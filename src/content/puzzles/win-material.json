@@ -1,0 +1,206 @@
+[
+  {
+    "id": "wm-01",
+    "fen": "4C1b1c/5k3/9/9/6b2/6n2/9/3K5/6p2/9 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 1,
+    "theme": "cannon",
+    "solution": [
+      {
+        "from": "e9",
+        "to": "i9",
+        "hint": "hint.free-piece"
+      }
+    ]
+  },
+  {
+    "id": "wm-02",
+    "fen": "C1ba5/4k4/3ab1c2/9/9/2B3R2/9/6r2/3K5/r2A3p1 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 1,
+    "theme": "chariot",
+    "solution": [
+      {
+        "from": "g4",
+        "to": "g2",
+        "hint": "hint.free-piece"
+      }
+    ]
+  },
+  {
+    "id": "wm-03",
+    "fen": "3a1k2P/2n6/b1na5/9/2N6/9/9/9/9/3K5 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 1,
+    "theme": "horse",
+    "solution": [
+      {
+        "from": "c5",
+        "to": "d7",
+        "hint": "hint.free-piece"
+      }
+    ]
+  },
+  {
+    "id": "wm-04",
+    "fen": "3a5/2RP5/3a1k3/c8/9/6n2/1c7/p4A3/4A4/5K3 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 1,
+    "theme": "soldier",
+    "solution": [
+      {
+        "from": "d8",
+        "to": "d9",
+        "hint": "hint.free-piece"
+      }
+    ]
+  },
+  {
+    "id": "wm-05",
+    "fen": "3k5/9/2na1aC2/9/2b3bc1/1c3CB2/p8/3A5/9/3AK4 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 2,
+    "theme": "cannon",
+    "solution": [
+      {
+        "from": "f4",
+        "to": "d4",
+        "hint": "hint.check"
+      },
+      {
+        "from": "c7",
+        "to": "d5"
+      },
+      {
+        "from": "d4",
+        "to": "d7",
+        "hint": "hint.collect"
+      }
+    ]
+  },
+  {
+    "id": "wm-06",
+    "fen": "6c2/3nk4/9/8R/9/9/1p7/9/9/3K1A3 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 2,
+    "theme": "chariot",
+    "solution": [
+      {
+        "from": "i6",
+        "to": "i8",
+        "hint": "hint.check"
+      },
+      {
+        "from": "e8",
+        "to": "e9"
+      },
+      {
+        "from": "i8",
+        "to": "d8",
+        "hint": "hint.collect"
+      }
+    ]
+  },
+  {
+    "id": "wm-07",
+    "fen": "9/4k4/nN7/4c4/9/4c4/9/5A3/9/3A1K3 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 2,
+    "theme": "fork",
+    "solution": [
+      {
+        "from": "b7",
+        "to": "d6",
+        "hint": "hint.fork"
+      },
+      {
+        "from": "e8",
+        "to": "f8"
+      },
+      {
+        "from": "d6",
+        "to": "e4",
+        "hint": "hint.collect"
+      }
+    ]
+  },
+  {
+    "id": "wm-08",
+    "fen": "2b6/5k3/5a2b/2C6/6c2/6R2/7c1/4K3B/9/3A5 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 3,
+    "theme": "cannon",
+    "solution": [
+      {
+        "from": "c6",
+        "to": "c7",
+        "hint": "hint.quiet"
+      },
+      {
+        "from": "h3",
+        "to": "i3"
+      },
+      {
+        "from": "c7",
+        "to": "i7",
+        "hint": "hint.collect"
+      }
+    ]
+  },
+  {
+    "id": "wm-09",
+    "fen": "3k5/4R4/5a3/9/2b6/1C7/c7p/3A5/9/3K1An2 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 3,
+    "theme": "chariot",
+    "solution": [
+      {
+        "from": "e8",
+        "to": "f8",
+        "hint": "hint.quiet"
+      },
+      {
+        "from": "g0",
+        "to": "h2"
+      },
+      {
+        "from": "f8",
+        "to": "f7",
+        "hint": "hint.collect"
+      }
+    ]
+  },
+  {
+    "id": "wm-10",
+    "fen": "5a3/3k5/4b4/9/9/1N7/2c6/B4K3/9/7c1 w - - 0 1",
+    "sideToMove": "red",
+    "goal": "win-material",
+    "difficulty": 3,
+    "theme": "fork",
+    "solution": [
+      {
+        "from": "b4",
+        "to": "d5",
+        "hint": "hint.fork"
+      },
+      {
+        "from": "c3",
+        "to": "d3"
+      },
+      {
+        "from": "d5",
+        "to": "e7",
+        "hint": "hint.collect"
+      }
+    ]
+  }
+]

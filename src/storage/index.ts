@@ -57,7 +57,35 @@ export function createLocalStore(prefix = 'duohuygo:'): KeyValueStore {
 }
 
 const COMPLETED_KEY = 'progress.completedLessons.v1';
+const SOLVED_PUZZLES_KEY = 'progress.solvedPuzzles.v1';
 const LANGUAGE_KEY = 'settings.language.v1';
+
+/** A persisted set of ids (completed lessons, solved puzzles, ...). */
+interface IdSet {
+  list(): string[];
+  add(id: string): string[];
+  clear(): void;
+}
+
+function createIdSet(store: KeyValueStore, key: string): IdSet {
+  const list = (): string[] => {
+    try {
+      const parsed: unknown = JSON.parse(store.get(key) ?? '[]');
+      return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === 'string') : [];
+    } catch {
+      return [];
+    }
+  };
+  return {
+    list,
+    add(id) {
+      const next = [...new Set([...list(), id])];
+      store.set(key, JSON.stringify(next));
+      return next;
+    },
+    clear: () => store.remove(key),
+  };
+}
 
 export interface ProgressRepository {
   completedLessons(): string[];
@@ -66,23 +94,19 @@ export interface ProgressRepository {
 }
 
 export function createProgressRepository(store: KeyValueStore): ProgressRepository {
-  const read = (): string[] => {
-    try {
-      const parsed: unknown = JSON.parse(store.get(COMPLETED_KEY) ?? '[]');
-      return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === 'string') : [];
-    } catch {
-      return [];
-    }
-  };
-  return {
-    completedLessons: read,
-    markCompleted(lessonId) {
-      const next = [...new Set([...read(), lessonId])];
-      store.set(COMPLETED_KEY, JSON.stringify(next));
-      return next;
-    },
-    reset: () => store.remove(COMPLETED_KEY),
-  };
+  const ids = createIdSet(store, COMPLETED_KEY);
+  return { completedLessons: ids.list, markCompleted: ids.add, reset: ids.clear };
+}
+
+export interface PuzzleProgressRepository {
+  solvedPuzzles(): string[];
+  markSolved(puzzleId: string): string[];
+  reset(): void;
+}
+
+export function createPuzzleProgressRepository(store: KeyValueStore): PuzzleProgressRepository {
+  const ids = createIdSet(store, SOLVED_PUZZLES_KEY);
+  return { solvedPuzzles: ids.list, markSolved: ids.add, reset: ids.clear };
 }
 
 export interface SettingsRepository {

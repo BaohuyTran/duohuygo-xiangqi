@@ -11,3 +11,23 @@ body {
   color: #292524;
   -webkit-tap-highlight-color: transparent;
 }
+
+/* A piece sliding from its previous point (Board animateMove); --dx/--dy are set inline. */
+@keyframes piece-slide {
+  from {
+    transform: translate(var(--dx), var(--dy));
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+.piece-slide {
+  animation: piece-slide 320ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .piece-slide {
+    animation: none;
+  }
+}

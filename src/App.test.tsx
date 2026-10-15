@@ -2,6 +2,7 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import App from './App';
+import { puzzles } from './puzzles/catalog';
 import { createMemoryStore } from './storage';
 
 afterEach(cleanup);
@@ -46,5 +47,25 @@ describe('App', () => {
     cleanup();
     render(<App store={store} />);
     expect(screen.getByText('Học cờ tướng từng bước một')).toBeTruthy();
+  });
+
+  it('navigates to the puzzles, records a solved puzzle and comes back', () => {
+    const store = createMemoryStore();
+    render(<App store={store} />);
+    press('Puzzles');
+    expect(screen.getByRole('heading', { name: 'Puzzles' })).toBeTruthy();
+    expect(screen.getByText('0 of 60 puzzles solved')).toBeTruthy();
+    press(/^Puzzle 1, /);
+    // Puzzle 1 is the easiest; play its stored solution (a one-move puzzle).
+    const p = puzzles[0];
+    expect(p.solution).toHaveLength(1);
+    tap(p.solution[0].from);
+    tap(p.solution[0].to);
+    expect(screen.getByRole('alert').textContent).toMatch(/Solved!/);
+    press('Back to puzzles');
+    expect(screen.getByText('1 of 60 puzzles solved')).toBeTruthy();
+    expect(screen.getByRole('button', { name: /^Puzzle 1, .*, solved$/ })).toBeTruthy();
+    press('Lessons');
+    expect(screen.getByText('DuoHuyGo Xiangqi')).toBeTruthy();
   });
 });

@@ -1,7 +1,7 @@
 import type { Unit } from '../content/types';
 import { useI18n } from '../i18n/I18nProvider';
-import { LANGUAGES } from '../i18n/messages';
 import type { LessonState } from '../lessons/progress';
+import { LanguageToggle } from './LanguageToggle';
 
 const UNIT_COLORS = ['#16a34a', '#0284c7', '#9333ea', '#ea580c', '#db2777', '#ca8a04'];
 // Horizontal offsets (px) that make the lesson path zig-zag like Duolingo's.
@@ -15,7 +15,7 @@ export interface HomeProps {
 }
 
 export function Home({ units, states, onStart, onReset }: HomeProps) {
-  const { t, lang, setLang } = useI18n();
+  const { t } = useI18n();
   const all = units.flatMap((u) => u.lessons);
   const completedCount = all.filter((l) => states.get(l.id) === 'completed').length;
 
@@ -26,20 +26,7 @@ export function Home({ units, states, onStart, onReset }: HomeProps) {
           <h1 className="text-2xl font-extrabold tracking-tight text-red-700">{t('app.title')}</h1>
           <p className="text-sm text-stone-500">{t('app.tagline')}</p>
         </div>
-        <div role="group" aria-label={t('lang.label')} className="flex shrink-0 rounded-xl border-2 border-stone-200 bg-white p-0.5">
-          {LANGUAGES.map((l) => (
-            <button
-              key={l}
-              type="button"
-              onClick={() => setLang(l)}
-              aria-pressed={lang === l}
-              aria-label={t(`lang.${l}`)}
-              className={`h-11 min-w-11 rounded-lg px-2 text-sm font-bold uppercase ${lang === l ? 'bg-stone-800 text-white' : 'text-stone-500'}`}
-            >
-              {l}
-            </button>
-          ))}
-        </div>
+        <LanguageToggle />
       </header>
 
       <div className="mb-6">

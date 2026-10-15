@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { fileOf, rankOf, squareName, type Piece, type Position, type Square } from '../engine';
 import { useI18n } from '../i18n/I18nProvider';
 
@@ -13,9 +14,10 @@ const LABELS: Record<Piece['color'], Record<Piece['type'], string>> = {
 
 /**
  * zone: a highlighted area · target: a point to move to · pick: chosen by the user ·
- * good: correct · missed: should have been chosen · wrong: should not have been chosen.
+ * good: correct · missed: should have been chosen · wrong: should not have been chosen ·
+ * hint: a piece or point revealed by a hint.
  */
-export type MarkTone = 'zone' | 'target' | 'pick' | 'good' | 'missed' | 'wrong';
+export type MarkTone = 'zone' | 'target' | 'pick' | 'good' | 'missed' | 'wrong' | 'hint';
 
 export interface BoardProps {
   position: Position;
@@ -25,10 +27,21 @@ export interface BoardProps {
   marks?: ReadonlyMap<Square, MarkTone>;
   lastMove?: { from: Square; to: Square } | null;
   checkedGeneral?: Square | null;
+  /** Slide the piece now standing on `to` in from `from`. */
+  animateMove?: { from: Square; to: Square } | null;
   onSquareClick?: (sq: Square) => void;
 }
 
-export function Board({ position, selected = null, dots = [], marks, lastMove, checkedGeneral, onSquareClick }: BoardProps) {
+export function Board({
+  position,
+  selected = null,
+  dots = [],
+  marks,
+  lastMove,
+  checkedGeneral,
+  animateMove,
+  onSquareClick,
+}: BoardProps) {
   const { t } = useI18n();
   // Red is always at the bottom.
   const point = (file: number, rank: number) => ({ x: MARGIN + file * CELL, y: MARGIN + (9 - rank) * CELL });
@@ -102,6 +115,7 @@ export function Board({ position, selected = null, dots = [], marks, lastMove, c
           isDot && t('board.legal'),
           (isSelected || tone === 'pick') && t('board.picked'),
           tone === 'target' && t('board.target'),
+          tone === 'hint' && t('board.hint'),
         ]
           .filter(Boolean)
           .join(', ');
@@ -119,8 +133,19 @@ export function Board({ position, selected = null, dots = [], marks, lastMove, c
             {tone === 'target' && (
               <circle cx={x} cy={y} r="4.6" fill="#fbbf24" fillOpacity="0.35" stroke="#d97706" strokeWidth="0.6" strokeDasharray="1.2 0.8" />
             )}
+            {tone === 'hint' && (
+              <circle className="animate-pulse" cx={x} cy={y} r="5" fill="#a855f7" fillOpacity="0.3" stroke="#9333ea" strokeWidth="0.8" />
+            )}
             {p && (
-              <>
+              <g
+                key={animateMove?.to === sq ? `${animateMove.from}-${sq}` : 'still'}
+                className={animateMove?.to === sq ? 'piece-slide' : undefined}
+                style={
+                  animateMove?.to === sq
+                    ? ({ '--dx': `${at(animateMove.from).x - x}px`, '--dy': `${at(animateMove.from).y - y}px` } as CSSProperties)
+                    : undefined
+                }
+              >
                 {sq === checkedGeneral && <circle cx={x} cy={y} r="5" fill="#dc2626" opacity="0.55" />}
                 <circle cx={x} cy={y} r="4.4" fill="#fdf6e3" stroke={color} strokeWidth="0.5" />
                 <circle cx={x} cy={y} r="3.6" fill="none" stroke={color} strokeWidth="0.2" />
@@ -136,7 +161,7 @@ export function Board({ position, selected = null, dots = [], marks, lastMove, c
                 >
                   {LABELS[p.color][p.type]}
                 </text>
-              </>
+              </g>
             )}
             {isSelected && <circle cx={x} cy={y} r="4.9" fill="none" stroke="#2563eb" strokeWidth="0.8" />}
             {isDot &&

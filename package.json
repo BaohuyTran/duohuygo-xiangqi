@@ -11,7 +11,8 @@
     "test:watch": "vitest",
     "lint": "oxlint",
     "typecheck": "tsc -b",
-    "icons": "node scripts/generate-icons.mjs"
+    "icons": "node scripts/generate-icons.mjs",
+    "puzzles:generate": "tsx scripts/generate-puzzles.ts"
   },
   "dependencies": {
     "react": "^19.2.8",
@@ -28,6 +29,7 @@
     "jsdom": "^29.1.1",
     "oxlint": "^1.81.0",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
     "vite-plugin-pwa": "^2.0.0",

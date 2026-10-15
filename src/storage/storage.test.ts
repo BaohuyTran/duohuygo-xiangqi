@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createMemoryStore, createProgressRepository, createSettingsRepository } from './index';
+import { createMemoryStore, createProgressRepository, createPuzzleProgressRepository, createSettingsRepository } from './index';
 
 describe('progress repository', () => {
   it('records completed lessons once each and can reset', () => {
@@ -22,5 +22,16 @@ describe('progress repository', () => {
     expect(settings.language()).toBeNull();
     settings.setLanguage('vi');
     expect(settings.language()).toBe('vi');
+  });
+
+  it('keeps solved puzzles separate from lesson progress', () => {
+    const store = createMemoryStore();
+    const puzzles = createPuzzleProgressRepository(store);
+    const lessons = createProgressRepository(store);
+    puzzles.markSolved('m1-01');
+    expect(puzzles.markSolved('m2-03')).toEqual(['m1-01', 'm2-03']);
+    expect(lessons.completedLessons()).toEqual([]);
+    lessons.reset();
+    expect(puzzles.solvedPuzzles()).toEqual(['m1-01', 'm2-03']);
   });
 });

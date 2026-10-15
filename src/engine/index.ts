@@ -16,3 +16,4 @@ export { START_FEN, parseFen, toFen, positionFromPieces, pieceFromLetter, pieceT
 export { legalMoves, legalMovesFrom, isLegalMove, makeMove, pseudoLegalTargets, isGeneralAttacked } from './movegen';
 export { isInCheck, gameStatus } from './status';
 export { perft } from './perft';
+export { PIECE_VALUES, MATE_SCORE, forcedWinMoves, hasForcedWin, materialBalance, searchScore, moveScore, isWinScore } from './solver';

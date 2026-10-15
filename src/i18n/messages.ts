@@ -85,6 +85,111 @@ export const messages = {
   'piece.cannon': { en: 'Cannon', vi: 'Pháo' },
   'piece.soldier': { en: 'Soldier', vi: 'Tốt' },
 
+  // ---------- Navigation ----------
+  'nav.label': { en: 'Main sections', vi: 'Mục chính' },
+  'nav.lessons': { en: 'Lessons', vi: 'Bài học' },
+  'nav.puzzles': { en: 'Puzzles', vi: 'Câu đố' },
+
+  // ---------- Puzzle list ----------
+  'puzzles.title': { en: 'Puzzles', vi: 'Câu đố' },
+  'puzzles.subtitle': { en: 'Find the winning move', vi: 'Tìm nước đi chiến thắng' },
+  'puzzles.solvedCount': { en: '{done} of {total} puzzles solved', vi: 'Đã giải {done}/{total} câu đố' },
+  'puzzles.groupBy': { en: 'Group puzzles by', vi: 'Nhóm câu đố theo' },
+  'puzzles.byDifficulty': { en: 'Difficulty', vi: 'Độ khó' },
+  'puzzles.byTheme': { en: 'Theme', vi: 'Chủ đề' },
+  'puzzles.level': { en: 'Level {n}', vi: 'Cấp {n}' },
+  'puzzles.number': { en: 'Puzzle {n}', vi: 'Câu đố {n}' },
+  'puzzles.solved': { en: 'solved', vi: 'đã giải' },
+  'puzzles.unsolved': { en: 'not solved yet', vi: 'chưa giải' },
+  'goal.mate-in-1': { en: 'Mate in 1', vi: 'Chiếu bí 1 nước' },
+  'goal.mate-in-2': { en: 'Mate in 2', vi: 'Chiếu bí 2 nước' },
+  'goal.win-material': { en: 'Win material', vi: 'Ăn quân' },
+  'goal.short.mate-in-1': { en: 'M1', vi: 'B1' },
+  'goal.short.mate-in-2': { en: 'M2', vi: 'B2' },
+  'goal.short.win-material': { en: '+', vi: '+' },
+  'theme.chariot': { en: 'Chariot', vi: 'Xe' },
+  'theme.horse': { en: 'Horse', vi: 'Mã' },
+  'theme.cannon': { en: 'Cannon', vi: 'Pháo' },
+  'theme.soldier': { en: 'Soldier', vi: 'Tốt' },
+  'theme.double-check': { en: 'Double check', vi: 'Chiếu đôi' },
+  'theme.flying-general': { en: 'Flying general', vi: 'Lộ mặt Tướng' },
+  'theme.fork': { en: 'Fork', vi: 'Bắt đôi' },
+  'theme.sacrifice': { en: 'Sacrifice', vi: 'Thí quân' },
+
+  // ---------- Puzzle player ----------
+  'puzzle.back': { en: 'Back to puzzles', vi: 'Quay lại danh sách câu đố' },
+  'puzzle.toMove.red': { en: 'Red to move', vi: 'Đỏ đi' },
+  'puzzle.toMove.black': { en: 'Black to move', vi: 'Đen đi' },
+  'puzzle.prompt.mate-in-1': { en: 'Checkmate in one move.', vi: 'Chiếu bí trong một nước.' },
+  'puzzle.prompt.mate-in-2': {
+    en: 'Checkmate in two moves, whatever Black does.',
+    vi: 'Chiếu bí trong hai nước, dù bên Đen đi thế nào.',
+  },
+  'puzzle.prompt.win-material': {
+    en: 'Find the move that wins material.',
+    vi: 'Tìm nước đi giúp bạn ăn được quân.',
+  },
+  'puzzle.yourMove': { en: 'Your move', vi: 'Đến lượt bạn' },
+  'puzzle.opponentMoving': { en: 'Black replies…', vi: 'Bên Đen đang đi…' },
+  'puzzle.hint': { en: 'Hint', vi: 'Gợi ý' },
+  'puzzle.hintMore': { en: 'Show target', vi: 'Xem điểm đến' },
+  'puzzle.showSolution': { en: 'Show solution', vi: 'Xem lời giải' },
+  'puzzle.retry': { en: 'Try again', vi: 'Thử lại' },
+  'puzzle.next': { en: 'Next puzzle', vi: 'Câu đố tiếp theo' },
+  'puzzle.restart': { en: 'Try it yourself', vi: 'Tự giải lại' },
+  'puzzle.solvedTitle': { en: 'Solved!', vi: 'Giải được rồi!' },
+  'puzzle.solvedBody': { en: 'Great move. Keep going!', vi: 'Nước đi tuyệt vời. Tiếp tục nào!' },
+  'puzzle.revealedTitle': { en: 'Solution', vi: 'Lời giải' },
+  'puzzle.revealedBody': {
+    en: 'That’s the winning line. Try another puzzle, or play it yourself.',
+    vi: 'Đây là đường thắng. Hãy thử câu đố khác, hoặc tự giải lại.',
+  },
+  'puzzle.wrong': { en: 'Not the winning move', vi: 'Chưa phải nước thắng' },
+  'puzzle.wrong.wrong.mate': {
+    en: 'Black can escape after that. Look for a stronger move.',
+    vi: 'Sau nước đó bên Đen vẫn thoát được. Hãy tìm nước mạnh hơn.',
+  },
+  'puzzle.wrong.wrong.material': {
+    en: 'That doesn’t win material against Black’s best reply.',
+    vi: 'Nước đó không ăn được quân nếu bên Đen đáp trả tốt nhất.',
+  },
+  'puzzle.wrong.illegal': { en: 'That piece can’t move there.', vi: 'Quân đó không thể đi tới điểm này.' },
+  'puzzle.wrong.unsafe': {
+    en: 'That move would leave your General under attack.',
+    vi: 'Nước đi đó khiến Tướng của bạn bị tấn công.',
+  },
+  'board.hint': { en: 'hint', vi: 'gợi ý' },
+
+  // ---------- Puzzle hints (one per player step) ----------
+  'hint.check': { en: 'Start with a check.', vi: 'Hãy bắt đầu bằng một nước chiếu.' },
+  'hint.quiet': {
+    en: 'The key move is not a check: first take away the General’s escape squares.',
+    vi: 'Nước then chốt không phải nước chiếu: trước tiên hãy chặn đường thoát của Tướng.',
+  },
+  'hint.sacrifice': { en: 'Don’t be afraid to give up a piece.', vi: 'Đừng ngại thí một quân.' },
+  'hint.cannon-screen': {
+    en: 'A Cannon checks with exactly one piece between it and the General.',
+    vi: 'Pháo chiếu khi có đúng một quân (ngòi) nằm giữa Pháo và Tướng.',
+  },
+  'hint.flying-general': {
+    en: 'Your General controls its whole file. Use it.',
+    vi: 'Tướng của bạn khống chế cả đường dọc. Hãy tận dụng nó.',
+  },
+  'hint.double-check': {
+    en: 'Attack the General with two pieces at once.',
+    vi: 'Hãy chiếu Tướng bằng hai quân cùng lúc.',
+  },
+  'hint.horse': { en: 'Your Horse can deliver the blow. Check its leg!', vi: 'Quân Mã có thể ra đòn. Nhớ kiểm tra chân Mã!' },
+  'hint.fork': { en: 'Find a move that attacks two things at once.', vi: 'Tìm nước đi tấn công hai mục tiêu cùng lúc.' },
+  'hint.free-piece': { en: 'One black piece is not protected.', vi: 'Có một quân Đen không được bảo vệ.' },
+  'hint.chariot': {
+    en: 'Your Chariot can reach the General along an open line.',
+    vi: 'Xe của bạn có thể chiếu Tướng theo một đường trống.',
+  },
+  'hint.soldier': { en: 'Even a Soldier can deliver checkmate.', vi: 'Ngay cả quân Tốt cũng có thể chiếu bí.' },
+  'hint.finish': { en: 'Now finish it: checkmate!', vi: 'Giờ kết thúc thôi: chiếu bí!' },
+  'hint.collect': { en: 'Now collect the material.', vi: 'Giờ hãy ăn quân.' },
+
   // ---------- Unit 1: the board and the General ----------
   'u1.title': { en: 'The board and the General', vi: 'Bàn cờ và quân Tướng' },
   'u1.desc': { en: 'Points, river, palace, and the most important piece.', vi: 'Giao điểm, sông, cung và quân quan trọng nhất.' },

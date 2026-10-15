@@ -12,9 +12,9 @@ import {
   parseSquare,
   positionFromPieces,
   pseudoLegalTargets,
+  PIECE_VALUES,
   rankOf,
   type Move,
-  type PieceType,
   type Position,
   type Square,
 } from '../engine';
@@ -76,7 +76,7 @@ export type MoveVerdict =
   | 'not-best';
 
 /** Shared legality check: returns 'illegal'/'unsafe' for moves the engine rejects, otherwise null. */
-function legality(pos: Position, move: Move): MoveVerdict | null {
+export function legality(pos: Position, move: Move): MoveVerdict | null {
   const p = pos.board[move.from];
   if (!p || p.color !== pos.turn) return 'illegal';
   if (legalMovesFrom(pos, move.from).includes(move.to)) return null;
@@ -101,16 +101,7 @@ export function checkMove(ex: MoveExercise, move: Move): MoveVerdict {
   }
 }
 
-/** Conventional beginner piece values. */
-export const PIECE_VALUES: Record<PieceType, number> = {
-  general: 1000,
-  chariot: 9,
-  cannon: 4.5,
-  horse: 4,
-  advisor: 2,
-  elephant: 2,
-  soldier: 1,
-};
+export { PIECE_VALUES } from '../engine';
 
 /** Value captured minus the value of the capturing piece if the opponent can take it back at once. */
 export function captureGain(pos: Position, move: Move): number {
