@@ -1,0 +1,189 @@
+{
+  "id": "u1",
+  "title": "u1.title",
+  "description": "u1.desc",
+  "lessons": [
+    {
+      "id": "u1l1",
+      "title": "u1l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w - - 0 1",
+          "text": "u1l1.e1"
+        },
+        {
+          "type": "learn",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w - - 0 1",
+          "text": "u1l1.e2",
+          "highlight": "red-side"
+        },
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "f9": "k"
+          },
+          "text": "u1l1.e3",
+          "highlight": "red-palace"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "f9": "k"
+          },
+          "prompt": "u1l1.e4",
+          "region": "red-palace"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "f9": "k"
+          },
+          "prompt": "u1l1.e5",
+          "region": "black-palace"
+        }
+      ]
+    },
+    {
+      "id": "u1l2",
+      "title": "u1l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e1": "K",
+            "e9": "k",
+            "e6": "p"
+          },
+          "text": "u1l2.e1",
+          "square": "e1"
+        },
+        {
+          "type": "learn",
+          "pieces": {
+            "d0": "K",
+            "e9": "k",
+            "e6": "p"
+          },
+          "text": "u1l2.e2",
+          "square": "d0"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e2": "K",
+            "e9": "k",
+            "e6": "p"
+          },
+          "prompt": "u1l2.e3",
+          "square": "e2"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "f2": "K",
+            "e9": "k",
+            "e6": "p"
+          },
+          "prompt": "u1l2.e4",
+          "square": "f2"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "d1": "K",
+            "e9": "k",
+            "e6": "p"
+          },
+          "prompt": "u1l2.e5",
+          "from": "d1",
+          "goal": {
+            "kind": "reach",
+            "squares": [
+              "e1"
+            ]
+          },
+          "solution": {
+            "from": "d1",
+            "to": "e1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u1l3",
+      "title": "u1l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e1": "K",
+            "f1": "p",
+            "e9": "k",
+            "e6": "p"
+          },
+          "text": "u1l3.e1",
+          "square": "e1"
+        },
+        {
+          "type": "capture",
+          "pieces": {
+            "d2": "K",
+            "e2": "p",
+            "e9": "k",
+            "e6": "p"
+          },
+          "prompt": "u1l3.e2",
+          "solution": {
+            "from": "d2",
+            "to": "e2"
+          }
+        },
+        {
+          "type": "learn",
+          "pieces": {
+            "e1": "K",
+            "d7": "r",
+            "e9": "k",
+            "e6": "p"
+          },
+          "text": "u1l3.e3",
+          "square": "e1"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e1": "K",
+            "f5": "r",
+            "e9": "k",
+            "e6": "p"
+          },
+          "prompt": "u1l3.e4",
+          "square": "e1"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "e1": "K",
+            "e4": "r",
+            "f7": "r",
+            "e9": "k",
+            "e6": "p"
+          },
+          "prompt": "u1l3.e5",
+          "from": "e1",
+          "goal": {
+            "kind": "any"
+          },
+          "solution": {
+            "from": "e1",
+            "to": "d1"
+          }
+        }
+      ]
+    }
+  ]
+}

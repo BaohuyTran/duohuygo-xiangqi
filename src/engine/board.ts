@@ -57,7 +57,7 @@ const PIECES: Record<Color, Record<PieceType, Piece>> = {
 
 export const piece = (color: Color, type: PieceType): Piece => PIECES[color][type];
 
-export const emptyBoard = (): Board => new Array<Piece | null>(SQUARE_COUNT).fill(null);
+export const emptyBoard = (): Board => Array.from<Piece | null>({ length: SQUARE_COUNT }).fill(null);
 
 export function findGeneral(board: Board, color: Color): Square {
   // The general is always inside its palace, so only scan those 9 squares.

@@ -1,0 +1,192 @@
+{
+  "id": "u5",
+  "title": "u5.title",
+  "description": "u5.desc",
+  "lessons": [
+    {
+      "id": "u5l1",
+      "title": "u5l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e3": "P"
+          },
+          "text": "u5l1.e1",
+          "square": "e3"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "c4": "P"
+          },
+          "prompt": "u5l1.e2",
+          "square": "c4"
+        },
+        {
+          "type": "capture",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "c3": "P",
+            "c4": "p"
+          },
+          "prompt": "u5l1.e3",
+          "solution": {
+            "from": "c3",
+            "to": "c4"
+          }
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "i4": "P"
+          },
+          "prompt": "u5l1.e4",
+          "from": "i4",
+          "goal": {
+            "kind": "reach",
+            "squares": [
+              "i5"
+            ]
+          },
+          "solution": {
+            "from": "i4",
+            "to": "i5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u5l2",
+      "title": "u5l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e5": "P"
+          },
+          "text": "u5l2.e1",
+          "square": "e5"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "a6": "P"
+          },
+          "prompt": "u5l2.e2",
+          "square": "a6"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "g7": "P",
+            "f7": "n"
+          },
+          "prompt": "u5l2.e3",
+          "square": "g7"
+        },
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "f9": "k",
+            "b9": "P"
+          },
+          "text": "u5l2.e4",
+          "square": "b9"
+        },
+        {
+          "type": "capture",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "d5": "P",
+            "c5": "r",
+            "d6": "p"
+          },
+          "prompt": "u5l2.e5",
+          "solution": {
+            "from": "d5",
+            "to": "c5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u5l3",
+      "title": "u5l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "d0": "K",
+            "e7": "P",
+            "f8": "P",
+            "e9": "k",
+            "a6": "p"
+          },
+          "text": "u5l3.e1",
+          "square": "f8"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "d0": "K",
+            "e7": "P",
+            "e9": "k",
+            "a6": "p"
+          },
+          "prompt": "u5l3.e2",
+          "goal": {
+            "kind": "check"
+          },
+          "solution": {
+            "from": "e7",
+            "to": "e8"
+          }
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "d0": "K",
+            "d8": "P",
+            "e9": "k"
+          },
+          "prompt": "u5l3.e3",
+          "square": "d8"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "d0": "K",
+            "e7": "P",
+            "f8": "P",
+            "e9": "k",
+            "a6": "p"
+          },
+          "prompt": "u5l3.e4",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "e7",
+            "to": "e8"
+          }
+        }
+      ]
+    }
+  ]
+}

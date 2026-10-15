@@ -3,7 +3,8 @@
 A Duolingo-style app for learning Chinese chess (Xiangqi). Runs in desktop and mobile browsers,
 installs as a PWA, works offline, and deploys as a static site.
 
-Current state: project scaffold, a fully tested rules engine (`src/engine`), and a board sandbox page.
+Current state: a tested rules engine (`src/engine`) and a lesson system: 6 units / 18 lessons that teach the board,
+every piece, check and checkmate, with a Duolingo-style lesson path, in English and Vietnamese.
 
 ```sh
 npm install

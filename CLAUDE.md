@@ -14,6 +14,7 @@ Must work in desktop and phone browsers and as an installable, offline-capable P
 | Run all tests once | `npm test` |
 | Tests in watch mode | `npm run test:watch` |
 | Run one test file | `npx vitest run src/engine/pieces.test.ts` |
+| Validate lesson content only | `npx vitest run src/content` |
 | Lint (oxlint) | `npm run lint` |
 | Type-check only | `npm run typecheck` |
 | Regenerate placeholder PWA icons | `npm run icons` |
@@ -39,10 +40,25 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
 │   └── generate-icons.mjs  # Dependency-free placeholder icon generator
 └── src/
     ├── main.tsx            # React entry
-    ├── App.tsx             # Board sandbox page: tap a piece to see legal moves, play, undo, load FEN
+    ├── App.tsx             # Screen switching (home <-> lesson), wires storage + i18n
     ├── index.css           # Tailwind import + base styles
     ├── components/
-    │   └── Board.tsx       # Responsive SVG 9x10 board
+    │   ├── Board.tsx       # Responsive SVG 9x10 board (dots, marks, selection)
+    │   ├── Home.tsx        # Duolingo-style unit/lesson path, language toggle
+    │   └── LessonPlayer.tsx# One exercise at a time, feedback, retry, completion screen
+    ├── content/
+    │   ├── lessons/*.json  # One file per unit, loaded in file-name order
+    │   ├── types.ts        # Lesson/exercise JSON format (documented there)
+    │   ├── validate.ts     # Content validator (shape, i18n keys, legal + solvable exercises)
+    │   └── index.ts        # Loads the JSON: `units`, `allLessons`, `findLesson`
+    ├── lessons/
+    │   ├── answers.ts      # Answer checking for every exercise type, via the engine
+    │   └── progress.ts     # Locked / available / completed lesson states
+    ├── i18n/
+    │   ├── messages.ts     # THE single file of all UI + lesson text, English and Vietnamese
+    │   └── I18nProvider.tsx# React context: useI18n() -> { t, lang, setLang }
+    ├── storage/
+    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback), progress + settings repos
     └── engine/             # Pure TypeScript rules engine. NO React/DOM imports (enforced by a test)
         ├── types.ts        # Color, PieceType, Piece, Square, Position, Move, GameStatus
         ├── board.ts        # Coordinates, palace/river helpers, square names
@@ -50,9 +66,21 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
         ├── movegen.ts      # Pseudo-legal + legal move generation, check detection, makeMove
         ├── status.ts       # isInCheck, gameStatus (check / checkmate / stalemate)
         ├── perft.ts        # Node counting for move-generator validation
-        ├── index.ts        # Public API: import from './engine', not individual files
-        └── *.test.ts       # Vitest unit tests (+ test-utils.ts helper)
+        └── index.ts        # Public API: import from './engine', not individual files
 ```
+
+Tests live next to the code as `*.test.ts(x)`. Component tests start with
+`// @vitest-environment jsdom` and use Testing Library; everything else runs in Node.
+
+## Lesson content
+
+- Add or edit lessons in `src/content/lessons/NN-name.json`; every string field is an i18n key
+  that must exist in `src/i18n/messages.ts` with both `en` and `vi` text.
+- Exercise types: `learn`, `select-squares`, `move` (goals: `reach`, `any`, `check`, `checkmate`),
+  `capture`. Answers are computed by the engine; `solution` fields are only verified, never trusted.
+- Positions use `pieces` maps (`{ "e0": "K", "d9": "k" }`) or `fen`. Exercises are played as Red.
+- `npx vitest run src/content` validates all content and plays every exercise through the engine.
+- Lessons unlock strictly in order; progress is stored via `src/storage` (localStorage today).
 
 ## Engine conventions
 

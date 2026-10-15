@@ -1,0 +1,281 @@
+import { useMemo, useState, type ReactNode } from 'react';
+import type { Exercise, Lesson } from '../content/types';
+import {
+  findGeneral,
+  isInCheck,
+  legalMovesFrom,
+  makeMove,
+  parseSquare,
+  type Move,
+  type Square,
+} from '../engine';
+import { useI18n } from '../i18n/I18nProvider';
+import {
+  checkCapture,
+  checkMove,
+  checkSelection,
+  expectedSelection,
+  positionOf,
+  regionSquares,
+  type MoveVerdict,
+  type SelectionResult,
+} from '../lessons/answers';
+import { Board, type MarkTone } from './Board';
+
+export interface LessonPlayerProps {
+  lesson: Lesson;
+  onExit: () => void;
+  onComplete: () => void;
+}
+
+export function LessonPlayer({ lesson, onExit, onComplete }: LessonPlayerProps) {
+  const { t } = useI18n();
+  const [index, setIndex] = useState(0);
+  const [firstTryCorrect, setFirstTryCorrect] = useState(0);
+  const total = lesson.exercises.length;
+  const done = index >= total;
+
+  const finishExercise = (firstTry: boolean) => {
+    if (firstTry) setFirstTryCorrect((n) => n + 1);
+    setIndex((i) => i + 1);
+  };
+
+  return (
+    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col">
+      <header className="flex items-center gap-3 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-2">
+        <button
+          type="button"
+          onClick={onExit}
+          aria-label={t('lesson.quit')}
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-stone-500 hover:bg-stone-200"
+        >
+          <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden>
+            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+        </button>
+        <div
+          role="progressbar"
+          aria-label={t('lesson.progress', { n: Math.min(index + 1, total), total })}
+          aria-valuemin={0}
+          aria-valuemax={total}
+          aria-valuenow={index}
+          className="h-4 flex-1 overflow-hidden rounded-full bg-stone-200"
+        >
+          <div className="h-full rounded-full bg-green-500 transition-[width] duration-300" style={{ width: `${(index / total) * 100}%` }} />
+        </div>
+      </header>
+
+      {done ? (
+        <section className="flex flex-1 flex-col items-center justify-center gap-6 px-6 text-center">
+          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-amber-400 text-6xl text-white shadow-lg" aria-hidden>
+            ★
+          </div>
+          <h2 className="text-3xl font-extrabold text-amber-600">{t('done.title')}</h2>
+          <p className="text-lg text-stone-600">{t('done.stats', { correct: firstTryCorrect, total })}</p>
+          <button
+            type="button"
+            onClick={onComplete}
+            className="h-12 w-full max-w-xs rounded-2xl bg-green-500 text-lg font-bold text-white shadow-[0_4px_0_#15803d] active:translate-y-1 active:shadow-none"
+          >
+            {t('lesson.continue')}
+          </button>
+        </section>
+      ) : (
+        <ExerciseView key={index} exercise={lesson.exercises[index]} onFinished={finishExercise} />
+      )}
+    </div>
+  );
+}
+
+type Status = 'answering' | 'correct' | 'incorrect';
+
+function ExerciseView({ exercise: ex, onFinished }: { exercise: Exercise; onFinished: (firstTry: boolean) => void }) {
+  const { t } = useI18n();
+  const start = useMemo(() => positionOf(ex), [ex]);
+  const fixedFrom = ex.type === 'move' && ex.from !== undefined ? parseSquare(ex.from) : null;
+
+  const [status, setStatus] = useState<Status>('answering');
+  const [hadMistake, setHadMistake] = useState(false);
+  const [picked, setPicked] = useState<ReadonlySet<Square>>(new Set());
+  const [selected, setSelected] = useState<Square | null>(fixedFrom);
+  const [played, setPlayed] = useState<Move | null>(null);
+  const [verdict, setVerdict] = useState<MoveVerdict | null>(null);
+  const [selection, setSelection] = useState<SelectionResult | null>(null);
+
+  const position = played ? makeMove(start, played) : start;
+
+  const succeed = () => setStatus('correct');
+  const fail = () => {
+    setStatus('incorrect');
+    setHadMistake(true);
+  };
+  const retry = () => {
+    setStatus('answering');
+    setPicked(new Set());
+    setSelected(fixedFrom);
+    setPlayed(null);
+    setVerdict(null);
+    setSelection(null);
+  };
+
+  const onSquareClick = (sq: Square) => {
+    if (status !== 'answering') return;
+    if (ex.type === 'select-squares') {
+      setPicked((prev) => {
+        const next = new Set(prev);
+        if (next.has(sq)) next.delete(sq);
+        else next.add(sq);
+        return next;
+      });
+      return;
+    }
+    if (ex.type !== 'move' && ex.type !== 'capture') return;
+    const piece = start.board[sq];
+    if (piece && piece.color === start.turn) {
+      setSelected(sq === selected && fixedFrom === null ? null : sq);
+      return;
+    }
+    if (selected === null) return;
+    const move = { from: selected, to: sq };
+    const result = ex.type === 'move' ? checkMove(ex, move) : checkCapture(ex, move);
+    setVerdict(result);
+    // Show the move on the board whenever it was legal, so the learner sees what happened.
+    if (result !== 'illegal' && result !== 'unsafe' && result !== 'wrong-piece') setPlayed(move);
+    setSelected(null);
+    if (result === 'correct') succeed();
+    else fail();
+  };
+
+  const checkPicked = () => {
+    if (ex.type !== 'select-squares') return;
+    const result = checkSelection(ex, picked);
+    setSelection(result);
+    if (result.correct) succeed();
+    else fail();
+  };
+
+  // ----- Board decorations -----
+  const marks = new Map<Square, MarkTone>();
+  let dots: Square[] = [];
+  let boardSelected: Square | null = selected;
+  if (ex.type === 'learn') {
+    const highlight = ex.highlight === undefined ? [] : typeof ex.highlight === 'string' ? regionSquares(ex.highlight) : ex.highlight.map(parseSquare);
+    for (const sq of highlight) marks.set(sq, 'zone');
+    if (ex.square) {
+      boardSelected = parseSquare(ex.square);
+      dots = legalMovesFrom(start, boardSelected);
+    }
+  } else if (ex.type === 'select-squares') {
+    if (selection && status !== 'answering') {
+      for (const sq of expectedSelection(ex)) marks.set(sq, selection.missed.includes(sq) ? 'missed' : 'good');
+      for (const sq of selection.wrong) marks.set(sq, 'wrong');
+    } else {
+      for (const sq of picked) marks.set(sq, 'pick');
+    }
+    if (ex.square) boardSelected = parseSquare(ex.square);
+  } else if (ex.type === 'move' && ex.goal.kind === 'reach' && !played) {
+    for (const s of ex.goal.squares) marks.set(parseSquare(s), 'target');
+  }
+  const checked = isInCheck(position) ? findGeneral(position.board, position.turn) : null;
+
+  const promptKey = ex.type === 'learn' ? ex.text : ex.prompt;
+  const explanation = ex.type !== 'learn' ? ex.explanation : undefined;
+
+  return (
+    <>
+      <section className="flex-1 px-4 pb-44">
+        <p className="text-sm font-bold tracking-wide text-violet-600 uppercase">{t(`lesson.type.${ex.type}`)}</p>
+        <h2 className="mt-1 mb-3 text-lg leading-snug font-bold text-stone-800" data-testid="prompt">
+          {t(promptKey)}
+        </h2>
+        <div className="overflow-hidden rounded-xl shadow-md">
+          <Board
+            position={position}
+            selected={boardSelected}
+            dots={dots}
+            marks={marks}
+            lastMove={played}
+            checkedGeneral={checked}
+            onSquareClick={ex.type === 'learn' ? undefined : onSquareClick}
+          />
+        </div>
+        {(ex.type === 'move' || ex.type === 'capture') && status === 'answering' && (
+          <p className="mt-3 text-center text-sm text-stone-500">{t('lesson.tapPiece')}</p>
+        )}
+      </section>
+
+      {(status !== 'answering' || ex.type === 'learn' || ex.type === 'select-squares') && (
+      <footer
+        className={`fixed inset-x-0 bottom-0 border-t-2 px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] ${
+          status === 'correct' ? 'border-green-200 bg-green-100' : status === 'incorrect' ? 'border-red-200 bg-red-100' : 'border-stone-200 bg-[#fdf6e3]'
+        }`}
+      >
+        <div className="mx-auto flex max-w-xl flex-col gap-3">
+          {status !== 'answering' && (
+            <div role="alert">
+              <p className={`text-xl font-extrabold ${status === 'correct' ? 'text-green-700' : 'text-red-700'}`}>
+                {t(status === 'correct' ? 'feedback.correct' : 'feedback.incorrect')}
+              </p>
+              {status === 'incorrect' && (
+                <p className="text-red-700">{t(selection ? 'verdict.selection' : `verdict.${verdict}`)}</p>
+              )}
+              {status === 'correct' && explanation && <p className="text-green-800">{t(explanation)}</p>}
+            </div>
+          )}
+
+          {status === 'answering' && ex.type === 'learn' && (
+            <PrimaryButton onClick={() => onFinished(true)}>{t('lesson.continue')}</PrimaryButton>
+          )}
+          {status === 'answering' && ex.type === 'select-squares' && (
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setPicked(new Set())}
+                disabled={picked.size === 0}
+                className="h-12 rounded-2xl border-2 border-stone-300 bg-white px-4 font-bold text-stone-600 disabled:opacity-40"
+              >
+                {t('lesson.clear')}
+              </button>
+              <PrimaryButton onClick={checkPicked} disabled={picked.size === 0}>
+                {t('lesson.check')}
+                {picked.size > 0 && <span className="ml-2 text-sm font-semibold opacity-80">({t('lesson.selected', { n: picked.size })})</span>}
+              </PrimaryButton>
+            </div>
+          )}
+          {status === 'correct' && <PrimaryButton onClick={() => onFinished(!hadMistake)}>{t('lesson.continue')}</PrimaryButton>}
+          {status === 'incorrect' && (
+            <PrimaryButton tone="red" onClick={retry}>
+              {t('lesson.retry')}
+            </PrimaryButton>
+          )}
+        </div>
+      </footer>
+      )}
+    </>
+  );
+}
+
+function PrimaryButton({
+  children,
+  onClick,
+  disabled,
+  tone = 'green',
+}: {
+  children: ReactNode;
+  onClick: () => void;
+  disabled?: boolean;
+  tone?: 'green' | 'red';
+}) {
+  const colors =
+    tone === 'green' ? 'bg-green-500 shadow-[0_4px_0_#15803d]' : 'bg-red-500 shadow-[0_4px_0_#b91c1c]';
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={`h-12 flex-1 rounded-2xl text-lg font-bold text-white ${colors} active:translate-y-1 active:shadow-none disabled:bg-stone-300 disabled:shadow-none`}
+    >
+      {children}
+    </button>
+  );
+}

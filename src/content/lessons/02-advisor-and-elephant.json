@@ -1,0 +1,198 @@
+{
+  "id": "u2",
+  "title": "u2.title",
+  "description": "u2.desc",
+  "lessons": [
+    {
+      "id": "u2l1",
+      "title": "u2l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e1": "A"
+          },
+          "text": "u2l1.e1",
+          "square": "e1"
+        },
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "d0": "A"
+          },
+          "text": "u2l1.e2",
+          "square": "d0"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "f0": "K",
+            "d9": "k",
+            "e1": "A"
+          },
+          "prompt": "u2l1.e3",
+          "square": "e1"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "f2": "A"
+          },
+          "prompt": "u2l1.e4",
+          "square": "f2"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "f0": "A"
+          },
+          "prompt": "u2l1.e5",
+          "from": "f0",
+          "goal": {
+            "kind": "reach",
+            "squares": [
+              "e1"
+            ]
+          },
+          "solution": {
+            "from": "f0",
+            "to": "e1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u2l2",
+      "title": "u2l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B"
+          },
+          "text": "u2l2.e1",
+          "square": "e2"
+        },
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "c4": "B"
+          },
+          "text": "u2l2.e2",
+          "square": "c4"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "g0": "B"
+          },
+          "prompt": "u2l2.e3",
+          "square": "g0"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "a2": "B"
+          },
+          "prompt": "u2l2.e4",
+          "square": "a2"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "c0": "B"
+          },
+          "prompt": "u2l2.e5",
+          "from": "c0",
+          "goal": {
+            "kind": "reach",
+            "squares": [
+              "e2"
+            ]
+          },
+          "solution": {
+            "from": "c0",
+            "to": "e2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u2l3",
+      "title": "u2l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B",
+            "d3": "P"
+          },
+          "text": "u2l3.e1",
+          "square": "e2"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B",
+            "f3": "p",
+            "d1": "p"
+          },
+          "prompt": "u2l3.e2",
+          "square": "e2"
+        },
+        {
+          "type": "capture",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B",
+            "g4": "n"
+          },
+          "prompt": "u2l3.e3",
+          "solution": {
+            "from": "e2",
+            "to": "g4"
+          }
+        },
+        {
+          "type": "capture",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B",
+            "c4": "p",
+            "g4": "p",
+            "c9": "r"
+          },
+          "prompt": "u2l3.e4",
+          "solution": {
+            "from": "e2",
+            "to": "g4"
+          }
+        }
+      ]
+    }
+  ]
+}

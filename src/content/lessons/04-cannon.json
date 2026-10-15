@@ -1,0 +1,199 @@
+{
+  "id": "u4",
+  "title": "u4.title",
+  "description": "u4.desc",
+  "lessons": [
+    {
+      "id": "u4l1",
+      "title": "u4l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "b2": "C"
+          },
+          "text": "u4l1.e1",
+          "square": "b2"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "a0": "C",
+            "a3": "P",
+            "c0": "B"
+          },
+          "prompt": "u4l1.e2",
+          "square": "a0"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "b2": "C"
+          },
+          "prompt": "u4l1.e3",
+          "from": "b2",
+          "goal": {
+            "kind": "reach",
+            "squares": [
+              "e2"
+            ]
+          },
+          "solution": {
+            "from": "b2",
+            "to": "e2"
+          }
+        },
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "b2": "C",
+            "b5": "r"
+          },
+          "text": "u4l1.e4",
+          "square": "b2"
+        }
+      ]
+    },
+    {
+      "id": "u4l2",
+      "title": "u4l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "b2": "C",
+            "b6": "p",
+            "b9": "n"
+          },
+          "text": "u4l2.e1",
+          "square": "b2"
+        },
+        {
+          "type": "capture",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "b2": "C",
+            "b7": "c",
+            "b9": "n"
+          },
+          "prompt": "u4l2.e2",
+          "solution": {
+            "from": "b2",
+            "to": "b9"
+          }
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "a2": "C",
+            "b2": "N",
+            "a0": "R",
+            "a5": "p",
+            "a8": "n"
+          },
+          "prompt": "u4l2.e3",
+          "square": "a2"
+        },
+        {
+          "type": "capture",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "C",
+            "e5": "P",
+            "e7": "r"
+          },
+          "prompt": "u4l2.e4",
+          "solution": {
+            "from": "e2",
+            "to": "e7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u4l3",
+      "title": "u4l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "h2": "C",
+            "e8": "a",
+            "e9": "k"
+          },
+          "text": "u4l3.e1",
+          "highlight": [
+            "e2"
+          ]
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "e0": "K",
+            "h2": "C",
+            "e8": "a",
+            "e9": "k"
+          },
+          "prompt": "u4l3.e2",
+          "from": "h2",
+          "goal": {
+            "kind": "check"
+          },
+          "solution": {
+            "from": "h2",
+            "to": "e2"
+          }
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "a3": "C",
+            "a0": "R",
+            "b3": "N",
+            "a6": "p",
+            "a9": "r"
+          },
+          "prompt": "u4l3.e3",
+          "square": "a3"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "e0": "K",
+            "e5": "C",
+            "h7": "C",
+            "d9": "a",
+            "f9": "a",
+            "e9": "k",
+            "a6": "p"
+          },
+          "prompt": "u4l3.e4",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "h7",
+            "to": "e7"
+          }
+        }
+      ]
+    }
+  ]
+}
