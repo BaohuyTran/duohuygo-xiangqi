@@ -13,7 +13,8 @@
     "typecheck": "tsc -b",
     "icons": "node scripts/generate-icons.mjs",
     "puzzles:generate": "tsx scripts/generate-puzzles.ts",
-    "ui:check": "node scripts/ui-check.mjs"
+    "ui:check": "node scripts/ui-check.mjs",
+    "offline:check": "node scripts/offline-check.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",

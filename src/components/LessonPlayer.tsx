@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useState, type CSSProperties, type ReactNode } from 'react';
 import type { Exercise, Lesson } from '../content/types';
 import {
   findGeneral,
@@ -20,8 +20,12 @@ import {
   type MoveVerdict,
   type SelectionResult,
 } from '../lessons/answers';
+import { moveSound, useSound } from '../sound';
 import { Board, type MarkTone } from './Board';
+import { Celebration } from './Celebration';
+import { SoundToggle } from './SoundToggle';
 import { HeartIcon } from './StatsBar';
+import { useElementHeight } from './useElementHeight';
 
 export interface LessonPlayerProps {
   lesson: Lesson;
@@ -43,6 +47,7 @@ interface HeartNote {
 
 export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, completionXp }: LessonPlayerProps) {
   const { t } = useI18n();
+  const { play } = useSound();
   const [index, setIndex] = useState(0);
   const [firstTryCorrect, setFirstTryCorrect] = useState(0);
   const [heartsLost, setHeartsLost] = useState(0);
@@ -51,6 +56,7 @@ export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, co
 
   const finishExercise = (firstTry: boolean) => {
     if (firstTry) setFirstTryCorrect((n) => n + 1);
+    if (index + 1 >= total) play('complete');
     setIndex((i) => i + 1);
   };
 
@@ -85,6 +91,7 @@ export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, co
         >
           <div className="h-full rounded-full bg-green-500 transition-[width] duration-300" style={{ width: `${(index / total) * 100}%` }} />
         </div>
+        <SoundToggle />
         {hearts !== undefined && (
           <div className={`flex min-h-11 shrink-0 items-center gap-1 ${hearts > 0 ? 'text-red-500' : 'text-stone-400'}`} data-testid="lesson-hearts">
             {/* Re-keyed on every lost heart so the shake animation replays. */}
@@ -100,8 +107,9 @@ export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, co
       </header>
 
       {done ? (
-        <section className="flex flex-1 flex-col items-center justify-center gap-6 px-6 text-center">
-          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-amber-400 text-6xl text-white shadow-lg" aria-hidden>
+        <section className="flex flex-1 flex-col items-center justify-center gap-6 px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center">
+          <Celebration />
+          <div className="celebrate-pop flex h-28 w-28 items-center justify-center rounded-full bg-amber-400 text-6xl text-white shadow-lg" aria-hidden>
             ★
           </div>
           <h2 className="text-3xl font-extrabold text-amber-600">{t('done.title')}</h2>
@@ -138,6 +146,8 @@ function ExerciseView({
   onMistake: () => HeartNote | null;
 }) {
   const { t } = useI18n();
+  const { play } = useSound();
+  const [footerRef, footerHeight] = useElementHeight<HTMLElement>();
   const start = useMemo(() => positionOf(ex), [ex]);
   const fixedFrom = ex.type === 'move' && ex.from !== undefined ? parseSquare(ex.from) : null;
 
@@ -152,8 +162,13 @@ function ExerciseView({
 
   const position = played ? makeMove(start, played) : start;
 
-  const succeed = () => setStatus('correct');
-  const fail = () => {
+  /** `delay`: seconds to wait so the verdict sound follows a move sound. */
+  const succeed = (delay = 0) => {
+    play('correct', delay);
+    setStatus('correct');
+  };
+  const fail = (delay = 0) => {
+    play('wrong', delay);
     setStatus('incorrect');
     setHadMistake(true);
     setHeartNote(onMistake());
@@ -190,10 +205,14 @@ function ExerciseView({
     const result = ex.type === 'move' ? checkMove(ex, move) : checkCapture(ex, move);
     setVerdict(result);
     // Show the move on the board whenever it was legal, so the learner sees what happened.
-    if (result !== 'illegal' && result !== 'unsafe' && result !== 'wrong-piece') setPlayed(move);
+    const shown = result !== 'illegal' && result !== 'unsafe' && result !== 'wrong-piece';
+    if (shown) {
+      setPlayed(move);
+      play(moveSound(start, move));
+    }
     setSelected(null);
-    if (result === 'correct') succeed();
-    else fail();
+    if (result === 'correct') succeed(shown ? 0.12 : 0);
+    else fail(shown ? 0.12 : 0);
   };
 
   const checkPicked = () => {
@@ -227,24 +246,27 @@ function ExerciseView({
     for (const s of ex.goal.squares) marks.set(parseSquare(s), 'target');
   }
   const checked = isInCheck(position) ? findGeneral(position.board, position.turn) : null;
+  const capturedPiece = played ? start.board[played.to] : null;
 
   const promptKey = ex.type === 'learn' ? ex.text : ex.prompt;
   const explanation = ex.type !== 'learn' ? ex.explanation : undefined;
 
   return (
     <>
-      <section className="flex-1 px-4 pb-44">
+      <section className="flex-1 px-4 pb-4" style={{ '--footer-h': `${footerHeight}px` } as CSSProperties}>
         <p className="text-sm font-bold tracking-wide text-violet-600 uppercase">{t(`lesson.type.${ex.type}`)}</p>
         <h2 className="mt-1 mb-3 text-lg leading-snug font-bold text-stone-800" data-testid="prompt">
           {t(promptKey)}
         </h2>
-        <div className="overflow-hidden rounded-xl shadow-md">
+        <div className={`board-fit overflow-hidden rounded-xl shadow-md ${status === 'incorrect' ? 'feedback-shake' : ''}`}>
           <Board
             position={position}
             selected={boardSelected}
             dots={dots}
             marks={marks}
             lastMove={played}
+            animateMove={played}
+            captured={played && capturedPiece ? { at: played.to, piece: capturedPiece } : null}
             checkedGeneral={checked}
             onSquareClick={ex.type === 'learn' ? undefined : onSquareClick}
           />
@@ -253,18 +275,24 @@ function ExerciseView({
           <p className="mt-3 text-center text-sm text-stone-500">{t('lesson.tapPiece')}</p>
         )}
       </section>
+      {/* Reserves the fixed footer's height, so the board's last row can always scroll clear of it. */}
+      <div aria-hidden className="shrink-0" style={{ height: footerHeight }} />
 
       {(status !== 'answering' || ex.type === 'learn' || ex.type === 'select-squares') && (
       <footer
-        className={`fixed inset-x-0 bottom-0 border-t-2 px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] ${
+        key={status}
+        ref={footerRef}
+        className={`safe-px fixed inset-x-0 bottom-0 z-10 border-t-2 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] ${status !== 'answering' ? 'feedback-in' : ''} ${
           status === 'correct' ? 'border-green-200 bg-green-100' : status === 'incorrect' ? 'border-red-200 bg-red-100' : 'border-stone-200 bg-[#fdf6e3]'
         }`}
       >
         <div className="mx-auto flex max-w-xl flex-col gap-3">
           {status !== 'answering' && (
             <div role="alert">
-              <p className={`text-xl font-extrabold ${status === 'correct' ? 'text-green-700' : 'text-red-700'}`}>
-                {t(status === 'correct' ? 'feedback.correct' : 'feedback.incorrect')}
+              <p className={`text-xl font-extrabold ${status === 'correct' ? 'text-green-700' : 'feedback-shake text-red-700'}`}>
+                <span className={status === 'correct' ? 'feedback-pop' : undefined}>
+                  {t(status === 'correct' ? 'feedback.correct' : 'feedback.incorrect')}
+                </span>
               </p>
               {status === 'incorrect' && (
                 <p className="text-red-700">{t(selection ? 'verdict.selection' : `verdict.${verdict}`)}</p>

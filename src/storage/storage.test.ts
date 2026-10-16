@@ -31,6 +31,16 @@ describe('progress repository', () => {
     expect(settings.language()).toBe('vi');
   });
 
+  it('stores the muted setting (sound on by default)', () => {
+    const store = createMemoryStore();
+    const settings = createSettingsRepository(store);
+    expect(settings.muted()).toBe(false);
+    settings.setMuted(true);
+    expect(createSettingsRepository(store).muted()).toBe(true);
+    settings.setMuted(false);
+    expect(settings.muted()).toBe(false);
+  });
+
   it('keeps solved puzzles separate from lesson progress', () => {
     const store = createMemoryStore();
     const puzzles = createPuzzleProgressRepository(store);

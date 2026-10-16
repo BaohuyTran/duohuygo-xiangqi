@@ -14,6 +14,8 @@ export const messages = {
   'lang.label': { en: 'Language', vi: 'Ngôn ngữ' },
   'lang.en': { en: 'English', vi: 'Tiếng Anh' },
   'lang.vi': { en: 'Vietnamese', vi: 'Tiếng Việt' },
+  'sound.turnOff': { en: 'Turn sound off', vi: 'Tắt âm thanh' },
+  'sound.turnOn': { en: 'Turn sound on', vi: 'Bật âm thanh' },
   'home.unit': { en: 'Unit {n}', vi: 'Chương {n}' },
   'home.progress': { en: '{done} of {total} lessons complete', vi: 'Đã xong {done}/{total} bài' },
   'home.lessonState.locked': { en: 'locked', vi: 'chưa mở' },

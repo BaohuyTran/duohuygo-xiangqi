@@ -3,6 +3,7 @@ import { PUZZLE_THEMES, type Puzzle } from '../content/puzzle-types';
 import type { GamificationSummary } from '../gamification';
 import { useI18n } from '../i18n/I18nProvider';
 import { LanguageToggle } from './LanguageToggle';
+import { SoundToggle } from './SoundToggle';
 import { StatsBar } from './StatsBar';
 
 type Grouping = 'difficulty' | 'theme';
@@ -32,7 +33,10 @@ export function PuzzleList({ puzzles, solved, onOpen, stats }: PuzzleListProps) 
           <h1 className="text-2xl font-extrabold tracking-tight text-red-700">{t('puzzles.title')}</h1>
           <p className="text-sm text-stone-500">{t('puzzles.subtitle')}</p>
         </div>
-        <LanguageToggle />
+        <div className="flex shrink-0 items-center gap-1">
+          <SoundToggle />
+          <LanguageToggle />
+        </div>
       </header>
 
       <StatsBar summary={stats} />
