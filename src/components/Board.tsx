@@ -29,6 +29,8 @@ export interface BoardProps {
   checkedGeneral?: Square | null;
   /** Slide the piece now standing on `to` in from `from`. */
   animateMove?: { from: Square; to: Square } | null;
+  /** A piece just captured on `at`: drawn once, fading out under the arriving piece. */
+  captured?: { at: Square; piece: Piece } | null;
   onSquareClick?: (sq: Square) => void;
 }
 
@@ -40,6 +42,7 @@ export function Board({
   lastMove,
   checkedGeneral,
   animateMove,
+  captured,
   onSquareClick,
 }: BoardProps) {
   const { t } = useI18n();
@@ -134,7 +137,24 @@ export function Board({
               <circle cx={x} cy={y} r="4.6" fill="#fbbf24" fillOpacity="0.35" stroke="#d97706" strokeWidth="0.6" strokeDasharray="1.2 0.8" />
             )}
             {tone === 'hint' && (
-              <circle className="animate-pulse" cx={x} cy={y} r="5" fill="#a855f7" fillOpacity="0.3" stroke="#9333ea" strokeWidth="0.8" />
+              <circle className="motion-safe:animate-pulse" cx={x} cy={y} r="5" fill="#a855f7" fillOpacity="0.3" stroke="#9333ea" strokeWidth="0.8" />
+            )}
+            {captured?.at === sq && (
+              <g key={`captured-${captured.piece.color}-${captured.piece.type}`} className="piece-captured" aria-hidden>
+                <circle cx={x} cy={y} r="4.4" fill="#fdf6e3" stroke={captured.piece.color === 'red' ? '#b91c1c' : '#1c1917'} strokeWidth="0.5" />
+                <text
+                  x={x}
+                  y={y}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize="4.6"
+                  fontFamily="'Noto Serif SC', 'Songti SC', 'SimSun', serif"
+                  fontWeight="700"
+                  fill={captured.piece.color === 'red' ? '#b91c1c' : '#1c1917'}
+                >
+                  {LABELS[captured.piece.color][captured.piece.type]}
+                </text>
+              </g>
             )}
             {p && (
               <g

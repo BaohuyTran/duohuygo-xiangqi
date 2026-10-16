@@ -3,6 +3,7 @@ import { minutesUntil, type DailyGoal, type GamificationSummary } from '../gamif
 import { useI18n } from '../i18n/I18nProvider';
 import type { LessonState } from '../lessons/progress';
 import { LanguageToggle } from './LanguageToggle';
+import { SoundToggle } from './SoundToggle';
 import { HeartIcon, StatsBar } from './StatsBar';
 
 const UNIT_COLORS = ['#16a34a', '#0284c7', '#9333ea', '#ea580c', '#db2777', '#ca8a04'];
@@ -30,7 +31,10 @@ export function Home({ units, states, onStart, onReset, stats, onGoalChange }: H
           <h1 className="text-2xl font-extrabold tracking-tight text-red-700">{t('app.title')}</h1>
           <p className="text-sm text-stone-500">{t('app.tagline')}</p>
         </div>
-        <LanguageToggle />
+        <div className="flex shrink-0 items-center gap-1">
+          <SoundToggle />
+          <LanguageToggle />
+        </div>
       </header>
 
       <StatsBar summary={stats} onGoalChange={onGoalChange} />
@@ -121,7 +125,7 @@ function LessonNode({
   return (
     <div className="flex w-36 flex-col items-center">
       {state === 'available' && (
-        <span className="mb-1 animate-bounce rounded-lg border-2 border-stone-200 bg-white px-2 py-0.5 text-xs font-extrabold tracking-wide uppercase" style={{ color }}>
+        <span className="mb-1 rounded-lg motion-safe:animate-bounce border-2 border-stone-200 bg-white px-2 py-0.5 text-xs font-extrabold tracking-wide uppercase" style={{ color }}>
           {startLabel}
         </span>
       )}

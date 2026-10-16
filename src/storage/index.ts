@@ -61,6 +61,7 @@ export function createLocalStore(prefix = 'duohuygo:'): KeyValueStore {
 const COMPLETED_KEY = 'progress.completedLessons.v1';
 const SOLVED_PUZZLES_KEY = 'progress.solvedPuzzles.v1';
 const LANGUAGE_KEY = 'settings.language.v1';
+const MUTED_KEY = 'settings.muted.v1';
 const GAMIFICATION_KEY = 'gamification.state.v1';
 
 /** A persisted set of ids (completed lessons, solved puzzles, ...). */
@@ -115,12 +116,17 @@ export function createPuzzleProgressRepository(store: KeyValueStore): PuzzleProg
 export interface SettingsRepository {
   language(): string | null;
   setLanguage(lang: string): void;
+  /** Sound effects off. Defaults to false (sound on). */
+  muted(): boolean;
+  setMuted(muted: boolean): void;
 }
 
 export function createSettingsRepository(store: KeyValueStore): SettingsRepository {
   return {
     language: () => store.get(LANGUAGE_KEY),
     setLanguage: (lang) => store.set(LANGUAGE_KEY, lang),
+    muted: () => store.get(MUTED_KEY) === '1',
+    setMuted: (muted) => store.set(MUTED_KEY, muted ? '1' : '0'),
   };
 }
 

@@ -144,29 +144,51 @@ lesson and puzzle players. English and Vietnamese.
 
 ## Task 5 — Polish
 
-**Status:** todo
+**Status:** done
 
 **Goal:** Make the app feel finished on phones without adding gameplay: sound, animation, verified
 offline support and layout fixes.
 
 **Acceptance criteria**
 
-- [ ] **Sound effects** for correct, wrong, move, capture and lesson/puzzle complete. They are generated in code
+- [x] **Sound effects** for correct, wrong, move, capture and lesson/puzzle complete. They are generated in code
       (Web Audio) or are original or CC0 assets with the licence recorded in the repo. A mute toggle is stored
       via `src/storage`, and sound respects the muted setting from the first interaction.
-- [ ] **Animations:** feedback panel slide-in, correct/wrong emphasis, capture/move animation, completion
+- [x] **Animations:** feedback panel slide-in, correct/wrong emphasis, capture/move animation, completion
       celebration. All respect `prefers-reduced-motion`.
-- [ ] **Offline PWA check:** an automated check (script or test) builds the app, loads it once,
+- [x] **Offline PWA check:** an automated check (script or test) builds the app, loads it once,
       goes offline, reloads, and can open a lesson and a puzzle. The manifest and icons pass installability
       basics.
-- [ ] **Phone layout fixes:** no horizontal scroll or clipped controls at 320, 360 and 414px wide and in
+- [x] **Phone layout fixes:** no horizontal scroll or clipped controls at 320, 360 and 414px wide and in
       landscape; safe-area insets respected; fixed footers never cover the board's last row.
-- [ ] No new gameplay, content, exercise types or puzzle rules. No changes to `src/engine`.
-- [ ] Any new text is in en + vi; build, tests and lint pass; CLAUDE.md updated if needed.
+- [x] No new gameplay, content, exercise types or puzzle rules. No changes to `src/engine`.
+- [x] Any new text is in en + vi; build, tests and lint pass; CLAUDE.md updated if needed.
 
 **Notes**
 
-- _(driver fills in)_
+- 2026-10-16: started on branch `task-5-polish`, stacked on `task-4-xp-hearts-streaks` (PR #1 not merged
+  yet; the user asked to continue). Its PR targets that branch until #1 is merged.
+- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/3 (stacked on #1, not merged).
+- 2026-10-16: done in 1 of 3 attempts.
+  - Tester: PASS.
+    - Lint, build and 271 tests pass, and the engine is unchanged.
+    - `ui:check` passes at 320x740, 360x740, 414x896, 740x360 and 640x320.
+    - `offline:check` passes, and so does the tester's own offline check.
+    - Sound gating was checked in a real browser: with mute stored, no audio plays from the first tap.
+    - Animations are switched off under reduced motion.
+  - Reviewer: APPROVE, with no blocking findings.
+- Added: `src/sound/` (code-generated Web Audio effects; mute stored as `settings.muted.v1`), `SoundToggle`,
+  `Celebration`, `useElementHeight` (footer measured, with a spacer so it can't cover the board), `.board-fit`,
+  safe-area insets, `npm run offline:check`, and stricter `scripts/ui-check.mjs` (`--height`, clipped controls,
+  footer covering the board's last row).
+- Open follow-ups (non-blocking, from the reviewer and tester):
+  - Make the older progress-bar and Home transitions `motion-safe:`.
+  - The capture fade does not replay for two identical captures in a row on the same square (Board ghost key).
+  - The first gesture being "Turn sound off" creates a silent AudioContext.
+  - The capture sound and animation are only unit-tested, not checked in a browser.
+  - The wrong-answer footer is cramped in very short landscape (640x320): the last row is reached by scrolling.
+- Process note: roles ran with the general-purpose agent fallback (`docs/DRIVER.md`, PR #2); the base
+  branch was `task-4-xp-hearts-streaks`.
 
 ---
 

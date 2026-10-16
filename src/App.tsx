@@ -9,6 +9,7 @@ import { createGamification, lessonXp, type Gamification } from './gamification'
 import { I18nProvider, isLanguage } from './i18n/I18nProvider';
 import { lessonStates } from './lessons/progress';
 import { findPuzzle, nextPuzzle, puzzleNumber, puzzles } from './puzzles/catalog';
+import { SoundProvider, type AudioContextLike } from './sound';
 import {
   createGamificationRepository,
   createLocalStore,
@@ -23,7 +24,16 @@ import {
 /** How often the stats (heart refills, day changes) are re-read while the app is open. */
 const STATS_REFRESH_MS = 30_000;
 
-export default function App({ store, now }: { store?: KeyValueStore; now?: () => Date }) {
+export default function App({
+  store,
+  now,
+  audio,
+}: {
+  store?: KeyValueStore;
+  now?: () => Date;
+  /** Audio backend factory for sound effects (tests inject a fake); defaults to Web Audio. */
+  audio?: () => AudioContextLike | null;
+}) {
   const repos = useMemo(() => {
     const s = store ?? createLocalStore();
     return {
@@ -37,7 +47,9 @@ export default function App({ store, now }: { store?: KeyValueStore; now?: () =>
 
   return (
     <I18nProvider initial={isLanguage(savedLang) ? savedLang : 'en'} onChange={repos.settings.setLanguage}>
-      <Screens progress={repos.progress} puzzleProgress={repos.puzzles} game={repos.game} />
+      <SoundProvider initialMuted={repos.settings.muted()} onMutedChange={repos.settings.setMuted} createContext={audio}>
+        <Screens progress={repos.progress} puzzleProgress={repos.puzzles} game={repos.game} />
+      </SoundProvider>
     </I18nProvider>
   );
 }
@@ -119,7 +131,7 @@ function Screens({
   }
 
   return (
-    <div className="pb-24">
+    <div className="pb-[calc(6rem+env(safe-area-inset-bottom))]">
       {tab === 'lessons' ? (
         <Home
           units={units}

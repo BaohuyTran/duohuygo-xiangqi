@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import type { Puzzle } from '../content/puzzle-types';
-import { findGeneral, forcedWinMoves, isInCheck, legalMoves, makeMove, type Move, type Position, type Square } from '../engine';
+import { findGeneral, forcedWinMoves, isInCheck, legalMoves, makeMove, type Move, type Piece, type Position, type Square } from '../engine';
 import { useI18n } from '../i18n/I18nProvider';
 import {
   attackerMovesLeft,
@@ -12,7 +12,11 @@ import {
   toMove,
   type PuzzleVerdict,
 } from '../puzzles/logic';
+import { moveSound, useSound } from '../sound';
 import { Board, type MarkTone } from './Board';
+import { Celebration } from './Celebration';
+import { SoundToggle } from './SoundToggle';
+import { useElementHeight } from './useElementHeight';
 
 /** Delay before the defender's automatic reply, and between moves when showing the solution. */
 export const REPLY_DELAY_MS = 650;
@@ -32,6 +36,8 @@ export interface PuzzlePlayerProps {
 
 export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext, xpEarned }: PuzzlePlayerProps) {
   const { t } = useI18n();
+  const { play } = useSound();
+  const [footerRef, footerHeight] = useElementHeight<HTMLElement>();
   const start = useMemo(() => startPosition(puzzle), [puzzle]);
 
   const [phase, setPhase] = useState<Phase>('playing');
@@ -43,6 +49,7 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
   const [verdict, setVerdict] = useState<PuzzleVerdict | null>(null);
   const [hintLevel, setHintLevel] = useState(0);
   const [lastMove, setLastMove] = useState<Move | null>(null);
+  const [captured, setCaptured] = useState<{ at: Square; piece: Piece } | null>(null);
 
   // Pending timers (auto-replies, solution playback) are cancelled on unmount or restart.
   const timers = useRef<number[]>([]);
@@ -56,6 +63,14 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
   useEffect(() => () => clearTimers(), []);
 
   const shown = wrongMove ? makeMove(pos, wrongMove) : pos;
+
+  /** Marks `move` (played from `before`) as the last move: highlight, slide, capture fade and sound. */
+  const showMove = (before: Position, move: Move | null, sound = true) => {
+    setLastMove(move);
+    const victim = move ? before.board[move.to] : null;
+    setCaptured(move && victim ? { at: move.to, piece: victim } : null);
+    if (move && sound) play(moveSound(before, move));
+  };
 
   /** The move a hint points to: the main line, or (after an accepted alternative) a move the engine finds. */
   const hintMove = useMemo((): Move | null => {
@@ -77,26 +92,29 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
       setVerdict(result);
       if (result === 'wrong') {
         setWrongMove(move);
-        setLastMove(move);
+        showMove(pos, move);
       }
+      play('wrong', result === 'wrong' ? 0.12 : 0);
       setPhase('wrong');
       return;
     }
     const after = makeMove(pos, move);
     const stillMain = onMainLine && sameMove(move, toMove(puzzle.solution[step]));
     setPos(after);
-    setLastMove(move);
+    showMove(pos, move);
     setHintLevel(0);
     if (step + 1 >= puzzle.solution.length) {
+      play('complete', 0.15);
       setPhase('solved');
       onSolved(puzzle.id);
       return;
     }
+    play('correct', 0.12);
     setPhase('opponent');
     later(() => {
       const reply = defenderReply(puzzle, step + 1, after, stillMain);
       setPos(makeMove(after, reply));
-      setLastMove(reply);
+      showMove(after, reply);
       setOnMainLine(stillMain && sameMove(reply, toMove(puzzle.solution[step + 1])));
       setStep(step + 2);
       setPhase('playing');
@@ -116,7 +134,7 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
   const retry = () => {
     setWrongMove(null);
     setVerdict(null);
-    setLastMove(null);
+    showMove(pos, null);
     setPhase('playing');
   };
 
@@ -129,7 +147,7 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
     setWrongMove(null);
     setVerdict(null);
     setHintLevel(0);
-    setLastMove(null);
+    showMove(start, null);
     setPhase('playing');
   };
 
@@ -142,15 +160,16 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
     setWrongMove(null);
     setVerdict(null);
     setHintLevel(0);
-    setLastMove(null);
+    showMove(start, null);
     setPhase('revealing');
     let cur = start;
     puzzle.solution.forEach((s, i) => {
       const move = toMove(s);
+      const before = cur;
       const next = makeMove(cur, move);
       later(() => {
         setPos(next);
-        setLastMove(move);
+        showMove(before, move);
         if (i === puzzle.solution.length - 1) setPhase('revealed');
       }, REPLY_DELAY_MS * (i + 1));
       cur = next;
@@ -196,15 +215,16 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
             {t(`theme.${puzzle.theme}`)}
           </p>
         </div>
+        <SoundToggle />
       </header>
 
-      <section className="flex-1 px-4 pb-48">
+      <section className="flex-1 px-4 pb-4" style={{ '--footer-h': `${footerHeight}px` } as CSSProperties}>
         <p role="status" aria-live="polite" className="mb-1 flex items-center gap-2 text-sm font-bold text-stone-700">
           <span aria-hidden className={`inline-block h-3 w-3 rounded-full ${phase === 'opponent' ? 'bg-stone-900' : 'bg-red-700'}`} />
           {turnLabel}
         </p>
         <h2 className="mb-3 text-lg leading-snug font-bold text-stone-800">{t(`puzzle.prompt.${puzzle.goal}`)}</h2>
-        <div className="overflow-hidden rounded-xl shadow-md">
+        <div className={`board-fit overflow-hidden rounded-xl shadow-md ${phase === 'wrong' ? 'feedback-shake' : ''}`}>
           <Board
             position={shown}
             selected={selected}
@@ -212,15 +232,23 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
             marks={marks}
             lastMove={lastMove}
             animateMove={lastMove}
+            captured={captured}
             checkedGeneral={checked}
             onSquareClick={onSquareClick}
           />
         </div>
         {hintText && <p className="mt-3 rounded-xl bg-violet-100 px-3 py-2 text-sm font-semibold text-violet-800">💡 {t(hintText)}</p>}
       </section>
+      {/* Reserves the fixed footer's height, so the board's last row can always scroll clear of it. */}
+      <div aria-hidden className="shrink-0" style={{ height: footerHeight }} />
 
+      {phase === 'solved' && <Celebration />}
       <footer
-        className={`fixed inset-x-0 bottom-0 border-t-2 px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] ${
+        key={phase === 'opponent' || phase === 'revealing' ? 'playing' : phase}
+        ref={footerRef}
+        className={`safe-px fixed inset-x-0 bottom-0 z-10 border-t-2 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] ${
+          phase === 'wrong' || phase === 'solved' || phase === 'revealed' ? 'feedback-in' : ''
+        } ${
           phase === 'solved'
             ? 'border-green-200 bg-green-100'
             : phase === 'wrong'
@@ -245,7 +273,7 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
           {phase === 'wrong' && (
             <>
               <div role="alert">
-                <p className="text-xl font-extrabold text-red-700">{t('puzzle.wrong')}</p>
+                <p className="feedback-shake text-xl font-extrabold text-red-700">{t('puzzle.wrong')}</p>
                 <p className="text-red-700">{wrongText}</p>
               </div>
               <ActionButton tone="red" onClick={retry}>
@@ -258,7 +286,9 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
             <>
               <div role="alert">
                 <p className={`text-xl font-extrabold ${phase === 'solved' ? 'text-green-700' : 'text-violet-800'}`}>
-                  {t(phase === 'solved' ? 'puzzle.solvedTitle' : 'puzzle.revealedTitle')}
+                  <span className={phase === 'solved' ? 'feedback-pop' : undefined}>
+                    {t(phase === 'solved' ? 'puzzle.solvedTitle' : 'puzzle.revealedTitle')}
+                  </span>
                 </p>
                 <p className={phase === 'solved' ? 'text-green-800' : 'text-violet-800'}>
                   {t(phase === 'solved' ? 'puzzle.solvedBody' : 'puzzle.revealedBody')}

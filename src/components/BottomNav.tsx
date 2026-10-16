@@ -14,7 +14,7 @@ export function BottomNav({ tab, onChange }: { tab: Tab; onChange: (tab: Tab) =>
   return (
     <nav
       aria-label={t('nav.label')}
-      className="fixed inset-x-0 bottom-0 z-10 border-t-2 border-stone-200 bg-[#fdf6e3] pb-[env(safe-area-inset-bottom)]"
+      className="fixed inset-x-0 bottom-0 z-10 border-t-2 border-stone-200 bg-[#fdf6e3] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]"
     >
       <div className="mx-auto flex max-w-xl">
         {(['lessons', 'puzzles'] as Tab[]).map((id) => {
