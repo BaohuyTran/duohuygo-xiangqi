@@ -1,4 +1,4 @@
-import { parseState, type GamificationRepository } from '../gamification';
+import { parseState, type GamificationRepository, type GamificationState } from '../gamification';
 
 // Small persistence layer. Everything goes through a KeyValueStore so localStorage can be swapped
 // for something else (IndexedDB, a server) later without touching the UI.
@@ -142,4 +142,39 @@ export function createGamificationRepository(store: KeyValueStore): Gamification
     },
     save: (state) => store.set(GAMIFICATION_KEY, JSON.stringify(state)),
   };
+}
+
+// ---------- Whole-progress snapshot (used by account sync in src/sync) ----------
+
+/**
+ * Everything that is synced to an account, read from / written to a KeyValueStore.
+ * `null` means "nothing stored on this device yet" (so a merge can tell unset from a default).
+ */
+export interface ProgressSnapshot {
+  completedLessons: string[];
+  solvedPuzzles: string[];
+  language: string | null;
+  muted: boolean | null;
+  gamification: GamificationState | null;
+}
+
+export function readSnapshot(store: KeyValueStore, now: Date): ProgressSnapshot {
+  const muted = store.get(MUTED_KEY);
+  return {
+    completedLessons: createProgressRepository(store).completedLessons(),
+    solvedPuzzles: createPuzzleProgressRepository(store).solvedPuzzles(),
+    language: store.get(LANGUAGE_KEY),
+    muted: muted === null ? null : muted === '1',
+    gamification: store.get(GAMIFICATION_KEY) === null ? null : createGamificationRepository(store).load(now),
+  };
+}
+
+/** Writes a snapshot. `null` fields are left untouched (never deletes data). */
+export function writeSnapshot(store: KeyValueStore, snapshot: ProgressSnapshot): void {
+  store.set(COMPLETED_KEY, JSON.stringify(snapshot.completedLessons));
+  store.set(SOLVED_PUZZLES_KEY, JSON.stringify(snapshot.solvedPuzzles));
+  const settings = createSettingsRepository(store);
+  if (snapshot.language !== null) settings.setLanguage(snapshot.language);
+  if (snapshot.muted !== null) settings.setMuted(snapshot.muted);
+  if (snapshot.gamification !== null) createGamificationRepository(store).save(snapshot.gamification);
 }

@@ -2,6 +2,8 @@ import type { Unit } from '../content/types';
 import { minutesUntil, type DailyGoal, type GamificationSummary } from '../gamification';
 import { useI18n } from '../i18n/I18nProvider';
 import type { LessonState } from '../lessons/progress';
+import type { AccountService } from '../sync/service';
+import { AccountButton } from './Account';
 import { LanguageToggle } from './LanguageToggle';
 import { SoundToggle } from './SoundToggle';
 import { HeartIcon, StatsBar } from './StatsBar';
@@ -17,9 +19,11 @@ export interface HomeProps {
   onReset: () => void;
   stats: GamificationSummary;
   onGoalChange: (goal: DailyGoal) => void;
+  /** Account login + sync; absent when sync is not configured (then no account UI at all). */
+  account?: AccountService;
 }
 
-export function Home({ units, states, onStart, onReset, stats, onGoalChange }: HomeProps) {
+export function Home({ units, states, onStart, onReset, stats, onGoalChange, account }: HomeProps) {
   const { t } = useI18n();
   const all = units.flatMap((u) => u.lessons);
   const completedCount = all.filter((l) => states.get(l.id) === 'completed').length;
@@ -31,7 +35,9 @@ export function Home({ units, states, onStart, onReset, stats, onGoalChange }: H
           <h1 className="text-2xl font-extrabold tracking-tight text-red-700">{t('app.title')}</h1>
           <p className="text-sm text-stone-500">{t('app.tagline')}</p>
         </div>
-        <div className="flex shrink-0 items-center gap-1">
+        {/* With the account button the controls may wrap onto two rows on narrow phones. */}
+        <div className={`flex items-center gap-1 ${account ? 'min-w-0 flex-wrap justify-end' : 'shrink-0'}`}>
+          {account && <AccountButton account={account} />}
           <SoundToggle />
           <LanguageToggle />
         </div>
