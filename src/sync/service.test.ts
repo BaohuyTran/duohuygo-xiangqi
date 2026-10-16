@@ -1,0 +1,292 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { initialState } from '../gamification';
+import {
+  createGamificationRepository,
+  createMemoryStore,
+  createProgressRepository,
+  createPuzzleProgressRepository,
+  createSettingsRepository,
+  readSnapshot,
+} from '../storage';
+import { createFakeBackend, type FakeBackend } from './fake-backend';
+import { toRemote } from './merge';
+import { createAccountService, isEmail, type AccountService, type NetworkStatus } from './service';
+
+const NOW = new Date(2026, 9, 16, 12, 0, 0);
+const USER = { id: 'user-1', email: 'me@example.com' };
+const REDIRECT = 'https://app.example/xiangqi/';
+
+function fakeNetwork(online = true) {
+  const listeners = new Set<() => void>();
+  const net: NetworkStatus & { online: boolean; goOnline(): void } = {
+    online,
+    isOnline: () => net.online,
+    onOnline(cb) {
+      listeners.add(cb);
+      return () => listeners.delete(cb);
+    },
+    goOnline() {
+      net.online = true;
+      for (const l of listeners) l();
+    },
+  };
+  return net;
+}
+
+let services: AccountService[] = [];
+function setup(backend: FakeBackend, opts: { network?: ReturnType<typeof fakeNetwork>; local?: Record<string, string> } = {}) {
+  const local = createMemoryStore(opts.local);
+  const network = opts.network ?? fakeNetwork();
+  const account = createAccountService({
+    store: local,
+    loadBackend: async () => backend,
+    redirectTo: REDIRECT,
+    now: () => NOW,
+    debounceMs: 1000,
+    network,
+  });
+  services.push(account);
+  return { local, account, network };
+}
+
+/** Lets pending promises (fake backend calls) settle. */
+const settle = async () => {
+  for (let i = 0; i < 10; i++) await Promise.resolve();
+  await vi.advanceTimersByTimeAsync(0);
+};
+
+beforeEach(() => vi.useFakeTimers());
+afterEach(() => {
+  for (const s of services) s.dispose();
+  services = [];
+  vi.useRealTimers();
+});
+
+describe('account service: auth', () => {
+  it('starts loading, then signed out without a session', async () => {
+    const { account } = setup(createFakeBackend());
+    expect(account.getState().auth).toBe('loading');
+    await account.ready;
+    expect(account.getState()).toMatchObject({ auth: 'signedOut', email: null, sync: 'idle' });
+  });
+
+  it('sends a magic link to the app URL and shows "link sent"', async () => {
+    const backend = createFakeBackend();
+    const { account } = setup(backend);
+    await account.ready;
+    expect(await account.sendMagicLink('  me@example.com ')).toBe(true);
+    expect(backend.calls.links).toEqual([{ email: 'me@example.com', redirectTo: REDIRECT }]);
+    expect(account.getState()).toMatchObject({ auth: 'linkSent', email: 'me@example.com' });
+    account.cancelLink();
+    expect(account.getState()).toMatchObject({ auth: 'signedOut', email: null });
+  });
+
+  it('reports an invalid address or a failed request without throwing', async () => {
+    const backend = createFakeBackend();
+    const { account } = setup(backend);
+    await account.ready;
+    expect(await account.sendMagicLink('not-an-email')).toBe(false);
+    expect(account.getState()).toMatchObject({ auth: 'signedOut', sendFailed: true });
+    backend.fail.link = true;
+    expect(await account.sendMagicLink('me@example.com')).toBe(false);
+    expect(backend.calls.links).toEqual([]);
+  });
+
+  it('signs in when the magic link is opened, and logs out keeping local data', async () => {
+    const backend = createFakeBackend();
+    const { account, local } = setup(backend);
+    await account.ready;
+    createProgressRepository(account.store).markCompleted('u1l1');
+    backend.signIn(USER);
+    await settle();
+    expect(account.getState()).toMatchObject({ auth: 'signedIn', email: 'me@example.com', sync: 'synced' });
+    await account.signOut();
+    expect(account.getState()).toMatchObject({ auth: 'signedOut', email: null, sync: 'idle' });
+    expect(createProgressRepository(local).completedLessons()).toEqual(['u1l1']);
+  });
+
+  it('still signs out locally when the server call fails', async () => {
+    const backend = createFakeBackend({ user: USER });
+    backend.fail.signOut = true;
+    const { account } = setup(backend);
+    await account.ready;
+    await account.signOut();
+    expect(account.getState().auth).toBe('signedOut');
+  });
+
+  it('falls back to signed out when the backend cannot load (e.g. offline first visit)', async () => {
+    const account = createAccountService({
+      store: createMemoryStore(),
+      loadBackend: () => Promise.reject(new Error('chunk failed')),
+      redirectTo: REDIRECT,
+      network: fakeNetwork(),
+    });
+    services.push(account);
+    await account.ready;
+    expect(account.getState()).toMatchObject({ auth: 'signedOut', sync: 'idle' });
+  });
+
+  it('validates email addresses', () => {
+    expect(isEmail('a@b.co')).toBe(true);
+    expect(isEmail('a@b')).toBe(false);
+    expect(isEmail('a b@c.de')).toBe(false);
+  });
+});
+
+describe('account service: sync', () => {
+  it('pulls, merges, writes locally and pushes on start with a session', async () => {
+    const remoteState = { ...initialState(NOW), totalXp: 25, xpByDay: { '2026-10-16': 25 } };
+    const backend = createFakeBackend({
+      user: USER,
+      rows: {
+        [USER.id]: toRemote({ completedLessons: ['u1l1', 'u1l2'], solvedPuzzles: ['p1'], language: 'vi', muted: null, gamification: remoteState }),
+      },
+    });
+    const local: Record<string, string> = {
+      'progress.completedLessons.v1': JSON.stringify(['u2l1']),
+      'gamification.state.v1': JSON.stringify({ ...initialState(NOW), totalXp: 10, xpByDay: { '2026-10-15': 10 } }),
+    };
+    const { account, local: store } = setup(backend, { local });
+    const changed = vi.fn();
+    account.onDataChanged(changed);
+    await account.ready;
+    await settle();
+
+    expect(account.getState().sync).toBe('synced');
+    const merged = readSnapshot(store, NOW);
+    expect(merged.completedLessons).toEqual(['u1l1', 'u1l2', 'u2l1']);
+    expect(merged.solvedPuzzles).toEqual(['p1']);
+    expect(merged.language).toBe('vi');
+    expect(merged.gamification).toMatchObject({ totalXp: 35, xpByDay: { '2026-10-15': 10, '2026-10-16': 25 } });
+    expect(changed).toHaveBeenCalledTimes(1);
+    expect(backend.rows.get(USER.id)).toMatchObject({ version: 1, completedLessons: ['u1l1', 'u1l2', 'u2l1'] });
+  });
+
+  it('creates the account row on the first sync', async () => {
+    const backend = createFakeBackend({ user: USER });
+    const { account } = setup(backend, { local: { 'progress.solvedPuzzles.v1': '["p9"]' } });
+    await account.ready;
+    await settle();
+    expect(backend.calls.pushes).toBe(1);
+    expect(backend.rows.get(USER.id)).toMatchObject({ solvedPuzzles: ['p9'] });
+  });
+
+  it('does not push when the account already has the same data', async () => {
+    const backend = createFakeBackend({
+      user: USER,
+      rows: { [USER.id]: toRemote({ completedLessons: ['u1l1'], solvedPuzzles: [], language: null, muted: null, gamification: null }) },
+    });
+    const { account } = setup(backend, { local: { 'progress.completedLessons.v1': '["u1l1"]' } });
+    await account.ready;
+    await settle();
+    expect(backend.calls.pulls).toBe(1);
+    expect(backend.calls.pushes).toBe(0);
+  });
+
+  it('syncs a local change after the debounce delay', async () => {
+    const backend = createFakeBackend({ user: USER });
+    const { account } = setup(backend);
+    await account.ready;
+    await settle();
+    const pushes = backend.calls.pushes;
+
+    createPuzzleProgressRepository(account.store).markSolved('p1');
+    createPuzzleProgressRepository(account.store).markSolved('p2');
+    await vi.advanceTimersByTimeAsync(500);
+    expect(backend.calls.pushes).toBe(pushes);
+    await vi.advanceTimersByTimeAsync(600);
+    await settle();
+    expect(backend.calls.pushes).toBe(pushes + 1);
+    expect(backend.rows.get(USER.id)).toMatchObject({ solvedPuzzles: ['p1', 'p2'] });
+  });
+
+  it('does not sync when only the hearts refill clock moved', async () => {
+    const backend = createFakeBackend({ user: USER });
+    const { account } = setup(backend, { local: { 'gamification.state.v1': JSON.stringify(initialState(NOW)) } });
+    await account.ready;
+    await settle();
+    const pulls = backend.calls.pulls;
+    const repo = createGamificationRepository(account.store);
+    repo.save({ ...repo.load(NOW), heartsAnchor: NOW.getTime() + 5 });
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(backend.calls.pulls).toBe(pulls);
+  });
+
+  it('does not schedule a sync for writes that change nothing, or while signed out', async () => {
+    const backend = createFakeBackend();
+    const { account } = setup(backend);
+    await account.ready;
+    createSettingsRepository(account.store).setLanguage('vi');
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(backend.calls.pulls).toBe(0);
+  });
+
+  it('is silent on network errors: status "error", local data untouched, retried on the next change', async () => {
+    const backend = createFakeBackend({ user: USER });
+    backend.fail.pull = true;
+    const { account, local } = setup(backend, { local: { 'progress.completedLessons.v1': '["u1l1"]' } });
+    await account.ready;
+    await settle();
+    expect(account.getState().sync).toBe('error');
+    expect(createProgressRepository(local).completedLessons()).toEqual(['u1l1']);
+
+    backend.fail.pull = false;
+    createProgressRepository(account.store).markCompleted('u1l2');
+    await vi.advanceTimersByTimeAsync(1000);
+    await settle();
+    expect(account.getState().sync).toBe('synced');
+    expect(backend.rows.get(USER.id)).toMatchObject({ completedLessons: ['u1l1', 'u1l2'] });
+  });
+
+  it('push failures are silent too', async () => {
+    const backend = createFakeBackend({ user: USER });
+    backend.fail.push = true;
+    const { account } = setup(backend);
+    await account.ready;
+    await expect(account.sync()).resolves.toBeUndefined();
+    expect(account.getState().sync).toBe('error');
+  });
+
+  it('waits while offline and syncs when the device comes back online', async () => {
+    const backend = createFakeBackend({ user: USER });
+    const network = fakeNetwork(false);
+    const { account } = setup(backend, { network, local: { 'progress.completedLessons.v1': '["u1l1"]' } });
+    await account.ready;
+    await settle();
+    expect(account.getState().sync).toBe('offline');
+    expect(backend.calls.pulls).toBe(0);
+
+    network.goOnline();
+    await settle();
+    expect(account.getState().sync).toBe('synced');
+    expect(backend.rows.get(USER.id)).toMatchObject({ completedLessons: ['u1l1'] });
+  });
+
+  it('a change made during a sync is synced right after it', async () => {
+    const backend = createFakeBackend({ user: USER });
+    const { account } = setup(backend);
+    await account.ready;
+    await settle();
+    const first = account.sync();
+    createProgressRepository(account.store).markCompleted('u9l9');
+    const second = account.sync();
+    await first;
+    await second;
+    await settle();
+    expect(backend.rows.get(USER.id)).toMatchObject({ completedLessons: ['u9l9'] });
+  });
+
+  it('two devices converge on the union of their progress', async () => {
+    const backend = createFakeBackend({ user: USER });
+    const a = setup(backend, { local: { 'progress.completedLessons.v1': '["u1l1"]' } });
+    await a.account.ready;
+    await settle();
+    const b = setup(backend, { local: { 'progress.completedLessons.v1': '["u1l2"]', 'progress.solvedPuzzles.v1': '["p5"]' } });
+    await b.account.ready;
+    await settle();
+    await a.account.sync();
+    for (const device of [a.local, b.local]) {
+      expect(readSnapshot(device, NOW)).toMatchObject({ completedLessons: ['u1l1', 'u1l2'], solvedPuzzles: ['p5'] });
+    }
+  });
+});

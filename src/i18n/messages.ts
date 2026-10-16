@@ -26,6 +26,45 @@ export const messages = {
   'home.resetConfirm': { en: 'Reset all lesson progress?', vi: 'Xóa toàn bộ tiến độ học?' },
   'home.allDone': { en: 'You finished every lesson. Great work!', vi: 'Bạn đã học xong tất cả các bài. Tuyệt vời!' },
 
+  // ---------- Account + sync (only shown when Supabase is configured) ----------
+  'account.open': { en: 'Account and sync', vi: 'Tài khoản và đồng bộ' },
+  'account.title': { en: 'Account and sync', vi: 'Tài khoản và đồng bộ' },
+  'account.close': { en: 'Close', vi: 'Đóng' },
+  'account.intro': {
+    en: 'Sign in with your email to keep your progress on all your devices. Everything also works without an account.',
+    vi: 'Đăng nhập bằng email để giữ tiến độ trên mọi thiết bị. Không có tài khoản bạn vẫn dùng được đầy đủ.',
+  },
+  'account.email': { en: 'Email', vi: 'Email' },
+  'account.sendLink': { en: 'Send magic link', vi: 'Gửi liên kết đăng nhập' },
+  'account.sending': { en: 'Sending…', vi: 'Đang gửi…' },
+  'account.sendFailed': {
+    en: 'Couldn’t send the link. Check the address and your connection, then try again.',
+    vi: 'Không gửi được liên kết. Hãy kiểm tra địa chỉ email và kết nối mạng rồi thử lại.',
+  },
+  'account.linkSent': {
+    en: 'Check your inbox: we sent a sign-in link to {email}. Open it on this device.',
+    vi: 'Hãy kiểm tra hộp thư: chúng tôi đã gửi liên kết đăng nhập tới {email}. Hãy mở nó trên thiết bị này.',
+  },
+  'account.useOtherEmail': { en: 'Use a different email', vi: 'Dùng email khác' },
+  'account.loading': { en: 'Loading…', vi: 'Đang tải…' },
+  'account.signedInAs': { en: 'Signed in as {email}', vi: 'Đã đăng nhập: {email}' },
+  'account.logout': { en: 'Log out', vi: 'Đăng xuất' },
+  'account.logoutNote': {
+    en: 'Logging out keeps your progress on this device.',
+    vi: 'Đăng xuất vẫn giữ tiến độ trên thiết bị này.',
+  },
+  'sync.idle': { en: 'Not synced yet', vi: 'Chưa đồng bộ' },
+  'sync.syncing': { en: 'Syncing…', vi: 'Đang đồng bộ…' },
+  'sync.synced': { en: 'Progress synced', vi: 'Đã đồng bộ tiến độ' },
+  'sync.offline': {
+    en: 'Offline. Your progress will sync when you are back online.',
+    vi: 'Đang ngoại tuyến. Tiến độ sẽ được đồng bộ khi có mạng trở lại.',
+  },
+  'sync.error': {
+    en: 'Couldn’t sync right now. Your progress is safe on this device.',
+    vi: 'Chưa đồng bộ được. Tiến độ của bạn vẫn an toàn trên thiết bị này.',
+  },
+
   // ---------- Lesson player ----------
   'lesson.quit': { en: 'Quit lesson', vi: 'Thoát bài học' },
   'lesson.progress': { en: 'Exercise {n} of {total}', vi: 'Bài tập {n}/{total}' },

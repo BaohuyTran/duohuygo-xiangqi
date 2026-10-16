@@ -6,6 +6,8 @@ import {
   createProgressRepository,
   createPuzzleProgressRepository,
   createSettingsRepository,
+  readSnapshot,
+  writeSnapshot,
 } from './index';
 
 describe('progress repository', () => {
@@ -62,5 +64,36 @@ describe('progress repository', () => {
     expect(store.get('gamification.state.v1')).toContain('"totalXp":30');
     store.set('gamification.state.v1', 'not json');
     expect(repo.load(now)).toEqual(initialState(now));
+  });
+});
+
+describe('progress snapshot (used by account sync)', () => {
+  const now = new Date(2026, 9, 16, 12);
+
+  it('reads "nothing stored" as null so a merge can tell it from a default', () => {
+    expect(readSnapshot(createMemoryStore(), now)).toEqual({
+      completedLessons: [],
+      solvedPuzzles: [],
+      language: null,
+      muted: null,
+      gamification: null,
+    });
+  });
+
+  it('writes and reads back every synced value through the repositories', () => {
+    const store = createMemoryStore();
+    const gamification = { ...initialState(now), totalXp: 12 };
+    writeSnapshot(store, { completedLessons: ['u1l1'], solvedPuzzles: ['p1'], language: 'vi', muted: true, gamification });
+    expect(readSnapshot(store, now)).toEqual({ completedLessons: ['u1l1'], solvedPuzzles: ['p1'], language: 'vi', muted: true, gamification });
+    expect(createProgressRepository(store).completedLessons()).toEqual(['u1l1']);
+    expect(createSettingsRepository(store).muted()).toBe(true);
+  });
+
+  it('leaves values it does not have untouched', () => {
+    const store = createMemoryStore({ 'settings.language.v1': 'vi', 'settings.muted.v1': '1' });
+    writeSnapshot(store, { completedLessons: [], solvedPuzzles: [], language: null, muted: null, gamification: null });
+    expect(createSettingsRepository(store).language()).toBe('vi');
+    expect(createSettingsRepository(store).muted()).toBe(true);
+    expect(store.get('gamification.state.v1')).toBeNull();
   });
 });

@@ -119,7 +119,7 @@ lesson and puzzle players. English and Vietnamese.
 **Notes**
 
 - 2026-10-16: started on branch `task-4-xp-hearts-streaks`.
-- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/1 (not merged).
+- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/1, merged into `main` on 2026-10-16 (with the user's permission).
 - 2026-10-16: done in 1 of 3 attempts. Tester PASS (lint, build, 253 tests, engine guard clean, ui-check
   360px, Playwright checks in EN + VI). Reviewer APPROVE with no blocking findings.
 - Rules: `src/gamification/` (pure, injectable clock), persisted via `createGamificationRepository`
@@ -168,7 +168,7 @@ offline support and layout fixes.
 
 - 2026-10-16: started on branch `task-5-polish`, stacked on `task-4-xp-hearts-streaks` (PR #1 not merged
   yet; the user asked to continue). Its PR targets that branch until #1 is merged.
-- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/3 (stacked on #1, not merged).
+- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/3, retargeted to `main` and merged on 2026-10-16 (with the user's permission).
 - 2026-10-16: done in 1 of 3 attempts.
   - Tester: PASS.
     - Lint, build and 271 tests pass, and the engine is unchanged.
@@ -194,24 +194,50 @@ offline support and layout fixes.
 
 ## Task 6 — Supabase login and sync (optional)
 
-**Status:** todo · **optional** (the driver skips it unless explicitly asked to do Task 6)
+**Status:** done · **optional** (requested explicitly by the user on 2026-10-16)
 
 **Goal:** Optional account login and cross-device sync of progress using Supabase, implemented
 behind the existing storage interfaces so the app still works fully offline and without an account.
 
 **Acceptance criteria**
 
-- [ ] A Supabase-backed implementation of the storage repositories (or a syncing `KeyValueStore`) sits behind
+- [x] A Supabase-backed implementation of the storage repositories (or a syncing `KeyValueStore`) sits behind
       the existing interfaces. UI components do not import Supabase.
-- [ ] Login via email magic link (OAuth optional); logout; the app works unchanged when signed out.
-- [ ] Offline-first: local data is the source of truth until it syncs. There is a documented merge rule
+- [x] Login via email magic link (OAuth optional); logout; the app works unchanged when signed out.
+- [x] Offline-first: local data is the source of truth until it syncs. There is a documented merge rule
       (e.g. union of completed/solved ids, max of XP and best streak), with unit tests for that merge rule.
-- [ ] SQL migrations with Row Level Security in `supabase/`. Keys come from `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`;
+- [x] SQL migrations with Row Level Security in `supabase/`. Keys come from `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`;
       no secrets in the repo. Without these variables the feature is hidden and the build still succeeds.
-- [ ] The app stays a static build (free static hosting). No custom server.
-- [ ] New text in en + vi; tests mock Supabase (no network in CI); CLAUDE.md documents setup.
-- [ ] No changes to `src/engine`.
+- [x] The app stays a static build (free static hosting). No custom server.
+- [x] New text in en + vi; tests mock Supabase (no network in CI); CLAUDE.md documents setup.
+- [x] No changes to `src/engine`.
 
 **Notes**
 
-- _(driver fills in)_
+- 2026-10-16: started on branch `task-6-supabase-sync` (from `main` after PRs #1–#3 were merged).
+- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/4 (not merged).
+- 2026-10-16: done in 1 of 3 attempts.
+  - Tester: PASS.
+    - Lint, build and 337 tests pass, and the engine is unchanged.
+    - The default build ships no Supabase code and shows no account UI; `ui:check` and `offline:check` pass on it.
+    - The env build passes, with Supabase in a lazy chunk.
+    - In Playwright with Supabase mocked: the magic-link request, the error state, a simulated signed-in sync and logout all work.
+    - No secrets in the repo, and the RLS migration was read and checked.
+  - Reviewer: APPROVE, with no blocking findings.
+- Added:
+  - `src/sync/`: merge rule, account/sync service, config, and the only Supabase import in `supabase.ts`, loaded via dynamic `import()`.
+  - `Account.tsx` (button and panel), `readSnapshot`/`writeSnapshot` in `src/storage`.
+  - `supabase/migrations/20261016000000_progress.sql`, `.env.example`, and a CLAUDE.md setup section.
+- **Not verified against a real Supabase project.** None is connected here, so magic-link email delivery, the real auth
+  redirect and the RLS policies under Postgres still need a manual check after you create the project.
+- Open follow-ups (non-blocking, from the reviewer and tester):
+  - "Reset progress" while signed in is undone by the next sync, because a union can't express deletion. Hide or disable it, or add a reset epoch.
+  - In the env build the 216 kB Supabase chunk is precached for every visitor.
+  - A streak can drop to 1 in an offline two-device edge case; `bestStreak` is kept.
+  - Same-day XP on two unsynced devices merges as a max, not a sum.
+  - The synced daily goal effectively stays per device; reword the docs.
+  - On iOS the magic link opens in Safari, not the installed PWA; consider a 6-digit code.
+  - No retry when the Supabase chunk fails to load until the app is reloaded.
+  - Add service tests for sign-out during a pull.
+  - Optional migration hardening: revoke-all before the grants, and a size limit on `data`.
+- Process note: roles ran with the general-purpose agent fallback (`docs/DRIVER.md`).

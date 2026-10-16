@@ -49,6 +49,9 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
 │   └── DRIVER.md           # "Do the next task" procedure for the main session
 ├── .claude/agents/         # implementer, tester, reviewer subagents
 ├── .github/workflows/ci.yml# npm ci + build + test on pull requests
+├── .env.example            # Placeholder Supabase variables (copy to .env.local; never commit real keys)
+├── supabase/
+│   └── migrations/         # SQL: `progress` table (one JSON row per user) + Row Level Security
 ├── index.html              # HTML shell, PWA meta tags
 ├── vite.config.ts          # Vite, Tailwind, PWA manifest, Vitest config
 ├── public/                 # Static assets copied as-is (favicon, PWA icons)
@@ -59,7 +62,8 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
 │   ├── offline-check.mjs   # Build, load once, go offline, reload, open a lesson + puzzle; manifest/icons
 │   └── generate-puzzles.ts # Dev-time puzzle generator (run with tsx; not part of the app)
 └── src/
-    ├── main.tsx            # React entry
+    ├── main.tsx            # React entry; creates the account service only when the Supabase env vars are set
+    ├── vite-env.d.ts       # Typing for VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY
     ├── App.tsx             # Tabs (Lessons / Puzzles) and screen switching, wires storage + i18n
     ├── index.css           # Tailwind import + base styles
     ├── components/
@@ -72,6 +76,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── StatsBar.tsx    # Streak, today's XP / daily goal (goal picker on Home), hearts + next refill
     │   ├── SoundToggle.tsx # Mute / unmute button (Home, Puzzles and both player headers)
     │   ├── Celebration.tsx # Confetti burst on lesson / puzzle completion
+    │   ├── Account.tsx     # Account button (Home header) + panel: magic link, link sent, signed in / sync status / log out
     │   ├── useElementHeight.ts # Measures the fixed footers so the page reserves room below the board
     │   └── LanguageToggle.tsx
     ├── content/
@@ -100,7 +105,13 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── SoundProvider.tsx # useSound(): play / muted / setMuted; unlocks audio on the first gesture
     │   └── fake-audio.ts   # Test helper: fake AudioContext that records scheduled notes
     ├── storage/
-    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings (language, muted), gamification repos
+    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings (language, muted), gamification repos; readSnapshot/writeSnapshot for sync
+    ├── sync/               # Optional account login + sync. UI never imports Supabase (enforced by a test)
+    │   ├── merge.ts        # THE merge rule (documented there), RemoteData JSON format, parseRemote. Pure
+    │   ├── service.ts      # createAccountService: auth state, offline-first sync, debounced; backend injected. No React
+    │   ├── config.ts       # readSyncConfig (env vars), appUrl (magic-link redirect = origin + base path)
+    │   ├── supabase.ts     # The ONLY Supabase import; loaded via dynamic import() from main.tsx
+    │   └── fake-backend.ts # Test helper: in-memory SyncBackend (no network)
     └── engine/             # Pure TypeScript rules engine. NO React/DOM imports (enforced by a test)
         ├── types.ts        # Color, PieceType, Piece, Square, Position, Move, GameStatus
         ├── board.ts        # Coordinates, palace/river helpers, square names
@@ -168,6 +179,45 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   go back to fixed `pb-*` guesses. Fixed bars add safe-area insets (`.safe-px`, `env(safe-area-inset-*)`).
 - `npm run ui:check` fails on horizontal scroll, controls under 44px or clipped at the edge, and a fixed
   bar covering the board's last row. Run it at 320, 360, 414 wide and in landscape (`--width 740 --height 360`).
+
+## Account login and sync (optional)
+
+- Off unless BOTH `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set at build time. Without them
+  there is no account UI and the build contains no Supabase code (the `import.meta.env` check in
+  `main.tsx` is folded away). With them, `@supabase/supabase-js` is a separate lazy chunk.
+- The app works unchanged when signed out. Local data (src/storage) is always the source of truth for
+  the UI: `App` reads/writes through `account.store`, a wrapper that schedules a sync 2 s after a
+  meaningful local change. A sync pulls the account row, merges, writes the merge locally (then the UI
+  re-reads via `onDataChanged`) and pushes it. It also runs on sign-in / app start with a session and
+  when the device comes back online. Errors never reach gameplay; they only show as a sync status.
+- Components get an `AccountService` (`App`'s optional `account` prop) and never import Supabase.
+  Tests use `createFakeBackend()` from `src/sync/fake-backend.ts` or a fake Supabase client: no network.
+- **Merge rule** (`src/sync/merge.ts`): completed lessons / solved puzzles = union; XP = per-day max,
+  total = max of the XP older than the per-day history + sum of merged days (never below either total);
+  streak = the side with the later `lastGoalDay` (same day: longer streak), best streak = max;
+  hearts = refill both by time, then the side with FEWER hearts (sync never grants hearts);
+  language, sound and daily goal = this device's value, the account's only fills in missing ones.
+  Corrupt or missing remote fields are ignored. Idempotent; commutative except the preferences.
+  Union cannot express deletion: "Reset progress" while signed in is undone by the next sync.
+- Logging out (`signOut({ scope: 'local' })`) keeps local progress. The auth session is stored through
+  `createLocalStore('duohuygo:auth:')`. Magic links use the implicit flow (works when the email opens
+  in another browser); the session arriving in the URL is picked up by supabase-js and the URL cleaned.
+
+Setup:
+
+1. Create a free project at supabase.com. In the SQL editor run `supabase/migrations/*.sql` in order
+   (or `supabase db push` with the Supabase CLI). It creates `public.progress` with RLS: a user can
+   select / insert / update only the row where `user_id = auth.uid()`.
+2. Authentication → Providers: keep Email enabled (magic link). Authentication → URL Configuration:
+   set the Site URL to the deployed app URL and add every app URL to Redirect URLs, including the
+   sub-path, e.g. `https://<user>.github.io/<repo>/` and `http://localhost:5173/` (the redirect is the
+   app's origin + Vite base path).
+3. Locally: copy `.env.example` to `.env.local` and fill in Project URL and the anon public key
+   (Project Settings → API). `.env*` files are git-ignored except the example.
+4. On the static host (e.g. GitHub Pages via Actions, Netlify, Vercel), set the same two variables in
+   the build environment. They are public client values; the data is protected by RLS. Never use the
+   service-role key in the app. Verify both builds: `npm run build` and
+   `VITE_SUPABASE_URL=https://example.supabase.co VITE_SUPABASE_ANON_KEY=dummy npm run build`.
 
 ## Engine conventions
 

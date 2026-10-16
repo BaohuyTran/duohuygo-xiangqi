@@ -25,3 +25,8 @@ dist-ssr
 
 # UI check screenshots (scripts/ui-check.mjs)
 ui-check-output
+
+# Local environment (Supabase keys); only the placeholder example is committed
+.env
+.env.*
+!.env.example
