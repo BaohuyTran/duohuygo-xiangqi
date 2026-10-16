@@ -1,3 +1,5 @@
+import { parseState, type GamificationRepository } from '../gamification';
+
 // Small persistence layer. Everything goes through a KeyValueStore so localStorage can be swapped
 // for something else (IndexedDB, a server) later without touching the UI.
 
@@ -59,6 +61,7 @@ export function createLocalStore(prefix = 'duohuygo:'): KeyValueStore {
 const COMPLETED_KEY = 'progress.completedLessons.v1';
 const SOLVED_PUZZLES_KEY = 'progress.solvedPuzzles.v1';
 const LANGUAGE_KEY = 'settings.language.v1';
+const GAMIFICATION_KEY = 'gamification.state.v1';
 
 /** A persisted set of ids (completed lessons, solved puzzles, ...). */
 interface IdSet {
@@ -118,5 +121,19 @@ export function createSettingsRepository(store: KeyValueStore): SettingsReposito
   return {
     language: () => store.get(LANGUAGE_KEY),
     setLanguage: (lang) => store.set(LANGUAGE_KEY, lang),
+  };
+}
+
+/** XP, hearts, daily goal and streak (rules in src/gamification). Corrupt data falls back to defaults. */
+export function createGamificationRepository(store: KeyValueStore): GamificationRepository {
+  return {
+    load(now) {
+      try {
+        return parseState(JSON.parse(store.get(GAMIFICATION_KEY) ?? 'null'), now);
+      } catch {
+        return parseState(null, now);
+      }
+    },
+    save: (state) => store.set(GAMIFICATION_KEY, JSON.stringify(state)),
   };
 }

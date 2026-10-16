@@ -26,9 +26,11 @@ export interface PuzzlePlayerProps {
   onExit: () => void;
   onSolved: (id: string) => void;
   onNext: () => void;
+  /** XP the app awarded for this solve (shown on the success screen); 0 when it was already solved. */
+  xpEarned?: number;
 }
 
-export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext }: PuzzlePlayerProps) {
+export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext, xpEarned }: PuzzlePlayerProps) {
   const { t } = useI18n();
   const start = useMemo(() => startPosition(puzzle), [puzzle]);
 
@@ -261,6 +263,11 @@ export function PuzzlePlayer({ puzzle, number, hasNext, onExit, onSolved, onNext
                 <p className={phase === 'solved' ? 'text-green-800' : 'text-violet-800'}>
                   {t(phase === 'solved' ? 'puzzle.solvedBody' : 'puzzle.revealedBody')}
                 </p>
+                {phase === 'solved' && xpEarned !== undefined && (
+                  <p className={xpEarned > 0 ? 'text-lg font-extrabold text-amber-600' : 'text-sm font-semibold text-stone-600'}>
+                    {xpEarned > 0 ? t('xp.earned', { xp: xpEarned }) : t('xp.none')}
+                  </p>
+                )}
               </div>
               <div className="flex gap-3">
                 {phase === 'revealed' && (

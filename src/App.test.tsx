@@ -3,7 +3,8 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import App from './App';
 import { puzzles } from './puzzles/catalog';
-import { createMemoryStore } from './storage';
+import { createGamificationRepository, createMemoryStore } from './storage';
+import { initialState } from './gamification';
 
 afterEach(cleanup);
 
@@ -67,5 +68,104 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /^Puzzle 1, .*, solved$/ })).toBeTruthy();
     press('Lessons');
     expect(screen.getByText('DuoHuyGo Xiangqi')).toBeTruthy();
+  });
+
+  describe('XP, hearts, daily goal and streak', () => {
+    const playFirstLesson = () => {
+      press('Continue');
+      press('Continue');
+      press('Continue');
+      for (const sq of ['d0', 'e0', 'f0', 'd1', 'e1', 'f1', 'd2', 'e2', 'f2']) tap(sq);
+      press(/Check/);
+      press('Continue');
+      for (const sq of ['d7', 'e7', 'f7', 'd8', 'e8', 'f8', 'd9', 'e9', 'f9']) tap(sq);
+      press(/Check/);
+      press('Continue');
+    };
+
+    it('awards lesson XP, costs a heart for a wrong answer and meets the daily goal', () => {
+      const store = createMemoryStore();
+      const now = () => new Date(2026, 5, 1, 10, 0);
+      render(<App store={store} now={now} />);
+      expect(screen.getByText('Today: 0 of 20 XP')).toBeTruthy();
+      expect(screen.getByText('5 of 5 hearts')).toBeTruthy();
+
+      press('The board (start)');
+      press('Continue');
+      press('Continue');
+      press('Continue');
+      tap('a0');
+      press(/Check/); // wrong selection
+      expect(screen.getByRole('alert').textContent).toMatch(/You lost a heart\. 4 left\./);
+      press('Try again');
+      for (const sq of ['d0', 'e0', 'f0', 'd1', 'e1', 'f1', 'd2', 'e2', 'f2']) tap(sq);
+      press(/Check/);
+      press('Continue');
+      for (const sq of ['d7', 'e7', 'f7', 'd8', 'e8', 'f8', 'd9', 'e9', 'f9']) tap(sq);
+      press(/Check/);
+      press('Continue');
+      expect(screen.getByText('+10 XP')).toBeTruthy();
+      press('Continue');
+
+      expect(screen.getByText('Today: 10 of 20 XP')).toBeTruthy();
+      expect(screen.getByText('4 of 5 hearts')).toBeTruthy();
+      expect(screen.getByText('Next heart in 30 min')).toBeTruthy();
+
+      // Replay: +5 XP.
+      press('The board (completed)');
+      playFirstLesson();
+      expect(screen.getByText('+5 XP')).toBeTruthy();
+      press('Continue');
+      expect(screen.getByText('Today: 15 of 20 XP')).toBeTruthy();
+
+      // Lower the goal from the home screen: today's 15 XP now meets it and starts a streak.
+      press(/Change daily goal/);
+      press('10 XP per day');
+      expect(screen.getByText('Today: 15 of 10 XP')).toBeTruthy();
+      expect(screen.getByText('1-day streak')).toBeTruthy();
+      expect(screen.getByText('Daily goal reached!')).toBeTruthy();
+
+      // Persisted.
+      cleanup();
+      render(<App store={store} now={now} />);
+      expect(screen.getByText('Today: 15 of 10 XP')).toBeTruthy();
+      expect(screen.getByText('1-day streak')).toBeTruthy();
+    });
+
+    it('blocks new lessons at 0 hearts, keeps puzzles open, and refills over time', () => {
+      const store = createMemoryStore();
+      let clock = new Date(2026, 5, 1, 10, 0);
+      createGamificationRepository(store).save({ ...initialState(clock), hearts: 0, heartsAnchor: clock.getTime() - 10 * 60 * 1000 });
+      render(<App store={store} now={() => clock} />);
+
+      expect(screen.getByText('0 of 5 hearts')).toBeTruthy();
+      expect(screen.getByRole('status').textContent).toMatch(/Out of hearts.*Next heart in 20 min/);
+      press('The board (start)');
+      expect(screen.queryByRole('grid')).toBeNull(); // still on the home screen
+
+      // Puzzles still work and award XP once.
+      press('Puzzles');
+      expect(screen.getByText('0 of 5 hearts')).toBeTruthy();
+      press(/^Puzzle 1, /);
+      const p = puzzles[0];
+      tap(p.solution[0].from);
+      tap(p.solution[0].to);
+      expect(screen.getByRole('alert').textContent).toMatch(/\+5 XP/);
+      press('Back to puzzles');
+      expect(screen.getByText('Today: 5 of 20 XP')).toBeTruthy();
+      press(/^Puzzle 1, /);
+      tap(p.solution[0].from);
+      tap(p.solution[0].to);
+      expect(screen.getByRole('alert').textContent).toMatch(/Already solved: no XP this time/);
+      press('Back to puzzles');
+      expect(screen.getByText('Today: 5 of 20 XP')).toBeTruthy();
+
+      // 20 minutes later a heart has come back: lessons can start again.
+      clock = new Date(2026, 5, 1, 10, 20);
+      press('Lessons');
+      press('The board (start)');
+      expect(screen.getByRole('grid')).toBeTruthy();
+      expect(screen.getByTestId('lesson-hearts').textContent).toMatch(/Hearts: 1/);
+    });
   });
 });

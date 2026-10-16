@@ -90,6 +90,33 @@ export const messages = {
   'nav.lessons': { en: 'Lessons', vi: 'Bài học' },
   'nav.puzzles': { en: 'Puzzles', vi: 'Câu đố' },
 
+  // ---------- XP, hearts, daily goal, streak ----------
+  'stats.label': { en: 'Your stats', vi: 'Thành tích của bạn' },
+  'stats.streak': { en: '{n}-day streak', vi: 'Chuỗi {n} ngày' },
+  'stats.todayXp': { en: 'Today: {xp} of {goal} XP', vi: 'Hôm nay: {xp}/{goal} XP' },
+  'stats.xpShort': { en: '{xp}/{goal} XP', vi: '{xp}/{goal} XP' },
+  'stats.hearts': { en: '{n} of {max} hearts', vi: '{n}/{max} tim' },
+  'stats.nextHeart': { en: 'Next heart in {min} min', vi: 'Tim tiếp theo sau {min} phút' },
+  'stats.goalMet': { en: 'Daily goal reached!', vi: 'Đã đạt mục tiêu hôm nay!' },
+  'stats.bestStreak': { en: 'Best streak: {n} days', vi: 'Chuỗi dài nhất: {n} ngày' },
+  'dailyGoal.title': { en: 'Daily goal', vi: 'Mục tiêu hằng ngày' },
+  'dailyGoal.change': { en: 'Change daily goal', vi: 'Đổi mục tiêu hằng ngày' },
+  'dailyGoal.option': { en: '{xp} XP', vi: '{xp} XP' },
+  'dailyGoal.optionLabel': { en: '{xp} XP per day', vi: '{xp} XP mỗi ngày' },
+  'hearts.empty.title': { en: 'Out of hearts', vi: 'Hết tim rồi' },
+  'hearts.empty.body': {
+    en: 'You need a heart to start a lesson. Next heart in {min} min. Puzzles are still open!',
+    vi: 'Bạn cần ít nhất một tim để bắt đầu bài học. Tim tiếp theo sau {min} phút. Bạn vẫn có thể giải câu đố!',
+  },
+  'hearts.lost': { en: 'You lost a heart. {n} left.', vi: 'Bạn bị mất một tim. Còn {n} tim.' },
+  'hearts.noneLeft': {
+    en: 'You’re out of hearts, but you can finish this lesson.',
+    vi: 'Bạn đã hết tim, nhưng vẫn có thể hoàn thành bài học này.',
+  },
+  'lesson.hearts': { en: 'Hearts: {n}', vi: 'Tim: {n}' },
+  'xp.earned': { en: '+{xp} XP', vi: '+{xp} XP' },
+  'xp.none': { en: 'Already solved: no XP this time.', vi: 'Đã giải trước đó: lần này không có XP.' },
+
   // ---------- Puzzle list ----------
   'puzzles.title': { en: 'Puzzles', vi: 'Câu đố' },
   'puzzles.subtitle': { en: 'Find the winning move', vi: 'Tìm nước đi chiến thắng' },

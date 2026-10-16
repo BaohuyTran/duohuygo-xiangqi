@@ -84,4 +84,21 @@ describe('PuzzlePlayer', () => {
     press('Next puzzle');
     expect(onNext).toHaveBeenCalledOnce();
   });
+
+  it('shows the XP earned on the success screen', () => {
+    const mate1 = puzzles.find((p) => p.goal === 'mate-in-1')!;
+    const { rerender } = render(
+      <I18nProvider initial="en">
+        <PuzzlePlayer puzzle={mate1} number={1} hasNext onExit={vi.fn()} onSolved={vi.fn()} onNext={vi.fn()} xpEarned={5} />
+      </I18nProvider>,
+    );
+    move(mate1.solution[0].from, mate1.solution[0].to);
+    expect(screen.getByRole('alert').textContent).toMatch(/Solved!.*\+5 XP/);
+    rerender(
+      <I18nProvider initial="en">
+        <PuzzlePlayer puzzle={mate1} number={1} hasNext onExit={vi.fn()} onSolved={vi.fn()} onNext={vi.fn()} xpEarned={0} />
+      </I18nProvider>,
+    );
+    expect(screen.getByRole('alert').textContent).toMatch(/Already solved: no XP this time/);
+  });
 });

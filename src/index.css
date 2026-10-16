@@ -26,8 +26,31 @@ body {
   animation: piece-slide 320ms ease-out;
 }
 
+/* The lesson header heart when a heart is lost (LessonPlayer). */
+@keyframes heart-lost {
+  0%,
+  100% {
+    transform: scale(1) rotate(0);
+  }
+  20% {
+    transform: scale(1.35) rotate(-12deg);
+  }
+  40% {
+    transform: scale(0.8) rotate(10deg);
+  }
+  60% {
+    transform: scale(1.1) rotate(-6deg);
+  }
+}
+
+.heart-lost {
+  display: inline-block;
+  animation: heart-lost 600ms ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .piece-slide {
+  .piece-slide,
+  .heart-lost {
     animation: none;
   }
 }

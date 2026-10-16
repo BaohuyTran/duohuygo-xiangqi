@@ -21,23 +21,45 @@ import {
   type SelectionResult,
 } from '../lessons/answers';
 import { Board, type MarkTone } from './Board';
+import { HeartIcon } from './StatsBar';
 
 export interface LessonPlayerProps {
   lesson: Lesson;
   onExit: () => void;
   onComplete: () => void;
+  /** Hearts left; when given, they are shown and every wrong answer calls `onMistake`. */
+  hearts?: number;
+  /** A wrong answer: the app takes a heart (never below 0). */
+  onMistake?: () => void;
+  /** XP the completion screen announces (awarded by the app on Continue). */
+  completionXp?: number;
 }
 
-export function LessonPlayer({ lesson, onExit, onComplete }: LessonPlayerProps) {
+/** What a wrong answer did to the hearts, for the feedback text. */
+interface HeartNote {
+  lost: boolean;
+  left: number;
+}
+
+export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, completionXp }: LessonPlayerProps) {
   const { t } = useI18n();
   const [index, setIndex] = useState(0);
   const [firstTryCorrect, setFirstTryCorrect] = useState(0);
+  const [heartsLost, setHeartsLost] = useState(0);
   const total = lesson.exercises.length;
   const done = index >= total;
 
   const finishExercise = (firstTry: boolean) => {
     if (firstTry) setFirstTryCorrect((n) => n + 1);
     setIndex((i) => i + 1);
+  };
+
+  const mistake = (): HeartNote | null => {
+    if (hearts === undefined) return null;
+    onMistake?.();
+    if (hearts <= 0) return { lost: false, left: 0 };
+    setHeartsLost((n) => n + 1);
+    return { lost: true, left: hearts - 1 };
   };
 
   return (
@@ -63,6 +85,18 @@ export function LessonPlayer({ lesson, onExit, onComplete }: LessonPlayerProps) 
         >
           <div className="h-full rounded-full bg-green-500 transition-[width] duration-300" style={{ width: `${(index / total) * 100}%` }} />
         </div>
+        {hearts !== undefined && (
+          <div className={`flex min-h-11 shrink-0 items-center gap-1 ${hearts > 0 ? 'text-red-500' : 'text-stone-400'}`} data-testid="lesson-hearts">
+            {/* Re-keyed on every lost heart so the shake animation replays. */}
+            <span key={heartsLost} className={heartsLost > 0 ? 'heart-lost' : undefined}>
+              <HeartIcon className="h-7 w-7" />
+            </span>
+            <span className="sr-only">{t('lesson.hearts', { n: hearts })}</span>
+            <span aria-hidden className="text-lg font-extrabold">
+              {hearts}
+            </span>
+          </div>
+        )}
       </header>
 
       {done ? (
@@ -72,6 +106,11 @@ export function LessonPlayer({ lesson, onExit, onComplete }: LessonPlayerProps) 
           </div>
           <h2 className="text-3xl font-extrabold text-amber-600">{t('done.title')}</h2>
           <p className="text-lg text-stone-600">{t('done.stats', { correct: firstTryCorrect, total })}</p>
+          {completionXp !== undefined && (
+            <p className="rounded-2xl border-2 border-amber-300 bg-amber-50 px-5 py-2 text-2xl font-extrabold text-amber-600">
+              {t('xp.earned', { xp: completionXp })}
+            </p>
+          )}
           <button
             type="button"
             onClick={onComplete}
@@ -81,7 +120,7 @@ export function LessonPlayer({ lesson, onExit, onComplete }: LessonPlayerProps) 
           </button>
         </section>
       ) : (
-        <ExerciseView key={index} exercise={lesson.exercises[index]} onFinished={finishExercise} />
+        <ExerciseView key={index} exercise={lesson.exercises[index]} onFinished={finishExercise} onMistake={mistake} />
       )}
     </div>
   );
@@ -89,7 +128,15 @@ export function LessonPlayer({ lesson, onExit, onComplete }: LessonPlayerProps) 
 
 type Status = 'answering' | 'correct' | 'incorrect';
 
-function ExerciseView({ exercise: ex, onFinished }: { exercise: Exercise; onFinished: (firstTry: boolean) => void }) {
+function ExerciseView({
+  exercise: ex,
+  onFinished,
+  onMistake,
+}: {
+  exercise: Exercise;
+  onFinished: (firstTry: boolean) => void;
+  onMistake: () => HeartNote | null;
+}) {
   const { t } = useI18n();
   const start = useMemo(() => positionOf(ex), [ex]);
   const fixedFrom = ex.type === 'move' && ex.from !== undefined ? parseSquare(ex.from) : null;
@@ -101,6 +148,7 @@ function ExerciseView({ exercise: ex, onFinished }: { exercise: Exercise; onFini
   const [played, setPlayed] = useState<Move | null>(null);
   const [verdict, setVerdict] = useState<MoveVerdict | null>(null);
   const [selection, setSelection] = useState<SelectionResult | null>(null);
+  const [heartNote, setHeartNote] = useState<HeartNote | null>(null);
 
   const position = played ? makeMove(start, played) : start;
 
@@ -108,6 +156,7 @@ function ExerciseView({ exercise: ex, onFinished }: { exercise: Exercise; onFini
   const fail = () => {
     setStatus('incorrect');
     setHadMistake(true);
+    setHeartNote(onMistake());
   };
   const retry = () => {
     setStatus('answering');
@@ -116,6 +165,7 @@ function ExerciseView({ exercise: ex, onFinished }: { exercise: Exercise; onFini
     setPlayed(null);
     setVerdict(null);
     setSelection(null);
+    setHeartNote(null);
   };
 
   const onSquareClick = (sq: Square) => {
@@ -218,6 +268,12 @@ function ExerciseView({ exercise: ex, onFinished }: { exercise: Exercise; onFini
               </p>
               {status === 'incorrect' && (
                 <p className="text-red-700">{t(selection ? 'verdict.selection' : `verdict.${verdict}`)}</p>
+              )}
+              {status === 'incorrect' && heartNote && (
+                <p className="mt-1 flex items-center gap-1.5 font-bold text-red-700">
+                  <HeartIcon className="h-5 w-5 shrink-0" />
+                  {heartNote.lost ? t('hearts.lost', { n: heartNote.left }) : t('hearts.noneLeft')}
+                </p>
               )}
               {status === 'correct' && explanation && <p className="text-green-800">{t(explanation)}</p>}
             </div>
