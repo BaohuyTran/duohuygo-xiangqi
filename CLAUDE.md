@@ -67,6 +67,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── PuzzleList.tsx  # Puzzles grouped by difficulty or theme, solved state
     │   ├── PuzzlePlayer.tsx# Puzzle play: hints, auto reply, show solution, next puzzle
     │   ├── BottomNav.tsx   # Lessons / Puzzles tab bar
+    │   ├── StatsBar.tsx    # Streak, today's XP / daily goal (goal picker on Home), hearts + next refill
     │   └── LanguageToggle.tsx
     ├── content/
     │   ├── lessons/*.json  # One file per unit, loaded in file-name order
@@ -85,8 +86,12 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     ├── i18n/
     │   ├── messages.ts     # THE single file of all UI + lesson text, English and Vietnamese
     │   └── I18nProvider.tsx# React context: useI18n() -> { t, lang, setLang }
+    ├── gamification/       # Pure XP / hearts / daily goal / streak rules. NO React/DOM (enforced by a test)
+    │   ├── rules.ts        # Pure functions taking `now: Date`; parseState validates stored data
+    │   ├── service.ts      # createGamification(repo, now = () => new Date()): load -> rule -> save
+    │   └── index.ts        # Public API
     ├── storage/
-    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings repos
+    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings, gamification repos
     └── engine/             # Pure TypeScript rules engine. NO React/DOM imports (enforced by a test)
         ├── types.ts        # Color, PieceType, Piece, Square, Position, Move, GameStatus
         ├── board.ts        # Coordinates, palace/river helpers, square names
@@ -125,6 +130,17 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - In the player, later moves are accepted whenever the engine confirms they still win, not only the
   stored move. Solved puzzle ids are stored through `src/storage` (`createPuzzleProgressRepository`).
 - All puzzles are currently Red to move (the board is always drawn with Red at the bottom).
+
+## XP, hearts, daily goal and streak
+
+- Rules live in `src/gamification/rules.ts` (documented at the top of the file); the clock is injected
+  (`App` takes an optional `now: () => Date`, tests pass a fixed one). Days are the device's local date.
+- XP: lesson first completion 10, replay 5, first puzzle solve 5 (no difficulty bonus), reveal/re-solve 0.
+- Hearts: max 5, −1 per wrong lesson answer, +1 every 30 min computed from timestamps. At 0 hearts no
+  lesson can be started (the current lesson can still be finished); puzzles never cost hearts.
+- Daily goal 10/20/30/50 XP (default 20), met when today's XP ≥ goal; the streak counts consecutive met days.
+- A clock that goes backwards never grants hearts and never breaks or extends a streak.
+- State is stored as one JSON value under `gamification.state.v1` via `createGamificationRepository`.
 
 ## Engine conventions
 

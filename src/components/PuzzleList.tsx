@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { PUZZLE_THEMES, type Puzzle } from '../content/puzzle-types';
+import type { GamificationSummary } from '../gamification';
 import { useI18n } from '../i18n/I18nProvider';
 import { LanguageToggle } from './LanguageToggle';
+import { StatsBar } from './StatsBar';
 
 type Grouping = 'difficulty' | 'theme';
 
@@ -9,9 +11,10 @@ export interface PuzzleListProps {
   puzzles: readonly Puzzle[];
   solved: ReadonlySet<string>;
   onOpen: (id: string) => void;
+  stats: GamificationSummary;
 }
 
-export function PuzzleList({ puzzles, solved, onOpen }: PuzzleListProps) {
+export function PuzzleList({ puzzles, solved, onOpen, stats }: PuzzleListProps) {
   const { t } = useI18n();
   const [grouping, setGrouping] = useState<Grouping>('difficulty');
   const number = new Map(puzzles.map((p, i) => [p.id, i + 1]));
@@ -31,6 +34,8 @@ export function PuzzleList({ puzzles, solved, onOpen }: PuzzleListProps) {
         </div>
         <LanguageToggle />
       </header>
+
+      <StatsBar summary={stats} />
 
       <p className="mb-1 text-sm font-semibold text-stone-600">{t('puzzles.solvedCount', { done: solvedCount, total: puzzles.length })}</p>
       <div className="mb-5 h-3 overflow-hidden rounded-full bg-stone-200">

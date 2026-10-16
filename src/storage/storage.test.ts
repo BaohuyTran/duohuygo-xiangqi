@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { createMemoryStore, createProgressRepository, createPuzzleProgressRepository, createSettingsRepository } from './index';
+import { initialState } from '../gamification';
+import {
+  createGamificationRepository,
+  createMemoryStore,
+  createProgressRepository,
+  createPuzzleProgressRepository,
+  createSettingsRepository,
+} from './index';
 
 describe('progress repository', () => {
   it('records completed lessons once each and can reset', () => {
@@ -33,5 +40,17 @@ describe('progress repository', () => {
     expect(lessons.completedLessons()).toEqual([]);
     lessons.reset();
     expect(puzzles.solvedPuzzles()).toEqual(['m1-01', 'm2-03']);
+  });
+
+  it('stores gamification state under a versioned key and falls back to defaults when corrupt', () => {
+    const now = new Date(2026, 0, 1);
+    const store = createMemoryStore();
+    const repo = createGamificationRepository(store);
+    expect(repo.load(now)).toEqual(initialState(now));
+    repo.save({ ...initialState(now), totalXp: 30, hearts: 3 });
+    expect(repo.load(now)).toMatchObject({ totalXp: 30, hearts: 3 });
+    expect(store.get('gamification.state.v1')).toContain('"totalXp":30');
+    store.set('gamification.state.v1', 'not json');
+    expect(repo.load(now)).toEqual(initialState(now));
   });
 });

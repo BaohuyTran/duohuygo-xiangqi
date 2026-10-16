@@ -1,7 +1,9 @@
 import type { Unit } from '../content/types';
+import { minutesUntil, type DailyGoal, type GamificationSummary } from '../gamification';
 import { useI18n } from '../i18n/I18nProvider';
 import type { LessonState } from '../lessons/progress';
 import { LanguageToggle } from './LanguageToggle';
+import { HeartIcon, StatsBar } from './StatsBar';
 
 const UNIT_COLORS = ['#16a34a', '#0284c7', '#9333ea', '#ea580c', '#db2777', '#ca8a04'];
 // Horizontal offsets (px) that make the lesson path zig-zag like Duolingo's.
@@ -12,9 +14,11 @@ export interface HomeProps {
   states: ReadonlyMap<string, LessonState>;
   onStart: (lessonId: string) => void;
   onReset: () => void;
+  stats: GamificationSummary;
+  onGoalChange: (goal: DailyGoal) => void;
 }
 
-export function Home({ units, states, onStart, onReset }: HomeProps) {
+export function Home({ units, states, onStart, onReset, stats, onGoalChange }: HomeProps) {
   const { t } = useI18n();
   const all = units.flatMap((u) => u.lessons);
   const completedCount = all.filter((l) => states.get(l.id) === 'completed').length;
@@ -28,6 +32,18 @@ export function Home({ units, states, onStart, onReset }: HomeProps) {
         </div>
         <LanguageToggle />
       </header>
+
+      <StatsBar summary={stats} onGoalChange={onGoalChange} />
+
+      {stats.hearts === 0 && (
+        <div role="status" className="mb-5 flex items-start gap-3 rounded-2xl border-2 border-red-200 bg-red-50 px-4 py-3">
+          <HeartIcon className="mt-0.5 h-7 w-7 shrink-0 text-stone-400" />
+          <div>
+            <p className="font-extrabold text-red-700">{t('hearts.empty.title')}</p>
+            <p className="text-sm text-red-800">{t('hearts.empty.body', { min: minutesUntil(stats.nextHeartInMs ?? 0) })}</p>
+          </div>
+        </div>
+      )}
 
       <div className="mb-6">
         <p className="mb-1 text-sm font-semibold text-stone-600">{t('home.progress', { done: completedCount, total: all.length })}</p>
