@@ -75,8 +75,7 @@ and player.
 
 **Notes**
 
-- Branch `task-3-puzzles` (commit `ab8dd7c`), **not yet merged into `main`**. Merge it (and this
-  workflow branch) before running the driver, or Task 4 will branch from a `main` without puzzles.
+- Merged to `main` (commit `ab8dd7c`), together with the workflow setup (`43b0d73`).
 - All 60 puzzles cross-checked against Fairy-Stockfish move generation with no disagreements.
 
 ---
