@@ -273,7 +273,7 @@ function PrimaryButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`h-12 flex-1 rounded-2xl text-lg font-bold text-white ${colors} active:translate-y-1 active:shadow-none disabled:bg-stone-300 disabled:shadow-none`}
+      className={`min-h-12 flex-1 rounded-2xl text-lg font-bold text-white ${colors} active:translate-y-1 active:shadow-none disabled:bg-stone-300 disabled:shadow-none`}
     >
       {children}
     </button>
