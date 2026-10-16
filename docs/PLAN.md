@@ -119,6 +119,7 @@ lesson and puzzle players. English and Vietnamese.
 **Notes**
 
 - 2026-10-16: started on branch `task-4-xp-hearts-streaks`.
+- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/1 (not merged).
 - 2026-10-16: done in 1 of 3 attempts. Tester PASS (lint, build, 253 tests, engine guard clean, ui-check
   360px, Playwright checks in EN + VI). Reviewer APPROVE with no blocking findings.
 - Rules: `src/gamification/` (pure, injectable clock), persisted via `createGamificationRepository`
