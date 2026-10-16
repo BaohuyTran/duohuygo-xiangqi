@@ -168,6 +168,7 @@ offline support and layout fixes.
 
 - 2026-10-16: started on branch `task-5-polish`, stacked on `task-4-xp-hearts-streaks` (PR #1 not merged
   yet; the user asked to continue). Its PR targets that branch until #1 is merged.
+- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/3 (stacked on #1, not merged).
 - 2026-10-16: done in 1 of 3 attempts.
   - Tester: PASS.
     - Lint, build and 271 tests pass, and the engine is unchanged.
