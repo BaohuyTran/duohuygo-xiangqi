@@ -14,6 +14,18 @@ Invoke them with the Agent tool (`subagent_type: "implementer" | "tester" | "rev
 foreground, one at a time. Give every agent the **full text of the task section** from `docs/PLAN.md`,
 because subagents start without this conversation's context.
 
+**If those agent types are not available**, use the fallback below. This happens when the Agent tool
+answers "Agent type 'implementer' not found", because `.claude/agents/` is only loaded when a session
+starts inside the repository checkout.
+
+- Run each role with `subagent_type: "general-purpose"`, and start its prompt with:
+  > You are acting as the project's `<role>` subagent. Your role definition is the file
+  > `<repo>/.claude/agents/<role>.md` — READ IT FIRST and follow it exactly (hard rules, procedure,
+  > report format). Use only the tools that file lists.
+- Then give the repository path, the branch and the same inputs as for the real agent.
+- Record in the task's notes in `docs/PLAN.md` that the fallback was used. Its tool limits are enforced by instructions,
+  not by the harness.
+
 ## Absolute rules
 
 - **Never merge** a PR, never push to `main`, never force-push, never delete branches, never rewrite history.
@@ -93,12 +105,18 @@ Always run the reviewer, even when the tester failed, so the next attempt gets a
    git push -u origin task-<N>-<slug>      # on a network error, retry up to 4 times: 2s, 4s, 8s, 16s
    ```
 3. Open a PR into `main`. **Do not merge it.**
-   ```sh
-   gh pr create --base main --head task-<N>-<slug> --title "Task <N>: <title>" --body-file <file>
-   ```
    PR body: summary, the acceptance-criteria checklist, the test evidence (lint/build/test counts, ui-check
    result), the reviewer verdict, notes and open questions. Use the repo's PR template if one exists.
-   If `gh pr create` is refused, report the compare URL
+   Write the body to a file outside the repo, then create the PR through the **REST API**. `gh pr create`
+   uses GraphQL, which Claude Code cloud sessions block with "GitHub GraphQL is not available".
+   ```sh
+   python3 -c 'import json,sys; print(json.dumps({"title": sys.argv[1], "head": sys.argv[2], "base": "main", "body": open(sys.argv[3]).read()}))' \
+     "Task <N>: <title>" task-<N>-<slug> <body-file> > <pr.json>
+   gh api -X POST repos/BaohuyTran/duohuygo-xiangqi/pulls --input <pr.json> --jq .html_url
+   ```
+   Where GraphQL is available (e.g. a local terminal), the equivalent is
+   `gh pr create --base main --head task-<N>-<slug> --title "Task <N>: <title>" --body-file <file>`.
+   If both are refused, report the compare URL
    `https://github.com/BaohuyTran/duohuygo-xiangqi/compare/main...task-<N>-<slug>?expand=1` instead.
 4. Add the PR link (or compare URL) to the task's notes in `docs/PLAN.md`, then commit `Task <N>: link PR in plan` and push.
 5. Go to step 10.
@@ -108,8 +126,8 @@ Always run the reviewer, even when the tester failed, so the next attempt gets a
 Keep the work, but do not present it as finished:
 
 1. In `docs/PLAN.md`, leave the status `in-progress`. Add notes listing the unresolved findings and what was tried.
-2. Commit as `Task <N> (WIP): <title>`, push the branch, and open a **draft** PR
-   (`gh pr create --draft ...`) whose body lists the unresolved findings. Do not merge.
+2. Commit as `Task <N> (WIP): <title>`, push the branch, and open a **draft** PR (same REST call as
+   step 7.3 with `"draft": true` added to the JSON) whose body lists the unresolved findings. Do not merge.
 3. Go to step 10 and say clearly that the task is **not** done.
 
 ## Step 9 — Engine bug or engine change: stop
