@@ -215,7 +215,7 @@ behind the existing storage interfaces so the app still works fully offline and 
 **Notes**
 
 - 2026-10-16: started on branch `task-6-supabase-sync` (from `main` after PRs #1–#3 were merged).
-- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/4 (not merged).
+- PR: https://github.com/BaohuyTran/duohuygo-xiangqi/pull/4, merged into `main` on 2026-10-16 (with the user's permission).
 - 2026-10-16: done in 1 of 3 attempts.
   - Tester: PASS.
     - Lint, build and 337 tests pass, and the engine is unchanged.
