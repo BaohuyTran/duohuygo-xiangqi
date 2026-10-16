@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# UI check screenshots (scripts/ui-check.mjs)
+ui-check-output
