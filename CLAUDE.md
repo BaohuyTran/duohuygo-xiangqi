@@ -48,7 +48,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
 │   ├── PLAN.md             # Task list with acceptance criteria and status
 │   └── DRIVER.md           # "Do the next task" procedure for the main session
 ├── .claude/agents/         # implementer, tester, reviewer subagents
-├── .github/workflows/ci.yml# npm ci + build + test on pull requests
+├── .github/workflows/      # ci.yml: npm ci + build + test on PRs · deploy.yml: GitHub Pages on push to main
 ├── .env.example            # Placeholder Supabase variables (copy to .env.local; never commit real keys)
 ├── supabase/
 │   └── migrations/         # SQL: `progress` table (one JSON row per user) + Row Level Security
@@ -218,6 +218,20 @@ Setup:
    the build environment. They are public client values; the data is protected by RLS. Never use the
    service-role key in the app. Verify both builds: `npm run build` and
    `VITE_SUPABASE_URL=https://example.supabase.co VITE_SUPABASE_ANON_KEY=dummy npm run build`.
+
+## Deployment (GitHub Pages)
+
+- `.github/workflows/deploy.yml` runs on every push to `main` (and manually via "Run workflow"): `npm ci`,
+  `npm test`, `npm run build`, then publishes `dist/` to **https://baohuytran.github.io/duohuygo-xiangqi/**.
+  `base: './'` in `vite.config.ts` makes the build work under that sub-path, including the service worker.
+- One-time repo setup:
+  1. Settings → Pages → Source: **GitHub Actions**.
+  2. Settings → Secrets and variables → Actions → **Variables**: `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
+     (public client values; use variables, not secrets, so they can be read at build time). Without them the
+     site deploys without the account feature.
+- Supabase → Authentication → URL Configuration: Site URL `https://baohuytran.github.io/duohuygo-xiangqi/`,
+  Redirect URLs: that URL plus `http://localhost:5173/` for local development.
+- Locally, put the same two values in `.env.local` (git-ignored) to run the account feature with `npm run dev`.
 
 ## Engine conventions
 
