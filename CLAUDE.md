@@ -226,9 +226,10 @@ Setup:
   `base: './'` in `vite.config.ts` makes the build work under that sub-path, including the service worker.
 - One-time repo setup:
   1. Settings → Pages → Source: **GitHub Actions**.
-  2. Settings → Secrets and variables → Actions → **Variables**: `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
-     (public client values; use variables, not secrets, so they can be read at build time). Without them the
-     site deploys without the account feature.
+  2. Settings → Secrets and variables → Actions → **Variables** (preferred) or **Secrets**, at **repository**
+     level (not on the `github-pages` environment): `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`. Without
+     them the site deploys without the account feature, and the "Check Supabase settings" step shows a warning.
+     After adding or changing them, re-run the workflow (Actions → Deploy to GitHub Pages → Run workflow).
 - Supabase → Authentication → URL Configuration: Site URL `https://baohuytran.github.io/duohuygo-xiangqi/`,
   Redirect URLs: that URL plus `http://localhost:5173/` for local development.
 - Locally, put the same two values in `.env.local` (git-ignored) to run the account feature with `npm run dev`.

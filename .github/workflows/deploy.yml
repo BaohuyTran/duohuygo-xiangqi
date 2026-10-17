@@ -2,8 +2,9 @@ name: Deploy to GitHub Pages
 
 # Publishes the static build to https://baohuytran.github.io/duohuygo-xiangqi/ on every push to main.
 # One-time repo setup: Settings → Pages → Source: "GitHub Actions", and (optional, for account
-# login + sync) Settings → Secrets and variables → Actions → Variables: VITE_SUPABASE_URL and
-# VITE_SUPABASE_ANON_KEY. Without the variables the app builds without the account feature.
+# login + sync) Settings → Secrets and variables → Actions → Variables (or Secrets), at REPOSITORY level:
+# VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY. Without them the app builds without the account feature
+# and the run shows a warning. Values set only on the github-pages environment are not visible to the build.
 
 on:
   push:
@@ -38,13 +39,24 @@ jobs:
       - name: Test
         run: npm test
 
+      # Public client values (the publishable/anon key is meant to ship to browsers; Row Level Security
+      # protects the data). Read from repository Variables, or from repository Secrets if they were saved there.
+      - name: Check Supabase settings
+        env:
+          SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL || secrets.VITE_SUPABASE_URL }}
+          SUPABASE_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY || secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_KEY" ]; then
+            echo "Supabase is configured: this build includes account login and sync."
+          else
+            echo "::warning title=Account login and sync are disabled::VITE_SUPABASE_URL and/or VITE_SUPABASE_ANON_KEY are not set at repository level (Settings → Secrets and variables → Actions → Variables or Secrets). Add both, then re-run this workflow."
+          fi
+
       - name: Build
         run: npm run build
         env:
-          # Public client values (the publishable/anon key is meant to ship to browsers;
-          # Row Level Security protects the data). Stored as repository variables, not in the code.
-          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL || secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY || secrets.VITE_SUPABASE_ANON_KEY }}
 
       - uses: actions/configure-pages@v5
 
