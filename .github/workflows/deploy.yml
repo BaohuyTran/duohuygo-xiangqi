@@ -1,0 +1,63 @@
+name: Deploy to GitHub Pages
+
+# Publishes the static build to https://baohuytran.github.io/duohuygo-xiangqi/ on every push to main.
+# One-time repo setup: Settings → Pages → Source: "GitHub Actions", and (optional, for account
+# login + sync) Settings → Secrets and variables → Actions → Variables: VITE_SUPABASE_URL and
+# VITE_SUPABASE_ANON_KEY. Without the variables the app builds without the account feature.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a deployment that is already running; queue the next one instead.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+        env:
+          # Public client values (the publishable/anon key is meant to ship to browsers;
+          # Row Level Security protects the data). Stored as repository variables, not in the code.
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
