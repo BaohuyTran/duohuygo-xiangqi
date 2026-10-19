@@ -1,12 +1,15 @@
-import { useMemo, useState, type CSSProperties, type ReactNode } from 'react';
-import type { Exercise, Lesson } from '../content/types';
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import type { CombinationExercise, Exercise, Lesson } from '../content/types';
 import {
   findGeneral,
   isInCheck,
   legalMovesFrom,
+  legalMoves,
   makeMove,
   parseSquare,
   type Move,
+  type Piece,
+  type Position,
   type Square,
 } from '../engine';
 import { useI18n } from '../i18n/I18nProvider';
@@ -20,6 +23,14 @@ import {
   type MoveVerdict,
   type SelectionResult,
 } from '../lessons/answers';
+import {
+  checkCombinationMove,
+  combinationDone,
+  combinationReply,
+  redMovesLeft,
+  type CombinationVerdict,
+} from '../lessons/combination';
+import { sameMove, toMove } from '../puzzles/logic';
 import { moveSound, useSound } from '../sound';
 import { Board, type MarkTone } from './Board';
 import { Celebration } from './Celebration';
@@ -128,7 +139,14 @@ export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, co
           </button>
         </section>
       ) : (
-        <ExerciseView key={index} exercise={lesson.exercises[index]} onFinished={finishExercise} onMistake={mistake} />
+        (() => {
+          const ex = lesson.exercises[index];
+          return ex.type === 'combination' ? (
+            <CombinationView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} />
+          ) : (
+            <ExerciseView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} />
+          );
+        })()
       )}
     </div>
   );
@@ -141,7 +159,7 @@ function ExerciseView({
   onFinished,
   onMistake,
 }: {
-  exercise: Exercise;
+  exercise: Exclude<Exercise, CombinationExercise>;
   onFinished: (firstTry: boolean) => void;
   onMistake: () => HeartNote | null;
 }) {
@@ -334,6 +352,202 @@ function ExerciseView({
           )}
         </div>
       </footer>
+      )}
+    </>
+  );
+}
+
+/** Delay before Black's automatic reply in a combination. */
+export const COMBINATION_REPLY_MS = 650;
+
+type ComboPhase = 'playing' | 'opponent' | 'wrong' | 'done';
+
+/** A combination: Red plays several moves, the engine answers each with a best defence. */
+function CombinationView({
+  exercise: ex,
+  onFinished,
+  onMistake,
+}: {
+  exercise: CombinationExercise;
+  onFinished: (firstTry: boolean) => void;
+  onMistake: () => HeartNote | null;
+}) {
+  const { t } = useI18n();
+  const { play } = useSound();
+  const [footerRef, footerHeight] = useElementHeight<HTMLElement>();
+  const start = useMemo(() => positionOf(ex), [ex]);
+
+  const [phase, setPhase] = useState<ComboPhase>('playing');
+  const [pos, setPos] = useState<Position>(start);
+  const [step, setStep] = useState(0);
+  const [onMainLine, setOnMainLine] = useState(true);
+  const [selected, setSelected] = useState<Square | null>(null);
+  const [wrongMove, setWrongMove] = useState<Move | null>(null);
+  const [verdict, setVerdict] = useState<CombinationVerdict | null>(null);
+  const [hadMistake, setHadMistake] = useState(false);
+  const [heartNote, setHeartNote] = useState<HeartNote | null>(null);
+  const [showHint, setShowHint] = useState(false);
+  const [lastMove, setLastMove] = useState<Move | null>(null);
+  const [captured, setCaptured] = useState<{ at: Square; piece: Piece } | null>(null);
+
+  // The pending auto-reply is cancelled on unmount.
+  const timers = useRef<number[]>([]);
+  const later = useCallback((fn: () => void, ms: number) => {
+    timers.current.push(window.setTimeout(fn, ms));
+  }, []);
+  useEffect(() => () => timers.current.forEach((id) => window.clearTimeout(id)), []);
+
+  const showMove = (before: Position, move: Move | null) => {
+    setLastMove(move);
+    const victim = move ? before.board[move.to] : null;
+    setCaptured(move && victim ? { at: move.to, piece: victim } : null);
+    if (move) play(moveSound(before, move));
+  };
+
+  const playMove = (move: Move) => {
+    setSelected(null);
+    const result = checkCombinationMove(ex, step, pos, move);
+    if (result !== 'correct') {
+      setVerdict(result);
+      if (result === 'wrong') {
+        setWrongMove(move);
+        showMove(pos, move);
+      }
+      play('wrong', result === 'wrong' ? 0.12 : 0);
+      setHadMistake(true);
+      setHeartNote(onMistake());
+      setPhase('wrong');
+      return;
+    }
+    const after = makeMove(pos, move);
+    const stillMain = onMainLine && ex.solution[step] !== undefined && sameMove(move, toMove(ex.solution[step]));
+    setPos(after);
+    showMove(pos, move);
+    setShowHint(false);
+    play('correct', 0.12);
+    if (combinationDone(ex, after, step)) {
+      setPhase('done');
+      return;
+    }
+    setPhase('opponent');
+    later(() => {
+      const reply = combinationReply(ex, step + 1, after, stillMain);
+      setPos(makeMove(after, reply));
+      showMove(after, reply);
+      setOnMainLine(stillMain && ex.solution[step + 1] !== undefined && sameMove(reply, toMove(ex.solution[step + 1])));
+      setStep(step + 2);
+      setPhase('playing');
+    }, COMBINATION_REPLY_MS);
+  };
+
+  const onSquareClick = (sq: Square) => {
+    if (phase !== 'playing') return;
+    const piece = pos.board[sq];
+    if (piece && piece.color === pos.turn) {
+      setSelected(sq === selected ? null : sq);
+      return;
+    }
+    if (selected !== null) playMove({ from: selected, to: sq });
+  };
+
+  const retry = () => {
+    setWrongMove(null);
+    setVerdict(null);
+    setHeartNote(null);
+    showMove(pos, null);
+    setPhase('playing');
+  };
+
+  const shown = wrongMove ? makeMove(pos, wrongMove) : pos;
+  const hintKey = ex.hints?.[step / 2];
+  const hintMove = showHint && onMainLine && ex.solution[step] ? toMove(ex.solution[step]) : null;
+  const marks = new Map<Square, MarkTone>();
+  if (hintMove) marks.set(hintMove.from, 'hint');
+  const dots = selected !== null && phase === 'playing' ? legalMoves(pos).filter((m) => m.from === selected).map((m) => m.to) : [];
+  const checked = isInCheck(shown) ? findGeneral(shown.board, shown.turn) : null;
+  const shownMove = wrongMove ?? lastMove;
+  const shownCapture = wrongMove ? (pos.board[wrongMove.to] ? { at: wrongMove.to, piece: pos.board[wrongMove.to]! } : null) : captured;
+  const left = redMovesLeft(ex, step);
+  const wrongText =
+    verdict === 'illegal' || verdict === 'unsafe'
+      ? t(`verdict.${verdict}`)
+      : t(ex.goal === 'checkmate' ? 'combination.wrong.mate' : 'combination.wrong.material');
+
+  return (
+    <>
+      <section className="flex-1 px-4 pb-4" style={{ '--footer-h': `${footerHeight}px` } as CSSProperties}>
+        <p className="text-sm font-bold tracking-wide text-violet-600 uppercase">{t('lesson.type.combination')}</p>
+        <h2 className="mt-1 mb-1 text-lg leading-snug font-bold text-stone-800" data-testid="prompt">
+          {t(ex.prompt)}
+        </h2>
+        <p className="mb-3 text-sm font-semibold text-stone-500" data-testid="combination-status">
+          {phase === 'opponent' ? t('combination.opponent') : phase === 'done' ? t('combination.done') : t('combination.movesLeft', { n: left })}
+        </p>
+        <div className={`board-fit overflow-hidden rounded-xl shadow-md ${phase === 'wrong' ? 'feedback-shake' : ''}`}>
+          <Board
+            position={shown}
+            selected={selected}
+            dots={dots}
+            marks={marks}
+            lastMove={shownMove}
+            animateMove={shownMove}
+            captured={shownCapture}
+            checkedGeneral={checked}
+            onSquareClick={onSquareClick}
+          />
+        </div>
+        {phase === 'playing' && (
+          <div className="mt-3 flex flex-col items-center gap-2">
+            <p className="text-center text-sm text-stone-500">{t('lesson.tapPiece')}</p>
+            {!showHint && onMainLine ? (
+              <button
+                type="button"
+                onClick={() => setShowHint(true)}
+                className="min-h-11 rounded-xl px-4 text-sm font-bold text-violet-700 underline"
+              >
+                {t('combination.hint')}
+              </button>
+            ) : (
+              showHint && <p className="text-center text-sm font-semibold text-violet-700">{t(hintKey ?? 'combination.hintPiece')}</p>
+            )}
+          </div>
+        )}
+      </section>
+      <div aria-hidden className="shrink-0" style={{ height: footerHeight }} />
+
+      {(phase === 'wrong' || phase === 'done') && (
+        <footer
+          key={phase}
+          ref={footerRef}
+          className={`safe-px feedback-in fixed inset-x-0 bottom-0 z-10 border-t-2 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] ${
+            phase === 'done' ? 'border-green-200 bg-green-100' : 'border-red-200 bg-red-100'
+          }`}
+        >
+          <div className="mx-auto flex max-w-xl flex-col gap-3">
+            <div role="alert">
+              <p className={`text-xl font-extrabold ${phase === 'done' ? 'text-green-700' : 'feedback-shake text-red-700'}`}>
+                <span className={phase === 'done' ? 'feedback-pop' : undefined}>
+                  {t(phase === 'done' ? 'feedback.correct' : 'feedback.incorrect')}
+                </span>
+              </p>
+              {phase === 'wrong' && <p className="text-red-700">{wrongText}</p>}
+              {phase === 'wrong' && heartNote && (
+                <p className="mt-1 flex items-center gap-1.5 font-bold text-red-700">
+                  <HeartIcon className="h-5 w-5 shrink-0" />
+                  {heartNote.lost ? t('hearts.lost', { n: heartNote.left }) : t('hearts.noneLeft')}
+                </p>
+              )}
+              {phase === 'done' && ex.explanation && <p className="text-green-800">{t(ex.explanation)}</p>}
+            </div>
+            {phase === 'done' ? (
+              <PrimaryButton onClick={() => onFinished(!hadMistake)}>{t('lesson.continue')}</PrimaryButton>
+            ) : (
+              <PrimaryButton tone="red" onClick={retry}>
+                {t('lesson.retry')}
+              </PrimaryButton>
+            )}
+          </div>
+        </footer>
       )}
     </>
   );

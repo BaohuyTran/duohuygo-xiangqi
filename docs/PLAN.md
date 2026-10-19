@@ -241,3 +241,27 @@ behind the existing storage interfaces so the app still works fully offline and 
   - Add service tests for sign-out during a pull.
   - Optional migration hardening: revoke-all before the grants, and a size limit on `data`.
 - Process note: roles ran with the general-purpose agent fallback (`docs/DRIVER.md`).
+
+---
+
+## Task 7 — Intermediate course
+
+**Status:** done · requested by the user on 2026-10-19 ("make the course harder, for intermediate level")
+
+**Goal:** A second, harder track for players who already know the rules, open from the start.
+
+**Acceptance criteria**
+
+- [x] Units 7–10 (`track: "intermediate"`): cannon mates (Double Cannon, Smothered General, Horse-behind-Cannon),
+      horse and chariot mates (Palcorner Horse, Two Chariots, Chariot and Horse, the General in attack),
+      tactics (forks, double check, stopping a mate threat) and combinations (sacrifices, quiet moves, mate in 3).
+- [x] New `combination` exercise: 2–3 Red moves against the engine's best defence, with hints, hearts and retry.
+- [x] New `defend` move goal: stop Black's mate-in-one threat.
+- [x] The intermediate track's first lesson is open from the start; Home has track headers and a jump link.
+- [x] Every position is original and engine-verified by the validator; en + vi text; no changes to `src/engine`.
+
+**Notes**
+
+- 2026-10-19: branch `intermediate-course`. 13 new lessons, 71 exercises (37 combinations incl. 4 mate-in-3, 5 defend).
+- Lint, build, all tests, `ui:check` at 360 and 320 px pass; the Double Cannon lesson was played through in
+  Chromium (wrong move → heart lost, engine reply, mate recognised, completion screen).

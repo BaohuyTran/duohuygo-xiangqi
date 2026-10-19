@@ -24,6 +24,15 @@ export const messages = {
   'home.start': { en: 'Start', vi: 'Bắt đầu' },
   'home.reset': { en: 'Reset progress', vi: 'Xóa tiến độ' },
   'home.resetConfirm': { en: 'Reset all lesson progress?', vi: 'Xóa toàn bộ tiến độ học?' },
+  'track.basics.title': { en: 'Basics', vi: 'Cơ bản' },
+  'track.basics.desc': { en: 'The board, every piece, check and checkmate.', vi: 'Bàn cờ, cách đi của từng quân, chiếu và chiếu bí.' },
+  'track.intermediate.title': { en: 'Intermediate', vi: 'Trung cấp' },
+  'track.intermediate.desc': {
+    en: 'Classic mating patterns, tactics and combinations. Open from the start.',
+    vi: 'Các thế sát cục kinh điển, chiến thuật và đòn phối hợp. Mở sẵn từ đầu.',
+  },
+  'track.jump.title': { en: 'Already know the rules?', vi: 'Đã biết luật chơi?' },
+  'track.jump.body': { en: 'Jump to the Intermediate course.', vi: 'Chuyển tới khóa Trung cấp.' },
   'home.allDone': { en: 'You finished every lesson. Great work!', vi: 'Bạn đã học xong tất cả các bài. Tuyệt vời!' },
 
   // ---------- Account + sync (only shown when Supabase is configured) ----------
@@ -77,6 +86,20 @@ export const messages = {
   'lesson.type.select-squares': { en: 'Tap the points', vi: 'Chạm vào các điểm' },
   'lesson.type.move': { en: 'Make a move', vi: 'Đi một nước' },
   'lesson.type.capture': { en: 'Find the capture', vi: 'Tìm nước ăn quân' },
+  'lesson.type.combination': { en: 'Combination', vi: 'Đòn phối hợp' },
+  'combination.movesLeft': { en: 'Red to move · moves left: {n}', vi: 'Đỏ đi · còn {n} nước' },
+  'combination.opponent': { en: 'Black is answering…', vi: 'Đen đang trả lời…' },
+  'combination.done': { en: 'Combination complete', vi: 'Hoàn thành đòn phối hợp' },
+  'combination.hint': { en: 'Show a hint', vi: 'Xem gợi ý' },
+  'combination.hintPiece': { en: 'Move the marked piece.', vi: 'Hãy đi quân được đánh dấu.' },
+  'combination.wrong.mate': {
+    en: 'That move lets Black escape. There is a forced mate: look for checks first.',
+    vi: 'Nước đó để Đen thoát. Có một đòn chiếu bí bắt buộc: hãy tìm các nước chiếu trước.',
+  },
+  'combination.wrong.material': {
+    en: 'That doesn’t win material against Black’s best defence.',
+    vi: 'Nước đó không thắng quân trước cách phòng thủ tốt nhất của Đen.',
+  },
   'lesson.tapPiece': { en: 'Tap a piece, then tap where it should go.', vi: 'Chạm vào một quân, rồi chạm vào điểm cần đến.' },
   'feedback.correct': { en: 'Correct!', vi: 'Chính xác!' },
   'feedback.incorrect': { en: 'Not quite', vi: 'Chưa đúng' },
@@ -94,6 +117,10 @@ export const messages = {
   'verdict.not-checkmate': {
     en: 'Not checkmate: Black can still escape.',
     vi: 'Chưa chiếu bí: bên Đen vẫn còn đường thoát.',
+  },
+  'verdict.allows-mate': {
+    en: 'After that move Black can checkmate you. Stop the threat!',
+    vi: 'Sau nước đó Đen có thể chiếu bí bạn. Hãy chặn mối đe dọa!',
   },
   'verdict.not-capture': { en: 'That move doesn’t capture anything.', vi: 'Nước đi đó không ăn quân nào.' },
   'verdict.not-best': {
@@ -546,6 +573,247 @@ export const messages = {
     vi: 'Trong cờ tướng, bên hết nước đi sẽ thua, kể cả khi không bị chiếu. Ở đây đến lượt Đen nhưng không còn nước đi, nên bên Đỏ thắng.',
   },
   'u6l3.e5': { en: 'Checkmate in one with a Soldier.', vi: 'Chiếu bí trong một nước bằng quân Tốt.' },
+
+  // ---------- Intermediate track ----------
+  'u7.title': { en: 'Cannon mating patterns', vi: 'Sát cục bằng Pháo' },
+  'u7.desc': {
+    en: 'Double Cannon, the Smothered General and Horse-behind-Cannon.',
+    vi: 'Trùng pháo, Muộn cung và Mã hậu pháo.',
+  },
+  'u7l1.title': { en: 'Double Cannon', vi: 'Trùng pháo' },
+  'u7l1.e1': {
+    en: 'Double Cannon: two Cannons on one line. The front Cannon is the rear Cannon’s screen, so the check cannot be blocked by a single piece, and the point in front of the General is hit too. Here the Red General’s open file also guards the side point.',
+    vi: 'Trùng pháo: hai Pháo cùng một đường. Pháo trước làm ngòi cho Pháo sau, nên một quân chặn không đỡ được, và điểm ngay trước Tướng cũng bị khống chế. Ở đây đường dọc thông của Tướng Đỏ còn khóa luôn điểm bên cạnh.',
+  },
+  'u7l1.p1': { en: 'Checkmate in one with a Double Cannon.', vi: 'Chiếu bí trong một nước bằng thế Trùng pháo.' },
+  'u7l1.p2': {
+    en: 'Mate in 2: drive the General onto your Cannons’ line, then finish with a Double Cannon.',
+    vi: 'Chiếu bí sau 2 nước: dồn Tướng vào đường của hai Pháo, rồi kết thúc bằng Trùng pháo.',
+  },
+  'u7l1.x1': {
+    en: 'The rear Cannon jumps over the front one. The General cannot step forward, because that point is on the same line.',
+    vi: 'Pháo sau bắn qua Pháo trước. Tướng không thể tiến lên vì điểm đó vẫn nằm trên cùng đường bắn.',
+  },
+  'u7l1.x2': {
+    en: 'The Cannons shut the file and the Red General’s open file takes away the escape to the side. Never forget your own General!',
+    vi: 'Hai Pháo khóa đường dọc, còn đường thông của Tướng Đỏ lấy mất lối thoát bên cạnh. Đừng quên Tướng của mình!',
+  },
+  'u7l1.x3': {
+    en: 'The Chariot’s check pushed the General onto the Cannons’ file. A forcing check first, then the pattern.',
+    vi: 'Nước chiếu của Xe đẩy Tướng vào đường dọc của hai Pháo. Chiếu ép trước, rồi mới ra thế cờ.',
+  },
+  'u7l1.x4': { en: 'Double Cannon works along a rank too, not only a file.', vi: 'Trùng pháo dùng được cả theo hàng ngang, không chỉ hàng dọc.' },
+
+  'u7l2.title': { en: 'Smothered General', vi: 'Muộn cung' },
+  'u7l2.e1': {
+    en: 'Smothered General: the black General is boxed in by its own pieces. A Cannon checks, using one of them as the screen, and the General has nowhere to step.',
+    vi: 'Muộn cung: Tướng đen bị chính quân nhà vây kín. Pháo chiếu, dùng một trong những quân đó làm ngòi, và Tướng không còn chỗ nào để đi.',
+  },
+  'u7l2.p1': {
+    en: 'Checkmate in one. Look for a General hemmed in by its own pieces.',
+    vi: 'Chiếu bí trong một nước. Hãy tìm Tướng bị chính quân nhà vây kín.',
+  },
+  'u7l2.x1': {
+    en: 'Black’s own Advisor became the screen. Every point next to the General is blocked by a black piece.',
+    vi: 'Chính quân Đen làm ngòi cho Pháo. Mọi điểm quanh Tướng đều bị quân Đen chặn.',
+  },
+
+  'u7l2.p2': {
+    en: 'Mate in 2: prepare a Smothered General.',
+    vi: 'Chiếu bí sau 2 nước: chuẩn bị thế Muộn cung.',
+  },
+  'u7l2.x2': {
+    en: 'The first move took away Black’s only breathing room. Then the Cannon mated through Black’s own piece.',
+    vi: 'Nước đầu lấy mất khoảng trống duy nhất của Đen. Sau đó Pháo chiếu bí xuyên qua chính quân Đen.',
+  },
+  'u7l3.x3': {
+    en: 'The Horse jumped in front of the Cannon and became its screen, guarding the escape points as it landed.',
+    vi: 'Mã nhảy lên trước Pháo để làm ngòi, đồng thời khống chế các điểm thoát ngay khi đáp xuống.',
+  },
+
+  'u7l3.title': { en: 'Horse-behind-Cannon', vi: 'Mã hậu pháo' },
+  'u7l3.e1': {
+    en: 'Horse-behind-Cannon: the Horse stands on the General’s line and acts as the screen, while it also guards the points beside the General. Each piece covers what the other cannot.',
+    vi: 'Mã hậu pháo: Mã đứng trên đường của Tướng làm ngòi cho Pháo, đồng thời khống chế các điểm cạnh Tướng. Mỗi quân che chỗ hở của quân kia.',
+  },
+  'u7l3.p1': { en: 'Checkmate in one with Horse and Cannon.', vi: 'Chiếu bí trong một nước bằng Mã và Pháo.' },
+  'u7l3.p2': {
+    en: 'Mate in 2 with Horse and Cannon. Black will defend as well as possible.',
+    vi: 'Chiếu bí sau 2 nước bằng Mã và Pháo. Đen sẽ phòng thủ tốt nhất có thể.',
+  },
+  'u7l3.x1': {
+    en: 'The Horse is the screen and guards the escape squares at the same time.',
+    vi: 'Mã vừa làm ngòi vừa khống chế các đường thoát.',
+  },
+  'u7l3.x2': {
+    en: 'The Horse checked first and stayed on the General’s line, ready to be the Cannon’s screen.',
+    vi: 'Mã chiếu trước rồi nằm lại trên đường của Tướng, sẵn sàng làm ngòi cho Pháo.',
+  },
+
+  'u8.title': { en: 'Horse and Chariot mates', vi: 'Sát cục bằng Mã và Xe' },
+  'u8.desc': {
+    en: 'The Palcorner Horse, two Chariots, Chariot and Horse, and your General in attack.',
+    vi: 'Ngọa tào mã, Song xa, Xe Mã phối hợp và Tướng trợ chiến.',
+  },
+  'u8l1.title': { en: 'Palcorner Horse', vi: 'Ngọa tào mã' },
+  'u8l1.e1': {
+    en: 'Palcorner Horse: a Horse next to the palace corner checks the General from the side. Partners take the other points; here a Soldier covers two of them and the Red General’s file covers the last.',
+    vi: 'Ngọa tào mã: Mã đứng sát góc cung chiếu Tướng từ bên hông. Các quân khác khóa những điểm còn lại; ở đây Tốt khóa hai điểm, đường dọc của Tướng Đỏ khóa điểm cuối.',
+  },
+  'u8l1.p1': { en: 'Checkmate in one with the Horse.', vi: 'Chiếu bí trong một nước bằng Mã.' },
+  'u8l1.p2': { en: 'Mate in 2: prepare the Horse’s jump, then mate.', vi: 'Chiếu bí sau 2 nước: chuẩn bị đường nhảy cho Mã, rồi chiếu bí.' },
+  'u8l1.p3': {
+    en: 'Checkmate in one. The Horse is in place, but something blocks its leg.',
+    vi: 'Chiếu bí trong một nước. Mã đã vào vị trí, nhưng có quân đang cản chân Mã.',
+  },
+  'u8l1.x1': {
+    en: 'The Horse checks from beside the palace; its partners close every escape.',
+    vi: 'Mã chiếu từ cạnh cung; các quân phối hợp đóng mọi lối thoát.',
+  },
+  'u8l1.x2': {
+    en: 'Moving the Chariot unblocked the Horse’s leg: a discovered check. The Chariot now guards the escape.',
+    vi: 'Xe rời đi để mở chân Mã: một nước chiếu mở. Giờ Xe khóa luôn đường thoát.',
+  },
+
+  'u8l2.title': { en: 'Two Chariots', vi: 'Song xa' },
+  'u8l2.e1': {
+    en: 'Two Chariots: one Chariot cuts off a whole rank, the other checks on the next one. The General is trapped between them.',
+    vi: 'Song xa: một Xe khóa cả một hàng ngang, Xe kia chiếu ở hàng kế bên. Tướng bị kẹp giữa hai Xe.',
+  },
+  'u8l2.p1': { en: 'Mate in 2 with your two Chariots.', vi: 'Chiếu bí sau 2 nước bằng hai Xe.' },
+  'u8l2.x1': {
+    en: 'Check, then the other Chariot finishes. The Chariots take turns: one cuts off, one checks.',
+    vi: 'Chiếu, rồi Xe kia kết thúc. Hai Xe thay phiên: một Xe khóa đường, một Xe chiếu.',
+  },
+  'u8l2.x2': {
+    en: 'The first move was not a check: it built a wall behind the General. Black had no answer to the coming check.',
+    vi: 'Nước đầu không chiếu: nó dựng một bức tường sau lưng Tướng. Đen không có cách đỡ nước chiếu tiếp theo.',
+  },
+
+  'u8l3.title': { en: 'Chariot and Horse', vi: 'Xe Mã phối hợp' },
+  'u8l3.e1': {
+    en: 'Chariot and Horse: the Horse takes away points the Chariot cannot reach, and the Chariot checks along the open line.',
+    vi: 'Xe Mã phối hợp: Mã khống chế những điểm Xe không với tới, còn Xe chiếu theo đường thông.',
+  },
+  'u8l3.p1': { en: 'Mate in 2 with Chariot and Horse.', vi: 'Chiếu bí sau 2 nước bằng Xe và Mã.' },
+  'u8l3.x1': {
+    en: 'One piece checks, the other covers the escape. Watch which points each piece controls.',
+    vi: 'Một quân chiếu, quân kia khóa đường thoát. Hãy để ý mỗi quân khống chế những điểm nào.',
+  },
+
+  'u8l4.title': { en: 'Your General attacks', vi: 'Tướng trợ chiến' },
+  'u8l4.e1': {
+    en: 'The Generals may never face each other on an open file. So your General controls its whole file and can guard an escape point all the way across the board.',
+    vi: 'Hai Tướng không được đối mặt trên một đường dọc thông. Vì vậy Tướng của bạn khống chế cả đường dọc và có thể khóa điểm thoát ở tận bên kia bàn cờ.',
+  },
+  'u8l4.p1': {
+    en: 'Checkmate in one. Your General helps.',
+    vi: 'Chiếu bí trong một nước. Tướng của bạn sẽ hỗ trợ.',
+  },
+  'u8l4.p2': {
+    en: 'Mate in 2. Use the General as an attacker.',
+    vi: 'Chiếu bí sau 2 nước. Hãy dùng Tướng như một quân tấn công.',
+  },
+  'u8l4.x1': {
+    en: 'The black General cannot step onto your General’s file: that is the point it needed.',
+    vi: 'Tướng đen không được bước vào đường dọc của Tướng bạn: đó chính là điểm nó cần.',
+  },
+  'u8l4.x2': {
+    en: 'A quiet General move! It took away an escape point, and Black could not stop the mate.',
+    vi: 'Một nước đi Tướng êm! Nó lấy mất điểm thoát, và Đen không thể ngăn nước chiếu bí.',
+  },
+
+  'u9.title': { en: 'Tactics', vi: 'Chiến thuật' },
+  'u9.desc': {
+    en: 'Forks, double check, and stopping your opponent’s mate.',
+    vi: 'Đòn bắt đôi, chiếu kép và cách chặn đòn chiếu bí của đối phương.',
+  },
+  'u9l1.title': { en: 'Forks', vi: 'Bắt đôi' },
+  'u9l1.e1': {
+    en: 'A fork attacks two things at once. The strongest fork is a check that also attacks a piece: Black must save the General, and then you take the piece.',
+    vi: 'Bắt đôi là tấn công hai mục tiêu cùng lúc. Đòn mạnh nhất là nước chiếu đồng thời đe dọa một quân: Đen buộc phải cứu Tướng, rồi bạn ăn quân kia.',
+  },
+  'u9l1.p1': {
+    en: 'Win material in 2: check and attack at the same time.',
+    vi: 'Thắng quân sau 2 nước: vừa chiếu vừa tấn công.',
+  },
+  'u9l1.x1': {
+    en: 'Check plus attack: Black could only save the General, so the other piece fell.',
+    vi: 'Vừa chiếu vừa đánh: Đen chỉ kịp cứu Tướng, nên quân kia bị ăn.',
+  },
+  'u9l1.x2': {
+    en: 'The Horse fork: one jump checked the General and attacked a piece. Horses are the best forking pieces.',
+    vi: 'Mã bắt đôi: một bước nhảy vừa chiếu Tướng vừa đe dọa quân khác. Mã là quân bắt đôi lợi hại nhất.',
+  },
+  'u9l1.x3': {
+    en: 'Once the screen changed, the Cannon could take. Watch how each move adds or removes a Cannon’s screen.',
+    vi: 'Khi ngòi thay đổi, Pháo ăn được quân. Hãy để ý mỗi nước đi thêm hay bớt ngòi cho Pháo thế nào.',
+  },
+  'u9l2.title': { en: 'Double check', vi: 'Chiếu kép' },
+  'u9l2.e1': {
+    en: 'Double check: two pieces give check at once. Blocking one line or capturing one checker is not enough, so the General usually has to move, and often cannot.',
+    vi: 'Chiếu kép: hai quân cùng chiếu một lúc. Chặn một đường hay ăn một quân chiếu là không đủ, nên Tướng thường phải tự chạy, và nhiều khi không chạy được.',
+  },
+  'u9l2.p1': { en: 'Mate in 2. Look for a double check.', vi: 'Chiếu bí sau 2 nước. Hãy tìm nước chiếu kép.' },
+  'u9l2.x1': {
+    en: 'Moving one piece opened a second line of attack. Two checks at once leave very few defences.',
+    vi: 'Đi một quân để mở thêm một đường tấn công. Hai nước chiếu cùng lúc khiến đối phương gần như không thể đỡ.',
+  },
+  'u9l3.title': { en: 'Stop the threat', vi: 'Chặn đòn đe dọa' },
+  'u9l3.e1': {
+    en: 'Before every move, ask: what does my opponent threaten? Here Black is ready to checkmate. Find Black’s mating move first, then look for the move that stops it.',
+    vi: 'Trước mỗi nước, hãy tự hỏi: đối phương đang đe dọa gì? Ở đây Đen sắp chiếu bí. Hãy tìm nước chiếu bí của Đen trước, rồi tìm nước để chặn nó.',
+  },
+  'u9l3.p1': {
+    en: 'Black threatens checkmate. Find a move that stops it.',
+    vi: 'Đen đang dọa chiếu bí. Hãy tìm nước đi để chặn đòn đó.',
+  },
+  'u9l3.x1': {
+    en: 'Threat stopped. Only one or two moves save the game here; spotting the threat is what makes them easy to find.',
+    vi: 'Đã chặn được. Ở đây chỉ có một hai nước cứu được ván cờ; nhận ra mối đe dọa giúp bạn tìm thấy chúng dễ dàng.',
+  },
+
+  'u10.title': { en: 'Combinations', vi: 'Đòn phối hợp' },
+  'u10.desc': {
+    en: 'Sacrifices, quiet moves and mate in three against the best defence.',
+    vi: 'Thí quân, nước êm và chiếu bí sau ba nước trước cách phòng thủ tốt nhất.',
+  },
+  'u10l1.title': { en: 'Sacrifice to mate', vi: 'Thí quân để chiếu bí' },
+  'u10l1.e1': {
+    en: 'A sacrifice gives up material to force the enemy General or its defenders onto worse points. Here Red gave a whole Chariot to pull the General forward, and now Black’s own Advisor is the Cannon’s screen.',
+    vi: 'Thí quân là bỏ quân để ép Tướng hoặc quân phòng thủ của đối phương vào chỗ xấu. Ở đây Đỏ thí hẳn một Xe để kéo Tướng lên, và giờ chính Sĩ đen làm ngòi cho Pháo.',
+  },
+  'u10l1.p1': {
+    en: 'Mate in 2. The first move gives up a piece.',
+    vi: 'Chiếu bí sau 2 nước. Nước đầu tiên phải thí một quân.',
+  },
+  'u10l1.x1': {
+    en: 'Material does not matter when the General falls. Taking the sacrifice was Black’s best try, and it still lost.',
+    vi: 'Quân nhiều ít không quan trọng khi Tướng bị bắt. Ăn quân thí là cách chống đỡ tốt nhất của Đen, nhưng vẫn thua.',
+  },
+  'u10l2.title': { en: 'Quiet moves', vi: 'Nước êm' },
+  'u10l2.e1': {
+    en: 'Not every winning move is a check. A quiet move sets up two threats or takes away an escape point. Here the first Cannon move opened the Red General’s file and lined up a Double Cannon.',
+    vi: 'Không phải nước thắng nào cũng là nước chiếu. Nước êm tạo hai mối đe dọa hoặc lấy mất điểm thoát. Ở đây nước Pháo đầu tiên mở đường dọc cho Tướng Đỏ và xếp thế Trùng pháo.',
+  },
+  'u10l2.p1': {
+    en: 'Mate in 2. The first move is not a check.',
+    vi: 'Chiếu bí sau 2 nước. Nước đầu tiên không phải nước chiếu.',
+  },
+  'u10l2.x1': {
+    en: 'After the quiet move Black had no defence against every mating threat.',
+    vi: 'Sau nước êm, Đen không thể đỡ được mọi đòn chiếu bí.',
+  },
+  'u10l3.title': { en: 'Mate in 3', vi: 'Chiếu bí sau 3 nước' },
+  'u10l3.e1': {
+    en: 'Longer combinations: each check pushes the General somewhere worse, until the last one mates. Count Black’s replies at every step.',
+    vi: 'Đòn phối hợp dài hơn: mỗi nước chiếu dồn Tướng vào chỗ tệ hơn, cho tới nước chiếu bí cuối cùng. Hãy tính các nước đáp của Đen ở từng bước.',
+  },
+  'u10l3.p1': { en: 'Mate in 3 against the best defence.', vi: 'Chiếu bí sau 3 nước trước cách phòng thủ tốt nhất.' },
+  'u10l3.x1': {
+    en: 'Every move was forcing, so Black never had time to defend.',
+    vi: 'Nước nào cũng ép buộc, nên Đen không bao giờ có thời gian phòng thủ.',
+  },
 } satisfies Record<string, Entry>;
 
 export type MessageKey = keyof typeof messages;

@@ -62,3 +62,70 @@ describe('content validator', () => {
     expect(errors.join('\n')).toMatch(pattern);
   });
 });
+
+describe('content validator: combinations, defend and tracks', () => {
+  // Mate in 2 with two Chariots (from the shipped course): Ri7-i8 is quiet, then Ri9-g9 mates.
+  const twoChariots = {
+    type: 'combination',
+    pieces: { c2: 'p', e9: 'k', f1: 'K', f4: 'p', g9: 'n', i7: 'R', i9: 'R' },
+    prompt: 'u8l2.p1',
+    goal: 'checkmate',
+    moves: 2,
+    solution: [
+      { from: 'i7', to: 'i8' },
+      { from: 'c2', to: 'c1' },
+      { from: 'i9', to: 'g9' },
+    ],
+  };
+
+  it('accepts a valid combination and a valid defend exercise', () => {
+    const defend = {
+      type: 'move',
+      pieces: { b3: 'r', b9: 'C', e9: 'k', f1: 'K', g8: 'r', g9: 'N' },
+      prompt: 'u9l3.p1',
+      goal: { kind: 'defend' },
+      solution: { from: 'g9', to: 'e8' },
+    };
+    expect(errorsFor(twoChariots, defend)).toEqual([]);
+  });
+
+  it.each([
+    ['a wrong number of moves', { ...twoChariots, moves: 3 }, /already mates in 2/],
+    ['an unsupported length', { ...twoChariots, moves: 4 }, /"moves" must be 2 or 3/],
+    ['an unknown goal', { ...twoChariots, goal: 'draw' }, /"goal" must be/],
+    ['a line that does not end with a Red move', { ...twoChariots, solution: twoChariots.solution.slice(0, 2) }, /alternate Red\/Black/],
+    ['a first move that does not win', { ...twoChariots, solution: [{ from: 'f1', to: 'f0' }, ...twoChariots.solution.slice(1)] }, /not accepted \(wrong\)/],
+    [
+      'a reply that is not a best defence',
+      {
+        ...twoChariots,
+        // After the quiet Pf8-e8 Black's best try is Cc8-c9 (two mates left); Ph3-h2 leaves three.
+        pieces: { c8: 'c', d7: 'P', d9: 'k', e0: 'K', f8: 'P', h3: 'p', i4: 'N', i7: 'b' },
+        solution: [
+          { from: 'f8', to: 'e8' },
+          { from: 'h3', to: 'h2' },
+          { from: 'd7', to: 'd8' },
+        ],
+      },
+      /not a best defence/,
+    ],
+    ['a missing hint key', { ...twoChariots, hints: ['nope.hint'] }, /nope\.hint/],
+    ['a defend exercise without a threat', { type: 'move', pieces: { ...K, a0: 'R' }, prompt: 'u9l3.p1', goal: { kind: 'defend' }, solution: { from: 'a0', to: 'a1' } }, /no mate-in-one threat/],
+  ])('rejects %s', (_name, exercise, pattern) => {
+    expect(errorsFor(exercise).join('\n')).toMatch(pattern);
+  });
+
+  const unit = (id: string, track?: string) => ({
+    id,
+    track,
+    title: 'u1.title',
+    description: 'u1.desc',
+    lessons: [{ id: `${id}l`, title: 'u1l1.title', exercises: [{ type: 'learn', pieces: K, text: 'u1l1.e1' }] }],
+  });
+
+  it('checks tracks: known names, and units of one track kept together', () => {
+    expect(validateUnits([unit('a'), unit('b', 'intermediate')])).toEqual([]);
+    expect(validateUnits([unit('a', 'expert')]).join('\n')).toMatch(/"track" must be one of/);
+    expect(validateUnits([unit('a'), unit('b', 'intermediate'), unit('c')]).join('\n')).toMatch(/must be consecutive/);
+  });
+});
