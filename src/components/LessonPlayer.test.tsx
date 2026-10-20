@@ -1,10 +1,10 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { findLesson } from '../content';
 import { I18nProvider } from '../i18n/I18nProvider';
-import { LessonPlayer } from './LessonPlayer';
+import { COMBINATION_REPLY_MS, LessonPlayer } from './LessonPlayer';
 
 afterEach(cleanup);
 
@@ -178,5 +178,47 @@ describe('LessonPlayer', () => {
       expect(screen.getByText('Lesson complete!')).toBeTruthy();
       expect(screen.getByText('+5 XP')).toBeTruthy();
     });
+  });
+
+  it('plays a combination: wrong first move costs a heart, then the engine answers and Red mates', () => {
+    vi.useFakeTimers();
+    try {
+      const onMistake = vi.fn();
+      render(
+        <I18nProvider initial="en">
+          <LessonPlayer lesson={findLesson('u8l2')!} onComplete={vi.fn()} onExit={vi.fn()} hearts={5} onMistake={onMistake} />
+        </I18nProvider>,
+      );
+      press('Continue'); // learn
+
+      // Two Chariots, mate in 2 (Ri7-i8+, Ke8-e9, Rh6-h9#). A quiet move lets Black escape.
+      expect(screen.getByText('Combination')).toBeTruthy();
+      expect(screen.getByTestId('combination-status').textContent).toMatch(/moves left: 2/);
+      tap('h6');
+      tap('h5');
+      expect(screen.getByRole('alert').textContent).toMatch(/lets Black escape/);
+      expect(onMistake).toHaveBeenCalledOnce();
+      press('Try again');
+
+      // The hint marks the piece to move.
+      press('Show a hint');
+      expect(screen.getByText('Move the marked piece.')).toBeTruthy();
+
+      tap('i7');
+      tap('i8');
+      expect(screen.getByTestId('combination-status').textContent).toMatch(/Black is answering/);
+      act(() => vi.advanceTimersByTime(COMBINATION_REPLY_MS));
+      expect(screen.getByRole('gridcell', { name: /^e9,/ }).getAttribute('aria-label')).toMatch(/Black General/i);
+      expect(screen.getByTestId('combination-status').textContent).toMatch(/moves left: 1/);
+
+      tap('h6');
+      tap('h9');
+      expect(screen.getByRole('alert').textContent).toMatch(/Correct!/);
+      expect(screen.getByRole('alert').textContent).toMatch(/Chariots take turns/);
+      press('Continue');
+      expect(screen.getByTestId('combination-status').textContent).toMatch(/moves left: 2/);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

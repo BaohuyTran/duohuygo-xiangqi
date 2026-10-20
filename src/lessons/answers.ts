@@ -2,6 +2,7 @@
 import {
   fileOf,
   gameStatus,
+  hasForcedWin,
   inPalace,
   isInCheck,
   legalMoves,
@@ -72,6 +73,8 @@ export type MoveVerdict =
   | 'wrong-target'
   | 'not-check'
   | 'not-checkmate'
+  /** The move leaves Black a checkmate in one. */
+  | 'allows-mate'
   | 'not-capture'
   | 'not-best';
 
@@ -98,6 +101,8 @@ export function checkMove(ex: MoveExercise, move: Move): MoveVerdict {
       return isInCheck(after) ? 'correct' : 'not-check';
     case 'checkmate':
       return gameStatus(after).kind === 'checkmate' ? 'correct' : 'not-checkmate';
+    case 'defend':
+      return hasForcedWin(after, 1) ? 'allows-mate' : 'correct';
   }
 }
 

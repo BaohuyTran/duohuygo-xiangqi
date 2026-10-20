@@ -20,3 +20,18 @@ describe('lessonStates', () => {
     expect(lessonStates(units, ['zzz', 'a1']).get('a2')).toBe('available');
   });
 });
+
+describe('lessonStates with tracks', () => {
+  const tracked = [
+    ...units,
+    { id: 'c', title: '', description: '', track: 'intermediate', lessons: [{ id: 'c1', title: '', exercises: [] }, { id: 'c2', title: '', exercises: [] }] },
+  ] as Unit[];
+
+  it('opens the first lesson of every track from the start', () => {
+    expect(Object.fromEntries(lessonStates(tracked, []))).toEqual({ a1: 'available', a2: 'locked', b1: 'locked', c1: 'available', c2: 'locked' });
+  });
+
+  it('unlocks each track on its own', () => {
+    expect(Object.fromEntries(lessonStates(tracked, ['c1']))).toEqual({ a1: 'available', a2: 'locked', b1: 'locked', c1: 'completed', c2: 'available' });
+  });
+});

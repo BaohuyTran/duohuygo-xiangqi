@@ -89,7 +89,8 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   └── index.ts        # Loads the JSON: `units`, `allLessons`, `findLesson`
     ├── lessons/
     │   ├── answers.ts      # Answer checking for every exercise type, via the engine
-    │   └── progress.ts     # Locked / available / completed lesson states
+    │   ├── combination.ts  # Combination exercises: accepted moves, engine best-defence replies
+    │   └── progress.ts     # Locked / available / completed lesson states (per track)
     ├── puzzles/
     │   ├── logic.ts        # Puzzle move checking, defender replies (shared by UI + verifier)
     │   └── catalog.ts      # Loads puzzle JSON in play order, next-puzzle selection
@@ -130,11 +131,24 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 
 - Add or edit lessons in `src/content/lessons/NN-name.json`; every string field is an i18n key
   that must exist in `src/i18n/messages.ts` with both `en` and `vi` text.
-- Exercise types: `learn`, `select-squares`, `move` (goals: `reach`, `any`, `check`, `checkmate`),
-  `capture`. Answers are computed by the engine; `solution` fields are only verified, never trusted.
+- Exercise types: `learn`, `select-squares`, `move` (goals: `reach`, `any`, `check`, `checkmate`,
+  `defend`), `capture`, `combination`. Answers are computed by the engine; `solution` fields are only
+  verified, never trusted.
+- `defend`: Black threatens mate in one; any move that leaves Black without a mate in one is correct.
+- `combination` (`src/lessons/combination.ts`): 2 or 3 Red moves against the engine's best defence,
+  goal `checkmate` (exactly N moves, not fewer) or `win-material` (≥ 2 points by the same search as
+  win-material puzzles, horizon = 2 plies per Red move). `solution` is the main line (Red, Black, …, Red);
+  any Red move the engine confirms is accepted. Optional `hints` (one i18n key per Red move).
 - Positions use `pieces` maps (`{ "e0": "K", "d9": "k" }`) or `fen`. Exercises are played as Red.
 - `npx vitest run src/content` validates all content and plays every exercise through the engine.
-- Lessons unlock strictly in order; progress is stored via `src/storage` (localStorage today).
+- Units have a `track`: `basics` (units 1–6, the default) or `intermediate` (units 7–10: cannon mates,
+  horse/chariot mates, tactics, combinations). Each track unlocks in order on its own, and the first
+  lesson of every track is open from the start (`src/lessons/progress.ts`). Home shows a header per track
+  and a "jump to Intermediate" link. Progress is stored via `src/storage` (localStorage today).
+- Intermediate positions are original: random positions kept only when the solver proves the pattern
+  (unique forced mate, best defence, clean fork). Do not copy positions from books or websites.
+- After adding a new lesson JSON file, clear Vitest's cache (`rm -rf node_modules/.vitest-cache`) if the
+  tests do not see it: the cached transform of `import.meta.glob` can be stale.
 
 ## Puzzles
 

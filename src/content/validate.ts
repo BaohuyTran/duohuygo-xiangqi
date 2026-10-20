@@ -2,6 +2,7 @@
 // or unsolvable lesson fails `npm test`.
 import {
   gameStatus,
+  hasForcedWin,
   isGeneralAttacked,
   legalMoves,
   legalMovesFrom,
@@ -18,11 +19,19 @@ import {
   expectedSelection,
   positionOf,
 } from '../lessons/answers';
-import type { Exercise, Unit } from './types';
+import {
+  bestCombinationReplies,
+  checkCombinationMove,
+  combinationDone,
+  winningMoves,
+} from '../lessons/combination';
+import { sameMove } from '../puzzles/logic';
+import type { CombinationExercise, Exercise, Unit } from './types';
 
 const REGIONS = ['red-palace', 'black-palace', 'red-side', 'black-side'];
-const EXERCISE_TYPES = ['learn', 'move', 'select-squares', 'capture'];
-const GOALS = ['reach', 'any', 'check', 'checkmate'];
+const EXERCISE_TYPES = ['learn', 'move', 'select-squares', 'capture', 'combination'];
+const GOALS = ['reach', 'any', 'check', 'checkmate', 'defend'];
+const TRACKS = ['basics', 'intermediate'];
 
 type Obj = Record<string, unknown>;
 const isObj = (v: unknown): v is Obj => typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -46,6 +55,8 @@ export function validateUnits(input: unknown): string[] {
   };
 
   if (!Array.isArray(input) || input.length === 0) return ['content: expected a non-empty array of units'];
+  /** Track -> index of its last unit so far. */
+  const seenTracks = new Map<unknown, number>();
 
   input.forEach((unit, ui) => {
     const uw = `unit[${ui}]`;
@@ -53,6 +64,12 @@ export function validateUnits(input: unknown): string[] {
     checkId(uw, unit.id);
     checkKey(uw, 'title', unit.title);
     checkKey(uw, 'description', unit.description);
+    if (unit.track !== undefined && (typeof unit.track !== 'string' || !TRACKS.includes(unit.track))) {
+      err(uw, `"track" must be one of ${TRACKS.join(', ')}`);
+    }
+    const track = unit.track ?? 'basics';
+    if (seenTracks.has(track) && seenTracks.get(track) !== ui - 1) err(uw, `units of track "${String(track)}" must be consecutive`);
+    seenTracks.set(track, ui);
     if (!Array.isArray(unit.lessons) || unit.lessons.length === 0) return err(uw, '"lessons" must be a non-empty array');
 
     unit.lessons.forEach((lesson, li) => {
@@ -177,6 +194,11 @@ function validateExercise(ex: unknown, checkKey: (field: string, value: unknown,
       if (verdict !== 'correct') {
         problems.push(`solution ${squareName(solution.from)}-${squareName(solution.to)} is not accepted (${verdict})`);
       }
+      if (goal.kind === 'defend') {
+        // There must be a real threat: Black would mate in one if it were Black's move.
+        if (!hasForcedWin({ ...pos, turn: 'black' }, 1)) problems.push('"defend": Black has no mate-in-one threat to stop');
+        if (legalMoves(pos).every((m) => checkMove(ex as never, m) === 'correct')) problems.push('"defend": every move stops the threat');
+      }
       if (goal.kind === 'checkmate') {
         // Avoid ambiguous "checkmate" puzzles where a quiet move would stalemate (also a win).
         const stalemating = legalMoves(pos).find((m) => gameStatus(makeMove(pos, m)).kind === 'stalemate');
@@ -199,7 +221,57 @@ function validateExercise(ex: unknown, checkKey: (field: string, value: unknown,
       }
       break;
     }
+
+    case 'combination':
+      checkKey('prompt', ex.prompt);
+      checkKey('explanation', ex.explanation, true);
+      problems.push(...validateCombination(ex, pos, checkKey));
+      break;
   }
+  return problems;
+}
+
+function validateCombination(ex: Obj, pos: Position, checkKey: (field: string, value: unknown, optional?: boolean) => void): string[] {
+  if (ex.goal !== 'checkmate' && ex.goal !== 'win-material') return ['"goal" must be "checkmate" or "win-material"'];
+  if (ex.moves !== 2 && ex.moves !== 3) return ['"moves" must be 2 or 3'];
+  const combo = ex as unknown as CombinationExercise;
+  const line = ex.solution;
+  if (!Array.isArray(line) || !line.every((s) => isObj(s) && isSquareName(s.from) && isSquareName(s.to))) {
+    return ['"solution" must be a list of { "from": square, "to": square }'];
+  }
+  if (line.length % 2 !== 1 || line.length > combo.moves * 2 - 1) {
+    return [`"solution" must alternate Red/Black, end with a Red move and have at most ${combo.moves * 2 - 1} moves`];
+  }
+  if (ex.hints !== undefined) {
+    if (!Array.isArray(ex.hints) || ex.hints.length > combo.moves) return ['"hints" must be a list with at most one key per Red move'];
+    ex.hints.forEach((h, i) => checkKey(`hints[${i}]`, h));
+  }
+  const problems: string[] = [];
+  if (combo.goal === 'checkmate') {
+    if (!hasForcedWin(pos, combo.moves)) return [`Red has no forced mate in ${combo.moves}`];
+    if (hasForcedWin(pos, combo.moves - 1)) problems.push(`Red already mates in ${combo.moves - 1}; lower "moves"`);
+  }
+  if (winningMoves(combo, pos, 0).length === legalMoves(pos).length) problems.push('every first move wins, so nothing is tested');
+
+  // Play the stored line: each Red move must be accepted, each Black reply a best defence.
+  let cur = pos;
+  for (let step = 0; step < line.length; step++) {
+    const move = { from: parseSquare(line[step].from as string), to: parseSquare(line[step].to as string) };
+    const name = `solution[${step}] ${line[step].from}-${line[step].to}`;
+    if (!legalMoves(cur).some((m) => sameMove(m, move))) return [...problems, `${name} is not legal`];
+    if (step % 2 === 0) {
+      const verdict = checkCombinationMove(combo, step, cur, move);
+      if (verdict !== 'correct') return [...problems, `${name} is not accepted (${verdict})`];
+    } else if (!bestCombinationReplies(combo, cur, step).some((m) => sameMove(m, move))) {
+      problems.push(`${name} is not a best defence`);
+    }
+    const after = makeMove(cur, move);
+    if (step % 2 === 0 && combinationDone(combo, after, step) !== (step === line.length - 1)) {
+      return [...problems, `${name}: the line must end exactly when the goal is reached`];
+    }
+    cur = after;
+  }
+  if (combo.goal === 'checkmate' && gameStatus(cur).kind !== 'checkmate') problems.push('the stored line does not end in checkmate');
   return problems;
 }
 

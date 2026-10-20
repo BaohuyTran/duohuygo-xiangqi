@@ -32,12 +32,22 @@ describe('App', () => {
 
     expect(screen.getByRole('button', { name: 'The board (completed)' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'The General (start)' })).toHaveProperty('disabled', false);
-    expect(screen.getByText('1 of 18 lessons complete')).toBeTruthy();
+    expect(screen.getByText('1 of 31 lessons complete')).toBeTruthy();
 
     // A fresh app on the same store keeps the progress.
     cleanup();
     render(<App store={store} />);
     expect(screen.getByRole('button', { name: 'The board (completed)' })).toBeTruthy();
+  });
+
+  it('opens the intermediate track from the start, next to the basics', () => {
+    render(<App store={createMemoryStore()} />);
+    expect(screen.getByRole('link', { name: /Already know the rules\?/ }).getAttribute('href')).toBe('#track-intermediate');
+    expect(screen.getByRole('heading', { name: 'Basics' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Intermediate' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Double Cannon (start)' })).toHaveProperty('disabled', false);
+    expect(screen.getByRole('button', { name: 'Smothered General (locked)' })).toHaveProperty('disabled', true);
+    expect(screen.getByRole('button', { name: 'The board (start)' })).toHaveProperty('disabled', false);
   });
 
   it('switches language and remembers the choice', () => {

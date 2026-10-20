@@ -27,6 +27,7 @@ export function Home({ units, states, onStart, onReset, stats, onGoalChange, acc
   const { t } = useI18n();
   const all = units.flatMap((u) => u.lessons);
   const completedCount = all.filter((l) => states.get(l.id) === 'completed').length;
+  const hasIntermediate = units.some((u) => u.track === 'intermediate');
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))]">
@@ -63,11 +64,34 @@ export function Home({ units, states, onStart, onReset, stats, onGoalChange, acc
         {completedCount === all.length && <p className="mt-2 font-semibold text-green-700">{t('home.allDone')}</p>}
       </div>
 
+      {hasIntermediate && (
+        <a
+          href="#track-intermediate"
+          className="mb-6 flex min-h-11 items-center justify-between gap-3 rounded-2xl border-2 border-violet-200 bg-violet-50 px-4 py-3 text-violet-800"
+        >
+          <span>
+            <span className="block font-extrabold">{t('track.jump.title')}</span>
+            <span className="block text-sm">{t('track.jump.body')}</span>
+          </span>
+          <span aria-hidden className="text-2xl font-extrabold">
+            ↓
+          </span>
+        </a>
+      )}
+
       <ol className="flex flex-col gap-8">
         {units.map((unit, ui) => {
           const color = UNIT_COLORS[ui % UNIT_COLORS.length];
+          const track = unit.track ?? 'basics';
+          const startsTrack = hasIntermediate && (ui === 0 || (units[ui - 1].track ?? 'basics') !== track);
           return (
             <li key={unit.id}>
+              {startsTrack && (
+                <div id={`track-${track}`} className="mb-5 scroll-mt-4 border-b-2 border-stone-200 pb-2">
+                  <h2 className="text-xl font-extrabold text-stone-800">{t(`track.${track}.title`)}</h2>
+                  <p className="text-sm text-stone-500">{t(`track.${track}.desc`)}</p>
+                </div>
+              )}
               <section aria-labelledby={`${unit.id}-title`}>
                 <div className="mb-6 rounded-2xl px-4 py-3 text-white shadow-[0_4px_0_rgba(0,0,0,0.2)]" style={{ backgroundColor: color }}>
                   <p className="text-xs font-bold tracking-wider uppercase opacity-85">{t('home.unit', { n: ui + 1 })}</p>

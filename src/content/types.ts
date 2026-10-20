@@ -43,7 +43,9 @@ export type MoveGoal =
   /** The move must give check. */
   | { kind: 'check' }
   /** The move must checkmate. */
-  | { kind: 'checkmate' };
+  | { kind: 'checkmate' }
+  /** Black threatens mate: the move must leave Black without a checkmate (or stalemate) in one. */
+  | { kind: 'defend' };
 
 /** Make one move that satisfies `goal`. `solution` documents a correct answer and is verified in tests. */
 export type MoveExercise = PositionSpec & {
@@ -67,7 +69,26 @@ export type CaptureExercise = PositionSpec & {
   explanation?: string;
 };
 
-export type Exercise = LearnExercise | SelectSquaresExercise | MoveExercise | CaptureExercise;
+/**
+ * A short combination played against the engine: Red moves, the engine answers with a best
+ * defence, and so on. `checkmate`: mate (or stalemate, also a win) within `moves` Red moves, and
+ * not sooner. `win-material`: end at least WIN_MATERIAL_THRESHOLD points up by the search in
+ * src/puzzles/logic.ts. Every Red move the engine confirms is accepted, not only the stored line.
+ * `solution` is the main line, alternating Red and Black moves and ending with a Red move.
+ */
+export type CombinationExercise = PositionSpec & {
+  type: 'combination';
+  prompt: string;
+  goal: 'checkmate' | 'win-material';
+  /** Number of Red moves: 2 or 3. */
+  moves: number;
+  solution: { from: string; to: string }[];
+  /** Optional i18n hint per Red move (index 0 = first Red move). */
+  hints?: string[];
+  explanation?: string;
+};
+
+export type Exercise = LearnExercise | SelectSquaresExercise | MoveExercise | CaptureExercise | CombinationExercise;
 export type ExerciseType = Exercise['type'];
 
 export interface Lesson {
@@ -76,9 +97,14 @@ export interface Lesson {
   exercises: Exercise[];
 }
 
+/** A track is a separate path: its first lesson is open from the start, then lessons unlock in order. */
+export type Track = 'basics' | 'intermediate';
+
 export interface Unit {
   id: string;
   title: string;
   description: string;
+  /** Defaults to 'basics'. Units of one track must be consecutive. */
+  track?: Track;
   lessons: Lesson[];
 }
