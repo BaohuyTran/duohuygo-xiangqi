@@ -261,5 +261,16 @@ describe('LessonPlayer', () => {
       expect(onComplete).toHaveBeenCalledOnce();
     });
   });
-});
 
+  it('ignores taps on the piece’s own point in a select-squares exercise', () => {
+    renderLesson('u1l2');
+    press('Continue'); // learn
+    // The General stands on e2: tapping it selects nothing.
+    tap('e2');
+    expect(screen.getByRole('button', { name: /Check/ })).toHaveProperty('disabled', true);
+    for (const sq of ['e1', 'd2', 'f2', 'e2']) tap(sq);
+    expect(screen.getByRole('button', { name: /Check/ }).textContent).toMatch(/\(3 selected\)/);
+    press(/Check/);
+    expect(screen.getByRole('alert').textContent).toMatch(/Correct!/);
+  });
+});

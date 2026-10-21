@@ -233,6 +233,8 @@ function ExerciseView({
   const onSquareClick = (sq: Square) => {
     if (status !== 'answering') return;
     if (ex.type === 'select-squares') {
+      // The piece's own point is never an answer: ignore taps on it instead of counting a hidden pick.
+      if (ex.square !== undefined && sq === parseSquare(ex.square)) return;
       setPicked((prev) => {
         const next = new Set(prev);
         if (next.has(sq)) next.delete(sq);
