@@ -1,7 +1,8 @@
 import type { Unit } from '../content/types';
 import { minutesUntil, type DailyGoal, type GamificationSummary } from '../gamification';
 import { useI18n } from '../i18n/I18nProvider';
-import type { LessonState } from '../lessons/progress';
+import { useState } from 'react';
+import { JUMP_TEST_LIVES, jumpTest, skippedLessons, type LessonState } from '../lessons/progress';
 import type { AccountService } from '../sync/service';
 import { AccountButton } from './Account';
 import { LanguageToggle } from './LanguageToggle';
@@ -16,6 +17,8 @@ export interface HomeProps {
   units: readonly Unit[];
   states: ReadonlyMap<string, LessonState>;
   onStart: (lessonId: string) => void;
+  /** Start the jump-ahead test that unlocks a locked lesson (and completes the lessons before it). */
+  onJump: (lessonId: string) => void;
   onReset: () => void;
   stats: GamificationSummary;
   onGoalChange: (goal: DailyGoal) => void;
@@ -23,10 +26,13 @@ export interface HomeProps {
   account?: AccountService;
 }
 
-export function Home({ units, states, onStart, onReset, stats, onGoalChange, account }: HomeProps) {
+export function Home({ units, states, onStart, onJump, onReset, stats, onGoalChange, account }: HomeProps) {
   const { t } = useI18n();
+  // The locked lesson the learner tapped: asks whether to take the jump-ahead test.
+  const [jumpTarget, setJumpTarget] = useState<string | null>(null);
   const all = units.flatMap((u) => u.lessons);
-  const completedCount = all.filter((l) => states.get(l.id) === 'completed').length;
+  const completedIds = all.filter((l) => states.get(l.id) === 'completed').map((l) => l.id);
+  const completedCount = completedIds.length;
   const hasIntermediate = units.some((u) => u.track === 'intermediate');
 
   return (
@@ -99,6 +105,15 @@ export function Home({ units, states, onStart, onReset, stats, onGoalChange, acc
                     {t(unit.title)}
                   </h2>
                   <p className="text-sm opacity-90">{t(unit.description)}</p>
+                  {states.get(unit.lessons[0].id) === 'locked' && (
+                    <button
+                      type="button"
+                      onClick={() => setJumpTarget(unit.lessons[0].id)}
+                      className="mt-2 min-h-11 rounded-xl border-2 border-white/70 bg-white/15 px-3 text-sm font-extrabold tracking-wide uppercase"
+                    >
+                      {t('jump.here')}
+                    </button>
+                  )}
                 </div>
                 <ol className="flex flex-col items-center gap-5">
                   {unit.lessons.map((lesson, li) => (
@@ -109,7 +124,7 @@ export function Home({ units, states, onStart, onReset, stats, onGoalChange, acc
                         color={color}
                         stateLabel={t(`home.lessonState.${states.get(lesson.id) ?? 'locked'}`)}
                         startLabel={t('home.start')}
-                        onClick={() => onStart(lesson.id)}
+                        onClick={() => (states.get(lesson.id) === 'locked' ? setJumpTarget(lesson.id) : onStart(lesson.id))}
                       />
                     </li>
                   ))}
@@ -119,6 +134,19 @@ export function Home({ units, states, onStart, onReset, stats, onGoalChange, acc
           );
         })}
       </ol>
+
+      {jumpTarget && (
+        <JumpDialog
+          lessonTitle={t(all.find((l) => l.id === jumpTarget)?.title ?? '')}
+          skipped={skippedLessons(units, jumpTarget, completedIds).length}
+          questions={jumpTest(units, jumpTarget, completedIds)?.exercises.length ?? 0}
+          onStart={() => {
+            onJump(jumpTarget);
+            setJumpTarget(null);
+          }}
+          onCancel={() => setJumpTarget(null)}
+        />
+      )}
 
       <div className="mt-10 flex justify-center">
         <button
@@ -162,9 +190,8 @@ function LessonNode({
       <button
         type="button"
         onClick={onClick}
-        disabled={locked}
         aria-label={`${title} (${stateLabel})`}
-        className="flex h-[72px] w-[72px] items-center justify-center rounded-full text-white transition-transform active:translate-y-1 disabled:cursor-not-allowed"
+        className="flex h-[72px] w-[72px] items-center justify-center rounded-full text-white transition-transform active:translate-y-1"
         style={{ backgroundColor: bg, boxShadow: locked ? '0 6px 0 #a8a29e' : '0 6px 0 rgba(0,0,0,0.25)' }}
       >
         {state === 'completed' ? (
@@ -183,6 +210,50 @@ function LessonNode({
         )}
       </button>
       <span className={`mt-3 text-center text-sm leading-tight font-bold ${locked ? 'text-stone-400' : 'text-stone-700'}`}>{title}</span>
+    </div>
+  );
+}
+
+function JumpDialog({
+  lessonTitle,
+  skipped,
+  questions,
+  onStart,
+  onCancel,
+}: {
+  lessonTitle: string;
+  skipped: number;
+  questions: number;
+  onStart: () => void;
+  onCancel: () => void;
+}) {
+  const { t } = useI18n();
+  return (
+    <div className="safe-px fixed inset-0 z-30 flex items-end justify-center bg-black/40 sm:items-center" onClick={onCancel}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="jump-title"
+        onClick={(e) => e.stopPropagation()}
+        className="feedback-in w-full max-w-md rounded-t-3xl bg-white px-5 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-xl sm:rounded-3xl"
+      >
+        <h2 id="jump-title" className="text-xl font-extrabold text-stone-800">
+          {t('jump.dialog.title', { lesson: lessonTitle })}
+        </h2>
+        <p className="mt-2 text-stone-600">{t('jump.dialog.body', { skipped, questions, lives: JUMP_TEST_LIVES })}</p>
+        <div className="mt-5 flex flex-col gap-3">
+          <button
+            type="button"
+            onClick={onStart}
+            className="min-h-12 rounded-2xl bg-violet-600 text-lg font-bold text-white shadow-[0_4px_0_#5b21b6] active:translate-y-1 active:shadow-none"
+          >
+            {t('jump.start')}
+          </button>
+          <button type="button" onClick={onCancel} className="min-h-11 rounded-2xl font-bold text-stone-500">
+            {t('jump.cancel')}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

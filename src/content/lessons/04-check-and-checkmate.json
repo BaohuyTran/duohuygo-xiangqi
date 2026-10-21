@@ -1,11 +1,11 @@
 {
-  "id": "u6",
-  "title": "u6.title",
-  "description": "u6.desc",
+  "id": "u4",
+  "title": "u4.title",
+  "description": "u4.desc",
   "lessons": [
     {
-      "id": "u6l1",
-      "title": "u6l1.title",
+      "id": "u4l1",
+      "title": "u4l1.title",
       "exercises": [
         {
           "type": "learn",
@@ -14,20 +14,11 @@
             "e9": "k",
             "a6": "p"
           },
-          "text": "u6l1.e1",
+          "text": "u4l1.e1",
           "square": "d0",
           "highlight": [
             "e0"
           ]
-        },
-        {
-          "type": "select-squares",
-          "pieces": {
-            "e1": "K",
-            "d9": "k"
-          },
-          "prompt": "u6l1.e2",
-          "square": "e1"
         },
         {
           "type": "learn",
@@ -36,34 +27,10 @@
             "e4": "N",
             "e9": "k"
           },
-          "text": "u6l1.e3",
+          "text": "u4l1.e2",
           "square": "e4",
           "allowNoMoves": true
         },
-        {
-          "type": "move",
-          "pieces": {
-            "d0": "K",
-            "a8": "R",
-            "h1": "R",
-            "e9": "k",
-            "i6": "p"
-          },
-          "prompt": "u6l1.e4",
-          "goal": {
-            "kind": "checkmate"
-          },
-          "solution": {
-            "from": "h1",
-            "to": "h9"
-          }
-        }
-      ]
-    },
-    {
-      "id": "u6l2",
-      "title": "u6l2.title",
-      "exercises": [
         {
           "type": "learn",
           "pieces": {
@@ -71,7 +38,7 @@
             "e4": "r",
             "e9": "k"
           },
-          "text": "u6l2.e1",
+          "text": "u4l1.e3",
           "square": "e1"
         },
         {
@@ -81,7 +48,7 @@
             "d9": "k",
             "a1": "R"
           },
-          "prompt": "u6l2.e2",
+          "prompt": "u4l1.e4",
           "from": "a1",
           "goal": {
             "kind": "check"
@@ -98,7 +65,7 @@
             "d9": "k",
             "f2": "n"
           },
-          "prompt": "u6l2.e3",
+          "prompt": "u4l1.e5",
           "goal": {
             "kind": "any"
           },
@@ -115,27 +82,17 @@
             "e3": "r",
             "c2": "N"
           },
-          "prompt": "u6l2.e4",
+          "prompt": "u4l1.e6",
           "solution": {
             "from": "c2",
             "to": "e3"
           }
-        },
-        {
-          "type": "select-squares",
-          "pieces": {
-            "e2": "K",
-            "e5": "r",
-            "d9": "k"
-          },
-          "prompt": "u6l2.e5",
-          "square": "e2"
         }
       ]
     },
     {
-      "id": "u6l3",
-      "title": "u6l3.title",
+      "id": "u4l2",
+      "title": "u4l2.title",
       "exercises": [
         {
           "type": "learn",
@@ -146,7 +103,25 @@
             "e9": "k"
           },
           "turn": "black",
-          "text": "u6l3.e1"
+          "text": "u4l2.e1"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "d0": "K",
+            "a8": "R",
+            "h1": "R",
+            "e9": "k",
+            "i6": "p"
+          },
+          "prompt": "u4l2.e2",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "h1",
+            "to": "h9"
+          }
         },
         {
           "type": "move",
@@ -157,7 +132,7 @@
             "e9": "k",
             "i6": "p"
           },
-          "prompt": "u6l3.e2",
+          "prompt": "u4l2.e3",
           "goal": {
             "kind": "checkmate"
           },
@@ -175,7 +150,7 @@
             "e9": "k",
             "a6": "p"
           },
-          "prompt": "u6l3.e3",
+          "prompt": "u4l2.e4",
           "goal": {
             "kind": "checkmate"
           },
@@ -193,7 +168,7 @@
             "e9": "k"
           },
           "turn": "black",
-          "text": "u6l3.e4"
+          "text": "u4l2.e5"
         },
         {
           "type": "move",
@@ -205,7 +180,7 @@
             "e9": "k",
             "i6": "p"
           },
-          "prompt": "u6l3.e5",
+          "prompt": "u4l2.e6",
           "goal": {
             "kind": "checkmate"
           },

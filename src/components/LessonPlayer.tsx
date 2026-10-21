@@ -31,6 +31,7 @@ import {
   type CombinationVerdict,
 } from '../lessons/combination';
 import { sameMove, toMove } from '../puzzles/logic';
+import { JUMP_TEST_LIVES } from '../lessons/progress';
 import { moveSound, useSound } from '../sound';
 import { Board, type MarkTone } from './Board';
 import { Celebration } from './Celebration';
@@ -48,6 +49,12 @@ export interface LessonPlayerProps {
   onMistake?: () => void;
   /** XP the completion screen announces (awarded by the app on Continue). */
   completionXp?: number;
+  /**
+   * A jump-ahead test instead of a lesson: JUMP_TEST_LIVES lives of its own (real hearts are not
+   * touched), running out ends the test with a "not this time" screen (`onExit`), and finishing it
+   * shows a "you skipped ahead" screen (`onComplete`).
+   */
+  test?: boolean;
 }
 
 /** What a wrong answer did to the hearts, for the feedback text. */
@@ -56,12 +63,14 @@ interface HeartNote {
   left: number;
 }
 
-export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, completionXp }: LessonPlayerProps) {
+export function LessonPlayer({ lesson, onExit, onComplete, hearts: realHearts, onMistake, completionXp, test = false }: LessonPlayerProps) {
   const { t } = useI18n();
   const { play } = useSound();
   const [index, setIndex] = useState(0);
   const [firstTryCorrect, setFirstTryCorrect] = useState(0);
   const [heartsLost, setHeartsLost] = useState(0);
+  const [failed, setFailed] = useState(false);
+  const hearts = test ? JUMP_TEST_LIVES - heartsLost : realHearts;
   const total = lesson.exercises.length;
   const done = index >= total;
 
@@ -73,7 +82,7 @@ export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, co
 
   const mistake = (): HeartNote | null => {
     if (hearts === undefined) return null;
-    onMistake?.();
+    if (!test) onMistake?.();
     if (hearts <= 0) return { lost: false, left: 0 };
     setHeartsLost((n) => n + 1);
     return { lost: true, left: hearts - 1 };
@@ -117,14 +126,29 @@ export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, co
         )}
       </header>
 
-      {done ? (
+      {failed ? (
+        <section className="flex flex-1 flex-col items-center justify-center gap-6 px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center">
+          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-stone-200 text-stone-500" aria-hidden>
+            <HeartIcon className="h-14 w-14" />
+          </div>
+          <h2 className="text-3xl font-extrabold text-stone-700">{t('jump.failed.title')}</h2>
+          <p className="text-lg text-stone-600">{t('jump.failed.body')}</p>
+          <button
+            type="button"
+            onClick={onExit}
+            className="h-12 w-full max-w-xs rounded-2xl bg-green-500 text-lg font-bold text-white shadow-[0_4px_0_#15803d] active:translate-y-1 active:shadow-none"
+          >
+            {t('jump.back')}
+          </button>
+        </section>
+      ) : done ? (
         <section className="flex flex-1 flex-col items-center justify-center gap-6 px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center">
           <Celebration />
           <div className="celebrate-pop flex h-28 w-28 items-center justify-center rounded-full bg-amber-400 text-6xl text-white shadow-lg" aria-hidden>
             ★
           </div>
-          <h2 className="text-3xl font-extrabold text-amber-600">{t('done.title')}</h2>
-          <p className="text-lg text-stone-600">{t('done.stats', { correct: firstTryCorrect, total })}</p>
+          <h2 className="text-3xl font-extrabold text-amber-600">{t(test ? 'jump.passed.title' : 'done.title')}</h2>
+          <p className="text-lg text-stone-600">{t(test ? 'jump.passed.body' : 'done.stats', { correct: firstTryCorrect, total })}</p>
           {completionXp !== undefined && (
             <p className="rounded-2xl border-2 border-amber-300 bg-amber-50 px-5 py-2 text-2xl font-extrabold text-amber-600">
               {t('xp.earned', { xp: completionXp })}
@@ -141,10 +165,12 @@ export function LessonPlayer({ lesson, onExit, onComplete, hearts, onMistake, co
       ) : (
         (() => {
           const ex = lesson.exercises[index];
+          // In a test with no lives left, the red button ends the test instead of retrying.
+          const outOfLives = test && hearts !== undefined && hearts <= 0 ? () => setFailed(true) : undefined;
           return ex.type === 'combination' ? (
-            <CombinationView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} />
+            <CombinationView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} onOutOfLives={outOfLives} />
           ) : (
-            <ExerciseView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} />
+            <ExerciseView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} onOutOfLives={outOfLives} />
           );
         })()
       )}
@@ -158,10 +184,13 @@ function ExerciseView({
   exercise: ex,
   onFinished,
   onMistake,
+  onOutOfLives,
 }: {
   exercise: Exclude<Exercise, CombinationExercise>;
   onFinished: (firstTry: boolean) => void;
   onMistake: () => HeartNote | null;
+  /** Set when a jump-ahead test has no lives left: replaces "Try again". */
+  onOutOfLives?: () => void;
 }) {
   const { t } = useI18n();
   const { play } = useSound();
@@ -346,8 +375,8 @@ function ExerciseView({
           )}
           {status === 'correct' && <PrimaryButton onClick={() => onFinished(!hadMistake)}>{t('lesson.continue')}</PrimaryButton>}
           {status === 'incorrect' && (
-            <PrimaryButton tone="red" onClick={retry}>
-              {t('lesson.retry')}
+            <PrimaryButton tone="red" onClick={onOutOfLives ?? retry}>
+              {t(onOutOfLives ? 'jump.seeResult' : 'lesson.retry')}
             </PrimaryButton>
           )}
         </div>
@@ -367,10 +396,12 @@ function CombinationView({
   exercise: ex,
   onFinished,
   onMistake,
+  onOutOfLives,
 }: {
   exercise: CombinationExercise;
   onFinished: (firstTry: boolean) => void;
   onMistake: () => HeartNote | null;
+  onOutOfLives?: () => void;
 }) {
   const { t } = useI18n();
   const { play } = useSound();
@@ -542,8 +573,8 @@ function CombinationView({
             {phase === 'done' ? (
               <PrimaryButton onClick={() => onFinished(!hadMistake)}>{t('lesson.continue')}</PrimaryButton>
             ) : (
-              <PrimaryButton tone="red" onClick={retry}>
-                {t('lesson.retry')}
+              <PrimaryButton tone="red" onClick={onOutOfLives ?? retry}>
+                {t(onOutOfLives ? 'jump.seeResult' : 'lesson.retry')}
               </PrimaryButton>
             )}
           </div>

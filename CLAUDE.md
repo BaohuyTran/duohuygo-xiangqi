@@ -141,10 +141,16 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   any Red move the engine confirms is accepted. Optional `hints` (one i18n key per Red move).
 - Positions use `pieces` maps (`{ "e0": "K", "d9": "k" }`) or `fen`. Exercises are played as Red.
 - `npx vitest run src/content` validates all content and plays every exercise through the engine.
-- Units have a `track`: `basics` (units 1–6, the default) or `intermediate` (units 7–10: cannon mates,
-  horse/chariot mates, tactics, combinations). Each track unlocks in order on its own, and the first
-  lesson of every track is open from the start (`src/lessons/progress.ts`). Home shows a header per track
-  and a "jump to Intermediate" link. Progress is stored via `src/storage` (localStorage today).
+- Units have a `track`: `basics` (files 01–04: 4 short units, 9 lessons, the default) or `intermediate`
+  (files 07–10, ids u7–u10: cannon mates, horse/chariot mates, tactics, combinations). Each track unlocks
+  in order on its own, and the first lesson of every track is open from the start
+  (`src/lessons/progress.ts`). Home shows a header per track and a "jump to Intermediate" link. Progress
+  is stored via `src/storage` (localStorage today). Text keys follow the lesson id (`u2l1.e3`, `u2l1.x3`).
+- Jump ahead (Duolingo-style): tapping a locked lesson, or "Jump here" on a locked unit, opens a dialog
+  and then a test (`jumpTest` in `src/lessons/progress.ts`): the last two practice exercises of every
+  skipped lesson, at most `JUMP_TEST_MAX` (8), played in `LessonPlayer` with `test` = `JUMP_TEST_LIVES` (3)
+  lives of its own (real hearts untouched, works at 0 hearts). Passing marks the skipped lessons complete
+  with no XP; running out of lives ends the test and changes nothing.
 - Intermediate positions are original: random positions kept only when the solver proves the pattern
   (unique forced mate, best defence, clean fork). Do not copy positions from books or websites.
 - After adding a new lesson JSON file, clear Vitest's cache (`rm -rf node_modules/.vitest-cache`) if the

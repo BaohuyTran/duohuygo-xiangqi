@@ -17,10 +17,12 @@ describe('shipped lesson content', () => {
     expect(validateUnits(units)).toEqual([]);
   });
 
-  it('has 6 basic and 4 intermediate units of 3-5 lessons with 4-6 exercises each', () => {
-    expect(units.map((u) => u.track ?? 'basics')).toEqual([...Array(6).fill('basics'), ...Array(4).fill('intermediate')]);
+  it('has a short basics track (4 units, 9 lessons) and 4 intermediate units, 4-6 exercises per lesson', () => {
+    expect(units.map((u) => u.track ?? 'basics')).toEqual([...Array(4).fill('basics'), ...Array(4).fill('intermediate')]);
+    const basics = units.filter((u) => (u.track ?? 'basics') === 'basics');
+    expect(basics.flatMap((u) => u.lessons)).toHaveLength(9);
     for (const unit of units) {
-      expect(unit.lessons.length, unit.id).toBeGreaterThanOrEqual(3);
+      expect(unit.lessons.length, unit.id).toBeGreaterThanOrEqual(unit.track === 'intermediate' ? 3 : 2);
       expect(unit.lessons.length, unit.id).toBeLessThanOrEqual(5);
       for (const lesson of unit.lessons) {
         expect(lesson.exercises.length, lesson.id).toBeGreaterThanOrEqual(4);

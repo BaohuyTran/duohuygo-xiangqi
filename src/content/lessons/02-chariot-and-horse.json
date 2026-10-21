@@ -1,11 +1,11 @@
 {
-  "id": "u3",
-  "title": "u3.title",
-  "description": "u3.desc",
+  "id": "u2",
+  "title": "u2.title",
+  "description": "u2.desc",
   "lessons": [
     {
-      "id": "u3l1",
-      "title": "u3l1.title",
+      "id": "u2l1",
+      "title": "u2l1.title",
       "exercises": [
         {
           "type": "learn",
@@ -14,7 +14,7 @@
             "d9": "k",
             "a0": "R"
           },
-          "text": "u3l1.e1",
+          "text": "u2l1.e1",
           "square": "a0"
         },
         {
@@ -25,28 +25,8 @@
             "i0": "R",
             "i3": "P"
           },
-          "prompt": "u3l1.e2",
+          "prompt": "u2l1.e2",
           "square": "i0"
-        },
-        {
-          "type": "move",
-          "pieces": {
-            "e0": "K",
-            "d9": "k",
-            "a0": "R"
-          },
-          "prompt": "u3l1.e3",
-          "from": "a0",
-          "goal": {
-            "kind": "reach",
-            "squares": [
-              "a7"
-            ]
-          },
-          "solution": {
-            "from": "a0",
-            "to": "a7"
-          }
         },
         {
           "type": "capture",
@@ -56,7 +36,7 @@
             "a0": "R",
             "a7": "c"
           },
-          "prompt": "u3l1.e4",
+          "prompt": "u2l1.e3",
           "solution": {
             "from": "a0",
             "to": "a7"
@@ -72,7 +52,7 @@
             "b9": "r",
             "h3": "c"
           },
-          "prompt": "u3l1.e5",
+          "prompt": "u2l1.e4",
           "solution": {
             "from": "e3",
             "to": "h3"
@@ -81,8 +61,8 @@
       ]
     },
     {
-      "id": "u3l2",
-      "title": "u3l2.title",
+      "id": "u2l2",
+      "title": "u2l2.title",
       "exercises": [
         {
           "type": "learn",
@@ -91,18 +71,8 @@
             "d9": "k",
             "e4": "N"
           },
-          "text": "u3l2.e1",
+          "text": "u2l2.e1",
           "square": "e4"
-        },
-        {
-          "type": "learn",
-          "pieces": {
-            "e0": "K",
-            "d9": "k",
-            "b0": "N"
-          },
-          "text": "u3l2.e2",
-          "square": "b0"
         },
         {
           "type": "select-squares",
@@ -111,45 +81,9 @@
             "d9": "k",
             "h0": "N"
           },
-          "prompt": "u3l2.e3",
+          "prompt": "u2l2.e2",
           "square": "h0"
         },
-        {
-          "type": "select-squares",
-          "pieces": {
-            "e0": "K",
-            "d9": "k",
-            "a5": "N"
-          },
-          "prompt": "u3l2.e4",
-          "square": "a5"
-        },
-        {
-          "type": "move",
-          "pieces": {
-            "e0": "K",
-            "d9": "k",
-            "b0": "N"
-          },
-          "prompt": "u3l2.e5",
-          "from": "b0",
-          "goal": {
-            "kind": "reach",
-            "squares": [
-              "c2"
-            ]
-          },
-          "solution": {
-            "from": "b0",
-            "to": "c2"
-          }
-        }
-      ]
-    },
-    {
-      "id": "u3l3",
-      "title": "u3l3.title",
-      "exercises": [
         {
           "type": "learn",
           "pieces": {
@@ -158,7 +92,7 @@
             "e4": "N",
             "e5": "P"
           },
-          "text": "u3l3.e1",
+          "text": "u2l2.e3",
           "square": "e4"
         },
         {
@@ -170,19 +104,8 @@
             "d4": "p",
             "e3": "P"
           },
-          "prompt": "u3l3.e2",
+          "prompt": "u2l2.e4",
           "square": "e4"
-        },
-        {
-          "type": "select-squares",
-          "pieces": {
-            "e0": "K",
-            "d9": "k",
-            "b0": "N",
-            "c0": "B"
-          },
-          "prompt": "u3l3.e3",
-          "square": "b0"
         },
         {
           "type": "capture",
@@ -194,7 +117,7 @@
             "c5": "c",
             "d4": "p"
           },
-          "prompt": "u3l3.e4",
+          "prompt": "u2l2.e5",
           "solution": {
             "from": "e4",
             "to": "f6"

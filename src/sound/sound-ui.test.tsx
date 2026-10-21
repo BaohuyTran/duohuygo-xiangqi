@@ -42,9 +42,6 @@ describe('sound in the app', () => {
     press(/Check/);
     expect(audio.started().slice(-2).map((n) => n.freq)).toEqual(freqs('correct'));
     press('Continue');
-    for (const sq of ['d7', 'e7', 'f7', 'd8', 'e8', 'f8', 'd9', 'e9', 'f9']) tap(sq);
-    press(/Check/);
-    press('Continue');
     expect(screen.getByText('Lesson complete!')).toBeTruthy();
     expect(screen.getByTestId('celebration')).toBeTruthy();
     expect(audio.started().slice(-4).map((n) => n.freq)).toEqual(freqs('complete'));
