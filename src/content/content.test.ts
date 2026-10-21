@@ -14,14 +14,18 @@ import { hasMessage } from '../i18n/messages';
 import { validateUnits } from './validate';
 
 describe('shipped lesson content', () => {
+  // Proving every mate in 4 and defence against mate in 3 takes a while.
   it('passes the validator', () => {
-    expect(validateUnits(units)).toEqual([]);
-  });
+    // DEEP_CONTENT=1 (npm run content:deep) also proves every stored firstMoves list is complete.
+    expect(validateUnits(units, { deep: process.env.DEEP_CONTENT === '1' })).toEqual([]);
+  }, 1_800_000);
 
-  it('has a short basics track (4 units, 9 lessons) and 4 intermediate units, 4-6 exercises per lesson', () => {
-    expect(units.map((u) => u.track ?? 'basics')).toEqual([...Array(4).fill('basics'), ...Array(4).fill('intermediate')]);
-    const basics = units.filter((u) => (u.track ?? 'basics') === 'basics');
-    expect(basics.flatMap((u) => u.lessons)).toHaveLength(9);
+  it('has the five levels in order, each with 4-6 exercises per lesson', () => {
+    const tracks = units.map((u) => u.track ?? 'basics');
+    expect([...new Set(tracks)]).toEqual(['basics', 'intermediate', 'advanced', 'expert', 'master']);
+    expect(tracks.filter((t) => t === 'basics')).toHaveLength(4);
+    expect(units.filter((u) => (u.track ?? 'basics') === 'basics').flatMap((u) => u.lessons)).toHaveLength(9);
+    expect(tracks.filter((t) => t === 'intermediate')).toHaveLength(4);
     for (const unit of units) {
       expect(unit.lessons.length, unit.id).toBeGreaterThanOrEqual(unit.track === 'intermediate' ? 3 : 2);
       expect(unit.lessons.length, unit.id).toBeLessThanOrEqual(5);
@@ -80,7 +84,7 @@ describe('shipped lesson content', () => {
             // Some first move fails, so the exercise tests something.
             const start = positionOf(ex);
             expect(legalMoves(start).some((m) => checkCombinationMove(ex, 0, start, m) === 'wrong')).toBe(true);
-          });
+          }, 60_000);
           return;
         }
 

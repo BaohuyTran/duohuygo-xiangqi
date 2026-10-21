@@ -1,0 +1,509 @@
+{
+  "id": "u14",
+  "title": "u14.title",
+  "description": "u14.desc",
+  "track": "expert",
+  "lessons": [
+    {
+      "id": "u14l1",
+      "title": "u14l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "g0": "p",
+            "e2": "K",
+            "e4": "P",
+            "a5": "r",
+            "g5": "c",
+            "d6": "R",
+            "f7": "R",
+            "f8": "k",
+            "g9": "N"
+          },
+          "turn": "black",
+          "text": "u14l1.e1"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a6": "N",
+            "a8": "N",
+            "a9": "R",
+            "c5": "b",
+            "d0": "A",
+            "e0": "p",
+            "e7": "k",
+            "f2": "K",
+            "g0": "B",
+            "h6": "r"
+          },
+          "prompt": "u14l1.p",
+          "goal": "checkmate",
+          "moves": 4,
+          "solution": [
+            {
+              "from": "a9",
+              "to": "e9"
+            },
+            {
+              "from": "e7",
+              "to": "d7"
+            },
+            {
+              "from": "a8",
+              "to": "c9"
+            },
+            {
+              "from": "d7",
+              "to": "d8"
+            },
+            {
+              "from": "c9",
+              "to": "b7"
+            },
+            {
+              "from": "d8",
+              "to": "d7"
+            },
+            {
+              "from": "a6",
+              "to": "b8"
+            }
+          ],
+          "firstMoves": [
+            {
+              "from": "a9",
+              "to": "e9"
+            }
+          ],
+          "explanation": "u14l1.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a1": "p",
+            "a7": "N",
+            "c4": "B",
+            "c6": "R",
+            "d7": "k",
+            "e0": "r",
+            "e6": "r",
+            "f2": "K",
+            "f7": "P",
+            "f9": "a",
+            "g5": "C"
+          },
+          "prompt": "u14l1.p",
+          "goal": "checkmate",
+          "moves": 4,
+          "solution": [
+            {
+              "from": "g5",
+              "to": "g7"
+            },
+            {
+              "from": "d7",
+              "to": "d8"
+            },
+            {
+              "from": "a7",
+              "to": "b9"
+            },
+            {
+              "from": "d8",
+              "to": "e8"
+            },
+            {
+              "from": "f7",
+              "to": "f8"
+            },
+            {
+              "from": "e8",
+              "to": "e9"
+            },
+            {
+              "from": "c6",
+              "to": "c9"
+            }
+          ],
+          "firstMoves": [
+            {
+              "from": "g5",
+              "to": "g7"
+            }
+          ],
+          "explanation": "u14l1.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a6": "C",
+            "a7": "N",
+            "b6": "R",
+            "b9": "C",
+            "c0": "B",
+            "d0": "A",
+            "d7": "P",
+            "e1": "K",
+            "e7": "b",
+            "f0": "n",
+            "f8": "k",
+            "i8": "c"
+          },
+          "prompt": "u14l1.p",
+          "goal": "checkmate",
+          "moves": 4,
+          "solution": [
+            {
+              "from": "b6",
+              "to": "f6"
+            },
+            {
+              "from": "f8",
+              "to": "e8"
+            },
+            {
+              "from": "d7",
+              "to": "e7"
+            },
+            {
+              "from": "e8",
+              "to": "e9"
+            },
+            {
+              "from": "e7",
+              "to": "e8"
+            },
+            {
+              "from": "e9",
+              "to": "d9"
+            },
+            {
+              "from": "f6",
+              "to": "d6"
+            }
+          ],
+          "firstMoves": [
+            {
+              "from": "b6",
+              "to": "f6"
+            }
+          ],
+          "explanation": "u14l1.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a4": "P",
+            "c9": "N",
+            "d6": "R",
+            "d8": "N",
+            "d9": "k",
+            "e7": "b",
+            "e8": "a",
+            "f0": "K",
+            "f5": "c",
+            "g2": "p",
+            "g4": "B",
+            "h6": "R",
+            "i3": "p"
+          },
+          "prompt": "u14l1.p",
+          "goal": "checkmate",
+          "moves": 4,
+          "solution": [
+            {
+              "from": "h6",
+              "to": "h9"
+            },
+            {
+              "from": "e7",
+              "to": "g9"
+            },
+            {
+              "from": "h9",
+              "to": "g9"
+            },
+            {
+              "from": "f5",
+              "to": "f9"
+            },
+            {
+              "from": "g9",
+              "to": "f9"
+            },
+            {
+              "from": "e8",
+              "to": "f9"
+            },
+            {
+              "from": "d8",
+              "to": "f7"
+            }
+          ],
+          "firstMoves": [
+            {
+              "from": "h6",
+              "to": "h9"
+            }
+          ],
+          "explanation": "u14l1.x"
+        }
+      ]
+    },
+    {
+      "id": "u14l2",
+      "title": "u14l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "d0": "A",
+            "f0": "A",
+            "e2": "K",
+            "c3": "P",
+            "g4": "B",
+            "c5": "b",
+            "d7": "k",
+            "b8": "C",
+            "c8": "C",
+            "d8": "R"
+          },
+          "turn": "black",
+          "text": "u14l2.e1"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a1": "n",
+            "a4": "P",
+            "a7": "R",
+            "b4": "p",
+            "b7": "N",
+            "b8": "n",
+            "c0": "B",
+            "d6": "N",
+            "d7": "a",
+            "e2": "K",
+            "f9": "k"
+          },
+          "prompt": "u14l2.p",
+          "goal": "checkmate",
+          "moves": 4,
+          "solution": [
+            {
+              "from": "a7",
+              "to": "a9"
+            },
+            {
+              "from": "b8",
+              "to": "d9"
+            },
+            {
+              "from": "a9",
+              "to": "d9"
+            },
+            {
+              "from": "f9",
+              "to": "f8"
+            },
+            {
+              "from": "d9",
+              "to": "d7"
+            },
+            {
+              "from": "a1",
+              "to": "b3"
+            },
+            {
+              "from": "d7",
+              "to": "f7"
+            }
+          ],
+          "firstMoves": [
+            {
+              "from": "a7",
+              "to": "a9"
+            }
+          ],
+          "explanation": "u14l2.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a5": "N",
+            "b5": "c",
+            "b7": "R",
+            "c7": "P",
+            "d1": "K",
+            "d2": "A",
+            "d9": "a",
+            "e1": "A",
+            "e9": "k",
+            "f6": "R",
+            "g9": "b"
+          },
+          "prompt": "u14l2.p",
+          "goal": "checkmate",
+          "moves": 4,
+          "solution": [
+            {
+              "from": "f6",
+              "to": "e6"
+            },
+            {
+              "from": "e9",
+              "to": "f9"
+            },
+            {
+              "from": "b7",
+              "to": "b5"
+            },
+            {
+              "from": "d9",
+              "to": "e8"
+            },
+            {
+              "from": "e6",
+              "to": "e8"
+            },
+            {
+              "from": "g9",
+              "to": "e7"
+            },
+            {
+              "from": "b5",
+              "to": "f5"
+            }
+          ],
+          "firstMoves": [
+            {
+              "from": "f6",
+              "to": "e6"
+            }
+          ],
+          "explanation": "u14l2.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a2": "n",
+            "b5": "N",
+            "d2": "A",
+            "d8": "k",
+            "e7": "N",
+            "e8": "a",
+            "e9": "P",
+            "f0": "K",
+            "f7": "a",
+            "f9": "C",
+            "g0": "B"
+          },
+          "prompt": "u14l2.p",
+          "goal": "checkmate",
+          "moves": 4,
+          "solution": [
+            {
+              "from": "e7",
+              "to": "c6"
+            },
+            {
+              "from": "d8",
+              "to": "d7"
+            },
+            {
+              "from": "b5",
+              "to": "d6"
+            },
+            {
+              "from": "a2",
+              "to": "b4"
+            },
+            {
+              "from": "c6",
+              "to": "b8"
+            },
+            {
+              "from": "d7",
+              "to": "e7"
+            },
+            {
+              "from": "d6",
+              "to": "f5"
+            }
+          ],
+          "firstMoves": [
+            {
+              "from": "e7",
+              "to": "c6"
+            }
+          ],
+          "explanation": "u14l2.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "c5": "b",
+            "c9": "b",
+            "d6": "R",
+            "d7": "a",
+            "d9": "n",
+            "e1": "K",
+            "f7": "a",
+            "f8": "k",
+            "g0": "B",
+            "g4": "p",
+            "g5": "R",
+            "h5": "P",
+            "h6": "N"
+          },
+          "prompt": "u14l2.p",
+          "goal": "checkmate",
+          "moves": 4,
+          "solution": [
+            {
+              "from": "g5",
+              "to": "g8"
+            },
+            {
+              "from": "f8",
+              "to": "f9"
+            },
+            {
+              "from": "g8",
+              "to": "g9"
+            },
+            {
+              "from": "f9",
+              "to": "f8"
+            },
+            {
+              "from": "d6",
+              "to": "g6"
+            },
+            {
+              "from": "g4",
+              "to": "g3"
+            },
+            {
+              "from": "g6",
+              "to": "g8"
+            }
+          ],
+          "firstMoves": [
+            {
+              "from": "g5",
+              "to": "g8"
+            },
+            {
+              "from": "d6",
+              "to": "d7"
+            }
+          ],
+          "explanation": "u14l2.x"
+        }
+      ]
+    }
+  ]
+}

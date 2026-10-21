@@ -33,7 +33,7 @@ describe('App', () => {
 
     expect(screen.getByRole('button', { name: 'The board (completed)' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'The General (start)' })).toHaveProperty('disabled', false);
-    expect(screen.getByText('1 of 22 lessons complete')).toBeTruthy();
+    expect(screen.getByText('1 of 36 lessons complete')).toBeTruthy();
 
     // A fresh app on the same store keeps the progress.
     cleanup();

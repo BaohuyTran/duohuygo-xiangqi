@@ -91,7 +91,7 @@ describe('content validator: combinations, defend and tracks', () => {
 
   it.each([
     ['a wrong number of moves', { ...twoChariots, moves: 3 }, /already mates in 2/],
-    ['an unsupported length', { ...twoChariots, moves: 4 }, /"moves" must be 2 or 3/],
+    ['an unsupported length', { ...twoChariots, moves: 5 }, /"moves" must be 2 to 4/],
     ['an unknown goal', { ...twoChariots, goal: 'draw' }, /"goal" must be/],
     ['a line that does not end with a Red move', { ...twoChariots, solution: twoChariots.solution.slice(0, 2) }, /alternate Red\/Black/],
     ['a first move that does not win', { ...twoChariots, solution: [{ from: 'f1', to: 'f0' }, ...twoChariots.solution.slice(1)] }, /not accepted \(wrong\)/],
@@ -110,7 +110,7 @@ describe('content validator: combinations, defend and tracks', () => {
       /not a best defence/,
     ],
     ['a missing hint key', { ...twoChariots, hints: ['nope.hint'] }, /nope\.hint/],
-    ['a defend exercise without a threat', { type: 'move', pieces: { ...K, a0: 'R' }, prompt: 'u9l3.p1', goal: { kind: 'defend' }, solution: { from: 'a0', to: 'a1' } }, /no mate-in-one threat/],
+    ['a defend exercise without a threat', { type: 'move', pieces: { ...K, a0: 'R' }, prompt: 'u9l3.p1', goal: { kind: 'defend' }, solution: { from: 'a0', to: 'a1' } }, /no mate-in-1 threat/],
   ])('rejects %s', (_name, exercise, pattern) => {
     expect(errorsFor(exercise).join('\n')).toMatch(pattern);
   });
@@ -125,7 +125,83 @@ describe('content validator: combinations, defend and tracks', () => {
 
   it('checks tracks: known names, and units of one track kept together', () => {
     expect(validateUnits([unit('a'), unit('b', 'intermediate')])).toEqual([]);
-    expect(validateUnits([unit('a', 'expert')]).join('\n')).toMatch(/"track" must be one of/);
+    expect(validateUnits([unit('a', 'grandmaster')]).join('\n')).toMatch(/"track" must be one of/);
     expect(validateUnits([unit('a'), unit('b', 'intermediate'), unit('c')]).join('\n')).toMatch(/must be consecutive/);
   });
+
+  describe('long combinations and deeper defence', () => {
+    // Mate in 4 from the Expert track's generator: Ri5-i3 (takes the Chariot), ..., Ca3-a8 mate.
+    const mateIn4 = {
+      type: 'combination',
+      pieces: { a3: 'C', b8: 'P', d7: 'a', d9: 'k', e6: 'R', e7: 'b', f2: 'K', g5: 'p', i3: 'r', i5: 'R' },
+      prompt: 'u14l1.p',
+      goal: 'checkmate',
+      moves: 4,
+      firstMoves: [{ from: 'i5', to: 'i3' }],
+      solution: [
+        { from: 'i5', to: 'i3' },
+        { from: 'g5', to: 'g4' },
+        { from: 'i3', to: 'i9' },
+        { from: 'e7', to: 'g9' },
+        { from: 'i9', to: 'g9' },
+        { from: 'd9', to: 'd8' },
+        { from: 'a3', to: 'a8' },
+      ],
+    };
+
+    it('accepts a mate in 4 with its winning first moves listed', () => {
+      expect(errorsFor(mateIn4)).toEqual([]);
+    }, 120_000);
+
+    it.each([
+      ['a mate in 4 without firstMoves', { ...mateIn4, firstMoves: undefined }, /"firstMoves" is required/],
+      ['firstMoves without the solution’s first move', { ...mateIn4, firstMoves: [{ from: 'f2', to: 'e2' }] }, /must include the first move of "solution"/],
+      ['five moves', { ...mateIn4, moves: 5 }, /"moves" must be 2 to 4/],
+    ])('rejects %s', (_name, exercise, pattern) => {
+      expect(errorsFor(exercise).join('\n')).toMatch(pattern);
+    });
+
+    it('deep mode proves every listed first move wins', () => {
+      const wrong = { ...mateIn4, firstMoves: [{ from: 'i5', to: 'i3' }, { from: 'f2', to: 'e2' }] };
+      expect(errorsFor(wrong)).toEqual([]); // the quick check only plays the main line
+      expect(validateUnits(unitWith(wrong), { deep: true }).join('\n')).toMatch(/firstMoves f2-e2 does not win/);
+    }, 300_000);
+
+    it('deep mode proves a firstMoves list is complete', () => {
+      // Two Chariots, mate in 2: six first moves win, but only Ra5-a8 is listed.
+      const incomplete = {
+        type: 'combination',
+        pieces: { a0: 'p', a5: 'R', d0: 'K', e9: 'k', i6: 'R' },
+        prompt: 'u8l2.p1',
+        goal: 'checkmate',
+        moves: 2,
+        firstMoves: [{ from: 'a5', to: 'a8' }],
+        solution: [
+          { from: 'a5', to: 'a8' },
+          { from: 'a0', to: 'b0' },
+          { from: 'i6', to: 'i9' },
+        ],
+      };
+      expect(errorsFor(incomplete)).toEqual([]);
+      const deep = validateUnits(unitWith(incomplete), { deep: true }).join('\n');
+      expect(deep).toMatch(/missing the winning move a5-e5/);
+      expect(deep).toMatch(/missing the winning move i6-i8/);
+    });
+
+    it('checks the depth of a defend goal', () => {
+      // Black threatens mate in 2; only Ch2-h1 stops it (from the Advanced track's generator).
+      const defend2 = {
+        type: 'move',
+        pieces: { a3: 'n', a6: 'n', b1: 'N', b3: 'c', d2: 'K', d7: 'a', e0: 'r', e8: 'k', f2: 'A', g1: 'p', h2: 'C', i3: 'N' },
+        prompt: 'u11l3.p',
+        goal: { kind: 'defend', depth: 2 },
+        solution: { from: 'h2', to: 'h1' },
+      };
+      expect(errorsFor(defend2)).toEqual([]);
+      expect(errorsFor({ ...defend2, goal: { kind: 'defend', depth: 4 } }).join('\n')).toMatch(/"goal.depth" must be 1, 2 or 3/);
+      // As a mate-in-1 defence there is nothing to stop, which the validator reports.
+      expect(errorsFor({ ...defend2, goal: { kind: 'defend', depth: 1 } }).join('\n')).toMatch(/no mate-in-1 threat/);
+    });
+  });
 });
+

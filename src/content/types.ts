@@ -44,8 +44,11 @@ export type MoveGoal =
   | { kind: 'check' }
   /** The move must checkmate. */
   | { kind: 'checkmate' }
-  /** Black threatens mate: the move must leave Black without a checkmate (or stalemate) in one. */
-  | { kind: 'defend' };
+  /**
+   * Black threatens mate in `depth` moves (1 to 3, default 1): the move must leave Black without a forced
+   * checkmate (or stalemate) within `depth` Black moves.
+   */
+  | { kind: 'defend'; depth?: number };
 
 /** Make one move that satisfies `goal`. `solution` documents a correct answer and is verified in tests. */
 export type MoveExercise = PositionSpec & {
@@ -80,9 +83,15 @@ export type CombinationExercise = PositionSpec & {
   type: 'combination';
   prompt: string;
   goal: 'checkmate' | 'win-material';
-  /** Number of Red moves: 2 or 3. */
+  /** Number of Red moves: 2 to 4 (win-material: 2 or 3). */
   moves: number;
   solution: { from: string; to: string }[];
+  /**
+   * Every winning first move (required when `moves` ≥ 4). Listing all winning first moves of a mate in 4
+   * takes the engine seconds, too slow for a tap on a phone, so they are computed once at authoring time;
+   * `npm run content:deep` re-proves the list is complete. Later moves are always judged by the engine.
+   */
+  firstMoves?: { from: string; to: string }[];
   /** Optional i18n hint per Red move (index 0 = first Red move). */
   hints?: string[];
   explanation?: string;
@@ -98,7 +107,7 @@ export interface Lesson {
 }
 
 /** A track is a separate path: its first lesson is open from the start, then lessons unlock in order. */
-export type Track = 'basics' | 'intermediate';
+export type Track = 'basics' | 'intermediate' | 'advanced' | 'expert' | 'master';
 
 export interface Unit {
   id: string;

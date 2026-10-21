@@ -1,0 +1,493 @@
+{
+  "id": "u11",
+  "title": "u11.title",
+  "description": "u11.desc",
+  "track": "advanced",
+  "lessons": [
+    {
+      "id": "u11l1",
+      "title": "u11l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "d0": "A",
+            "f0": "A",
+            "d2": "K",
+            "f3": "R",
+            "e4": "C",
+            "g5": "p",
+            "i5": "R",
+            "e6": "N",
+            "f7": "k",
+            "h7": "r",
+            "f9": "a"
+          },
+          "turn": "black",
+          "text": "u11l1.e1"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a4": "N",
+            "a6": "c",
+            "b8": "c",
+            "b9": "R",
+            "c4": "B",
+            "c6": "P",
+            "e6": "p",
+            "e8": "a",
+            "e9": "C",
+            "f0": "K",
+            "f7": "a",
+            "f9": "k",
+            "h8": "R"
+          },
+          "prompt": "u11l1.p",
+          "goal": "checkmate",
+          "moves": 2,
+          "solution": [
+            {
+              "from": "e9",
+              "to": "e6"
+            },
+            {
+              "from": "e8",
+              "to": "d9"
+            },
+            {
+              "from": "b9",
+              "to": "d9"
+            }
+          ],
+          "explanation": "u11l1.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "b5": "r",
+            "b8": "R",
+            "c3": "P",
+            "c4": "c",
+            "c5": "b",
+            "c9": "b",
+            "d1": "K",
+            "e3": "R",
+            "e4": "N",
+            "e7": "k",
+            "f1": "c",
+            "f9": "a",
+            "i2": "B"
+          },
+          "prompt": "u11l1.p",
+          "goal": "checkmate",
+          "moves": 2,
+          "solution": [
+            {
+              "from": "e4",
+              "to": "g5"
+            },
+            {
+              "from": "c4",
+              "to": "e4"
+            },
+            {
+              "from": "e3",
+              "to": "e4"
+            }
+          ],
+          "explanation": "u11l1.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a4": "r",
+            "a7": "b",
+            "b5": "R",
+            "c4": "B",
+            "d2": "A",
+            "d3": "R",
+            "d5": "P",
+            "d8": "N",
+            "e1": "K",
+            "e4": "C",
+            "e8": "k",
+            "e9": "r",
+            "f9": "a",
+            "g5": "b",
+            "i6": "p"
+          },
+          "prompt": "u11l1.p",
+          "goal": "checkmate",
+          "moves": 2,
+          "solution": [
+            {
+              "from": "d8",
+              "to": "e6"
+            },
+            {
+              "from": "g5",
+              "to": "e7"
+            },
+            {
+              "from": "b5",
+              "to": "b8"
+            }
+          ],
+          "explanation": "u11l1.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a9": "N",
+            "b7": "P",
+            "c9": "b",
+            "d1": "K",
+            "d7": "N",
+            "f3": "P",
+            "f4": "C",
+            "f7": "k",
+            "g4": "B",
+            "h7": "n"
+          },
+          "prompt": "u11l1.p",
+          "goal": "checkmate",
+          "moves": 2,
+          "solution": [
+            {
+              "from": "d7",
+              "to": "f6"
+            },
+            {
+              "from": "f7",
+              "to": "e7"
+            },
+            {
+              "from": "a9",
+              "to": "c8"
+            }
+          ],
+          "explanation": "u11l1.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a8": "C",
+            "b3": "N",
+            "c2": "r",
+            "c3": "p",
+            "d0": "K",
+            "d2": "A",
+            "d7": "P",
+            "f2": "A",
+            "f8": "k",
+            "i6": "R"
+          },
+          "prompt": "u11l1.p",
+          "goal": "checkmate",
+          "moves": 2,
+          "solution": [
+            {
+              "from": "d7",
+              "to": "d8"
+            },
+            {
+              "from": "f8",
+              "to": "f9"
+            },
+            {
+              "from": "i6",
+              "to": "i9"
+            }
+          ],
+          "explanation": "u11l1.x"
+        }
+      ]
+    },
+    {
+      "id": "u11l2",
+      "title": "u11l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "f1": "K",
+            "e2": "B",
+            "e3": "R",
+            "i4": "C",
+            "c5": "b",
+            "i5": "r",
+            "d7": "a",
+            "g7": "N",
+            "i7": "b",
+            "h8": "R",
+            "d9": "k"
+          },
+          "text": "u11l2.e1"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "c5": "b",
+            "d7": "a",
+            "d9": "k",
+            "e2": "B",
+            "e3": "R",
+            "f1": "K",
+            "g7": "N",
+            "h8": "R",
+            "i4": "C",
+            "i5": "r",
+            "i7": "b"
+          },
+          "prompt": "u11l2.p",
+          "goal": "checkmate",
+          "moves": 3,
+          "solution": [
+            {
+              "from": "e3",
+              "to": "e9"
+            },
+            {
+              "from": "d9",
+              "to": "e9"
+            },
+            {
+              "from": "h8",
+              "to": "h9"
+            },
+            {
+              "from": "i7",
+              "to": "g9"
+            },
+            {
+              "from": "h9",
+              "to": "g9"
+            }
+          ],
+          "explanation": "u11l2.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "a7": "C",
+            "b3": "n",
+            "c6": "N",
+            "c8": "R",
+            "d6": "r",
+            "d8": "c",
+            "e0": "K",
+            "e1": "A",
+            "e7": "P",
+            "f0": "A",
+            "f7": "P",
+            "f9": "k"
+          },
+          "prompt": "u11l2.p",
+          "goal": "checkmate",
+          "moves": 3,
+          "solution": [
+            {
+              "from": "c6",
+              "to": "d8"
+            },
+            {
+              "from": "d6",
+              "to": "d8"
+            },
+            {
+              "from": "c8",
+              "to": "c9"
+            },
+            {
+              "from": "d8",
+              "to": "d9"
+            },
+            {
+              "from": "c9",
+              "to": "d9"
+            }
+          ],
+          "explanation": "u11l2.x"
+        },
+        {
+          "type": "combination",
+          "pieces": {
+            "c0": "c",
+            "c7": "P",
+            "c9": "N",
+            "d1": "K",
+            "e1": "n",
+            "e5": "p",
+            "e9": "k",
+            "f7": "a",
+            "f8": "R",
+            "g5": "b",
+            "g8": "P",
+            "g9": "b",
+            "i9": "N"
+          },
+          "prompt": "u11l2.p",
+          "goal": "checkmate",
+          "moves": 3,
+          "solution": [
+            {
+              "from": "f8",
+              "to": "f9"
+            },
+            {
+              "from": "e9",
+              "to": "f9"
+            },
+            {
+              "from": "g8",
+              "to": "g9"
+            },
+            {
+              "from": "f9",
+              "to": "e9"
+            },
+            {
+              "from": "i9",
+              "to": "g8"
+            }
+          ],
+          "explanation": "u11l2.x"
+        }
+      ]
+    },
+    {
+      "id": "u11l3",
+      "title": "u11l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "a0": "r",
+            "c0": "B",
+            "d0": "p",
+            "f0": "A",
+            "d1": "K",
+            "d2": "A",
+            "d3": "n",
+            "e3": "p",
+            "f3": "N",
+            "i5": "N",
+            "d9": "k",
+            "f9": "a"
+          },
+          "text": "u11l3.e1"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "a0": "r",
+            "c0": "B",
+            "d0": "p",
+            "d1": "K",
+            "d2": "A",
+            "d3": "n",
+            "d9": "k",
+            "e3": "p",
+            "f0": "A",
+            "f3": "N",
+            "f9": "a",
+            "i5": "N"
+          },
+          "prompt": "u11l3.p",
+          "goal": {
+            "kind": "defend",
+            "depth": 2
+          },
+          "solution": {
+            "from": "d1",
+            "to": "d0"
+          },
+          "explanation": "u11l3.x"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "a7": "b",
+            "b2": "p",
+            "b6": "N",
+            "c1": "c",
+            "c9": "b",
+            "d0": "A",
+            "d7": "a",
+            "d8": "k",
+            "e1": "K",
+            "e5": "C",
+            "f4": "n",
+            "f7": "a",
+            "g2": "r",
+            "h5": "r"
+          },
+          "prompt": "u11l3.p",
+          "goal": {
+            "kind": "defend",
+            "depth": 2
+          },
+          "solution": {
+            "from": "e1",
+            "to": "d1"
+          },
+          "explanation": "u11l3.x"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "a0": "R",
+            "a6": "N",
+            "b4": "n",
+            "c0": "B",
+            "c5": "b",
+            "d7": "a",
+            "e2": "K",
+            "f0": "r",
+            "f5": "n",
+            "f7": "a",
+            "f9": "k",
+            "h3": "r"
+          },
+          "prompt": "u11l3.p",
+          "goal": {
+            "kind": "defend",
+            "depth": 2
+          },
+          "solution": {
+            "from": "a0",
+            "to": "a3"
+          },
+          "explanation": "u11l3.x"
+        },
+        {
+          "type": "move",
+          "pieces": {
+            "a1": "p",
+            "b0": "n",
+            "b3": "p",
+            "b6": "n",
+            "c3": "P",
+            "d8": "P",
+            "e9": "k",
+            "f0": "C",
+            "f2": "K",
+            "g4": "r",
+            "g5": "b"
+          },
+          "prompt": "u11l3.p",
+          "goal": {
+            "kind": "defend",
+            "depth": 2
+          },
+          "solution": {
+            "from": "d8",
+            "to": "d9"
+          },
+          "explanation": "u11l3.x"
+        }
+      ]
+    }
+  ]
+}

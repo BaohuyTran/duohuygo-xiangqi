@@ -286,3 +286,27 @@ behind the existing storage interfaces so the app still works fully offline and 
 
 - 2026-10-21: branch `shorter-basics-skip`. Lint, build, 389 tests, `ui:check` at 360, 320 and 740×360 pass;
   the jump dialog, a failed test and the return to Home were checked in Chromium.
+
+---
+
+## Task 9 — Advanced, Expert and Master levels
+
+**Status:** done · requested by the user on 2026-10-21
+
+**Goal:** Three more tracks above Intermediate, each open from the start like Intermediate, with jump tests and
+the Home "jump to" banner working for them.
+
+**Acceptance criteria**
+
+- [x] Advanced (u11–u12), Expert (u13–u14) and Master (u15): 14 lessons, 76 exercises, en + vi, original
+      engine-proven positions (seeded random search, kept only when the solver proves the pattern).
+- [x] Combinations up to mate in 4 and `defend` goals against mate in 2 and 3; moves in long combinations are
+      judged quickly enough for a phone (only the played move is searched; mate-in-4 first moves are listed).
+- [x] Quick validation stays in the normal test run; `npm run content:deep` proves the mate-in-4 lists.
+- [x] No changes to `src/engine`.
+
+**Notes**
+
+- 2026-10-21: committed directly to main. Searches that yielded too few positions changed two lessons:
+  no mate-in-4 sacrifices were found, so Expert has "The quiet follow-up"; too few mate-in-3 defences, so the
+  Master unit ends with a mixed "Master challenge" (one mate-in-3 defence and three mates in 4).

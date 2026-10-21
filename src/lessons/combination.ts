@@ -2,7 +2,7 @@
 // defence). Everything is decided by the engine; the stored line is only the main line and the
 // source of hints. Mirrors src/puzzles/logic.ts, which does the same for puzzles.
 import type { CombinationExercise } from '../content/types';
-import { forcedWinMoves, legalMoves, makeMove, materialBalance, moveScore, searchScore, type Move, type Position } from '../engine';
+import { forcedWinMoves, hasForcedWin, legalMoves, makeMove, materialBalance, moveScore, searchScore, type Move, type Position } from '../engine';
 import { sameMove, toMove, WIN_MATERIAL_THRESHOLD } from '../puzzles/logic';
 import { legality, positionOf } from './answers';
 
@@ -20,26 +20,56 @@ export function combinationGain(ex: CombinationExercise, pos: Position, move: Mo
   return moveScore(pos, move, combinationDepth(ex) - step) - materialBalance(start.board, 'red');
 }
 
+/**
+ * Does the legal Red `move` at line index `step` keep the combination winning? Only this move's
+ * subtree is searched (a mate in 4 would take seconds to list every winning move), so the player
+ * gets an answer quickly even in long combinations.
+ */
+export function isWinningMove(ex: CombinationExercise, pos: Position, step: number, move: Move): boolean {
+  if (step === 0 && ex.firstMoves) return ex.firstMoves.some((m) => sameMove(toMove(m), move));
+  return searchWinningMove(ex, pos, step, move);
+}
+
+/** isWinningMove decided by the engine alone, ignoring a stored `firstMoves` list. */
+export function searchWinningMove(ex: CombinationExercise, pos: Position, step: number, move: Move): boolean {
+  if (ex.goal === 'win-material') return combinationGain(ex, pos, move, step) >= WIN_MATERIAL_THRESHOLD;
+  const after = makeMove(pos, move);
+  const replies = legalMoves(after);
+  if (replies.length === 0) return true; // checkmate (or stalemate, also a win)
+  const left = redMovesLeft(ex, step) - 1;
+  return left >= 1 && replies.every((r) => hasForcedWin(makeMove(after, r), left));
+}
+
 /** Every Red move at line index `step` from `pos` that keeps the combination winning. */
 export function winningMoves(ex: CombinationExercise, pos: Position, step: number): Move[] {
-  if (ex.goal === 'checkmate') return forcedWinMoves(pos, redMovesLeft(ex, step));
-  return legalMoves(pos).filter((m) => combinationGain(ex, pos, m, step) >= WIN_MATERIAL_THRESHOLD);
+  return legalMoves(pos).filter((m) => isWinningMove(ex, pos, step, m));
 }
 
 export function checkCombinationMove(ex: CombinationExercise, step: number, pos: Position, move: Move): CombinationVerdict {
   const illegal = legality(pos, move);
   if (illegal) return illegal === 'unsafe' ? 'unsafe' : 'illegal';
-  return winningMoves(ex, pos, step).some((m) => sameMove(m, move)) ? 'correct' : 'wrong';
+  return isWinningMove(ex, pos, step, move) ? 'correct' : 'wrong';
 }
 
-/** Black's best replies at line index `step` (odd): fewest winning answers, or the lowest Red score. */
+/**
+ * Black's best replies at line index `step` (odd). Win-material: the lowest Red search score. Mate with
+ * 1–2 Red moves left after the reply: the replies leaving Red the fewest winning answers. With 3 or more
+ * left (long combinations), counting answers would take seconds, so the rule is "longest resistance":
+ * the replies after which Red has no shorter mate; when every reply allows one, all of them.
+ */
 export function bestCombinationReplies(ex: CombinationExercise, pos: Position, step: number): Move[] {
+  const replies = legalMoves(pos);
+  const left = redMovesLeft(ex, step + 1);
+  if (ex.goal === 'checkmate' && left >= 3) {
+    const resisting = replies.filter((r) => !hasForcedWin(makeMove(pos, r), left - 1));
+    return resisting.length > 0 ? resisting : replies;
+  }
   const score = (r: Move): number => {
     const after = makeMove(pos, r);
     if (ex.goal === 'win-material') return searchScore(after, combinationDepth(ex) - step - 1);
-    return forcedWinMoves(after, redMovesLeft(ex, step + 1)).length;
+    return forcedWinMoves(after, left).length;
   };
-  const scored = legalMoves(pos).map((r) => ({ r, s: score(r) }));
+  const scored = replies.map((r) => ({ r, s: score(r) }));
   const best = Math.min(...scored.map((x) => x.s));
   return scored.filter((x) => x.s === best).map((x) => x.r);
 }

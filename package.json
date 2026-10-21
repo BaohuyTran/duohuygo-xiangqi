@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "content:deep": "DEEP_CONTENT=1 vitest run src/content/content.test.ts",
     "lint": "oxlint",
     "typecheck": "tsc -b",
     "icons": "node scripts/generate-icons.mjs",

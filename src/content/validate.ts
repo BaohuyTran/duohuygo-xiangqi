@@ -23,22 +23,28 @@ import {
   bestCombinationReplies,
   checkCombinationMove,
   combinationDone,
-  winningMoves,
+  isWinningMove,
+  searchWinningMove,
 } from '../lessons/combination';
-import { sameMove } from '../puzzles/logic';
+import { sameMove, toMove } from '../puzzles/logic';
 import type { CombinationExercise, Exercise, Unit } from './types';
 
 const REGIONS = ['red-palace', 'black-palace', 'red-side', 'black-side'];
 const EXERCISE_TYPES = ['learn', 'move', 'select-squares', 'capture', 'combination'];
 const GOALS = ['reach', 'any', 'check', 'checkmate', 'defend'];
-const TRACKS = ['basics', 'intermediate'];
+const TRACKS = ['basics', 'intermediate', 'advanced', 'expert', 'master'];
 
 type Obj = Record<string, unknown>;
 const isObj = (v: unknown): v is Obj => typeof v === 'object' && v !== null && !Array.isArray(v);
 const isSquareName = (v: unknown): v is string => typeof v === 'string' && /^[a-i][0-9]$/.test(v);
 
 /** Returns a list of human-readable problems; empty means the content is valid. */
-export function validateUnits(input: unknown): string[] {
+/** `deep`: also prove that every stored `firstMoves` list is complete (slow; `npm run content:deep`). */
+export interface ValidateOptions {
+  deep?: boolean;
+}
+
+export function validateUnits(input: unknown, options: ValidateOptions = {}): string[] {
   const errors: string[] = [];
   const ids = new Set<string>();
   const err = (where: string, msg: string) => errors.push(`${where}: ${msg}`);
@@ -82,14 +88,14 @@ export function validateUnits(input: unknown): string[] {
       }
       lesson.exercises.forEach((ex, ei) => {
         const ew = `${String(lesson.id)}/exercise[${ei}]`;
-        for (const problem of validateExercise(ex, checkKey.bind(null, ew))) err(ew, problem);
+        for (const problem of validateExercise(ex, checkKey.bind(null, ew), options)) err(ew, problem);
       });
     });
   });
   return errors;
 }
 
-function validateExercise(ex: unknown, checkKey: (field: string, value: unknown, optional?: boolean) => void): string[] {
+function validateExercise(ex: unknown, checkKey: (field: string, value: unknown, optional?: boolean) => void, options: ValidateOptions): string[] {
   const problems: string[] = [];
   if (!isObj(ex)) return ['must be an object'];
   if (typeof ex.type !== 'string' || !EXERCISE_TYPES.includes(ex.type)) return [`unknown type ${JSON.stringify(ex.type)}`];
@@ -195,8 +201,13 @@ function validateExercise(ex: unknown, checkKey: (field: string, value: unknown,
         problems.push(`solution ${squareName(solution.from)}-${squareName(solution.to)} is not accepted (${verdict})`);
       }
       if (goal.kind === 'defend') {
-        // There must be a real threat: Black would mate in one if it were Black's move.
-        if (!hasForcedWin({ ...pos, turn: 'black' }, 1)) problems.push('"defend": Black has no mate-in-one threat to stop');
+        const depth = goal.depth ?? 1;
+        if (typeof depth !== 'number' || !Number.isInteger(depth) || depth < 1 || depth > 3) {
+          problems.push('"goal.depth" must be 1, 2 or 3');
+          break;
+        }
+        // There must be a real threat: Black would force mate in `depth` if it were Black's move.
+        if (!hasForcedWin({ ...pos, turn: 'black' }, depth)) problems.push(`"defend": Black has no mate-in-${depth} threat to stop`);
         if (legalMoves(pos).every((m) => checkMove(ex as never, m) === 'correct')) problems.push('"defend": every move stops the threat');
       }
       if (goal.kind === 'checkmate') {
@@ -225,15 +236,23 @@ function validateExercise(ex: unknown, checkKey: (field: string, value: unknown,
     case 'combination':
       checkKey('prompt', ex.prompt);
       checkKey('explanation', ex.explanation, true);
-      problems.push(...validateCombination(ex, pos, checkKey));
+      problems.push(...validateCombination(ex, pos, checkKey, options));
       break;
   }
   return problems;
 }
 
-function validateCombination(ex: Obj, pos: Position, checkKey: (field: string, value: unknown, optional?: boolean) => void): string[] {
+function validateCombination(
+  ex: Obj,
+  pos: Position,
+  checkKey: (field: string, value: unknown, optional?: boolean) => void,
+  options: ValidateOptions,
+): string[] {
   if (ex.goal !== 'checkmate' && ex.goal !== 'win-material') return ['"goal" must be "checkmate" or "win-material"'];
-  if (ex.moves !== 2 && ex.moves !== 3) return ['"moves" must be 2 or 3'];
+  const maxMoves = ex.goal === 'checkmate' ? 4 : 3;
+  if (typeof ex.moves !== 'number' || !Number.isInteger(ex.moves) || ex.moves < 2 || ex.moves > maxMoves) {
+    return [`"moves" must be 2 to ${maxMoves}`];
+  }
   const combo = ex as unknown as CombinationExercise;
   const line = ex.solution;
   if (!Array.isArray(line) || !line.every((s) => isObj(s) && isSquareName(s.from) && isSquareName(s.to))) {
@@ -247,11 +266,34 @@ function validateCombination(ex: Obj, pos: Position, checkKey: (field: string, v
     ex.hints.forEach((h, i) => checkKey(`hints[${i}]`, h));
   }
   const problems: string[] = [];
+  if (combo.moves >= 4 && ex.firstMoves === undefined) return ['"firstMoves" is required when "moves" is 4'];
+  if (ex.firstMoves !== undefined) {
+    const first = ex.firstMoves;
+    if (!Array.isArray(first) || first.length === 0 || !first.every((s) => isObj(s) && isSquareName(s.from) && isSquareName(s.to))) {
+      return ['"firstMoves" must be a non-empty list of { "from": square, "to": square }'];
+    }
+    for (const m of first as { from: string; to: string }[]) {
+      const move = { from: parseSquare(m.from), to: parseSquare(m.to) };
+      if (!legalMoves(pos).some((l) => sameMove(l, move))) return [`firstMoves ${m.from}-${m.to} is not legal`];
+      // Proving a first move of a mate in 4 can take a minute on a full board: deep mode only. The quick
+      // checks below still play the stored main line against the best defence.
+      if (options.deep && !searchWinningMove(combo, pos, 0, move)) problems.push(`firstMoves ${m.from}-${m.to} does not win`);
+    }
+    if (!first.some((m) => isObj(m) && m.from === line[0]?.from && m.to === line[0]?.to)) {
+      problems.push('"firstMoves" must include the first move of "solution"');
+    }
+    if (options.deep) {
+      // Completeness: no other first move wins (slow for a mate in 4; run with `npm run content:deep`).
+      const missing = legalMoves(pos).filter((m) => !first.some((f) => sameMove(toMove(f as never), m)) && searchWinningMove(combo, pos, 0, m));
+      for (const m of missing) problems.push(`firstMoves is missing the winning move ${squareName(m.from)}-${squareName(m.to)}`);
+    }
+  }
   if (combo.goal === 'checkmate') {
-    if (!hasForcedWin(pos, combo.moves)) return [`Red has no forced mate in ${combo.moves}`];
+    // With firstMoves the deep check proves the mate (each listed move wins); otherwise prove it here.
+    if ((ex.firstMoves === undefined || options.deep) && !hasForcedWin(pos, combo.moves)) return [`Red has no forced mate in ${combo.moves}`];
     if (hasForcedWin(pos, combo.moves - 1)) problems.push(`Red already mates in ${combo.moves - 1}; lower "moves"`);
   }
-  if (winningMoves(combo, pos, 0).length === legalMoves(pos).length) problems.push('every first move wins, so nothing is tested');
+  if (legalMoves(pos).every((m) => isWinningMove(combo, pos, 0, m))) problems.push('every first move wins, so nothing is tested');
 
   // Play the stored line: each Red move must be accepted, each Black reply a best defence.
   let cur = pos;

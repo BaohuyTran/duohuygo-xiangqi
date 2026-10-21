@@ -31,9 +31,30 @@ export const messages = {
     en: 'Classic mating patterns, tactics and combinations. Open from the start.',
     vi: 'Các thế sát cục kinh điển, chiến thuật và đòn phối hợp. Mở sẵn từ đầu.',
   },
+  'track.advanced.title': { en: 'Advanced', vi: 'Nâng cao' },
+  'track.advanced.desc': {
+    en: 'Discovered attacks, decoys, mate in 3 and stopping a mate in 2.',
+    vi: 'Đòn chiếu mở, đòn dụ, chiếu bí sau 3 nước và chặn đòn chiếu bí sau 2 nước.',
+  },
+  'track.expert.title': { en: 'Expert', vi: 'Chuyên gia' },
+  'track.expert.desc': {
+    en: 'Quiet moves, mate in 4 and only-move defence.',
+    vi: 'Nước êm, chiếu bí sau 4 nước và phòng thủ bằng nước duy nhất.',
+  },
+  'track.master.title': { en: 'Master', vi: 'Kiện tướng' },
+  'track.master.desc': {
+    en: 'Full, realistic positions: long combinations and defending against mate in 3.',
+    vi: 'Thế cờ đầy đủ như ván thật: đòn phối hợp dài và phòng thủ trước đòn chiếu bí sau 3 nước.',
+  },
   // Home "jump to this level" banner, one pair per track after basics (see jumpBannerTrack).
   'track.intermediate.jumpTitle': { en: 'Already know the rules?', vi: 'Đã biết luật chơi?' },
   'track.intermediate.jumpBody': { en: 'Jump to the Intermediate course.', vi: 'Chuyển tới khóa Trung cấp.' },
+  'track.advanced.jumpTitle': { en: 'Ready for more?', vi: 'Sẵn sàng thử thách hơn?' },
+  'track.advanced.jumpBody': { en: 'Jump to the Advanced course.', vi: 'Chuyển tới khóa Nâng cao.' },
+  'track.expert.jumpTitle': { en: 'Strong player already?', vi: 'Bạn đã chơi tốt?' },
+  'track.expert.jumpBody': { en: 'Jump to the Expert course.', vi: 'Chuyển tới khóa Chuyên gia.' },
+  'track.master.jumpTitle': { en: 'Looking for a real challenge?', vi: 'Muốn thử thách thật sự?' },
+  'track.master.jumpBody': { en: 'Jump to the Master course.', vi: 'Chuyển tới khóa Kiện tướng.' },
   'jump.here': { en: 'Jump here', vi: 'Nhảy tới đây' },
   'jump.dialog.title': { en: 'Jump to “{lesson}”?', vi: 'Nhảy tới “{lesson}”?' },
   'jump.dialog.body': {
@@ -111,6 +132,7 @@ export const messages = {
   'lesson.type.combination': { en: 'Combination', vi: 'Đòn phối hợp' },
   'combination.movesLeft': { en: 'Red to move · moves left: {n}', vi: 'Đỏ đi · còn {n} nước' },
   'combination.opponent': { en: 'Black is answering…', vi: 'Đen đang trả lời…' },
+  'combination.checking': { en: 'Checking your move…', vi: 'Đang kiểm tra nước đi…' },
   'combination.done': { en: 'Combination complete', vi: 'Hoàn thành đòn phối hợp' },
   'combination.hint': { en: 'Show a hint', vi: 'Xem gợi ý' },
   'combination.hintPiece': { en: 'Move the marked piece.', vi: 'Hãy đi quân được đánh dấu.' },
@@ -739,6 +761,202 @@ export const messages = {
   'u10l3.x1': {
     en: 'Every move was forcing, so Black never had time to defend.',
     vi: 'Nước nào cũng ép buộc, nên Đen không bao giờ có thời gian phòng thủ.',
+  },
+
+  // ---------- Advanced track ----------
+  'u11.title': { en: 'Hidden attacks', vi: 'Đòn đánh ẩn' },
+  'u11.desc': {
+    en: 'Discovered checks, decoy sacrifices and stopping a mate in 2.',
+    vi: 'Chiếu mở, thí quân dụ và chặn đòn chiếu bí sau 2 nước.',
+  },
+  'u11l1.title': { en: 'Discovered check', vi: 'Chiếu mở' },
+  'u11l1.e1': {
+    en: 'Discovered check: one piece moves, and a different piece gives the check. It can step out of a Chariot’s or Cannon’s line, or step in as a Cannon’s screen. The piece that moved is free to make its own threat.',
+    vi: 'Chiếu mở: một quân di chuyển, và một quân khác chiếu Tướng. Quân đó có thể rời khỏi đường của Xe hay Pháo, hoặc bước vào làm ngòi cho Pháo. Quân vừa đi được tự do tạo đe dọa riêng.',
+  },
+  'u11l1.p': { en: 'Mate in 2. Start with a discovered check.', vi: 'Chiếu bí sau 2 nước. Hãy bắt đầu bằng một nước chiếu mở.' },
+  'u11l1.x': {
+    en: 'The check came from a piece that did not move, so Black had to answer it while your other piece got into position.',
+    vi: 'Nước chiếu đến từ một quân không di chuyển, nên Đen phải đỡ nó trong khi quân kia của bạn vào vị trí.',
+  },
+  'u11l2.title': { en: 'Decoy', vi: 'Đòn dụ' },
+  'u11l2.e1': {
+    en: 'A decoy sacrifice lures a black piece, or the General itself, onto a bad point: there it blocks its own General or walks into a mating net. In the next position Red’s first move offers a piece. Look for the point you want the bait taken on.',
+    vi: 'Thí quân dụ là nhử một quân Đen, hoặc chính Tướng, vào một điểm xấu: ở đó nó chặn đường Tướng nhà hoặc đi vào lưới chiếu bí. Ở thế tiếp theo, nước đầu của Đỏ dâng một quân. Hãy tìm điểm mà bạn muốn Đen ăn mồi.',
+  },
+  'u11l2.p': { en: 'Mate in 3. The first move offers a piece.', vi: 'Chiếu bí sau 3 nước. Nước đầu tiên dâng một quân.' },
+  'u11l2.x': {
+    en: 'Taking the bait was Black’s best try, but afterwards a black piece stood on the wrong point.',
+    vi: 'Ăn mồi là cách chống đỡ tốt nhất của Đen, nhưng sau đó một quân Đen đứng sai chỗ.',
+  },
+  'u11l3.title': { en: 'Stop the mate in 2', vi: 'Chặn đòn chiếu bí 2 nước' },
+  'u11l3.e1': {
+    en: 'Look one move deeper. Black threatens a forced mate in two moves, so a move that only stops the first check may not be enough. List Black’s checks and captures, find the key point or piece, then protect it.',
+    vi: 'Hãy nhìn sâu thêm một nước. Đen dọa chiếu bí bắt buộc sau hai nước, nên chỉ chặn nước chiếu đầu có thể chưa đủ. Hãy liệt kê các nước chiếu và ăn quân của Đen, tìm điểm hoặc quân then chốt, rồi bảo vệ nó.',
+  },
+  'u11l3.p': {
+    en: 'Black threatens mate in 2. Find a move that stops it.',
+    vi: 'Đen dọa chiếu bí sau 2 nước. Hãy tìm nước đi để chặn.',
+  },
+  'u11l3.x': {
+    en: 'Threat stopped: after your move Black has no forced mate in 2.',
+    vi: 'Đã chặn được: sau nước của bạn, Đen không còn đòn chiếu bí bắt buộc sau 2 nước.',
+  },
+
+  'u12.title': { en: 'Mate in 3', vi: 'Chiếu bí sau 3 nước' },
+  'u12.desc': {
+    en: 'Three-move attacks: keep checking, finish with Horse or Cannon, and start quietly.',
+    vi: 'Đòn tấn công ba nước: chiếu liên tục, kết thúc bằng Mã hoặc Pháo, và khởi đầu bằng nước êm.',
+  },
+  'u12l1.title': { en: 'Check, check, mate', vi: 'Chiếu liên hoàn' },
+  'u12l1.e1': {
+    en: 'The simplest long attack is a chain of checks: each one leaves the General fewer points, until none are left. Here three checks in a row ended the game.',
+    vi: 'Đòn tấn công dài đơn giản nhất là một chuỗi nước chiếu: mỗi nước làm Tướng còn ít điểm hơn, cho đến khi hết đường. Ở đây ba nước chiếu liên tiếp đã kết thúc ván cờ.',
+  },
+  'u12l1.p': { en: 'Mate in 3. Every move is a check.', vi: 'Chiếu bí sau 3 nước. Nước nào cũng là nước chiếu.' },
+  'u12l1.x': {
+    en: 'Each check left Black fewer choices, until there were none.',
+    vi: 'Mỗi nước chiếu khiến Đen ít lựa chọn hơn, cho đến khi không còn lựa chọn nào.',
+  },
+  'u12l2.title': { en: 'Horse and Cannon finish', vi: 'Mã Pháo kết thúc' },
+  'u12l2.e1': {
+    en: 'Chariots often clear the way, but the Horse and the Cannon deliver many final blows: they attack from angles, and over screens, that defenders cannot easily cover.',
+    vi: 'Xe thường mở đường, nhưng Mã và Pháo hay ra đòn kết thúc: chúng tấn công từ những góc, và qua ngòi, mà quân phòng thủ khó che chắn.',
+  },
+  'u12l2.p': {
+    en: 'Mate in 3. The Horse or the Cannon deals the final blow.',
+    vi: 'Chiếu bí sau 3 nước. Mã hoặc Pháo ra đòn cuối cùng.',
+  },
+  'u12l2.x': {
+    en: 'The last check came from an angle Black could not block.',
+    vi: 'Nước chiếu cuối đến từ một hướng mà Đen không thể chặn.',
+  },
+  'u12l3.title': { en: 'The quiet start', vi: 'Khởi đầu bằng nước êm' },
+  'u12l3.e1': {
+    en: 'Sometimes the strongest first move is not a check. A quiet move can take away an escape point or bring one more piece into the attack, and Black has no time to stop both threats.',
+    vi: 'Đôi khi nước đầu mạnh nhất không phải nước chiếu. Một nước êm có thể lấy mất điểm thoát hoặc đưa thêm một quân vào tấn công, và Đen không kịp chặn cả hai mối đe dọa.',
+  },
+  'u12l3.p': { en: 'Mate in 3. The first move is not a check.', vi: 'Chiếu bí sau 3 nước. Nước đầu tiên không phải nước chiếu.' },
+  'u12l3.x': {
+    en: 'The quiet move created a threat Black could not answer in time.',
+    vi: 'Nước êm tạo ra mối đe dọa mà Đen không kịp đối phó.',
+  },
+
+  // ---------- Expert track ----------
+  'u13.title': { en: 'Expert technique', vi: 'Kỹ thuật chuyên gia' },
+  'u13.desc': {
+    en: 'Only-move defence, quiet moves on a full board, and discovered attacks over three moves.',
+    vi: 'Phòng thủ bằng nước duy nhất, nước êm trên bàn cờ đầy, và chiếu mở trong ba nước.',
+  },
+  'u13l1.title': { en: 'The only move', vi: 'Nước duy nhất' },
+  'u13l1.e1': {
+    en: 'One move often decides the game. In these positions Black threatens mate in 2 and exactly one move saves you: every other move loses.',
+    vi: 'Một nước thường quyết định ván cờ. Ở những thế này Đen dọa chiếu bí sau 2 nước và chỉ đúng một nước cứu được bạn: mọi nước khác đều thua.',
+  },
+  'u13l1.p': {
+    en: 'Black threatens mate in 2. Only one move saves you.',
+    vi: 'Đen dọa chiếu bí sau 2 nước. Chỉ một nước cứu được bạn.',
+  },
+  'u13l1.x': { en: 'That was the only move. Well defended!', vi: 'Đó là nước duy nhất. Phòng thủ rất tốt!' },
+  'u13l2.title': { en: 'Quiet moves, full board', vi: 'Nước êm trên bàn cờ đầy' },
+  'u13l2.e1': {
+    en: 'With many pieces on the board, checks are easy to find but often lead nowhere. Look for the quiet move that adds an attacker or removes a defender.',
+    vi: 'Khi bàn cờ còn nhiều quân, nước chiếu dễ tìm nhưng thường không đi đến đâu. Hãy tìm nước êm thêm một quân tấn công hoặc loại bỏ một quân phòng thủ.',
+  },
+  'u13l2.p': {
+    en: 'Mate in 3 on a full board. Not every move is a check.',
+    vi: 'Chiếu bí sau 3 nước trên bàn cờ đầy. Không phải nước nào cũng là nước chiếu.',
+  },
+  'u13l2.x': {
+    en: 'A quiet move in the middle of the attack made the difference.',
+    vi: 'Một nước êm giữa đòn tấn công đã tạo nên khác biệt.',
+  },
+  'u13l3.title': { en: 'Discovered attack in 3', vi: 'Chiếu mở trong 3 nước' },
+  'u13l3.e1': {
+    en: 'A discovered check is even stronger in a longer attack: while Black answers the check, the piece that moved takes up its best point for the next blow.',
+    vi: 'Chiếu mở còn mạnh hơn trong đòn tấn công dài: trong lúc Đen đỡ nước chiếu, quân vừa đi chiếm điểm tốt nhất cho đòn tiếp theo.',
+  },
+  'u13l3.p': { en: 'Mate in 3. Start with a discovered check.', vi: 'Chiếu bí sau 3 nước. Hãy bắt đầu bằng một nước chiếu mở.' },
+  'u13l3.x': {
+    en: 'The discovered check gained a free move for your attack.',
+    vi: 'Nước chiếu mở giúp đòn tấn công có thêm một nước miễn phí.',
+  },
+
+  'u14.title': { en: 'Mate in 4', vi: 'Chiếu bí sau 4 nước' },
+  'u14.desc': {
+    en: 'Four-move combinations against the best defence.',
+    vi: 'Đòn phối hợp bốn nước trước cách phòng thủ tốt nhất.',
+  },
+  'u14l1.title': { en: 'Mate in 4', vi: 'Chiếu bí sau 4 nước' },
+  'u14l1.e1': {
+    en: 'Four moves deep: calculate Black’s best reply after each of your moves. Black always chooses the defence that lasts longest, so a line that works against a weak reply is not enough.',
+    vi: 'Tính sâu bốn nước: sau mỗi nước của bạn, hãy tính nước đáp tốt nhất của Đen. Đen luôn chọn cách phòng thủ kéo dài nhất, nên một biến chỉ thắng được nước đáp yếu là chưa đủ.',
+  },
+  'u14l1.p': { en: 'Mate in 4 against the best defence.', vi: 'Chiếu bí sau 4 nước trước cách phòng thủ tốt nhất.' },
+  'u14l1.x': {
+    en: 'Four moves, and Black never escaped. Excellent calculation!',
+    vi: 'Bốn nước, và Đen không bao giờ thoát được. Tính toán xuất sắc!',
+  },
+  'u14l2.title': { en: 'The quiet follow-up', vi: 'Nước êm giữa đòn' },
+  'u14l2.e1': {
+    en: 'Long attacks often need a pause: after a few checks, one quiet move brings the last piece in or takes away the last escape point. Black gets a free move, but nothing useful to do with it.',
+    vi: 'Đòn tấn công dài thường cần một nhịp dừng: sau vài nước chiếu, một nước êm đưa quân cuối cùng vào trận hoặc lấy mất điểm thoát cuối cùng. Đen được đi một nước, nhưng không làm được gì hữu ích.',
+  },
+  'u14l2.p': {
+    en: 'Mate in 4. Somewhere in the attack there is a quiet move.',
+    vi: 'Chiếu bí sau 4 nước. Ở đâu đó trong đòn tấn công có một nước êm.',
+  },
+  'u14l2.x': {
+    en: 'The quiet move in the middle was the key: Black had a free move and no defence.',
+    vi: 'Nước êm ở giữa đòn là then chốt: Đen được đi tự do nhưng không có cách phòng thủ.',
+  },
+
+  // ---------- Master track ----------
+  'u15.title': { en: 'Master play', vi: 'Đẳng cấp kiện tướng' },
+  'u15.desc': {
+    en: 'Quiet mates in 4, full-board attacks, and stopping a mate in 3.',
+    vi: 'Chiếu bí 4 nước với nước êm, tấn công trên bàn cờ đầy, và chặn đòn chiếu bí sau 3 nước.',
+  },
+  'u15l1.title': { en: 'Quiet mate in 4', vi: 'Chiếu bí 4 nước với nước êm' },
+  'u15l1.e1': {
+    en: 'The hardest attacks contain a quiet move: no check, no capture, just a better point for a piece. Masters find it by asking what Black would do if they could pass.',
+    vi: 'Những đòn tấn công khó nhất có một nước êm: không chiếu, không ăn quân, chỉ đưa một quân tới điểm tốt hơn. Kiện tướng tìm ra nó bằng cách tự hỏi Đen sẽ làm gì nếu được bỏ lượt.',
+  },
+  'u15l1.p': {
+    en: 'Mate in 4. At least one of your moves is not a check.',
+    vi: 'Chiếu bí sau 4 nước. Ít nhất một nước của bạn không phải nước chiếu.',
+  },
+  'u15l1.x': {
+    en: 'You found the quiet move inside a four-move attack. Master level!',
+    vi: 'Bạn đã tìm ra nước êm trong đòn tấn công bốn nước. Đẳng cấp kiện tướng!',
+  },
+  'u15l2.title': { en: 'Full-board mate in 4', vi: 'Chiếu bí 4 nước trên bàn cờ đầy' },
+  'u15l2.e1': {
+    en: 'Real games are crowded. With defenders everywhere, check which black pieces can block, capture or cover each point before you commit to an attack.',
+    vi: 'Ván cờ thật thường đông quân. Khi quân phòng thủ ở khắp nơi, hãy kiểm tra quân Đen nào có thể chặn, ăn quân hay che từng điểm trước khi quyết định tấn công.',
+  },
+  'u15l2.p': { en: 'Mate in 4 on a full board.', vi: 'Chiếu bí sau 4 nước trên bàn cờ đầy.' },
+  'u15l2.x': {
+    en: 'Every defender was accounted for. Mate in 4!',
+    vi: 'Mọi quân phòng thủ đều đã được tính đến. Chiếu bí sau 4 nước!',
+  },
+  'u15l3.title': { en: 'Master challenge', vi: 'Thử thách kiện tướng' },
+  'u15l3.e1': {
+    en: 'The final test mixes attack and defence, with no hint about which is which: first a mate in 3 to stop, then three mates in 4. Look at both sides’ threats before every move.',
+    vi: 'Bài kiểm tra cuối kết hợp tấn công và phòng thủ, không báo trước đâu là đâu: đầu tiên chặn một đòn chiếu bí sau 3 nước, sau đó là ba đòn chiếu bí sau 4 nước. Hãy xem mối đe dọa của cả hai bên trước mỗi nước đi.',
+  },
+  'u15l3.p1': {
+    en: 'Black threatens mate in 3. Only one move saves you.',
+    vi: 'Đen dọa chiếu bí sau 3 nước. Chỉ một nước cứu được bạn.',
+  },
+  'u15l3.x1': {
+    en: 'The only defence, three moves deep. Master level!',
+    vi: 'Nước phòng thủ duy nhất, tính sâu ba nước. Đẳng cấp kiện tướng!',
+  },
+  'u15l3.p2': { en: 'Mate in 4 against the best defence.', vi: 'Chiếu bí sau 4 nước trước cách phòng thủ tốt nhất.' },
+  'u15l3.x2': {
+    en: 'Master challenge complete. Calculated to the end!',
+    vi: 'Hoàn thành thử thách kiện tướng. Tính toán đến tận cùng!',
   },
 } satisfies Record<string, Entry>;
 

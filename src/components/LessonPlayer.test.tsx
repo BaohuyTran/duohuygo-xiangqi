@@ -273,4 +273,53 @@ describe('LessonPlayer', () => {
     press(/Check/);
     expect(screen.getByRole('alert').textContent).toMatch(/Correct!/);
   });
+
+  it('judges a mate-in-4 move after a short "checking" pause, then lets Black answer', () => {
+    vi.useFakeTimers();
+    try {
+      // Expert track, Mate in 4: the main line starts Ra9-e9+ Ke7-d7.
+      const mateIn4 = findLesson('u14l1')!.exercises[1];
+      expect(mateIn4.type === 'combination' && mateIn4.moves).toBe(4);
+      render(
+        <I18nProvider initial="en">
+          <LessonPlayer lesson={{ id: 'm4', title: 'u14l1.title', exercises: [mateIn4] }} onComplete={vi.fn()} onExit={vi.fn()} />
+        </I18nProvider>,
+      );
+      expect(screen.getByTestId('combination-status').textContent).toMatch(/moves left: 4/);
+      tap('a9');
+      tap('e9');
+      expect(screen.getByTestId('combination-status').textContent).toMatch(/Checking your move/);
+      act(() => vi.advanceTimersByTime(30));
+      expect(screen.getByTestId('combination-status').textContent).toMatch(/Black is answering/);
+      act(() => vi.advanceTimersByTime(COMBINATION_REPLY_MS));
+      expect(screen.getByTestId('combination-status').textContent).toMatch(/moves left: 3/);
+      expect(screen.getByRole('gridcell', { name: /^d7,/ }).getAttribute('aria-label')).toMatch(/Black General/i);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('stops a mate-in-3 threat after a short "checking" pause', () => {
+    vi.useFakeTimers();
+    try {
+      // Master challenge: Black threatens mate in 3 and only one move saves Red.
+      const defend3 = findLesson('u15l3')!.exercises[1];
+      if (defend3.type !== 'move' || defend3.goal.kind !== 'defend') throw new Error('expected a defend exercise');
+      expect(defend3.goal.depth).toBe(3);
+      render(
+        <I18nProvider initial="en">
+          <LessonPlayer lesson={{ id: 'd3', title: 'u15l3.title', exercises: [defend3] }} onComplete={vi.fn()} onExit={vi.fn()} />
+        </I18nProvider>,
+      );
+      tap(defend3.solution.from);
+      tap(defend3.solution.to);
+      expect(screen.getByTestId('checking').textContent).toMatch(/Checking your move/);
+      expect(screen.queryByRole('alert')).toBeNull();
+      act(() => vi.advanceTimersByTime(30));
+      expect(screen.getByRole('alert').textContent).toMatch(/Correct!/);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
+

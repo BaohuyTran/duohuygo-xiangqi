@@ -102,7 +102,7 @@ export function checkMove(ex: MoveExercise, move: Move): MoveVerdict {
     case 'checkmate':
       return gameStatus(after).kind === 'checkmate' ? 'correct' : 'not-checkmate';
     case 'defend':
-      return hasForcedWin(after, 1) ? 'allows-mate' : 'correct';
+      return hasForcedWin(after, ex.goal.depth ?? 1) ? 'allows-mate' : 'correct';
   }
 }
 

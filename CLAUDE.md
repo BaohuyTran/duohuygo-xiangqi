@@ -27,6 +27,7 @@ Must work in desktop and phone browsers and as an installable, offline-capable P
 | Tests in watch mode | `npm run test:watch` |
 | Run one test file | `npx vitest run src/engine/pieces.test.ts` |
 | Validate lesson + puzzle content only | `npx vitest run src/content` |
+| Deep lesson proof (slow, ~6 min): every mate-in-4 `firstMoves` list wins and is complete | `npm run content:deep` |
 | Regenerate puzzles (dev-time, ~10 min, deterministic) | `npm run puzzles:generate` |
 | Lint (oxlint) | `npm run lint` |
 | Type-check only | `npm run typecheck` |
@@ -137,15 +138,24 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Exercise types: `learn`, `select-squares`, `move` (goals: `reach`, `any`, `check`, `checkmate`,
   `defend`), `capture`, `combination`. Answers are computed by the engine; `solution` fields are only
   verified, never trusted.
-- `defend`: Black threatens mate in one; any move that leaves Black without a mate in one is correct.
-- `combination` (`src/lessons/combination.ts`): 2 or 3 Red moves against the engine's best defence,
-  goal `checkmate` (exactly N moves, not fewer) or `win-material` (≥ 2 points by the same search as
-  win-material puzzles, horizon = 2 plies per Red move). `solution` is the main line (Red, Black, …, Red);
+- `defend` (`goal.depth` 1–3, default 1): Black threatens mate in `depth`; any move that leaves Black
+  without a forced mate in `depth` is correct. Depth 3 is judged after a short "Checking your move…" pause.
+- `combination` (`src/lessons/combination.ts`): 2–4 Red moves against the engine's best defence,
+  goal `checkmate` (exactly N moves, not fewer) or `win-material` (2–3 moves; ≥ 2 points by the same search
+  as win-material puzzles, horizon = 2 plies per Red move). `solution` is the main line (Red, Black, …, Red);
   any Red move the engine confirms is accepted. Optional `hints` (one i18n key per Red move).
+  Only the played move is searched (`isWinningMove`). Black's reply: fewest winning answers when 1–2 Red
+  moves remain, "longest resistance" (no shorter mate) when 3+ remain. Mates in 4 must list every winning
+  first move in `firstMoves` (computed at authoring time: a full list takes the engine seconds to minutes);
+  the quick validator plays the main line, `npm run content:deep` proves the list wins and is complete.
+  Run it after changing any mate-in-4 exercise. Moves in a mate in 4 are judged after a short pause.
 - Positions use `pieces` maps (`{ "e0": "K", "d9": "k" }`) or `fen`. Exercises are played as Red.
 - `npx vitest run src/content` validates all content and plays every exercise through the engine.
-- Units have a `track`: `basics` (files 01–04: 4 short units, 9 lessons, the default) or `intermediate`
-  (files 07–10, ids u7–u10: cannon mates, horse/chariot mates, tactics, combinations). Each track unlocks
+- Units have a `track`, in order: `basics` (files 01–04: 4 short units, 9 lessons, the default),
+  `intermediate` (files 07–10, ids u7–u10: cannon mates, horse/chariot mates, tactics, combinations),
+  `advanced` (11–12: discovered check, decoys, stopping mate in 2, mate in 3), `expert` (13–14: only-move
+  defence, quiet moves on a full board, discovered attack in 3, mate in 4) and `master` (15: quiet mates in
+  4, full-board mates in 4, and a challenge mixing a mate-in-3 defence with mates in 4). Each track unlocks
   in order on its own, and the first lesson of every track is open from the start
   (`src/lessons/progress.ts`). Home shows a header per track and a "jump to <level>" banner
   (`jumpBannerTrack`): it points to the lowest higher level not started yet and disappears once the learner

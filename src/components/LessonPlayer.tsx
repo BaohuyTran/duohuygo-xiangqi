@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import type { CombinationExercise, Exercise, Lesson } from '../content/types';
+import type { CaptureExercise, CombinationExercise, Exercise, Lesson } from '../content/types';
 import {
   findGeneral,
   isInCheck,
@@ -16,6 +16,7 @@ import { useI18n } from '../i18n/I18nProvider';
 import {
   checkCapture,
   checkMove,
+  legality,
   checkSelection,
   expectedSelection,
   positionOf,
@@ -178,7 +179,7 @@ export function LessonPlayer({ lesson, onExit, onComplete, hearts: realHearts, o
   );
 }
 
-type Status = 'answering' | 'correct' | 'incorrect';
+type Status = 'answering' | 'checking' | 'correct' | 'incorrect';
 
 function ExerciseView({
   exercise: ex,
@@ -199,6 +200,8 @@ function ExerciseView({
   const fixedFrom = ex.type === 'move' && ex.from !== undefined ? parseSquare(ex.from) : null;
 
   const [status, setStatus] = useState<Status>('answering');
+  const checkTimer = useRef<number | undefined>(undefined);
+  useEffect(() => () => window.clearTimeout(checkTimer.current), []);
   const [hadMistake, setHadMistake] = useState(false);
   const [picked, setPicked] = useState<ReadonlySet<Square>>(new Set());
   const [selected, setSelected] = useState<Square | null>(fixedFrom);
@@ -251,7 +254,24 @@ function ExerciseView({
     }
     if (selected === null) return;
     const move = { from: selected, to: sq };
-    const result = ex.type === 'move' ? checkMove(ex, move) : checkCapture(ex, move);
+    // Stopping a mate in 3 means searching Black's replies three moves deep, which can take a moment:
+    // show the legal move with "Checking your move…" first, then judge it.
+    if (ex.type === 'move' && ex.goal.kind === 'defend' && (ex.goal.depth ?? 1) >= 3 && legality(start, move) === null) {
+      setStatus('checking');
+      setPlayed(move);
+      play(moveSound(start, move));
+      setSelected(null);
+      checkTimer.current = window.setTimeout(() => {
+        setStatus('answering');
+        judge(move);
+      }, 30);
+      return;
+    }
+    judge(move);
+  };
+
+  const judge = (move: Move) => {
+    const result = ex.type === 'move' ? checkMove(ex, move) : checkCapture(ex as CaptureExercise, move);
     setVerdict(result);
     // Show the move on the board whenever it was legal, so the learner sees what happened.
     const shown = result !== 'illegal' && result !== 'unsafe' && result !== 'wrong-piece';
@@ -323,11 +343,16 @@ function ExerciseView({
         {(ex.type === 'move' || ex.type === 'capture') && status === 'answering' && (
           <p className="mt-3 text-center text-sm text-stone-500">{t('lesson.tapPiece')}</p>
         )}
+        {status === 'checking' && (
+          <p className="mt-3 text-center text-sm font-semibold text-stone-500" data-testid="checking">
+            {t('combination.checking')}
+          </p>
+        )}
       </section>
       {/* Reserves the fixed footer's height, so the board's last row can always scroll clear of it. */}
       <div aria-hidden className="shrink-0" style={{ height: footerHeight }} />
 
-      {(status !== 'answering' || ex.type === 'learn' || ex.type === 'select-squares') && (
+      {((status !== 'answering' && status !== 'checking') || ex.type === 'learn' || ex.type === 'select-squares') && (
       <footer
         key={status}
         ref={footerRef}
@@ -391,7 +416,10 @@ function ExerciseView({
 /** Delay before Black's automatic reply in a combination. */
 export const COMBINATION_REPLY_MS = 650;
 
-type ComboPhase = 'playing' | 'opponent' | 'wrong' | 'done';
+/** Combinations with at least this many Red moves are judged after a short pause, so the board can paint first. */
+const DEFERRED_CHECK_MOVES = 4;
+
+type ComboPhase = 'playing' | 'checking' | 'opponent' | 'wrong' | 'done';
 
 /** A combination: Red plays several moves, the engine answers each with a best defence. */
 function CombinationView({
@@ -439,6 +467,20 @@ function CombinationView({
 
   const playMove = (move: Move) => {
     setSelected(null);
+    // Judging a move in a mate in 4 can take a moment: show the move and "Checking…" first.
+    if (ex.moves >= DEFERRED_CHECK_MOVES && legality(pos, move) === null) {
+      setPhase('checking');
+      setWrongMove(move);
+      later(() => {
+        setWrongMove(null);
+        judgeMove(move);
+      }, 30);
+      return;
+    }
+    judgeMove(move);
+  };
+
+  const judgeMove = (move: Move) => {
     const result = checkCombinationMove(ex, step, pos, move);
     if (result !== 'correct') {
       setVerdict(result);
@@ -514,7 +556,13 @@ function CombinationView({
           {t(ex.prompt)}
         </h2>
         <p className="mb-3 text-sm font-semibold text-stone-500" data-testid="combination-status">
-          {phase === 'opponent' ? t('combination.opponent') : phase === 'done' ? t('combination.done') : t('combination.movesLeft', { n: left })}
+          {phase === 'opponent'
+            ? t('combination.opponent')
+            : phase === 'checking'
+              ? t('combination.checking')
+              : phase === 'done'
+                ? t('combination.done')
+                : t('combination.movesLeft', { n: left })}
         </p>
         <div className={`board-fit overflow-hidden rounded-xl shadow-md ${phase === 'wrong' ? 'feedback-shake' : ''}`}>
           <Board
