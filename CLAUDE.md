@@ -147,7 +147,9 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Units have a `track`: `basics` (files 01–04: 4 short units, 9 lessons, the default) or `intermediate`
   (files 07–10, ids u7–u10: cannon mates, horse/chariot mates, tactics, combinations). Each track unlocks
   in order on its own, and the first lesson of every track is open from the start
-  (`src/lessons/progress.ts`). Home shows a header per track and a "jump to Intermediate" link. Progress
+  (`src/lessons/progress.ts`). Home shows a header per track and a "jump to <level>" banner
+  (`jumpBannerTrack`): it points to the lowest higher level not started yet and disappears once the learner
+  completes a lesson there or in a higher level. A new track needs `track.<id>.jumpTitle`/`jumpBody` text. Progress
   is stored via `src/storage` (localStorage today). Text keys follow the lesson id (`u2l1.e3`, `u2l1.x3`).
 - Jump ahead (Duolingo-style): tapping a locked lesson, or "Jump here" on a locked unit, opens a dialog
   and then a test (`jumpTest` in `src/lessons/progress.ts`): the last two practice exercises of every

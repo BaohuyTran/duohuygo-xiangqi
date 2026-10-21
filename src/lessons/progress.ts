@@ -59,3 +59,17 @@ export function jumpTest(units: readonly Unit[], lessonId: string, completed: It
   const exercises = Array.from({ length: count }, (_, i) => pool[Math.floor(((i + 0.5) * pool.length) / count)]);
   return { id: `jump-${lessonId}`, title: 'jump.title', exercises };
 }
+
+/**
+ * The track the Home "jump to …" banner points to: the first track after the first one (basics) that the
+ * learner has not started yet. A track counts as started once any of its lessons, or of a later track, is
+ * completed, so the banner disappears as soon as the learner is working at that level or above, and
+ * moves on to the next level when more tracks exist. Null when there is nothing left to point to.
+ */
+export function jumpBannerTrack(units: readonly Unit[], completed: Iterable<string>): Track | null {
+  const done = new Set(completed);
+  const tracks = [...new Set(units.map((u) => u.track ?? 'basics'))];
+  const started = tracks.map((track) => units.some((u) => (u.track ?? 'basics') === track && u.lessons.some((l) => done.has(l.id))));
+  const highestStarted = started.lastIndexOf(true);
+  return tracks.find((_, i) => i > 0 && i > highestStarted) ?? null;
+}

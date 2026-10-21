@@ -31,8 +31,9 @@ export const messages = {
     en: 'Classic mating patterns, tactics and combinations. Open from the start.',
     vi: 'Các thế sát cục kinh điển, chiến thuật và đòn phối hợp. Mở sẵn từ đầu.',
   },
-  'track.jump.title': { en: 'Already know the rules?', vi: 'Đã biết luật chơi?' },
-  'track.jump.body': { en: 'Jump to the Intermediate course.', vi: 'Chuyển tới khóa Trung cấp.' },
+  // Home "jump to this level" banner, one pair per track after basics (see jumpBannerTrack).
+  'track.intermediate.jumpTitle': { en: 'Already know the rules?', vi: 'Đã biết luật chơi?' },
+  'track.intermediate.jumpBody': { en: 'Jump to the Intermediate course.', vi: 'Chuyển tới khóa Trung cấp.' },
   'jump.here': { en: 'Jump here', vi: 'Nhảy tới đây' },
   'jump.dialog.title': { en: 'Jump to “{lesson}”?', vi: 'Nhảy tới “{lesson}”?' },
   'jump.dialog.body': {

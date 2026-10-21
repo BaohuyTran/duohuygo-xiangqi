@@ -7,7 +7,7 @@ import { squareName } from './engine';
 import { expectedSelection } from './lessons/answers';
 import { jumpTest } from './lessons/progress';
 import { puzzles } from './puzzles/catalog';
-import { createGamificationRepository, createMemoryStore } from './storage';
+import { createGamificationRepository, createMemoryStore, createProgressRepository } from './storage';
 import { initialState } from './gamification';
 
 afterEach(cleanup);
@@ -84,6 +84,19 @@ describe('App', () => {
     // No XP for skipped lessons, and the test never costs real hearts.
     expect(screen.getByText('Today: 0 of 20 XP')).toBeTruthy();
     expect(screen.getByText('5 of 5 hearts')).toBeTruthy();
+  });
+
+  it('hides the "jump to Intermediate" banner once an intermediate lesson is completed', () => {
+    const store = createMemoryStore();
+    createProgressRepository(store).markCompleted('u1l1'); // basics progress keeps it
+    render(<App store={store} />);
+    expect(screen.getByRole('link', { name: /Already know the rules\?/ })).toBeTruthy();
+    cleanup();
+
+    createProgressRepository(store).markCompleted('u7l1');
+    render(<App store={store} />);
+    expect(screen.queryByRole('link', { name: /Already know the rules\?/ })).toBeNull();
+    expect(screen.getByRole('heading', { name: 'Intermediate' })).toBeTruthy();
   });
 
   it('switches language and remembers the choice', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Unit } from '../content/types';
-import { JUMP_TEST_MAX, jumpTest, lessonStates, skippedLessons } from './progress';
+import { JUMP_TEST_MAX, jumpBannerTrack, jumpTest, lessonStates, skippedLessons } from './progress';
 
 const units = [
   { id: 'a', title: '', description: '', lessons: [{ id: 'a1', title: '', exercises: [] }, { id: 'a2', title: '', exercises: [] }] },
@@ -70,5 +70,26 @@ describe('jump-ahead test', () => {
     expect(picked).toHaveLength(JUMP_TEST_MAX);
     expect(new Set(picked).size).toBe(JUMP_TEST_MAX);
     for (const lesson of ['a1', 'a2', 'a3', 'b1', 'b2']) expect(picked.some((p) => p.startsWith(`${lesson}.`)), lesson).toBe(true);
+  });
+});
+
+describe('jumpBannerTrack', () => {
+  const unit = (id: string, track?: string) => ({ id, title: '', description: '', track, lessons: [{ id: `${id}1`, title: '', exercises: [] }] });
+  // A future third level, to check the rule generalizes beyond intermediate.
+  const course = [unit('a'), unit('b', 'intermediate'), unit('c', 'advanced')] as unknown as Unit[];
+
+  it('points to the first higher level until the learner starts it', () => {
+    expect(jumpBannerTrack(course, [])).toBe('intermediate');
+    expect(jumpBannerTrack(course, ['a1'])).toBe('intermediate');
+  });
+
+  it('moves on to the next level once a level is started, and hides when the top level is started', () => {
+    expect(jumpBannerTrack(course, ['b1'])).toBe('advanced');
+    expect(jumpBannerTrack(course, ['c1'])).toBeNull();
+    expect(jumpBannerTrack(course, ['a1', 'c1'])).toBeNull();
+  });
+
+  it('shows nothing when there is only one track', () => {
+    expect(jumpBannerTrack([unit('a')] as unknown as Unit[], [])).toBeNull();
   });
 });

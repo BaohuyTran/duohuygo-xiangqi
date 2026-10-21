@@ -10,6 +10,7 @@ import {
 import { checkCombinationMove, combinationDone, combinationReply } from '../lessons/combination';
 import { toMove } from '../puzzles/logic';
 import { allLessons, units } from './index';
+import { hasMessage } from '../i18n/messages';
 import { validateUnits } from './validate';
 
 describe('shipped lesson content', () => {
@@ -28,6 +29,14 @@ describe('shipped lesson content', () => {
         expect(lesson.exercises.length, lesson.id).toBeGreaterThanOrEqual(4);
         expect(lesson.exercises.length, lesson.id).toBeLessThanOrEqual(6);
       }
+    }
+  });
+
+  it('has Home banner text for every level after the first (jumpBannerTrack)', () => {
+    const tracks = [...new Set(units.map((u) => u.track ?? 'basics'))].slice(1);
+    for (const track of tracks) {
+      expect(hasMessage(`track.${track}.jumpTitle`), track).toBe(true);
+      expect(hasMessage(`track.${track}.jumpBody`), track).toBe(true);
     }
   });
 

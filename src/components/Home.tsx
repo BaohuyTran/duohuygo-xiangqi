@@ -2,7 +2,7 @@ import type { Unit } from '../content/types';
 import { minutesUntil, type DailyGoal, type GamificationSummary } from '../gamification';
 import { useI18n } from '../i18n/I18nProvider';
 import { useState } from 'react';
-import { JUMP_TEST_LIVES, jumpTest, skippedLessons, type LessonState } from '../lessons/progress';
+import { JUMP_TEST_LIVES, jumpBannerTrack, jumpTest, skippedLessons, type LessonState } from '../lessons/progress';
 import type { AccountService } from '../sync/service';
 import { AccountButton } from './Account';
 import { LanguageToggle } from './LanguageToggle';
@@ -34,6 +34,8 @@ export function Home({ units, states, onStart, onJump, onReset, stats, onGoalCha
   const completedIds = all.filter((l) => states.get(l.id) === 'completed').map((l) => l.id);
   const completedCount = completedIds.length;
   const hasIntermediate = units.some((u) => u.track === 'intermediate');
+  // Hidden once the learner has started that level (or a higher one).
+  const bannerTrack = jumpBannerTrack(units, completedIds);
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))]">
@@ -70,14 +72,14 @@ export function Home({ units, states, onStart, onJump, onReset, stats, onGoalCha
         {completedCount === all.length && <p className="mt-2 font-semibold text-green-700">{t('home.allDone')}</p>}
       </div>
 
-      {hasIntermediate && (
+      {bannerTrack && (
         <a
-          href="#track-intermediate"
+          href={`#track-${bannerTrack}`}
           className="mb-6 flex min-h-11 items-center justify-between gap-3 rounded-2xl border-2 border-violet-200 bg-violet-50 px-4 py-3 text-violet-800"
         >
           <span>
-            <span className="block font-extrabold">{t('track.jump.title')}</span>
-            <span className="block text-sm">{t('track.jump.body')}</span>
+            <span className="block font-extrabold">{t(`track.${bannerTrack}.jumpTitle`)}</span>
+            <span className="block text-sm">{t(`track.${bannerTrack}.jumpBody`)}</span>
           </span>
           <span aria-hidden className="text-2xl font-extrabold">
             ↓
