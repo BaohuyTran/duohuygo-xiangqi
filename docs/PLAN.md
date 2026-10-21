@@ -265,3 +265,24 @@ behind the existing storage interfaces so the app still works fully offline and 
 - 2026-10-19: branch `intermediate-course`. 13 new lessons, 71 exercises (37 combinations incl. 4 mate-in-3, 5 defend).
 - Lint, build, all tests, `ui:check` at 360 and 320 px pass; the Double Cannon lesson was played through in
   Chromium (wrong move → heart lost, engine reply, mate recognised, completion screen).
+
+---
+
+## Task 8 — Shorter basics and jump-ahead tests
+
+**Status:** done · requested by the user on 2026-10-21
+
+**Goal:** Make the beginner track shorter and let learners skip ahead by passing a short test, like Duolingo.
+
+**Acceptance criteria**
+
+- [x] Basics compressed from 6 units / 18 lessons / 84 exercises to 4 units / 9 lessons / 48 exercises, keeping
+      one example of every rule (no real users yet, so lesson ids were renumbered freely).
+- [x] Tapping a locked lesson (or "Jump here" on a locked unit) offers a jump-ahead test built from the skipped
+      lessons; 3 lives of its own, no real hearts used; passing completes the skipped lessons (no XP).
+- [x] en + vi text, tests for the selection rule, the test mode and the full App flow; no changes to `src/engine`.
+
+**Notes**
+
+- 2026-10-21: branch `shorter-basics-skip`. Lint, build, 389 tests, `ui:check` at 360, 320 and 740×360 pass;
+  the jump dialog, a failed test and the return to Home were checked in Chromium.

@@ -4,10 +4,10 @@ import { Home } from './components/Home';
 import { LessonPlayer } from './components/LessonPlayer';
 import { PuzzleList } from './components/PuzzleList';
 import { PuzzlePlayer } from './components/PuzzlePlayer';
-import { findLesson, units } from './content';
+import { findLesson, units, type Lesson } from './content';
 import { createGamification, lessonXp, type Gamification } from './gamification';
 import { I18nProvider, isLanguage, useI18n } from './i18n/I18nProvider';
-import { lessonStates } from './lessons/progress';
+import { jumpTest, lessonStates, skippedLessons } from './lessons/progress';
 import { findPuzzle, nextPuzzle, puzzleNumber, puzzles } from './puzzles/catalog';
 import { SoundProvider, useSound, type AudioContextLike } from './sound';
 import type { AccountService } from './sync/service';
@@ -94,6 +94,8 @@ function Screens({
   const [completed, setCompleted] = useState(() => progress.completedLessons());
   const [solved, setSolved] = useState(() => new Set(puzzleProgress.solvedPuzzles()));
   const [lessonId, setLessonId] = useState<string | null>(null);
+  // A running jump-ahead test: the locked lesson it unlocks and its exercises (fixed when it starts).
+  const [jump, setJump] = useState<{ target: string; test: Lesson } | null>(null);
   const [puzzleId, setPuzzleId] = useState<string | null>(null);
   const [stats, setStats] = useState(() => game.refresh());
   // XP awarded for the last solved puzzle, shown on its success screen.
@@ -117,6 +119,24 @@ function Screens({
   const states = useMemo(() => lessonStates(units, completed), [completed]);
   const lesson = lessonId ? findLesson(lessonId) : undefined;
   const puzzle = puzzleId ? findPuzzle(puzzleId) : undefined;
+
+  if (jump) {
+    return (
+      <LessonPlayer
+        key={jump.test.id}
+        lesson={jump.test}
+        test
+        onExit={() => setJump(null)}
+        onComplete={() => {
+          // Passing completes every skipped lesson, without XP; the target becomes available.
+          let next = completed;
+          for (const l of skippedLessons(units, jump.target, completed)) next = progress.markCompleted(l.id);
+          setCompleted(next);
+          setJump(null);
+        }}
+      />
+    );
+  }
 
   if (lesson) {
     const firstCompletion = !completed.includes(lesson.id);
@@ -185,6 +205,10 @@ function Screens({
             const fresh = game.refresh();
             setStats(fresh);
             if (fresh.hearts > 0) setLessonId(id);
+          }}
+          onJump={(id) => {
+            const test = jumpTest(units, id, completed);
+            if (test) setJump({ target: id, test });
           }}
           onReset={() => {
             progress.reset();

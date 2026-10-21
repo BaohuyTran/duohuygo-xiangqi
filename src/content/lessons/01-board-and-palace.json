@@ -35,15 +35,6 @@
           },
           "prompt": "u1l1.e4",
           "region": "red-palace"
-        },
-        {
-          "type": "select-squares",
-          "pieces": {
-            "e0": "K",
-            "f9": "k"
-          },
-          "prompt": "u1l1.e5",
-          "region": "black-palace"
         }
       ]
     },
@@ -62,61 +53,15 @@
           "square": "e1"
         },
         {
-          "type": "learn",
-          "pieces": {
-            "d0": "K",
-            "e9": "k",
-            "e6": "p"
-          },
-          "text": "u1l2.e2",
-          "square": "d0"
-        },
-        {
           "type": "select-squares",
           "pieces": {
             "e2": "K",
             "e9": "k",
             "e6": "p"
           },
-          "prompt": "u1l2.e3",
+          "prompt": "u1l2.e2",
           "square": "e2"
         },
-        {
-          "type": "select-squares",
-          "pieces": {
-            "f2": "K",
-            "e9": "k",
-            "e6": "p"
-          },
-          "prompt": "u1l2.e4",
-          "square": "f2"
-        },
-        {
-          "type": "move",
-          "pieces": {
-            "d1": "K",
-            "e9": "k",
-            "e6": "p"
-          },
-          "prompt": "u1l2.e5",
-          "from": "d1",
-          "goal": {
-            "kind": "reach",
-            "squares": [
-              "e1"
-            ]
-          },
-          "solution": {
-            "from": "d1",
-            "to": "e1"
-          }
-        }
-      ]
-    },
-    {
-      "id": "u1l3",
-      "title": "u1l3.title",
-      "exercises": [
         {
           "type": "learn",
           "pieces": {
@@ -125,7 +70,7 @@
             "e9": "k",
             "e6": "p"
           },
-          "text": "u1l3.e1",
+          "text": "u1l2.e3",
           "square": "e1"
         },
         {
@@ -136,7 +81,7 @@
             "e9": "k",
             "e6": "p"
           },
-          "prompt": "u1l3.e2",
+          "prompt": "u1l2.e4",
           "solution": {
             "from": "d2",
             "to": "e2"
@@ -150,18 +95,7 @@
             "e9": "k",
             "e6": "p"
           },
-          "text": "u1l3.e3",
-          "square": "e1"
-        },
-        {
-          "type": "select-squares",
-          "pieces": {
-            "e1": "K",
-            "f5": "r",
-            "e9": "k",
-            "e6": "p"
-          },
-          "prompt": "u1l3.e4",
+          "text": "u1l2.e5",
           "square": "e1"
         },
         {
@@ -173,7 +107,7 @@
             "e9": "k",
             "e6": "p"
           },
-          "prompt": "u1l3.e5",
+          "prompt": "u1l2.e6",
           "from": "e1",
           "goal": {
             "kind": "any"
@@ -182,6 +116,75 @@
             "from": "e1",
             "to": "d1"
           }
+        }
+      ]
+    },
+    {
+      "id": "u1l3",
+      "title": "u1l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e1": "A"
+          },
+          "text": "u1l3.e1",
+          "square": "e1"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "f0": "K",
+            "d9": "k",
+            "e1": "A"
+          },
+          "prompt": "u1l3.e2",
+          "square": "e1"
+        },
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B"
+          },
+          "text": "u1l3.e3",
+          "square": "e2"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "g0": "B"
+          },
+          "prompt": "u1l3.e4",
+          "square": "g0"
+        },
+        {
+          "type": "learn",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B",
+            "d3": "P"
+          },
+          "text": "u1l3.e5",
+          "square": "e2"
+        },
+        {
+          "type": "select-squares",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B",
+            "f3": "p",
+            "d1": "p"
+          },
+          "prompt": "u1l3.e6",
+          "square": "e2"
         }
       ]
     }

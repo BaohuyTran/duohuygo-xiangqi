@@ -117,7 +117,7 @@ describe('App with account sync', () => {
     const account = makeAccount(backend);
     render(<App account={account} />);
     expect(screen.getByRole('button', { name: 'Account and sync' })).toBeTruthy();
-    expect(await screen.findByText('Đã xong 1/31 bài')).toBeTruthy();
+    expect(await screen.findByText('Đã xong 1/22 bài')).toBeTruthy();
   });
 
   it('local progress made in the app is pushed to the account', async () => {
