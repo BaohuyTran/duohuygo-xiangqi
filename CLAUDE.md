@@ -6,10 +6,13 @@ Must work in desktop and phone browsers and as an installable, offline-capable P
 ## Planning and automated workflow
 
 - **[docs/PLAN.md](docs/PLAN.md)** lists the tasks (goal, acceptance criteria, status, notes). Tasks 1–3 are done.
-- **[docs/DRIVER.md](docs/DRIVER.md)** is the exact procedure for "do the next task": branch → `implementer` →
-  `tester` → `reviewer` → fix loop (max 3 attempts) → commit, push, PR (never merge) → update PLAN.md → summary.
+- **Work directly on `main`**: no feature branches, no PRs (only the owner and Claude work on this repo, and
+  there are no users yet). Commit and push to `main` once lint, build and tests pass; every push to `main`
+  deploys to GitHub Pages.
+- **[docs/DRIVER.md](docs/DRIVER.md)** is the exact procedure for "do the next task": `implementer` →
+  `tester` → `reviewer` → fix loop (max 3 attempts) → update PLAN.md → commit and push to main → summary.
 - Subagents live in `.claude/agents/` (`implementer`, `tester`, `reviewer`). CI (`.github/workflows/ci.yml`)
-  runs `npm ci`, build and test on every pull request.
+  runs `npm ci`, build and test on pull requests; on `main`, the deploy workflow runs the tests before publishing.
 - Never change `src/engine` behavior. If you find an engine bug, stop and report it.
 
 ## Commands
