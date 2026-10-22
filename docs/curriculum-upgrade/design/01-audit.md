@@ -11,6 +11,10 @@ Labels used in this document:
 
 Line numbers refer to commit `e99e1f3`.
 
+**Exercise identifiers (used here and in 04-architecture.md):** `<lessonId>#<i>`, where `i` is the **0-based index
+into the lesson's `exercises` array in the JSON, learn cards included**. Example: `u15l3#3` is the fourth entry of
+lesson `u15l3` (index 0 is its learn card). When a position matters, its FEN is given as well.
+
 ---
 
 ## 1. Content counts — Verified
@@ -170,17 +174,23 @@ types in §1.4 (no type can judge a non-forcing move) it supports the gap findin
 ## 2. Colour coverage — Verified
 
 - **Every practice exercise is played as Red** (146/146, count above). The lesson validator enforces it:
-  `src/content/validate.ts:119` ("exercises are played as Red: Red must be to move"); `move.from`, `square` and
-  solution moves must be Red pieces (`validate.ts:129`, `validate.ts:147`). The format says so:
-  `src/content/types.ts:5` and `types.ts:10`.
+  `src/content/validate.ts:119` ("exercises are played as Red: Red must be to move"); `move.from` and `square`
+  must hold Red pieces (`redPieceAt`, `validate.ts:123-134`, used at `:148`, `:169`, `:183`); a learn card with a
+  `square` needs Red to move (`validate.ts:147`); a stored solution moving a non-Red piece fails the legality check
+  because Red is to move (`legality`, `src/lessons/answers.ts:84`). The format says so: `src/content/types.ts:5`
+  and `types.ts:10`.
 - **Learn cards:** 26 Red to move, 23 Black to move. The Black-to-move cards show finished positions (for
   example a checkmate already delivered) seen from Red's side; the learner never moves Black pieces.
 - **Board orientation is fixed:** "Red is always at the bottom" (`src/components/Board.tsx:49-50`, the `point`
   function maps rank 0 to the bottom). There is no flip option and no visible coordinate labels; square names exist
   only in the accessible labels (`Board.tsx:115-124`).
 - **Puzzles:** all 60 are Red to move (§1.6); `Puzzle.sideToMove` exists in the format
-  (`src/content/puzzle-types.ts:42`) and `PuzzlePlayer` shows `puzzle.toMove.<side>`, but no Black puzzle exists
-  and CLAUDE.md states the board is always drawn with Red at the bottom.
+  (`src/content/puzzle-types.ts:42`) and `PuzzlePlayer` shows `puzzle.toMove.<side>`, but the puzzle verifier
+  rejects anything else (`src/content/validate-puzzles.ts:80`: "sideToMove must be \"red\"") and CLAUDE.md states
+  the board is always drawn with Red at the bottom.
+- **What playing Black would have to change** (list for 04-architecture.md §5.1): `validate.ts:119`, `:123-134`,
+  `:147`; `validate-puzzles.ts:80`; `combination.ts:15, 20`; `Board.tsx:49-50` (orientation) and the river labels
+  `Board.tsx:100-103`; colour words in prompts/explanations in `src/i18n/messages.ts`.
 - **Colour-specific code paths:** combinations measure material from Red's side
   (`src/lessons/combination.ts:20`, `materialBalance(start.board, 'red')`) and name the mover "Red"
   (`redMovesLeft`, `combination.ts:15`); exercise prompts and explanations are written as "Red …/Black …". The
@@ -231,7 +241,7 @@ types in §1.4 (no type can judge a non-forcing move) it supports the gap findin
 - Completion = reaching the end of a lesson. Wrong answers do not prevent completion: each wrong answer costs a
   heart (outside tests) and the learner retries the same exercise (`LessonPlayer.tsx:220-234`); at 0 hearts the
   current lesson can still be finished (`LessonPlayer.tsx:84-90`). First-try correct answers are counted
-  (`LessonPlayer.tsx:70, 78`) and shown on the completion screen (`:152`) but **not stored**.
+  (`LessonPlayer.tsx:71, 79`) and shown on the completion screen (`:152`) but **not stored**.
 - Storage: one id list `progress.completedLessons.v1` (`src/storage/index.ts:61`, repository `:100-103`).
   Solved puzzles: `progress.solvedPuzzles.v1` (`:62`, `:111-114`). No per-exercise, per-attempt, hint or
   mastery data is stored anywhere.
@@ -307,7 +317,8 @@ types in §1.4 (no type can judge a non-forcing move) it supports the gap findin
 - Solver: exhaustive forced-win search (`forcedWinMoves`/`hasForcedWin`, `solver.ts:49-83`) and a
   material-only alpha-beta with capture quiescence (`searchScore`/`moveScore`, `solver.ts:123-172`).
 - No engine bug was found in this audit. One cross-check with an independent engine (Fairy-Stockfish) agreed with
-  the stored mate-in-4 line of `u15l3` exercise 4 (04-architecture.md §2.4).
+  the stored mate-in-4 line of `u15l3#3` (FEN `2b2N3/1N2ak3/5a3/6R2/2bc5/5c3/9/8B/9/4K4 w - - 0 1`;
+  04-architecture.md §2.4).
 
 ---
 

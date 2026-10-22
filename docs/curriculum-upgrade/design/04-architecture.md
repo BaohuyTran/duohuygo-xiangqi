@@ -11,6 +11,9 @@ Labels:
 - **Unresolved**: needs a decision by another item (S1.2 ruleset/assessment, S1.3 migration, the owner) or a
   measurement that cannot be made in step 1.
 
+Exercise identifiers: `<lessonId>#<i>` with `i` = 0-based index into the lesson's `exercises` array, learn cards
+included (same convention as [01-audit.md](./01-audit.md)); FENs are given where a position matters.
+
 ---
 
 ## 1. Summary
@@ -59,8 +62,9 @@ position", unless it comes from a real game line played from the start.
 ### 2.2 Measured timings
 
 Machine: Intel Xeon @ 2.10 GHz, 4 vCPU, Linux, Node v22.22.0 via `tsx` (same JS engine family as Chrome's V8).
-Single run per row (enough for orders of magnitude, not for benchmarks). The script is in the appendix (§A.1);
-run it with `npx tsx <script> "$PWD"` from the repository root.
+Tables §2.2 first two: single cold run per row (orders of magnitude only; script §A.1). Rows marked "median" and
+§5.5's policy costs: one warm-up run, then the median of 3–5 runs (script §A.4). Run any script with
+`npx tsx <script> "$PWD"` from the repository root. Repeated runs vary by roughly ±20 %.
 
 Full board ("start" = the initial position; "mid" = after 1. C2=5 H8+7 2. H2+3 H2+3 3. R1=2 R9=8, FEN
 `r1bakabr1/9/1cn3nc1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1 w - - 6 4`, a developed, quiet position):
@@ -72,17 +76,20 @@ Full board ("start" = the initial position; "mid" = after 1. C2=5 H8+7 2. H2+3 H
 | `searchScore(start, 2 / 3 / 4 / 5)` | 24 / 131 / 1,415 / 3,749 ms | 0 |
 | `searchScore(mid, 2 / 3 / 4 / 5)` | 19 / 64 / 1,424 / 5,924 ms | 0.5 / 0.5 / 1 / 1 |
 | `hasForcedWin(start, 2)` / `hasForcedWin(mid, 2)` | 4.8 / 3.1 ms | false |
+| `hasForcedWin(after m, 2)` for **every** legal move m of mid (37) — median | 119 ms | the per-move mate guard of §5.4 |
+| `moveScore(mid, m, 2)` / `moveScore(mid, m, 3)` for every move m (37) — median | 77 / 721 ms | only 5 distinct scores among 37 moves (§5.5) |
 
 Lesson exercises (from the content):
 
 | Call | Time | Notes |
 | --- | ---: | --- |
 | `checkMove` defend depth 2 (u13l1, solution / losing move) | 1.8–6.2 ms | |
-| `checkMove` defend depth 3 (u15l3 #1, solution / losing move) | 220 / 131 ms | the UI shows "Checking your move…" first |
-| `searchWinningMove` mate in 4, one first move (u15l3 #2/#3/#4) | 732 / 3,645 / 352 ms | only `content:deep` does this; the app uses `firstMoves` |
-| `hasForcedWin(pos, 4)` (u15l3 #2/#3/#4) | 4,551 / 5,516 / 418 ms | |
-| `forcedWinMoves(pos, 4)` full list (u15l3 #4) | 1,621 ms | 2 moves |
-| `forcedWinMoves(pos, 3)` full list (u13l3 #2/#3) | 179 / 71 ms | |
+| `checkMove` defend depth 3 (u15l3#1, solution / losing move) | 220 / 131 ms | the UI shows "Checking your move…" first |
+| `searchWinningMove` mate in 4, one first move (u15l3#2 / #3 / #4) | 732 / 3,645 / 352 ms | only `content:deep` does this; the app uses `firstMoves` |
+| `hasForcedWin(pos, 4)` (u15l3#2 / #3 / #4) | 4,551 / 5,516 / 418 ms | u15l3#3 re-measured: median 4,503 ms |
+| `forcedWinMoves(pos, 4)` full list (u15l3#4) | 1,621 ms | 2 moves |
+| `forcedWinMoves(pos, 4)` full list (u15l3#3) — median | 4,978 ms | 1 move: f9-h8 |
+| `forcedWinMoves(pos, 3)` full list (u13l3#2 / #3) | 179 / 71 ms | |
 
 What the lesson player actually computes while playing every combination's main line (script §A.2): judging each
 Red move (`checkCombinationMove`) and computing Black's best defence (`bestCombinationReplies`):
@@ -121,13 +128,15 @@ measured per exercise.
 Fairy-Stockfish (`fairy-stockfish-nnue.wasm` 1.1.12 from npm, run under Node with a small driver, §A.3; no NNUE
 network loaded, so its classical evaluation; 1 thread):
 
-- **Rules agree on the checked line.** For `u15l3` exercise 4 (FEN
+- **Rules agree on the checked line.** For `u15l3#3` (FEN
   `2b2N3/1N2ak3/5a3/6R2/2bc5/5c3/9/8B/9/4K4 w - - 0 1`), after our solution's first move it reports "mate in 3"
   for Red at once, and `go mate 4` from the start returns exactly our stored line
   (f9-h8 f4-g4 g6-g8 f8-f9 g8-g9 f9-f8 h8-g6). Not a systematic cross-check: one position.
 - **A strong engine's first choice is not a proof.** On the same position, `go depth 22` (40 s) preferred another
   move with a +7.4 pawn score and did not see the quiet mate; only `go mate 4` found it, at depth 23 after 54 s.
-  Our exhaustive solver proves it in 0.4–1.6 s. Lesson for the design: forced-outcome claims are proven by the
+  Our exhaustive solver proves a mate in 4 exists in ~4.5–5.5 s (`hasForcedWin(pos, 4)`) and that f9-h8 is the
+  only winning first move in ~5 s (`forcedWinMoves(pos, 4)`, §2.2), about ten times faster than the external
+  engine's `go mate 4`. Lesson for the design: forced-outcome claims are proven by the
   exhaustive solver; external engine scores are evidence for evaluation, with stated limits, not verification.
 - Coordinate systems differ: Fairy-Stockfish UCI uses files `a–i` and ranks **1–10** (`f10h9` = our `f9-h8`).
   Any integration needs a tested conversion.
@@ -213,9 +222,12 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
 - **Proposal:**
   - Content: optional `side: 'red' | 'black'` on every exercise (default `red`); the validator requires the side to
     move to equal `side` and all "own piece" checks use it. Existing content is unchanged (all default `red`).
-  - Board: `orientation` prop; `point(file, rank)` maps to `(8 - file, rank)` when Black is at the bottom. Hit
-    areas, marks, animations (`--dx/--dy` are computed from `at()`), and accessible labels follow automatically.
-    The orientation follows the learner's side for the whole exercise, including opponent replies.
+  - Board: `orientation` prop that rotates the board 180°. In grid units (before `MARGIN + … * CELL`), today
+    `point(file, rank)` draws at x = file, y = 9 − rank (`Board.tsx:50`); with Black at the bottom it draws at
+    x = 8 − file, y = rank. Grid lines and palace diagonals are symmetric under this rotation. Hit areas, marks,
+    animations (`--dx/--dy` are computed from `at()`) and accessible labels follow automatically. The river
+    labels are placed by hand (`Board.tsx:100-103`: 楚 河 on the left, 漢 界 on the right) and must be swapped
+    explicitly. The orientation follows the learner's side for the whole exercise, including opponent replies.
   - Coordinates: optional edge labels. **Unresolved (S1.2 / learning-experience):** which notation learners see —
     ICCS letters/digits (what the content uses), traditional file numbers 1–9 counted from each player's right
     (the convention of Chinese and Vietnamese notation, e.g. "Pháo 2 bình 5"), or both. The engine keeps ICCS
@@ -249,13 +261,21 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
 
 - **Today (Verified):** forcing goals accept every move meeting the predicate; puzzles accept only the stored
   first move plus `alternatives`, which the verifier requires to be the complete winning set.
-- **Proposal:** every decision point has an explicit **move table** covering all legal moves (30–45 in a
-  middlegame), produced at authoring time and committed:
+- **Proposal (decision taken in this document): complete tables for authored decision points.** Every authored
+  decision point (single-decision exercises, learner nodes of a `line`, assessment items) stores a **complete**
+  move table: every legal move (30–45 in a middlegame) has a class, produced at authoring time and committed:
   - `best` / `good` → accepted (feedback distinguishes them, never "wrong");
   - `playable` → accepted with a comment ("possible, but it does not do X"), configurable per exercise as accepted
     or "try again, without penalty" for teaching steps;
-  - `mistake` / `blunder` → rejected, each with a reason key (what the opponent does next);
-  - unlisted moves fall into a default class computed by §5.4 (safety guard + objective).
+  - `mistake` / `blunder` → rejected, each with a reason key (what the opponent does next).
+  Each entry records its `source`: `computed` (the generator applied the §5.4 rule: safety guard + objective
+  predicates) or `authored` (set or confirmed by the author, with a reason). The author must review and decide
+  every accepted move and every move the generator flags as tempting (e.g. captures, checks, moves the content
+  names); the rest may stay `computed`. Rationale for complete over partial: the verdict for the start of every
+  authored decision is then fixed, reviewable and identical on every device, costs no runtime search, and cannot
+  change silently if the analysis code changes (the validator recomputes `computed` entries and fails on drift).
+  A runtime **default class** (§5.4, computed in the Worker) is used only where no table can exist: positions
+  reached off the authored tree in `line` exercises and in `play` tasks.
   A generator script proposes the table (search scores, features, solver results); the author edits; the content
   reviewer approves. The validator checks the table is complete, every claim it makes (e.g. "loses the chariot")
   is reproduced by the engine, and that at least two moves are accepted where the objective allows alternatives
@@ -270,10 +290,13 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   required; an engine score is used only as a guard with a tolerance, and §2.4 shows why: even a strong engine's
   first choice at depth 22 was not the objectively best move.
 - **Layer 1 — safety guard (computable, reliable within its horizon):** the move does not allow a forced mate
-  within k moves (exhaustive, k = 2 costs ~3–5 ms on a full board, §2.2), does not lose ≥ T material within d
-  plies compared with the best available alternative (material search; d = 3 costs ~60–130 ms desktop, d = 4
-  ~1.4 s → authoring time or Worker), and does not leave a piece en prise to a winning capture (attack map, ~instant).
-  Thresholds T and k/d are per exercise, defaults documented. Limit: tactics beyond the horizon are invisible.
+  within k moves (exhaustive; k = 2 costs ~3–5 ms for **one** quiet full-board position, but ~120 ms median to
+  check **all 37** moves of the mid position, and more in tactical positions with many checks), does not lose
+  ≥ T material within d plies compared with the best available alternative (material search for every move:
+  d = 2 ~77 ms, d = 3 ~720 ms median for the 37 mid moves, §2.2 → authoring time, or Worker at d = 2), and does not
+  leave a piece en prise to a winning capture (attack map, ~instant). For authored decision points all of this is
+  precomputed (§5.3); at runtime it is needed only off the tree. Thresholds T and k/d are per exercise, defaults
+  documented (R7). Limit: tactics beyond the horizon are invisible.
 - **Layer 2 — objective predicates (declarative, per exercise; computable):** examples that an in-repo evaluator
   can decide exactly from the resulting position:
   - mobility of a named piece ≥ N or increased by ≥ N (legal-move count; horse legs and elephant eyes included);
@@ -295,27 +318,81 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   pieces safe for the next 2 moves"), never "the engine says this is best".
 - **Graceful failure:** if a runtime check cannot finish within its budget, the move is treated as "not checked":
   accepted if the author table accepts it, otherwise neutral feedback ("this is not one of the plans this lesson
-  covers") with no heart or score penalty, and the event is counted for content review.
+  covers") with no heart or score penalty, and the event is counted for content review. **In assessments** a
+  "not checked" move earns **no credit and no penalty**: the item is voided and replaced by another item of the
+  same strand (or, if none is left, excluded from both numerator and denominator and reported), so a timeout can
+  never raise a score towards 90/100. Authored assessment items have complete tables (§5.3), so this can only
+  happen off the tree.
 
 ### 5.5 Constrained training opponents
 
 - **Today (Verified):** best defence only (forced lines), from stored moves or the exhaustive/material search.
-- **Proposal:** an `OpponentPolicy` interface in `src/play/` with an injected RNG; each policy states its intended
-  quality and the learner-facing disclosure:
+- **Verified — why material-only sparring is not enough.** A policy that picks randomly among moves within a
+  tolerance of the best needs a score for **every** root move. With today's material-only search
+  (`moveScore` for all 37 moves of the mid position) this costs ~77 ms median at d = 2 and ~720 ms at d = 3, and
+  yields only **5 distinct scores for 37 moves**: every safe move ties, so the choice among them is random. Such an
+  opponent avoids blunders but never builds a threat; a defending learner would only be tested on "do not blunder
+  within 3 plies".
+- **Proposal:** an `OpponentPolicy` interface in `src/play/` with an injected RNG; each policy states its
+  evaluation, intended quality and the learner-facing disclosure:
 
-  | Policy | Intended quality | Limits to disclose |
-  | --- | --- | --- |
-  | `scripted` | exactly the authored replies (deviations from §5.2) | knows nothing off the tree; hands over to another policy |
-  | `best-defence` | optimal within the forced-mate horizon (today's behaviour) | only meaningful in forced lines |
-  | `safe-sparring(d)` | avoids hanging pieces and simple tactics up to d plies (d = 2–3), picks randomly among moves within a tolerance of its best score | no plans, no positional understanding; can be outplayed strategically |
-  | `restricted(spec)` | only some pieces move, or a fixed plan (e.g. "only develops", "only defends the palace") | deliberately unrealistic; a drill partner |
-  | `greedy` | takes material whenever possible | for teaching safety and traps only |
+  | Policy | Evaluation used | Intended quality | Limits to disclose |
+  | --- | --- | --- | --- |
+  | `scripted` | none: authored replies (deviations from §5.2; threat trees, below) | exactly what the author wrote and the reviewer approved | knows nothing off the tree; hands over to the policy named in the exercise |
+  | `best-defence` | exhaustive forced-mate search; material search for win-material (today's code) | optimal within the forced horizon | only meaningful in forced lines |
+  | `forcing-attack(k)` | exhaustive `forcedWinMoves` (k ≤ 2 at runtime, 3 in endgames) then material search | plays a forced mate or a winning capture whenever one exists within its horizon, otherwise hands over | sees nothing quieter than its horizon |
+  | `safe-sparring(d)` | material-only search (`moveScore`), d = 2 | never hangs material within d plies; otherwise random | no threats, no plans; a practice partner for safety habits only |
+  | `pressing(d)` | material + features of §5.4: pressure on the enemy palace (attacked palace points), attacked undefended enemy pieces, mobility; capture quiescence; d = 2 | prefers safe moves that attack the learner's palace and loose pieces, so a defender faces real threats each move | shallow (2 plies + captures); threats may be superficial; no long plans; weights are heuristic and must be validated (below) |
+  | `restricted(spec)` | any of the above, limited to some pieces or a fixed plan ("only develops", "only defends the palace") | a drill partner | deliberately unrealistic |
+  | `greedy` | captures first | for teaching safety and traps only | trivially exploitable |
 
   Strength is defined by depth/node limits (deterministic per seed), never by wall-clock time, so a phone and a
-  desktop see the same opponent. Measured cost for `safe-sparring(3)` on a full board: ~60–130 ms per move desktop
-  (§2.2), acceptable in a Worker.
-- **Unresolved (S1.2):** which practical tasks use which policy, and whether any assessment uses `safe-sparring`
-  (its weakness means beating it is weak evidence; see §5.6).
+  desktop see the same opponent.
+- **Measured cost of the policies (desktop, warm-up + median, script §A.4; "windowed" = each root move searched
+  only to prove "within 0.5 of the best so far", which is all a tolerance policy needs):**
+
+  | Position | Policy (all root moves) | Exact | Windowed | Distinct scores |
+  | --- | --- | ---: | ---: | --- |
+  | mid (37 moves, full board) | `safe-sparring`, material d = 2 / d = 3 | 77 / 721 ms | — | 5 / 37 |
+  | mid | `pressing` prototype, d = 1 + quiescence | 12 ms | 6 ms | 25 / 37 |
+  | mid | `pressing` prototype, d = 2 + quiescence | 174 ms | 77 ms | 26 / 37 |
+  | mid | `pressing` prototype, d = 3 + quiescence | 2,067 ms | 988 ms | 27 / 37 |
+  | u15l3#3 (28 moves, 12 pieces) | `pressing` prototype, d = 2 / d = 3 + quiescence | 30 / 377 ms | 16 / 178 ms | 21–22 / 28 |
+  | mid | `forcing-attack`: `forcedWinMoves(mid, 1 / 2 / 3)` | 0.8 / 12 / 107 ms | — | (quiet position; tactical ones cost more, §2.2) |
+
+  The prototype is throwaway scratch code (untuned weights: mobility 0.03 per pseudo-legal move, 0.08 per
+  attacked enemy palace point, 30 % of a piece's value when it is attacked and undefended; pins ignored; no
+  transposition table). It shows the **cost** and that the features separate moves; it does **not** show that its
+  choices are good.
+- **Budget reconciliation (§7.5: ≤ ~300 ms desktop per Worker request):** `pressing(2)` windowed with capture
+  quiescence (~77 ms on a full board) and `forcing-attack(2)` fit, as does `safe-sparring(2)`. Depth 3 does not fit
+  on a full board (~1 s windowed, ~2 s exact; material-only ~720 ms) and is allowed only when the position is
+  small (≤ ~12 pieces, measured ~180 ms windowed) or after S2 shows that a transposition table and better move
+  ordering bring it under budget. Every request also carries a node limit (the d = 2 full-board searches above
+  used 2,400–4,800 nodes; a cap of ~20,000 nodes keeps an unlucky position bounded). The phone factor (R6) may
+  force d = 1 + quiescence on slow devices — but because verdicts and opponents are defined by depth/node limits,
+  a slow phone waits longer rather than seeing a weaker opponent; if the wait exceeds the safety-net time, the
+  policy falls back to its d = 1 move and the game record notes it.
+- **How defence, hold and convert tasks get a challenging, plausible opponent (Proposal):**
+  1. **Choose positions where the pressure is concrete.** A `hold`/defence task is published only if, at
+     authoring time, the attacker has a concrete threat at the start (a forced mate within k, or a material gain
+     ≥ T found by the search) that the learner must parry, verified by the exhaustive solver / search. A
+     `convert` task is published only if the defender has a concrete counter-threat or a fortress-like resource
+     the learner must prevent (verified the same way), so "shuffle safely" does not pass.
+  2. **Authored threat trees** (`scripted`): the author writes the attacker's main ideas and its answers to the
+     main defences (as a `line` tree, §5.2); forced claims are proven; the content reviewer checks plausibility.
+  3. **Off the tree:** `forcing-attack` first (if a forced win or a winning capture exists, it is played), then
+     `pressing(2)`. In `convert` tasks the learner's opponent is the defender, so `forcing-attack` plays its
+     counter-threats and `pressing` its counterplay.
+  4. **Validation of `pressing` before any assessment uses it (S2):** play it against `safe-sparring` and against
+     itself from the pilot positions; the content reviewer judges a sample of its moves for plausibility; weights
+     are adjusted until no reviewed sample shows obviously aimless play. Until then it is a practice partner only.
+- **What a pass does and does not show:** passing a `hold` task shows the learner parried the verified threats and
+  the threats `pressing` found within 2 plies + captures; passing `convert` shows the learner converted against
+  verified counterplay and a shallow defender. Neither shows the result against a strong human or engine, nor
+  that the learner understood the plan (the self-analysis tasks of 03-assessment address that).
+- **Unresolved (S1.2):** which practical tasks use which policy, and whether any assessment counts results against
+  `safe-sparring` or `pressing` (R3).
 
 ### 5.6 Practical-play tasks
 
@@ -330,8 +407,13 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   persistence through `src/storage` (a reload or tab switch does not lose the game), a post-game review that runs
   the safety guard on each learner move in the Worker (with a budget per move) and lists blunders, and rubric
   scoring from `design/03-assessment.md`.
-- **Evidence limits (Proposal, for 03-assessment):** results against `safe-sparring` show safety and basic
-  conversion, not strength against humans; rubric items based on the post-game review (blunders per game,
+- **Opponent per task (Proposal):** `hold` and defence tasks: threat tree → `forcing-attack(2)` → `pressing(2)`;
+  `convert`: counterplay tree → `forcing-attack(2)` → `pressing(2)`; `play-out` and `game`: `pressing(2)`, with
+  `scripted` openings where the lesson needs specific deviations. `safe-sparring` is for early Basic practice only.
+  Position selection rules for `hold`/`convert` are in §5.5.
+- **Evidence limits (Proposal, for 03-assessment):** results against `safe-sparring` show only safety; results
+  against threat trees + `pressing` show defence against verified and shallow threats (§5.5), not strength against
+  humans; rubric items based on the post-game review (blunders per game,
   undefended pieces left, development by move N) are measurable; "had a plan" is not machine-measurable and needs
   self-analysis tasks (the learner annotates their own game, compared with the review).
 
@@ -345,7 +427,9 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   - detect the third occurrence of a key; classify every move of the repeated cycle as *check* or *other*
     (check is exact: `isInCheck` after the move);
   - a **training ruleset** that the code can decide exactly: (1) one side checks on every move of the cycle and the
-    other does not → the checking side loses (perpetual check is forbidden); (2) both sides check perpetually, or
+    other does not → the checking side loses (perpetual check is forbidden). This **simplifies** the official
+    rules, under which the perpetually checking side must change its move and loses only if it refuses; an app
+    cannot ask "will you change?", so it adjudicates at the third occurrence. Disclosed to the learner; (2) both sides check perpetually, or
     neither does → draw; (3) **perpetual chase is not adjudicated** (it needs judging whether each move creates a
     new attack on an unprotected piece, with many exceptions in the official rules); (4) tasks have explicit move
     caps instead of a general no-capture rule; full games use a no-capture move limit chosen by S1.2.
@@ -439,7 +523,9 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
    opponents + adjudicator → `play` tasks → three-level progress storage + migration + sync column. The pilot needs
    all except possibly full games.
 5. **Budgets to adopt (to be confirmed on phones in S2):** UI-thread work ≤ ~50 ms desktop; Worker requests
-   ≤ ~300 ms desktop at the chosen depth/node limits; anything slower precomputed at authoring time.
+   ≤ ~300 ms desktop at the chosen depth/node limits; anything slower precomputed at authoring time. Measured fits
+   (§5.5): opponent policies at d = 2 + capture quiescence (≤ ~180 ms exact, ~77 ms windowed on a full board),
+   runtime mate guard k = 2 for all moves (~120 ms); d = 3 only in small positions until S2 measures improvements.
 
 ## 8. Unresolved decisions (collected)
 
@@ -447,11 +533,12 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
 | --- | --- | --- |
 | R1 | Coordinates/notation shown to learners (ICCS, traditional 1–9 per side, both) | S1.2 / learning experience |
 | R2 | Reference ruleset, no-capture limit, perpetual-chase handling disclosure, repetition outcome in `hold` tasks | S1.2 (`03-assessment.md`) |
-| R3 | Whether any assessment counts results against `safe-sparring` opponents | S1.2 |
+| R3 | Whether any assessment counts results against `safe-sparring` or `pressing` opponents (only after `pressing` is validated, §5.5) | S1.2 |
 | R4 | Licence of this repository; whether a GPL engine may ever ship in the app | owner |
 | R5 | Supabase: separate `data_v2` column behaviour with old clients; mastery revocation | S1.3 + S2 test |
-| R6 | Phone slowdown factor (measure §A.1 on real devices) | S2 pilot |
-| R7 | Default safety-guard thresholds (k, d, T) per level | S1.2 + content reviewer |
+| R6 | Phone slowdown factor: run §A.1 and §A.4 (packaged as a page) on at least one Android and one iOS device; confirm `pressing(2)` / `forcing-attack(2)` / mate guard stay within the 300 ms-desktop-equivalent budget, else drop to d = 1 + quiescence on slow devices | S2 pilot |
+| R7 | Default thresholds per level: mate guard k (2 at runtime, more at authoring), material horizon d (2 at runtime, 3–4 at authoring), loss threshold T, policy tolerance (0.5 in the measurements), node cap (~20,000 proposed) | S1.2 + content reviewer, measured in S2 |
+| R8 | Reconcile with `03-assessment.md` §5.2 and A2 (not edited here). (a) Its A2.3 adjudicates a **simplified perpetual chase** (the chasing side loses); §5.7 here does not adjudicate chase. (b) Partner names: `script` ≈ `scripted`; `spar` (material d = 2 + quiescence, tolerance 1 point) ≈ `safe-sparring(2)` (fits the budget: ~77 ms); `defend` (material search at depth 4 for its move + short mate search) and `counter` (`defend` plus a preference for checks/attacks within 0.5) are **material-based at depth 4**: choosing a move at depth 4 means scoring every root move at depth 4, which exceeds the measured ~720 ms already needed at d = 3 on a full board, so they fit the 300 ms budget only in small endgame positions or after S2 improvements; and a material-only base gives the tie problem of §5.5, which `counter`'s preference partly addresses. Proposed: `defend` ≈ threat tree → `forcing-attack(2)` → `pressing(2)`; `counter` ≈ `pressing(2)` with its tie-break. (c) 03's UA5 (phone cost of partners) is answered by §5.5's desktop numbers + R6 | S1.4 |
 
 ---
 
@@ -573,3 +660,116 @@ GO="depth 16" node "$S/fsf.cjs" "$S/fsf/package" "r1bakabr1/9/1cn3nc1/p1p1p1p1p/
 
 The package's own `uci.js` fails under Node 22 (its loader fetches the `.wasm` by path); passing `wasmBinary`
 as above avoids that.
+
+### A.4 Opponent-policy and per-move guard costs (`$S/policy.mts`, run: `ALL=1 npx tsx $S/policy.mts "$PWD"`)
+
+One warm-up run, then the median of 5 runs (3 for depth 3 and the mate-in-4 rows). Without `ALL=1` only the
+`pressing` prototype rows run. The `pressing` evaluation here is a throwaway prototype for cost measurement, not
+a proposal for the final weights. `forcedWinMoves(mid, n)` was timed the same way (warm-up + median of 3).
+
+```ts
+// Usage (repo root): npx tsx policy.mts <repo>
+// Costs of opponent-policy prototypes: every root move must be scored (or bounded) to choose "within tolerance".
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+const repo = process.argv[2];
+const E = await import(join(repo, 'src/engine/index.ts'));
+const A = await import(join(repo, 'src/lessons/answers.ts'));
+const bench = (label: string, fn: () => unknown, runs = 5) => {
+  fn(); // warm-up
+  const t: number[] = []; let r: unknown;
+  for (let i = 0; i < runs; i++) { const t0 = performance.now(); r = fn(); t.push(performance.now() - t0); }
+  t.sort((a, b) => a - b);
+  console.log(`${label.padEnd(66)} median ${t[runs >> 1].toFixed(1).padStart(8)} ms (min ${t[0].toFixed(1)}, max ${t[runs - 1].toFixed(1)})  ${typeof r === 'string' ? r : ''}`);
+  return r;
+};
+const P = (s: string) => E.parseSquare(s);
+let mid = E.parseFen(E.START_FEN);
+for (const [f, t] of [['h2', 'e2'], ['h9', 'g7'], ['h0', 'g2'], ['b9', 'c7'], ['i0', 'h0'], ['i9', 'h9']]) mid = E.makeMove(mid, { from: P(f), to: P(t) });
+const fx = JSON.parse(readFileSync(join(repo, 'src/content/lessons/15-master.json'), 'utf8')).lessons.find((l: any) => l.id === 'u15l3').exercises[3];
+const u15 = A.positionOf(fx);
+const spread = (scores: number[]) => `distinct scores ${new Set(scores.map((s) => s.toFixed(2))).size}/${scores.length}, range ${Math.min(...scores).toFixed(2)}..${Math.max(...scores).toFixed(2)}`;
+
+// --- material-only policy as the engine offers it: moveScore for every root move
+if (process.env.ALL) for (const d of [2, 3]) {
+  let s: number[] = [];
+  bench(`material: moveScore(m, ${d}) for all ${E.legalMoves(mid).length} mid moves`, () => { s = E.legalMoves(mid).map((m: any) => E.moveScore(mid, m, d)); return ''; });
+  console.log('   ', spread(s));
+}
+if (process.env.ALL) bench(`mate guard: hasForcedWin(after m, 2) for all mid moves`, () => (E.legalMoves(mid).forEach((m: any) => E.hasForcedWin(E.makeMove(mid, m), 2)), ''));
+if (process.env.ALL) bench(`u15l3#3: hasForcedWin(pos, 4)`, () => String(E.hasForcedWin(u15, 4)), 3);
+if (process.env.ALL) bench(`u15l3#3: forcedWinMoves(pos, 4)`, () => E.forcedWinMoves(u15, 4).map((m: any) => E.squareName(m.from) + '-' + E.squareName(m.to)).join(','), 3);
+
+// --- prototype "pressing" evaluation (scratch only): material + palace pressure + attacked pieces + mobility
+const V = E.PIECE_VALUES;
+const palace = (color: string, sq: number) => { const f = E.fileOf(sq), r = E.rankOf(sq); return f >= 3 && f <= 5 && (color === 'red' ? r <= 2 : r >= 7); };
+function evalFor(board: any[], side: string): number {
+  let s = 0;
+  const attacked = new Map<number, string[]>();
+  for (let sq = 0; sq < 90; sq++) {
+    const p = board[sq]; if (!p) continue;
+    const sign = p.color === side ? 1 : -1;
+    if (p.type !== 'general') s += sign * V[p.type];
+    const targets = E.pseudoLegalTargets(board, sq);
+    s += sign * 0.03 * targets.length; // mobility
+    const enemy = p.color === 'red' ? 'black' : 'red';
+    for (const t of targets) {
+      if (palace(enemy, t)) s += sign * 0.08; // pressure on the enemy palace
+      (attacked.get(t) ?? attacked.set(t, []).get(t)!).push(p.color);
+    }
+  }
+  for (let sq = 0; sq < 90; sq++) { // attacked and undefended pieces (ignores pins/legality: a heuristic)
+    const p = board[sq]; if (!p || p.type === 'general') continue;
+    const by = attacked.get(sq) ?? [];
+    if (by.some((c) => c !== p.color) && !by.includes(p.color)) s += (p.color === side ? -0.3 : 0.3) * V[p.type];
+  }
+  return s;
+}
+function legal(board: any[], turn: string) {
+  const out: [number, number][] = [];
+  for (let f = 0; f < 90; f++) { const p = board[f]; if (!p || p.color !== turn) continue;
+    for (const t of E.pseudoLegalTargets(board, f)) { const c = board[t]; board[t] = p; board[f] = null;
+      if (!E.isGeneralAttacked(board, turn)) out.push([f, t]); board[f] = p; board[t] = c; } }
+  return out.sort((a, b) => (board[b[1]] ? V[board[b[1]].type] : 0) - (board[a[1]] ? V[board[a[1]].type] : 0));
+}
+let nodes = 0;
+function quiesce(board: any[], turn: string, a: number, b: number, q: number): number {
+  nodes++;
+  const stand = evalFor(board, turn);
+  if (stand >= b || q >= 4) return stand;
+  if (stand > a) a = stand;
+  const opp = turn === 'red' ? 'black' : 'red';
+  let best = stand;
+  for (const [f, t] of legal(board, turn)) { if (!board[t]) continue; const p = board[f], c = board[t]; board[t] = p; board[f] = null;
+    const sc = -quiesce(board, opp, -b, -a, q + 1); board[f] = p; board[t] = c;
+    if (sc > best) best = sc; if (sc > a) a = sc; if (a >= b) break; }
+  return best;
+}
+function nega(board: any[], turn: string, d: number, a: number, b: number): number {
+  nodes++;
+  const moves = legal(board, turn);
+  if (!moves.length) return -1e5;
+  if (d === 0) return quiesce(board, turn, a, b, 0);
+  const opp = turn === 'red' ? 'black' : 'red';
+  let best = -Infinity;
+  for (const [f, t] of moves) { const p = board[f], c = board[t]; board[t] = p; board[f] = null;
+    const sc = -nega(board, opp, d - 1, -b, -a); board[f] = p; board[t] = c;
+    if (sc > best) best = sc; if (sc > a) a = sc; if (a >= b) break; }
+  return best;
+}
+function rootScores(pos: any, d: number, tol: number | null) {
+  const board = pos.board.slice(); const opp = pos.turn === 'red' ? 'black' : 'red';
+  const moves = legal(board, pos.turn); const out: number[] = []; let best = -Infinity;
+  for (const [f, t] of moves) { const p = board[f], c = board[t]; board[t] = p; board[f] = null;
+    // full window, or a window that only proves "within tol of best so far"
+    const lo = tol === null ? -Infinity : best - tol;
+    const sc = -nega(board, opp, d - 1, -Infinity, -lo); board[f] = p; board[t] = c;
+    out.push(sc); if (sc > best) best = sc; }
+  return out;
+}
+for (const [name, pos] of [['mid', mid], ['u15l3#3', u15]] as const) for (const d of [1, 2, 3]) for (const tol of [null, 0.5]) {
+  let s: number[] = [];
+  bench(`pressing eval, ${name}, depth ${d}, ${tol === null ? 'all moves exact' : 'windowed tol 0.5'}`, () => { nodes = 0; s = rootScores(pos, d, tol); return `nodes ${nodes}`; }, d === 3 ? 3 : 5);
+  if (tol === null) console.log('   ', spread(s));
+}
+```
