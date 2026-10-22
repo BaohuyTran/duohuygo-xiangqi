@@ -1,0 +1,97 @@
+# Curriculum upgrade — backlog
+
+Work items for the phase, in dependency order. The driver ([DRIVER.md](./DRIVER.md)) picks the first `todo` item
+whose dependencies are `done`. Status: `todo` · `in-progress` · `done`. Items of later steps are added by step 1
+(S1.4 writes the prioritized implementation backlog that replaces the placeholders for steps 2–4).
+
+Design documents live in `docs/curriculum-upgrade/design/`.
+
+---
+
+## Step 1 — Audit and design (no application behaviour changes)
+
+### S1.1 — Current-state audit and exercise-architecture feasibility
+
+- **Status:** todo
+- **Role focus:** architecture engineer (+ QA for counts)
+- **Depends on:** —
+- **Owned files:** `design/01-audit.md`, `design/04-architecture.md`
+- **Acceptance criteria**
+  - [ ] `design/01-audit.md`: verified counts (units, lessons, practice exercises by type and goal, learn cards,
+        puzzles by kind, tracks), with the command/script used to count; colour coverage; how jump-ahead,
+        progress, gamification and sync work, with `file:line` references; the historical findings in
+        `01-audit-and-design.md` confirmed or corrected.
+  - [ ] `design/04-architecture.md`: engine and solver capabilities and limits (rules not implemented, search
+        depth/time on a phone), exercise model today, what is needed for: playing Black (orientation,
+        coordinates), branching continuations, multiple acceptable moves, strategic (non-tactical) acceptance,
+        constrained training opponents, practical-play tasks, repetition adjudication, three-level progress
+        (completed / mastered / applied); integration options (in-repo search in a Web Worker vs an external
+        engine such as a WASM build) with licensing, size, offline and performance notes; recommendation.
+  - [ ] Verified facts, design proposals and unresolved decisions are visibly separated.
+  - [ ] No application code changed.
+
+### S1.2 — Curriculum and assessment specification
+
+- **Status:** todo
+- **Role focus:** curriculum designer (+ learning-experience)
+- **Depends on:** — (reads the code itself; reconciled with S1.1 at S1.4)
+- **Owned files:** `design/02-curriculum.md`, `design/03-assessment.md`
+- **Acceptance criteria**
+  - [ ] Every unit: stable id, level, prerequisites, competency tags (six strands), observable outcomes, lesson
+        titles + objectives, exercise types and scaffolding progression, guided / independent / transfer tasks,
+        misconceptions + feedback requirements, assessment and remediation criteria.
+  - [ ] All six strands and the 50-topic baseline covered (any split/merge/reorder justified); both colours;
+        attack and defence; positions with no immediate tactic; plans before opening memorization; difficulty
+        grows through fewer hints, unfamiliarity, branching, counterplay and evaluation.
+  - [ ] Assessment spec: completed / independently mastered / applied in practical play; item design rules
+        (no motif leaks); practical-play rubrics; jump-ahead scoring ≥ 90/100 with per-strand minimums, first
+        attempt vs hints/retries; XP/streaks never count as competence; ruleset choice incl. repetition
+        adjudication and implementation limits.
+  - [ ] No invented positions, ratings or learning-time guarantees.
+
+### S1.3 — Reuse/migration map and content sourcing policy
+
+- **Status:** todo
+- **Role focus:** curriculum designer + QA (migration risks)
+- **Depends on:** S1.1, S1.2
+- **Owned files:** `design/05-migration.md`, `design/07-sourcing.md`
+- **Acceptance criteria**
+  - [ ] Every existing lesson id (and the puzzle bank) mapped to keep / revise / move / retire, with target unit.
+  - [ ] Versioned progress migration: storage keys, what old completion maps to (completion only, never
+        mastery), sync/merge implications, rollback, tests needed.
+  - [ ] Sourcing, attribution/licensing and verification policy (original positions, engine-verified claims,
+        review record tied to stable ids, draft status).
+
+### S1.4 — Implementation backlog and pilot recommendation
+
+- **Status:** todo
+- **Role focus:** lead integrator (driver) with implementer
+- **Depends on:** S1.1, S1.2, S1.3
+- **Owned files:** `design/06-backlog.md`, this file (driver), `design/README.md`
+- **Acceptance criteria**
+  - [ ] Prioritized, dependency-ordered backlog for steps 2–4 with ownership and acceptance criteria, copied
+        into this file as `S2.*`, `S3.*`, `S4.*` items.
+  - [ ] Pilot recommendation (the five pilot pieces from `02-foundation-and-pilot.md`) and what it validates.
+  - [ ] `design/README.md` indexes the documents; inconsistencies between S1.1–S1.3 resolved.
+
+### S1.gate — Step 1 gate
+
+- **Status:** todo
+- **Depends on:** S1.1–S1.4
+- **Acceptance criteria**
+  - [ ] All deliverables 1–7 of `01-audit-and-design.md` exist; `content-reviewer` and `reviewer` APPROVE the set.
+  - [ ] Lint, build, tests pass; no application behaviour changed.
+
+---
+
+## Step 2 — Foundation and pilot
+
+Placeholder: replaced by S1.4.
+
+## Step 3 — Curriculum production
+
+Placeholder: replaced by S1.4.
+
+## Step 4 — Final validation
+
+Placeholder: replaced by S1.4.

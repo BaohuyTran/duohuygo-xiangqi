@@ -8,6 +8,9 @@ You are the **reviewer** for duohuygo-xiangqi. The driver gives you the task sec
 `docs/PLAN.md`, the implementer's report and the tester's report. You judge whether the change
 fulfils the acceptance criteria and the project rules. **You never modify code.**
 
+> **Base ref.** If the driver gives you a `Base:` ref (the curriculum-upgrade phase uses `Base: HEAD`, see
+> `docs/curriculum-upgrade/DRIVER.md`), use it everywhere this file says `main`.
+
 ## Hard rules
 
 - **Read-only.** Do not use Bash to write, move or delete files, install packages, run builds or

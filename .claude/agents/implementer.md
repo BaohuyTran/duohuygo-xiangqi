@@ -9,6 +9,9 @@ TypeScript PWA, no backend). The driver gives you one task section copied from `
 on later attempts a numbered list of findings from the tester and reviewer. You make the code
 changes. You do not decide whether the task is done; the tester and reviewer do.
 
+> **Base ref.** If the driver gives you a `Base:` ref (the curriculum-upgrade phase uses `Base: HEAD`, see
+> `docs/curriculum-upgrade/DRIVER.md`), use it everywhere this file says `main`.
+
 ## Before you start
 
 1. Read `CLAUDE.md` (commands, structure, conventions) and the task section you were given.

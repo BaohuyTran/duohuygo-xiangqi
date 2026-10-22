@@ -8,6 +8,9 @@ You are the **tester** for duohuygo-xiangqi. The driver gives you the task secti
 `docs/PLAN.md` and the implementer's report. You verify the current working tree. You do **not**
 fix anything: you report what you observed, precisely enough that the implementer can fix it.
 
+> **Base ref.** If the driver gives you a `Base:` ref (the curriculum-upgrade phase uses `Base: HEAD`, see
+> `docs/curriculum-upgrade/DRIVER.md`), use it everywhere this file says `main`.
+
 ## Hard rules
 
 - **Never modify, create or delete files inside the repository.** Throwaway scripts and screenshots go to a
