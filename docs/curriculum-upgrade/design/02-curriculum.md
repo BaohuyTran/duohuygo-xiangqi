@@ -2,7 +2,7 @@
 
 Backlog item S1.2 · Owner: curriculum designer · Companion: [03-assessment.md](./03-assessment.md) (how
 everything here is assessed). Audit: [01-audit.md](./01-audit.md); architecture: [04-architecture.md](./04-architecture.md)
-(S1.1). S1.4 reconciles the three. Revision: attempt 2 (fixes the S1.2 review findings).
+(S1.1). S1.4 reconciles the three. Revision: attempt 3 (fixes the S1.2 review findings of attempts 1 and 2).
 
 ## 0. How to read this document
 
@@ -131,6 +131,14 @@ S1.1 decides how the board rotates and how a `formatMove` helper renders it.
   operator + target, the style also used in 04-architecture.md ("C2=5", "H8+7"; `+` advance, `-` retreat, `=`
   traverse). Vietnamese: the Vietnamese traditional form ("P2-5", "M8.7"; `.` tấn, `/` thoái, `-` bình). The
   exact Vietnamese symbols are to be confirmed by the content reviewer before any text uses them.
+- **Piece letters.** English: K General, A Advisor, E Elephant, R Chariot, H Horse, C Cannon, P Soldier. Vietnamese:
+  Tg Tướng, S Sĩ, T Tượng, X Xe, M Mã, P Pháo, B Tốt. Tướng and Tượng both start with T, so the General is written
+  "Tg" and the Elephant "T"; the Soldier is lettered B (from Binh) because T is taken, while the piece is always
+  *named* "Tốt" in text, as in `src/i18n/messages.ts` today. Vietnamese letters are **to confirm against a sourced
+  reference** before use.
+- **Two identical pieces on one file:** the front/rear piece is marked instead of the file number. English: `+`
+  front, `−` rear before the piece letter (e.g. "+C=5"); Vietnamese: `t` (trước) / `s` (sau) after the piece letter
+  (e.g. "Pt-5"). Both forms are **to confirm against a sourced reference**.
 - **ICCS** (`h2e2`) stays internal: content JSON, tests, validators. Not shown to learners.
 - Notation is taught in `b01l4` and repeated wherever a prompt first uses it. **Unresolved (LX):** a setting to
   show ICCS coordinates as well.
@@ -151,7 +159,7 @@ Tượng/Elephant, Xe/Chariot, Mã/Horse, Pháo/Cannon, Tốt/Soldier.
 | Ngọa tào mã | 卧槽马 | Ngọa tào Horse (English name to be confirmed; **not** "palace corner") | A Horse on the point beside the enemy palace from which it checks the General; the current UI title "Palcorner Horse" (`u8l1.title`) must be renamed when `u8l1` is migrated |
 | Trùng pháo | 重炮 | Double Cannon | Two Cannons on one line, the front one screening the back one |
 | Muộn cung | 闷宫 | Smothered General | Cannon mate where the General's own pieces block it in |
-| Mã hậu pháo | 马后炮 | Horse-behind-Cannon | Horse controls the General while the Cannon mates along the line |
+| Mã hậu pháo | 马后炮 | Horse-behind-Cannon | The Horse stands on the line between the Cannon and the enemy General, serving as the Cannon's screen, and covers the General's flight points |
 | Song xa | 双车 | Two Chariots | Mate by the two Chariots |
 
 ---
@@ -226,7 +234,9 @@ Every unit has at least one TR task (listed in the unit). **Default unit shape:*
 | Sustained play (learner moves; pilot calibrates) | Short tasks 6–12; full games to an adjudicated result (cap 80) | 10–20 | 12–25 | 15–30 | Multi-game exam |
 
 Lengths are design targets; the architecture review confirms the partner's time per move on a phone (Needs
-architecture confirmation; 04 §5.5 measured ~60–130 ms per move on desktop for `safe-sparring(3)`).
+architecture confirmation). 04 §5.5 measured, on desktop for the 37 moves of a full-board position, ~77 ms for the
+material search at d = 2 and ~721 ms at d = 3, against a budget of ≤ ~300 ms per request: partners therefore run at
+d = 2 (+ capture quiescence) on full boards, and d = 3 only in positions of ≤ ~12 pieces (03-assessment.md §5.2).
 
 ---
 
@@ -457,7 +467,7 @@ allows mate in one; find a safe useful move when there is no tactic; keep playin
 - **Guided:** `select-squares` (threatened pieces after a shown move) with the moved piece highlighted.
 - **Independent:** `choice` (safe/unsafe + reason), `decision` (`safe` guard + predicate "improves a piece"); mostly
   positions with no tactic.
-- **Transfer:** `b08-g1`: short `play` (6–12 learner moves) from a simplified position vs `safe-sparring(3)`, rubric R1 70 % + R0 30 %.
+- **Transfer:** `b08-g1`: short `play` (6–12 learner moves) from a simplified position vs `safe-sparring(2)`, rubric R1 70 % + R0 30 %.
 - **Misconceptions → feedback:** `b08.m1` only my plan matters → replay the opponent's last move and show its threat.
   `b08.m2` the opponent's move was random → show what it attacks. `b08.m3` checking captures but not checks → show the
   check that wins material. `b08.m4` "safe" means "do nothing" → show a safe move that also develops.
@@ -500,7 +510,8 @@ threat to the central Soldier as Black; play the first moves by principle as eit
 | Baseline topics | 10 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `b10-g1` (game as Red), `b10-g2` (game as Black); level exam `xb` |
 
-**Outcomes.** Play a complete game from the start position to a result against `safe-sparring` as either colour,
+**Outcomes.** Play a complete game from the start position to a result against the game partner (03-assessment.md §5.2:
+`scripted` opening → `pressing(2)`, or `safe-sparring(2)` under fallback F2) as either colour,
 applying the safety routine; convert a large material lead into mate in a simplified position; find the move where
 material was lost in a finished game and suggest a better one. A "result" is mate, stalemate, or the training
 adjudication of 03-assessment.md §5.5 (move cap 80 learner moves, no-capture limit, repetition rules): disclosed to
@@ -515,7 +526,8 @@ the learner as a training result, not an official one.
 
 - **Guided:** `play` with G2 coach prompts that fade to none.
 - **Independent:** `play` (b10l3, conversion, no prompts); `review` of the learner's own game.
-- **Transfer:** `b10-g1` and `b10-g2`: full games, no prompts.
+- **Transfer:** `b10-g1` and `b10-g2`: full games, no prompts, scored with the `xb` per-game score (03-assessment.md
+  §6: result 40 + R1 × 0.4 + R2 × 0.2; under fallback F2: R1 × 0.6 + R2 × 0.2 + R0 × 0.2), pass ≥ 75.
 - **Misconceptions → feedback:** `b10.m1` once ahead, the game wins itself → show the opponent's counter-chance in the
   learner's game. `b10.m2` attacking means ignoring threats → point to the move in the game where a threat was
   ignored. `b10.m3` a lost piece means the game is lost → show the drawing/holding chances that remained.
@@ -542,7 +554,7 @@ other; reject an activation that walks into a capture.
 
 - **Guided:** `select-squares` (worst piece) with mobility counts shown.
 - **Independent:** `decision` (predicate "chosen piece's mobility rises" + guard), contrast items, mostly quiet.
-- **Transfer:** `i01-g1`, `play` vs `safe-sparring`, rubric R3 (activity predicate) + R1.
+- **Transfer:** `i01-g1`, `play` vs `pressing(2)`, rubric R3 (activity predicate) + R1.
 - **Misconceptions → feedback:** `i01.m1` active = advanced as far as possible → compare mobility before/after and
   show the piece can be chased. `i01.m2` more attackers is always better → show two pieces blocking each other's lines.
 - **Assessment:** unit check. **Remediation:** default.
@@ -682,7 +694,7 @@ when it works; choose the defence that does not create a new weakness.
 
 - **Guided:** `move` (`defend`) with the threat shown as an arrow.
 - **Independent:** `decision`, `combination` from the defender's side (Black).
-- **Transfer:** `i07-g1`, `play` as defender vs a pressing partner, rubric R5 + R1.
+- **Transfer:** `i07-g1`, `play` as defender vs the hold chain or `pressing(2)` (03-assessment.md §5.2), rubric R5 + R1.
 - **Misconceptions → feedback:** `i07.m1` any move stopping the immediate threat is fine → play on to the second
   threat. `i07.m2` counter-attack always beats defence → show the counter-threat that is too slow.
 - **Assessment:** unit check; `i07-g1` for "applied". **Remediation:** default.
@@ -712,7 +724,7 @@ reviewed); choose a middlegame aim at the end of the line.
 
 - **Guided:** `learn` + `line` with each move's purpose shown.
 - **Independent:** `line` with seeded deviations; `decision`; `choice` (which aim fits this position).
-- **Transfer:** `i08-g1`, `line` then `play` vs `safe-sparring`, rubrics R6 + R1.
+- **Transfer:** `i08-g1`, `line` then `play` (`scripted` → `pressing(2)`), rubrics R6 + R1.
 - **Misconceptions → feedback:** `i08.m1` the opening is a fixed sequence → show a deviation and the same plan
   continuing. `i08.m2` always take the central Soldier at once → play out the reviewed line where Black gains time.
   `i08.m3` the Cannon alone makes an attack → count attackers vs defenders on the central file.
@@ -761,7 +773,7 @@ General theory ("this material always wins/draws") only with a cited, reviewed s
 
 - **Guided:** `combination` (checkmate) with the General's flight points marked.
 - **Independent:** `decision` (predicate: enemy General's legal moves fall; guard), `combination`.
-- **Transfer:** `i10-g1`, `play` vs the strict partner `safe-sparring(4, 0)`, rubric R4.
+- **Transfer:** `i10-g1`, `play` vs the convert chain (counterplay tree → `forcing-attack` → `pressing`), rubric R4.
 - **Misconceptions → feedback:** `i10.m1` the General must hide in endgames → show the point it controls. `i10.m2`
   checking is the fastest way to mate → show a check that releases the General and the quiet move that does not.
 - **Assessment:** unit check; `i10-g1`. **Remediation:** default.
@@ -860,7 +872,7 @@ guard refutes or the reviewed explanation shows to achieve nothing (pilot candid
 
 - **Guided:** `select-squares` (worst piece) with mobility shown.
 - **Independent:** `line` (re-route vs authored replies), `decision`.
-- **Transfer:** `a03-g1`, `play` vs `safe-sparring`, rubric R3 + R1.
+- **Transfer:** `a03-g1`, `play` vs `pressing(2)`, rubric R3 + R1.
 - **Misconceptions → feedback:** `a03.m1` every move must threaten something → show the attack's refutation and the
   improvement's later benefit. `a03.m2` a piece is "placed" once it has moved → show its mobility is still low.
 - **Assessment:** unit check; `a03-g1`. **Remediation:** default.
@@ -931,7 +943,7 @@ within the horizon, on a legal position); recognise when the attack is not ready
 
 - **Guided:** `decision` with attackers/defenders counted on the board.
 - **Independent:** `decision` (threat predicate), `combination` (finishing).
-- **Transfer:** `a06-g1`, `play` vs a pressing partner, rubric R3 + R1.
+- **Transfer:** `a06-g1`, `play` vs the hold chain or `pressing(2)` (03-assessment.md §5.2), rubric R3 + R1.
 - **Misconceptions → feedback:** `a06.m1` attacking means checking → show the check that drives the General to safety.
   `a06.m2` no combination means nothing to do → show the quiet move after which a combination appears.
 - **Assessment:** unit check; `a06-g1`. **Remediation:** default.
@@ -954,7 +966,7 @@ elsewhere; defend as Black under Central Cannon pressure.
 
 - **Guided:** `decision` with the opponent's plan shown as arrows.
 - **Independent:** `decision`, `move` (`defend`, depth 2).
-- **Transfer:** `a07-g1`, `play` vs a pressing partner, rubric R5 (with counterplay predicate) + R1.
+- **Transfer:** `a07-g1`, `play` vs the hold chain or `pressing(2)` (03-assessment.md §5.2), rubric R5 (with counterplay predicate) + R1.
 - **Misconceptions → feedback:** `a07.m1` defence means passivity → show the passive move losing to the plan and the
   active one holding. `a07.m2` defend only when the threat is immediate → show the plan two moves later.
 - **Assessment:** unit check; `a07-g1`. **Remediation:** default.
@@ -1004,7 +1016,7 @@ not suggest otherwise.
 | a09l4 | Defending with less | Holding technique |
 
 - **Guided:** `combination` with key points marked.
-- **Independent:** `combination`, `decision`, `play` vs `safe-sparring(4, 0)`.
+- **Independent:** `combination`, `decision`, `play` vs the convert/hold chains (depth 3 allowed: ≤ ~12 pieces).
 - **Transfer:** `a09-g1` (R4), `a09-g2` (R5 with holding predicate) as Black.
 - **Misconceptions → feedback:** `a09.m1` a Cannon is strong on an empty board → show the missing screens. `a09.m2`
   more material always wins → only verified/sourced examples. "Draw" is never claimed from search alone; holding
@@ -1099,7 +1111,7 @@ material-only engine cannot prove compensation, Verified limit); accept and refu
 
 - **Guided:** `decision` with the threat each move creates shown.
 - **Independent:** `decision`, `line`.
-- **Transfer:** `e03-g1`, `play` vs a pressing partner, rubric R3 + R4.
+- **Transfer:** `e03-g1`, `play` vs the hold chain or `pressing(2)` (03-assessment.md §5.2), rubric R3 + R4.
 - **Misconceptions → feedback:** `e03.m1` checks keep the initiative best → show a check that lets the defence
   regroup. `e03.m2` an attack must succeed where it started → show the second target.
 - **Assessment:** unit check; `e03-g1`. **Remediation:** default.
@@ -1122,7 +1134,7 @@ attack for the move cap.
 
 - **Guided:** `move` (`defend`) with the threat shown.
 - **Independent:** `decision`, `move` (`defend`).
-- **Transfer:** `e04-g1`, rubric R5 (counterplay predicate) + R1, pressing partner.
+- **Transfer:** `e04-g1`, rubric R5 (counterplay predicate) + R1, hold chain (03-assessment.md §5.2).
 - **Misconceptions → feedback:** `e04.m1` keep all material at any cost → show the attack continuing. `e04.m2` passive
   defence is safest → show the passive move losing.
 - **Assessment:** unit check; `e04-g1`. **Remediation:** default.
@@ -1157,7 +1169,7 @@ static one before it fades.
 | Reuses | — (new) | Practical task | `e06-g1` (Red), `e06-g2` (Black) |
 
 **Outcomes.** When ahead, remove counterplay first and then advance; simplify into a verified won endgame; convert as
-either colour against a pressing partner within the cap.
+either colour against the hold chain or `pressing(2)` (03-assessment.md §5.2) within the cap.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
@@ -1190,7 +1202,7 @@ adjudicates (03-assessment.md §8).
 
 - **Guided:** `decision` with the defensive setup's points marked.
 - **Independent:** `decision`, `choice` (rules), `play` (holding, short).
-- **Transfer:** `e07-g1` as Black vs a pressing partner, rubric R5 (holding predicate).
+- **Transfer:** `e07-g1` as Black vs the hold chain or `pressing(2)` (03-assessment.md §5.2), rubric R5 (holding predicate).
 - **Misconceptions → feedback:** `e07.m1` when worse, only passivity holds → show the active defensive move that
   trades an attacker. `e07.m2` repeating moves always draws → state the perpetual check/chase rules and the app's
   training limit. `e07.m3` a position is lost once material is down → show the verified holding setup.
@@ -1305,7 +1317,7 @@ act accordingly.
 | Level · prerequisites | Master · m02 | Strands | **PA**, **DE** |
 | --- | --- | --- | --- |
 | Baseline topics | 43 | Colour · perspective | Both |
-| Reuses | — (new) | Practical task | `m03-g1` (`play`, pressing partner) |
+| Reuses | — (new) | Practical task | `m03-g1` (`play`, hold chain → `pressing(2)`) |
 
 **Outcomes.** Notice when the opponent's counter-attack outweighs one's own and switch to defence, and back.
 
@@ -1362,10 +1374,10 @@ crossed Soldier, restrict the General), or hold a worse one for the cap.
 | m05l1 | Plans in rich endgames | Choose and execute |
 | m05l2 | Holding the worse side | Defend |
 
-- **m05l1 Items:** `choice` (plan) + `play` vs `safe-sparring(4, 0)`. **Positions must show:** at least two pieces per
+- **m05l1 Items:** `choice` (plan) + `play` vs the convert chain. **Positions must show:** at least two pieces per
   side besides Advisors/Elephants; the win verified for the exact position or the task scored by material
   thresholds only. **Success:** R4 ≥ 75.
-- **m05l2 Items:** `play` as defender vs a pressing partner. **Success:** R5 ≥ 75 with holding predicate.
+- **m05l2 Items:** `play` as defender vs the hold chain or `pressing(2)` (03-assessment.md §5.2). **Success:** R5 ≥ 75 with holding predicate.
 - **Guided:** worked example. **Independent:** m05 items. **Transfer:** `m05-g1`, `m05-g2`.
 - **Misconceptions → feedback:** `m05.m1` simplify everything when ahead → show a verified/sourced drawn reduction.
   `m05.m2` the defender can only wait → show the active defence that holds.
@@ -1550,7 +1562,7 @@ Counts follow from §8 and 03-assessment.md; item counts per lesson use the §5.
 | Intermediate | 11 | 42 | 210–340 | ~58 | 176 | 7 | `xi`; `pi` 40 + 2 |
 | Advanced | 10 | 37 | 185–260 | ~27 | 160 | 6 | `xa`; `pa` 40 + 2 |
 | Expert | 9 | 31 | 125–185 | ~35 | 8 × 16 + 12 = 140 | 8 | `xe`; `pe` 40 + 2 |
-| Master | 9 | 18 | 72–90 | 0 | 7 × 16 + 12 = 124 (m09: none) | 6 + `xm` | `xm` pool |
+| Master | 9 | 18 | 72–90 | 0 | 7 × 16 + 12 = 124 (m09: none) | 6 + `xm` | `xm` pool (no `pm`: no test-out within Master, 03-assessment.md §7.2) |
 | **Total** | **49** | **161** | **~760–1140** | **~146** | **~750** | **31** | 4 placement pools (~160 items, 8 tasks) + 5 exam pools |
 
 (The lesson count includes the new b01l4.) This is a large authoring volume: roughly 600–1000 new practice items and ~750 new
