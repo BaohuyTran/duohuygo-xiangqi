@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Unit } from '../content/types';
-import { JUMP_TEST_MAX, jumpBannerTrack, jumpTest, lessonStates, skippedLessons } from './progress';
+import { JUMP_TEST_MAX, furthestLesson, jumpBannerTrack, jumpTest, lessonStates, skippedLessons } from './progress';
 
 const units = [
   { id: 'a', title: '', description: '', lessons: [{ id: 'a1', title: '', exercises: [] }, { id: 'a2', title: '', exercises: [] }] },
@@ -91,5 +91,31 @@ describe('jumpBannerTrack', () => {
 
   it('shows nothing when there is only one track', () => {
     expect(jumpBannerTrack([unit('a')] as unknown as Unit[], [])).toBeNull();
+  });
+});
+
+describe('furthestLesson', () => {
+  const unit = (id: string, n: number, track?: string) => ({
+    id,
+    title: '',
+    description: '',
+    track,
+    lessons: Array.from({ length: n }, (_, i) => ({ id: `${id}${i + 1}`, title: '', exercises: [] })),
+  });
+  const course = [unit('a', 2), unit('b', 2), unit('c', 2, 'intermediate')] as unknown as Unit[];
+
+  it('is null for a new learner', () => {
+    expect(furthestLesson(course, [])).toBeNull();
+  });
+
+  it('is the next lesson to study in the highest track started', () => {
+    expect(furthestLesson(course, ['a1'])).toBe('a2');
+    expect(furthestLesson(course, ['a1', 'a2'])).toBe('b1'); // across units
+    expect(furthestLesson(course, ['a1', 'c1'])).toBe('c2'); // the higher track wins
+    expect(furthestLesson(course, ['c2'])).toBe('c1'); // a lesson skipped earlier in the track comes first
+  });
+
+  it('is the last lesson of the track when all of it is done', () => {
+    expect(furthestLesson(course, ['c1', 'c2'])).toBe('c2');
   });
 });

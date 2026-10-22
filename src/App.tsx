@@ -7,7 +7,7 @@ import { PuzzlePlayer } from './components/PuzzlePlayer';
 import { findLesson, units, type Lesson } from './content';
 import { createGamification, lessonXp, type Gamification } from './gamification';
 import { I18nProvider, isLanguage, useI18n } from './i18n/I18nProvider';
-import { jumpTest, lessonStates, skippedLessons } from './lessons/progress';
+import { furthestLesson, jumpTest, lessonStates, skippedLessons } from './lessons/progress';
 import { findPuzzle, nextPuzzle, puzzleNumber, puzzles } from './puzzles/catalog';
 import { SoundProvider, useSound, type AudioContextLike } from './sound';
 import type { AccountService } from './sync/service';
@@ -57,7 +57,7 @@ export default function App({
     <I18nProvider initial={isLanguage(savedLang) ? savedLang : 'en'} onChange={repos.settings.setLanguage}>
       <SoundProvider initialMuted={repos.settings.muted()} onMutedChange={repos.settings.setMuted} createContext={audio}>
         {account && <SyncedSettings account={account} settings={repos.settings} />}
-        <Screens progress={repos.progress} puzzleProgress={repos.puzzles} settings={repos.settings} game={repos.game} account={account} />
+        <Screens progress={repos.progress} puzzleProgress={repos.puzzles} game={repos.game} account={account} />
       </SoundProvider>
     </I18nProvider>
   );
@@ -82,13 +82,11 @@ function SyncedSettings({ account, settings }: { account: AccountService; settin
 function Screens({
   progress,
   puzzleProgress,
-  settings,
   game,
   account,
 }: {
   progress: ProgressRepository;
   puzzleProgress: PuzzleProgressRepository;
-  settings: SettingsRepository;
   game: Gamification;
   account?: AccountService;
 }) {
@@ -96,16 +94,9 @@ function Screens({
   const [completed, setCompleted] = useState(() => progress.completedLessons());
   const [solved, setSolved] = useState(() => new Set(puzzleProgress.solvedPuzzles()));
   const [lessonId, setLessonId] = useState<string | null>(null);
-  // The lesson Home scrolls to when it next appears: the last one studied (on opening the app), or the
-  // lesson / jump target just left. Cleared once Home has scrolled, so switching tabs does not jump.
-  const [homeFocus, setHomeFocus] = useState<string | null>(() => {
-    const last = settings.lastLesson();
-    return last && findLesson(last) ? last : null;
-  });
-  const openLesson = (id: string) => {
-    settings.setLastLesson(id);
-    setLessonId(id);
-  };
+  // The lesson Home scrolls to when it next appears: the furthest lesson reached (on opening the app), or
+  // the lesson / jump target just left. Cleared once Home has scrolled, so switching tabs does not jump.
+  const [homeFocus, setHomeFocus] = useState<string | null>(() => furthestLesson(units, progress.completedLessons()));
   const leaveLesson = (id: string) => {
     setHomeFocus(id);
     setLessonId(null);
@@ -226,13 +217,11 @@ function Screens({
             if (states.get(id) === 'locked') return;
             const fresh = game.refresh();
             setStats(fresh);
-            if (fresh.hearts > 0) openLesson(id);
+            if (fresh.hearts > 0) setLessonId(id);
           }}
           onJump={(id) => {
             const test = jumpTest(units, id, completed);
-            if (!test) return;
-            settings.setLastLesson(id);
-            setJump({ target: id, test });
+            if (test) setJump({ target: id, test });
           }}
           onReset={() => {
             progress.reset();

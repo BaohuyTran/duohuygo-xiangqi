@@ -62,8 +62,6 @@ const COMPLETED_KEY = 'progress.completedLessons.v1';
 const SOLVED_PUZZLES_KEY = 'progress.solvedPuzzles.v1';
 const LANGUAGE_KEY = 'settings.language.v1';
 const MUTED_KEY = 'settings.muted.v1';
-/** The lesson the learner last opened on this device (not synced: it only positions the Home screen). */
-const LAST_LESSON_KEY = 'settings.lastLesson.v1';
 const GAMIFICATION_KEY = 'gamification.state.v1';
 
 /** A persisted set of ids (completed lessons, solved puzzles, ...). */
@@ -121,9 +119,6 @@ export interface SettingsRepository {
   /** Sound effects off. Defaults to false (sound on). */
   muted(): boolean;
   setMuted(muted: boolean): void;
-  /** Id of the lesson last opened on this device, used to scroll Home to it. */
-  lastLesson(): string | null;
-  setLastLesson(lessonId: string): void;
 }
 
 export function createSettingsRepository(store: KeyValueStore): SettingsRepository {
@@ -132,8 +127,6 @@ export function createSettingsRepository(store: KeyValueStore): SettingsReposito
     setLanguage: (lang) => store.set(LANGUAGE_KEY, lang),
     muted: () => store.get(MUTED_KEY) === '1',
     setMuted: (muted) => store.set(MUTED_KEY, muted ? '1' : '0'),
-    lastLesson: () => store.get(LAST_LESSON_KEY),
-    setLastLesson: (lessonId) => store.set(LAST_LESSON_KEY, lessonId),
   };
 }
 

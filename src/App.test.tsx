@@ -7,7 +7,7 @@ import { squareName } from './engine';
 import { expectedSelection } from './lessons/answers';
 import { jumpTest } from './lessons/progress';
 import { puzzles } from './puzzles/catalog';
-import { createGamificationRepository, createMemoryStore, createProgressRepository, createSettingsRepository } from './storage';
+import { createGamificationRepository, createMemoryStore, createProgressRepository } from './storage';
 import { initialState } from './gamification';
 
 afterEach(cleanup);
@@ -112,16 +112,17 @@ describe('App', () => {
       Element.prototype.scrollIntoView = scrollSpy;
     };
 
-    it('opens the app scrolled to the last lesson studied, and not at all for a new learner', () => {
+    it('opens the app scrolled to the furthest lesson reached, and not at all for a new learner', () => {
       spy();
       render(<App store={createMemoryStore()} />);
       expect(scrollSpy).not.toHaveBeenCalled();
       cleanup();
 
+      // Basics partly done and two Intermediate lessons done: continue at the third Intermediate lesson.
       const store = createMemoryStore();
-      createSettingsRepository(store).setLastLesson('u8l2');
+      for (const id of ['u1l1', 'u1l2', 'u7l1', 'u7l2']) createProgressRepository(store).markCompleted(id);
       render(<App store={store} />);
-      expect(scrolled()).toEqual(['u8l2']);
+      expect(scrolled()).toEqual(['u7l3']);
       expect(scrollSpy).toHaveBeenCalledWith({ block: 'center' });
     });
 
@@ -132,7 +133,6 @@ describe('App', () => {
       press('Double Cannon (start)');
       press('Quit lesson');
       expect(scrolled()).toEqual(['u7l1']);
-      expect(createSettingsRepository(store).lastLesson()).toBe('u7l1');
 
       press('The board (start)');
       press('Continue');

@@ -73,3 +73,17 @@ export function jumpBannerTrack(units: readonly Unit[], completed: Iterable<stri
   const highestStarted = started.lastIndexOf(true);
   return tracks.find((_, i) => i > 0 && i > highestStarted) ?? null;
 }
+
+/**
+ * The lesson Home opens on: in the highest track with a completed lesson, the first lesson not completed
+ * yet (where the learner continues), or that track's last lesson when all are done. Null when nothing is
+ * completed, so a new learner starts at the top. Derived from progress only, so it is the same on every
+ * device the progress syncs to.
+ */
+export function furthestLesson(units: readonly Unit[], completed: Iterable<string>): string | null {
+  const done = new Set(completed);
+  const started = trackLessons(units).filter((lessons) => lessons.some((l) => done.has(l.id)));
+  const track = started[started.length - 1];
+  if (!track) return null;
+  return (track.find((l) => !done.has(l.id)) ?? track[track.length - 1]).id;
+}
