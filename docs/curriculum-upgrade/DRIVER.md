@@ -136,8 +136,9 @@ each the item, the implementer and tester reports, `Attempt: k`, `Base: HEAD`.
 ## Step 8 — Out of attempts (or blocked)
 
 1. Item stays `in-progress`; BACKLOG.md and STATUS.md list the unresolved findings and what was tried.
-2. If lint, build and tests pass, commit as `Curriculum <item id> (WIP): <title>` and push to the phase branch.
-   If not, push to `wip-<item id>` instead so nothing is lost.
+2. Commit as `Curriculum <item id> (WIP): <title>` and push to the phase branch (the session may push only to
+   the phase branch, so there are no `wip-*` branches). If lint, build or tests fail, say so in the commit
+   message and STATUS.md.
 3. Continue with other ready items that do not depend on it. If none remain, go to step 10 and say clearly
    what is not done.
 
@@ -145,7 +146,7 @@ each the item, the implementer and tester reports, `Attempt: k`, `Base: HEAD`.
 
 1. Do not fix or revert anything in `src/engine` yourself.
 2. STATUS.md: blocker `engine issue — see report`; item stays `in-progress`.
-3. Commit as `Curriculum <item id> (blocked)` to `wip-<item id>`, push, and report the FEN, the moves, expected
+3. Commit as `Curriculum <item id> (blocked)` on the phase branch, push, and report the FEN, the moves, expected
    vs actual behavior (or the modified files) and which agent found it. Continue only with items that do not
    depend on the engine behavior in question.
 
