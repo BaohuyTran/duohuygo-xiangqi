@@ -1,7 +1,7 @@
 import type { Unit } from '../content/types';
 import { minutesUntil, type DailyGoal, type GamificationSummary } from '../gamification';
 import { useI18n } from '../i18n/I18nProvider';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { JUMP_TEST_LIVES, jumpBannerTrack, jumpTest, skippedLessons, type LessonState } from '../lessons/progress';
 import type { AccountService } from '../sync/service';
 import { AccountButton } from './Account';
@@ -17,6 +17,10 @@ export interface HomeProps {
   units: readonly Unit[];
   states: ReadonlyMap<string, LessonState>;
   onStart: (lessonId: string) => void;
+  /** Scroll this lesson into view when Home appears (the last one studied, or the one just left). */
+  focusLessonId?: string | null;
+  /** Called once Home has scrolled to `focusLessonId`. */
+  onFocused?: () => void;
   /** Start the jump-ahead test that unlocks a locked lesson (and completes the lessons before it). */
   onJump: (lessonId: string) => void;
   onReset: () => void;
@@ -26,8 +30,16 @@ export interface HomeProps {
   account?: AccountService;
 }
 
-export function Home({ units, states, onStart, onJump, onReset, stats, onGoalChange, account }: HomeProps) {
+export function Home({ units, states, onStart, onJump, onReset, stats, onGoalChange, account, focusLessonId, onFocused }: HomeProps) {
   const { t } = useI18n();
+  const pathRef = useRef<HTMLOListElement>(null);
+  // Bring the focus lesson to the middle of the screen at once (no smooth scroll: Home just appeared).
+  useEffect(() => {
+    if (!focusLessonId) return;
+    const node = pathRef.current?.querySelector(`[data-lesson-id="${focusLessonId}"]`);
+    node?.scrollIntoView?.({ block: 'center' });
+    onFocused?.();
+  }, [focusLessonId, onFocused]);
   // The locked lesson the learner tapped: asks whether to take the jump-ahead test.
   const [jumpTarget, setJumpTarget] = useState<string | null>(null);
   const all = units.flatMap((u) => u.lessons);
@@ -87,7 +99,7 @@ export function Home({ units, states, onStart, onJump, onReset, stats, onGoalCha
         </a>
       )}
 
-      <ol className="flex flex-col gap-8">
+      <ol ref={pathRef} className="flex flex-col gap-8">
         {units.map((unit, ui) => {
           const color = UNIT_COLORS[ui % UNIT_COLORS.length];
           const track = unit.track ?? 'basics';
@@ -119,7 +131,7 @@ export function Home({ units, states, onStart, onJump, onReset, stats, onGoalCha
                 </div>
                 <ol className="flex flex-col items-center gap-5">
                   {unit.lessons.map((lesson, li) => (
-                    <li key={lesson.id} style={{ transform: `translateX(${ZIGZAG[li % ZIGZAG.length]}px)` }}>
+                    <li key={lesson.id} data-lesson-id={lesson.id} style={{ transform: `translateX(${ZIGZAG[li % ZIGZAG.length]}px)` }}>
                       <LessonNode
                         title={t(lesson.title)}
                         state={states.get(lesson.id) ?? 'locked'}

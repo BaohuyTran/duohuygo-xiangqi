@@ -110,7 +110,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── SoundProvider.tsx # useSound(): play / muted / setMuted; unlocks audio on the first gesture
     │   └── fake-audio.ts   # Test helper: fake AudioContext that records scheduled notes
     ├── storage/
-    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings (language, muted), gamification repos; readSnapshot/writeSnapshot for sync
+    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings (language, muted, last lesson), gamification repos; readSnapshot/writeSnapshot for sync
     ├── sync/               # Optional account login + sync. UI never imports Supabase (enforced by a test)
     │   ├── merge.ts        # THE merge rule (documented there), RemoteData JSON format, parseRemote. Pure
     │   ├── service.ts      # createAccountService: auth state, offline-first sync, debounced; backend injected. No React
@@ -166,6 +166,10 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   skipped lesson, at most `JUMP_TEST_MAX` (8), played in `LessonPlayer` with `test` = `JUMP_TEST_LIVES` (3)
   lives of its own (real hearts untouched, works at 0 hearts). Passing marks the skipped lessons complete
   with no XP; running out of lives ends the test and changes nothing.
+- Home scroll position: opening a lesson (or a jump test) stores its id (`settings.lastLesson.v1` via
+  `createSettingsRepository`, per device, not synced). Home scrolls that lesson to the middle of the screen
+  when the app opens, and after a lesson or jump test is finished or quit (`focusLessonId` on `Home`). It does
+  not scroll on tab switches, and a new learner starts at the top.
 - Intermediate positions are original: random positions kept only when the solver proves the pattern
   (unique forced mate, best defence, clean fork). Do not copy positions from books or websites.
 - After adding a new lesson JSON file, clear Vitest's cache (`rm -rf node_modules/.vitest-cache`) if the

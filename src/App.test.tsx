@@ -1,13 +1,13 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { units } from './content';
 import { squareName } from './engine';
 import { expectedSelection } from './lessons/answers';
 import { jumpTest } from './lessons/progress';
 import { puzzles } from './puzzles/catalog';
-import { createGamificationRepository, createMemoryStore, createProgressRepository } from './storage';
+import { createGamificationRepository, createMemoryStore, createProgressRepository, createSettingsRepository } from './storage';
 import { initialState } from './gamification';
 
 afterEach(cleanup);
@@ -97,6 +97,57 @@ describe('App', () => {
     render(<App store={store} />);
     expect(screen.queryByRole('link', { name: /Already know the rules\?/ })).toBeNull();
     expect(screen.getByRole('heading', { name: 'Intermediate' })).toBeTruthy();
+  });
+
+  describe('scroll position on the lesson path', () => {
+    // jsdom has no layout: record which lesson node Home scrolls into view.
+    const scrolled = () => scrollSpy.mock.contexts.map((el) => (el as HTMLElement).closest('[data-lesson-id]')?.getAttribute('data-lesson-id'));
+    const scrollSpy = vi.fn();
+    const original = Element.prototype.scrollIntoView;
+    afterEach(() => {
+      Element.prototype.scrollIntoView = original;
+      scrollSpy.mockReset();
+    });
+    const spy = () => {
+      Element.prototype.scrollIntoView = scrollSpy;
+    };
+
+    it('opens the app scrolled to the last lesson studied, and not at all for a new learner', () => {
+      spy();
+      render(<App store={createMemoryStore()} />);
+      expect(scrollSpy).not.toHaveBeenCalled();
+      cleanup();
+
+      const store = createMemoryStore();
+      createSettingsRepository(store).setLastLesson('u8l2');
+      render(<App store={store} />);
+      expect(scrolled()).toEqual(['u8l2']);
+      expect(scrollSpy).toHaveBeenCalledWith({ block: 'center' });
+    });
+
+    it('comes back scrolled to the lesson just finished or quit, but not when switching tabs', () => {
+      spy();
+      const store = createMemoryStore();
+      render(<App store={store} />);
+      press('Double Cannon (start)');
+      press('Quit lesson');
+      expect(scrolled()).toEqual(['u7l1']);
+      expect(createSettingsRepository(store).lastLesson()).toBe('u7l1');
+
+      press('The board (start)');
+      press('Continue');
+      press('Continue');
+      press('Continue');
+      for (const sq of ['d0', 'e0', 'f0', 'd1', 'e1', 'f1', 'd2', 'e2', 'f2']) tap(sq);
+      press(/Check/);
+      press('Continue');
+      press('Continue'); // completion screen
+      expect(scrolled()).toEqual(['u7l1', 'u1l1']);
+
+      press('Puzzles');
+      press('Lessons');
+      expect(scrolled()).toEqual(['u7l1', 'u1l1']);
+    });
   });
 
   it('switches language and remembers the choice', () => {

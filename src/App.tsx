@@ -57,7 +57,7 @@ export default function App({
     <I18nProvider initial={isLanguage(savedLang) ? savedLang : 'en'} onChange={repos.settings.setLanguage}>
       <SoundProvider initialMuted={repos.settings.muted()} onMutedChange={repos.settings.setMuted} createContext={audio}>
         {account && <SyncedSettings account={account} settings={repos.settings} />}
-        <Screens progress={repos.progress} puzzleProgress={repos.puzzles} game={repos.game} account={account} />
+        <Screens progress={repos.progress} puzzleProgress={repos.puzzles} settings={repos.settings} game={repos.game} account={account} />
       </SoundProvider>
     </I18nProvider>
   );
@@ -82,11 +82,13 @@ function SyncedSettings({ account, settings }: { account: AccountService; settin
 function Screens({
   progress,
   puzzleProgress,
+  settings,
   game,
   account,
 }: {
   progress: ProgressRepository;
   puzzleProgress: PuzzleProgressRepository;
+  settings: SettingsRepository;
   game: Gamification;
   account?: AccountService;
 }) {
@@ -94,6 +96,20 @@ function Screens({
   const [completed, setCompleted] = useState(() => progress.completedLessons());
   const [solved, setSolved] = useState(() => new Set(puzzleProgress.solvedPuzzles()));
   const [lessonId, setLessonId] = useState<string | null>(null);
+  // The lesson Home scrolls to when it next appears: the last one studied (on opening the app), or the
+  // lesson / jump target just left. Cleared once Home has scrolled, so switching tabs does not jump.
+  const [homeFocus, setHomeFocus] = useState<string | null>(() => {
+    const last = settings.lastLesson();
+    return last && findLesson(last) ? last : null;
+  });
+  const openLesson = (id: string) => {
+    settings.setLastLesson(id);
+    setLessonId(id);
+  };
+  const leaveLesson = (id: string) => {
+    setHomeFocus(id);
+    setLessonId(null);
+  };
   // A running jump-ahead test: the locked lesson it unlocks and its exercises (fixed when it starts).
   const [jump, setJump] = useState<{ target: string; test: Lesson } | null>(null);
   const [puzzleId, setPuzzleId] = useState<string | null>(null);
@@ -126,12 +142,16 @@ function Screens({
         key={jump.test.id}
         lesson={jump.test}
         test
-        onExit={() => setJump(null)}
+        onExit={() => {
+          setHomeFocus(jump.target);
+          setJump(null);
+        }}
         onComplete={() => {
           // Passing completes every skipped lesson, without XP; the target becomes available.
           let next = completed;
           for (const l of skippedLessons(units, jump.target, completed)) next = progress.markCompleted(l.id);
           setCompleted(next);
+          setHomeFocus(jump.target);
           setJump(null);
         }}
       />
@@ -150,12 +170,12 @@ function Screens({
           game.loseHeart();
           setStats(game.summary());
         }}
-        onExit={() => setLessonId(null)}
+        onExit={() => leaveLesson(lesson.id)}
         onComplete={() => {
           game.completeLesson(firstCompletion);
           setStats(game.summary());
           setCompleted(progress.markCompleted(lesson.id));
-          setLessonId(null);
+          leaveLesson(lesson.id);
         }}
       />
     );
@@ -193,6 +213,8 @@ function Screens({
         <Home
           units={units}
           states={states}
+          focusLessonId={homeFocus}
+          onFocused={() => setHomeFocus(null)}
           stats={stats}
           account={account}
           onGoalChange={(goal) => {
@@ -204,11 +226,13 @@ function Screens({
             if (states.get(id) === 'locked') return;
             const fresh = game.refresh();
             setStats(fresh);
-            if (fresh.hearts > 0) setLessonId(id);
+            if (fresh.hearts > 0) openLesson(id);
           }}
           onJump={(id) => {
             const test = jumpTest(units, id, completed);
-            if (test) setJump({ target: id, test });
+            if (!test) return;
+            settings.setLastLesson(id);
+            setJump({ target: id, test });
           }}
           onReset={() => {
             progress.reset();
