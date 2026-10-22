@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 1 — Audit and design
-- **Active items:** S1.1, S1.2 (parallel, disjoint files)
+- **Active items:** S1.2 (attempt 2); S1.1 done
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -30,6 +30,9 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   - S1.2: reviewer and content-reviewer CHANGES_REQUESTED (missing unit fields for Master and some others; mastery
     unreachable for b10/e09/m09; "complete game" silently narrowed; holding rubric open to weak-opponent false
     success; R1 penalises tactics not yet taught). Opening lines checked legal and correctly named.
+
+- 2026-10-22 — **S1.1 done** (attempt 2, `d4d66c1`): reviewer APPROVE, content-reviewer APPROVE (re-ran the policy
+  cost script A.4: distinct-score counts identical, timings within ±20 %; u15l3#3 forced-win proof ≈ 4.4 s).
 
 ## Blockers and failed gates
 

@@ -12,23 +12,23 @@ Design documents live in `docs/curriculum-upgrade/design/`.
 
 ### S1.1 — Current-state audit and exercise-architecture feasibility
 
-- **Status:** todo
+- **Status:** done (attempt 2, 2026-10-22: tester findings fixed; reviewer and content-reviewer APPROVE)
 - **Role focus:** architecture engineer (+ QA for counts)
 - **Depends on:** —
 - **Owned files:** `design/01-audit.md`, `design/04-architecture.md`
 - **Acceptance criteria**
-  - [ ] `design/01-audit.md`: verified counts (units, lessons, practice exercises by type and goal, learn cards,
+  - [x] `design/01-audit.md`: verified counts (units, lessons, practice exercises by type and goal, learn cards,
         puzzles by kind, tracks), with the command/script used to count; colour coverage; how jump-ahead,
         progress, gamification and sync work, with `file:line` references; the historical findings in
         `01-audit-and-design.md` confirmed or corrected.
-  - [ ] `design/04-architecture.md`: engine and solver capabilities and limits (rules not implemented, search
+  - [x] `design/04-architecture.md`: engine and solver capabilities and limits (rules not implemented, search
         depth/time on a phone), exercise model today, what is needed for: playing Black (orientation,
         coordinates), branching continuations, multiple acceptable moves, strategic (non-tactical) acceptance,
         constrained training opponents, practical-play tasks, repetition adjudication, three-level progress
         (completed / mastered / applied); integration options (in-repo search in a Web Worker vs an external
         engine such as a WASM build) with licensing, size, offline and performance notes; recommendation.
-  - [ ] Verified facts, design proposals and unresolved decisions are visibly separated.
-  - [ ] No application code changed.
+  - [x] Verified facts, design proposals and unresolved decisions are visibly separated.
+  - [x] No application code changed.
 
 ### S1.2 — Curriculum and assessment specification
 
@@ -68,6 +68,10 @@ Design documents live in `docs/curriculum-upgrade/design/`.
 - **Role focus:** lead integrator (driver) with implementer
 - **Depends on:** S1.1, S1.2, S1.3
 - **Owned files:** `design/06-backlog.md`, this file (driver), `design/README.md`
+- **Carry-over from S1.1 reviews (must be resolved here):** device-dependent opponent fallback (d = 1 on slow
+  devices) must void assessment / "applied" evidence like a "not checked" move; name the threshold and horizon of
+  `forcing-attack`'s "winning capture"; re-check 04 §8 R8 against the revised 03; 01-audit hint remark "while on
+  the main line".
 - **Acceptance criteria**
   - [ ] Prioritized, dependency-ordered backlog for steps 2–4 with ownership and acceptance criteria, copied
         into this file as `S2.*`, `S3.*`, `S4.*` items.
