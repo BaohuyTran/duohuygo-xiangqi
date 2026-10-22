@@ -1,33 +1,29 @@
 # Curriculum specification
 
 Backlog item S1.2 · Owner: curriculum designer · Companion: [03-assessment.md](./03-assessment.md) (how
-everything here is assessed). The audit ([01-audit.md](./01-audit.md)) and the architecture review
-([04-architecture.md](./04-architecture.md)) are written in parallel; S1.4 reconciles the three.
+everything here is assessed). Audit: [01-audit.md](./01-audit.md); architecture: [04-architecture.md](./04-architecture.md)
+(S1.1). S1.4 reconciles the three. Revision: attempt 2 (fixes the S1.2 review findings).
 
 ## 0. How to read this document
 
 Every statement carries one of these labels, either on its own line or on the section heading it belongs to:
 
-- **Verified**: checked against the repository at the time of writing (file reference given) or with the engine
-  (command given). Re-check before relying on it if the code has changed.
+- **Verified**: checked against the repository (file reference given) or with the engine (command given).
 - **Proposal**: a design choice made here. Later steps implement it unless the S1 gate, a reviewer or the pilot
   changes it.
-- **Unresolved**: a decision that needs more information, another role, or the pilot. Listed again in §9.
-- **Needs architecture confirmation**: a proposal that depends on a capability that the architecture review
-  (S1.1 / S1.4) must confirm is feasible in a static PWA with the in-repo engine on a phone.
+- **Unresolved**: needs more information, another role, or the pilot. Listed again in §11.
+- **Needs architecture confirmation**: a proposal that depends on a capability the architecture review (S1.1 /
+  S1.4) must confirm is feasible in a static PWA with the in-repo engine on a phone.
 
-This document contains **no chess positions**. It describes what each position must show; positions are
-authored and verified later under the sourcing and verification policy (S1.3, `design/07-sourcing.md`). It
-claims **no ratings, no playing strength and no learning times**. "Master" is the name of the last course
-stage, not a title or a rating.
+This document contains **no chess positions**. It describes what each position must show; positions are authored
+and verified later under the sourcing and verification policy (S1.3, `design/07-sourcing.md`). It claims **no
+ratings, no playing strength and no learning times**. "Master" is the name of the last course stage, not a title.
 
 ---
 
 ## 1. Starting point (Verified)
 
-The facts below were checked on this branch (HEAD at the time of writing) with a short Node script over
-`src/content/lessons/*.json`. S1.1 (`design/01-audit.md`) owns the full audit; only what this spec builds on is
-repeated here.
+Checked on this branch with a short Node script over `src/content/lessons/*.json` (S1.1 owns the full audit).
 
 | Fact | Evidence |
 | --- | --- |
@@ -37,48 +33,38 @@ repeated here.
 | Practice exercises are played as Red; only `learn` cards may show Black to move | `src/content/types.ts:5`, `:10` |
 | Exercise types: `learn`, `select-squares`, `move` (goals `reach`, `any`, `check`, `checkmate`, `defend`), `capture`, `combination` | `src/content/types.ts` |
 | Lessons unlock in order within a track; the first lesson of every track is open | `src/lessons/progress.ts:11` |
-| Jump-ahead test = last two non-`learn` exercises of each skipped lesson, at most 8 (`JUMP_TEST_MAX`), 3 lives (`JUMP_TEST_LIVES`); passing marks the skipped lessons complete | `src/lessons/progress.ts:39`, `:41`, `:55–56` |
-| Lesson completion does not depend on first-try accuracy: a wrong answer is retried; first-try count is only shown on the completion screen | `src/components/LessonPlayer.tsx:71`, `:152` |
+| Jump-ahead test = last two non-`learn` exercises of each skipped lesson, at most 8, 3 lives; passing marks the skipped lessons complete | `src/lessons/progress.ts:39`, `:41`, `:55–56` |
+| Lesson completion does not depend on first-try accuracy | `src/components/LessonPlayer.tsx:71`, `:152` |
 | Progress is one set of completed lesson ids under `progress.completedLessons.v1` | `src/storage/index.ts:61` |
-| Engine evaluation is material only (chariot 9, cannon 4.5, horse 4, advisor 2, elephant 2, soldier 1; a crossed soldier counts the same as an uncrossed one) | `src/engine/solver.ts:9–17` |
-| Repetition, perpetual check and perpetual chase are not handled by the engine | `src/engine/status.ts:12`, CLAUDE.md "Engine conventions" |
-| The opening sequences named in units `b09`, `i08`, `i09`, `e08` are legal from `START_FEN`: `h2e2 h9g7 h0g2 b9c7 i0h0 i9h9`; `h2e2 h7e7`; `h2e2 b7e7`; `g3g4`; `h0g2`; `c0e2` | checked with `parseFen` / `isLegalMove` / `makeMove` from `src/engine` (read-only script, not committed). Legality only: the *names* and *plans* attached to them are for the content reviewer to confirm |
+| Engine evaluation is material only (Chariot 9, Cannon 4.5, Horse 4, Advisor 2, Elephant 2, Soldier 1; a crossed Soldier counts the same as an uncrossed one) | `src/engine/solver.ts:9–17` |
+| Repetition, perpetual check and perpetual chase are not handled by the engine | `src/engine/status.ts:12` |
+| The app has no game clock (only animation/feedback timers) | `src/components/*.tsx` |
+| These sequences are legal from `START_FEN`: `h2e2 h9g7 h0g2 b9c7 i0h0 i9h9`; `h2e2 h7e7`; `h2e2 b7e7`; `g3g4`; `h0g2`; `c0e2` | `parseFen` / `isLegalMove` / `makeMove` from `src/engine` (read-only script, not committed). Legality only: names and plans are for the content reviewer |
 
 The historical finding in `01-audit-and-design.md` (13 units, 36 lessons, 146 practice exercises; 120 of them
-Intermediate–Master; learner always Red; jump-ahead samples practice exercises) is consistent with these counts.
-S1.1 confirms the per-goal breakdown.
+Intermediate–Master; learner always Red; jump-ahead samples practice exercises) matches these counts.
 
 ---
 
 ## 2. Design rules applied (Proposal)
 
-1. **Why, when, when not.** Every lesson has at least one `learn` card or worked example that explains *why* the
-   idea works, and at least one **contrast** item where the same-looking idea fails (the tempting move loses,
-   the sacrifice is unsound, the exchange helps the opponent).
-2. **Both colours, both sides of the idea.** From `b02` on, every unit has practice as Black. Each level has at
-   least one third of its practice and assessment items played as Black (target, checked per level by the content
-   validator once colour is a field). Attack units include a defending lesson or contrast items and vice versa.
-3. **Quiet positions are normal.** Units tagged PA, OD or DE include items whose best answer is a quiet move
-   (improve, defend, consolidate, develop, wait) and items where "there is no tactic" is the right conclusion.
-   At least a quarter of their independent and assessment items have no immediate tactical win.
-4. **Plans before move orders.** `b09` teaches principles with no named opening; `i08` / `i09` teach one opening
-   *plan* per colour with short lines (each move explained by its purpose) and the common deviations; full
-   repertoire work waits until `e08`; `m06` teaches handling moves no line covers.
-5. **Difficulty through decisions, not only depth.** From level to level the main difficulty levers are:
-   fewer hints, unfamiliar positions, opponent branching, counterplay, evaluation and sustained play (§5).
-   Longer forced mates are kept as calculation practice, not as the measure of level.
-6. **Completion ≠ mastery ≠ application.** Lessons can be completed with hints and retries. Mastery comes only
-   from independent unit checks; application only from practical-play tasks (03-assessment.md §2). XP, hearts and
-   streaks never feed either.
-7. **Small reusable exercise set.** Ten exercise types (§4): the five that exist plus five new ones. A new
-   unit should not need a new type.
-8. **Accept reasonable alternatives.** Answers are judged by the objective (engine-verified where the claim is
-   tactical, authored classification + engine safety guard where it is strategic), never by equality with one
-   stored move (§4.3).
-9. **Position-specific feedback.** Every answer, right or wrong, explains this position: the purpose of the move,
-   the opponent's key reply, the common error and why the tempting alternative fails (§6).
-10. **Bilingual.** All text in `src/i18n/messages.ts`, English and Vietnamese, with a shared glossary of piece,
-    pattern and opening names (Unresolved: glossary owner; see §9).
+1. **Why, when, when not.** Every lesson has a `learn` card or worked example explaining *why* the idea works,
+   and at least one **contrast** item where the same-looking idea fails.
+2. **Both colours, both sides of the idea.** From `b02` on, every unit has practice as Black, except units that
+   declare a colour exception with a reason (only `i08`, Red-only by topic, balanced by the Black-only `i09`). Each
+   level has at least one third of its practice and assessment items played as Black.
+3. **Quiet positions are normal.** Units with a primary PA, OD or DE strand include items whose best answer is a
+   quiet move and items where "there is no tactic" is right: at least a quarter of their independent and assessment
+   items have no immediate tactical win.
+4. **Plans before move orders.** `b09` principles (no named opening) → `i08` / `i09` one plan per colour with
+   short explained lines and deviations → `e08` repertoire → `m06` unfamiliar moves.
+5. **Difficulty through decisions, not only depth** (§6).
+6. **Completion ≠ mastery ≠ application** (03-assessment.md §2). XP, hearts and streaks never feed mastery or
+   application.
+7. **Small reusable exercise set**: ten types (§5).
+8. **Accept reasonable alternatives** (§5.3).
+9. **Position-specific feedback** (§7).
+10. **Bilingual**, with one glossary and one notation (§4).
 
 ---
 
@@ -88,201 +74,243 @@ S1.1 confirms the per-goal breakdown.
 
 | Code | Strand | Covers |
 | --- | --- | --- |
-| **RS** | Rules and board safety | Moves, check, results, ruleset; seeing attacked/defended pieces; the pre-move safety routine |
+| **RS** | Rules and board safety | Moves, notation, check, results, ruleset; attacked/defended pieces; the pre-move safety routine |
 | **TC** | Tactical recognition and calculation | Motifs, forcing lines, candidate moves, branching calculation, intermediate moves, sacrifices |
 | **OD** | Openings and piece development | Development principles, opening plans per colour, deviations, repertoire, unfamiliar openings |
-| **PA** | Positional assessment, planning and attack | Activity, assessment, plans, files/ranks, soldier structure, preparing attacks, initiative, conversion choices |
-| **DE** | Defence and endgames | Tactical and positional defence, counterplay, holding worse positions, elementary to complex endgames |
-| **PP** | Practical play and self-analysis | Sustained play from set positions, complete games, self-review, risk decisions, portfolios |
+| **PA** | Positional assessment, planning and attack | Activity, assessment, plans, files/ranks, Soldier structure, preparing attacks, initiative |
+| **DE** | Defence and endgames | Tactical and positional defence, counterplay, holding worse positions, endgames |
+| **PP** | Practical play and self-analysis | Sustained play, complete games, self-review, risk decisions, portfolios |
 
-Each unit has one or two **primary** strands (in bold in the unit headers) and optional secondary strands.
-Assessment items carry exactly one strand tag (the one they score toward).
+Each unit has one or two **primary** strands (bold in the unit header) and optional secondary strands. Assessment
+items carry exactly one strand tag.
 
 ### 3.2 Levels (Proposal; level names = existing `Track` values, Verified in `src/content/types.ts`)
 
 | Level (track) | Prefix | Units | Exit outcome (observable) |
 | --- | --- | --- | --- |
-| Basic (`basics`) | `b` | b01–b10 | Plays a complete game from the start position, as either colour, against the basic training partner without frequently leaving material capturable for free; develops pieces by principle |
+| Basic (`basics`) | `b` | b01–b10 | Plays complete games from the start position, as either colour, against the basic training partner to an (adjudicated) result without frequently leaving material capturable for free; develops pieces by principle |
 | Intermediate (`intermediate`) | `i` | i01–i11 | Finds and defends against the standard motifs and mating patterns; plays one opening plan as Red and one as Black into a middlegame; wins elementary endgames from set positions |
-| Advanced (`advanced`) | `a` | a01–a10 | Assesses a position in words (choice items) and acts on it; prefers improving moves when no tactic exists; prepares attacks; defends positionally; handles transitions and practical endgames |
-| Expert (`expert`) | `e` | e01–e09 | Calculates branching lines with intermediate moves; judges sacrifices; keeps and converts advantages; defends worse positions; holds a repertoire for both colours; reviews own games |
+| Advanced (`advanced`) | `a` | a01–a10 | Assesses a position in words and acts on it; prefers improving moves when no tactic exists; prepares attacks; defends positionally; handles transitions and practical endgames |
+| Expert (`expert`) | `e` | e01–e09 | Calculates branching lines; judges sacrifices; keeps and converts advantages; defends worse positions; holds a repertoire for both colours; reviews own games |
 | Master (`master`) | `m` | m01–m09 | Decides in unfamiliar, unlabelled positions; compares plans; switches between attack and defence; passes a multi-game practical assessment and a portfolio review |
 
-49 units. Lessons per unit vary (2–5): units are sized by content, not to a quota.
+49 units, 161 lessons (§10). Lessons per unit vary (2–5) by content, not by quota.
 
 ### 3.3 Identifiers (Proposal)
 
 | Thing | Format | Example | Notes |
 | --- | --- | --- | --- |
-| Unit | level prefix + 2 digits | `b05`, `i11`, `m09` | Prefixes `b i a e m` + digits do not collide with existing ids (`u1`–`u4`, `u7`–`u15`, lessons `u<n>l<k>`, puzzles `m1-NN`, `m2-NN`, `wm-NN`, `jump-<lessonId>`). Verified: no i18n key in `src/i18n/messages.ts` starts with `[biaem][0-9][0-9]` |
-| Lesson | unit + `l` + digit | `b05l2` | Same pattern as today (`u2l1`), so i18n keys stay `<lessonId>.<suffix>` |
-| Practice exercise | lesson + `-` + 2 digits | `b05l2-04` | New explicit `id` field; today exercises have no id (Verified: `types.ts`) |
-| Unit-check item | unit + `-c` + 2 digits | `b05-c07` | Separate pool from practice (03-assessment.md §4) |
-| Placement (jump) item | `p` + level prefix + `-` + 2 digits | `pi-14` | Placement pools per target level |
+| Unit | level prefix + 2 digits | `b05`, `m09` | No collision with `u1`–`u4`, `u7`–`u15`, `u<n>l<k>`, puzzles `m1-NN`/`m2-NN`/`wm-NN`, `jump-<lessonId>`. Verified: no i18n key in `src/i18n/messages.ts` starts with `[biaem][0-9][0-9]` |
+| Lesson | unit + `l` + digit | `b05l2` | Same pattern as today, so i18n keys stay `<lessonId>.<suffix>` |
+| Practice exercise | lesson + `-` + 2 digits | `b05l2-04` | New explicit `id` field (today exercises have none) |
+| Unit-check item | unit + `-c` + 2 digits | `b05-c07` | Separate pool (03-assessment.md §4) |
+| Placement item | `p` + level prefix + `-` + 2 digits | `pi-14` | Placement pools |
+| Placement practical task | `p` + level prefix + `-g` + digit | `pb-g1` | Separate from exam pools (03-assessment.md §7) |
 | Practical task | unit + `-g` + digit | `b10-g1` | `play` / `review` tasks used for "applied" evidence |
-| Level practical exam | `x` + level prefix | `xb`, `xi` | 03-assessment.md §6 |
+| Level exam | `x` + level prefix | `xb` | 03-assessment.md §6 |
+| Misconception | unit + `.m` + digit | `b06.m2` | Tags wrong answers for remediation |
 
-Ids are never reused for different content. Each content item also carries a `version` integer; a substantive
-change to an item (position, accepted moves, objective) increments it, and evidence recorded against an older
-version is kept but marked as such (03-assessment.md §3.3).
+Ids are never reused for different content. Each item carries a `version` integer, incremented on substantive
+change (03-assessment.md §3.3).
 
-**Old ids (feasibility only; S1.3 owns the map).** Old lesson ids stay valid keys in storage. A later migration
-maps each old completed lesson id to "completed" on the new lesson(s) listed in the "Reuses" line of each unit
-below, never to "mastered" or "applied". Every existing lesson has at least one candidate home (§8), so the map is
-feasible without dropping progress.
+**Old ids (feasibility only; S1.3 owns the map).** A later migration maps each old completed lesson id to
+"completed" on the new lesson(s) in the unit's "Reuses" line, never to "mastered" or "applied". Every existing
+lesson has a candidate home (§9.4).
 
 ---
 
-## 4. Exercise types
+## 4. Notation and glossary (Proposal; S1.2 owns them, S1.1 owns board-orientation mechanics)
 
-Each type is described once here; units only reference it.
+This breaks the open loop between 04-architecture.md R1 and the earlier U5: **S1.2 decides what learners read**;
+S1.1 decides how the board rotates and how a `formatMove` helper renders it.
 
-### 4.1 Catalogue
+- **Board labels:** each side's files numbered 1–9 from that side's own right, as on printed boards: Red's numbers
+  along Red's edge, Black's along Black's edge; when the learner plays Black the board is rotated and Black's numbers
+  are at the bottom.
+- **Moves in prompts and explanations:** the traditional per-language notation. English: piece letter + file +
+  operator + target, the style also used in 04-architecture.md ("C2=5", "H8+7"; `+` advance, `-` retreat, `=`
+  traverse). Vietnamese: the Vietnamese traditional form ("P2-5", "M8.7"; `.` tấn, `/` thoái, `-` bình). The
+  exact Vietnamese symbols are to be confirmed by the content reviewer before any text uses them.
+- **ICCS** (`h2e2`) stays internal: content JSON, tests, validators. Not shown to learners.
+- Notation is taught in `b01l4` and repeated wherever a prompt first uses it. **Unresolved (LX):** a setting to
+  show ICCS coordinates as well.
+
+**Glossary (names to be confirmed by the content reviewer; the Vietnamese pattern names already exist in
+`src/i18n/messages.ts`, Verified for Trùng pháo, Muộn cung, Mã hậu pháo).** Pieces: Tướng/General, Sĩ/Advisor,
+Tượng/Elephant, Xe/Chariot, Mã/Horse, Pháo/Cannon, Tốt/Soldier.
+
+| Vietnamese | Chinese | English used in the course | Meaning (legality of example moves Verified, §1) |
+| --- | --- | --- | --- |
+| Pháo đầu | 中炮 | Central Cannon | Red Cannon to the central file (C2=5, `h2e2`) |
+| Bình phong mã | 屏风马 | Screen Horses | Black develops both Horses toward the centre (`h9g7`, `b9c7`) |
+| Thuận pháo | 顺炮 | Same-direction Cannons | Black answers C2=5 with C8=5 (`h7e7`) |
+| Nghịch pháo | 列炮 | Opposite-direction Cannons | Black answers C2=5 with C2=5 (`b7e7`) |
+| Tiên nhân chỉ lộ | 仙人指路 | Soldier opening ("Immortal points the way") | Red's third- or seventh-file Soldier one step (e.g. `g3g4`) |
+| Phi tượng | 飞相 | Elephant opening | An Elephant to the central point (e.g. `c0e2`) |
+| Khởi mã | 起马 | Horse opening | A Horse first (e.g. `h0g2`) |
+| Ngọa tào mã | 卧槽马 | Ngọa tào Horse (English name to be confirmed; **not** "palace corner") | A Horse on the point beside the enemy palace from which it checks the General; the current UI title "Palcorner Horse" (`u8l1.title`) must be renamed when `u8l1` is migrated |
+| Trùng pháo | 重炮 | Double Cannon | Two Cannons on one line, the front one screening the back one |
+| Muộn cung | 闷宫 | Smothered General | Cannon mate where the General's own pieces block it in |
+| Mã hậu pháo | 马后炮 | Horse-behind-Cannon | Horse controls the General while the Cannon mates along the line |
+| Song xa | 双车 | Two Chariots | Mate by the two Chariots |
+
+---
+
+## 5. Exercise types
+
+### 5.1 Catalogue
 
 | Type | Status | Behaviour | Answer judged by |
 | --- | --- | --- | --- |
-| `learn` | **Verified** existing | Board + explanation card; optional piece moves or highlighted squares | Not scored |
-| `select-squares` | **Verified** existing; **Proposal** to extend | Tap every square that matches. Today: a piece's legal moves or a board region. Extension: *attacked by side X*, *pieces of side X that are attacked*, *pieces that are attacked and not defended* ("hanging"), *pieces that can capture square Y* — all computed from the rules engine in `src/lessons`, not stored | Exact set (computed) |
-| `move` | **Verified** existing; **Proposal** to extend | Make one move toward a goal. Existing goals `reach`, `any`, `check`, `checkmate`, `defend` (depth 1–3). New goal `safe`: the move must not lose material by the shallow material search (threshold = `WIN_MATERIAL_THRESHOLD`, Verified `src/puzzles/logic.ts:19`) | Engine |
-| `capture` | **Verified** existing | Find the best capture by immediate exchange count | Engine |
-| `combination` | **Verified** existing | 2–4 own moves against the engine's best defence, goal mate or material | Engine (forced) |
-| `choice` | **Proposal** | A question about a position, 3–4 options. Options are text ("Red is better because…"), board marks (two arrows to compare) or a tapped piece/square ("Which piece is worst placed?" is a `select-squares` variant with a single authored answer). Option order is shuffled with a seeded generator. Each option has its own feedback | Authored key, reviewed |
-| `decision` | **Proposal** · **Needs architecture confirmation** (predicates, search cost) | One move in a position where several moves are reasonable. Every move falls into a class: **target** (the lesson's idea), **sound** (good, but not the lesson's idea), **dubious** (safe but misses the objective), **error** (engine-refuted: loses ≥ threshold material or allows a forced mate within the checked depth). Classes come from (a) an authored list of moves, (b) optional **objective predicates** checked by code (e.g. "a chariot reaches an open file", "the worst piece's legal-move count rises", "a back-rank piece develops", "the threatened piece is no longer hanging"), and (c) the engine **safety guard** for any unlisted move | §4.3 |
-| `line` | **Proposal** · **Needs architecture confirmation** (tree format) | A move tree played from one side. At the learner's node: accepted moves (authored + predicate) each with an explanation; unknown safe moves get "playable, but here is the plan" feedback and the line continues from the closest authored node or ends. At the opponent's node: the main move or an authored **deviation**, chosen by seeded randomness in practice and set by the item in assessments, so every deviation is met. Leaves end with a summary or hand off to `play` | Authored tree + safety guard |
-| `play` | **Proposal** · **Needs architecture confirmation** (opponent search in a Web Worker, time per move on a phone, adjudication) | Sustained play from a set position (or the start position) for up to *N* learner moves against a **training partner** profile (03-assessment.md §5.2). Ends on mate, stalemate, repetition adjudication or the move cap; scored by a rubric (03-assessment.md §5) | Rubric (outcome + checkable process items) |
-| `review` | **Proposal** · **Needs architecture confirmation** (post-game analysis cost) | Look back at a finished game (own `play` game, own level exam, or an annotated game). Steps: find the turning point among the learner's moves, play a better move there (judged like `decision`), choose the reason (`choice`). Only material/mate swings the engine can show are scored; positional reflection is recorded but unscored (03-assessment.md §5.4) | Engine swing + authored key |
+| `learn` | **Verified** existing | Board + explanation; optional piece moves or highlighted squares | Not scored |
+| `select-squares` | **Verified** existing; **Proposal** to extend | Tap every matching square. Today: a piece's legal moves or a region. Extension: *attacked by side X*, *pieces of side X that are attacked*, *hanging pieces* (attacked and not defended), *pieces that can capture square Y*, *single authored square/piece* ("worst-placed piece") — computed from the rules engine in `src/lessons`, not stored | Exact set |
+| `move` | **Verified** existing; **Proposal** to extend | One move toward a goal: `reach`, `any`, `check`, `checkmate`, `defend` (depth 1–3); new `safe` = passes the level's safety guard (03-assessment.md §5.3) | Engine |
+| `capture` | **Verified** existing | Best capture by immediate exchange count | Engine |
+| `combination` | **Verified** existing | 2–4 own moves against best defence, goal mate or material | Engine (forced) |
+| `choice` | **Proposal** | Question about a position, 3–4 options: text, two compared arrows, or "nothing/none". Shuffled with a seed; each option has feedback and, for distractors, a misconception id | Authored key, reviewed |
+| `decision` | **Proposal** · **Needs architecture confirmation** (move tables, predicates; 04 §5.3–5.4) | One move where several are reasonable. Classes: **target** (lesson idea), **sound** (good, not the idea), **dubious** (safe, misses objective), **error** (fails the safety guard: allows loss ≥ 2 or mate within the level horizon). Sources: author table, objective predicates, safety guard | §5.3 |
+| `line` | **Proposal** · **Needs architecture confirmation** (tree format) | Move tree played from one side; learner nodes accept authored + predicate moves; opponent nodes play main or deviation (seeded in practice, fixed per assessment item). Ends with a summary or hands off to `play` | Tree + guard |
+| `play` | **Proposal** · **Needs architecture confirmation** (Worker search, phone cost, adjudication) | Sustained play from a set position or the start position for up to *N* learner moves (or a full game to an adjudicated result) against a training partner (03-assessment.md §5.2) | Rubric |
+| `review` | **Proposal** · **Needs architecture confirmation** (post-game analysis) | Look back at a finished game: mark the turning point, play a better move (as `decision`), choose the reason (`choice`) | Engine swing + key |
 
-`choice` is the only way to assess *assessment in words* (who is better and why). It must never be the only
-evidence for a unit whose outcome is a move or a plan: those units pair it with `decision`, `line` or `play`.
+`choice` is never the only evidence for an outcome about acting; it is paired with `decision`, `line` or `play`.
 
-### 4.2 Assistance levels and the scaffolding ladder (Proposal)
+### 5.2 Assistance levels and ladders (Proposal)
 
 | Level | Name | What the learner gets |
 | --- | --- | --- |
-| G3 | Demonstrate | `learn` card or an animated worked example; nothing to answer, or a trivial confirmation |
-| G2 | Guided | Prompt names the idea ("Use the Horse fork"); the key piece or region is highlighted; hints available |
-| G1 | Prompted | Prompt names the idea; no highlight; hint ladder on request (1 idea → 2 piece → 3 move, Proposal); every hint is recorded |
-| G0 | Independent | Neutral prompt ("Black to move."), unfamiliar position, no highlight. Practice may still offer hints (recorded); unit checks never do |
-| TR | Transfer | The skill is needed but not announced, in a new context: the other colour, a fuller board, inside a `line` or `play` task, or mixed with earlier units |
+| G3 | Demonstrate | `learn` card or worked example; nothing to answer, or a trivial confirmation |
+| G2 | Guided | Prompt names the idea; key piece or region highlighted; hints available |
+| G1 | Prompted | Prompt names the idea; no highlight; hint ladder on request (1 idea → 2 piece → 3 move), recorded |
+| G0 | Independent | Neutral prompt, unfamiliar position, no highlight. Practice may offer a hint (recorded); checks never do |
+| TR | Transfer | Skill needed but not announced, new context: other colour, fuller board, inside `line`/`play`, mixed with earlier units |
 
-**Default lesson shape** (Proposal): 1–2 `learn` cards (why + when it fails) → 2–3 G2 items → 2–3 G1 items →
-1–2 G0 items → optional TR item; a lesson has 6–10 non-`learn` items at most, so it fits a phone session. Units
-deviate only where stated.
+**Ladder by level** (each lesson follows its level's ladder unless the unit says otherwise):
 
-**Default unit shape** (Proposal): lessons in order → unit check (independent items from a separate pool,
-03-assessment.md §4) → optional practical task (`-g` id) where the unit lists one.
+| Level | Ladder | Lesson size (non-`learn` items) |
+| --- | --- | --- |
+| Basic, Intermediate | G3 → G2 (2–3) → G1 (2–3) → G0 (1–2) → TR (0–1) | 5–8 |
+| Advanced | G3 → G1 (2) → G0 (2–3) → TR (1) | 5–7 |
+| Expert | G3 → G1 (1–2) → G0 (2–3) → TR (1) | 4–6 |
+| Master | G3 worked example (annotated, with the contrast case) → G0 (3–4, unlabelled, mixed) → TR (1, usually `play`) | 4–5 |
 
-### 4.3 Accepting reasonable alternatives (Proposal)
+Every unit has at least one TR task (listed in the unit). **Default unit shape:** lessons → unit check
+(03-assessment.md §4) → practical task(s) where listed.
 
-- **Tactical claims** (`move`, `capture`, `combination`): any move the engine confirms reaches the goal is
-  correct (already the case; Verified in `src/lessons/combination.ts` `isWinningMove`).
-- **Strategic items** (`decision`, `line`): credit = class **target** or **sound**. The author lists the target
-  and sound moves they know of; predicates widen "target" to every move that achieves the objective; the safety
-  guard turns every unlisted move that loses material or allows mate into **error** with the refutation shown on
-  the board. Unlisted moves that pass the guard and match no predicate are **dubious** with neutral feedback
-  ("This does not lose anything, but it does not …"), and are logged locally so reviewers can reclassify them in
-  the next content version. Whether "dubious" gets partial credit is set per item in 03-assessment.md §3.2.
-- **Authoring check** (Needs architecture confirmation): a dev-time script lists every legal move of a `decision`
-  position that passes the safety guard, so the author must explicitly classify or consciously leave each one to
-  the default. The content validator fails if a listed target/sound move fails the guard.
-- **Engine score is evidence, not proof of the objective.** A move with the best material score is not
-  automatically "target"; a move that is a little worse by material search is not automatically wrong. The class
-  is a reviewed pedagogical judgement bounded by the engine guard.
+### 5.3 Accepting reasonable alternatives (Proposal)
+
+- **Tactical claims** (`move`, `capture`, `combination`): any engine-confirmed move is correct (Verified today:
+  `src/lessons/combination.ts` `isWinningMove`).
+- **Strategic items** (`decision`, `line`): credit = **target** or **sound**. Authors list known target/sound
+  moves; predicates widen "target" to every move achieving the objective; the safety guard marks unlisted
+  losing moves **error** with the refutation shown; other unlisted moves are **dubious** ("does not lose anything,
+  but does not …") and logged locally for reclassification. A dev-time script lists every guard-passing move of a
+  `decision` position so the author classifies or consciously defaults each one (Needs architecture confirmation;
+  04 §5.3 proposes complete authored tables, which this spec adopts). The validator fails if a target/sound move
+  fails the guard, and requires at least two accepted moves where the objective allows alternatives.
+- **Engine score is evidence, not the answer key.** The best material score is not automatically "target"; a
+  slightly worse score is not automatically wrong. Feedback states its basis ("keeps your pieces safe for the next 2
+  moves and develops the Horse"), never "the engine says".
 
 ---
 
-## 5. Difficulty progression (Proposal)
+## 6. Difficulty progression (Proposal)
 
 | Lever | Basic | Intermediate | Advanced | Expert | Master |
 | --- | --- | --- | --- | --- | --- |
-| Hints | G2–G1 in most practice | G1 dominant, G0 at lesson end | G0 dominant | G0; hints only in `learn`-adjacent items | None outside `learn` |
-| Unfamiliarity | Few pieces, then full-board positions for safety | Pattern positions, then the same pattern in fuller positions | Full positions from realistic play, both colours | Positions not resembling any practice item | Mixed, unlabelled, both colours |
-| Branching | Single reply | Opponent picks among 1–2 authored replies | `line` deviations; `combination` best defence | Calculation with several defending branches; intermediate moves | Plan comparison where both plans are playable |
-| Counterplay | Opponent threats to notice (safety routine) | Opponent counter-threats in defence units | Opponent plays for counterplay in `play` | Counterpuncher partner (03 §5.2) | Attack/defence switches inside one task |
-| Evaluation | Material counting | Development and activity | Multi-factor assessment in words + action | Static vs dynamic, compensation | Diagnose without labels, compare plans |
-| Sustained decisions (`play` length, learner moves; to calibrate in the pilot) | 6–20 | 10–20 | 12–25 | 15–30 | Multi-game assessment |
+| Hints | G2–G1 in most practice | G1 dominant, G0 at lesson end | G0 dominant | G0; G1 briefly | None after the worked example |
+| Unfamiliarity | Few pieces, then full board for safety | Pattern positions, then fuller ones | Full positions from realistic play | Unlike any practice item | Mixed, unlabelled |
+| Branching | Single reply | 1–2 authored replies | `line` deviations; best defence | Several defending branches; intermediate moves | Plan comparison |
+| Counterplay | Threats to notice (safety routine) | Counter-threats in defence units | Partner plays for counterplay | Pressing partner (03 §5.2) | Attack/defence switches in one task |
+| Evaluation | Material counting | Development and activity | Multi-factor assessment + action | Static vs dynamic, compensation | Diagnose without labels |
+| Sustained play (learner moves; pilot calibrates) | Short tasks 6–12; full games to an adjudicated result (cap 80) | 10–20 | 12–25 | 15–30 | Multi-game exam |
 
-The `play` lengths are design targets for task authors, not promises; the architecture review must confirm the
-training partner can answer within an acceptable time on a phone for those lengths (Needs architecture
-confirmation).
-
----
-
-## 6. Feedback requirements (all units, Proposal)
-
-1. **Correct answer:** name what the move achieves *in this position* and the opponent's most important reply.
-   No generic "Well done!" alone (the generic line may accompany specific text).
-2. **Wrong answer, engine-refutable:** show the refutation on the board (opponent's reply, then the material or
-   mate it leads to), then one sentence on the common error it reflects.
-3. **Wrong answer, strategic (`dubious`):** say what the move does and what it neglects; point to the target idea
-   without giving the move at G0.
-4. **Tempting alternative:** every G1/G0 `decision` and `line` item names the most tempting wrong move and why it
-   fails (authored, reviewed).
-5. **Misconception tags:** each unit's misconceptions (below) get an id (`<unit>.m<k>`, e.g. `b06.m2`). Wrong
-   answers that match one are tagged, so remediation can target it (03-assessment.md §4.4).
-6. **Independent and assessment items** give feedback only after the answer; the prompt never names the motif
-   (03-assessment.md §4.2).
-7. **Both languages** carry the same content; Vietnamese is not a shortened translation.
+Lengths are design targets; the architecture review confirms the partner's time per move on a phone (Needs
+architecture confirmation; 04 §5.5 measured ~60–130 ms per move on desktop for `safe-sparring(3)`).
 
 ---
 
-## 7. Units
+## 7. Feedback requirements (all units, Proposal)
 
-Format per unit: header table → observable outcomes → lessons (id, title, objective) → practice ladder
-(guided / independent / transfer, with exercise types) → misconceptions and feedback → assessment and
-remediation. "Unit check" means the default unit check of 03-assessment.md §4 unless stated otherwise. "Reuses"
-names existing lessons whose verified positions may be reused or adapted (S1.3 decides; reuse never imports
-completion as mastery). Everything in §7 is **Proposal** unless labelled.
+1. **Correct:** what the move achieves *here* and the opponent's most important reply. A generic "Well done!" may
+   only accompany specific text.
+2. **Wrong, engine-refutable:** show the refutation on the board, then one sentence on the error behind it.
+3. **Wrong, strategic (`dubious`):** what the move does and what it neglects; at G0 point to the idea without
+   giving the move.
+4. **Tempting alternative:** every G1/G0 `decision`/`line` item names the most tempting wrong move and why it fails.
+5. **Misconception tags:** each misconception below has an id; matching wrong answers are tagged and drive
+   remediation (03-assessment.md §4.4). The feedback text listed with each misconception is the requirement the
+   author implements for that position.
+6. **Assessment items** give feedback only after the answer; prompts never name the motif (03-assessment.md §4.2).
+7. **Both languages** carry the same content.
+
+---
+
+## 8. Units
+
+Format per unit: header table → outcomes → lessons → **Guided / Independent / Transfer** (with exercise types) →
+**Misconceptions → feedback** → **Assessment** → **Remediation**. "Unit check" = the default check of
+03-assessment.md §4.1. **Remediation default** = 03-assessment.md §4.4 (failed objectives' G1/G0 practice and the
+misconception's `learn` card, then a new check form); units list only additions. "Reuses" names existing lessons
+whose verified positions may be reused as **practice** (S1.3 decides; never as check items; never importing
+mastery). Everything in §8 is **Proposal** unless labelled.
 
 ### Basic level
 
-#### b01 — Board, setup, turns and the goal
+#### b01 — Board, notation, setup and the goal
 | Level · prerequisites | Basic · none | Strands | **RS** |
 | --- | --- | --- | --- |
 | Baseline topics | 1 | Colour · perspective | Both (setup for both sides) |
 | Reuses | `u1l1` | Practical task | — |
 
-**Outcomes.** The learner can: name any point by file and rank; locate the river and both palaces; place every
-piece on its start point for either colour; say who moves first; state how a game is won under the chosen
-ruleset (checkmate or stalemate of the opposing General; the General is never captured).
+**Outcomes.** Name any point by file and rank and read a move in the course notation (§4); locate river and
+palaces; identify every start point for either colour; say who moves first; state how a game is won (checkmate or
+stalemate of the opposing General; the General is never captured).
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| b01l1 | Points, files and ranks | Name and find points; river and palaces |
-| b01l2 | Setting up both armies | Identify every start point, Red and Black; Red moves first, turns alternate |
-| b01l3 | How a game ends | Checkmate and stalemate win; the General is not captured; draws exist (detail in b05l3) |
+| b01l1 | Points, files and ranks | Find points; river and palaces |
+| b01l2 | Setting up both armies | Every start point, Red and Black; Red moves first, turns alternate |
+| b01l3 | How a game ends | Checkmate and stalemate win; the General is not captured; draws exist (b05l3) |
+| b01l4 | Reading moves | Each side's file numbers; read and play a written move for both colours |
 
-**Practice.** Guided: `select-squares` (region) with highlights; `choice` on start points. Independent: tap
-named points without highlights; `choice` "who moves now?". Transfer: the same tasks on the board seen from
-Black's side (orientation, Needs architecture confirmation).
-**Misconceptions → feedback.** b01.m1 pieces stand inside squares → show the intersection points. b01.m2 the river
-blocks every piece → preview: only Elephants (and Soldiers' moves change) are affected. b01.m3 the goal is to
-capture the General → explain checkmate. b01.m4 stalemate is a draw (from Western chess) → state the ruleset.
-**Assessment and remediation.** Unit check, short form (6 items, `choice` + `select-squares`). Remediation: replay
-the lesson of each failed item's objective.
+- **Guided:** `select-squares` (region, start points) with highlights; `learn` on file numbering from each side.
+- **Independent:** tap named points without highlights; `move` (`reach`) "play C2=5"-style written moves; `choice`
+  "who moves now?".
+- **Transfer:** the same tasks as Black on the rotated board (orientation: S1.1).
+- **Misconceptions → feedback:** `b01.m1` pieces stand inside squares → highlight the intersections the pieces use.
+  `b01.m2` the river blocks every piece → state that only Elephants are stopped and Soldiers change behaviour (b04).
+  `b01.m3` the goal is to capture the General → show a checkmate and that the game ends before any capture.
+  `b01.m4` stalemate is a draw (Western chess) → state the course ruleset: the stalemated side loses. `b01.m5` Black's
+  files are numbered like Red's → show both edge labels and the same file named from each side.
+- **Assessment:** unit check, short form (6 items: `choice`, `select-squares`, notation `move`).
+- **Remediation:** default.
 
 #### b02 — General, Advisors, Elephants and facing Generals
 | Level · prerequisites | Basic · b01 | Strands | **RS**, DE |
 | --- | --- | --- | --- |
-| Baseline topics | 2 | Colour · perspective | Both · using and defending against the facing-Generals rule |
+| Baseline topics | 2 | Colour · perspective | Both · using and defending against the facing rule |
 | Reuses | `u1l2`, `u1l3` | Practical task | — |
 
-**Outcomes.** The learner can list the legal moves of the General, Advisors and Elephants in a given position;
-explain why a move that leaves the two Generals facing on an open file is illegal; use the facing rule to take
-points away from the enemy General; explain the Elephant eye block and the river limit.
+**Outcomes.** List legal moves of General, Advisors and Elephants; explain why leaving the Generals facing on an
+open file is illegal; use the facing rule to take points from the enemy General; explain the Elephant-eye block and
+river limit.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| b02l1 | The General in its palace | Legal General moves; the palace limit |
-| b02l2 | Facing Generals | Recognise illegal facing; use an own General to restrict the enemy General |
-| b02l3 | Advisors and Elephants | Legal moves; blocked Elephant eye; river limit; their defensive role |
+| b02l1 | The General in its palace | Legal General moves; palace limit |
+| b02l2 | Facing Generals | Recognise illegal facing; restrict the enemy General with your own |
+| b02l3 | Advisors and Elephants | Legal moves; blocked eye; river limit; defensive role |
 
-**Practice.** Guided `select-squares` (legal moves) with highlights → independent `select-squares` without →
-`move` (`reach`) to restrict the enemy General → `choice` "is this move legal, and why?". Transfer: as Black in a
-fuller position. **Misconceptions.** b02.m1 the General moves diagonally; b02.m2 Elephants cross the river; b02.m3
-an Elephant jumps a blocked eye; b02.m4 facing only matters for the side that moves. Feedback shows the rule on
-this board (the blocking point, the palace edge). **Assessment.** Unit check (≥ 2 items as Black). Remediation
-by lesson.
+- **Guided:** `select-squares` (legal moves) with highlights.
+- **Independent:** `select-squares` without highlights; `move` (`reach`) to restrict the enemy General; `choice` "is
+  this move legal, and why?".
+- **Transfer:** as Black in a fuller position, legality questions mixed across the three pieces.
+- **Misconceptions → feedback:** `b02.m1` the General moves diagonally → show the palace lines it may use. `b02.m2`
+  Elephants cross the river → mark the river and the Elephant's seven points. `b02.m3` an Elephant jumps a blocked eye
+  → mark the eye point and the piece on it. `b02.m4` facing only matters for the side to move → show that the move
+  creating the face is the illegal one.
+- **Assessment:** unit check (≥ 2 items as Black). **Remediation:** default.
 
 #### b03 — Chariot and Horse
 | Level · prerequisites | Basic · b02 | Strands | **RS**, TC |
@@ -290,18 +318,22 @@ by lesson.
 | Baseline topics | 3 | Colour · perspective | Both |
 | Reuses | `u2l1`, `u2l2` | Practical task | — |
 
-**Outcomes.** The learner can list Chariot and Horse moves and captures, including blocked Horse legs
-("hobbled" Horse); identify which enemy pieces a given Chariot or Horse attacks.
+**Outcomes.** List Chariot and Horse moves and captures, including blocked Horse legs; identify which enemy pieces
+a given Chariot or Horse attacks.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| b03l1 | The Chariot | Moves and captures along files and ranks; blocked lines |
-| b03l2 | The Horse and its leg | Moves; the blocked leg; why a Horse on the edge is weak |
+| b03l1 | The Chariot | Lines, captures, blocked lines |
+| b03l2 | The Horse and its leg | Moves; the blocked leg; edge Horses |
 | b03l3 | What can they take? | Tap every enemy piece a Chariot or Horse attacks, both colours |
 
-**Practice.** `select-squares` (legal moves → attacked pieces, extension), `capture`. Transfer: crowded
-full-board position as Black. **Misconceptions.** b03.m1 the Horse jumps like a chess knight; b03.m2 the leg block
-is on the landing point; b03.m3 the Chariot jumps over a piece. **Assessment.** Unit check. Remediation by lesson.
+- **Guided:** `select-squares` (legal moves) with the leg point highlighted.
+- **Independent:** `select-squares` (attacked pieces), `capture`.
+- **Transfer:** crowded full-board position as Black: "tap every piece Red's Horses attack".
+- **Misconceptions → feedback:** `b03.m1` the Horse jumps like a chess knight → mark the leg point and the moves the
+  block removes. `b03.m2` the block is on the landing point → animate the one-step-then-diagonal path. `b03.m3` the
+  Chariot jumps a piece → highlight the first piece on the line as the end of its reach.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### b04 — Cannon and Soldier
 | Level · prerequisites | Basic · b03 | Strands | **RS**, TC |
@@ -309,167 +341,187 @@ is on the landing point; b03.m3 the Chariot jumps over a piece. **Assessment.** 
 | Baseline topics | 4 | Colour · perspective | Both |
 | Reuses | `u3l1`, `u3l2` | Practical task | — |
 
-**Outcomes.** The learner can list Cannon moves and captures (exactly one screen to capture, none to move);
-list Soldier moves before and after crossing the river; read every piece's moves on a full board.
+**Outcomes.** List Cannon moves and captures (exactly one screen to capture, none to move); list Soldier moves
+before and after the river; read every piece's moves on a full board.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | b04l1 | The Cannon and its screen | Moving vs capturing; any piece of either colour is a screen |
-| b04l2 | The Soldier before and after the river | Forward only; sideways after crossing; no promotion; no retreat |
+| b04l2 | The Soldier before and after the river | Forward only; sideways after crossing; no promotion, no retreat |
 | b04l3 | Every piece on a full board | Mixed piece reading, both colours |
 
-**Practice.** `select-squares`, `capture`. **Misconceptions.** b04.m1 the Cannon captures with no screen or with two;
-b04.m2 the Cannon may jump to an empty point; b04.m3 Soldiers move sideways before the river or retreat; b04.m4
-Soldiers promote (from Western chess). **Assessment.** Unit check. Remediation by lesson.
+- **Guided:** `select-squares` with the screen highlighted.
+- **Independent:** `select-squares`, `capture` with Cannon captures.
+- **Transfer:** b04l3 full-board `select-squares` as Black ("tap every Red piece that can capture your Horse"),
+  mixing all seven piece types.
+- **Misconceptions → feedback:** `b04.m1` the Cannon captures with no screen or with two → count the pieces between
+  on the board. `b04.m2` the Cannon may jump to an empty point → show that moving needs a clear line. `b04.m3`
+  Soldiers move sideways before the river or retreat → mark the river and the allowed steps. `b04.m4` Soldiers
+  promote → state that a Soldier never promotes; on the last rank it can only move sideways.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### b05 — Check, escaping check, checkmate, stalemate and results
 | Level · prerequisites | Basic · b04 | Strands | **RS**, DE |
 | --- | --- | --- | --- |
 | Baseline topics | 5 | Colour · perspective | Both · giving and escaping check |
-| Reuses | `u4l1`, `u4l2`; checkmate items of `u3l1`, `u3l2` | Practical task | — |
+| Reuses | `u4l1`, `u4l2`; mate items of `u3l1`, `u3l2` | Practical task | — |
 
-**Outcomes.** The learner can tell check, checkmate and stalemate apart in a given position; escape check by every
-available method (move the General, capture the checker, block — including blocking a Horse leg — and, against a
-Cannon, adding a second screen or moving away or capturing the screen; the engine decides which are legal in each
-position); deliver mate in one; state the results and the ruleset
-summary used by the app (03-assessment.md §8), including what the app does not adjudicate.
+**Outcomes.** Tell check, checkmate and stalemate apart; escape check by every available method (move the General,
+capture the checker, block — including a Horse-leg block — and, against a Cannon, adding a second screen or moving
+away or capturing the screen; the engine decides legality per position); deliver mate in one; state the course
+ruleset and what the app does not adjudicate (03-assessment.md §8).
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| b05l1 | Check and every way out | All escape methods, including the Horse-leg block and Cannon screens |
-| b05l2 | Checkmate | Recognise mate; deliver mate in one with each piece type, both colours |
-| b05l3 | Stalemate and other results | Stalemate loses for the stalemated side; draws; perpetual check is forbidden (ruleset summary) |
+| b05l1 | Check and every way out | All escape methods |
+| b05l2 | Checkmate | Recognise and deliver mate in one, both colours |
+| b05l3 | Stalemate and other results | Stalemate loses; draws; perpetual check is forbidden; app limits |
 
-**Practice.** `move` (`any` to escape check, `checkmate`), `choice` ("check, mate, stalemate or none?"; "which
-escapes are legal?"). Contrast: positions that look like mate but have an escape. Transfer: escaping check as Black
-where only one escape keeps material (preview of b06–b08). **Misconceptions.** b05.m1 a Horse check cannot be blocked;
-b05.m2 you may ignore check to capture something big; b05.m3 stalemate is a draw; b05.m4 every check is good.
-**Assessment.** Unit check; includes "not mate" positions. Remediation by lesson.
+- **Guided:** `move` (`check`, `any` to escape) with the checking piece highlighted.
+- **Independent:** `move` (`checkmate`), `choice` ("check, mate, stalemate or none?"; "which escapes are legal?").
+- **Transfer:** escaping check as Black where only one escape keeps material (preview of b06–b08).
+- **Misconceptions → feedback:** `b05.m1` a Horse check cannot be blocked → show the leg point and the blocking move.
+  `b05.m2` ignore check to capture something big → explain the move is illegal and show the checker. `b05.m3`
+  stalemate is a draw → restate the ruleset with the position. `b05.m4` every check is good → show a check that lets
+  the General escape to a better point and loses a tempo.
+- **Assessment:** unit check, including "not mate" positions. **Remediation:** default.
 
 #### b06 — Threatened, undefended and defended pieces
 | Level · prerequisites | Basic · b05 | Strands | **RS**, TC, DE |
 | --- | --- | --- | --- |
-| Baseline topics | 6 | Colour · perspective | Both · spotting own and enemy weaknesses |
-| Reuses | `capture` items of `u2l1`, `u2l2` (as contrast) | Practical task | — |
+| Baseline topics | 6 | Colour · perspective | Both · own and enemy weaknesses |
+| Reuses | `capture` items of `u2l1`, `u2l2` (contrast) | Practical task | — |
 
-**Outcomes.** The learner can mark every attacked piece of a side; tell hanging (attacked and undefended) pieces
-from defended ones, counting attackers and defenders; save a threatened piece by moving it, defending it, blocking
-the attack or making a bigger threat; say "nothing is hanging" when that is true.
+**Outcomes.** Mark every attacked piece of a side; tell hanging pieces from defended ones by counting attackers and
+defenders; save a threatened piece (move, defend, block, bigger threat); say "nothing is hanging" when true.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| b06l1 | What is attacked? | Tap all attacked pieces of one side (incl. Cannon attacks through a screen) |
-| b06l2 | Defended or hanging? | Count attackers and defenders; a cheap attacker can still win a defended piece |
-| b06l3 | Saving a threatened piece | Four ways to answer a threat; choose one that keeps everything safe |
+| b06l1 | What is attacked? | Tap all attacked pieces of one side (incl. through a Cannon screen) |
+| b06l2 | Defended or hanging? | Count attackers/defenders; a cheaper attacker still wins a defended piece |
+| b06l3 | Saving a threatened piece | Four answers to a threat; choose one that keeps everything safe |
 
-**Practice.** `select-squares` (attacked / hanging, extension), `choice` with a "none" option, `move` (`safe`).
-Quiet positions are common here (often nothing hangs). Transfer: full-board, as Black, after an opponent move.
-**Misconceptions.** b06.m1 a defended piece is always safe (ignores a lower-value attacker); b06.m2 a Cannon "behind"
-a piece does not attack; b06.m3 a hobbled Horse still defends; b06.m4 a piece pinned to its General still defends.
-**Assessment.** Unit check. Remediation by lesson and misconception tag.
+- **Guided:** `select-squares` (attacked pieces) with attack lines drawn.
+- **Independent:** `select-squares` (hanging), `choice` with a correct-sometimes "none", `move` (`safe`).
+- **Transfer:** full board, as Black, right after an animated opponent move.
+- **Misconceptions → feedback:** `b06.m1` a defended piece is always safe → show the cheaper attacker's capture and
+  the exchange count. `b06.m2` a Cannon behind a piece does not attack → draw the screen line. `b06.m3` a hobbled
+  Horse still defends → mark the blocked leg. `b06.m4` a piece pinned to its General still defends → show the illegal
+  recapture.
+- **Assessment:** unit check. **Remediation:** default, by misconception tag first.
 
 #### b07 — Exchanges and relative material value
 | Level · prerequisites | Basic · b06 | Strands | **TC**, RS, PA |
 | --- | --- | --- | --- |
 | Baseline topics | 7 | Colour · perspective | Both |
-| Reuses | `u2l1`, `u2l2`, `u3l1` `capture` items; win-material puzzles as optional practice | Practical task | — |
+| Reuses | `capture` items of `u2l*`, `u3l1`; win-material puzzles as optional practice | Practical task | — |
 
-**Outcomes.** The learner can use the conventional beginner values (the engine's values, Verified
-`solver.ts:9–17`) to count an exchange sequence; refuse a capture that loses material to the recapture; explain,
-with examples, why values change with the position (a crossed Soldier, a Cannon short of screens, a trapped
-piece) — the general claim is a conventional teaching heuristic that the content reviewer confirms in wording;
-choose when trading helps (ahead in material, removing a strong attacker) and when it does not.
+**Outcomes.** Count an exchange with the conventional beginner values (the engine's, Verified `solver.ts:9–17`);
+refuse a capture that loses to the recapture; explain with examples why values change with the position (crossed
+Soldier, Cannon short of screens, trapped piece — a conventional heuristic whose wording the content reviewer
+confirms); choose when trading helps.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| b07l1 | What pieces are worth | Values as a guide, not a law; when they change |
-| b07l2 | Counting an exchange | Count captures and recaptures; refuse losing captures |
-| b07l3 | Should I trade? | Trading when ahead or to remove an attacker; keeping an active piece |
+| b07l1 | What pieces are worth | Values as a guide, not a law |
+| b07l2 | Counting an exchange | Captures and recaptures; refuse losing captures |
+| b07l3 | Should I trade? | Trade when ahead or to remove an attacker; keep an active piece |
 
-**Practice.** `capture`, `decision` (best move is *not* a capture), `choice` ("trade or not, and why"). Transfer:
-both colours in a full position. **Misconceptions.** b07.m1 every capture is good; b07.m2 equal trades never matter;
-b07.m3 values are fixed (including the engine's equal value for crossed and uncrossed Soldiers, a disclosed
-engine limitation). **Assessment.** Unit check. Remediation by lesson.
+- **Guided:** `capture` with the exchange count shown step by step.
+- **Independent:** `capture`, `decision` (the best move is not a capture), `choice` ("trade or not, and why").
+- **Transfer:** full position as Black where a tempting capture loses to a recapture two moves later.
+- **Misconceptions → feedback:** `b07.m1` every capture is good → play out the recapture and show the count. `b07.m2`
+  equal trades never matter → show what the trade does to activity or safety. `b07.m3` values are fixed → show the
+  position-specific reason; disclose the engine's equal value for crossed Soldiers as a limitation.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### b08 — The pre-move safety routine
 | Level · prerequisites | Basic · b07 | Strands | **RS**, **DE**, PP |
 | --- | --- | --- | --- |
-| Baseline topics | 8 | Colour · perspective | Both · own blunders and the opponent's threats |
+| Baseline topics | 8 | Colour · perspective | Both · own blunders and opponent threats |
 | Reuses | — (new) | Practical task | `b08-g1` (`play`, short) |
 
-**Routine taught (Proposal; wording reviewed by the content reviewer):** before every move ask (1) *What does the
-opponent's last move threaten?* (checks, captures, attacks); (2) *What are my checks, captures and threats?*;
-(3) *After my move, can the opponent check, capture something undefended or win material?*
+**Routine (wording reviewed by the content reviewer):** before every move ask (1) *What does the opponent's last
+move threaten?* (2) *What are my checks, captures and threats?* (3) *After my move, can the opponent check, capture
+something undefended or win material?*
 
-**Outcomes.** After an opponent move, the learner names what it threatens (or "nothing"); rejects an intended move
-that leaves material capturable or allows mate in one; finds a safe useful move in a position with no tactic; keeps
-playing safely for several moves.
+**Outcomes.** Name what an opponent move threatens (or "nothing"); reject a move that leaves material capturable or
+allows mate in one; find a safe useful move when there is no tactic; keep playing safely for several moves.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| b08l1 | What did that move threaten? | Read the opponent's last move (shown animated) |
-| b08l2 | Blunder check | Judge an intended move as safe or unsafe, and why |
-| b08l3 | Safe and useful in a quiet position | Choose a move that is safe *and* improves something |
+| b08l1 | What did that move threaten? | Read the opponent's last move |
+| b08l2 | Blunder check | Judge an intended move safe or unsafe, and why |
+| b08l3 | Safe and useful in a quiet position | Safe *and* improves something |
 
-**Practice.** `select-squares` (threatened pieces after a shown move), `choice` (safe / unsafe + reason),
-`decision` (`safe` guard + predicate "improves a piece"). Mostly positions with no immediate tactic. Transfer:
-`b08-g1`, a short `play` task from a simplified position against the basic partner, rubric R1 Safety
-(03-assessment.md §5.3). **Misconceptions.** b08.m1 only my own plan matters; b08.m2 the opponent's move was
-random; b08.m3 checking captures but not checks; b08.m4 "safe" means "do nothing". **Assessment.** Unit check with
-safety-critical items (03-assessment.md §4.1); `b08-g1` for "applied". Remediation: misconception-tagged items,
-then b08l2.
+- **Guided:** `select-squares` (threatened pieces after a shown move) with the moved piece highlighted.
+- **Independent:** `choice` (safe/unsafe + reason), `decision` (`safe` guard + predicate "improves a piece"); mostly
+  positions with no tactic.
+- **Transfer:** `b08-g1`: short `play` (6–12 learner moves) from a simplified position vs `safe-sparring(3)`, rubric R1 70 % + R0 30 %.
+- **Misconceptions → feedback:** `b08.m1` only my plan matters → replay the opponent's last move and show its threat.
+  `b08.m2` the opponent's move was random → show what it attacks. `b08.m3` checking captures but not checks → show the
+  check that wins material. `b08.m4` "safe" means "do nothing" → show a safe move that also develops.
+- **Assessment:** unit check with safety-critical items; `b08-g1` for "applied". **Remediation:** default, then
+  b08l2 again.
 
 #### b09 — Opening development principles
 | Level · prerequisites | Basic · b08 | Strands | **OD**, PA, RS |
 | --- | --- | --- | --- |
 | Baseline topics | 9 | Colour · perspective | Both |
-| Reuses | — (new) | Practical task | `b09-g1` (`play` from the start position, first moves only) |
+| Reuses | — (new) | Practical task | `b09-g1` (`play` from the start position, first moves) |
 
-**Principles taught (Proposal; content reviewer confirms the wording and the examples):** bring the Chariots
-into play early; develop Horses toward the centre and keep their legs free; know what a central Cannon threatens
-and protect the central Soldier; do not move the General or Advisors without a reason; move each piece with a
-purpose and avoid moving one piece many times; do not grab material at the cost of falling behind in development
-and safety.
+**Principles (content reviewer confirms wording and examples):** bring Chariots into play early; develop Horses
+toward the centre with free legs; know what a central Cannon threatens and protect the central Soldier; do not move
+General or Advisors without reason; move each piece with a purpose; do not grab material at the cost of
+development and safety.
 
-**Outcomes.** The learner can compare two positions and say which side is better developed and why; choose a
-developing move that is also safe; meet the central Cannon's threat to the central Soldier as Black; play the
-first moves of a game by principle as either colour without a memorised line.
+**Outcomes.** Say which side is better developed and why; choose a safe developing move; meet the central Cannon's
+threat to the central Soldier as Black; play the first moves by principle as either colour without a memorised line.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| b09l1 | Why develop? | Undeveloped pieces do not fight; compare development |
-| b09l2 | Get the Chariots out | Choose moves that activate or prepare a Chariot |
+| b09l1 | Why develop? | Undeveloped pieces do not fight |
+| b09l2 | Get the Chariots out | Activate or prepare a Chariot |
 | b09l3 | Meeting the central Cannon | As Black, protect the central Soldier with a developing move |
-| b09l4 | First moves by principle, both colours | Short `line`s from the start position with deviations |
+| b09l4 | First moves by principle, both colours | Short `line`s with deviations |
 
-**Practice.** `choice` (compare development), `decision` (predicate "develops a back-rank piece" + safety guard),
-`line` (short, both colours, deviations). No named openings yet. Contrast: a material grab that costs development or
-safety. Transfer: `b09-g1` (`play` from the start position for the first moves, rubric R2 Development).
-**Misconceptions.** b09.m1 openings are memorised sequences; b09.m2 move the same piece repeatedly to attack early;
-b09.m3 the General should "step out" early; b09.m4 grabbing a Soldier is always good. **Assessment.** Unit check
-(≥ 1/4 no-tactic items); `b09-g1` for "applied".
+- **Guided:** `choice` (compare development) with the undeveloped pieces marked.
+- **Independent:** `decision` (predicate "develops a back-rank piece" + guard), `line` (both colours, deviations).
+- **Transfer:** `b09-g1`, `play` from the start position for the first moves, rubric R2 + R1.
+- **Misconceptions → feedback:** `b09.m1` openings are memorised sequences → explain the purpose of the move and an
+  equally good alternative. `b09.m2` move one piece repeatedly to attack early → count developed pieces for both sides
+  after the sequence. `b09.m3` the General should step out early → show the open line it creates. `b09.m4` grabbing a
+  Soldier is always good → play out the development lead the opponent gains.
+- **Assessment:** unit check (≥ 1/4 quiet); `b09-g1` for "applied". **Remediation:** default.
 
-#### b10 — First complete guided games
+#### b10 — First complete games
 | Level · prerequisites | Basic · b09 | Strands | **PP**, RS, OD, DE |
 | --- | --- | --- | --- |
 | Baseline topics | 10 | Colour · perspective | Both |
-| Reuses | — (new) | Practical task | `b10-g1`, `b10-g2`; level exam `xb` |
+| Reuses | — (new) | Practical task | `b10-g1` (game as Red), `b10-g2` (game as Black); level exam `xb` |
 
-**Outcomes.** The learner can play a complete game from the start position against the basic training partner as
-either colour, applying the safety routine; convert a large material lead into mate in a simplified position;
-find in a finished game the move where they lost material and suggest a better one.
+**Outcomes.** Play a complete game from the start position to a result against `safe-sparring` as either colour,
+applying the safety routine; convert a large material lead into mate in a simplified position; find the move where
+material was lost in a finished game and suggest a better one. A "result" is mate, stalemate, or the training
+adjudication of 03-assessment.md §5.5 (move cap 80 learner moves, no-capture limit, repetition rules): disclosed to
+the learner as a training result, not an official one.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| b10l1 | A guided game as Red | Coach prompts (safety routine questions) on every move, then fading |
+| b10l1 | A guided game as Red | Coach prompts (safety questions) on every move, fading after the opening |
 | b10l2 | A guided game as Black | Same, as Black |
-| b10l3 | Finishing a won game | Convert a large material lead into mate (simplified start position) |
+| b10l3 | Finishing a won game | Convert a large lead into mate (simplified start position) |
 | b10l4 | Looking back | First `review`: find the material-losing move, play a better one |
 
-**Practice.** `play` with coaching (G2 prompts that fade to none), `review`. **Misconceptions.** b10.m1 once ahead,
-the game wins itself; b10.m2 attacking means ignoring threats; b10.m3 a lost piece means the game is lost.
-**Assessment.** Unit check is replaced by the practical tasks `b10-g1` (as Red) and `b10-g2` (as Black), and the
-Basic level exam `xb` (03-assessment.md §6). Remediation: the review of the failed game assigns b06–b08 items.
+- **Guided:** `play` with G2 coach prompts that fade to none.
+- **Independent:** `play` (b10l3, conversion, no prompts); `review` of the learner's own game.
+- **Transfer:** `b10-g1` and `b10-g2`: full games, no prompts.
+- **Misconceptions → feedback:** `b10.m1` once ahead, the game wins itself → show the opponent's counter-chance in the
+  learner's game. `b10.m2` attacking means ignoring threats → point to the move in the game where a threat was
+  ignored. `b10.m3` a lost piece means the game is lost → show the drawing/holding chances that remained.
+- **Assessment:** unit check, short form (6 items: in-game safety decisions, conversion decisions, one `review`
+  item on an authored game) for mastery; `b10-g1`, `b10-g2` and `xb` for "applied".
+- **Remediation:** default, plus the review of a failed game assigns b06–b08 items by its mistake categories.
 
 ### Intermediate level
 
@@ -479,41 +531,45 @@ Basic level exam `xb` (03-assessment.md §6). Remediation: the review of the fai
 | Baseline topics | 11 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `i01-g1` (`play`, improve pieces) |
 
-**Outcomes.** The learner can identify the least active piece (fewest useful moves, blocked, out of play) of a
-side; improve it with a safe move; place two pieces so they support each other (e.g. Chariot behind Horse, Cannon
-with a ready screen); reject an activation that walks into a capture.
+**Outcomes.** Identify the least active piece of a side; improve it safely; place two pieces so they support each
+other; reject an activation that walks into a capture.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| i01l1 | Active and passive pieces | Judge activity by mobility and targets, not by distance travelled |
-| i01l2 | Pieces that work together | Coordination of pairs; avoid pieces that block each other |
+| i01l1 | Active and passive pieces | Activity by mobility and targets, not distance |
+| i01l2 | Pieces that work together | Pairs that support; pieces that block each other |
 | i01l3 | Activate safely | Contrast: activation that loses material |
 
-**Practice.** `choice` / `select-squares` (worst piece), `decision` (predicate "mobility of the chosen piece rises"),
-contrast items. Most positions have no tactic. Transfer: `i01-g1` (`play`, rubric R3 Plan with an activity
-predicate). **Misconceptions.** i01.m1 active = advanced as far as possible; i01.m2 more attackers is always better even
-when they block each other. **Assessment.** Unit check. Remediation by lesson.
+- **Guided:** `select-squares` (worst piece) with mobility counts shown.
+- **Independent:** `decision` (predicate "chosen piece's mobility rises" + guard), contrast items, mostly quiet.
+- **Transfer:** `i01-g1`, `play` vs `safe-sparring`, rubric R3 (activity predicate) + R1.
+- **Misconceptions → feedback:** `i01.m1` active = advanced as far as possible → compare mobility before/after and
+  show the piece can be chased. `i01.m2` more attackers is always better → show two pieces blocking each other's lines.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### i02 — Forks and pins
 | Level · prerequisites | Intermediate · i01 | Strands | **TC**, DE |
 | --- | --- | --- | --- |
-| Baseline topics | 12 | Colour · perspective | Both · making and avoiding forks/pins |
-| Reuses | `u9l1` (win-material forks) | Practical task | — |
+| Baseline topics | 12 | Colour · perspective | Both · making and avoiding |
+| Reuses | `u9l1` | Practical task | — |
 
-**Outcomes.** The learner can win material with a fork by any piece type; recognise a pinned piece (to the General
-by a Chariot, by facing Generals, and the two-piece case on a Cannon line, where moving either piece leaves one
-screen) — legality is engine-verified, the explanations reviewed; avoid forks and break pins when defending.
+**Outcomes.** Win material with a fork by any piece type; recognise pinned pieces (by a Chariot, by facing Generals,
+and two pieces on a Cannon line, where moving either leaves one screen — legality engine-verified, wording
+reviewed); avoid forks and break pins when defending.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | i02l1 | Forks | Double attacks by Horse, Chariot, Cannon and Soldier |
-| i02l2 | Pins | Pieces that cannot move (or cannot leave a line) because of the General |
-| i02l3 | Defending forks and pins | Stay off fork points; unpin; counter-attack the forker |
+| i02l2 | Pins | Pieces that cannot move or leave a line because of the General |
+| i02l3 | Defending forks and pins | Avoid fork points; unpin; counter-attack the forker |
 
-**Practice.** G2 → G0 `combination` (`win-material`) and `move`; `decision` for defence; contrast: a fork that fails
-because the forker is captured with check. Transfer: unannounced fork/pin items in full positions as Black.
-**Misconceptions.** i02.m1 every fork wins material; i02.m2 a pinned piece cannot capture at all; i02.m3 a Cannon
-cannot pin. **Assessment.** Unit check. Remediation by lesson.
+- **Guided:** `combination` (`win-material`) with the forking piece highlighted.
+- **Independent:** `combination`, `move`; `decision` for defence; contrast where the forker is captured with check.
+- **Transfer:** unannounced fork/pin items as Black inside fuller positions and in interleaved check items.
+- **Misconceptions → feedback:** `i02.m1` every fork wins → play out the counter-check or capture of the forker.
+  `i02.m2` a pinned piece cannot capture at all → show a pinned Chariot capturing along the pin line. `i02.m3` a Cannon
+  cannot pin → show the two-piece case and the illegal move.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### i03 — Discovered attacks and double check
 | Level · prerequisites | Intermediate · i02 | Strands | **TC**, DE |
@@ -521,9 +577,9 @@ cannot pin. **Assessment.** Unit check. Remediation by lesson.
 | Baseline topics | 13 | Colour · perspective | Both |
 | Reuses | `u9l2`, `u11l1` | Practical task | — |
 
-**Outcomes.** The learner can use a discovered attack (moving a blocker, or for a Cannon creating or removing a
-screen) to win material or mate; answer a double check correctly (usually only a General move helps; the engine
-decides legality in each position, and any exception used in an item is reviewed); spot and defuse an enemy battery before it fires.
+**Outcomes.** Use a discovered attack (moving a blocker, or creating/removing a Cannon screen); answer a double check
+correctly (usually only a General move helps; the engine decides legality, and any exception used in an item is
+reviewed); spot and defuse a battery before it fires.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
@@ -531,73 +587,82 @@ decides legality in each position, and any exception used in an item is reviewed
 | i03l2 | Double check | Giving it; answering it |
 | i03l3 | Defusing a battery | Quiet defence before the discovery |
 
-**Practice.** `combination`, `move`, `decision` (prophylactic defence, predicate "battery line blocked or front
-piece no longer able to discover with gain"). **Misconceptions.** i03.m1 one block or capture answers any double check; i03.m2 only Chariots
-make discoveries. **Assessment.** Unit check. Remediation by lesson.
+- **Guided:** `combination` with the battery line drawn.
+- **Independent:** `combination`, `move`; `decision` (predicate "battery line blocked or front piece neutralised").
+- **Transfer:** as Black, a position where the opponent's battery is the only danger and nothing announces it.
+- **Misconceptions → feedback:** `i03.m1` one block or capture answers any double check → show the second checker
+  still attacking. `i03.m2` only Chariots make discoveries → show a Cannon screen created by a move.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### i04 — Removing defenders, deflection, decoys and overload
 | Level · prerequisites | Intermediate · i03 | Strands | **TC** |
 | --- | --- | --- | --- |
 | Baseline topics | 14 | Colour · perspective | Both |
-| Reuses | `u11l2` (decoy), `u10l1` (sacrifice to mate) | Practical task | — |
+| Reuses | `u11l2`, `u10l1` | Practical task | — |
 
-**Outcomes.** The learner can remove or deflect a defender to win material or mate; decoy a piece (often the
-General) onto a bad point; exploit a piece with two defensive jobs; reject a sacrifice that does not work.
+**Outcomes.** Remove or deflect a defender to win material or mate; decoy a piece onto a fatal point; exploit an
+overloaded defender; reject a sacrifice that does not work.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| i04l1 | Remove the defender | Capture or exchange the piece that holds things together |
-| i04l2 | Deflection and decoy | Drive a defender away; lure a piece onto a fatal point |
+| i04l1 | Remove the defender | Capture/exchange the key defender |
+| i04l2 | Deflection and decoy | Drive away; lure in |
 | i04l3 | Overload | One defender, two jobs |
-| i04l4 | When the sacrifice fails | Contrast: the tempting sacrifice is refuted; play a quiet move |
+| i04l4 | When the sacrifice fails | The tempting sacrifice is refuted; play a quiet move |
 
-**Practice.** `combination` (checkmate / win-material), `decision` for i04l4. **Misconceptions.** i04.m1 a sacrifice
-that gives check must be good; i04.m2 the defender is the closest piece. **Assessment.** Unit check (≥ 1 item where
-no sacrifice works). Remediation by lesson.
+- **Guided:** `combination` with the defender highlighted.
+- **Independent:** `combination` (mate/material), `decision` (i04l4).
+- **Transfer:** mixed set as Black where only some positions contain a working sacrifice.
+- **Misconceptions → feedback:** `i04.m1` a sacrifice with check must be good → play the refutation. `i04.m2` the
+  defender is the nearest piece → show which piece actually guards the target.
+- **Assessment:** unit check (≥ 1 item where no sacrifice works). **Remediation:** default.
 
 #### i05 — Cannon mating patterns and their defence
 | Level · prerequisites | Intermediate · i04 | Strands | **TC**, DE |
 | --- | --- | --- | --- |
-| Baseline topics | 15 (split, see §8) | Colour · perspective | Both · attack and defence |
+| Baseline topics | 15 (split, §9.1) | Colour · perspective | Both · attack and defence |
 | Reuses | `u7l1`, `u7l2`, `u7l3` | Practical task | — |
 
-**Outcomes.** The learner can deliver the Double Cannon, smothered-General (palace blocked by own pieces) and
-Horse-behind-Cannon mates in 1–2 moves; recognise the pattern one move early from the defending side and break it
-(remove the screen line, free a palace point, counter-check).
+**Outcomes.** Deliver Trùng pháo (Double Cannon), Muộn cung (Smothered General) and Mã hậu pháo (Horse-behind-Cannon)
+mates in 1–2 moves; from the defending side, see the pattern one move early and break it.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | i05l1 | Double Cannon | Pattern, setup, when it fails |
-| i05l2 | The blocked palace | General trapped by its own pieces |
+| i05l2 | Smothered General | Trapped by its own pieces |
 | i05l3 | Horse behind Cannon | Pattern and setup |
-| i05l4 | Defending against Cannon mates | As Black: see it coming and stop it |
+| i05l4 | Defending against Cannon mates | As Black: stop it one move early |
 
-**Practice.** Existing `move` / `combination` items reused for i05l1–3 (as Red); new `move` (`defend`) and `decision`
-items as Black for i05l4. **Misconceptions.** i05.m1 a Cannon checks with no screen; i05.m2 blocking with any piece
-always stops a Cannon check (it may create the screen for the second Cannon). **Assessment.** Unit check (≥ 1/3 as
-defender). Remediation by lesson.
+- **Guided:** reused `move`/`combination` items (Red) with pattern pieces highlighted.
+- **Independent:** reused items without highlight; new `move` (`defend`) and `decision` as Black.
+- **Transfer:** pattern embedded in a fuller position as Black (defend) and as Red (attack), unannounced.
+- **Misconceptions → feedback:** `i05.m1` a Cannon checks with no screen → count pieces on the line. `i05.m2` any
+  block stops a Cannon check → show the block creating the second Cannon's screen.
+- **Assessment:** unit check (≥ 1/3 as defender). **Remediation:** default.
 
 #### i06 — Horse and Chariot mating patterns and their defence
 | Level · prerequisites | Intermediate · i05 | Strands | **TC**, DE |
 | --- | --- | --- | --- |
 | Baseline topics | 15 (split) | Colour · perspective | Both · attack and defence |
-| Reuses | `u8l1`, `u8l2`, `u8l3`, `u8l4` | Practical task | — |
+| Reuses | `u8l1`–`u8l4` | Practical task | — |
 
-**Outcomes.** The learner can deliver the palace-corner Horse, two-Chariot, Chariot-and-Horse and General-assisted
-mates; from the defending side, see the pattern one move early and stop it, choosing a defence that does not lose
-material elsewhere.
+**Outcomes.** Deliver the Ngọa tào Horse, Two-Chariot, Chariot-and-Horse and General-assisted mates; from the
+defending side stop the pattern one move early without losing material elsewhere.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| i06l1 | Palace-corner Horse | Pattern and setup |
+| i06l1 | The Ngọa tào Horse | Pattern and setup |
 | i06l2 | Two Chariots | Pattern and setup |
 | i06l3 | Chariot and Horse | Pattern and setup |
 | i06l4 | The General joins the attack | Facing-Generals support |
 | i06l5 | Stop it one move early | As Black: prophylaxis against these patterns |
 
-**Practice.** Reused `move` / `combination` (Red); new `move` (`defend`, depth 1–2) and `decision` as Black.
-**Misconceptions.** i06.m1 the attack always needs a check every move; i06.m2 defending means moving the General.
-**Assessment.** Unit check (≥ 1/3 as defender). Remediation by lesson.
+- **Guided:** reused items (Red) with highlights.
+- **Independent:** reused items without highlights; `move` (`defend`, depth 1–2) and `decision` as Black.
+- **Transfer:** unannounced pattern positions mixed with i05 patterns, both colours.
+- **Misconceptions → feedback:** `i06.m1` the attack needs a check every move → show the quiet move that makes mate
+  unstoppable. `i06.m2` defending means moving the General → show the interposition or exchange that holds.
+- **Assessment:** unit check (≥ 1/3 as defender). **Remediation:** default.
 
 #### i07 — Tactical defence, exchanges and counter-threats
 | Level · prerequisites | Intermediate · i06 | Strands | **DE**, TC |
@@ -605,92 +670,101 @@ material elsewhere.
 | Baseline topics | 16 | Colour · perspective | Both |
 | Reuses | `u9l3`, `u11l3` | Practical task | `i07-g1` (`play`, survive pressure) |
 
-**Outcomes.** The learner can stop a one- or two-move threat; defend by exchanging the key attacker; answer a threat
-with a stronger counter-threat when (and only when) it works; choose among several defences the one that does not
-create a new weakness.
+**Outcomes.** Stop one- and two-move threats; defend by exchanging the attacker; answer a threat with a bigger one
+when it works; choose the defence that does not create a new weakness.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| i07l1 | Stop the threat | Find a move that stops the threat (`defend`) |
+| i07l1 | Stop the threat | `defend` |
 | i07l2 | Defend by exchange | Trade the attacker |
-| i07l3 | Counter-threats | A bigger threat as defence; contrast where it fails |
-| i07l4 | Choosing the defence | Several defences work now; only one holds later |
+| i07l3 | Counter-threats | Bigger threat as defence; contrast where it fails |
+| i07l4 | Choosing the defence | Several defences work now; one holds later |
 
-**Practice.** `move` (`defend`), `decision`, `combination` from the defender's side (Black). Transfer: `i07-g1`
-(`play`, rubric R5 Holding). **Misconceptions.** i07.m1 any move that stops the immediate threat is fine; i07.m2
-counter-attack is always better than defence. **Assessment.** Unit check; `i07-g1` for "applied".
+- **Guided:** `move` (`defend`) with the threat shown as an arrow.
+- **Independent:** `decision`, `combination` from the defender's side (Black).
+- **Transfer:** `i07-g1`, `play` as defender vs a pressing partner, rubric R5 + R1.
+- **Misconceptions → feedback:** `i07.m1` any move stopping the immediate threat is fine → play on to the second
+  threat. `i07.m2` counter-attack always beats defence → show the counter-threat that is too slow.
+- **Assessment:** unit check; `i07-g1` for "applied". **Remediation:** default.
 
 #### i08 — Central Cannon plans as Red
 | Level · prerequisites | Intermediate · i07 (knowledge: b09, i01) | Strands | **OD**, PA |
 | --- | --- | --- | --- |
-| Baseline topics | 17 | Colour · perspective | Red |
+| Baseline topics | 17 | Colour · perspective | **Red only** (colour exception, rule 2: the topic is Red's opening; i09 is its Black counterpart) |
 | Reuses | — (new) | Practical task | `i08-g1` (`line` → `play`) |
 
-**Content (Proposal; names and plans confirmed by the content reviewer).** The central Cannon (`h2e2`; Vietnamese
-*Pháo đầu*) puts pressure on Black's central Soldier and the central file; Red continues by developing the Horses and
-bringing a Chariot out. Black's common replies taught as deviations: Screen Horse (both Horses developed toward the
-centre, e.g. `h9g7` … `b9c7`), Same-direction Cannons (`h7e7`) and Opposite-direction Cannons (`b7e7`); move legality
-Verified (§1). Lines stay short (a few moves per side), every move with its purpose.
+**Content (names and plans confirmed by the content reviewer).** The Central Cannon (Pháo đầu, C2=5, `h2e2`)
+pressures Black's central Soldier and the central file; Red develops the Horses and a Chariot. Black's **main**
+reply taught is the Screen Horses (Bình phong mã); **other replies** taught as deviations: Same-direction Cannons
+(Thuận pháo, `h7e7`) and Opposite-direction Cannons (Nghịch pháo, `b7e7`) (legality Verified, §1). Lines stay short,
+every move with its purpose.
 
-**Outcomes.** As Red, the learner can explain what the central Cannon threatens and what it costs; continue
-development with purpose against each taught reply; recognise when an early capture of the central Soldier is not
-worth it (position-specific, reviewed); choose a middlegame aim at the end of the line.
+**Outcomes.** As Red, explain what the Central Cannon threatens and costs; continue development with purpose against
+each taught reply; recognise when capturing the central Soldier early is not worth it (position-specific,
+reviewed); choose a middlegame aim at the end of the line.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| i08l1 | Why the central Cannon? | Purpose, threats, costs |
-| i08l2 | Developing behind the Cannon | Horses and Chariots against the Screen Horse |
-| i08l3 | When Black plays something else | The plan against the Cannon replies and other deviations |
-| i08l4 | Where the plan leads | Middlegame aims; positions with no tactic |
+| i08l1 | Why the Central Cannon? | Purpose, threats, costs |
+| i08l2 | Against the Screen Horses | Develop Horses and Chariots behind the Cannon |
+| i08l3 | Against other replies | Same- and opposite-direction Cannons, other tries |
+| i08l4 | Where the plan leads | Middlegame aims; quiet positions |
 
-**Practice.** `learn`, `line` with deviations (seeded so each deviation appears), `decision`, `choice`. Transfer:
-`i08-g1` (`line` then `play`, rubrics R6 Opening + R1 Safety). **Misconceptions.** i08.m1 the opening is a fixed
-sequence; i08.m2 always take the central Soldier at once; i08.m3 the Cannon alone makes an attack. **Assessment.**
-Unit check (opponent deviations in at least half the `line` items).
+- **Guided:** `learn` + `line` with each move's purpose shown.
+- **Independent:** `line` with seeded deviations; `decision`; `choice` (which aim fits this position).
+- **Transfer:** `i08-g1`, `line` then `play` vs `safe-sparring`, rubrics R6 + R1.
+- **Misconceptions → feedback:** `i08.m1` the opening is a fixed sequence → show a deviation and the same plan
+  continuing. `i08.m2` always take the central Soldier at once → play out the reviewed line where Black gains time.
+  `i08.m3` the Cannon alone makes an attack → count attackers vs defenders on the central file.
+- **Assessment:** unit check (deviations in at least half the `line` items). **Remediation:** default.
 
-#### i09 — Screen Horse defence plans as Black
+#### i09 — Screen Horses defence plans as Black
 | Level · prerequisites | Intermediate · i08 | Strands | **OD**, DE |
 | --- | --- | --- | --- |
-| Baseline topics | 18 | Colour · perspective | Black |
+| Baseline topics | 18 | Colour · perspective | Black only (counterpart of i08) |
 | Reuses | — (new) | Practical task | `i09-g1` (`line` → `play` as Black) |
 
-**Outcomes.** As Black against the central Cannon, the learner can explain why both Horses protect the centre and
-the palace; develop Chariots and Elephants with purpose; create counterplay (e.g. a Soldier advance that frees a
-Horse, a Cannon placement) — specific ideas confirmed by the content reviewer; keep the plan when Red deviates.
+**Outcomes.** As Black against the Central Cannon, explain why both Horses protect the centre and palace; develop
+Chariots and Elephants with purpose; create counterplay (specific ideas confirmed by the content reviewer); keep
+the plan when Red deviates.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| i09l1 | Why the Screen Horse? | Purpose and structure |
+| i09l1 | Why the Screen Horses? | Purpose and structure |
 | i09l2 | Developing the rest | Chariots, Elephants, Cannons |
 | i09l3 | Black's counterplay | Active ideas, not only defence |
-| i09l4 | When Red deviates | Early Chariot pressure and other Red tries |
+| i09l4 | When Red deviates | Early Chariot pressure and other tries |
 
-**Practice.** As i08, played as Black. Transfer: `i09-g1`. **Misconceptions.** i09.m1 Black only defends;
-i09.m2 the Horses must never move again. **Assessment.** Unit check (all items as Black).
+- **Guided:** `learn` + `line` with purposes.
+- **Independent:** `line` with Red deviations; `decision`.
+- **Transfer:** `i09-g1` as Black, rubrics R6 + R1.
+- **Misconceptions → feedback:** `i09.m1` Black only defends → show the counter-chance in the line. `i09.m2` the Horses
+  must never move again → show a reviewed position where a Horse move is the plan.
+- **Assessment:** unit check (all items as Black). **Remediation:** default.
 
 #### i10 — Elementary endgames and General/Soldier activity
 | Level · prerequisites | Intermediate · i09 (knowledge: i07) | Strands | **DE**, PA |
 | --- | --- | --- | --- |
 | Baseline topics | 19 | Colour · perspective | Both · winning and holding |
-| Reuses | `u4l2` items with few pieces | Practical task | `i10-g1` (`play`, convert) |
+| Reuses | few-piece items of `u4l2` | Practical task | `i10-g1` (`play`, convert) |
 
-**Outcomes.** The learner can use the General actively (taking a file, supporting with the facing rule); win
-elementary endgames from set positions against best defence (each position's win verified by the forced-win search
-for that exact position); use Soldiers and the General to restrict the enemy General. General endgame theory
-("this material always wins/draws") is taught only with a cited, reviewed source (S1.3); otherwise claims are
-limited to the exact verified position.
+**Outcomes.** Use the General actively; win elementary endgames from set positions against best defence (each win
+verified by the forced-win search for that exact position); restrict the enemy General with Soldiers and General.
+General theory ("this material always wins/draws") only with a cited, reviewed source (S1.3).
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| i10l1 | The General as a fighter | Active General; the facing rule in endgames |
+| i10l1 | The General as a fighter | Active General; facing rule in endgames |
 | i10l2 | Soldiers and the bare General | Verified elementary wins |
 | i10l3 | The Chariot finishes | Chariot (+ General) mates against few defenders |
 | i10l4 | Restrict first | Quiet restricting moves before mating |
 
-**Practice.** `combination` (checkmate, verified), `decision` (restriction predicate: enemy General's legal-move
-count falls, safety guard), `play` vs the defender profile. Transfer: `i10-g1` (rubric R4 Conversion).
-**Misconceptions.** i10.m1 the General must hide in endgames; i10.m2 checking is always the fastest way to mate.
-**Assessment.** Unit check; `i10-g1` for "applied".
+- **Guided:** `combination` (checkmate) with the General's flight points marked.
+- **Independent:** `decision` (predicate: enemy General's legal moves fall; guard), `combination`.
+- **Transfer:** `i10-g1`, `play` vs the strict partner `safe-sparring(4, 0)`, rubric R4.
+- **Misconceptions → feedback:** `i10.m1` the General must hide in endgames → show the point it controls. `i10.m2`
+  checking is the fastest way to mate → show a check that releases the General and the quiet move that does not.
+- **Assessment:** unit check; `i10-g1`. **Remediation:** default.
 
 #### i11 — From opening to middlegame
 | Level · prerequisites | Intermediate · i10 (knowledge: i08, i09) | Strands | **PA**, **OD**, PP |
@@ -698,19 +772,22 @@ count falls, safety guard), `play` vs the defender profile. Transfer: `i10-g1` (
 | Baseline topics | 20 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `i11-g1` (Red), `i11-g2` (Black); level exam `xi` |
 
-**Outcomes.** The learner can tell when development is complete enough to start a plan; pick a target (central
-file, weak flank, an invasion point) from an assessment of the position; play from the end of an opening line into
-the middlegame as either colour for several moves with a consistent plan and safely.
+**Outcomes.** Tell when development is complete enough; pick a target from features of the position; play from the
+end of an opening line into the middlegame as either colour with a consistent plan, safely.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | i11l1 | Is development finished? | Checklist: Chariots active, Horses out, General safe |
-| i11l2 | Choosing a target | Target from features of the position |
+| i11l2 | Choosing a target | Target from features |
 | i11l3 | Into the middlegame as Red | `line` → `play` |
 | i11l4 | Into the middlegame as Black | `line` → `play` |
 
-**Practice.** `choice`, `decision`, `line`, `play`. **Misconceptions.** i11.m1 attack as soon as possible;
-i11.m2 a plan is a fixed list of moves. **Assessment.** Unit check; `i11-g1`, `i11-g2`; Intermediate exam `xi`.
+- **Guided:** `choice` (checklist) with features marked.
+- **Independent:** `decision` (target predicate), `line`.
+- **Transfer:** `i11-g1`, `i11-g2`, rubrics R6 + R3 + R1.
+- **Misconceptions → feedback:** `i11.m1` attack as soon as possible → show the undeveloped piece that is missing
+  from the attack. `i11.m2` a plan is a fixed list of moves → show the plan surviving a different opponent move.
+- **Assessment:** unit check; `i11-g1`, `i11-g2`; Intermediate exam `xi`. **Remediation:** default.
 
 ### Advanced level
 
@@ -720,45 +797,51 @@ i11.m2 a plan is a fixed list of moves. **Assessment.** Unit check; `i11-g1`, `i
 | Baseline topics | 21 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | — |
 
-**Assessment checklist taught (Proposal; reviewer confirms):** material; General safety (palace defenders, open
-lines toward the palace); piece activity and coordination; Soldier structure (crossed, linked, weak); who has the
-threats and the initiative. **Important limit:** the engine evaluates material only (Verified, §1), so every
-assessment answer here is authored and reviewed; an engine score is never the answer key.
+**Checklist (reviewer confirms):** material; General safety (palace defenders, open lines toward the palace);
+activity and coordination; Soldier structure; who has threats and initiative. **Limit:** the engine evaluates
+material only (Verified), so every answer key is authored and reviewed; an engine score is never the key.
 
-**Outcomes.** The learner can say which side is better and give the main reason, in positions where material is
-equal; recognise when a material lead is outweighed by General safety or activity (reviewed examples); assess the
-same position from both sides.
+**Outcomes.** Say which side is better and the main reason in positions with equal material; recognise when a
+material lead is outweighed by safety or activity (reviewed examples); assess the same position from both sides.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| a01l1 | Material and safety | The two factors that decide most positions at this stage |
+| a01l1 | Material and safety | The two deciding factors at this stage |
 | a01l2 | Activity and structure | The slower factors |
-| a01l3 | Who is better, and why? | Combine the factors; contrast positions |
-| a01l4 | Same position, other side | Assess as Black and as Red |
+| a01l3 | Who is better, and why? | Combine factors; contrast positions |
+| a01l4 | Same position, other side | Assess as Red and as Black |
 
-**Practice.** `choice` (verdict + reason, both required), then `decision` "act on your assessment". **Misconceptions.**
-a01.m1 more material = better; a01.m2 the side to move is always better; a01.m3 one factor decides everything.
-**Assessment.** Unit check pairs each verdict item with an action item, so guessing a verdict is not enough.
+- **Guided:** `choice` (verdict + reason) with the factor highlighted.
+- **Independent:** `choice` paired with `decision` "act on your assessment".
+- **Transfer:** assess, then play 6–8 moves of `play` from the same position (as Black), rubric R3 (the plan the
+  learner chose is the predicate set offered in the `choice`).
+- **Misconceptions → feedback:** `a01.m1` more material = better → show the safety factor that decides. `a01.m2` the
+  side to move is always better → show a position where moving first does not help. `a01.m3` one factor decides
+  everything → show a factor that changes the verdict.
+- **Assessment:** unit check pairs each verdict with an action item. **Remediation:** default.
 
 #### a02 — Candidate moves and opponent responses
 | Level · prerequisites | Advanced · a01 | Strands | **TC**, PA |
 | --- | --- | --- | --- |
 | Baseline topics | 22 | Colour · perspective | Both |
-| Reuses | `u10l3`, `u12l1`, `u12l2` (mate in 3 as forcing-line practice) | Practical task | — |
+| Reuses | `u10l3`, `u12l1`, `u12l2` (forcing-line practice) | Practical task | — |
 
-**Outcomes.** The learner can list several candidate moves (forcing first: checks, captures, threats, then
-improving moves); predict the opponent's best reply; reject a candidate that fails to one reply.
+**Outcomes.** List several candidates (forcing first); predict the opponent's best reply; reject a candidate that
+fails to one reply.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | a02l1 | Find the candidates | Pick 2–3 candidates from a set |
 | a02l2 | What will they play? | Play the opponent's best reply ("move as the other side") |
-| a02l3 | Forcing lines | Checks, captures, threats calculated to the end |
-| a02l4 | The candidate that fails | Contrast: the natural move loses to one reply |
+| a02l3 | Forcing lines | Checks, captures, threats to the end |
+| a02l4 | The candidate that fails | The natural move loses to one reply |
 
-**Practice.** `choice` (multi-select candidates; scored only when paired with the move item), `move` played *as
-the opponent*, `combination`, `decision`. **Misconceptions.** a02.m1 the first good-looking move is enough; a02.m2
-the opponent will play the reply I expect. **Assessment.** Unit check.
+- **Guided:** `choice` (multi-select candidates) with forcing moves marked.
+- **Independent:** `move` played as the opponent, `combination`, `decision`.
+- **Transfer:** unannounced positions mixing forcing and quiet answers, as Black, where the natural candidate fails.
+- **Misconceptions → feedback:** `a02.m1` the first good-looking move is enough → show the reply that refutes it.
+  `a02.m2` the opponent will play the expected reply → show their stronger option.
+- **Assessment:** unit check (candidate `choice` scored only with its paired move item). **Remediation:** default.
 
 #### a03 — Improving poorly placed pieces
 | Level · prerequisites | Advanced · a02 | Strands | **PA** |
@@ -766,19 +849,21 @@ the opponent will play the reply I expect. **Assessment.** Unit check.
 | Baseline topics | 23 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `a03-g1` (`play`, re-route a piece) |
 
-**Outcomes.** The learner can find the worst-placed piece; plan a route of 2–3 moves to a better point; prefer that
-improvement to a premature attack that the engine guard shows to be refuted or that the reviewed explanation shows
-to achieve nothing (pilot candidate, see S1.4).
+**Outcomes.** Find the worst-placed piece; plan a 2–3 move route; prefer that improvement to a premature attack the
+guard refutes or the reviewed explanation shows to achieve nothing (pilot candidate).
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | a03l1 | The worst piece | Identify it and say why |
-| a03l2 | Routes | Plan and play a re-route against a passive opponent |
-| a03l3 | Improve instead of attack | Contrast: the attack fails, the improvement works |
+| a03l2 | Routes | Plan and play a re-route |
+| a03l3 | Improve instead of attack | The attack fails, the improvement works |
 
-**Practice.** `select-squares` (worst piece), `line` (re-route, opponent replies authored), `decision`, `play`.
-Transfer: `a03-g1` (rubric R3). **Misconceptions.** a03.m1 every move must threaten something; a03.m2 a piece is
-"placed" once it has moved. **Assessment.** Unit check; `a03-g1` for "applied".
+- **Guided:** `select-squares` (worst piece) with mobility shown.
+- **Independent:** `line` (re-route vs authored replies), `decision`.
+- **Transfer:** `a03-g1`, `play` vs `safe-sparring`, rubric R3 + R1.
+- **Misconceptions → feedback:** `a03.m1` every move must threaten something → show the attack's refutation and the
+  improvement's later benefit. `a03.m2` a piece is "placed" once it has moved → show its mobility is still low.
+- **Assessment:** unit check; `a03-g1`. **Remediation:** default.
 
 #### a04 — Open files, ranks and invasion points
 | Level · prerequisites | Advanced · a03 | Strands | **PA**, TC |
@@ -786,18 +871,22 @@ Transfer: `a03-g1` (rubric R3). **Misconceptions.** a03.m1 every move must threa
 | Baseline topics | 24 | Colour · perspective | Both · invading and denying |
 | Reuses | — (new) | Practical task | — |
 
-**Outcomes.** The learner can occupy and contest open files and useful ranks with Chariots; identify invasion points
-near the enemy palace for Horses and Chariots; deny invasion points as the defender.
+**Outcomes.** Occupy and contest open files and useful ranks with Chariots; identify invasion points near the enemy
+palace; deny them as the defender.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| a04l1 | Open files | Take and contest them |
-| a04l2 | Ranks | Lateral Chariot activity across the board |
+| a04l1 | Open files | Take and contest |
+| a04l2 | Ranks | Lateral Chariot activity |
 | a04l3 | Invasion points | Where pieces hurt the palace |
-| a04l4 | Closing the door | Deny invasion as the defender |
+| a04l4 | Closing the door | Deny invasion |
 
-**Practice.** `decision` (predicates: file occupied, invasion point controlled), `choice`, `line`. **Misconceptions.**
-a04.m1 the first Chariot on a file owns it; a04.m2 invade as soon as possible. **Assessment.** Unit check.
+- **Guided:** `decision` (predicate "file occupied") with open files marked.
+- **Independent:** `decision`, `choice`, `line`.
+- **Transfer:** `line` from an opening-derived position as Black where the right plan is to deny an invasion point.
+- **Misconceptions → feedback:** `a04.m1` the first Chariot on a file owns it → show the opponent doubling. `a04.m2`
+  invade as soon as possible → show the invader trapped or exchanged.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### a05 — Soldier structures, breaks and weaknesses
 | Level · prerequisites | Advanced · a04 | Strands | **PA**, DE |
@@ -805,61 +894,70 @@ a04.m1 the first Chariot on a file owns it; a04.m2 invade as soon as possible. *
 | Baseline topics | 25 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | — |
 
-**Outcomes.** The learner can explain the role of the central and linked Soldiers; time a Soldier advance that opens
-a line or frees a piece; identify undefended Soldiers and points they no longer cover; explain why a crossed Soldier is
-worth more than the engine's value suggests (disclosed engine limitation, Verified).
+**Outcomes.** Explain the role of central and linked Soldiers; time an advance that opens a line or frees a piece;
+identify undefended Soldiers and the points they no longer cover; explain why a crossed Soldier is worth more than
+the engine's value (disclosed limitation, Verified).
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| a05l1 | What Soldiers do | Blocking, supporting, controlling points |
-| a05l2 | Soldier breaks | Advances that open lines; when they are premature |
-| a05l3 | Weaknesses | Undefended Soldiers and the holes behind them |
+| a05l1 | What Soldiers do | Block, support, control |
+| a05l2 | Soldier breaks | Advances that open lines; when premature |
+| a05l3 | Weaknesses | Undefended Soldiers and holes |
 | a05l4 | The crossed Soldier | Value in middlegame and endgame |
 
-**Practice.** `choice`, `decision`, `line`. Contrast: a premature advance (irreversible). **Misconceptions.** a05.m1
-advancing Soldiers is always progress; a05.m2 Soldiers are not worth defending. **Assessment.** Unit check.
+- **Guided:** `choice` with Soldier-controlled points marked.
+- **Independent:** `decision`, `line` (contrast: premature, irreversible advance).
+- **Transfer:** `line` as Black where the opponent's Soldier advance must be answered by occupying the hole it left.
+- **Misconceptions → feedback:** `a05.m1` advancing Soldiers is always progress → show the hole left behind.
+  `a05.m2` Soldiers are not worth defending → show the line opened after a Soldier falls.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### a06 — Preparing attacks before a combination exists
 | Level · prerequisites | Advanced · a05 (knowledge: i06) | Strands | **PA**, TC |
 | --- | --- | --- | --- |
 | Baseline topics | 26 | Colour · perspective | Both |
-| Reuses | `u10l2` (quiet moves), `u12l3` (quiet start) as finishing examples | Practical task | `a06-g1` (`play`, build an attack) |
+| Reuses | `u10l2`, `u12l3` (finishing examples) | Practical task | `a06-g1` (`play`, build an attack) |
 
-**Outcomes.** The learner can bring more attackers than defenders to the palace before attacking; provoke or exploit
-weakened palace defences; play a quiet move that creates a real threat (Needs architecture confirmation:
-"creates a threat" = if the same side moved again it would have a forced win or material gain within the checked
-depth, computed on a legal position); recognise when the attack is not ready and keep improving.
+**Outcomes.** Bring more attackers than defenders; exploit weakened palace defences; play a quiet move that creates a
+real threat (Needs architecture confirmation: "threat" = with the same side to move again, a forced win or gain ≥ 2
+within the horizon, on a legal position); recognise when the attack is not ready.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| a06l1 | More attackers than defenders | Count and add attackers |
+| a06l1 | More attackers than defenders | Count and add |
 | a06l2 | Weakening the palace | Target the defenders |
-| a06l3 | The quiet threat | A move that threatens without checking |
-| a06l4 | Not yet | Contrast: the attack is premature; improve or defend first |
+| a06l3 | The quiet threat | Threaten without checking |
+| a06l4 | Not yet | Premature attack; improve or defend first |
 
-**Practice.** `decision` (threat predicate), `combination` (finishing), `play`. Transfer: `a06-g1` (rubric R3 + R1).
-**Misconceptions.** a06.m1 attacking means checking; a06.m2 if there is no combination, there is nothing to do.
-**Assessment.** Unit check; `a06-g1` for "applied".
+- **Guided:** `decision` with attackers/defenders counted on the board.
+- **Independent:** `decision` (threat predicate), `combination` (finishing).
+- **Transfer:** `a06-g1`, `play` vs a pressing partner, rubric R3 + R1.
+- **Misconceptions → feedback:** `a06.m1` attacking means checking → show the check that drives the General to safety.
+  `a06.m2` no combination means nothing to do → show the quiet move after which a combination appears.
+- **Assessment:** unit check; `a06-g1`. **Remediation:** default.
 
 #### a07 — Positional defence and counterplay
 | Level · prerequisites | Advanced · a06 | Strands | **DE**, PA |
 | --- | --- | --- | --- |
 | Baseline topics | 27 | Colour · perspective | Both (≥ half as Black) |
-| Reuses | `u11l3` (stop mate in 2) | Practical task | `a07-g1` (`play`, defend and counter) |
+| Reuses | `u11l3` | Practical task | `a07-g1` (`play`, defend and counter) |
 
-**Outcomes.** The learner can stop an opponent's plan before it becomes tactical (prophylaxis); exchange the best
-attacker; create counterplay elsewhere instead of only waiting; defend as Black under central-Cannon pressure.
+**Outcomes.** Stop an opponent's plan before it becomes tactical; exchange the best attacker; create counterplay
+elsewhere; defend as Black under Central Cannon pressure.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | a07l1 | Prophylaxis | What does the opponent want? Stop it |
 | a07l2 | Trade the best attacker | Defensive exchanges |
 | a07l3 | Counterplay | Threats on the other side |
-| a07l4 | Under pressure as Black | Transfer to a full opening-derived position |
+| a07l4 | Under pressure as Black | Full opening-derived position |
 
-**Practice.** `decision`, `move` (`defend`, depth 2), `play` vs the counterpuncher profile. Transfer: `a07-g1`
-(rubrics R5 + R1). **Misconceptions.** a07.m1 defence means passivity; a07.m2 defend only when the threat is
-immediate. **Assessment.** Unit check; `a07-g1` for "applied".
+- **Guided:** `decision` with the opponent's plan shown as arrows.
+- **Independent:** `decision`, `move` (`defend`, depth 2).
+- **Transfer:** `a07-g1`, `play` vs a pressing partner, rubric R5 (with counterplay predicate) + R1.
+- **Misconceptions → feedback:** `a07.m1` defence means passivity → show the passive move losing to the plan and the
+  active one holding. `a07.m2` defend only when the threat is immediate → show the plan two moves later.
+- **Assessment:** unit check; `a07-g1`. **Remediation:** default.
 
 #### a08 — Exchanges and phase transitions
 | Level · prerequisites | Advanced · a07 | Strands | **PA**, DE |
@@ -867,18 +965,22 @@ immediate. **Assessment.** Unit check; `a07-g1` for "applied".
 | Baseline topics | 28 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | — |
 
-**Outcomes.** The learner can choose exchanges that help (simplify when ahead, remove attackers when defending)
-and avoid those that help the opponent; compare the endgames that two exchange choices lead to, where the
-comparison is verified for the exact positions or reviewed with a source; keep pieces when winning chances need them.
+**Outcomes.** Choose exchanges that help (simplify when ahead, remove attackers when defending); compare the endgames
+two choices lead to, where verified for the exact positions or sourced; keep pieces when winning chances need them.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| a08l1 | Which trades help? | By material balance and by who attacks |
+| a08l1 | Which trades help? | By material balance and initiative |
 | a08l2 | Choosing the endgame | Compare resulting endgames |
-| a08l3 | Keep the pieces | When trading kills the winning chances |
+| a08l3 | Keep the pieces | When trading kills winning chances |
 
-**Practice.** `decision`, `choice`. **Misconceptions.** a08.m1 trade whenever possible when ahead; a08.m2 all endgames
-with more material win. **Assessment.** Unit check.
+- **Guided:** `choice` showing both resulting positions side by side.
+- **Independent:** `decision`, `choice`.
+- **Transfer:** a `play` continuation (8–10 moves, both colours alternating by item) where one exchange offer must be
+  accepted and a later one refused; scored as a practice item, rubric R4.
+- **Misconceptions → feedback:** `a08.m1` trade whenever possible when ahead → show the drawish endgame it leads to
+  (only verified/sourced claims). `a08.m2` more material always wins the endgame → same evidence rule.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### a09 — Practical Chariot, Horse and Cannon endgames
 | Level · prerequisites | Advanced · a08 (knowledge: i10) | Strands | **DE** |
@@ -886,9 +988,13 @@ with more material win. **Assessment.** Unit check.
 | Baseline topics | 29 | Colour · perspective | Both · winning and holding |
 | Reuses | — (new) | Practical task | `a09-g1` (convert), `a09-g2` (hold) |
 
-**Outcomes.** The learner can convert Chariot, Horse and Cannon endgames from set positions against best defence
-(wins proved by the forced-win search for the exact position, within the search limits documented in S1.1); use a
-Cannon's screen (own General or Advisor) in the endgame; hold a worse endgame for the task's move cap.
+**Outcomes.** Convert Chariot, Horse and Cannon endgames from set positions against best defence (wins proved for the
+exact position within the search limits of 04-architecture.md); use Advisors, Elephants or Soldiers as Cannon
+screens; hold a worse endgame for the task's move cap.
+
+**Author note (chess accuracy):** the own General can never be the screen for a Cannon check along a file — the two
+Generals would face each other unless another piece stands between them, which would make two screens. Items must
+not suggest otherwise.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
@@ -897,9 +1003,13 @@ Cannon's screen (own General or Advisor) in the endgame; hold a worse endgame fo
 | a09l3 | Cannon endgames | Finding screens |
 | a09l4 | Defending with less | Holding technique |
 
-**Practice.** `combination`, `play` (defender profile), `decision`. "Draw" is never claimed from search alone; holding
-tasks say "hold for N moves" (03-assessment.md §8). **Misconceptions.** a09.m1 a Cannon is strong with nothing on the
-board; a09.m2 more material always wins. **Assessment.** Unit check; `a09-g1`, `a09-g2`.
+- **Guided:** `combination` with key points marked.
+- **Independent:** `combination`, `decision`, `play` vs `safe-sparring(4, 0)`.
+- **Transfer:** `a09-g1` (R4), `a09-g2` (R5 with holding predicate) as Black.
+- **Misconceptions → feedback:** `a09.m1` a Cannon is strong on an empty board → show the missing screens. `a09.m2`
+  more material always wins → only verified/sourced examples. "Draw" is never claimed from search alone; holding
+  tasks say "hold for N moves" (03-assessment.md §8).
+- **Assessment:** unit check; `a09-g1`, `a09-g2`. **Remediation:** default.
 
 #### a10 — Annotated games connecting all phases
 | Level · prerequisites | Advanced · a09 | Strands | **PP**, PA, OD, DE |
@@ -907,19 +1017,23 @@ board; a09.m2 more material always wins. **Assessment.** Unit check; `a09-g1`, `
 | Baseline topics | 30 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `a10-g1` (`review` of own exam game); level exam `xa` |
 
-**Outcomes.** The learner can follow a complete annotated game and predict key moves at its turning points (opening
-plan → middlegame target → transition → endgame); explain each turning point; apply the same questions to their own
-game.
+**Outcomes.** Follow an annotated game and predict key moves at its turning points (opening plan → middlegame target
+→ transition → endgame); explain each turning point; apply the same questions to own games.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | a10l1 | Annotated game as Red | Predict-the-move at turning points |
 | a10l2 | Annotated game as Black | Same, as Black |
-| a10l3 | Your game, annotated | `review` of the learner's own game |
+| a10l3 | Your game, annotated | `review` of own game |
 
-**Practice.** `line` (predict-the-move with annotations; acceptance as `decision`), `choice`, `review`. **Source of
-games: Unresolved** (§9). **Assessment.** Unit check (unseen turning points from a different game); `a10-g1`;
-Advanced exam `xa`.
+- **Guided:** `line` (predict-the-move, acceptance as `decision`) with the phase named before each turning point.
+- **Independent:** the same on a second game without phase labels; `choice` for the reason.
+- **Transfer:** `a10-g1`, `review` of the learner's own `xa` game (rubric R7).
+- **Misconceptions → feedback:** `a10.m1` games are decided by one brilliant move → show the earlier quiet decisions
+  that made it possible. `a10.m2` the opening and endgame are separate subjects → show how the opening plan decided
+  which endgame arose.
+- **Assessment:** unit check (unseen turning points from a different game); `a10-g1`; `xa`. **Remediation:** default.
+- **Source of games: Unresolved** (§11 U1).
 
 ### Expert level
 
@@ -927,21 +1041,24 @@ Advanced exam `xa`.
 | Level · prerequisites | Expert · a10 | Strands | **TC** |
 | --- | --- | --- | --- |
 | Baseline topics | 31 | Colour · perspective | Both · attacker and defender |
-| Reuses | `u12l*`, `u13l2`, `u13l3`, `u14l1`, `u14l2`, `u15l1`, `u15l2` (mate in 3/4 as calculation practice) | Practical task | — |
+| Reuses | `u12l*`, `u13l2`, `u13l3`, `u14l*`, `u15l1`, `u15l2` (calculation practice) | Practical task | — |
 
-**Outcomes.** The learner can calculate lines where the defender has several replies and handle each; find and use
-intermediate moves (for both sides); find the refutation of an opponent's combination.
+**Outcomes.** Calculate lines where the defender has several replies; find and use intermediate moves for both
+sides; refute an opponent's combination.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| e01l1 | Every reply counts | Practice mode varies the defence so several branches are met |
-| e01l2 | Intermediate moves | Insert a forcing move before the expected recapture |
+| e01l1 | Every reply counts | Practice varies the defence so several branches are met |
+| e01l2 | Intermediate moves | A forcing move before the expected recapture |
 | e01l3 | Long forcing lines | Mate in 3–4 (reused) |
-| e01l4 | Refute their combination | As defender, find the hole in the opponent's line |
+| e01l4 | Refute their combination | As defender, find the hole |
 
-**Practice.** `combination` (with varied defence in practice, Needs architecture confirmation), `decision`,
-`move` as the defender. **Misconceptions.** e01.m1 the opponent must recapture; e01.m2 calculation stops at the first
-check. **Assessment.** Unit check (no item from the reused pools; independent pool only).
+- **Guided:** `combination` with the branch point announced ("Black has two defences").
+- **Independent:** `combination` with varied defence (Needs architecture confirmation), `decision`, `move` as defender.
+- **Transfer:** as Black, the opponent starts a combination inside a quiet-looking position; find the intermediate move.
+- **Misconceptions → feedback:** `e01.m1` the opponent must recapture → show the intermediate move. `e01.m2` calculation
+  stops at the first check → show the branch after it.
+- **Assessment:** unit check (independent pool only; no reused positions). **Remediation:** default.
 
 #### e02 — Sound sacrifices and compensation
 | Level · prerequisites | Expert · e01 | Strands | **TC**, PA |
@@ -949,9 +1066,8 @@ check. **Assessment.** Unit check (no item from the reused pools; independent po
 | Baseline topics | 32 | Colour · perspective | Both |
 | Reuses | `u10l1` | Practical task | — |
 
-**Outcomes.** The learner can play forced sacrifices (verified); judge a non-forced sacrifice by what it gains
-(open General, lasting initiative) using only reviewed examples, since the material-only engine cannot prove
-compensation (Verified limit); accept and refute unsound sacrifices as the defender.
+**Outcomes.** Play forced sacrifices (verified); judge non-forced sacrifices with reviewed examples only (the
+material-only engine cannot prove compensation, Verified limit); accept and refute unsound sacrifices.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
@@ -959,47 +1075,57 @@ compensation (Verified limit); accept and refute unsound sacrifices as the defen
 | e02l2 | Paying for the initiative | Reviewed, non-forced examples; claims limited |
 | e02l3 | Taking the bait safely | Refute unsound sacrifices |
 
-**Practice.** `combination`, `choice`, `decision`. **Misconceptions.** e02.m1 every sacrifice near the General works;
-e02.m2 never accept a sacrifice. **Assessment.** Unit check (≥ 1 unsound-sacrifice item).
+- **Guided:** `combination` with the sacrificed piece marked.
+- **Independent:** `combination`, `choice`, `decision`.
+- **Transfer:** mixed set as Black: accept or decline offered material; only some offers are sound.
+- **Misconceptions → feedback:** `e02.m1` every sacrifice near the General works → play the refutation. `e02.m2` never
+  accept a sacrifice → show the sacrifice that simply loses.
+- **Assessment:** unit check (≥ 1 unsound-sacrifice item). **Remediation:** default.
 
 #### e03 — Initiative, tempo and switching targets
 | Level · prerequisites | Expert · e02 | Strands | **PA**, TC |
 | --- | --- | --- | --- |
-| Baseline topics | 33 + 34 (merged, see §8) | Colour · perspective | Both |
+| Baseline topics | 33 + 34 (merged, §9.1) | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `e03-g1` (`play`, keep the initiative) |
 
-**Outcomes.** The learner can gain time with threats; decide when to keep up the pressure and when to cash in;
-create a second target so one defender cannot hold both; switch the attack to the other wing.
+**Outcomes.** Gain time with threats; decide when to keep pressure or cash in; create a second target; switch wings.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| e03l1 | Moves with tempo | Develop or improve with a threat |
+| e03l1 | Moves with tempo | Develop/improve with a threat |
 | e03l2 | Keep it or cash it | When the initiative fades |
 | e03l3 | Two targets | Overstretch the defence |
-| e03l4 | Switch the attack | Change wing when one side is closed |
+| e03l4 | Switch the attack | Change wing |
 
-**Practice.** `decision`, `line`, `play` (counterpuncher profile). Transfer: `e03-g1` (rubric R3 + R4).
-**Misconceptions.** e03.m1 checks are the best way to keep the initiative; e03.m2 an attack must succeed where it
-started. **Assessment.** Unit check; `e03-g1`.
+- **Guided:** `decision` with the threat each move creates shown.
+- **Independent:** `decision`, `line`.
+- **Transfer:** `e03-g1`, `play` vs a pressing partner, rubric R3 + R4.
+- **Misconceptions → feedback:** `e03.m1` checks keep the initiative best → show a check that lets the defence
+  regroup. `e03.m2` an attack must succeed where it started → show the second target.
+- **Assessment:** unit check; `e03-g1`. **Remediation:** default.
 
 #### e04 — Active defence
 | Level · prerequisites | Expert · e03 | Strands | **DE** |
 | --- | --- | --- | --- |
 | Baseline topics | 35 | Colour · perspective | Both (≥ half as Black) |
-| Reuses | `u13l1` (only move), `u15l3` defend-3 item | Practical task | `e04-g1` (`play`, hold under attack) |
+| Reuses | `u13l1`, defend-3 item of `u15l3` | Practical task | `e04-g1` (`play`, hold under attack) |
 
-**Outcomes.** The learner can find the only move; defend by counter-attack; return material to break an attack;
-hold a position under a prepared attack for the task's move cap.
+**Outcomes.** Find the only move; defend by counter-attack; return material to break an attack; hold under a prepared
+attack for the move cap.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | e04l1 | The only move | `defend` depth 2–3 (reused) |
 | e04l2 | Counter-attack as defence | Threats that stop the attack |
-| e04l3 | Give it back | Return material to end the attack |
+| e04l3 | Give it back | Return material |
 | e04l4 | Hold the fort | `play` as defender |
 
-**Practice.** `move` (`defend`), `decision`, `play`. Transfer: `e04-g1` (rubric R5). **Misconceptions.** e04.m1 keep all
-material at any cost; e04.m2 passive defence is safest. **Assessment.** Unit check; `e04-g1`.
+- **Guided:** `move` (`defend`) with the threat shown.
+- **Independent:** `decision`, `move` (`defend`).
+- **Transfer:** `e04-g1`, rubric R5 (counterplay predicate) + R1, pressing partner.
+- **Misconceptions → feedback:** `e04.m1` keep all material at any cost → show the attack continuing. `e04.m2` passive
+  defence is safest → show the passive move losing.
+- **Assessment:** unit check; `e04-g1`. **Remediation:** default.
 
 #### e05 — Static versus dynamic advantages
 | Level · prerequisites | Expert · e04 | Strands | **PA** |
@@ -1007,18 +1133,22 @@ material at any cost; e04.m2 passive defence is safest. **Assessment.** Unit che
 | Baseline topics | 36 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | — |
 
-**Outcomes.** The learner can classify an advantage as static (material, structure) or dynamic (activity,
-initiative, General exposure); choose the plan that fits it (play fast with a dynamic edge, consolidate with a static
-one); turn a dynamic advantage into a static one before it fades.
+**Outcomes.** Classify an advantage as static or dynamic; choose a plan that fits; turn a dynamic advantage into a
+static one before it fades.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| e05l1 | Two kinds of advantage | Classify, with reasons |
-| e05l2 | Play to your advantage | Matching plan to advantage |
-| e05l3 | Cash in | Converting dynamic into static |
+| e05l1 | Two kinds of advantage | Classify with reasons |
+| e05l2 | Play to your advantage | Match plan to advantage |
+| e05l3 | Cash in | Dynamic into static |
 
-**Practice.** `choice`, `decision`, `line`. All answer keys authored and reviewed (engine is material-only).
-**Misconceptions.** e05.m1 only material counts; e05.m2 activity lasts forever. **Assessment.** Unit check.
+- **Guided:** `choice` with the advantage's features listed.
+- **Independent:** `choice` paired with `decision`, `line`. Keys authored and reviewed (material-only engine).
+- **Transfer:** a `play` continuation (8–12 moves) where a dynamic edge fades unless cashed in; rubric R4 measures
+  material at the end vs start.
+- **Misconceptions → feedback:** `e05.m1` only material counts → show the attack that outweighs it. `e05.m2` activity
+  lasts forever → show the opponent consolidating.
+- **Assessment:** unit check. **Remediation:** default.
 
 #### e06 — Converting advantages while restricting counterplay
 | Level · prerequisites | Expert · e05 (knowledge: a09) | Strands | **DE**, **PA** |
@@ -1026,18 +1156,21 @@ one); turn a dynamic advantage into a static one before it fades.
 | Baseline topics | 37 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `e06-g1` (Red), `e06-g2` (Black) |
 
-**Outcomes.** The learner can, when ahead, first remove the opponent's counterplay (prophylaxis, safe General) and
-then advance; simplify into a won endgame (verified for the exact position); convert as either colour against the
-counterpuncher profile within the move cap.
+**Outcomes.** When ahead, remove counterplay first and then advance; simplify into a verified won endgame; convert as
+either colour against a pressing partner within the cap.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | e06l1 | Safety first when ahead | Prophylaxis before progress |
 | e06l2 | Simplify to win | Trades into verified won endgames |
-| e06l3 | Converting as Black | Transfer to the other colour |
+| e06l3 | Converting as Black | Other colour |
 
-**Practice.** `decision`, `play`. Transfer: `e06-g1`, `e06-g2` (rubric R4). **Misconceptions.** e06.m1 when ahead,
-attack immediately; e06.m2 the opponent has nothing left. **Assessment.** Unit check; `e06-g1`, `e06-g2`.
+- **Guided:** `decision` with the opponent's counter-chances shown.
+- **Independent:** `decision`, `play` (short).
+- **Transfer:** `e06-g1`, `e06-g2`, rubric R4.
+- **Misconceptions → feedback:** `e06.m1` when ahead, attack immediately → show the counter-attack it allows. `e06.m2`
+  the opponent has nothing left → show their remaining threat.
+- **Assessment:** unit check; `e06-g1`, `e06-g2`. **Remediation:** default.
 
 #### e07 — Defending inferior positions and drawing resources
 | Level · prerequisites | Expert · e06 | Strands | **DE** |
@@ -1045,22 +1178,25 @@ attack immediately; e06.m2 the opponent has nothing left. **Assessment.** Unit c
 | Baseline topics | 38 | Colour · perspective | Both (≥ half as Black) |
 | Reuses | — (new) | Practical task | `e07-g1` (`play`, hold) |
 
-**Outcomes.** The learner can keep a worse position together (General safety, trading attackers, active pieces);
-use defensive setups that are verified for the exact position (holding for the task's move cap, or a cited and
-reviewed source for a theoretical draw); explain which repetitions are legal draws and which are forbidden under the
-ruleset (perpetual check, perpetual chase), and what the app adjudicates (03-assessment.md §8).
+**Outcomes.** Keep a worse position together; use defensive setups verified for the exact position (hold for the cap)
+or sourced as theoretical draws; explain which repetitions are legal draws and which are forbidden, and what the app
+adjudicates (03-assessment.md §8).
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | e07l1 | Hold together | Practical defence when down material |
 | e07l2 | Defensive setups | Only verified or sourced setups |
-| e07l3 | Repetition: resource and limits | Ruleset lesson, with the app's limits disclosed |
+| e07l3 | Repetition: resource and limits | Ruleset lesson with app limits disclosed |
 
-**Practice.** `decision`, `choice`, `play` (holding). **Scope note:** the engine cannot prove a draw (Verified: no
-repetition handling; the solver proves forced wins within a depth only). "Verified drawing resources" in the
-baseline is therefore narrowed to "positions where the defender holds for the stated move cap against the strongest
-training profile, or a sourced theoretical draw" — recorded here, not silently dropped. **Assessment.** Unit check;
-`e07-g1`.
+- **Guided:** `decision` with the defensive setup's points marked.
+- **Independent:** `decision`, `choice` (rules), `play` (holding, short).
+- **Transfer:** `e07-g1` as Black vs a pressing partner, rubric R5 (holding predicate).
+- **Misconceptions → feedback:** `e07.m1` when worse, only passivity holds → show the active defensive move that
+  trades an attacker. `e07.m2` repeating moves always draws → state the perpetual check/chase rules and the app's
+  training limit. `e07.m3` a position is lost once material is down → show the verified holding setup.
+- **Scope note:** the engine cannot prove a draw (Verified). "Verified drawing resources" is narrowed to "holds for
+  the stated cap against the strongest training partner, or a sourced theoretical draw" — recorded, not dropped.
+- **Assessment:** unit check; `e07-g1`. **Remediation:** default.
 
 #### e08 — A practical opening repertoire for both colours
 | Level · prerequisites | Expert · e07 (knowledge: i11, e03) | Strands | **OD**, PA |
@@ -1068,21 +1204,23 @@ training profile, or a sourced theoretical draw" — recorded here, not silently
 | Baseline topics | 39 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `e08-g1` (Red), `e08-g2` (Black) |
 
-**Outcomes.** The learner can play one repertoire as Red (central Cannon plan against the main replies) and as
-Black (a plan against the central Cannon and against first moves such as the Elephant, Soldier and Horse openings —
-`c0e2`, `g3g4`, `h0g2` legality Verified; names confirmed by the reviewer); explain the purpose of each repertoire
-move and the middlegame it leads to; handle deviations by principle.
+**Outcomes.** Play one repertoire as Red (Central Cannon plan against the main replies) and as Black (a plan against
+the Central Cannon and against the Elephant, Soldier and Horse openings — names in §4, legality Verified); explain
+each repertoire move's purpose and its middlegame; handle deviations by principle.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| e08l1 | Repertoire as Red | Central Cannon against the main replies |
-| e08l2 | Repertoire as Black against the central Cannon | Screen Horse and one alternative |
-| e08l3 | Black against other first moves | Elephant, Soldier and Horse openings |
+| e08l1 | Repertoire as Red | Central Cannon vs main replies |
+| e08l2 | As Black against the Central Cannon | Screen Horses and one alternative |
+| e08l3 | Black against other first moves | Elephant, Soldier, Horse openings |
 | e08l4 | Testing the repertoire | Random deviations, then `play` |
 
-**Practice.** `line` (deviations seeded), `play`. Transfer: `e08-g1`, `e08-g2` (rubric R6 + R1). **Misconceptions.**
-e08.m1 a repertoire is a list to memorise; e08.m2 a deviation is a mistake to punish at once. **Assessment.** Unit
-check (lines with deviations not met in practice).
+- **Guided:** `line` with purposes shown.
+- **Independent:** `line` with seeded deviations not seen in guided items.
+- **Transfer:** `e08-g1`, `e08-g2`, rubric R6 + R1.
+- **Misconceptions → feedback:** `e08.m1` a repertoire is a list to memorise → show the plan that survives a deviation.
+  `e08.m2` a deviation must be punished at once → show the sound developing reply.
+- **Assessment:** unit check (deviations not met in practice). **Remediation:** default.
 
 #### e09 — Independent analysis of personal games
 | Level · prerequisites | Expert · e08 | Strands | **PP** |
@@ -1090,21 +1228,28 @@ check (lines with deviations not met in practice).
 | Baseline topics | 40 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `e09-g1` (`review`); level exam `xe` |
 
-**Outcomes.** The learner can find the turning points of their own game (engine-detected material/mate swings);
-propose a better move at each (judged like `decision`); classify the mistake (missed threat, missed tactic, plan,
-endgame technique); build a short training plan from the categories the app can detect.
+**Outcomes.** Find the turning points of own games (engine-detectable swings); propose a better move at each; classify
+the mistake (missed threat, missed tactic, plan, technique); build a training plan from the categories the app detects.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| e09l1 | Find the turning point | Locate swings in own games |
-| e09l2 | Name the mistake | Classify (tactical categories scored; positional ones self-reported) |
-| e09l3 | A training plan | Pick units to revisit from the review |
+| e09l1 | Find the turning point | Locate swings |
+| e09l2 | Name the mistake | Tactical categories scored; positional ones self-reported |
+| e09l3 | A training plan | Choose units to revisit |
 
-**Practice.** `review`, `choice`. **Assessment.** `e09-g1` (rubric R7); Expert exam `xe`.
+- **Guided:** `review` of an authored game with the swing moves marked.
+- **Independent:** `review` of an authored game without marks; then of own games.
+- **Transfer:** `e09-g1`, `review` of an own `play` game (rubric R7).
+- **Misconceptions → feedback:** `e09.m1` the losing move is the last mistake → show the earlier swing. `e09.m2` the
+  engine's best move is the only improvement → show a second accepted improvement. `e09.m3` mistakes are bad luck → link
+  the category to the unit that trains it.
+- **Assessment:** unit check, short form (6 `review`/`choice` items on unseen authored games) for mastery; `e09-g1`,
+  `xe` for "applied". **Remediation:** default.
 
 ### Master level
 
-All Master items are unlabelled and mixed across strands and colours; prompts are neutral (03-assessment.md §4.2).
+All Master items follow the Master ladder (§5.2: worked example → unlabelled G0 → TR), mix colours and are prompted
+neutrally (03-assessment.md §4.2). Each lesson lists **Items** (types), **Positions must show**, and **Success**.
 
 #### m01 — Diagnosing unfamiliar positions without motif labels
 | Level · prerequisites | Master · e09 | Strands | **PA**, **TC** |
@@ -1112,15 +1257,26 @@ All Master items are unlabelled and mixed across strands and colours; prompts ar
 | Baseline topics | 41 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | — |
 
-**Outcomes.** In unlabelled positions the learner can decide what kind of position it is (tactical, quiet, defensive,
-endgame) and act: find the tactic if there is one, otherwise the best plan or the necessary defence.
+**Outcomes.** In unlabelled positions decide what kind of position it is (tactical, quiet, defensive, endgame) and
+act accordingly.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | m01l1 | What kind of position? | Classify, then act |
-| m01l2 | Mixed decisions | Unlabelled `decision` items across strands (≥ 1/3 no tactic) |
+| m01l2 | Mixed decisions | Act without labels |
 
-**Assessment.** Unit check is itself mixed and unlabelled.
+- **m01l1 Items:** `choice` (kind of position) always paired with `decision`/`combination` on the same position.
+  **Positions must show:** a full-board middlegame or endgame drawn from realistic structures; about a third tactical,
+  a third quiet, a third defensive/endgame; never a practice position. **Success:** pair credited only if both parts
+  are correct.
+- **m01l2 Items:** `decision`, `combination`, `move` (`defend`), unlabelled, mixed. **Positions must show:** at least
+  one "decoy" where a familiar motif seems available and fails. **Success:** target/sound class or engine-confirmed.
+- **Guided:** worked example per kind. **Independent:** m01l1/m01l2 items. **Transfer:** interleaved items inside
+  later Master checks.
+- **Misconceptions → feedback:** `m01.m1` every position hides a tactic → show the decoy's refutation and the quiet
+  move. `m01.m2` quiet positions need no calculation → show the opponent's tactic after a careless move.
+- **Assessment:** unit check (fully mixed, ≥ 1/3 quiet). **Remediation:** default, routed to the unit owning the
+  failed item's strand.
 
 #### m02 — Comparing plausible plans
 | Level · prerequisites | Master · m01 | Strands | **PA** |
@@ -1128,31 +1284,45 @@ endgame) and act: find the tactic if there is one, otherwise the best plan or th
 | Baseline topics | 42 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `m02-g1` (`play` the chosen plan) |
 
-**Outcomes.** The learner can name two plausible plans, compare them by assessment factors, choose one and carry it
-out for several moves.
+**Outcomes.** Name two plausible plans, compare them by assessment factors, choose one and carry it out.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| m02l1 | Two plans | Describe and compare (reviewed keys) |
-| m02l2 | Test the plan | Play the chosen plan (Needs architecture confirmation: replay one position with each plan) |
+| m02l1 | Two plans | Describe and compare |
+| m02l2 | Test the plan | Play it |
 
-**Assessment.** Unit check; `m02-g1`.
+- **m02l1 Items:** `choice` (which plan, with reason) paired with `decision` (first move of the plan). **Positions must
+  show:** two genuinely playable plans (reviewed), one fitting the position better for a stated reason. **Success:**
+  both parts correct; the "other" plan is never marked wrong in feedback, only less fitting, with the reason.
+- **m02l2 Items:** `play` from the position with each plan's objective as a predicate (Needs architecture
+  confirmation: replaying the same position with each plan). **Success:** rubric R3 ≥ 75 for the chosen plan.
+- **Guided:** worked example comparing plans. **Independent:** m02l1 items. **Transfer:** `m02-g1` (R3 + R1).
+- **Misconceptions → feedback:** `m02.m1` there is one correct plan → show both plans working with different
+  results. `m02.m2` a plan is chosen by the first move that looks good → show the factor comparison.
+- **Assessment:** unit check; `m02-g1`. **Remediation:** default (a01, a03 objectives).
 
 #### m03 — Switching between attack and defence
 | Level · prerequisites | Master · m02 | Strands | **PA**, **DE** |
 | --- | --- | --- | --- |
 | Baseline topics | 43 | Colour · perspective | Both |
-| Reuses | — (new) | Practical task | `m03-g1` (`play`, counterpuncher) |
+| Reuses | — (new) | Practical task | `m03-g1` (`play`, pressing partner) |
 
-**Outcomes.** The learner can notice when the opponent's counter-attack outweighs their own attack and switch to
-defence (and back); detected in `play` by the rubric's "unanswered threat" items.
+**Outcomes.** Notice when the opponent's counter-attack outweighs one's own and switch to defence, and back.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
-| m03l1 | Whose attack is faster? | Count tempi to mate/material for both sides |
-| m03l2 | Switching in play | `play` with an opponent counter-attack |
+| m03l1 | Whose attack is faster? | Count moves to mate/material for both sides |
+| m03l2 | Switching in play | Play through a counter-attack |
 
-**Assessment.** Unit check; `m03-g1`.
+- **m03l1 Items:** `choice` (whose attack is faster) paired with `decision` (attack or defend now). **Positions must
+  show:** mutual attacks where the faster side is verifiable by forced-win search for the exact position.
+  **Success:** both parts correct.
+- **m03l2 Items:** `play` where the partner counter-attacks mid-task. **Success:** R3 (own attack predicate) 50 % +
+  R5 50 %, with no **unanswered threat** (03-assessment.md §5.3 signal).
+- **Guided:** worked example. **Independent:** m03l1 items. **Transfer:** `m03-g1`.
+- **Misconceptions → feedback:** `m03.m1` keep attacking whatever happens → show the opponent's faster mate.
+  `m03.m2` once defending, stay passive → show the moment the attack can resume.
+- **Assessment:** unit check; `m03-g1`. **Remediation:** default (a07, e04 objectives).
 
 #### m04 — Irreversible decisions
 | Level · prerequisites | Master · m03 | Strands | **PA** |
@@ -1160,15 +1330,23 @@ defence (and back); detected in `play` by the rubric's "unanswered threat" items
 | Baseline topics | 44 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | — |
 
-**Outcomes.** The learner can recognise irreversible moves (Soldier advances, exchanges, sacrifices, weakening the
-palace) and decide whether to commit now or keep options.
+**Outcomes.** Recognise irreversible moves (Soldier advances, exchanges, sacrifices, palace weakening) and decide
+whether to commit now or keep options.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | m04l1 | No way back | Recognise irreversible moves |
-| m04l2 | Commit or wait | `decision` with contrasting pairs |
+| m04l2 | Commit or wait | Decide |
 
-**Assessment.** Unit check.
+- **m04l1 Items:** `select-squares`/`choice` (which candidate moves are irreversible). **Positions must show:** a mix
+  of reversible and irreversible candidates. **Success:** exact set.
+- **m04l2 Items:** contrasting `decision` pairs (similar positions, one where committing works, one where it fails).
+  **Success:** target/sound in both of the pair.
+- **Guided:** worked example. **Independent:** m04 items. **Transfer:** a `play` continuation (8–10 moves) where an
+  early commitment is offered; rubric R3.
+- **Misconceptions → feedback:** `m04.m1` committing early is always strong → show the lost flexibility. `m04.m2`
+  waiting is always safe → show the opportunity that disappears.
+- **Assessment:** unit check. **Remediation:** default (a05, a08 objectives).
 
 #### m05 — Complex practical endgames
 | Level · prerequisites | Master · m04 | Strands | **DE** |
@@ -1176,15 +1354,22 @@ palace) and decide whether to commit now or keep options.
 | Baseline topics | 45 | Colour · perspective | Both · converting and holding |
 | Reuses | — (new) | Practical task | `m05-g1` (convert), `m05-g2` (hold) |
 
-**Outcomes.** With several pieces left, the learner can choose a plan (trade into a verified won endgame, create a
-passed/crossed Soldier, restrict the General) and carry it out, or hold a worse one for the move cap.
+**Outcomes.** With several pieces left, choose and carry out a plan (trade into a verified won endgame, create a
+crossed Soldier, restrict the General), or hold a worse one for the cap.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | m05l1 | Plans in rich endgames | Choose and execute |
-| m05l2 | Holding the worse side | `play` as defender |
+| m05l2 | Holding the worse side | Defend |
 
-**Assessment.** Unit check; `m05-g1`, `m05-g2`.
+- **m05l1 Items:** `choice` (plan) + `play` vs `safe-sparring(4, 0)`. **Positions must show:** at least two pieces per
+  side besides Advisors/Elephants; the win verified for the exact position or the task scored by material
+  thresholds only. **Success:** R4 ≥ 75.
+- **m05l2 Items:** `play` as defender vs a pressing partner. **Success:** R5 ≥ 75 with holding predicate.
+- **Guided:** worked example. **Independent:** m05 items. **Transfer:** `m05-g1`, `m05-g2`.
+- **Misconceptions → feedback:** `m05.m1` simplify everything when ahead → show a verified/sourced drawn reduction.
+  `m05.m2` the defender can only wait → show the active defence that holds.
+- **Assessment:** unit check; `m05-g1`, `m05-g2`. **Remediation:** default (i10, a09, e06, e07 objectives).
 
 #### m06 — Handling unfamiliar opening moves
 | Level · prerequisites | Master · m05 | Strands | **OD**, PA |
@@ -1192,33 +1377,50 @@ passed/crossed Soldier, restrict the General) and carry it out, or hold a worse 
 | Baseline topics | 46 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `m06-g1` (`play` from an unusual opening) |
 
-**Outcomes.** Facing legal, plausible moves outside the learner's repertoire, the learner can apply principles
-(development, centre, General safety) and the safety routine, judged by rubrics R2 + R1, not by a book line.
+**Outcomes.** Facing legal, plausible moves outside the repertoire, apply development, centre and General-safety
+principles and the safety routine; judged by R2 + R1, not by a book line.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | m06l1 | Out of the book | Principles against unknown moves |
 | m06l2 | Punish or ignore? | When an odd move has a weakness, and when it is just different |
 
-**Assessment.** Unit check; `m06-g1`.
+- **m06l1 Items:** `line` where the opponent's move is not in the learner's repertoire; learner nodes accept by
+  development predicate + guard. **Positions must show:** legal first moves that are uncommon but not blunders
+  (reviewed). **Success:** all learner moves target/sound.
+- **m06l2 Items:** `decision` pairs: an odd move with a concrete weakness (engine-verifiable gain) vs an odd move with
+  none. **Success:** punish the first, develop calmly against the second.
+- **Guided:** worked example. **Independent:** m06 items. **Transfer:** `m06-g1`.
+- **Misconceptions → feedback:** `m06.m1` an unknown move must be bad → show it is sound and the calm reply.
+  `m06.m2` without a book line I am lost → show the principle checklist applied.
+- **Assessment:** unit check; `m06-g1`. **Remediation:** default (b09, e08 objectives).
 
-#### m07 — Time management and practical risk
+#### m07 — Where to think and practical risk
 | Level · prerequisites | Master · m06 | Strands | **PP** |
 | --- | --- | --- | --- |
-| Baseline topics | 47 | Colour · perspective | Both |
+| Baseline topics | 47 (scoped, see note) | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | — |
 
-**Outcomes.** The learner can decide how much to calculate (forcing positions vs quiet ones); choose a safe or a
-risky continuation according to the situation (ahead, behind, against counterplay).
+**Outcomes.** Decide how much to calculate (critical vs routine moments); choose a safe or risky continuation by
+situation (ahead, behind, under counterplay).
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | m07l1 | Where to spend your thinking | Spot the critical moment |
-| m07l2 | Safe or risky? | `choice` + `decision` by situation |
+| m07l2 | Safe or risky? | Choose by situation |
 
-**Scope note:** the app has no game clock (Verified: `src/components` has only animation/feedback timers, no game clock). Time management is taught as
-"choosing where to think"; an optional decision timer is **Needs architecture confirmation** and never required
-for accessibility.
+- **m07l1 Items:** `review`-style: in an authored game fragment, mark the move where calculation mattered most.
+  **Positions must show:** one critical moment (a tactic or irreversible decision) among routine moves. **Success:**
+  marks the critical move.
+- **m07l2 Items:** `choice` (safe or risky, with reason) paired with `decision`. **Positions must show:** two playable
+  continuations, one safe, one sharper, with the material situation varied across items. **Success:** both parts.
+- **Guided:** worked example. **Independent:** m07 items. **Transfer:** in `xm`, the R7 review asks for the critical
+  moment of the learner's own game.
+- **Misconceptions → feedback:** `m07.m1` calculate every move equally → show the routine move and the critical one.
+  `m07.m2` always play safe → show the position where safety loses slowly.
+- **Assessment:** unit check, short form (6 items). **Remediation:** default (a02, e01 objectives).
+- **Scope note:** no game clock (Verified). Time management is taught as "where to think"; an optional decision timer
+  is Needs architecture confirmation and never required (accessibility).
 
 #### m08 — Deep annotated-game analysis
 | Level · prerequisites | Master · m07 | Strands | **PP**, PA |
@@ -1226,114 +1428,151 @@ for accessibility.
 | Baseline topics | 48 | Colour · perspective | Both |
 | Reuses | — (new) | Practical task | `m08-g1` (`review`) |
 
-**Outcomes.** The learner can analyse a complete game: alternatives at critical moments, the plans of both sides,
-where the result was decided.
+**Outcomes.** Analyse a complete game: alternatives at critical moments, both sides' plans, where the result was
+decided.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | m08l1 | One game, both sides | Predict both sides' moves at critical moments |
 | m08l2 | Where was it decided? | Choose and justify |
 
-**Source of games: Unresolved** (§9). **Assessment.** Unit check; `m08-g1`.
+- **m08l1 Items:** `line` predict-the-move for **both** sides. **Positions must show:** a complete annotated game
+  (source Unresolved U1). **Success:** target/sound at ≥ 75 % of nodes (per-node credit).
+- **m08l2 Items:** `review` (mark the deciding moment) + `choice` (why). **Success:** R7 ≥ 70.
+- **Guided:** worked example on one game. **Independent:** a second game. **Transfer:** `m08-g1` on an own `xm` game.
+- **Misconceptions → feedback:** `m08.m1` the loser's last move decided the game → show the earlier decision.
+  `m08.m2` only the winner had a plan → show the loser's plan and where it failed.
+- **Assessment:** unit check; `m08-g1`. **Remediation:** default (a10, e09 objectives).
 
 #### m09 — Graduation: multi-game assessment, portfolio and reassessment
 | Level · prerequisites | Master · m08 | Strands | **PP**, all |
 | --- | --- | --- | --- |
-| Baseline topics | 49 + 50 (merged, see §8) | Colour · perspective | Both |
-| Reuses | — (new) | Practical task | `xm` (multi-game exam) |
+| Baseline topics | 49 + 50 (merged, §9.1) | Colour · perspective | Both |
+| Reuses | — (new) | Practical task | `xm` |
 
-**Outcomes.** The learner completes several practical games/tasks across phases and both colours (03-assessment.md
-§6, `xm`), reviews each, and receives a portfolio summary: strands mastered, applied tasks passed, weaknesses
-found, and a remediation path for any strand below threshold, with reassessment.
+**Outcomes.** Complete several practical tasks across phases and both colours (`xm`), review each, and receive a
+portfolio: strands mastered, tasks applied, weaknesses found, remediation path, reassessment.
 
 | Lesson | Title | Objective |
 | --- | --- | --- |
 | m09l1 | The graduation games | Multi-game practical assessment |
 | m09l2 | Portfolio and next steps | Review, remediation, reassessment |
 
-No new teaching; all items are assessment (03-assessment.md §6.5).
+- **m09l1 Items:** the `xm` tasks (03-assessment.md §6). **Positions must show:** unseen positions from exam pools,
+  covering opening, middlegame, defence and endgame, both colours. **Success:** `xm` pass rule.
+- **m09l2 Items:** `review` of each `xm` game; generated portfolio. **Success:** R7 ≥ 70 per review.
+- **Guided:** a practice `xm`-style task with coach prompts (not scored).
+- **Independent:** the `xm` tasks, unlabelled, no prompts.
+- **Transfer:** `xm` positions are unseen and span all phases and both colours; the m09l2 reviews apply the analysis
+  to the learner's own games.
+- **Misconceptions → feedback:** `m09.m1` graduating means mastering Xiangqi → portfolio states what was and was not
+  assessed. `m09.m2` a failed exam task means starting over → portfolio routes to the specific units.
+- **Assessment:** mastery and application of m09 both come from passing `xm` (03-assessment.md §2). **Remediation:**
+  per failed `xm` task, the units owning its rubric strands; reassessment with new seeds.
 
 ---
 
-## 8. Coverage
+## 9. Coverage
 
-### 8.1 Baseline topics → units (Verified against the list in `01-audit-and-design.md`)
+### 9.1 Baseline topics → units
 
 | Topics | Unit | Change |
 | --- | --- | --- |
-| 1–10 | b01–b10 | One unit each, renamed only |
+| 1–10 | b01–b10 | One unit each; b01 adds notation (needed by every prompt) |
 | 11–14 | i01–i04 | One unit each |
-| 15 | i05 + i06 | **Split**: the topic holds 7 existing lessons' worth of patterns (`u7`, `u8`) plus new defending lessons; one unit would be too long for a phone session and would bury defence |
+| 15 | i05 + i06 | **Split**: seven existing lessons' worth of patterns (`u7`, `u8`) plus new defending lessons; one unit would be too long for phone sessions and would bury defence |
 | 16–20 | i07–i11 | One unit each |
 | 21–30 | a01–a10 | One unit each |
 | 31–32 | e01–e02 | One unit each |
-| 33 + 34 | e03 | **Merge**: tempo and switching targets are the same skill (keeping the opponent busy) with the same exercise types and practical task; separate units would duplicate the `play` task |
-| 35–40 | e04–e09 | One unit each; 38 narrowed (see e07 scope note), not dropped |
-| 41–48 | m01–m08 | One unit each; 47 scoped to "choosing where to think" (no clock; see m07) |
+| 33 + 34 | e03 | **Merge**: same skill (keeping the opponent busy), same exercise types and practical task |
+| 35–40 | e04–e09 | One unit each; 38 narrowed (e07 scope note), not dropped |
+| 41–48 | m01–m08 | One unit each; 47 scoped to "where to think" (no clock; m07 note) |
 | 49 + 50 | m09 | **Merge**: both are assessment and portfolio activities, no new teaching |
+| 10 (complete games) | b10 | Kept as complete games: played to mate, stalemate or a disclosed training adjudication (cap 80 learner moves, no-capture limit, repetition rules; 03-assessment.md §5.5) — not shortened to a capped fragment |
 
-No topic is dropped; no topic order changed. Prerequisites listed as "knowledge" in a unit header are informational
-(remediation and jump-test sampling); unlocking stays linear within a level as today (Verified,
-`src/lessons/progress.ts:11`), Unresolved whether to unlock by the prerequisite graph instead.
+No topic dropped; no topic order changed. "Knowledge" prerequisites in unit headers are informational (remediation,
+jump-test sampling); unlocking stays linear within a level (Verified `src/lessons/progress.ts:11`; Unresolved U3).
 
-### 8.2 Strand coverage by unit (primary in caps)
+### 9.2 Strand coverage by unit (primary in capitals)
 
 | Level | RS | TC | OD | PA | DE | PP |
 | --- | --- | --- | --- | --- | --- | --- |
-| Basic | B01–B06, b07, B08 | b03, b04, b06, B07 | B09, b10 | b07, b09 | b02, b05, b06, B08, b10 | b08, B10 |
-| Intermediate | — (safety rubric in every `play`) | I02–I06, i07 | I08, I09, I11, i01 | I01, I11, i08, i10 | I07, I10, i02, i03, i05, i06, i09 | i11; practical tasks of i07–i11; exam `xi` |
-| Advanced | rubric only | A02, a04, a06 | a10 | A01, A03–A06, A08, a02, a07, a10 | A07, A09, a05, a08, a10 | A10 |
-| Expert | rubric only | E01, E02, e03 | E08 | E03, E05, E06, e02, e08 | E04, E06, E07 | E09 |
-| Master | rubric only | M01 | M06 | M01–M04, m06, m08 | M03, M05 | M07–M09 |
+| Basic | B01–B06, b07, B08, b09, b10 | b03, b04, b06, B07 | B09, b10 | b07, b09 | b02, b05, b06, B08, b10 | b08, B10 |
+| Intermediate | — (R1 in every `play`) | I02–I06, i07 | I08, I09, I11, i01 | I01, I11, i08, i10 | I07, I10, i02, i03, i05, i06, i09 | i11; tasks of i07–i11; `xi` |
+| Advanced | R1 only | A02, a04, a06 | a10 | A01, A03–A06, A08, a02, a07, a10 | A07, A09, a05, a08, a10 | A10 |
+| Expert | R1 only | E01, E02, e03 | E08 | E03, E05, E06, e02, e08 | E04, E06, E07 | E09 |
+| Master | R1 only | M01 | M06 | M01–M04, m06, m08 | M03, M05 | M07–M09 |
 
-RS is taught in Basic and then assessed continuously through the R1 Safety rubric of every practical task and
-through safety-critical items in later unit checks (03-assessment.md §4.1).
+RS is taught in Basic and then assessed through R1 in every practical task and safety-critical items in later checks
+and placement tests (03-assessment.md §4.1, §7.2).
 
-### 8.3 Cross-cutting requirements
+### 9.3 Cross-cutting requirements
 
 | Requirement | Where it is met |
 | --- | --- |
-| Both colours | Black practice from b02 on; ≥ 1/3 Black items per level; Black-only i09; ≥ half Black in a07, e04, e07; practical tasks as both colours in b10, i11, e06, e08 |
-| Attack and defence | Paired lessons: i02l3, i03l3, i05l4, i06l5, a04l4, e01l4, e02l3; defence units i07, a07, e04, e07, m03, m05 |
-| Positions with no immediate tactic | Core of b08, b09, i01, i08–i11, a01, a03–a05, a07, a08, e05, e06, m01–m04, m06; contrast lessons i04l4, a03l3, a06l4; ≥ 1/4 of independent/assessment items in PA/OD/DE units |
-| Plans before memorisation | b09 (principles, no names) → i08/i09 (one plan per colour, short lines, deviations) → e08 (repertoire) → m06 (unfamiliar moves) |
-| Difficulty levers | §5 table; Master items unlabelled and mixed |
+| Both colours | Black practice from b02 on (exception i08, balanced by i09); ≥ 1/3 Black items per level; ≥ half Black in a07, e04, e07; practical tasks as both colours in b10, i11, e06, e08 |
+| Attack and defence | Paired lessons i02l3, i03l3, i05l4, i06l5, a04l4, e01l4, e02l3; defence units i07, a07, e04, e07, m03, m05 |
+| No immediate tactic | Core of b08, b09, i01, i08–i11, a01, a03–a05, a07, a08, e05, e06, m01–m04, m06; contrast lessons i04l4, a03l3, a06l4; ≥ 1/4 of independent/assessment items in PA/OD/DE units |
+| Plans before memorisation | b09 → i08/i09 → e08 → m06 |
+| Difficulty levers | §6; Master ladder §5.2 |
 | Completion / mastery / application | 03-assessment.md §2 |
-| Self-analysis | b10l4 → a10 → e09 → m08 → m09 |
+| Self-analysis | b10l4 → a10 → e09 → m07/m08 → m09 |
 
-### 8.4 Existing lessons → candidate homes (feasibility for S1.3)
+### 9.4 Existing lessons → candidate homes (feasibility for S1.3)
 
-| Existing | Candidate new home |
+| Existing | Candidate home |
 | --- | --- |
-| `u1l1` | b01 · `u1l2` → b02 · `u1l3` → b02 |
-| `u2l1`, `u2l2` | b03 (and b06/b07 contrast captures) |
-| `u3l1`, `u3l2` | b04 (checkmate items → b05) |
+| `u1l1` · `u1l2`, `u1l3` | b01 · b02 |
+| `u2l1`, `u2l2` | b03 (contrast captures also b06/b07) |
+| `u3l1`, `u3l2` | b04 (mate items → b05) |
 | `u4l1`, `u4l2` | b05 (few-piece mates also i10) |
 | `u7l1`–`u7l3` | i05 |
-| `u8l1`–`u8l4` | i06 |
-| `u9l1` | i02 · `u9l2` → i03 · `u9l3` → i07 |
-| `u10l1` | i04 / e02 · `u10l2` → a06 · `u10l3` → a02 |
-| `u11l1` | i03 · `u11l2` → i04 · `u11l3` → i07 / a07 |
+| `u8l1`–`u8l4` | i06 (`u8l1` title renamed, §4) |
+| `u9l1` · `u9l2` · `u9l3` | i02 · i03 · i07 |
+| `u10l1` · `u10l2` · `u10l3` | i04/e02 · a06 · a02 |
+| `u11l1` · `u11l2` · `u11l3` | i03 · i04 · i07/a07 |
 | `u12l1`–`u12l3` | a02 / a06 / e01 |
-| `u13l1` | e04 · `u13l2`, `u13l3` → e01 |
-| `u14l1`, `u14l2` | e01 |
-| `u15l1`, `u15l2` | e01 · `u15l3` → e04 / e01 |
-| Puzzle bank (`m1-*`, `m2-*`, `wm-*`) | Stays a separate optional practice area; never counts toward mastery or application (03-assessment.md §7) |
+| `u13l1` · `u13l2`, `u13l3` | e04 · e01 |
+| `u14l1`, `u14l2` · `u15l1`, `u15l2` · `u15l3` | e01 · e01 · e04/e01 |
+| Puzzle bank (`m1-*`, `m2-*`, `wm-*`) | Separate optional practice; never counts toward mastery or application |
 
-Reused exercises are **practice** material. They are not used as unit-check or placement items, because learners may
-have seen them (03-assessment.md §4.2).
+Reused exercises are practice only, never check or placement items.
 
 ---
 
-## 9. Unresolved decisions
+## 10. Content volume estimate (Proposal; for S1.4 batch sizing)
+
+Counts follow from §8 and 03-assessment.md; item counts per lesson use the §5.2 ladder sizes.
+
+| Level | Units | Lessons | Practice items (range) | Of which reusable today | Check pool (2 forms) | Practical tasks (`-g`) | Exam / placement pools |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Basic | 10 | 33 | 165–265 | ~26 | 8 × 16 + 2 × 12 = 152 | 4 | `xb`; `pb` 40 items + 2 tasks |
+| Intermediate | 11 | 42 | 210–340 | ~58 | 176 | 7 | `xi`; `pi` 40 + 2 |
+| Advanced | 10 | 37 | 185–260 | ~27 | 160 | 6 | `xa`; `pa` 40 + 2 |
+| Expert | 9 | 31 | 125–185 | ~35 | 8 × 16 + 12 = 140 | 8 | `xe`; `pe` 40 + 2 |
+| Master | 9 | 18 | 72–90 | 0 | 7 × 16 + 12 = 124 (m09: none) | 6 + `xm` | `xm` pool |
+| **Total** | **49** | **161** | **~760–1140** | **~146** | **~750** | **31** | 4 placement pools (~160 items, 8 tasks) + 5 exam pools |
+
+(The lesson count includes the new b01l4.) This is a large authoring volume: roughly 600–1000 new practice items and ~750 new
+check items, each needing verification and review in two languages. Reductions that keep the outcomes (Proposal,
+for S1.4 to choose): (1) lesson sizes at the low end of the ranges (G2 items only where the pilot shows learners need
+them); (2) check pools of 1.5 forms for units with one primary strand, accepting partial item reuse on a third
+attempt (03-assessment.md §4.3); (3) publish level by level (Basic and Intermediate first), keeping later levels as
+the existing content until their batch is reviewed; (4) generate candidate positions with the existing seeded
+generator approach (`scripts/generate-puzzles.ts` style, original positions only) so authoring time goes into
+classification and explanation. No reduction may remove a unit's transfer task, Black coverage or quiet items.
+
+---
+
+## 11. Unresolved decisions
 
 | # | Question | Options | Needed from |
 | --- | --- | --- | --- |
-| U1 | Source of annotated games (a10, m08) and opening lines | (a) games played and annotated by the authors/testers; (b) historical games with attribution under the S1.3 policy; (c) both, reviewed | S1.3 sourcing policy, content reviewer |
-| U2 | Vietnamese and English glossary owner (piece, pattern, opening names) | Single glossary section in `messages.ts` comments or a design file | S1.4 |
-| U3 | Unlock by prerequisite graph instead of linear order within a level | Keep linear (today); graph | S1.4, pilot |
-| U4 | `decision` predicates: which predicates are built-in | Minimal set listed in §4.1 vs per-item code | S1.1 architecture |
-| U5 | Board orientation when playing Black (flip, coordinate labels) | — | S1.1 architecture |
-| U6 | `play` lengths and training-partner time budget on a phone | §5 targets | S1.1, pilot |
-| U7 | Optional decision timer (m07) | Omit; optional per item | S1.1, LX reviewer |
-| U8 | Number of lessons per unit after the pilot | As specified; adjusted by pilot findings | Pilot (step 2) |
+| U1 | Source of annotated games (a10, m08) and opening lines | Author/tester games; historical games with attribution under S1.3; both, reviewed | S1.3, content reviewer |
+| U2 | Glossary location and final English names (§4) | Comment block in `messages.ts` or a design file | S1.4, content reviewer |
+| U3 | Unlock by prerequisite graph instead of linear order within a level | Keep linear; graph | S1.4, pilot |
+| U4 | Built-in `decision` predicate set | 04 §5.4 list vs per-item code | S1.1 |
+| U5 | ~~Notation~~ — decided in §4 (S1.2). Remaining: a setting to also show ICCS | — | LX reviewer |
+| U6 | `play` lengths and partner time budget on a phone | §6 targets | S1.1, pilot |
+| U7 | Optional decision timer (m07) | Omit; optional | S1.1, LX reviewer |
+| U8 | Lessons/items per unit after the pilot; which §10 reductions to apply | — | Pilot, S1.4 |
