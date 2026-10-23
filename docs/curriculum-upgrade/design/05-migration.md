@@ -424,7 +424,7 @@ interface MasteryGrant     { at: string; via: 'check' | 'placement' | 'exam'; sc
                              strandScores?: Partial<Record<Strand, number>>; formId: string; assessmentVersion: number }
 interface ApplicationGrant { at: string; via: 'practical' | 'placement' | 'exam'; score: number;
                              taskVersion: number; equivalentOf?: TaskId /* placement task ≡ unit task, 03 §7.4 */;
-                             fallback?: 'F1' | 'F2' | 'F2b' | 'F3' | 'F4' | 'F5' /* 03 §5.2, added in S1.4 */ }
+                             fallback?: 'F1' | 'F1c' | 'F2' | 'F2b' | 'F3' | 'F4' | 'F5' /* 03 §5.2, added in S1.4 */ }
 
 // duohuygo:learning.attempts.v1 — local only, capped (e.g. newest 2,000 entries): the attempt record of 03 §3.1.
 ```
@@ -443,9 +443,12 @@ interface ApplicationGrant { at: string; via: 'practical' | 'placement' | 'exam'
 
 ```ts
 // src/progress/legacy.ts (pure; no React, no gamification import)
+// Version 1 (state REL-P, backlog S2.10): only the 9 orphans of §6, each with []. Each release of §8.4.1 adds the
+// entries of the legacy lessons it retires (their "Completion →" targets of §3) and bumps the version:
+// e.g. REL-1 → 2 (u1l1: ['b01l1'], …), …, REL-4 (… u15l3: ['e04l1']); REL-5 adds nothing. Map corrections (§8.7) also bump it.
 export const LEGACY_MAP_VERSION = 1;
 export const LEGACY_MAP: Record<string, readonly LessonId[]> = {
-  u1l1: ['b01l1'], /* … the "Completion →" column of §3, plus the §6 orphans with [] … */ u15l3: ['e04l1'],
+  u2l3: [], u3l3: [], u4l3: [], u5l1: [], u5l2: [], u5l3: [], u6l1: [], u6l2: [], u6l3: [],
 };
 export function legacyCompletion(v1Ids: readonly string[]): Map<LessonId, { via: 'migration'; from: string[] }>;
 export function completedView(records: LearningRecords, v1Ids: readonly string[]): Map<LessonId, CompletedState>;
@@ -490,11 +493,11 @@ Rules:
   (`progress.ts:29-36`, `:69-75`). So, before any re-tracking or any new unit file ships, the loader orders units by
   **track rank** (`basics` < `intermediate` < `advanced` < `expert` < `master`) and then by file name (backlog item
   S2.2, with a test that every track's units are contiguous). `10-combinations.json` then stays next to
-  `12-mate-in-3.json` in the Advanced block whatever the new files are called. **Transitional locking:** in R2 the
+  `12-mate-in-3.json` in the Advanced block whatever the new files are called. **Transitional locking:** in REL-2 the
   Advanced track reads `u10l2`, `u10l3`, `u12l1`–`u12l3`; a learner who has not completed `u10l2`/`u10l3` (for example
-  one who entered Advanced at `u11l1` before R2) finds the not-yet-completed `u12` lessons locked until they complete
+  one who entered Advanced at `u11l1` before REL-2) finds the not-yet-completed `u12` lessons locked until they complete
   those two lessons or pass today's jump test. Completed `u12` lessons stay completed and replayable, and the state
-  lasts one release (R3 retires both units). The remainder is kept **before** `u12` on purpose: ordering it after
+  lasts one release (REL-3 retires both units). The remainder is kept **before** `u12` on purpose: ordering it after
   `u12` would instead lock learners who were working on `u10l2`/`u10l3` behind three harder lessons, and `u10l2`
   ("Quiet moves") prepares `u12l3` ("The quiet start").
 - **P4 — a level with no content** (legacy lessons retired, new units not yet published) is not shown: Home lists
@@ -504,23 +507,23 @@ Rules:
   gate and jump-ahead of 03 §7, records in `learning.records.v1`). New-course units of levels not yet published are
   visible only in the course preview (S2.2), never in the default learning path.
 
-**Release order (decided in S1.4):** one level per release, upwards — R1 Basic, R2 Intermediate, R3 Advanced, R4
-Expert, R5 Master. Reasons: step 3 completes levels in this order (06-backlog.md §5), so a reviewed level does not wait
+**Release order (decided in S1.4):** one level per release, upwards — REL-1 Basic, REL-2 Intermediate, REL-3 Advanced,
+REL-4 Expert, REL-5 Master (prefix `REL-` so release states are not confused with rubrics R0–R7 or 04's R1–R8). Reasons: step 3 completes levels in this order (06-backlog.md §5), so a reviewed level does not wait
 for the next one; every state then has each track either wholly legacy or wholly new (no track mixes legacy and new
-units), which keeps unlocking and the release test simple. "P" is the step-2 pilot state.
+units), which keeps unlocking and the release test simple. `REL-P` is the step-2 pilot state.
 
 | State | New levels published | Legacy lessons retired (map entries added) | Legacy lessons still live | Held items |
 | --- | --- | --- | --- | --- |
-| R0 (today) | — | — | all 36 | — |
-| P (pilot, step 2) | — (pilot units in the course preview only) | — | all 36 | — |
-| R1 | Basic | `u1`–`u4` (all 9) | `u7`–`u15` (27) | — |
-| R2 | Intermediate | `u7`–`u9` (all), `u10l1`, `u11l1`–`u11l3` | `u10l2`, `u10l3` (unit `u10` re-tracked to `advanced`, P3), `u12`–`u15` | `u10l1#3`, `#4` (→ e02l1); `u11l3#3`, `#4` (→ a07 pool) |
-| R3 | Advanced | `u10l2`, `u10l3`, `u12l1`–`u12l3` | `u13`–`u15` | `u10l1#3`, `#4` |
-| R4 | Expert | `u13`–`u15` (all) | — | — (Master track empty until R5, P4) |
-| R5 | Master | — | — | — |
+| REL-0 (today) | — | — | all 36 | — |
+| REL-P (pilot, step 2) | — (pilot units in the course preview only) | — | all 36 | — |
+| REL-1 | Basic | `u1`–`u4` (all 9) | `u7`–`u15` (27) | — |
+| REL-2 | Intermediate | `u7`–`u9` (all), `u10l1`, `u11l1`–`u11l3` | `u10l2`, `u10l3` (unit `u10` re-tracked to `advanced`, P3), `u12`–`u15` | `u10l1#3`, `#4` (→ e02l1); `u11l3#3`, `#4` (→ a07 pool) |
+| REL-3 | Advanced | `u10l2`, `u10l3`, `u12l1`–`u12l3` | `u13`–`u15` | `u10l1#3`, `#4` |
+| REL-4 | Expert | `u13`–`u15` (all) | — | — (Master track empty until REL-5, P4) |
+| REL-5 | Master | — | — | — |
 
-Learners who completed `u11l*` see `i03l1`, `i04l2`, `i07l1` completed from R2; learners who completed `u10l2`/`u10l3`
-keep those legacy lessons (now under Advanced) until R3, when `a06l3`/`a02l3` show as completed. Held items were
+Learners who completed `u11l*` see `i03l1`, `i04l2`, `i07l1` completed from REL-2; learners who completed `u10l2`/`u10l3`
+keep those legacy lessons (now under Advanced) until REL-3, when `a06l3`/`a02l3` show as completed. Held items were
 practice in their legacy lessons until those retired; they are unavailable until their target level ships (one
 release for `u11l3#3`, `#4`; two for `u10l1#3`, `#4`).
 
@@ -624,7 +627,7 @@ release for `u11l3#3`, `#4`; two for `u10l1#3`, `#4`).
 
 | # | Test | Kind |
 | --- | --- | --- |
-| T1 | **Per release state** R0, P, R1–R5 of §8.4.1 (a table in the test: published levels, live legacy lessons, held items): `LEGACY_MAP` contains exactly the retired legacy lessons (with their §3 "Completion →" targets) and the 9 orphans; every target is published in that state; no live legacy lesson is in the map; every published reused item's `legacyRef` belongs to a retired legacy lesson (P1, P2); held items are served nowhere; no position has two live homes; every track's units are contiguous and each track is wholly legacy or wholly new (P3, P5); the current content matches exactly one state | unit (content) |
+| T1 | **Per release state** REL-0, REL-P, REL-1–REL-5 of §8.4.1 (a table in the test: published levels, live legacy lessons, held items): `LEGACY_MAP` contains exactly the retired legacy lessons (with their §3 "Completion →" targets) and the 9 orphans; every target is published in that state; no live legacy lesson is in the map; every published reused item's `legacyRef` belongs to a retired legacy lesson (P1, P2); held items are served nowhere; no position has two live homes; every track's units are contiguous and each track is wholly legacy or wholly new (P3, P5); the current content matches exactly one state | unit (content) |
 | T2 | Every target of an old lesson contains ≥ 1 `core` item whose `legacyRef` belongs to that old lesson; every reused item's position equals its `legacyRef` position or carries a revision reason | content validator |
 | T3 | `legacyCompletion`: single, split and many-to-one cases; `from` lists; orphans and unknown ids ignored; duplicates; empty; corrupt v1 → none | unit |
 | T4 | Migration never yields `mastered` or `applied`, for any input (exhaustive over the map + random id sets) | unit |
@@ -733,7 +736,8 @@ console.log({ lessons: lessons.length, exercises: exercises.length, puzzles: puz
 console.log(problems.length ? problems.join('\n') : 'OK: every lesson, exercise and puzzle is mapped exactly once');
 ```
 
-Output on HEAD `83b2ade` with this document (attempt 2); re-run on `71150b0` with the S1.4 edits of 02 and this document, same output:
+Output on HEAD `83b2ade` with this document (S1.3 attempt 2); re-run in S1.4 attempt 2 on HEAD `ed4a490` plus the uncommitted S1.4
+edits of 02 and this document, same output:
 
 ```
 {

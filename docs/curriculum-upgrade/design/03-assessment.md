@@ -174,9 +174,9 @@ partner with limited depth. It punishes loose pieces and short tactics but does 
 | Policy (04) | Behaviour | Use in this course |
 | --- | --- | --- |
 | `scripted` | The authored replies: `line` deviations, **threat trees** (attacker's ideas and answers to the main defences) and **counterplay trees** (defender's resources), forced claims proven | `line` items; first part of every hold, convert and opening task |
-| `best-defence` | Optimal within the forced-mate horizon | `combination` only |
-| `forcing-attack(k)` | Plays a forced mate within k (k ≤ 2 at runtime, 3 in positions of ≤ ~12 pieces) when one exists; otherwise a **winning capture** when one exists — a capture *m* with `moveScore(P, m, d)` − `materialBalance(P, mover)` ≥ *T* = 2 (`WIN_MATERIAL_THRESHOLD`), searched at *d* = 2 plies + capture quiescence (*d* = 3 in positions of ≤ ~12 pieces), the highest-scoring one, ties broken by the seed; otherwise hands over | Second link of the hold/convert chains |
-| `safe-sparring(2)` | Material search d = 2 + capture quiescence; never hangs material within 2 plies; random among moves within τ of its best (τ = 1.0 in Basic, 0.5 above). Depth 2 already sees a mate in one against itself, because quiescence scores a side with no legal moves as mated (Verified `src/engine/solver.ts:123–125`) | **Early Basic practice** (b01–b09 drills), `b08-g1`, `b09-g1`, the full-game fallbacks F2/F2b and the post-line continuation of opening tasks under F5 (below). Depth 3 only in positions of ≤ ~12 pieces (04 budget). This widens 04 §5.6 ("early Basic practice only"); recorded as a proposed decision in 06-backlog.md §7 |
+| `best-defence` | Optimal within the forced-mate horizon. **Resist mode** (added in S1.4): avoids a forced mate within *k* = 2 whenever some move does (exhaustive), then plays the highest `moveScore` at *d* = 2 + capture quiescence (*k* = *d* = 3 in positions of ≤ ~12 pieces), seeded ties | `combination`; resist mode only as the last link of the convert chain under fallback F1c (below) |
+| `forcing-attack(k)` | Plays a forced mate within k (k ≤ 2 at runtime, 3 in positions of ≤ ~12 pieces) when one exists; otherwise a **winning capture** when one exists — a capture *m* with `moveScore(P, m, d)` − `materialBalance(P.board, mover)` ≥ *T* = 2 (`WIN_MATERIAL_THRESHOLD`), searched at *d* = 2 plies + capture quiescence (*d* = 3 in positions of ≤ ~12 pieces), the highest-scoring one, ties broken by the seed; otherwise hands over | Second link of the hold/convert chains |
+| `safe-sparring(2)` | Material search d = 2 + capture quiescence; never hangs material within 2 plies; random among moves within τ of its best (τ = 1.0 in Basic, 0.5 above). Depth 2 already sees a mate in one against itself, because quiescence scores a side with no legal moves as mated (Verified `src/engine/solver.ts:123–125`) | **Early Basic practice** (b01–b09 drills), `b08-g1`, `b09-g1`, the full-game fallbacks F2/F2b and the post-tree continuation of opening tasks under F5 (below), always with the τ of the task's level. Depth 3 only in positions of ≤ ~12 pieces (04 budget). This widens 04 §5.6 ("early Basic practice only"); recorded as a proposed decision in 06-backlog.md §7 |
 | `pressing(2)` | Material + palace pressure, attacked undefended pieces and mobility (04 §5.5), d = 2 + capture quiescence; prefers safe moves that attack the learner's palace and loose pieces. Heuristic weights | Game, play-out and plan tasks; last link of the hold/convert chains |
 | `restricted`, `greedy` | Drill partners | Practice only; **never** application evidence |
 
@@ -192,69 +192,95 @@ tree → `forcing-attack(2)` → `pressing(2)` (in positions of ≤ ~12 pieces `
 | Opening (R6, R2) | `i08-g1`, `i09-g1`, `i11-g*`, `e08-g*`, `m06-g1`; opening tasks of `xi`, repertoire tasks of `xe`, the opening task of `xm`; `pi-g*` | `scripted` → `pressing(2)` | F5 |
 | Plan (R3) | `i01-g1`, `a03-g1`, `a06-g1`, `e03-g1`, `m02-g1` | `pressing(2)` | F1 |
 | Hold / defence (R5) | `i07-g1`, `a07-g1`, `a09-g2`, `e04-g1`, `e07-g1`, `m03-g1`, `m05-g2` | hold chain | F1 |
-| Convert (R4) | `i10-g1`, `a09-g1`, `e06-g*`, `m05-g1`; conversion task of `xi` | convert chain | F1 |
+| Convert (R4) | `i10-g1`, `a09-g1`, `e06-g*`, `m05-g1`; conversion task of `xi` | convert chain | F1c |
 | Full games | `b10-g1`, `b10-g2`, `xb` games, `pb-g*` | `scripted` opening → `pressing(2)` | F2 (F2b if F2 fails §5.7) |
 | Reviews (R7) | `a10-g1`, `e09-g1`, `m08-g1` | none (post-game analysis) | unchanged |
 
-**Dependency on validating `pressing`.** Every assessment use of `pressing` (all rows above except the drills, and the
-`xb`, `xi`, `xa`, `xe`, `xm` tasks that use them; the drills and reviews do not use it) depends on its step-2 validation (04 §5.5 item 4); until then `pressing`
-is a practice partner only. **Fallback F**, applied while `pressing` is not validated, if it fails validation, or for
-any single task that fails the §5.7 guard:
+**Dependency on validating `pressing`.** `pressing` is used by the opening, plan, hold, convert and full-game rows above,
+and therefore by every `xb`, `xi`, `xa`, `xe` and `xm` task built from them; the drill and review rows do not use it.
+Until its step-2 validation (04 §5.5 item 4; backlog S2.18) `pressing` is a practice partner only. **Fallback F**
+applies while `pressing` is not validated, if it fails validation, and for any single task that fails the §5.7 guard
+in its main form:
 
-- **F1 (hold, convert, plan tasks):** *tree-bounded* scoring. The task is played only while the opponent's moves come
+- **F1 (hold and plan tasks):** *tree-bounded* scoring. The task is played only while the opponent's moves come
   from the authored tree or `forcing-attack(2)` (verified threats); when only `pressing` would move, the task ends and
-  the rubric scores the position reached. A task whose tree is too short to pass §5.7 stays practice only.
+  the rubric scores the position reached. **Every accepted move is covered:** at each learner node of the tree the
+  complete move table (04 §5.3) classes every legal move, and every target/sound move has either an authored
+  continuation or an authored **scoring leaf** — the validator evaluates the rubric on the position after that move (as
+  if the task ended there, the learner's earlier moves being target/sound) and requires the pass mark. So a different
+  valid plan is never failed for lack of a continuation; dubious and error moves are scored where the task ends. A
+  task whose tree is too short to pass §5.7 stays practice only.
+- **F1c (convert tasks: `i10-g1`, `a09-g1`, `e06-g1`, `e06-g2`, `m05-g1`, the conversion tasks of `xi`, `xa`, `xe`,
+  `xm`, and `pe-g*` / `pa-g*` built like them):** the chain is counterplay tree → `forcing-attack(2)` → `best-defence`
+  in resist mode (table above) instead of `pressing(2)`, played to the task's cap, R4 scored as defined. A tree end
+  therefore never ends the task early. Resist mode is the existing exhaustive mate search plus the material search,
+  so it needs no `pressing` validation; its cost is the mate guard over all moves plus a d = 2 material search (~120 ms
+  and ~77 ms desktop for the 37 moves of a full-board position, 04 §2.2; endgames have fewer moves), within the 04
+  budget. Without a mate R4 is at most 30 + 20 + 20 = 70 < 75, so a pass needs a mate (or stalemate win) within the
+  cap against a defender that avoids every mate it can see within *k*; the §5.7 reference run must show that this is
+  achievable for every validation seed. Disclosed limit: the defender creates no counterplay beyond the authored tree
+  and `forcing-attack`.
 - **F2 (full games: `b10-g1`, `b10-g2`, `xb` games, `pb-g*`):** partner `safe-sparring(2)` with τ = 1.0; the result
   is not scored (against `safe-sparring` it shows only safety, 04 §5.6): game score = R1 × 0.6 + R2 × 0.2 + R0 × 0.2.
 - **F2b (if the F2 games fail the §5.7 guard).** `safe-sparring` makes no threats, so a safe shuffler (N2) may pass an
-  F2 game. Then each game starts with a `scripted` Basic opening tree (short lines with deviations as in b09l4, at
-  least 4 learner moves) and is scored R1 × 0.4 + R2 × 0.2 + R0 × 0.1 + line share × 30, where *line share* (0 to 1) is
-  the share of the learner's line nodes answered target/sound (as in R6). If F2b also fails §5.7, the two games are still
+  F2 game. Then each game starts with a `scripted` Basic opening tree (short lines with deviations as in b09l4) and
+  is scored R1 × 0.4 + R2 × 0.2 + R0 × 0.1 + line share × 30, with *line share* and its **gate** (≥ 2/3, else the game
+  fails) exactly as defined for R6 in §5.3 (*L* ≥ 6 counted moves). If F2b also fails §5.7, the two games are still
   played to their end and must finish without a critical failure (§5.6), but are not scored; the scored game evidence
   of `xb` is then two F5 Basic opening tasks (one per colour, built like `b09-g1` with a scripted first part, scored
-  R6 × 0.5 + R1 × 0.5 like `i08-g1`).
+  R6 × 0.5 + R1 × 0.5 like `i08-g1`). The placement practical tasks `pb-g*` (J1 into Intermediate) follow the same
+  steps: F2, then F2b, then an F5 Basic opening task, which is then declared equivalent (§7.4) to `b09-g1` instead of
+  `b10-g1`; J1 into Intermediate then carries no full-game evidence, and the result screen says so.
 - **F3 (`xb`):** in addition to the two games (F2 or F2b), two tree-bounded hold tasks from Basic-level positions
   (verified threat at the start; threat tree → `forcing-attack(2)`), each ≥ 75.
 - **F4 (`xi`, `xa`, `xe`, `xm`, placement practical tasks above Basic):** each `pressing`-dependent task is replaced by
-  a tree-bounded task (F1) with the same rubric, except opening and repertoire tasks, which follow F5. Under F, `xi` is
-  two F5 opening-to-middlegame tasks (one per colour) plus its endgame conversion task tree-bounded (F1: counterplay
-  tree → `forcing-attack(2)`, no `pressing`).
+  its F form with the same rubric: F1 for hold and plan tasks, F1c for conversion tasks, F5 for opening and repertoire
+  tasks. Under F, `xi` is two F5 opening-to-middlegame tasks (one per colour) plus its endgame conversion task under
+  F1c.
 - **F5 (opening tasks: `i08-g1`, `i09-g1`, `i11-g1`, `i11-g2`, `e08-g1`, `e08-g2`, `m06-g1`, the opening tasks of
   `xi`, the repertoire tasks of `xe`, the opening task of `xm`, and `pi-g*`):**
-  1. *Line part unchanged.* The `scripted` tree plays the opponent; R6's line term is the share of the learner's line
-     nodes answered target/sound. A learner move off the tree that the default class (04 §5.4) does not class as
-     error ends the line part, not the task; an error-class move counts as a missed node.
-  2. *Continuation.* The opponent is `safe-sparring(2)` with τ = 0.5 for the task's remaining learner moves (the same
-     cap as with `pressing`). Only R2 and R1 are scored on it: R6 = line share × 60 + R2 × 0.4, with R2 taken over
-     the learner's first *n* moves of the **whole task** (line moves included), so a short line or an early off-tree
-     move does not shrink R2's window.
+  1. *Line part unchanged.* The `scripted` tree plays the opponent while the learner is on it; R6, its line share and
+     its gate are exactly as in §5.3 (the same rule as in the main regime).
+  2. *Continuation.* Once the learner leaves the tree, or the tree ends, the opponent is `safe-sparring(2)` with the
+     τ of the task's level (1.0 Basic, 0.5 above) for the task's remaining learner moves (the same cap as with
+     `pressing`). Only R6 (line share and R2) and R1 are scored; R2 is taken over the learner's first *n* moves of the
+     whole task, as everywhere.
   3. *R3 terms* (`i11-g1`, `i11-g2`) use only **own-side** predicates under F5 (placement and mobility of the learner's
      pieces; a chosen target attacked by at least two learner pieces), evaluated at the end of the task. Predicates
      that need the opponent's resistance are not used against `safe-sparring`.
   4. No result, R4 or R5 term is earned against `safe-sparring`. The §5.7 guard runs on the F5 version of each task; a
      task that fails it stays practice only and the pool supplies another.
 
-  Rationale: the scripted line carries the opening evidence and does not depend on `pressing`; R2 + R1 against
-  `safe-sparring(2)` is the evidence already accepted for `b09-g1`. τ = 0.5 above Basic makes the partner's replies
-  less random than the Basic setting.
-- **Provenance.** A grant earned under F records which fallback applied (`fallback: 'F1' … 'F5'`, 05-migration.md
+  Rationale: the scripted line and the gated line share carry the opening evidence and do not depend on `pressing`;
+  R2 + R1 against `safe-sparring(2)` is the evidence already accepted for `b09-g1`. τ = 0.5 above Basic makes the
+  partner's replies less random than the Basic setting.
+- **Provenance.** A grant earned under F records which fallback applied (`fallback: 'F1' | 'F1c' | 'F2' | 'F2b' | 'F3' | 'F4' | 'F5'`, 05-migration.md
   §8.3). It is not revoked when `pressing` is validated later, and the portfolio (§6.1) lists fallback-based evidence.
 
 **Reachability under F.** Mastery never depends on `pressing`: it comes from unit checks (and `xm` for m09). Level
 application needs, for each exam slot, at least one published task that passes the §5.7 guard in its F form.
-Tree-bounded (F1), line-based (F5) and F2b tasks can be made to pass by authoring (longer trees, more narrow
-positions), so this is a production obligation that each level's release item checks (06-backlog.md S3.4, S3.8, S3.12,
+Tree-bounded (F1: complete tables, continuations or passing scoring leaves for every accepted move), conversion (F1c:
+a verified forced win the reference run converts against resist mode), line-based (F5) and F2b tasks can be made to
+pass by authoring (longer trees, more narrow positions, other positions), so this is a production obligation that each level's release item checks (06-backlog.md S3.4, S3.8, S3.12,
 S3.16, S3.19). Under that obligation all five levels stay masterable and applied, and graduation stays reachable:
 
 | Level | Mastery under F | Level application under F | Unit practical tasks under F |
 | --- | --- | --- | --- |
 | Basic | Checks b01–b10 (b01, b10 short form) | `xb`: two games (F2, or F2b, or unscored games + two F5 Basic opening tasks) + two F3 hold tasks + R7 review | `b08-g1`, `b09-g1` unchanged (`safe-sparring`); `b10-g1`, `b10-g2` scored like the `xb` games |
-| Intermediate | Checks i01–i11 | `xi` (F4): two F5 opening-to-middlegame tasks + F1 conversion | `i01-g1` F1 (plan); `i07-g1` F1 (hold); `i08-g1`, `i09-g1`, `i11-g1`, `i11-g2` F5; `i10-g1` F1 (convert) |
-| Advanced | Checks a01–a10 | `xa` (F4): F1 improving/attack-building, F1 positional defence, F1 endgame + R7 review | `a03-g1`, `a06-g1` F1; `a07-g1`, `a09-g2` F1; `a09-g1` F1; `a10-g1` review (no partner) |
-| Expert | Checks e01–e09 (e09 short form) | `xe` (F4): two F5 repertoire tasks + F1 conversion + F1 holding + R7 review | `e03-g1` F1; `e04-g1`, `e07-g1` F1; `e06-g1`, `e06-g2` F1; `e08-g1`, `e08-g2` F5; `e09-g1` review |
-| Master | Checks m01–m08 (m07 short form); m09 by `xm` | `xm` (F4): ≥ 5 tasks — opening F5; middlegame, defence and endgame F1; both colours — and their reviews | `m02-g1`, `m03-g1` F1; `m05-g1`, `m05-g2` F1; `m06-g1` F5; `m08-g1` review |
+| Intermediate | Checks i01–i11 | `xi` (F4): two F5 opening-to-middlegame tasks + F1c conversion | `i01-g1` F1 (plan); `i07-g1` F1 (hold); `i08-g1`, `i09-g1`, `i11-g1`, `i11-g2` F5; `i10-g1` F1c (convert) |
+| Advanced | Checks a01–a10 | `xa` (F4): F1 improving/attack-building, F1 positional defence, endgame F1c (R4) or F1 (R5) + R7 review | `a03-g1`, `a06-g1` F1; `a07-g1`, `a09-g2` F1; `a09-g1` F1c; `a10-g1` review (no partner) |
+| Expert | Checks e01–e09 (e09 short form) | `xe` (F4): two F5 repertoire tasks + F1c conversion + F1 holding + R7 review | `e03-g1` F1; `e04-g1`, `e07-g1` F1; `e06-g1`, `e06-g2` F1c; `e08-g1`, `e08-g2` F5; `e09-g1` review |
+| Master | Checks m01–m08 (m07 short form); m09 by `xm` | `xm` (F4): ≥ 5 tasks — opening F5; middlegame and defence F1; endgame F1c (conversion) or F1 (holding); both colours — and their reviews | `m02-g1`, `m03-g1` F1; `m05-g1` F1c, `m05-g2` F1; `m06-g1` F5; `m08-g1` review |
 
-Placement practical tasks follow the same rules: `pb-g*` F2/F2b, `pi-g*` F5, `pa-g*` and `pe-g*` F1.
+Placement practical tasks follow the same rules: `pb-g*` F2 → F2b → F5 Basic opening task (above), `pi-g*` F5,
+`pa-g*` F1 or F1c (as `a07-g1` or `a09-g1`), `pe-g*` F1c (as `e06-g1`/`e06-g2`).
+
+**Basic tasks against `safe-sparring` and the §5.7 guard.** At Basic the R1 horizon (*h* = 1) equals the safe
+shuffler's guard horizon, so N2 scores R1 ≈ 100 and the guard rests on the other terms. `b08-g1` has R0 (a fork the
+partner sees at d = 2 costs N2 material). `b09-g1` (R2 + R1) may therefore fail §5.7; the remedy, in order: (1) add
+R0 (R2 × 0.4 + R1 × 0.3 + R0 × 0.3); (2) if it still fails, give it a scripted first part and score it as a Basic R6
+task (R6 × 0.5 + R1 × 0.5), whose gate guarantees the N2 failure rate (§5.3). The F5 Basic opening tasks of `xb` and
+`pb-g*` already have that gate.
 
 **Answer to 04 R3:** results against `safe-sparring(2)` count only for `b08-g1`, `b09-g1` (safety and development
 process), the F2/F2b games and the F5 continuation (R2 and R1 only), never as a game result. Results against
@@ -284,7 +310,7 @@ suspicious, to stay within budget.
 
 **Signals** (computed after the game in a Worker; per learner move *m* in position *P*):
 
-- *S(m)* = `moveScore(P, m, h + 1)` (learner's view); *B* = `materialBalance(P, learner)`; *L(m)* = *B* − *S(m)*.
+- *S(m)* = `moveScore(P, m, h + 1)` (learner's view); *B* = `materialBalance(P.board, learner)`; *L(m)* = *B* − *S(m)*.
 - **Allowed loss**: *L(m)* ≥ *T* **and** *L(m)* − min over legal *m′* of *L(m′)* ≥ *T* (the second search only runs when
   the first condition holds; an unavoidable loss is not penalised). **Serious** if that difference ≥ 4.
 - **Allowed mate**: after *m* the opponent has a forced mate within *k* (`hasForcedWin`) and some legal alternative
@@ -309,8 +335,33 @@ e.g., both serious allowed loss and missed gain).
 | **R3 Plan** | Improving, attack-building, plan tasks | Objective predicate reached by the cap: 50; reached with R1 ≥ 75: 30; own non-General mobility at end ≥ start: 20 |
 | **R4 Conversion** | Winning from an advantage | Mate or stalemate win within the cap: 60 (else lead at the end ≥ lead at the start: 30); opponent never had a forced mate within 2: 20; R1 ≥ 75: 20 |
 | **R5 Holding** | Defending | Gate: not mated. Final deficit ≤ start deficit + 1: 30; no threat at the end: 20; R1 × 0.2: 20; **holding objective predicate** (authored: counterplay created — a learner move after which the learner threatens a gain ≥ *T* or mate; or an attacker exchanged; or a reviewed defensive setup reached): 30. Without the predicate the maximum is 70, below the pass mark |
-| **R6 Opening line** | `line` → `play` openings | Share of line nodes answered target/sound × 60 + R2 on the moves after the line × 0.4 |
+| **R6 Opening line** | `line` → `play` openings | **Gate:** line share ≥ 2/3, else the task fails whatever its score. Line share (defined below) × 60 + R2 × 0.4, R2 over the learner's first *n* moves of the whole task (line moves included) |
 | **R7 Self-review** | `review` tasks | Marks one of the top 3 turning points (largest allowed loss/missed gain): 40; better move target/sound (authored game) or improving *S* by ≥ *T* (own game): 40; reason category matches the detected one (allowed loss / missed gain / missed mate / allowed mate): 20. Positional reflection recorded, **not scored** |
+
+**Line share (R6, F2b; defined in S1.4).** Each opening task fixes *L* ≥ 6 **counted** learner moves; line share =
+credited counted moves ÷ *L*. The window is the first *L* counted moves of the task, and the denominator never shrinks:
+
+1. *On the tree.* At a learner node of the authored tree the move is classed by the node's complete move table
+   (04 §5.3): target/sound = credited, dubious/error = not credited.
+2. *Off the tree.* After the learner leaves the tree (a move with no authored continuation — every dubious or error
+   move, and possibly a sound alternative) or the tree ends, each further learner move is classed by the default class
+   (04 §5.4: the level's safety guard + the task's objective predicate, e.g. "develops a back-rank piece"):
+   target/sound = credited. A sound alternative therefore keeps its credit as long as the following moves develop
+   safely; this is the same in the main regime and under F5.
+3. *Selectivity.* A move counts toward *L* only if, in its position, at most 1/3 of the guard-passing moves would be
+   credited. On the tree this is checked at authoring time from the tables (the validator lists non-selective nodes,
+   which are played but not counted); off the tree the post-game analysis computes it in the Worker (one class per
+   legal move, the same searches as the guard). If the task ends with fewer than *L* counted moves, the run is voided
+   (§5.6); the §5.7 reference run must reach *L*.
+4. *Gate.* Line share ≥ 2/3 is a pass condition of every R6 task and every F2b game.
+
+*Why a safe shuffler cannot pass through the line term.* N2 picks a random guard-passing move, so each counted move is
+credited with conditional probability ≤ 1/3 whatever happened before. The number credited among the *L* counted moves
+is therefore dominated by Binomial(*L*, 1/3), and P(line share ≥ 2/3) ≤ Σ over k ≥ ⌈2L/3⌉ of C(L, k)(1/3)^k(2/3)^(L−k)
+= 73/729 ≈ 0.100 for *L* = 6 and 129/6561 ≈ 0.020 for *L* = 8. With the gate, N2 fails about 90 % (L = 6) to 98 %
+(L = 8) of the runs of every R6 task, above the 80 % that §5.7 requires, however high its R1 and R2 are. (Without the
+gate it could not be excluded: `i08-g1` = 0.5 × R6 + 0.5 × R1 with R1 ≈ 100 needs only R6 ≥ 50.) A learner who
+follows the tree or plays sound alternatives scores share 1, so R6 ≥ 60 + 0.4 × R2.
 
 A task's score is the weighted sum of its rubrics as listed in the unit (e.g. `b08-g1`: R1 70 % + R0 30 %;
 `i08-g1`: R6 50 % + R1 50 %; `m03-g1`: R3 50 % + R5 50 %). If an own game has no turning point, R7 uses another
@@ -388,10 +439,10 @@ Exam positions come from exam pools not used in practice, checks or placement.
 | Exam | Tasks (lengths calibrated in the pilot) | Pass |
 | --- | --- | --- |
 | `xb` Basic | Two full games from the initial position (one per colour), `scripted` opening → `pressing(2)`, ended per §5.5. **Per-game score** (also the rubric of `b10-g1`/`b10-g2`): result (training win 40, training draw 20, loss 0) + R1 × 0.4 + R2 × 0.2; then R7 review of either game. Under fallback F: F2 games (F2b if they fail §5.7) + F3 hold tasks | Both games ≥ 75, no critical failure; review ≥ 60. Under F: also both hold tasks ≥ 75; if the F2b games are unscored, they must finish without a critical failure and both F5 Basic opening tasks must score ≥ 75 |
-| `xi` Intermediate | Opening-to-middlegame task per colour (R6 + R1, `scripted` → `pressing(2)`); elementary endgame conversion (R4, convert chain). Under F: F4 (opening tasks F5, conversion F1) | All three ≥ 75 |
-| `xa` Advanced | Improving/attack-building (R3 + R1, `pressing(2)`); positional defence (R5, hold chain); endgame (R4 or R5, convert/hold chain); R7 review of one. Under F: F4 (all F1) | All ≥ 75; review ≥ 60 |
-| `xe` Expert | Repertoire task per colour (R6 + R1); conversion with counterplay (R4, convert chain); holding (R5, hold chain); R7 review. Under F: F4 (repertoire tasks F5, the others F1) | All ≥ 75; review ≥ 70 |
-| `xm` Master (m09) | ≥ 5 unlabelled tasks across opening, middlegame, defence and endgame, both colours; R7 review of each, including the critical moment (m07). Under F: F4 (opening task F5, the others F1) | Every task ≥ 75 and every review ≥ 70 |
+| `xi` Intermediate | Opening-to-middlegame task per colour (R6 + R1, `scripted` → `pressing(2)`); elementary endgame conversion (R4, convert chain). Under F: F4 (opening tasks F5, conversion F1c) | All three ≥ 75 |
+| `xa` Advanced | Improving/attack-building (R3 + R1, `pressing(2)`); positional defence (R5, hold chain); endgame (R4 or R5, convert/hold chain); R7 review of one. Under F: F4 (F1; an R4 endgame F1c) | All ≥ 75; review ≥ 60 |
+| `xe` Expert | Repertoire task per colour (R6 + R1); conversion with counterplay (R4, convert chain); holding (R5, hold chain); R7 review. Under F: F4 (repertoire tasks F5, conversion F1c, holding F1) | All ≥ 75; review ≥ 70 |
+| `xm` Master (m09) | ≥ 5 unlabelled tasks across opening, middlegame, defence and endgame, both colours; R7 review of each, including the critical moment (m07). Under F: F4 (opening task F5, conversion F1c, the others F1) | Every task ≥ 75 and every review ≥ 70 |
 
 ### 6.1 Portfolio (m09)
 
@@ -532,11 +583,18 @@ when forced; results are labelled "training result".
 - §5.7 guards: N1/N2 failure rates and narrow-position count on every published practical task.
 - Training ruleset: perpetual check loses; both/neither → draw; learner third-repetition refusal and its exceptions;
   no-capture limit and cap: same lead rule at both stops.
-- Partners and fallback: task kind → partner table; while `pressing` is unvalidated, F1–F5 apply (tree-bounded tasks
+- Partners and fallback: task kind → partner table; while `pressing` is unvalidated, F1, F1c, F2, F2b, F3, F4 and F5 apply (tree-bounded tasks
   end when the tree and `forcing-attack(2)` run out; F2 game score has no result term; F2b adds the scripted line term;
-  `xb` under F needs the F3 hold tasks; `xi` under F is two F5 tasks + an F1 conversion; F5 scores only line share,
-  R2 over the whole task and R1, R3 with own-side predicates only); grants record the fallback used; the reachability
-  table of §5.2 holds (every level masterable and applied, graduation reachable) on a fixture pool.
+  `xb` under F needs the F3 hold tasks; `xi` under F is two F5 tasks + an F1c conversion; F5 scores only line share,
+  R2 over the whole task and R1, R3 with own-side predicates only; F1c plays resist-mode `best-defence` to the cap);
+  F1 validator: every target/sound tree move has a continuation or a passing scoring leaf; grants record the fallback
+  used; the reachability table of §5.2 holds (every level masterable and applied, graduation reachable) on a fixture
+  pool.
+- Line share (§5.3): fixed *L*, on-tree classes from the tables, off-tree default class, selectivity ≤ 1/3, voiding
+  when fewer than *L* counted moves, gate ≥ 2/3; a seeded N2 simulation on fixture trees fails ≥ 80 % (expected ≈ 90 %
+  at *L* = 6); a sound alternative at the first node followed by developing moves passes.
+- R4 under F1c: no mate → at most 70 (fails); resist mode avoids every mate within *k* it can avoid.
+- `b09-g1` remedy order (add R0, then a scripted first part) when §5.7 fails.
 - `forcing-attack`: plays a forced mate within k when one exists, else the highest winning capture (gain ≥ 2 at d = 2
   + quiescence), else hands over; seeded tie-break.
 - Voided runs: a device fallback move or a "not checked" signal voids the run (no grant, no penalty, no retry
@@ -571,8 +629,9 @@ when forced; results are labelled "training result".
 5. Partners: 04's policies and chains (§5.2): hold = threat tree → `forcing-attack(2)` → `pressing(2)`; convert =
    counterplay tree → `forcing-attack(2)` → `pressing(2)`; games = `scripted` opening → `pressing(2)`;
    `safe-sparring(2)` for early Basic practice, `b08-g1`, `b09-g1`, fallbacks F2/F2b and the F5 continuation only.
-   Assessment use of `pressing` only after its step-2 validation; fallback F1–F5 otherwise, with the reachability
-   table of §5.2. Withdraws `spar`/`defend`/`counter` and `safe-sparring(4, 0)` (answers 04 R8).
+   Assessment use of `pressing` only after its step-2 validation; fallback F (F1, F1c, F2/F2b, F3, F4, F5) otherwise, with the reachability
+   table of §5.2; R6 line share over a fixed window with a selectivity rule and a 2/3 gate (§5.3). Withdraws
+   `spar`/`defend`/`counter` and `safe-sparring(4, 0)` (answers 04 R8).
 6. Safety horizon table (§5.3) as the default guard for rubrics and `decision` items; *h* = 2 at runtime above Basic
    until step 2 measures *h* = 3 (answers 04 R7).
 7. Mastery merge: higher score, ties later date (same as 04 §5.8).

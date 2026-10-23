@@ -44,6 +44,7 @@ also meets the **standing criteria**:
 - All learner-visible text in `src/i18n/messages.ts`, en + vi, matching placeholders.
 - Phone first: 320/360/414 px and landscape, touch targets ≥ 44 px, keyboard operable where applicable.
 - `CLAUDE.md` updated when folders, commands or conventions change.
+- No new npm dependency (runtime or dev) without a DECISIONS.md entry proposed in the item's report.
 - Items that author or change chess content, assessment or scoring logic get a `content-reviewer` verdict from an agent
   run other than the author's (DRIVER.md step 5).
 
@@ -111,8 +112,8 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
   fallback F). Either way every level stays masterable and applied (03 §5.2 reachability table).
 - **Phone cost (S2.6):** the pilot's partners and signals are measured with a throttled-browser proxy; real devices are
   an owner action.
-- **Migration:** the pilot runs in release state **P** (05 §8.4.1): all 36 legacy lessons live, `LEGACY_MAP` holds only
-  the 9 orphans, new records in `learning.records.v1`, `data_v2` sync with fallbacks. Tests T1 (states R0 and P),
+- **Migration:** the pilot runs in release state **REL-P** (05 §8.4.1): all 36 legacy lessons live, `LEGACY_MAP` holds only
+  the 9 orphans, new records in `learning.records.v1`, `data_v2` sync with fallbacks. Tests T1 (states REL-0 and REL-P),
   T3–T14, T16–T18 run; T15 is documented for the owner.
 - **Content workflow:** review records, hashes, independence, drafts outside the loaders, release test.
 - **Calibration:** 03 thresholds (UA6), task lengths (U6), daily retake limit (UA2), warm-up (UA1), ICCS setting (U5),
@@ -162,7 +163,7 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
 
 - **Role focus:** architecture engineer + QA
 - **Depends on:** S2.1
-- **Owned files:** `src/content/index.ts`, new `src/content/release.ts` (release-state table R0, P, R1–R5 of 05
+- **Owned files:** `src/content/index.ts`, new `src/content/release.ts` (release-state table REL-0, REL-P, REL-1–REL-5 of 05
   §8.4.1), new `src/content/release.test.ts`, new `src/content/reviews/` (records + test-only loader), new
   `src/content/drafts/.gitkeep`, new `scripts/review-hash.ts`, `src/vite-env.d.ts` (`VITE_COURSE_PREVIEW`),
   `src/App.tsx` (which path Home shows), `CLAUDE.md`
@@ -177,7 +178,7 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
   - [ ] Course preview: off by default and in production builds; `VITE_COURSE_PREVIEW=1` shows the new-course path
         (reviewed units of unpublished levels, by level) instead of the legacy path; first lesson of each level open in
         the preview.
-  - [ ] T1 (05 §8.10) for states R0 and P; the current content matches exactly one state.
+  - [ ] T1 (05 §8.10) for states REL-0 and REL-P; the current content matches exactly one state.
 
 ### S2.3 — Playing Black: orientation, notation, colour-neutral judges
 
@@ -292,7 +293,8 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
   `src/play/purity.test.ts`
 - **Acceptance criteria**
   - [ ] `OpponentPolicy` with injected seeded RNG: `scripted`, `best-defence`, `forcing-attack(k)` (03 §5.2 winning
-        capture), `safe-sparring(d, τ)`, `pressing(d)` (04 prototype weights; tuned in S2.18), `restricted`, `greedy`;
+        capture), `safe-sparring(d, τ)`, `pressing(d)` (04 prototype weights; tuned in S2.18), `restricted`, `greedy`, and
+        `best-defence` in resist mode (03 §5.2, for F1c);
         each with its disclosure key; deterministic per seed; depth/node limits; a safety-net d = 1 move is flagged in
         the game record (it voids the run, 03 §5.6).
   - [ ] Partners avoid a third repetition unless every alternative loses ≥ *T*.
@@ -311,7 +313,7 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
 - **Acceptance criteria**
   - [ ] `createLearningRepository` for `learning.records.v1` (05 §8.3, incl. optional `fallback` on application
         grants) and `learning.attempts.v1` (local, capped at 2,000).
-  - [ ] `LEGACY_MAP` (version 1: the 9 orphans with no target, state P) and `completedView` (05 §8.4); loading writes
+  - [ ] `LEGACY_MAP` (version 1: the 9 orphans with no target, state REL-P) and `completedView` (05 §8.4); loading writes
         nothing.
   - [ ] Corrupt-data handling of 05 §8.9 (backup key, field-level drops, unknown ids kept).
   - [ ] Reset clears v1 completion, records and the attempt log (MU3); puzzles, settings and gamification unchanged.
@@ -345,8 +347,11 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
   - [ ] Task definition of 03 §5.1; partner chains and disclosure text of 03 §5.2; post-game signals in the Worker
         within budget.
   - [ ] Rubrics R0–R7 and pass rules of 03 §5.3–§5.6, tested on fixed recorded games (03 §10); voided runs.
-  - [ ] Partner regime switch (`main` | `fallback`), default `fallback` until S2.18; F1–F5 behave as 03 §5.2; grants
-        record the fallback; the reachability table holds on a fixture pool.
+  - [ ] Partner regime switch (`main` | `fallback`), default `fallback` until S2.18; F1 (with the scoring-leaf rule),
+        F1c, F2, F2b, F3, F4 and F5 behave as 03 §5.2; grants record the fallback; the reachability table holds on a
+        fixture pool.
+  - [ ] Line share of 03 §5.3 (fixed *L* counted moves, table classes on the tree, default class off it, selectivity
+        ≤ 1/3, voiding below *L*, gate ≥ 2/3) for R6 and F2b; a seeded N2 simulation on fixture trees fails ≥ 80 %.
   - [ ] A game in progress survives reload and tab switch (stored through `src/storage`).
   - [ ] `review`: mark the turning point, play a better move (as `decision`), choose the reason; R7.
   - [ ] `scripts/verify-practical.ts` runs the 03 §5.7 checks (reference run, N1, N2, narrow positions, real
@@ -355,13 +360,13 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
 ### S2.13 — Assessment engine and progress-state UI
 
 - **Role focus:** architecture engineer + learning-experience (assessment)
-- **Depends on:** S2.7, S2.10, S2.12
+- **Depends on:** S2.2, S2.7, S2.10, S2.12
 - **Owned files:** new `src/assessment/credit.ts`, `checks.ts`, `placement.ts`, `exams.ts`, `index.ts`, their tests,
   new `src/assessment/purity.test.ts`, `src/content/types.ts` (pool item types), new `src/content/pools.ts` (loader
   for `src/content/assessment/*.json`, + test), `src/content/release.test.ts` (pools in the release test),
   `src/lessons/progress.ts`, `src/lessons/progress.test.ts`, `src/components/Home.tsx`, new
   `src/components/AssessmentPlayer.tsx`, `src/App.tsx`, `src/i18n/messages.ts`
-- **Shared files:** `types.ts`, `App.tsx`, `messages.ts`
+- **Shared files:** `types.ts`, `App.tsx`, `messages.ts` · **Serialize with:** S2.2 (`App.tsx`, `release.test.ts`)
 - **Acceptance criteria**
   - [ ] Pool files `src/content/assessment/<pool>.json` (unit check, placement, placement practical, exam) loaded and
         validated: metadata of 03 §4.2 rule 9, uniqueness corpus, review status; drafts never served.
@@ -390,7 +395,8 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
 - **Acceptance criteria**
   - [ ] `b09l3` as 02 b09 (as Black; guided `choice`, independent `decision` with develop predicate + guard, a short
         `line`), feedback four parts, misconceptions `b09.m1`–`m4` tagged where they apply.
-  - [ ] `b09-g1` vs `safe-sparring(2)`, R2 + R1, passes the §5.7 guard (N1 ≥ 90 %, N2 ≥ 80 % fail).
+  - [ ] `b09-g1` vs `safe-sparring(2)`, R2 + R1, passes the §5.7 guard (N1 ≥ 90 %, N2 ≥ 80 % fail); if not, the remedy
+        of 03 §5.2 in order (add R0; then a scripted first part with the line-share gate), recorded.
   - [ ] §2.3 "done" criteria 1–4; preview only.
 
 ### S2.15 — Pilot P2: `i08l3` + `i08-g1`
@@ -403,7 +409,7 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
   - [ ] `i08l3` as 02 i08 (Red; `line` with the Screen Horses main line and the Same-direction / Opposite-direction
         Cannon deviations; each move's purpose; deviations in at least half the `line` items); names and plans
         confirmed by the content reviewer.
-  - [ ] `i08-g1` (`line` → `play`, R6 + R1) passes the §5.7 guard in its F5 form, and in the main form if S2.18
+  - [ ] `i08-g1` (`line` → `play`, R6 + R1, line-share gate, *L* ≥ 6 counted moves) passes the §5.7 guard in its F5 form, and in the main form if S2.18
         validates `pressing`.
   - [ ] §2.3 criteria 1–4.
 
@@ -448,7 +454,7 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
   - [ ] An independent `content-reviewer` judges a sample of ≥ 50 `pressing` moves for plausibility; weight changes and
         their reasons recorded.
   - [ ] Verdict recorded as a decision: **validated** (regime `main`; the pilot tasks pass §5.7 in their main form) or
-        **not validated** (regime stays `fallback`; F1–F5 apply). Either way the 03 §5.2 reachability table holds.
+        **not validated** (regime stays `fallback`; fallback F of 03 §5.2 applies). Either way the 03 §5.2 reachability table holds.
 
 ### S2.19 — Pilot integration and walkthrough
 
@@ -458,7 +464,8 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
 - **Acceptance criteria**
   - [ ] The preview build plays all five pieces end to end at 320/360/414, landscape and desktop, both colours,
         keyboard; flows covered: lesson → check (fail → remediation → retake) → task (incl. a voided run by fault
-        injection) → J2 test-out of `a03`.
+        injection) → J2 test-out of `a03`; a J1 placement run on a test fixture pool (not learner content) exercises
+        the J1 form, the practical slot and the result screen in the preview.
   - [ ] Default build: legacy path unchanged; `ui:check`, `offline:check`, both Supabase builds pass; no console errors.
   - [ ] Findings listed with owners; blocking ones fixed or sent back to their item.
 
@@ -470,7 +477,9 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
   `05-migration.md`, `07-sourcing.md`, `06-backlog.md`, new `docs/curriculum-upgrade/pilot/review.md`
 - **Acceptance criteria**
   - [ ] Decisions recorded for UA1, UA2, UA6, UA7, U3, U5, U6, U8 and the MU1 entry point, with the pilot evidence.
-  - [ ] Calibrated thresholds (03 §5.7 rates, narrow-position count, task lengths) written into 03.
+  - [ ] Calibrated thresholds (03 §5.7 rates, narrow-position count, task lengths) written into 03. Any loosening of
+        a §5.7 rate or of the line-share gate is approved by `content-reviewer` and re-run on every pilot task before
+        S2.gate.
   - [ ] Design documents updated to what was implemented (02-foundation-and-pilot.md "Definition of done").
   - [ ] Step 3 batch sizes confirmed or changed (§5.2); reductions (1) and (2) of §5.1 decided; anything beyond §5.1
         proposed to the owner with consequences.
@@ -507,12 +516,12 @@ classification, feedback and review. Not adopted yet, decided at S2.20 with pilo
 **(2)** check pools of 1.5 forms for units with one primary strand (about −120 items; third attempts meet exposed
 items, 03 §4.3). Options that would cut scope need an **owner decision** and are **not recommended**: deferring the
 Master level (graduation would become unreachable and the course would end at Expert; the legacy u15 content is
-retired into Expert in R4 either way) or single-form placement pools (retakes blocked until new items exist).
+retired into Expert in REL-4 either way) or single-form placement pools (retakes blocked until new items exist).
 
 ### 5.2 Batch plan
 
 Batches follow level order (each unit's prerequisites and interleaved check items come from earlier units) and the
-release order R1 Basic → R5 Master. A batch item may be split by the driver into per-unit sub-items (`S3.n.a`, …) with
+release order REL-1 Basic → REL-5 Master. A batch item may be split by the driver into per-unit sub-items (`S3.n.a`, …) with
 the same criteria; the batch is done when all its units are. Pilot content (S2.14–S2.17) is completed inside its
 batch, not redone.
 
@@ -528,24 +537,54 @@ until the level's release item.
 | **S3.1** Basic A | b01, b02, b03, b04 | 13 | `u1l1`, `u1l2`, `u1l3`, `u2l1`, `u2l2`, `u3l1`, `u3l2` except `u2l1#3` and the mate items; `u4l1` learn cards in b02l2; BLK twins | 12 + 3 × 16 = 60 | — | Notation lesson b01l4 uses S2.3; creates `coverage.md` |
 | **S3.2** Basic B | b05, b06, b07 | 9 | `u4l1`, `u4l2`, mate items of `u3l*`, `u2l1#3` | 48 | — | Rules lesson b05l3: AXF edition (03 UA3 / 07 S07-U3) checked by the content reviewer; creates `references.md` |
 | **S3.3** Basic C | b08, b09, b10 | 11 (b09l3 from the pilot) | — | 16 + 16 + 12 = 44 | `b08-g1`, `b09-g1` (pilot), `b10-g1`, `b10-g2` | First full games: F2/F2b decision if `pressing` is not validated; 03 UA7 confirmed |
-| **S3.4** Basic release (R1) | — | — | — | `pb` 40 + `pb-g1`, `pb-g2` | `xb` (+ F3 hold tasks under F) | See release criteria below; retire `u1`–`u4`; MU5 notice |
+| **S3.4** Basic release (REL-1) | — | — | — | `pb` 40 + `pb-g1`, `pb-g2` | `xb` (+ F3 hold tasks under F) | See release criteria below; retire `u1`–`u4`; MU5 notice |
 | **S3.5** Intermediate A | i01, i02, i03, i04 | 13 | `u9l1`, `u9l2`, `u11l1`, `u11l2`, `u10l1` | 64 | `i01-g1` | Cannon forks of `u9l1` (MOTIF) |
 | **S3.6** Intermediate B | i05, i06, i07 | 13 | `u7`, `u8`, `u9l3`, `u11l3` | 48 | `i07-g1` | New defending-as-Black lessons i05l4, i06l5; `u8l1` NAME |
 | **S3.7** Intermediate C | i08, i09, i10, i11 | 16 (i08l3 from the pilot) | — | 64 | `i08-g1` (pilot), `i09-g1`, `i10-g1`, `i11-g1`, `i11-g2` | i08 Red only, i09 Black only; endgame wins proved for exact positions |
-| **S3.8** Intermediate release (R2) | — | — | — | `pi` 40 + 2 | `xi` | Retire `u7`–`u9`, `u10l1`, `u11`; re-track `u10` (P3); J1 into Intermediate |
+| **S3.8** Intermediate release (REL-2) | — | — | — | `pi` 40 + 2 | `xi` | Retire `u7`–`u9`, `u10l1`, `u11`; re-track `u10` (P3); J1 into Intermediate |
 | **S3.9** Advanced A | a01, a02, a03, a04 | 15 (a03 from the pilot) | `u10l3`, `u12l1`, `u12l2` | 64 (a03's 16 from the pilot) | `a03-g1` (pilot) | Assessment answer keys authored and reviewed (material-only engine) |
 | **S3.10** Advanced B | a05, a06, a07 | 12 (a07l4 from the pilot) | `u10l2`, `u12l3`; `u11l3` pool items | 48 | `a06-g1`, `a07-g1` (pilot) | ≥ half Black in a07 |
 | **S3.11** Advanced C | a08, a09, a10 | 10 | — | 48 | `a09-g1`, `a09-g2`, `a10-g1` | Course games for a10 (07 §3.2 option A); endgame claims exact-position or sourced |
-| **S3.12** Advanced release (R3) | — | — | — | `pa` 40 + 2 (incl. the pilot slice) | `xa` | Retire `u10l2`, `u10l3`, `u12` |
+| **S3.12** Advanced release (REL-3) | — | — | — | `pa` 40 + 2 (incl. the pilot slice) | `xa` | Retire `u10l2`, `u10l3`, `u12` |
 | **S3.13** Expert A | e01, e02, e03 | 11 | `u13l2`, `u13l3`, `u14`, `u15l1`, `u15l2`, `u15l3` pool items, two `u10l1` warm-ups | 48 | `e03-g1` | Varied defence (VAR); MOTIF fixes |
 | **S3.14** Expert B | e04, e05, e06 | 10 | `u13l1`, defend-3 item of `u15l3` | 48 | `e04-g1`, `e06-g1`, `e06-g2` | ≥ half Black in e04 |
 | **S3.15** Expert C | e07, e08, e09 | 10 | — | 16 + 16 + 12 = 44 | `e07-g1`, `e08-g1`, `e08-g2`, `e09-g1` | Rules lesson e07l3 (reference rulebook); "draw" claims only as 02 e07 allows |
-| **S3.16** Expert release (R4) | — | — | — | `pe` 40 + 2 | `xe` | Retire `u13`–`u15`; Master track hidden until R5 (P4) |
+| **S3.16** Expert release (REL-4) | — | — | — | `pe` 40 + 2 | `xe` | Retire `u13`–`u15`; Master track hidden until REL-5 (P4) |
 | **S3.17** Master A | m01, m02, m03, m04 | 8 | — | 64 | `m02-g1`, `m03-g1` | Unlabelled, mixed colours; decoys |
 | **S3.18** Master B | m05, m06, m07, m08, m09 | 10 | — | 16 + 16 + 12 + 16 = 60 (m09 none) | `m05-g1`, `m05-g2`, `m06-g1`, `m08-g1`; `xm` pool | Course game for m08; portfolio (03 §6.1) |
-| **S3.19** Master release (R5) and course integration | — | — | — | — | `xm` live | Whole course published; final `LEGACY_MAP`; T1 for R5 |
+| **S3.19** Master release (REL-5) and course integration | — | — | — | — | `xm` live | Whole course published; final `LEGACY_MAP`; T1 for REL-5 |
 
 Check-item counts per batch sum to 152 + 176 + 160 + 140 + 124 = 752 (02 §10, "~750").
+
+**Files, dependencies and serialization of every step-3 item.** All step-3 items run one after another: each owns the
+shared files `src/i18n/messages.ts` and `docs/curriculum-upgrade/coverage.md` for its round (§2.2). Naming: a unit file
+is `src/content/lessons/<unitId>-<slug>.json` (lessons, and the unit's extra-practice `pool`, MU1); a unit-check pool is
+`src/content/assessment/<unitId>-check.json`; placement pools `src/content/assessment/p<level>.json` (items) and
+`p<level>-tasks.json` (practical tasks); exam pools `src/content/assessment/x<level>.json`; review records
+`src/content/reviews/<unitId>.json` (pools: `reviews/p<level>.json`, `reviews/x<level>.json`). Pilot files of S2.14–S2.17
+are extended in place.
+
+| Item | Depends on (content · serialization) | Owned files |
+| --- | --- | --- |
+| S3.1 | S2.gate | new unit, check-pool and review files of `b01`–`b04`; `messages.ts`; new `docs/curriculum-upgrade/coverage.md` |
+| S3.2 | S3.1 | unit, check-pool and review files of `b05`–`b07`; `messages.ts`; `coverage.md`; new `docs/curriculum-upgrade/references.md` (07 §5.3) |
+| S3.3 | S3.2 | unit, check-pool and review files of `b08`, `b09` (pilot file extended), `b10`; `src/content/assessment/b08-check.json` (pilot items extended); `messages.ts`; `coverage.md` |
+| S3.4 | S3.3 | new `src/content/assessment/pb.json`, `pb-tasks.json`, `xb.json` and their review files; status → `published` in the Basic unit, pool and review files; delete `src/content/lessons/01-board-and-palace.json`, `02-chariot-and-horse.json`, `03-cannon-and-soldier.json`, `04-check-and-checkmate.json`; `src/content/release.ts` (state REL-1) and `src/content/release.test.ts`; `src/progress/legacy.ts` (`u1`–`u4` entries, version bump) and its test; `src/content/retired-ids.json` (only if new ids retire); `messages.ts` (retired keys removed, MU5 notice); `src/components/Home.tsx` (MU5 notice, if adopted); `coverage.md`; `CLAUDE.md` ("Lesson content") |
+| S3.5 | S3.3 · after S3.4 | unit, check-pool and review files of `i01`–`i04`; `src/content/assessment/i01-check.json` (pilot items extended); `messages.ts`; `coverage.md` |
+| S3.6 | S3.5 | unit, check-pool and review files of `i05`–`i07`; `messages.ts` (incl. the `u8l1` NAME rename); `coverage.md` |
+| S3.7 | S3.6 | unit, check-pool and review files of `i08` (pilot file extended), `i09`–`i11`; `messages.ts`; `coverage.md` |
+| S3.8 | S3.7, S3.4 | new `pi.json`, `pi-tasks.json`, `xi.json` and review files; Intermediate files → `published`; delete `07-cannon-mates.json`, `08-horse-and-chariot-mates.json`, `09-tactics.json`, `11-hidden-attacks.json`; `10-combinations.json` (remove `u10l1`, `track` → `advanced`, 05 P3); `release.ts` (REL-2), `release.test.ts`; `legacy.ts` (+ entries, version); `retired-ids.json` (if needed); `messages.ts`; `coverage.md`; `CLAUDE.md` |
+| S3.9 | S3.7 · after S3.8 | unit, check-pool and review files of `a01`, `a02`, `a03` (pilot files extended), `a04`; `messages.ts`; `coverage.md` |
+| S3.10 | S3.9 | unit, check-pool and review files of `a05`, `a06`, `a07` (pilot file extended); `messages.ts`; `coverage.md` |
+| S3.11 | S3.10 | unit, check-pool and review files of `a08`–`a10`; course-game records for a10 (new `src/content/games/<gameId>.json`, 07 §3.2); `messages.ts`; `coverage.md` |
+| S3.12 | S3.11, S3.8 | `pa.json` (pilot slice extended), new `pa-tasks.json`, `xa.json` and review files; Advanced files → `published`; delete `10-combinations.json`, `12-mate-in-3.json`; `release.ts` (REL-3), `release.test.ts`; `legacy.ts`; `retired-ids.json` (if needed); `messages.ts`; `coverage.md`; `CLAUDE.md` |
+| S3.13 | S3.11 · after S3.12 | unit, check-pool and review files of `e01`–`e03`; `messages.ts`; `coverage.md` |
+| S3.14 | S3.13 | unit, check-pool and review files of `e04`–`e06`; `messages.ts`; `coverage.md` |
+| S3.15 | S3.14 | unit, check-pool and review files of `e07`–`e09`; course-game records for e09 (`src/content/games/`); `messages.ts`; `coverage.md` |
+| S3.16 | S3.15, S3.12 | new `pe.json`, `pe-tasks.json`, `xe.json` and review files; Expert files → `published`; delete `13-expert-technique.json`, `14-mate-in-4.json`, `15-master.json`; `release.ts` (REL-4), `release.test.ts`; `legacy.ts`; `retired-ids.json` (if needed); `messages.ts`; `coverage.md`; `CLAUDE.md` |
+| S3.17 | S3.15 · after S3.16 | unit, check-pool and review files of `m01`–`m04`; `messages.ts`; `coverage.md` |
+| S3.18 | S3.17 | unit, check-pool and review files of `m05`–`m09`; new `xm.json` and review file; course-game record for m08 (`src/content/games/`); `messages.ts`; `coverage.md` |
+| S3.19 | S3.18, S3.16 | Master files → `published`; `release.ts` (REL-5), `release.test.ts`; `legacy.ts` (final version); puzzle links of 05 §5 (`src/components/Home.tsx` or `PuzzleList.tsx`, whichever S2.13 chose for the "more practice" entry); `messages.ts` (track descriptions of 02 §3.2, no title or rating claims); `coverage.md`; `CLAUDE.md` |
 
 **Release items (S3.4, S3.8, S3.12, S3.16, S3.19) — acceptance criteria:**
 
@@ -559,7 +598,7 @@ Check-item counts per batch sum to 152 + 176 + 160 + 140 + 124 = 752 (02 §10, "
       the level's units.
 - [ ] J1 into this level (and J2 within it) works with the pools of the levels below; the level entry gate applies.
 - [ ] Walkthrough as a new learner and as a migrated learner (fixture v1 data with completed legacy lessons): migrated
-      lessons show completed, never mastered; nothing locks that was open, except the documented R2 case (05 P3).
+      lessons show completed, never mastered; nothing locks that was open, except the documented REL-2 case (05 P3).
 - [ ] S3.4 only: the one-time notice for returning learners decided with the LX reviewer (MU5).
 
 ### S3.gate — Step 3 gate
@@ -630,7 +669,7 @@ fix, repeat the affected validation).
 - **Depends on:** S3.gate
 - **Owned files:** new `docs/curriculum-upgrade/final/app-validation.md`, `scripts/ui-check.mjs` (if extended)
 - **Acceptance criteria**
-  - [ ] Migration across all release states R0 → R5 with fixture v1 data (T1–T14, T16–T18), rollback simulation and
+  - [ ] Migration across all release states REL-0 → REL-5 with fixture v1 data (T1–T14, T16–T18), rollback simulation and
         mixed builds; T15 status reported (owner action).
   - [ ] `ui:check` at 320/360/414/landscape/desktop, both colours; `offline:check`; both Supabase builds; draft
         exclusion and the release test.
@@ -662,7 +701,7 @@ fix, repeat the affected validation).
 - **Depends on:** S4.1–S4.7
 - **Acceptance criteria**
   - [ ] All 04-final-validation.md deliverables exist; `reviewer` and `content-reviewer` APPROVE; all checks pass;
-        nothing merged, published or deployed.
+        nothing deployed and nothing merged into `main` (the phase branch is pushed, DRIVER.md).
 
 ---
 
@@ -676,7 +715,7 @@ fix, repeat the affected validation).
 | PD-02 | Unit-check mastery ≥ 80/100 first attempt + all safety-critical items; jump-ahead ≥ 90/100 exact (display floored), per-strand ≥ 75 % (strands with < 4 items perfect), all critical items, practical evidence; placement mastery only for covered units | 03 §12.2, §4.1, §7.3 | no |
 | PD-03 | Separate pools: practice, unit check, placement, placement practical, exam; drafts never served | 03 §12.3 | no |
 | PD-04 | AXF rules taught as the reference; training ruleset of 03 §5.5 (perpetual check adjudicated, chase not, learner may not create a third repetition, 30-move no-capture limit, 80-move cap with material adjudication) | 03 §12.4, §8 | no |
-| PD-05 | Partners and chains of 03 §5.2; assessment use of `pressing` only after validation (S2.18); fallback F1–F5 otherwise, incl. F5 for opening tasks, F2b for `xb` games, `xi` in F4, and the reachability table | 03 §12.5, §5.2 (S1.4) | no |
+| PD-05 | Partners and chains of 03 §5.2; assessment use of `pressing` only after validation (S2.18); fallback F otherwise (F1 with scoring leaves, F1c resist-mode conversion, F2/F2b, F3, F4 incl. `xi`, F5 for opening tasks) and the reachability table; R6 line share with fixed *L*, selectivity ≤ 1/3 and gate ≥ 2/3 (03 §5.3) | 03 §12.5, §5.2 (S1.4) | no |
 | PD-06 | Safety-horizon table of 03 §5.3 as the default guard; *h* = 2 at runtime above Basic until S2.6 measures *h* = 3 | 03 §12.6 | no |
 | PD-07 | Mastery merge: higher score, ties later date, deterministic tie-breaks (same in 03 §2, 04 §5.8, 05 §8.6) | 03 §12.7 | no |
 | PD-08 | Notation and glossary owned by the curriculum (02 §4), orientation mechanics by the architecture; glossary file `docs/curriculum-upgrade/glossary.md` from S2.3 | 03 §12.8; 02 U2 | no |
@@ -695,7 +734,7 @@ fix, repeat the affected validation).
 | PD-21 | New evidence in `learning.records.v1` and a `data_v2` column; `data` keeps the v1 shape; v1 dual-written for live legacy lessons only; no reverse map (MD3). T15 on a real project before any deploy that writes `data_v2` | 05 §10; 04 R5 | no (T15 is an owner **action**) |
 | PD-22 | Orphan ids and ids whose meaning changed on 2026-10-21 read by current meaning / ignored (MD4) | 05 §10 | no |
 | PD-23 | Additive-only changes within a key; breaking changes get a new key and column (MD5) | 05 §10 | no |
-| PD-24 | Phased publishing P1–P5; release order R1 Basic → R2 Intermediate → R3 Advanced → R4 Expert → R5 Master; `u10` re-tracked before `u12` with the documented R2 locking case (MD6, S1.4) | 05 §8.4.1 | no |
+| PD-24 | Phased publishing P1–P5; release order REL-1 Basic → REL-2 Intermediate → REL-3 Advanced → REL-4 Expert → REL-5 Master; `u10` re-tracked before `u12` with the documented R2 locking case (MD6, S1.4) | 05 §8.4.1 | no |
 | PD-25 | Attempt log local only; the `exposed` id set syncs (MD7, MU6) | 05 §10, §11 | no |
 | PD-26 | Legacy `pool` items live in per-unit extra-practice pools (MU1 option a) | 05 §11 | no |
 | PD-27 | Reset clears v1 completion, records (incl. mastery and applied) and the attempt log (MU3) | 05 §8.5, §11 | no |
@@ -721,7 +760,8 @@ fix, repeat the affected validation).
 
 ## 8. Open items register (all documents)
 
-Only genuinely open items; each has an owner. Resolved items are marked in their own documents with a pointer.
+**This is the canonical open-items register.** Only genuinely open items; each has an owner. The tables in the other
+documents keep resolved rows (with a pointer) for traceability.
 
 | Id(s) | Question | Owner |
 | --- | --- | --- |

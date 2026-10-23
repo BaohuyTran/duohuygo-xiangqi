@@ -507,7 +507,8 @@ threat to the central Soldier as Black; play the first moves by principle as eit
 
 - **Guided:** `choice` (compare development) with the undeveloped pieces marked.
 - **Independent:** `decision` (predicate "develops a back-rank piece" + guard), `line` (both colours, deviations).
-- **Transfer:** `b09-g1`, `play` from the start position for the first moves vs `safe-sparring(2)`, rubric R2 + R1.
+- **Transfer:** `b09-g1`, `play` from the start position for the first moves vs `safe-sparring(2)`, rubric R2 + R1
+  (if it fails the 03 §5.7 guard: add R0, then a scripted first part with the line-share gate, 03 §5.2).
 - **Misconceptions → feedback:** `b09.m1` openings are memorised sequences → explain the purpose of the move and an
   equally good alternative. `b09.m2` move one piece repeatedly to attack early → count developed pieces for both sides
   after the sequence. `b09.m3` the General should step out early → show the open line it creates. `b09.m4` grabbing a
@@ -785,7 +786,8 @@ General theory ("this material always wins/draws") only with a cited, reviewed s
 
 - **Guided:** `combination` (checkmate) with the General's flight points marked.
 - **Independent:** `decision` (predicate: enemy General's legal moves fall; guard), `combination`.
-- **Transfer:** `i10-g1`, `play` vs the convert chain (counterplay tree → `forcing-attack` → `pressing`), rubric R4.
+- **Transfer:** `i10-g1`, `play` vs the convert chain (counterplay tree → `forcing-attack` → `pressing`; F1c under
+  fallback, 03-assessment.md §5.2), rubric R4.
 - **Misconceptions → feedback:** `i10.m1` the General must hide in endgames → show the point it controls. `i10.m2`
   checking is the fastest way to mate → show a check that releases the General and the quiet move that does not.
 - **Assessment:** unit check; `i10-g1`. **Remediation:** default.
@@ -1194,7 +1196,7 @@ the cap.
 
 - **Guided:** `decision` with the opponent's counter-chances shown.
 - **Independent:** `decision`, `play` (short).
-- **Transfer:** `e06-g1`, `e06-g2` vs the convert chain (03-assessment.md §5.2; F1 under fallback), rubric R4.
+- **Transfer:** `e06-g1`, `e06-g2` vs the convert chain (03-assessment.md §5.2; F1c under fallback), rubric R4.
 - **Misconceptions → feedback:** `e06.m1` when ahead, attack immediately → show the counter-attack it allows. `e06.m2`
   the opponent has nothing left → show their remaining threat.
 - **Assessment:** unit check; `e06-g1`, `e06-g2`. **Remediation:** default.
@@ -1419,7 +1421,7 @@ principles and the safety routine; judged by development (R2) and safety (R1), n
   none. **Success:** punish the first, develop calmly against the second.
 - **Guided:** worked example. **Independent:** m06 items. **Transfer:** `m06-g1`, rubric R6 + R1 (03-assessment.md
   §5.2 Opening row; F5 under fallback), where the line nodes are classed by the development predicate and the guard,
-  not by a book line, and R6 includes R2 on the moves after the line.
+  not by a book line; R6 includes R2 over the whole task and the line-share gate (03 §5.3).
 - **Misconceptions → feedback:** `m06.m1` an unknown move must be bad → show it is sound and the calm reply.
   `m06.m2` without a book line I am lost → show the principle checklist applied.
 - **Assessment:** unit check; `m06-g1`. **Remediation:** default (b09, e08 objectives).
