@@ -9,7 +9,7 @@ Main differences from the first phase:
 
 | | First phase (`docs/DRIVER.md`) | This phase |
 | --- | --- | --- |
-| Work items | `## Task N` in `docs/PLAN.md` | Items in [BACKLOG.md](./BACKLOG.md) (`S<step>.<n>` ids) |
+| Work items | `## Task N` in `docs/PLAN.md` | Items in [BACKLOG.md](./BACKLOG.md) (`S<step>.<n>` ids); step 2–4 item text in `design/06-backlog.md` §4–§6 |
 | Branch | directly on `main`, push deploys | the phase branch (below); **never push to `main`, never deploy** |
 | Runs | one task per run, then stop | keep going item after item, step after step (PLAN.md "Autonomous orchestration") |
 | State | task notes in `docs/PLAN.md` | [STATUS.md](./STATUS.md), [DECISIONS.md](./DECISIONS.md), [BACKLOG.md](./BACKLOG.md) |

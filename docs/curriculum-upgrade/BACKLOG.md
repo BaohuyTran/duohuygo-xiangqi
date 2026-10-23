@@ -32,23 +32,22 @@ Design documents live in `docs/curriculum-upgrade/design/`.
 
 ### S1.2 — Curriculum and assessment specification
 
-- **Status:** in-progress — 3 attempts used (2026-10-23). All unit-field, mastery, complete-game, guard and
-  partner findings fixed; one finding left, carried into S1.4 (see there). Not approved until S1.4's review passes.
+- **Status:** done — closed through S1.4 (2026-10-23): its remaining finding was fixed in S1.4 and approved there
 - **Role focus:** curriculum designer (+ learning-experience)
 - **Depends on:** — (reads the code itself; reconciled with S1.1 at S1.4)
 - **Owned files:** `design/02-curriculum.md`, `design/03-assessment.md`
 - **Acceptance criteria**
-  - [ ] Every unit: stable id, level, prerequisites, competency tags (six strands), observable outcomes, lesson
+  - [x] Every unit: stable id, level, prerequisites, competency tags (six strands), observable outcomes, lesson
         titles + objectives, exercise types and scaffolding progression, guided / independent / transfer tasks,
         misconceptions + feedback requirements, assessment and remediation criteria.
-  - [ ] All six strands and the 50-topic baseline covered (any split/merge/reorder justified); both colours;
+  - [x] All six strands and the 50-topic baseline covered (any split/merge/reorder justified); both colours;
         attack and defence; positions with no immediate tactic; plans before opening memorization; difficulty
         grows through fewer hints, unfamiliarity, branching, counterplay and evaluation.
-  - [ ] Assessment spec: completed / independently mastered / applied in practical play; item design rules
+  - [x] Assessment spec: completed / independently mastered / applied in practical play; item design rules
         (no motif leaks); practical-play rubrics; jump-ahead scoring ≥ 90/100 with per-strand minimums, first
         attempt vs hints/retries; XP/streaks never count as competence; ruleset choice incl. repetition
         adjudication and implementation limits.
-  - [ ] No invented positions, ratings or learning-time guarantees.
+  - [x] No invented positions, ratings or learning-time guarantees.
 
 ### S1.3 — Reuse/migration map and content sourcing policy
 
@@ -65,7 +64,7 @@ Design documents live in `docs/curriculum-upgrade/design/`.
 
 ### S1.4 — Implementation backlog and pilot recommendation
 
-- **Status:** todo
+- **Status:** done (attempt 3, `a60adfa`, 2026-10-23: reviewer and content-reviewer APPROVE)
 - **Role focus:** lead integrator (driver) with implementer
 - **Depends on:** S1.1, S1.2, S1.3
 - **Owned files:** `design/06-backlog.md`, this file (driver), `design/README.md`
@@ -87,29 +86,80 @@ Design documents live in `docs/curriculum-upgrade/design/`.
   during the transition (or order the remainder after `u12`); reword 02 §3.3 per 05 DV1 (completion only to
   successors); one notation for quiet moves in validator output.
 - **Acceptance criteria**
-  - [ ] Prioritized, dependency-ordered backlog for steps 2–4 with ownership and acceptance criteria, copied
+  - [x] Prioritized, dependency-ordered backlog for steps 2–4 with ownership and acceptance criteria, copied
         into this file as `S2.*`, `S3.*`, `S4.*` items.
-  - [ ] Pilot recommendation (the five pilot pieces from `02-foundation-and-pilot.md`) and what it validates.
-  - [ ] `design/README.md` indexes the documents; inconsistencies between S1.1–S1.3 resolved.
+  - [x] Pilot recommendation (the five pilot pieces from `02-foundation-and-pilot.md`) and what it validates.
+  - [x] `design/README.md` indexes the documents; inconsistencies between S1.1–S1.3 resolved.
 
 ### S1.gate — Step 1 gate
 
-- **Status:** todo
+- **Status:** done (2026-10-23: reviewer and content-reviewer APPROVE the full design set; lint, build, 471 tests pass; no application code changed since `e99e1f3`)
 - **Depends on:** S1.1–S1.4
 - **Acceptance criteria**
-  - [ ] All deliverables 1–7 of `01-audit-and-design.md` exist; `content-reviewer` and `reviewer` APPROVE the set.
-  - [ ] Lint, build, tests pass; no application behaviour changed.
+  - [x] All deliverables 1–7 of `01-audit-and-design.md` exist; `content-reviewer` and `reviewer` APPROVE the set.
+  - [x] Lint, build, tests pass; no application behaviour changed.
 
 ---
 
-## Step 2 — Foundation and pilot
+## Steps 2–4 — status
 
-Placeholder: replaced by S1.4.
+Item definitions (role focus, owned and shared files, acceptance criteria) live in
+[design/06-backlog.md](./design/06-backlog.md) §4–§6 and are the single source; this table tracks status only.
+Standing criteria, shared-file serialization and the content "done" definition: 06 §2. Suggested parallel rounds
+for step 2: 06 §2.2.
 
-## Step 3 — Curriculum production
+Carry-over from the S1.4 reviews (non-blocking, apply in the named items): 03 §10 summary bullet and PD-05 should read
+"0 < credited fraction ≤ 1/3" (S2.12); S2.6 also times `forcing-attack(3)` on the pilot's endgame positions and
+flags depth 3 "measured within budget" per task; S2.20 records each R6 task's void rate next to its N2 failure rate.
 
-Placeholder: replaced by S1.4.
-
-## Step 4 — Final validation
-
-Placeholder: replaced by S1.4.
+| Item | Title | Depends on | Status |
+| --- | --- | --- | --- |
+| S2.1 | Content schema v2 and validator foundations | — | todo |
+| S2.2 | Release path: review records, draft gate, release states, preview, unit ordering | S2.1 | todo |
+| S2.3 | Playing Black: orientation, notation, colour-neutral judges | S2.1 | todo |
+| S2.4 | Analysis core (`src/analysis`) | — | todo |
+| S2.5 | Worker analysis client | S2.4 | todo |
+| S2.6 | Phone-cost measurement and runtime budgets | S2.5, S2.9 | todo |
+| S2.7 | Strategic decisions: move tables, `decision`, `choice`, feedback and hint ladder | S2.1, S2.3, S2.4 | todo |
+| S2.8 | Branching: `line` trees and varied defence | S2.5, S2.7 | todo |
+| S2.9 | Training partners and game adjudication (`src/play`) | S2.4, S2.5 | todo |
+| S2.10 | Three-level progress storage and derived legacy migration | — | todo |
+| S2.11 | Account sync of the new records (`data_v2`) | S2.10 | todo |
+| S2.12 | Practical tasks: `play`, `review`, rubrics, fallback F, practical guard | S2.8, S2.9, S2.10 | todo |
+| S2.13 | Assessment engine and progress-state UI | S2.2, S2.7, S2.10, S2.12 | todo |
+| S2.14 | Pilot P1: `b09l3` + `b09-g1` | S2.2, S2.3, S2.7, S2.8, S2.12 | todo |
+| S2.15 | Pilot P2: `i08l3` + `i08-g1` | S2.14 | todo |
+| S2.16 | Pilot P3 + P5: unit `a03`, `a03-g1`, the `a03` check pool and a placement slice | S2.13, S2.15 | todo |
+| S2.17 | Pilot P4: `a07l4` + `a07-g1` | S2.16 | todo |
+| S2.18 | `pressing` validation | S2.6, S2.12, S2.15, S2.16, S2.17 | todo |
+| S2.19 | Pilot integration and walkthrough | S2.13, S2.14–S2.18 | todo |
+| S2.20 | Pilot review, calibration and design correction | S2.19 | todo |
+| S2.gate | Step 2 gate | S2.1–S2.20 | todo |
+| S3.1 | Units b01–b04 | S2.gate | todo |
+| S3.2 | Units b05–b07 | S3.1 | todo |
+| S3.3 | Units b08, b09, b10 | S3.2 | todo |
+| S3.4 | Release REL-1 | S3.3 | todo |
+| S3.5 | Units i01–i04 | S3.3 · after S3.4 | todo |
+| S3.6 | Units i05–i07 | S3.5 | todo |
+| S3.7 | Units i08, i09–i11 | S3.6 | todo |
+| S3.8 | Release REL-2 | S3.7, S3.4 | todo |
+| S3.9 | Units a01, a02, a03, a04 | S3.7 · after S3.8 | todo |
+| S3.10 | Units a05, a06, a07 | S3.9 | todo |
+| S3.11 | Units a08–a10 | S3.10 | todo |
+| S3.12 | Release REL-3 | S3.11, S3.8 | todo |
+| S3.13 | Units e01–e03 | S3.11 · after S3.12 | todo |
+| S3.14 | Units e04–e06 | S3.13 | todo |
+| S3.15 | Units e07–e09 | S3.14 | todo |
+| S3.16 | Release REL-4 | S3.15, S3.12 | todo |
+| S3.17 | Units m01–m04 | S3.15 · after S3.16 | todo |
+| S3.18 | Units m05–m09 | S3.17 | todo |
+| S3.19 | Release REL-5 | S3.18, S3.16 | todo |
+| S3.gate | Step 3 gate | S3.1–S3.19 | todo |
+| S4.1 | Learning-journey audit and coverage matrix | S3.gate | todo |
+| S4.2 | Chess accuracy and content integrity sweep | S3.gate | todo |
+| S4.3 | Learner-behaviour scenarios | S3.gate | todo |
+| S4.4 | Scoring review | S4.3 | todo |
+| S4.5 | Application, migration and release-path validation | S3.gate | todo |
+| S4.6 | Learner-facing descriptions, readiness report and study plan | S4.1–S4.5 | todo |
+| S4.7 | Release candidate and rollback notes | S4.6 | todo |
+| S4.gate | Step 4 gate | S4.1–S4.7 | todo |

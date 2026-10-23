@@ -4,16 +4,18 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Current position
 
-- **Step:** 1 — Audit and design
-- **Active items:** S1.4 (backlog, pilot, reconciliation incl. the S1.2 remainder); S1.1 and S1.3 done
+- **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
+- **Active items:** S2.1 ∥ S2.4 ∥ S2.10 (round A of 06 §2.2)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
 
 | Item | Agent | Owned files |
 | --- | --- | --- |
-| S1.1 | implementer (architecture engineer) | `design/01-audit.md`, `design/04-architecture.md` |
-| S1.2 | implementer (curriculum designer) | `design/02-curriculum.md`, `design/03-assessment.md` |
+| S1.1–S1.4 (done) | implementer; reviewed by tester, reviewer, content-reviewer | `design/*.md` |
+| S2.1 | implementer (architecture engineer) | per 06 §4 S2.1 |
+| S2.4 | implementer (architecture engineer) | per 06 §4 S2.4 |
+| S2.10 | implementer (architecture engineer + QA) | per 06 §4 S2.10 |
 | state docs, git | driver | `STATUS.md`, `DECISIONS.md`, `BACKLOG.md`, `DRIVER.md` |
 
 ## Completed work and evidence
@@ -45,6 +47,14 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   the sync fingerprint gap confirmed), reviewer APPROVE, content-reviewer APPROVE (u9l1 Cannon forks and u13l2
   successor fixed after engine checks).
 
+- 2026-10-23 — **S1.4 done** (attempt 3, `a60adfa`): reviewer and content-reviewer APPROVE. It also closed S1.2's
+  remaining finding (opening fallback F5, `xi` in F4, conversion fallback F1c with resist-mode `best-defence` at
+  k = d = 2, line-share rule with fixed L ≥ 6, 0 < credited fraction ≤ 1/3, gate ≥ 2/3; N2 pass bound 73/729 at
+  L = 6, recomputed by both reviewers).
+- 2026-10-23 — **Step 1 gate passed.** All seven deliverables in `design/` (index: `design/README.md`); reviewer and
+  content-reviewer APPROVE the set; lint, build and 471 tests pass on `a60adfa`; no application code changed since
+  the phase began. Decisions adopted as D3; backlog for steps 2–4 in BACKLOG.md (definitions in 06 §4–§6).
+
 ## Blockers and failed gates
 
 - None blocking. Owner decisions needed before release (not before implementation): licence of code and content
@@ -56,5 +66,5 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. S1.1 and S1.2 attempt 2 running (implementer, in parallel); then re-test and re-review each.
-2. S1.3, then S1.4, then the step 1 gate; then start step 2 from the backlog S1.4 writes.
+1. Step 2 round A in parallel: S2.1 (content schema v2), S2.4 (analysis core), S2.10 (three-level progress storage).
+2. Then rounds B–D and the pilot items in the order of 06 §2.2; S2.gate before any step-3 batch.
