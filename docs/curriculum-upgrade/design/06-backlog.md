@@ -242,7 +242,8 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
   - [ ] Real-device runs (≥ 1 Android, ≥ 1 iOS) requested from the owner with exact steps; until done the readiness
         report says phones are unmeasured (04 R6).
   - [ ] Decisions recorded: node caps, safety-net time, whether *h* = 3 post-game signals fit (03 UA5 cost part), task
-        lengths that fit per level (02 U6, 03 UA7 input).
+        lengths that fit per level (02 U6, 03 UA7 input), and the cost of `best-defence` resist mode at *k* = *d* = 2
+        and 3 on endgame positions, deciding where 3 is allowed (default: nowhere).
 
 ### S2.7 — Strategic decisions: move tables, `decision`, `choice`, feedback and hint ladder
 
@@ -294,7 +295,7 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
 - **Acceptance criteria**
   - [ ] `OpponentPolicy` with injected seeded RNG: `scripted`, `best-defence`, `forcing-attack(k)` (03 §5.2 winning
         capture), `safe-sparring(d, τ)`, `pressing(d)` (04 prototype weights; tuned in S2.18), `restricted`, `greedy`, and
-        `best-defence` in resist mode (03 §5.2, for F1c);
+        `best-defence` in resist mode (03 §5.2, for F1c; *k* = *d* = 2 by default);
         each with its disclosure key; deterministic per seed; depth/node limits; a safety-net d = 1 move is flagged in
         the game record (it voids the run, 03 §5.6).
   - [ ] Partners avoid a third repetition unless every alternative loses ≥ *T*.
@@ -351,7 +352,11 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
         F1c, F2, F2b, F3, F4 and F5 behave as 03 §5.2; grants record the fallback; the reachability table holds on a
         fixture pool.
   - [ ] Line share of 03 §5.3 (fixed *L* counted moves, table classes on the tree, default class off it, selectivity
-        ≤ 1/3, voiding below *L*, gate ≥ 2/3) for R6 and F2b; a seeded N2 simulation on fixture trees fails ≥ 80 %.
+        0 < credited fraction ≤ 1/3, voiding below *L*, gate ≥ 2/3) for R6 and F2b; a seeded N2 simulation on fixture
+        trees fails ≥ 80 %; a check-evasion position is not counted; a learner who develops faster than the tree passes;
+        `verify-practical.ts` reports the void rate (runs with < *L* counted moves) per task.
+  - [ ] F1c resist mode runs at *k* = *d* = 2 unless the task is flagged as measured in S2.6; `verify-practical.ts`
+        records its cost on every reference-run position; F1 leaves at non-selective nodes rejected.
   - [ ] A game in progress survives reload and tab switch (stored through `src/storage`).
   - [ ] `review`: mark the turning point, play a better move (as `decision`), choose the reason; R7.
   - [ ] `scripts/verify-practical.ts` runs the 03 §5.7 checks (reference run, N1, N2, narrow positions, real
@@ -476,7 +481,8 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
 - **Owned files:** `docs/curriculum-upgrade/design/02-curriculum.md`, `03-assessment.md`, `04-architecture.md`,
   `05-migration.md`, `07-sourcing.md`, `06-backlog.md`, new `docs/curriculum-upgrade/pilot/review.md`
 - **Acceptance criteria**
-  - [ ] Decisions recorded for UA1, UA2, UA6, UA7, U3, U5, U6, U8 and the MU1 entry point, with the pilot evidence.
+  - [ ] Decisions recorded for UA1, UA2, UA6, UA7, U3, U5, U6, U8 and the MU1 entry point, with the pilot evidence;
+        the void rate of each pilot R6 task (03 §5.3 rule 3) measured and, if voids repeat, its *L* or tree adjusted.
   - [ ] Calibrated thresholds (03 §5.7 rates, narrow-position count, task lengths) written into 03. Any loosening of
         a §5.7 rate or of the line-share gate is approved by `content-reviewer` and re-run on every pilot task before
         S2.gate.
@@ -682,7 +688,8 @@ fix, repeat the affected validation).
   new `docs/curriculum-upgrade/final/study-plan.md`
 - **Acceptance criteria**
   - [ ] Learner-facing descriptions match demonstrated capabilities; no official title, rating or learning-time claim.
-  - [ ] Readiness report: verified strengths, defects, limitations (partner regime, phones, rules not implemented,
+  - [ ] Readiness report: verified strengths, defects, limitations (partner regime incl. the shallow counterplay of
+        F1c conversion tasks, phones, rules not implemented,
         T15, licence), unresolved blockers; which learning-effectiveness claims need real learners.
   - [ ] Usability / pilot-study plan with metrics; no fabricated results.
 
@@ -734,7 +741,7 @@ fix, repeat the affected validation).
 | PD-21 | New evidence in `learning.records.v1` and a `data_v2` column; `data` keeps the v1 shape; v1 dual-written for live legacy lessons only; no reverse map (MD3). T15 on a real project before any deploy that writes `data_v2` | 05 §10; 04 R5 | no (T15 is an owner **action**) |
 | PD-22 | Orphan ids and ids whose meaning changed on 2026-10-21 read by current meaning / ignored (MD4) | 05 §10 | no |
 | PD-23 | Additive-only changes within a key; breaking changes get a new key and column (MD5) | 05 §10 | no |
-| PD-24 | Phased publishing P1–P5; release order REL-1 Basic → REL-2 Intermediate → REL-3 Advanced → REL-4 Expert → REL-5 Master; `u10` re-tracked before `u12` with the documented R2 locking case (MD6, S1.4) | 05 §8.4.1 | no |
+| PD-24 | Phased publishing P1–P5; release order REL-1 Basic → REL-2 Intermediate → REL-3 Advanced → REL-4 Expert → REL-5 Master; `u10` re-tracked before `u12` with the documented REL-2 locking case (MD6, S1.4) | 05 §8.4.1 | no |
 | PD-25 | Attempt log local only; the `exposed` id set syncs (MD7, MU6) | 05 §10, §11 | no |
 | PD-26 | Legacy `pool` items live in per-unit extra-practice pools (MU1 option a) | 05 §11 | no |
 | PD-27 | Reset clears v1 completion, records (incl. mastery and applied) and the attempt log (MU3) | 05 §8.5, §11 | no |

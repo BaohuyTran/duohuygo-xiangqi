@@ -174,7 +174,7 @@ partner with limited depth. It punishes loose pieces and short tactics but does 
 | Policy (04) | Behaviour | Use in this course |
 | --- | --- | --- |
 | `scripted` | The authored replies: `line` deviations, **threat trees** (attacker's ideas and answers to the main defences) and **counterplay trees** (defender's resources), forced claims proven | `line` items; first part of every hold, convert and opening task |
-| `best-defence` | Optimal within the forced-mate horizon. **Resist mode** (added in S1.4): avoids a forced mate within *k* = 2 whenever some move does (exhaustive), then plays the highest `moveScore` at *d* = 2 + capture quiescence (*k* = *d* = 3 in positions of ≤ ~12 pieces), seeded ties | `combination`; resist mode only as the last link of the convert chain under fallback F1c (below) |
+| `best-defence` | Optimal within the forced-mate horizon. **Resist mode** (added in S1.4): avoids a forced mate within *k* = 2 whenever some move does (exhaustive), then plays the highest `moveScore` at *d* = 2 + capture quiescence, seeded ties. *k* = *d* = 2 always by default; 3 only for a task whose positions S2.6 measured within budget (S1.4 review measured up to ~10 s per move at *k* = 3 in a 12-piece position) | `combination`; resist mode only as the last link of the convert chain under fallback F1c (below) |
 | `forcing-attack(k)` | Plays a forced mate within k (k ≤ 2 at runtime, 3 in positions of ≤ ~12 pieces) when one exists; otherwise a **winning capture** when one exists — a capture *m* with `moveScore(P, m, d)` − `materialBalance(P.board, mover)` ≥ *T* = 2 (`WIN_MATERIAL_THRESHOLD`), searched at *d* = 2 plies + capture quiescence (*d* = 3 in positions of ≤ ~12 pieces), the highest-scoring one, ties broken by the seed; otherwise hands over | Second link of the hold/convert chains |
 | `safe-sparring(2)` | Material search d = 2 + capture quiescence; never hangs material within 2 plies; random among moves within τ of its best (τ = 1.0 in Basic, 0.5 above). Depth 2 already sees a mate in one against itself, because quiescence scores a side with no legal moves as mated (Verified `src/engine/solver.ts:123–125`) | **Early Basic practice** (b01–b09 drills), `b08-g1`, `b09-g1`, the full-game fallbacks F2/F2b and the post-tree continuation of opening tasks under F5 (below), always with the τ of the task's level. Depth 3 only in positions of ≤ ~12 pieces (04 budget). This widens 04 §5.6 ("early Basic practice only"); recorded as a proposed decision in 06-backlog.md §7 |
 | `pressing(2)` | Material + palace pressure, attacked undefended pieces and mobility (04 §5.5), d = 2 + capture quiescence; prefers safe moves that attack the learner's palace and loose pieces. Heuristic weights | Game, play-out and plan tasks; last link of the hold/convert chains |
@@ -208,18 +208,28 @@ in its main form:
   complete move table (04 §5.3) classes every legal move, and every target/sound move has either an authored
   continuation or an authored **scoring leaf** — the validator evaluates the rubric on the position after that move (as
   if the task ended there, the learner's earlier moves being target/sound) and requires the pass mark. So a different
-  valid plan is never failed for lack of a continuation; dubious and error moves are scored where the task ends. A
-  task whose tree is too short to pass §5.7 stays practice only.
+  valid plan is never failed for lack of a continuation; dubious and error moves are scored where the task ends.
+  Authoring guidance: prefer continuations to scoring leaves at early nodes, and apply the line-share selectivity rule
+  (§5.3, rule 3) to leaves — a node where more than 1/3 of the guard-passing moves would pass as leaves gets
+  continuations instead, so a shuffler cannot pass by ending the task early. A task whose tree is too short to pass
+  §5.7 stays practice only.
 - **F1c (convert tasks: `i10-g1`, `a09-g1`, `e06-g1`, `e06-g2`, `m05-g1`, the conversion tasks of `xi`, `xa`, `xe`,
   `xm`, and `pe-g*` / `pa-g*` built like them):** the chain is counterplay tree → `forcing-attack(2)` → `best-defence`
   in resist mode (table above) instead of `pressing(2)`, played to the task's cap, R4 scored as defined. A tree end
   therefore never ends the task early. Resist mode is the existing exhaustive mate search plus the material search,
-  so it needs no `pressing` validation; its cost is the mate guard over all moves plus a d = 2 material search (~120 ms
-  and ~77 ms desktop for the 37 moves of a full-board position, 04 §2.2; endgames have fewer moves), within the 04
-  budget. Without a mate R4 is at most 30 + 20 + 20 = 70 < 75, so a pass needs a mate (or stalemate win) within the
-  cap against a defender that avoids every mate it can see within *k*; the §5.7 reference run must show that this is
-  achievable for every validation seed. Disclosed limit: the defender creates no counterplay beyond the authored tree
-  and `forcing-attack`.
+  so it needs no `pressing` validation. It runs at *k* = *d* = 2: the mate guard over all moves plus a d = 2 material
+  search (~120 ms and ~77 ms desktop for the 37 moves of a full-board position, 04 §2.2; endgames have fewer moves),
+  which fits the 04 budget. *k* or *d* = 3 does **not** fit in general (the S1.4 review measured 73–344 ms for the
+  *k* = 3 scan in 6–11-piece endgames, and 4–10 s per move in the 12-piece position of `u15l3#3`), so 3 is allowed
+  only for a task whose reference-run positions S2.6 measured within budget; `scripts/verify-practical.ts` records the
+  resist-mode cost on every reference-run position. Without a mate R4 is at most 30 + 20 + 20 = 70 < 75, so a pass
+  needs a mate (or stalemate win) within the cap against a defender that avoids every mate it can see within *k*.
+  **Reference run:** a mate against resist mode is usually beyond the exhaustive solver's depth, so the reference run
+  is an authored learner line played against resist mode for every validation seed (resist mode is deterministic per
+  seed); it must mate within the cap for each seed, and a second reviewer-authored line must too (§5.7 items 1, 6).
+  Disclosed limit, also in the task text and the readiness report: the defender creates no counterplay beyond the
+  authored tree and `forcing-attack`, so "conversion with counterplay" (`e06`, `xe`) shows only shallow counterplay
+  under F1c.
 - **F2 (full games: `b10-g1`, `b10-g2`, `xb` games, `pb-g*`):** partner `safe-sparring(2)` with τ = 1.0; the result
   is not scored (against `safe-sparring` it shows only safety, 04 §5.6): game score = R1 × 0.6 + R2 × 0.2 + R0 × 0.2.
 - **F2b (if the F2 games fail the §5.7 guard).** `safe-sparring` makes no threats, so a safe shuffler (N2) may pass an
@@ -348,14 +358,18 @@ credited counted moves ÷ *L*. The window is the first *L* counted moves of the 
    (04 §5.4: the level's safety guard + the task's objective predicate, e.g. "develops a back-rank piece"):
    target/sound = credited. A sound alternative therefore keeps its credit as long as the following moves develop
    safely; this is the same in the main regime and under F5.
-3. *Selectivity.* A move counts toward *L* only if, in its position, at most 1/3 of the guard-passing moves would be
-   credited. On the tree this is checked at authoring time from the tables (the validator lists non-selective nodes,
+3. *Selectivity.* A move counts toward *L* only if, in its position, **at least one and at most 1/3** of the
+   guard-passing moves would be credited (0 < credited fraction ≤ 1/3). Positions where nothing can be credited — a
+   check evasion, every back-rank piece already developed, a sound route the predicate does not describe — are played
+   but not counted, so a strong learner who develops faster than the tree is never charged for them. On the tree this is checked at authoring time from the tables (the validator lists non-selective nodes,
    which are played but not counted); off the tree the post-game analysis computes it in the Worker (one class per
    legal move, the same searches as the guard). If the task ends with fewer than *L* counted moves, the run is voided
-   (§5.6); the §5.7 reference run must reach *L*.
+   (§5.6); the §5.7 reference run must reach *L*. The pilot measures how often runs are voided this way (S2.12, S2.20);
+   if voids repeat for a task, its *L* is lowered (never below 6) or its tree lengthened.
 4. *Gate.* Line share ≥ 2/3 is a pass condition of every R6 task and every F2b game.
 
-*Why a safe shuffler cannot pass through the line term.* N2 picks a random guard-passing move, so each counted move is
+*Why a safe shuffler cannot pass through the line term* (the lower bound "at least one" in rule 3 does not change
+this: it only removes positions where nobody can be credited). N2 picks a random guard-passing move, so each counted move is
 credited with conditional probability ≤ 1/3 whatever happened before. The number credited among the *L* counted moves
 is therefore dominated by Binomial(*L*, 1/3), and P(line share ≥ 2/3) ≤ Σ over k ≥ ⌈2L/3⌉ of C(L, k)(1/3)^k(2/3)^(L−k)
 = 73/729 ≈ 0.100 for *L* = 6 and 129/6561 ≈ 0.020 for *L* = 8. With the gate, N2 fails about 90 % (L = 6) to 98 %
@@ -593,7 +607,11 @@ when forced; results are labelled "training result".
 - Line share (§5.3): fixed *L*, on-tree classes from the tables, off-tree default class, selectivity ≤ 1/3, voiding
   when fewer than *L* counted moves, gate ≥ 2/3; a seeded N2 simulation on fixture trees fails ≥ 80 % (expected ≈ 90 %
   at *L* = 6); a sound alternative at the first node followed by developing moves passes.
-- R4 under F1c: no mate → at most 70 (fails); resist mode avoids every mate within *k* it can avoid.
+- R4 under F1c: no mate → at most 70 (fails); resist mode avoids every mate within *k* it can avoid; *k* = *d* = 2
+  unless the task is flagged as measured within budget.
+- Line share: a check-evasion position (no guard-passing move credited) is not counted; a learner who completes
+  development faster than the tree (later positions with nothing left to develop) still passes the gate; F1 leaves at
+  a non-selective node are rejected by the validator.
 - `b09-g1` remedy order (add R0, then a scripted first part) when §5.7 fails.
 - `forcing-attack`: plays a forced mate within k when one exists, else the highest winning capture (gain ≥ 2 at d = 2
   + quiescence), else hands over; seeded tie-break.
