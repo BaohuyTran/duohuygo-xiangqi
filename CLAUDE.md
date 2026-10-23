@@ -88,13 +88,19 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── puzzles/*.json  # mate-in-1 / mate-in-2 / win-material, each ordered by difficulty
     │   ├── types.ts        # Lesson/exercise JSON format (documented there)
     │   ├── puzzle-types.ts # Puzzle JSON format (documented there)
-    │   ├── validate.ts     # Lesson validator (shape, i18n keys, legal + solvable exercises)
+    │   ├── validate.ts     # Lesson validator (shape, i18n keys, metadata, side, legal + solvable exercises, pools)
     │   ├── validate-puzzles.ts # Puzzle verifier (legal FEN, goal reached, UNIQUE first move)
+    │   ├── legality.ts     # Piece-count + reachable-point rules (shared by both validators)
+    │   ├── normalize.ts    # Normal form up to file mirror + colour swap (duplicate / uniqueness checks)
+    │   ├── retired-ids.json# Ids never to be reused (u1–u15, old lesson ids, orphans, retired new ids)
     │   └── index.ts        # Loads the JSON: `units`, `allLessons`, `findLesson`
     ├── lessons/
     │   ├── answers.ts      # Answer checking for every exercise type, via the engine
     │   ├── combination.ts  # Combination exercises: accepted moves, engine best-defence replies
     │   └── progress.ts     # Locked / available / completed lesson states (per track)
+    ├── progress/           # Three-level learning records. Pure: NO React/DOM/storage/gamification (enforced by a test)
+    │   ├── records.ts      # LearningRecords format (completed / mastered / applied / exposed), lenient field-level parser, attempt log (cap 2,000)
+    │   └── legacy.ts       # LEGACY_MAP (versioned; v1 = the 9 orphan ids, no targets) + completedView: legacy completion DERIVED from the v1 list, never stored
     ├── puzzles/
     │   ├── logic.ts        # Puzzle move checking, defender replies (shared by UI + verifier)
     │   └── catalog.ts      # Loads puzzle JSON in play order, next-puzzle selection
@@ -110,7 +116,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── SoundProvider.tsx # useSound(): play / muted / setMuted; unlocks audio on the first gesture
     │   └── fake-audio.ts   # Test helper: fake AudioContext that records scheduled notes
     ├── storage/
-    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings (language, muted), gamification repos; readSnapshot/writeSnapshot for sync
+    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings (language, muted), gamification and learning (`createLearningRepository`) repos; readSnapshot/writeSnapshot for sync
     ├── sync/               # Optional account login + sync. UI never imports Supabase (enforced by a test)
     │   ├── merge.ts        # THE merge rule (documented there), RemoteData JSON format, parseRemote. Pure
     │   ├── service.ts      # createAccountService: auth state, offline-first sync, debounced; backend injected. No React
@@ -149,7 +155,25 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   first move in `firstMoves` (computed at authoring time: a full list takes the engine seconds to minutes);
   the quick validator plays the main line, `npm run content:deep` proves the list wins and is complete.
   Run it after changing any mate-in-4 exercise. Moves in a mate in 4 are judged after a short pause.
-- Positions use `pieces` maps (`{ "e0": "K", "d9": "k" }`) or `fen`. Exercises are played as Red.
+- Positions use `pieces` maps (`{ "e0": "K", "d9": "k" }`) or `fen`. Exercises are played by their `side`
+  (default `red`): the side to move must equal `side`, and `square`/`from` must hold a piece of that side.
+  Black `win-material` combinations are refused until the judges are colour-neutral (S2.3).
+- Schema v2 (`src/content/types.ts`, curriculum-upgrade design 02 §3.3, 07 §2.1/§5.1). **Legacy units** (ids
+  `u1`–`u15`) keep every new field optional. **New-course units** (id = level prefix `b i a e m` + 2 digits, e.g.
+  `b05`; `track` required and matching the prefix; lessons `b05l2`) need on every exercise `id` (`b05l2-04`;
+  pool items `b05-p03`), `version` (≥ 1), `status` (`draft` · `verified` · `reviewed` · `published` · `retired`),
+  `source` (`kind`: `generated` + `generator`/`seed`, `authored`, `derived` + `derivedFrom`/`transform`,
+  `course-game` + `gameId`/`moveNumber`, `legacy` + `legacyRef` like `u7l1#2` or `m2-07`; optional `refs`
+  citations) and an explicit `side`; practice items (not `learn` cards) also need `strand` (`RS TC OD PA DE PP`),
+  `nature` (`tactic` | `quiet`), `critical` and `misconceptions` (ids like `b06.m2`, may be empty). Ids are unique
+  and new-course ids must not be in `src/content/retired-ids.json` (append ids there when they retire).
+- Legality (`src/content/legality.ts`, also used by the puzzle verifier): at most the starting number of each
+  piece, and only reachable points (General/Advisor in the palace, Elephant on its 7 points, a Soldier before its
+  river only on files a, c, e, g, i). Errors for new-course positions; for legacy positions they are only
+  reported (`validateContent(...).notices`, `legacyPlacementNotices`): today the 12 `POS` positions.
+- A unit may have an extra-practice `pool` (array of practice exercises, no `learn` cards), validated exactly
+  like lesson items. `src/content/normalize.ts` (`normalKey`, `duplicateGroups`) compares positions up to file
+  mirror and colour swap; today the only duplicates are 7 learn cards showing the next item's position.
 - `npx vitest run src/content` validates all content and plays every exercise through the engine.
 - Units have a `track`, in order: `basics` (files 01–04: 4 short units, 9 lessons, the default),
   `intermediate` (files 07–10, ids u7–u10: cannon mates, horse/chariot mates, tactics, combinations),
@@ -189,6 +213,18 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - In the player, later moves are accepted whenever the engine confirms they still win, not only the
   stored move. Solved puzzle ids are stored through `src/storage` (`createPuzzleProgressRepository`).
 - All puzzles are currently Red to move (the board is always drawn with Red at the bottom).
+
+## Learning records (curriculum upgrade)
+
+- New-course progress is stored through `createLearningRepository` under `learning.records.v1` (completed /
+  mastered / applied with provenance, plus the exposed item set; additive changes only, unknown fields and a higher
+  `schema` are preserved) and `learning.attempts.v1` (attempt log, local only, newest 2,000). A stored value that is
+  not a JSON object reads as empty and is copied to `learning.records.v1.backup` on the next write.
+- New-course ids are never written to `progress.completedLessons.v1`. Legacy completion is derived at read time
+  (`completedView` in `src/progress/legacy.ts`) and never stored; loading writes nothing. Each release that retires
+  legacy lessons adds their `LEGACY_MAP` entries and bumps `LEGACY_MAP_VERSION` (corrections only add targets).
+- Reset progress clears the v1 completed list, the records and the attempt log; puzzles, settings and gamification
+  are untouched. Design: `docs/curriculum-upgrade/design/05-migration.md` §8.
 
 ## XP, hearts, daily goal and streak
 

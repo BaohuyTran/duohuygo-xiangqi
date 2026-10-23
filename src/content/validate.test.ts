@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { validateUnits } from './validate';
+import { positionFromPieces, toFen } from '../engine';
+import { units as shippedUnits } from './index';
+import { swapColours } from './normalize';
+import { legacyPlacementNotices, RETIRED_IDS, validateContent, validateUnits } from './validate';
 
 const K = { e0: 'K', d9: 'k' };
 
@@ -205,3 +208,232 @@ describe('content validator: combinations, defend and tracks', () => {
   });
 });
 
+
+describe('content validator: schema v2 (new-course units, metadata, side, legality, pools)', () => {
+  /** Full metadata of a practice item; learn cards need only id, version, status, source and side. */
+  const meta = (id: string, extra: Record<string, unknown> = {}) => ({
+    id,
+    version: 1,
+    status: 'draft',
+    source: { kind: 'authored' },
+    side: 'red',
+    strand: 'TC',
+    nature: 'tactic',
+    critical: false,
+    misconceptions: [],
+    ...extra,
+  });
+  const learnMeta = (id: string) => ({ id, version: 1, status: 'draft', source: { kind: 'authored' }, side: 'red' });
+  const newUnit = (exercises: unknown[], extra: Record<string, unknown> = {}) => ({
+    id: 'b01',
+    track: 'basics',
+    title: 'u1.title',
+    description: 'u1.desc',
+    lessons: [{ id: 'b01l1', title: 'u1l1.title', exercises }],
+    ...extra,
+  });
+  const errorsOf = (...units: unknown[]) => validateUnits(units);
+
+  const learn = { ...learnMeta('b01l1-01'), type: 'learn', pieces: { ...K, a0: 'R' }, square: 'a0', text: 'u3l1.e1' };
+  const select = { ...meta('b01l1-02'), type: 'select-squares', pieces: { ...K, a0: 'R' }, square: 'a0', prompt: 'u3l1.e2' };
+
+  // Black fixtures: Black to move, own-piece checks against Black.
+  const blackPieces = { e0: 'K', d9: 'k', a9: 'r' };
+  const blackSelect = { ...meta('b01l1-03', { side: 'black' }), type: 'select-squares', pieces: blackPieces, turn: 'black', square: 'a9', prompt: 'u3l1.e2' };
+  const blackMove = {
+    ...meta('b01l1-04', { side: 'black' }),
+    type: 'move',
+    pieces: blackPieces,
+    turn: 'black',
+    from: 'a9',
+    goal: { kind: 'reach', squares: ['a2'] },
+    solution: { from: 'a9', to: 'a2' },
+    prompt: 'u3l1.e3',
+  };
+  const blackCapture = {
+    ...meta('b01l1-05', { side: 'black' }),
+    type: 'capture',
+    pieces: { ...blackPieces, a2: 'C' },
+    turn: 'black',
+    solution: { from: 'a9', to: 'a2' },
+    prompt: 'u3l1.e4',
+  };
+  // Colour-swapped twin of the Red defend fixture above: Red threatens mate, Black's Horse g0-e1 stops it.
+  const blackDefend = {
+    ...meta('b01l1-06', { side: 'black', strand: 'DE', critical: true, source: { kind: 'derived', derivedFrom: 'u9l3#1', transform: ['colour-swap'] } }),
+    type: 'move',
+    fen: toFen(swapColours(positionFromPieces({ b3: 'r', b9: 'C', e9: 'k', f1: 'K', g8: 'r', g9: 'N' }))),
+    prompt: 'u9l3.p1',
+    goal: { kind: 'defend' },
+    solution: { from: 'g0', to: 'e1' },
+  };
+
+  it('accepts a new-course unit with full metadata, Red and Black items, and a pool', () => {
+    const unit = newUnit([learn, select, blackSelect, blackMove, blackCapture, blackDefend], {
+      pool: [{ ...select, id: 'b01-p01', misconceptions: ['b01.m1'], source: { kind: 'generated', generator: 'scripts/x.ts', seed: 7 } }],
+    });
+    expect(errorsOf(unit)).toEqual([]);
+  });
+
+  it('accepts a colour-swapped mate-in-2 combination played as Black', () => {
+    // The two-Chariots fixture above, colour-swapped: Ri7-i8 becomes ...Ri2-i1 for Black.
+    const combo = {
+      ...meta('b01l1-01', { side: 'black', source: { kind: 'derived', derivedFrom: 'u8l2#1', transform: ['colour-swap'] } }),
+      type: 'combination',
+      fen: toFen(swapColours(positionFromPieces({ c2: 'p', e9: 'k', f1: 'K', f4: 'p', g9: 'n', i7: 'R', i9: 'R' }))),
+      prompt: 'u8l2.p1',
+      goal: 'checkmate',
+      moves: 2,
+      solution: [
+        { from: 'i2', to: 'i1' },
+        { from: 'c7', to: 'c8' },
+        { from: 'i0', to: 'g0' },
+      ],
+    };
+    expect(errorsOf(newUnit([combo]))).toEqual([]);
+  });
+
+  it('keeps metadata optional in legacy units, but type-checks it when present', () => {
+    const legacy = (ex: unknown) => ({ id: 'u1', title: 'u1.title', description: 'u1.desc', lessons: [{ id: 'u1l1', title: 'u1l1.title', exercises: [ex] }] });
+    const plain = { type: 'select-squares', pieces: { ...K, a0: 'R' }, square: 'a0', prompt: 'u3l1.e2' };
+    expect(errorsOf(legacy(plain))).toEqual([]);
+    expect(errorsOf(legacy({ ...plain, side: 'red', strand: 'RS', status: 'verified' }))).toEqual([]);
+    expect(errorsOf(legacy({ ...plain, strand: 'XX' })).join('\n')).toMatch(/"strand" must be one of/);
+  });
+
+  it('requires every metadata field on new-course items (fewer on learn cards)', () => {
+    const bare = { type: 'select-squares', id: 'b01l1-01', pieces: { ...K, a0: 'R' }, square: 'a0', prompt: 'u3l1.e2' };
+    const errors = errorsOf(newUnit([bare])).join('\n');
+    for (const field of ['version', 'status', 'source', 'side', 'strand', 'nature', 'critical', 'misconceptions']) {
+      expect(errors).toMatch(new RegExp(`"${field}" is required in a new-course unit`));
+    }
+    const learnErrors = errorsOf(newUnit([{ type: 'learn', id: 'b01l1-01', pieces: K, text: 'u1l1.e1' }])).join('\n');
+    expect(learnErrors).toMatch(/"version" is required/);
+    expect(learnErrors).not.toMatch(/"strand"|"nature"|"critical"|"misconceptions"/);
+    expect(errorsOf(newUnit([{ ...select, id: undefined }])).join('\n')).toMatch(/"id" is required/);
+  });
+
+  it.each([
+    ['a version below 1', { ...select, version: 0 }, /"version" must be an integer/],
+    ['an unknown status', { ...select, status: 'final' }, /"status" must be one of draft, verified, reviewed, published, retired/],
+    ['an unknown strand', { ...select, strand: 'XX' }, /"strand" must be one of/],
+    ['an unknown nature', { ...select, nature: 'positional' }, /"nature" must be "tactic" or "quiet"/],
+    ['a non-boolean critical', { ...select, critical: 'yes' }, /"critical" must be true or false/],
+    ['a bad misconception id', { ...select, misconceptions: ['m2'] }, /misconception ids like "b06.m2"/],
+    ['a repeated misconception id', { ...select, misconceptions: ['b01.m1', 'b01.m1'] }, /lists an id twice/],
+    ['an unknown side', { ...select, side: 'blue' }, /"side" must be "red" or "black"/],
+    ['an unknown source kind', { ...select, source: { kind: 'book' } }, /"source.kind" must be one of/],
+    ['an unknown source field', { ...select, source: { kind: 'authored', author: 'me' } }, /"source.author" is not a known source field/],
+    ['a generated item without seed', { ...select, source: { kind: 'generated', generator: 'scripts/x.ts' } }, /"source.seed" is required/],
+    ['a derived item without transform', { ...select, source: { kind: 'derived', derivedFrom: 'b01l1-01' } }, /"source.transform" is required/],
+    ['an unknown transform', { ...select, source: { kind: 'derived', derivedFrom: 'b01l1-01', transform: ['rotate'] } }, /"source.transform" must be/],
+    ['a course-game item without move number', { ...select, source: { kind: 'course-game', gameId: 'g1' } }, /"source.moveNumber" is required/],
+    ['a legacy item without legacyRef', { ...select, source: { kind: 'legacy' } }, /"source.legacyRef" is required/],
+    ['a malformed legacyRef', { ...select, source: { kind: 'legacy', legacyRef: 'u7l1-2' } }, /"source.legacyRef" must be an old exercise/],
+    ['a legacyRef to a lesson that never existed', { ...select, source: { kind: 'legacy', legacyRef: 'u99l1#0' } }, /is not an old lesson id/],
+    ['a citation without locator', { ...select, source: { kind: 'authored', refs: [{ title: 'Rules', checkedBy: 'reviewer', checkedAt: '2026-11-02' }] } }, /"source.refs" must be/],
+  ])('rejects %s', (_name, exercise, pattern) => {
+    expect(errorsOf(newUnit([exercise])).join('\n')).toMatch(pattern);
+  });
+
+  it('accepts every source kind with its required fields', () => {
+    const sources = [
+      { kind: 'authored', refs: [{ title: 'Rules', locator: 'art. 23', checkedBy: 'content-reviewer', checkedAt: '2026-11-02' }] },
+      { kind: 'generated', generator: 'scripts/generate-puzzles.ts', generatorVersion: '1', seed: 'abc' },
+      { kind: 'derived', derivedFrom: 'm2-07', transform: ['file-mirror', 'colour-swap'] },
+      { kind: 'course-game', gameId: 'cg-001', moveNumber: 12 },
+      { kind: 'legacy', legacyRef: 'u7l1#2' },
+      { kind: 'legacy', legacyRef: 'wm-03' },
+    ];
+    const items = sources.map((source, i) => ({ ...select, id: `b01l1-0${i + 1}`, source }));
+    expect(errorsOf(newUnit(items))).toEqual([]);
+  });
+
+  it('checks new-course ids: patterns, uniqueness, retired ids', () => {
+    expect(errorsOf(newUnit([{ ...select, id: 'b01l1-1' }])).join('\n')).toMatch(/id "b01l1-1" must match/);
+    expect(errorsOf(newUnit([{ ...select, id: 'b02l1-01' }])).join('\n')).toMatch(/must match/);
+    expect(errorsOf(newUnit([select, { ...select }])).join('\n')).toMatch(/duplicate id "b01l1-02"/);
+    expect(errorsOf(newUnit([select], { lessons: [{ id: 'b01x', title: 'u1l1.title', exercises: [select] }] })).join('\n')).toMatch(
+      /lesson id "b01x" must be "b01l" \+ a digit/,
+    );
+    // A pool item must be <unitId>-pNN and may not reuse a lesson item's id.
+    expect(errorsOf(newUnit([select], { pool: [{ ...select, id: 'b01-01' }] })).join('\n')).toMatch(/id "b01-01" must match/);
+    expect(errorsOf(newUnit([select], { pool: [select] })).join('\n')).toMatch(/duplicate id "b01l1-02"/);
+    // Retired ids: unit, lesson and item ids are all checked.
+    const retired = validateUnits([newUnit([select])], { retiredIds: ['b01', 'b01l1', 'b01l1-02'] }).join('\n');
+    expect(retired).toMatch(/id "b01" is retired/);
+    expect(retired).toMatch(/id "b01l1" is retired/);
+    expect(retired).toMatch(/id "b01l1-02" is retired/);
+    // Legacy units are exempt: their own ids are the retired ones.
+    expect(validateUnits([{ id: 'u1', title: 'u1.title', description: 'u1.desc', lessons: [{ id: 'u1l1', title: 'u1l1.title', exercises: [select] }] }])).toEqual([]);
+  });
+
+  it('requires a new-course unit to name the track of its id prefix', () => {
+    expect(errorsOf(newUnit([select], { track: undefined })).join('\n')).toMatch(/needs "track": "basics"/);
+    expect(errorsOf(newUnit([select], { id: 'i01', lessons: [{ id: 'i01l1', title: 'u1l1.title', exercises: [{ ...select, id: 'i01l1-01' }] }] })).join('\n')).toMatch(
+      /needs "track": "intermediate"/,
+    );
+  });
+
+  it('lists the retired ids: u1–u15, every old lesson id incl. u8l4 and the 9 orphans', () => {
+    for (let n = 1; n <= 15; n++) {
+      expect(RETIRED_IDS.has(`u${n}`)).toBe(true);
+      for (let k = 1; k <= 3; k++) expect(RETIRED_IDS.has(`u${n}l${k}`)).toBe(true);
+    }
+    for (const orphan of ['u2l3', 'u3l3', 'u4l3', 'u5l1', 'u5l2', 'u5l3', 'u6l1', 'u6l2', 'u6l3']) expect(RETIRED_IDS.has(orphan)).toBe(true);
+    for (const unit of shippedUnits) {
+      expect(RETIRED_IDS.has(unit.id), unit.id).toBe(true);
+      for (const lesson of unit.lessons) expect(RETIRED_IDS.has(lesson.id), lesson.id).toBe(true);
+    }
+    expect([...RETIRED_IDS].every((id) => /^u\d+(l\d)?$/.test(id))).toBe(true);
+  });
+
+  it('checks the side to move and own pieces against "side"', () => {
+    expect(errorsOf(newUnit([{ ...blackSelect, turn: 'red' }])).join('\n')).toMatch(/Black must be to move/);
+    expect(errorsOf(newUnit([{ ...select, side: 'black' }])).join('\n')).toMatch(/Black must be to move/);
+    expect(errorsOf(newUnit([{ ...blackSelect, square: 'e0' }])).join('\n')).toMatch(/"square" e0 must hold a Black piece/);
+    expect(errorsOf(newUnit([{ ...blackMove, from: 'e0' }])).join('\n')).toMatch(/"from" e0 must hold a Black piece/);
+    // A Black defend item needs a Red threat.
+    expect(errorsOf(newUnit([{ ...blackDefend, fen: undefined, pieces: blackPieces, turn: 'black', solution: { from: 'a9', to: 'a8' } }])).join('\n')).toMatch(
+      /Red has no mate-in-1 threat/,
+    );
+    // The win-material judge still measures Red material (S2.3), so Black win-material combinations are refused.
+    const winMaterial = { ...meta('b01l1-01', { side: 'black' }), type: 'combination', pieces: blackPieces, turn: 'black', prompt: 'u8l2.p1', goal: 'win-material', moves: 2, solution: [{ from: 'a9', to: 'a8' }] };
+    expect(errorsOf(newUnit([winMaterial])).join('\n')).toMatch(/cannot be played as Black yet/);
+  });
+
+  it('fails unreachable points and extra pieces in new-course positions, and only reports them in legacy units', () => {
+    // A Red Soldier on d3: before the river only files a, c, e, g, i are possible.
+    const badSoldier = { ...select, pieces: { ...K, a0: 'R', d3: 'P' } };
+    expect(errorsOf(newUnit([badSoldier])).join('\n')).toMatch(/illegal placement: red soldier on d3 can never stand there/);
+    const threeChariots = { ...select, pieces: { ...K, a0: 'R', a1: 'R', a2: 'R' } };
+    expect(errorsOf(newUnit([threeChariots])).join('\n')).toMatch(/illegal placement: too many red chariots \(3\)/);
+
+    const legacy = [{ id: 'u1', title: 'u1.title', description: 'u1.desc', lessons: [{ id: 'u1l1', title: 'u1l1.title', exercises: [badSoldier] }] }];
+    const report = validateContent(legacy);
+    expect(report.errors).toEqual([]);
+    expect(report.notices).toEqual(['u1l1#0: red soldier on d3 can never stand there (legacy position, allowed while its lesson is live)']);
+  });
+
+  // 05-migration.md §9 command 3: 12 legacy positions with an unreachable Soldier, no piece-count failure.
+  it('reports exactly the 12 legacy POS positions of the shipped content', () => {
+    const refs = legacyPlacementNotices(shippedUnits).map((n) => n.split(':')[0]);
+    expect(refs).toEqual(['u1l3#4', 'u3l1#2', 'u3l2#3', 'u9l1#3', 'u9l1#5', 'u11l1#4', 'u12l1#1', 'u12l1#5', 'u12l2#2', 'u12l3#3', 'u13l1#0', 'u13l1#1']);
+    expect(legacyPlacementNotices(shippedUnits).every((n) => / soldier on [a-i]\d can never stand there/.test(n))).toBe(true);
+  });
+
+  it('validates a unit pool like lesson items', () => {
+    const poolItem = { ...select, id: 'b01-p01' };
+    expect(errorsOf(newUnit([select], { pool: [poolItem] }))).toEqual([]);
+    expect(errorsOf(newUnit([select], { pool: 'x' })).join('\n')).toMatch(/"pool" must be an array/);
+    expect(errorsOf(newUnit([select], { pool: [{ ...learn, id: 'b01-p01' }] })).join('\n')).toMatch(/b01\/pool\[0\]: a unit pool holds practice items only/);
+    // The judges run on pool items: a solution that misses the goal fails.
+    const wrongMove = { ...blackMove, id: 'b01-p01', solution: { from: 'a9', to: 'a3' } };
+    expect(errorsOf(newUnit([select], { pool: [wrongMove] })).join('\n')).toMatch(/b01\/pool\[0\]: solution a9-a3 is not accepted \(wrong-target\)/);
+    // Metadata is required on pool items of new-course units.
+    expect(errorsOf(newUnit([select], { pool: [{ ...poolItem, strand: undefined }] })).join('\n')).toMatch(/b01\/pool\[0\]: "strand" is required/);
+    // Legacy units may have a pool too (no metadata needed).
+    const legacyUnit = { id: 'u1', title: 'u1.title', description: 'u1.desc', lessons: [{ id: 'u1l1', title: 'u1l1.title', exercises: [learn] }], pool: [{ type: 'select-squares', pieces: { ...K, a0: 'R' }, square: 'a0', prompt: 'u3l1.e2' }] };
+    expect(errorsOf(legacyUnit)).toEqual([]);
+  });
+});

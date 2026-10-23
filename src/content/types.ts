@@ -2,12 +2,91 @@
  * Lesson content format. Units live as static JSON in src/content/lessons/ (one file per unit,
  * loaded in file-name order). Every user-visible string is an i18n key into src/i18n/messages.ts.
  *
- * Squares use ICCS names ("e0" = Red general's start square). Lessons are always played as Red.
+ * Squares use ICCS names ("e0" = Red general's start square). Exercises are played by `side`
+ * (default Red; the legacy course is Red only).
+ *
+ * Two kinds of unit share this format (src/content/validate.ts):
+ * - legacy units (ids `u1`–`u15`, lessons `u<n>l<k>`): every metadata field below is optional;
+ * - new-course units (ids per 02-curriculum.md §3.3: `b05`, lessons `b05l2`, items `b05l2-04`, pool items
+ *   `b05-p03`): every exercise must carry `ExerciseMeta`, and no id may appear in src/content/retired-ids.json.
  */
+
+/** Content statuses (07-sourcing.md §6): draft -> verified -> reviewed -> published; retired = id reserved. */
+export const CONTENT_STATUSES = ['draft', 'verified', 'reviewed', 'published', 'retired'] as const;
+export type ContentStatus = (typeof CONTENT_STATUSES)[number];
+
+/** Competency strands (02-curriculum.md §3.1). */
+export const STRANDS = ['RS', 'TC', 'OD', 'PA', 'DE', 'PP'] as const;
+export type Strand = (typeof STRANDS)[number];
+
+/** Where a position comes from (07-sourcing.md §2.1). */
+export const SOURCE_KINDS = ['generated', 'authored', 'derived', 'course-game', 'legacy'] as const;
+export type SourceKind = (typeof SOURCE_KINDS)[number];
+
+/** Recorded transformations of a `derived` item (07-sourcing.md §2.1). */
+export const TRANSFORMS = ['colour-swap', 'file-mirror', 'after-moves', 'edit-pieces'] as const;
+export type Transform = (typeof TRANSFORMS)[number];
+
+/** A checked reference (07-sourcing.md §2.2): added only after a reviewer opened the source. */
+export interface Citation {
+  title: string;
+  author?: string;
+  edition?: string;
+  year?: number;
+  /** "art. 23", "p. 41". */
+  locator: string;
+  checkedBy: string;
+  /** ISO date, YYYY-MM-DD. */
+  checkedAt: string;
+}
+
+/**
+ * Provenance of an item. Required fields per kind: `generated` -> `generator` + `seed`;
+ * `derived` -> `derivedFrom` (an item id or legacy ref) + `transform`; `course-game` -> `gameId` +
+ * `moveNumber`; `legacy` -> `legacyRef` (`u7l1#2` = 0-based index into the old lesson's exercises, or a
+ * puzzle id `m2-07`). `authored` needs nothing extra.
+ */
+export interface Source {
+  kind: SourceKind;
+  generator?: string;
+  /** Generator version string (07-sourcing.md §7). */
+  generatorVersion?: string;
+  seed?: string | number;
+  derivedFrom?: string;
+  transform?: Transform[];
+  legacyRef?: string;
+  gameId?: string;
+  moveNumber?: number;
+  refs?: Citation[];
+}
+
+/**
+ * Per-item metadata (07-sourcing.md §5.1, 03-assessment.md §4.2 rule 9). Optional on legacy exercises.
+ * On new-course exercises `id`, `version`, `status`, `source` and `side` are required on every item;
+ * `strand`, `nature`, `critical` and `misconceptions` on every item except `learn` cards.
+ */
+export interface ExerciseMeta {
+  /** `<lessonId>-NN` in a lesson, `<unitId>-pNN` in a unit pool. Never reused. */
+  id?: string;
+  /** Integer ≥ 1, incremented on a substantive change (07-sourcing.md §7). */
+  version?: number;
+  status?: ContentStatus;
+  source?: Source;
+  /** The side the learner plays; it must be the side to move. Default `red`. */
+  side?: 'red' | 'black';
+  strand?: Strand;
+  /** `tactic` (a forcing idea decides) or `quiet` (no tactic; improve, prepare, defend). */
+  nature?: 'tactic' | 'quiet';
+  /** Safety-critical item (03-assessment.md §3: a miss blocks mastery). */
+  critical?: boolean;
+  /** Misconception ids (`b06.m2`) that wrong answers of this item tag. May be empty. */
+  misconceptions?: string[];
+}
 
 /**
  * Either a full FEN or a square -> FEN-letter map such as { "e0": "K", "e9": "k" }.
- * Exercises are played as Red; only "learn" exercises may show Black to move (e.g. a finished checkmate).
+ * The side to move must be the exercise's `side` (default Red); only "learn" exercises may show the other
+ * side to move (e.g. a finished checkmate).
  */
 export type PositionSpec =
   | { fen: string; pieces?: never; turn?: never }
@@ -17,7 +96,7 @@ export type PositionSpec =
 export type Region = 'red-palace' | 'black-palace' | 'red-side' | 'black-side';
 
 /** Show a piece and its legal moves (from the engine), or highlight squares, with an explanation. */
-export type LearnExercise = PositionSpec & {
+export type LearnExercise = PositionSpec & ExerciseMeta & {
   type: 'learn';
   text: string;
   /** Piece whose legal moves are highlighted. */
@@ -29,7 +108,7 @@ export type LearnExercise = PositionSpec & {
 };
 
 /** Tap every square the piece on `square` can legally move to, or every point of `region`. */
-export type SelectSquaresExercise = PositionSpec & {
+export type SelectSquaresExercise = PositionSpec & ExerciseMeta & {
   type: 'select-squares';
   prompt: string;
   explanation?: string;
@@ -51,7 +130,7 @@ export type MoveGoal =
   | { kind: 'defend'; depth?: number };
 
 /** Make one move that satisfies `goal`. `solution` documents a correct answer and is verified in tests. */
-export type MoveExercise = PositionSpec & {
+export type MoveExercise = PositionSpec & ExerciseMeta & {
   type: 'move';
   prompt: string;
   goal: MoveGoal;
@@ -65,7 +144,7 @@ export type MoveExercise = PositionSpec & {
  * Find the winning capture: the engine accepts any capture whose material gain (value taken minus
  * value lost to an immediate recapture) is positive and the best available. `solution` is verified.
  */
-export type CaptureExercise = PositionSpec & {
+export type CaptureExercise = PositionSpec & ExerciseMeta & {
   type: 'capture';
   prompt: string;
   solution: { from: string; to: string };
@@ -79,7 +158,7 @@ export type CaptureExercise = PositionSpec & {
  * src/puzzles/logic.ts. Every Red move the engine confirms is accepted, not only the stored line.
  * `solution` is the main line, alternating Red and Black moves and ending with a Red move.
  */
-export type CombinationExercise = PositionSpec & {
+export type CombinationExercise = PositionSpec & ExerciseMeta & {
   type: 'combination';
   prompt: string;
   goal: 'checkmate' | 'win-material';
@@ -113,7 +192,12 @@ export interface Unit {
   id: string;
   title: string;
   description: string;
-  /** Defaults to 'basics'. Units of one track must be consecutive. */
+  /** Defaults to 'basics' (required, and matching the id prefix, in new-course units). Units of one track must be consecutive. */
   track?: Track;
   lessons: Lesson[];
+  /**
+   * Extra-practice pool (05-migration.md MU1): practice items outside the lesson sequence, used by "more
+   * practice" and remediation. Validated like lesson items; no `learn` cards.
+   */
+  pool?: Exercise[];
 }

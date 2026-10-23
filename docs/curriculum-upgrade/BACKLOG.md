@@ -114,7 +114,7 @@ flags depth 3 "measured within budget" per task; S2.20 records each R6 task's vo
 
 | Item | Title | Depends on | Status |
 | --- | --- | --- | --- |
-| S2.1 | Content schema v2 and validator foundations | — | todo |
+| S2.1 | Content schema v2 and validator foundations | — | done (attempt 1, 2026-10-23) |
 | S2.2 | Release path: review records, draft gate, release states, preview, unit ordering | S2.1 | todo |
 | S2.3 | Playing Black: orientation, notation, colour-neutral judges | S2.1 | todo |
 | S2.4 | Analysis core (`src/analysis`) | — | todo |

@@ -2,7 +2,6 @@
 // scripts/generate-puzzles.ts. A puzzle passes only if its position is legal, its goal is reached
 // by the stored line, and its first move is the UNIQUE way to reach the goal (plus listed alternatives).
 import {
-  fileOf,
   forcedWinMoves,
   gameStatus,
   isGeneralAttacked,
@@ -10,11 +9,8 @@ import {
   legalMoves,
   makeMove,
   moveScore,
-  rankOf,
   squareName,
-  type Color,
   type Move,
-  type PieceType,
   type Position,
 } from '../engine';
 import { hasMessage } from '../i18n/messages';
@@ -29,37 +25,8 @@ import {
   WIN_MATERIAL_DEPTH,
   WIN_MATERIAL_THRESHOLD,
 } from '../puzzles/logic';
+import { placementProblems } from './legality';
 import { PUZZLE_GOALS, PUZZLE_THEMES, type Puzzle } from './puzzle-types';
-
-const MAX_COUNT: Record<PieceType, number> = {
-  general: 1,
-  advisor: 2,
-  elephant: 2,
-  horse: 2,
-  chariot: 2,
-  cannon: 2,
-  soldier: 5,
-};
-
-/** Points a piece can ever stand on, as squares seen from Red (Black's are mirrored). */
-function reachable(type: PieceType, color: Color, file: number, rank: number): boolean {
-  const r = color === 'red' ? rank : 9 - rank; // rank counted from the owner's back rank
-  switch (type) {
-    case 'general':
-      return file >= 3 && file <= 5 && r <= 2;
-    case 'advisor':
-      return (file === 4 && r === 1) || ((file === 3 || file === 5) && (r === 0 || r === 2));
-    case 'elephant':
-      return [
-        [2, 0], [6, 0], [0, 2], [4, 2], [8, 2], [2, 4], [6, 4],
-      ].some(([f, rr]) => f === file && rr === r);
-    case 'soldier':
-      // Starts on rank 3; before the river only files a, c, e, g, i are possible.
-      return r >= 5 || (r >= 3 && file % 2 === 0);
-    default:
-      return true;
-  }
-}
 
 const isSquareName = (v: unknown): v is string => typeof v === 'string' && /^[a-i][0-9]$/.test(v);
 const fmt = (m: Move) => `${squareName(m.from)}-${squareName(m.to)}`;
@@ -107,15 +74,7 @@ export function validatePuzzle(input: unknown): string[] {
   }
   if (pos.turn !== puzzle.sideToMove) problems.push(`sideToMove is ${puzzle.sideToMove} but the FEN says ${pos.turn}`);
   if (isGeneralAttacked(pos.board, 'black')) problems.push('illegal position: Black is in check (or the Generals face each other) with Red to move');
-  for (const color of ['red', 'black'] as const) {
-    for (const type of Object.keys(MAX_COUNT) as PieceType[]) {
-      const squares = pos.board.flatMap((pc, sq) => (pc?.color === color && pc.type === type ? [sq] : []));
-      if (squares.length > MAX_COUNT[type]) problems.push(`too many ${color} ${type}s (${squares.length})`);
-      for (const sq of squares) {
-        if (!reachable(type, color, fileOf(sq), rankOf(sq))) problems.push(`${color} ${type} on ${squareName(sq)} can never stand there`);
-      }
-    }
-  }
+  problems.push(...placementProblems(pos.board));
   if (legalMoves(pos).length === 0) problems.push('the side to move has no legal moves');
   if (problems.length) return problems;
 

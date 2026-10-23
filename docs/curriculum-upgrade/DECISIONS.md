@@ -42,3 +42,14 @@ live in the design documents, marked "unresolved".
 
 - **Decision:** Step 2–4 item definitions stay in `design/06-backlog.md` §4–§6; `BACKLOG.md` tracks their status only.
 - **Reason:** PLAN.md asks to avoid competing sources of truth; copying ~500 lines would create two.
+
+## D5 — 2026-10-23 — Small schema choices from S2.1
+
+- Extra-practice pool item ids are `<unitId>-pNN`; the tactic/quiet field is named `nature`.
+- New-course `learn` cards need only id, version, status, source and side; strand, nature, critical and
+  misconceptions are required on practice items (07 §5.1 read as "answered items").
+- Black `win-material` combinations are refused by the validator until S2.3 makes the material judge colour-neutral.
+- `u8l4` is a retired id too (07 §8's "u1l1–u15l3" shorthand missed it).
+- **Add the placement rule "at most one own Soldier per file before it crosses the river"** (content-reviewer, S2.1):
+  it catches `u13l2#4` (two unpromoted Black Soldiers on file a), making 13 legacy POS positions. Owner: S2.3
+  (next item touching `legality.ts`/`validate.ts` placement) — update 05 §9 command 3, 07 §6 and the POS list.

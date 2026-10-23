@@ -63,6 +63,15 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   S2.13: merge duplicated `Strand` type; align local completion rule with the §8.6 merge; repeat App-level T6 once
   Home reads `completedView`; deep-freeze `LEGACY_MAP` arrays when targets are added.
 
+- 2026-10-23 — **S2.1 done** (attempt 1): exercise metadata (`ExerciseMeta`), new-course id rules +
+  `retired-ids.json` (u1–u15, all old lesson ids incl. `u8l4`), side-aware validation (Black fixtures validate),
+  shared `legality.ts` (puzzle verifier unchanged on all 60 puzzles; 12 legacy POS positions reported as notices),
+  `normalize.ts` (7 duplicate groups reproduced), unit `pool`. Tester PASS (577 tests, old vs new verifier identical);
+  reviewer APPROVE; content-reviewer APPROVE (reachable points checked on 1,260 point×piece×colour cases; 169
+  colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
+  placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
+  "one own Soldier per file before the river" proposed (decision D5).
+
 ## Blockers and failed gates
 
 - None blocking. Owner decisions needed before release (not before implementation): licence of code and content
