@@ -55,6 +55,14 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   content-reviewer APPROVE the set; lint, build and 471 tests pass on `a60adfa`; no application code changed since
   the phase began. Decisions adopted as D3; backlog for steps 2–4 in BACKLOG.md (definitions in 06 §4–§6).
 
+- 2026-10-23 — **S2.10 done** (attempt 1): `createLearningRepository` (`learning.records.v1`, attempt log capped at
+  2,000), `LEGACY_MAP` v1 (9 orphans) + `completedView` derived at read time, lazy backup of corrupt records on the
+  first write, Reset clears v1 + records + attempts. Tester PASS (lint, build, 577 tests incl. parallel items,
+  ui-check 360, Chromium: nothing written on load, lesson completion writes v1 only, Reset clears exactly the three
+  keys); reviewer APPROVE. CLAUDE.md text applied with S2.1 (owner of CLAUDE.md this round). Follow-ups for S2.11/
+  S2.13: merge duplicated `Strand` type; align local completion rule with the §8.6 merge; repeat App-level T6 once
+  Home reads `completedView`; deep-freeze `LEGACY_MAP` arrays when targets are added.
+
 ## Blockers and failed gates
 
 - None blocking. Owner decisions needed before release (not before implementation): licence of code and content

@@ -123,7 +123,7 @@ flags depth 3 "measured within budget" per task; S2.20 records each R6 task's vo
 | S2.7 | Strategic decisions: move tables, `decision`, `choice`, feedback and hint ladder | S2.1, S2.3, S2.4 | todo |
 | S2.8 | Branching: `line` trees and varied defence | S2.5, S2.7 | todo |
 | S2.9 | Training partners and game adjudication (`src/play`) | S2.4, S2.5 | todo |
-| S2.10 | Three-level progress storage and derived legacy migration | — | todo |
+| S2.10 | Three-level progress storage and derived legacy migration | — | done (attempt 1, 2026-10-23) |
 | S2.11 | Account sync of the new records (`data_v2`) | S2.10 | todo |
 | S2.12 | Practical tasks: `play`, `review`, rubrics, fallback F, practical guard | S2.8, S2.9, S2.10 | todo |
 | S2.13 | Assessment engine and progress-state UI | S2.2, S2.7, S2.10, S2.12 | todo |

@@ -13,11 +13,13 @@ import { SoundProvider, useSound, type AudioContextLike } from './sound';
 import type { AccountService } from './sync/service';
 import {
   createGamificationRepository,
+  createLearningRepository,
   createLocalStore,
   createProgressRepository,
   createPuzzleProgressRepository,
   createSettingsRepository,
   type KeyValueStore,
+  type LearningRepository,
   type ProgressRepository,
   type PuzzleProgressRepository,
   type SettingsRepository,
@@ -46,6 +48,7 @@ export default function App({
     const s = store ?? account?.store ?? createLocalStore();
     return {
       progress: createProgressRepository(s),
+      learning: createLearningRepository(s),
       puzzles: createPuzzleProgressRepository(s),
       settings: createSettingsRepository(s),
       game: createGamification(createGamificationRepository(s), now),
@@ -57,7 +60,7 @@ export default function App({
     <I18nProvider initial={isLanguage(savedLang) ? savedLang : 'en'} onChange={repos.settings.setLanguage}>
       <SoundProvider initialMuted={repos.settings.muted()} onMutedChange={repos.settings.setMuted} createContext={audio}>
         {account && <SyncedSettings account={account} settings={repos.settings} />}
-        <Screens progress={repos.progress} puzzleProgress={repos.puzzles} game={repos.game} account={account} />
+        <Screens progress={repos.progress} learning={repos.learning} puzzleProgress={repos.puzzles} game={repos.game} account={account} />
       </SoundProvider>
     </I18nProvider>
   );
@@ -81,11 +84,14 @@ function SyncedSettings({ account, settings }: { account: AccountService; settin
 
 function Screens({
   progress,
+  learning,
   puzzleProgress,
   game,
   account,
 }: {
   progress: ProgressRepository;
+  /** Three-level records (src/progress); only Reset uses them so far. */
+  learning: LearningRepository;
   puzzleProgress: PuzzleProgressRepository;
   game: Gamification;
   account?: AccountService;
@@ -224,7 +230,10 @@ function Screens({
             if (test) setJump({ target: id, test });
           }}
           onReset={() => {
+            // Clears v1 completion (otherwise the derived legacy view would re-grant it), the learning records
+            // and the attempt log (05 §8.5, MU3). Puzzles, settings and gamification are untouched.
             progress.reset();
+            learning.reset();
             setCompleted([]);
           }}
         />
