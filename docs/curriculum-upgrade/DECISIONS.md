@@ -53,3 +53,17 @@ live in the design documents, marked "unresolved".
 - **Add the placement rule "at most one own Soldier per file before it crosses the river"** (content-reviewer, S2.1):
   it catches `u13l2#4` (two unpromoted Black Soldiers on file a), making 13 legacy POS positions. Owner: S2.3
   (next item touching `legality.ts`/`validate.ts` placement) — update 05 §9 command 3, 07 §6 and the POS list.
+
+## D6 — 2026-10-23 — Interpretations of 03 §5.3 in the analysis layer (S2.4)
+
+- i01 keeps Basic's missed-gain rule (free captures only, with the S conditions); forks and pins start in i02.
+- A forced-mate loss that every move allows is not penalised as an allowed loss ("an unavoidable loss is not
+  penalised"); a mate loss with a non-mating alternative is a serious allowed loss (`mate: true`).
+- "Threat at the end" (R5) counts a learner who is in check as facing a threat; a move that gives check is still not a
+  quiet threat (02 a06).
+- A piece en prise is reported but does not decide `safe`; the guard is defined by (h, k, T) only.
+- "Open file" means no pieces in front (Xiangqi usage); the soldier-based notion is `soldierFileStatus`, not used as
+  "open file".
+- Evaluation weights (`DEFAULT_WEIGHTS`) and `palacePressure` (counts piece–point pairs, unlike the 04 Appendix A.4
+  prototype) are unvalidated until S2.18; the prototype's "undefended" check never saw defenders, so `pressing`
+  choices may differ from 04's measurements.

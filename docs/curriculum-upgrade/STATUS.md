@@ -96,6 +96,14 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   the `.neutral` keys when Black exercises appear (S2.13/S2.14); `.board-fit` aspect with file numbers; colour-neutral
   validator messages; rename `u8l1` "Palcorner Horse" → "Trough Horse" at migration.
 
+- 2026-10-23 — **S2.4 done** (attempt 2): `src/analysis` (search equal to the engine's material search, features,
+  evaluation, 03 §5.3 safety signals, a06 threat, winning capture, declarative predicates). Tester PASS (233
+  independent equality checks, 0 mismatches; deterministic; node limit/abort; MID depth 3 = 3,411 nodes; all 37 MID
+  moves 'checked' under the cap); reviewer APPROVE; content-reviewer APPROVE after 5 chess-logic fixes (Basic missed
+  gain, cannon control, check at the end, Xiangqi open file, cannon-screen general file) — brute-force 03 §5.3
+  reference on 150 positions × both colours: 0 differences. Timing per move (~114 ms claimed, ~340 ms on a loaded
+  machine) to be re-measured idle in S2.6. Interpretations recorded as D6.
+
 ## Blockers and failed gates
 
 - **Owner action (before any deploy that writes `data_v2`):** apply migration `20261023000000_progress_data_v2.sql`

@@ -107,6 +107,12 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     ├── progress/           # Three-level learning records. Pure: NO React/DOM/storage/gamification (enforced by a test)
     │   ├── records.ts      # LearningRecords format (completed / mastered / applied / exposed), lenient field-level parser, attempt log (cap 2,000)
     │   └── legacy.ts       # LEGACY_MAP (versioned; v1 = the 9 orphan ids, no targets) + completedView: legacy completion DERIVED from the v1 list, never stored
+    ├── analysis/           # Pure analysis layer (no React/DOM, no gamification; imports only '../engine'; enforced by purity.test.ts)
+    │   ├── search.ts       # Iterative-deepening alpha-beta + Zobrist TT, node limit, abort flag → { score, pv, depth, nodes, complete }
+    │   ├── eval.ts         # materialEval (= engine material) and featureEvaluator (terms reported separately; weights unvalidated until S2.18)
+    │   ├── features.ts     # Control maps (cannons by capture squares), hanging/en-prise, mobility, horse legs, cannon screens, pieces ahead, general-file exposure, soldiers, palace, development
+    │   ├── judge.ts        # 03 §5.3 safety horizons + signals, a06 threat, forcing-attack winning capture, declarative predicates
+    │   └── index.ts        # Public API: import from './analysis'
     ├── notation/
     │   └── format.ts       # formatMove: traditional notation en/vi (C2=5 · P2-5), per-side file numbers; pure
     ├── puzzles/
@@ -255,6 +261,22 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   Legacy keys that still say "Black" have `.neutral` twins for players showing a Black exercise.
 - `npm run ui:check` also builds `scripts/ui-fixtures/black.html` (Black at the bottom, file numbers, a move shown
   in notation) into `ui-check-output/fixture-dist/` and checks it at the same viewport, served on port 4198.
+
+## Analysis layer (curriculum upgrade, `src/analysis`)
+
+- With `materialEval`, a complete `search`/`searchMove` equals the engine's `searchScore`/`moveScore` exactly (tested).
+  Keep it that way: the transposition table only cuts off at the same remaining depth.
+- Verdicts depend on node limits, never on time (default 20,000 nodes per search). A stopped search means
+  'not-checked': no penalty and no credit. `hasForcedWin` calls (k ≤ 2) ignore `abort`; only the Worker (S2.5) can stop
+  them.
+- Safety horizons per level are `SAFETY_GUARDS` / `guardForUnit`; `moveSignals` gives one penalty per move. Basic (and
+  i01) missed gain counts only free captures that also satisfy the 03 §5.3 S conditions. A forced-mate loss that every
+  move allows is not penalised. `threatAtEnd` counts a check against the learner as a threat.
+- Objective predicates are a fixed JSON list (`Predicate`, `predicateErrors`); a piece is named by its square in the
+  `before` position. `open-file` means no pieces in front (the Xiangqi notion, not chess pawns); use
+  `general-file {against: 'both'}` for palace safety (`'cannon'` alone is "closed" when nothing stands in front);
+  `threat {created: true}` compares with `before`, so callers judging "at some move" pass the position before that
+  move; set `h`/`k` on `threat` explicitly below Advanced. Add new kinds in `judge.ts` only, never per-item code.
 
 ## Learning records (curriculum upgrade)
 
