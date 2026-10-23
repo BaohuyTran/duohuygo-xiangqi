@@ -67,3 +67,13 @@ live in the design documents, marked "unresolved".
 - Evaluation weights (`DEFAULT_WEIGHTS`) and `palacePressure` (counts piece–point pairs, unlike the 04 Appendix A.4
   prototype) are unvalidated until S2.18; the prototype's "undefended" check never saw defenders, so `pressing`
   choices may differ from 04's measurements.
+
+## D7 — 2026-10-23 — Owner: stop after step 2 and push it to `main`
+
+- **Decision (owner, in chat):** "Stop when finish step 2 and push all in to main." This overrides D1 and PLAN.md's
+  delivery boundary for the step 2 result only: when S2.gate passes, the phase branch is merged into `main` and pushed
+  (which deploys to GitHub Pages), and the run stops there; steps 3–4 are not started in this run.
+- **Pre-condition to confirm with the owner before the push:** the deployed build syncs `data_v2` when the Supabase
+  variables are set (they are, on the `github-pages` environment). Without migration `20261023000000_progress_data_v2.sql`
+  on the real project, signed-in learners see a sync error (v1 progress still syncs). CLAUDE.md's T15 rule says not
+  to deploy a build that writes `data_v2` before the migration and T15 steps 3–5.
