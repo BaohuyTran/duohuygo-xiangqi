@@ -77,3 +77,7 @@ live in the design documents, marked "unresolved".
   variables are set (they are, on the `github-pages` environment). Without migration `20261023000000_progress_data_v2.sql`
   on the real project, signed-in learners see a sync error (v1 progress still syncs). CLAUDE.md's T15 rule says not
   to deploy a build that writes `data_v2` before the migration and T15 steps 3–5.
+- **Owner answer (2026-10-23):** "Ignore those error, no real user in app for now. Just make sure everything in step 2
+  is ready in main branch." The push to `main` at S2.gate does not wait for the `data_v2` migration / T15; until the
+  migration runs, signed-in testers may see a sync error (v1 data still syncs). T15 stays an owner action before real
+  users.
