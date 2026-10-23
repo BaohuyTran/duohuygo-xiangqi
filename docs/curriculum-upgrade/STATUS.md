@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 1 — Audit and design
-- **Active items:** S1.2 (attempt 2); S1.1 done
+- **Active items:** S1.3 (attempt 1); S1.1 done; S1.2 out of attempts, remainder in S1.4
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -33,6 +33,12 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 - 2026-10-22 — **S1.1 done** (attempt 2, `d4d66c1`): reviewer APPROVE, content-reviewer APPROVE (re-ran the policy
   cost script A.4: distinct-score counts identical, timings within ±20 %; u15l3#3 forced-win proof ≈ 4.4 s).
+
+- 2026-10-23 — **S1.2 out of attempts** (attempt 3, `0125749`): reviewer and content-reviewer confirm every
+  earlier finding fixed (49/49 units complete, mastery reachable, partners match 04, notation and glossary checked;
+  Mã hậu pháo mate verified in the engine). One blocker left (no fallback for opening tasks / `xi` while `pressing`
+  is unvalidated) — carried into S1.4, which owns cross-document reconciliation, and re-reviewed there.
+- Process: an API usage limit interrupted the S1.2 content review and S1.3 on 2026-10-22; both resumed.
 
 ## Blockers and failed gates
 

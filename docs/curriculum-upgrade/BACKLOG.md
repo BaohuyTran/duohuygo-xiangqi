@@ -32,7 +32,8 @@ Design documents live in `docs/curriculum-upgrade/design/`.
 
 ### S1.2 — Curriculum and assessment specification
 
-- **Status:** todo
+- **Status:** in-progress — 3 attempts used (2026-10-23). All unit-field, mastery, complete-game, guard and
+  partner findings fixed; one finding left, carried into S1.4 (see there). Not approved until S1.4's review passes.
 - **Role focus:** curriculum designer (+ learning-experience)
 - **Depends on:** — (reads the code itself; reconciled with S1.1 at S1.4)
 - **Owned files:** `design/02-curriculum.md`, `design/03-assessment.md`
@@ -72,6 +73,14 @@ Design documents live in `docs/curriculum-upgrade/design/`.
   devices) must void assessment / "applied" evidence like a "not checked" move; name the threshold and horizon of
   `forcing-attack`'s "winning capture"; re-check 04 §8 R8 against the revised 03; 01-audit hint remark "while on
   the main line".
+- **Carry-over from S1.2 (attempts exhausted; blocking, must be fixed and re-reviewed here):** fallback F (03 §5.2)
+  has no rule for R6 opening tasks or the `xi` exam (`i08-g1`, `i09-g1`, `i11-g*`, `e08-g*`, `m06-g1`, repertoire
+  tasks in `xi`/`xe`), so Intermediate "applied" and graduation are unreachable while `pressing` is unvalidated:
+  add `xi` to F4 and an opening-task fallback (R6 on the scripted line; how the post-line R2 term is scored),
+  reword the "reachable under F" statements. Non-blocking: make 02's partner chains for `a06-g1`, `e03-g1`, `e06-g*`
+  match the 03 §5.2 table; say what `xb` becomes if the F2 games fail the §5.7 guard; note 03's override of 04
+  ("safe-sparring for early Basic practice only") in DECISIONS.md; one-line note that F2 does not score the
+  Basic game result.
 - **Acceptance criteria**
   - [ ] Prioritized, dependency-ordered backlog for steps 2–4 with ownership and acceptance criteria, copied
         into this file as `S2.*`, `S3.*`, `S4.*` items.
