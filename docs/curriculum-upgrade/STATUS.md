@@ -104,6 +104,15 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   reference on 150 positions × both colours: 0 differences. Timing per move (~114 ms claimed, ~340 ms on a loaded
   machine) to be re-measured idle in S2.6. Interpretations recorded as D6.
 
+- 2026-10-23 — **S2.5 done** (attempt 1): `src/analysis/{requests,worker,client}.ts` — typed request union, Worker
+  with a wall-clock safety net (terminate + restart → 'not-checked'), per-search and per-request node budgets,
+  synchronous small-budget fallback without a Worker; identical Worker/sync verdicts (tested, mutation-checked).
+  Tester PASS (796 tests; offline:check: worker chunk precached, 82 moves judged offline, main-thread max 0.5 ms per
+  request, 0 long tasks, restart offline; main chunk without analysis code); reviewer APPROVE. Temporary side-effect
+  import in `src/main.tsx` keeps the worker chunk built until a screen imports the client. CLAUDE.md text applied
+  with S2.7 (owner of CLAUDE.md this round). Carried to S2.6: clamp non-finite `timeoutMs`; do not run unbounded mate
+  searches on the main thread after a Worker crash; exercise the real client in a browser bench.
+
 ## Blockers and failed gates
 
 - **Owner action (before any deploy that writes `data_v2`):** apply migration `20261023000000_progress_data_v2.sql`

@@ -2,6 +2,9 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+// Builds the analysis Worker chunk (src/analysis/worker.ts) so the PWA precaches it for offline use.
+// Starts no Worker: the client creates one on its first request. Drop once a screen imports the client.
+import './analysis/client'
 import { createLocalStore } from './storage'
 import { appUrl, readSyncConfig } from './sync/config'
 import { createAccountService } from './sync/service'
