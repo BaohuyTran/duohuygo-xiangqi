@@ -1,11 +1,17 @@
 import type { CSSProperties } from 'react';
 import { fileOf, rankOf, squareName, type Piece, type Position, type Square } from '../engine';
 import { useI18n } from '../i18n/I18nProvider';
+import { sideFileNumber } from '../notation/format';
 
 const CELL = 10;
 const MARGIN = 5.5;
+/** Extra band above and below the grid for the per-side file numbers (`fileNumbers`). */
+const NUMBER_BAND = 4.5;
 const WIDTH = CELL * 8 + MARGIN * 2;
-const HEIGHT = CELL * 9 + MARGIN * 2;
+const GRID_HEIGHT = CELL * 9 + MARGIN * 2;
+
+/** The side drawn at the bottom of the board. */
+export type BoardOrientation = 'red' | 'black';
 
 const LABELS: Record<Piece['color'], Record<Piece['type'], string>> = {
   red: { general: '帥', advisor: '仕', elephant: '相', horse: '傌', chariot: '俥', cannon: '炮', soldier: '兵' },
@@ -32,6 +38,13 @@ export interface BoardProps {
   /** A piece just captured on `at`: drawn once, fading out under the arriving piece. */
   captured?: { at: Square; piece: Piece } | null;
   onSquareClick?: (sq: Square) => void;
+  /**
+   * The side at the bottom (default Red). With Black at the bottom the board is turned 180°: a point
+   * (file, rank) is drawn at grid x = 8 − file, y = rank; the river labels swap sides too.
+   */
+  orientation?: BoardOrientation;
+  /** Show each side's file numbers 1–9 along its own edge (bottom side's numbers at the bottom). */
+  fileNumbers?: boolean;
 }
 
 export function Board({
@@ -44,10 +57,18 @@ export function Board({
   animateMove,
   captured,
   onSquareClick,
+  orientation = 'red',
+  fileNumbers = false,
 }: BoardProps) {
   const { t } = useI18n();
-  // Red is always at the bottom.
-  const point = (file: number, rank: number) => ({ x: MARGIN + file * CELL, y: MARGIN + (9 - rank) * CELL });
+  const flipped = orientation === 'black';
+  const band = fileNumbers ? NUMBER_BAND : 0;
+  const height = GRID_HEIGHT + band * 2;
+  // Red at the bottom: x = file, y = 9 − rank (grid units). Black at the bottom: turned 180°.
+  const point = (file: number, rank: number) => ({
+    x: MARGIN + (flipped ? 8 - file : file) * CELL,
+    y: band + MARGIN + (flipped ? rank : 9 - rank) * CELL,
+  });
   const at = (sq: Square) => point(fileOf(sq), rankOf(sq));
   const line = (f1: number, r1: number, f2: number, r2: number, key: string) => {
     const a = point(f1, r1);
@@ -68,17 +89,19 @@ export function Board({
   ];
 
   const dotSet = new Set(dots);
-  const riverY = MARGIN + 4.5 * CELL;
+  const riverY = band + MARGIN + 4.5 * CELL;
+  const top: BoardOrientation = flipped ? 'red' : 'black';
   const interactive = Boolean(onSquareClick);
 
   return (
     <svg
-      viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+      viewBox={`0 0 ${WIDTH} ${height}`}
       className="block h-auto w-full touch-manipulation select-none"
       role="grid"
-      aria-label={t('board.label')}
+      aria-label={t(flipped ? 'board.labelBlack' : 'board.label')}
+      data-orientation={orientation}
     >
-      <rect x="0" y="0" width={WIDTH} height={HEIGHT} rx="2" fill="#e8c38a" />
+      <rect x="0" y="0" width={WIDTH} height={height} rx="2" fill="#e8c38a" />
 
       {/* Area highlights sit under the grid lines. */}
       {marks &&
@@ -97,13 +120,38 @@ export function Board({
         {gridLines}
       </g>
       <g fill="#5b3a1a" fontSize="4.2" fontFamily="'Noto Serif SC', 'Songti SC', serif" dominantBaseline="central" opacity="0.7">
-        <text x={MARGIN + 1.5 * CELL} y={riverY} textAnchor="middle">
-          楚 河
+        {/* Placed by hand, so they swap sides explicitly when the board is turned. */}
+        <text x={MARGIN + 1.5 * CELL} y={riverY} textAnchor="middle" data-testid="river-left">
+          {flipped ? '漢 界' : '楚 河'}
         </text>
-        <text x={MARGIN + 6.5 * CELL} y={riverY} textAnchor="middle">
-          漢 界
+        <text x={MARGIN + 6.5 * CELL} y={riverY} textAnchor="middle" data-testid="river-right">
+          {flipped ? '楚 河' : '漢 界'}
         </text>
       </g>
+      {fileNumbers &&
+        ([
+          [top, band / 2 + 0.6],
+          [orientation, height - band / 2 - 0.6],
+        ] as const).map(([side, y]) => (
+          <g
+            key={side}
+            data-edge={side === orientation ? 'bottom' : 'top'}
+            data-side={side}
+            aria-hidden
+            fill={side === 'red' ? '#b91c1c' : '#1c1917'}
+            fontSize="3.4"
+            fontWeight="700"
+            fontFamily="system-ui, sans-serif"
+            textAnchor="middle"
+            dominantBaseline="central"
+          >
+            {Array.from({ length: 9 }, (_, file) => (
+              <text key={file} x={point(file, 0).x} y={y}>
+                {sideFileNumber(side, file)}
+              </text>
+            ))}
+          </g>
+        ))}
 
       {Array.from({ length: 90 }, (_, sq) => {
         const p = position.board[sq];

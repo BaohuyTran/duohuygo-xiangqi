@@ -4,10 +4,12 @@ import { Home } from './components/Home';
 import { LessonPlayer } from './components/LessonPlayer';
 import { PuzzleList } from './components/PuzzleList';
 import { PuzzlePlayer } from './components/PuzzlePlayer';
-import { findLesson, units, type Lesson } from './content';
+import { units, type Lesson, type Unit } from './content';
+import { isNewCourseLessonId } from './content/release';
 import { createGamification, lessonXp, type Gamification } from './gamification';
 import { I18nProvider, isLanguage, useI18n } from './i18n/I18nProvider';
 import { furthestLesson, jumpTest, lessonStates, skippedLessons } from './lessons/progress';
+import { completedView } from './progress/legacy';
 import { findPuzzle, nextPuzzle, puzzleNumber, puzzles } from './puzzles/catalog';
 import { SoundProvider, useSound, type AudioContextLike } from './sound';
 import type { AccountService } from './sync/service';
@@ -33,6 +35,7 @@ export default function App({
   now,
   audio,
   account,
+  course = units,
 }: {
   store?: KeyValueStore;
   now?: () => Date;
@@ -43,6 +46,8 @@ export default function App({
    * `account.store` so local changes get synced. Absent: no account UI, plain local storage.
    */
   account?: AccountService;
+  /** The units Home shows; defaults to the path of src/content (legacy path, or the course preview). Tests inject fixtures. */
+  course?: readonly Unit[];
 }) {
   const repos = useMemo(() => {
     const s = store ?? account?.store ?? createLocalStore();
@@ -60,7 +65,15 @@ export default function App({
     <I18nProvider initial={isLanguage(savedLang) ? savedLang : 'en'} onChange={repos.settings.setLanguage}>
       <SoundProvider initialMuted={repos.settings.muted()} onMutedChange={repos.settings.setMuted} createContext={audio}>
         {account && <SyncedSettings account={account} settings={repos.settings} />}
-        <Screens progress={repos.progress} learning={repos.learning} puzzleProgress={repos.puzzles} game={repos.game} account={account} />
+        <Screens
+          progress={repos.progress}
+          learning={repos.learning}
+          puzzleProgress={repos.puzzles}
+          game={repos.game}
+          account={account}
+          course={course}
+          now={now}
+        />
       </SoundProvider>
     </I18nProvider>
   );
@@ -88,21 +101,41 @@ function Screens({
   puzzleProgress,
   game,
   account,
+  course,
+  now = () => new Date(),
 }: {
   progress: ProgressRepository;
-  /** Three-level records (src/progress); only Reset uses them so far. */
+  /** Three-level records (src/progress): new-course completion (course preview) and Reset. */
   learning: LearningRepository;
   puzzleProgress: PuzzleProgressRepository;
   game: Gamification;
   account?: AccountService;
+  course: readonly Unit[];
+  now?: () => Date;
 }) {
+  // Completed lessons as Home shows them: the v1 list (legacy lessons) plus the new-course records, including
+  // completion derived from retired legacy lessons (src/progress/legacy.ts). Reading writes nothing.
+  const readCompleted = () => {
+    const v1 = progress.completedLessons();
+    return [...new Set([...v1, ...completedView(learning.records(), v1).keys()])];
+  };
+  // New-course ids are never written to the v1 list (05-migration.md §8.7, T18): they go to the learning records.
+  // `placement` stands in for a passed jump test until the new jump-ahead of 03 §7 exists (S2.13).
+  const markDone = (lesson: Lesson, via: 'lesson' | 'placement') => {
+    if (!isNewCourseLessonId(lesson.id)) {
+      progress.markCompleted(lesson.id);
+      return;
+    }
+    const contentVersion = Math.max(1, ...lesson.exercises.map((e) => e.version ?? 1));
+    learning.grantCompletion(lesson.id, { at: now().toISOString(), via, contentVersion });
+  };
   const [tab, setTab] = useState<Tab>('lessons');
-  const [completed, setCompleted] = useState(() => progress.completedLessons());
+  const [completed, setCompleted] = useState(readCompleted);
   const [solved, setSolved] = useState(() => new Set(puzzleProgress.solvedPuzzles()));
   const [lessonId, setLessonId] = useState<string | null>(null);
   // The lesson Home scrolls to when it next appears: the furthest lesson reached (on opening the app), or
   // the lesson / jump target just left. Cleared once Home has scrolled, so switching tabs does not jump.
-  const [homeFocus, setHomeFocus] = useState<string | null>(() => furthestLesson(units, progress.completedLessons()));
+  const [homeFocus, setHomeFocus] = useState<string | null>(() => furthestLesson(course, readCompleted()));
   const leaveLesson = (id: string) => {
     setHomeFocus(id);
     setLessonId(null);
@@ -123,14 +156,14 @@ function Screens({
   useEffect(
     () =>
       account?.onDataChanged(() => {
-        setCompleted(progress.completedLessons());
+        setCompleted(readCompleted());
         setSolved(new Set(puzzleProgress.solvedPuzzles()));
         setStats(game.summary());
       }),
-    [account, progress, puzzleProgress, game],
+    [account, progress, learning, puzzleProgress, game],
   );
-  const states = useMemo(() => lessonStates(units, completed), [completed]);
-  const lesson = lessonId ? findLesson(lessonId) : undefined;
+  const states = useMemo(() => lessonStates(course, completed), [course, completed]);
+  const lesson = lessonId ? course.flatMap((u) => u.lessons).find((l) => l.id === lessonId) : undefined;
   const puzzle = puzzleId ? findPuzzle(puzzleId) : undefined;
 
   if (jump) {
@@ -145,9 +178,8 @@ function Screens({
         }}
         onComplete={() => {
           // Passing completes every skipped lesson, without XP; the target becomes available.
-          let next = completed;
-          for (const l of skippedLessons(units, jump.target, completed)) next = progress.markCompleted(l.id);
-          setCompleted(next);
+          for (const l of skippedLessons(course, jump.target, completed)) markDone(l, 'placement');
+          setCompleted(readCompleted());
           setHomeFocus(jump.target);
           setJump(null);
         }}
@@ -171,7 +203,8 @@ function Screens({
         onComplete={() => {
           game.completeLesson(firstCompletion);
           setStats(game.summary());
-          setCompleted(progress.markCompleted(lesson.id));
+          markDone(lesson, 'lesson');
+          setCompleted(readCompleted());
           leaveLesson(lesson.id);
         }}
       />
@@ -208,7 +241,7 @@ function Screens({
     <div className="pb-[calc(6rem+env(safe-area-inset-bottom))]">
       {tab === 'lessons' ? (
         <Home
-          units={units}
+          units={course}
           states={states}
           focusLessonId={homeFocus}
           onFocused={() => setHomeFocus(null)}
@@ -226,7 +259,7 @@ function Screens({
             if (fresh.hearts > 0) setLessonId(id);
           }}
           onJump={(id) => {
-            const test = jumpTest(units, id, completed);
+            const test = jumpTest(course, id, completed);
             if (test) setJump({ target: id, test });
           }}
           onReset={() => {

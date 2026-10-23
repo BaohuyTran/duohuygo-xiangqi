@@ -9,6 +9,14 @@
 // still covers the board's last row when scrolled to the bottom, a console error or an uncaught
 // exception. Screenshots go to --out (default: ui-check-output/, git-ignored).
 //
+// Playing Black (S2.3): afterwards it builds the test-only fixture page scripts/ui-fixtures/black.html
+// (its own Vite config; never part of the app build) into ui-check-output/fixture-dist/, serves it on
+// --fixture-port (default 4198) and checks the same rules with Black at the bottom: the
+// board is turned (e9 below e0, i9 left of a9), a tap on the Black Horse b9 then c7 plays the move, and
+// the footer shows it in traditional notation (en "H2+3", vi "M2.3"). `--no-black` skips this part.
+// The course preview (VITE_COURSE_PREVIEW=1) has no Black unit yet and the players do not pass an
+// orientation yet, so the fixture page is the Black check until a reviewed Black unit exists.
+//
 // Playwright is NOT a project dependency: the script uses a globally installed `playwright`
 // (as in the cloud dev container) or a local one if present.
 import { spawn, execSync } from 'node:child_process';
@@ -26,6 +34,9 @@ const WIDTH = Number(arg('width', '360'));
 const HEIGHT = Number(arg('height', '740'));
 const PORT = Number(arg('port', '4199'));
 const BASE = `http://localhost:${PORT}/`;
+const BLACK = !args.includes('--no-black');
+const FIXTURE_PORT = Number(arg('fixture-port', '4198'));
+const FIXTURE_CONFIG = 'scripts/ui-fixtures/vite.config.mjs';
 
 function loadPlaywright() {
   const require = createRequire(import.meta.url);
@@ -59,6 +70,7 @@ const fail = (msg) => failures.push(msg);
 mkdirSync(OUT, { recursive: true });
 // Own process group, so the whole npx -> vite tree can be stopped at the end.
 const server = spawn('npx', ['vite', 'preview', '--port', String(PORT), '--strictPort'], { stdio: 'ignore', detached: true });
+let fixtureServer;
 let browser;
 try {
   await waitForServer(BASE);
@@ -139,14 +151,50 @@ try {
   }
   await page.waitForSelector('[role="alert"]');
   await audit('05-puzzle-feedback');
+
+  if (BLACK) {
+    execSync(`npx vite build --config ${FIXTURE_CONFIG} --logLevel warn`, { stdio: 'inherit' });
+    fixtureServer = spawn('npx', ['vite', 'preview', '--config', FIXTURE_CONFIG, '--port', String(FIXTURE_PORT), '--strictPort'], {
+      stdio: 'ignore',
+      detached: true,
+    });
+    const fixtureUrl = `http://localhost:${FIXTURE_PORT}/black.html`;
+    await waitForServer(fixtureUrl);
+    const centre = async (name) => {
+      const box = await page.getByRole('gridcell', { name: new RegExp(`^${name},`) }).boundingBox();
+      return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+    };
+    for (const [lang, expected] of [
+      ['en', 'H2+3'],
+      ['vi', 'M2.3'],
+    ]) {
+      await page.goto(`${fixtureUrl}?lang=${lang}`);
+      await page.waitForSelector('[role="grid"][data-orientation="black"]');
+      const [e0, e9, a9, i9] = [await centre('e0'), await centre('e9'), await centre('a9'), await centre('i9')];
+      if (!(e9.y > e0.y)) fail(`black fixture (${lang}): Black's General e9 is not below Red's e0`);
+      if (!(i9.x < a9.x)) fail(`black fixture (${lang}): i9 is not left of a9 with Black at the bottom`);
+      const bottomNumbers = await page.locator('[data-edge="bottom"]').getAttribute('data-side');
+      if (bottomNumbers !== 'black') fail(`black fixture (${lang}): bottom file numbers are ${bottomNumbers}'s, not Black's`);
+      if (lang === 'en') await audit('06-black-board');
+      await page.getByRole('gridcell', { name: /^b9,/ }).tap();
+      await page.getByRole('gridcell', { name: /^c7,.*(legal move|nước đi hợp lệ)/ }).tap();
+      await page.waitForSelector('[role="alert"]');
+      const notation = (await page.getByTestId('notation').textContent())?.trim();
+      if (notation !== expected) fail(`black fixture (${lang}): move b9-c7 shown as "${notation}", expected "${expected}"`);
+      await audit(`07-black-move-${lang}`);
+    }
+  }
 } catch (e) {
   fail(`ui-check crashed: ${e instanceof Error ? e.message : String(e)}`);
 } finally {
   await browser?.close();
-  try {
-    process.kill(-server.pid, 'SIGTERM');
-  } catch {
-    // already gone
+  for (const proc of [server, fixtureServer]) {
+    if (!proc) continue;
+    try {
+      process.kill(-proc.pid, 'SIGTERM');
+    } catch {
+      // already gone
+    }
   }
 }
 
@@ -154,4 +202,4 @@ if (failures.length) {
   console.error(`UI CHECK FAILED (${failures.length}):\n- ${failures.join('\n- ')}`);
   process.exit(1);
 }
-console.log(`UI CHECK PASSED at ${WIDTH}x${HEIGHT}px. Screenshots: ${OUT}`);
+console.log(`UI CHECK PASSED at ${WIDTH}x${HEIGHT}px${BLACK ? ' (incl. the Black fixture)' : ''}. Screenshots: ${OUT}`);

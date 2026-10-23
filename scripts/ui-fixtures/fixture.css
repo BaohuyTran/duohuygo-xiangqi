@@ -1,0 +1,4 @@
+/* The app's styles, with Tailwind told to scan the app sources and this fixture. */
+@import '../../src/index.css';
+@source '../../src';
+@source './';

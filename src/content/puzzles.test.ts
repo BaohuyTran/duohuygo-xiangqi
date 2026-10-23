@@ -10,6 +10,12 @@ import { validatePuzzles } from './validate-puzzles';
 
 const byGoal = (goal: string) => puzzles.filter((p) => p.goal === goal);
 
+/**
+ * The verifier searches every first move and every defence: win-material takes ~25 s on a quiet machine, close to the
+ * 30 s default (vite.config.ts `testTimeout`), and timed out under load in full runs. Explicit per-test budget.
+ */
+const VERIFIER_TIMEOUT_MS = 120_000;
+
 describe('shipped puzzles', () => {
   it('has the target number of puzzles per goal', () => {
     expect(byGoal('mate-in-1')).toHaveLength(30);
@@ -22,7 +28,7 @@ describe('shipped puzzles', () => {
     it(`${goal}: every puzzle passes the verifier (legal, solvable, unique)`, () => {
       const list = byGoal(goal).sort((a, b) => a.id.localeCompare(b.id));
       expect(validatePuzzles(list)).toEqual([]);
-    });
+    }, VERIFIER_TIMEOUT_MS);
   }
 
   it('mate in 1: a naive search finds exactly the stored mating move', () => {

@@ -130,8 +130,11 @@ export const messages = {
   'lesson.type.move': { en: 'Make a move', vi: 'Đi một nước' },
   'lesson.type.capture': { en: 'Find the capture', vi: 'Tìm nước ăn quân' },
   'lesson.type.combination': { en: 'Combination', vi: 'Đòn phối hợp' },
-  'combination.movesLeft': { en: 'Red to move · moves left: {n}', vi: 'Đỏ đi · còn {n} nước' },
+  'combination.movesLeft': { en: 'Your move · moves left: {n}', vi: 'Lượt của bạn · còn {n} nước' },
   'combination.opponent': { en: 'Black is answering…', vi: 'Đen đang trả lời…' },
+  // Colour-neutral twins of keys whose legacy text names Black (the learner was always Red there); the
+  // players use these when they show a Black exercise (curriculum-upgrade S2.3).
+  'combination.opponent.neutral': { en: 'Your opponent is answering…', vi: 'Đối phương đang trả lời…' },
   'combination.checking': { en: 'Checking your move…', vi: 'Đang kiểm tra nước đi…' },
   'combination.done': { en: 'Combination complete', vi: 'Hoàn thành đòn phối hợp' },
   'combination.hint': { en: 'Show a hint', vi: 'Xem gợi ý' },
@@ -140,9 +143,13 @@ export const messages = {
     en: 'That move lets Black escape. There is a forced mate: look for checks first.',
     vi: 'Nước đó để Đen thoát. Có một đòn chiếu bí bắt buộc: hãy tìm các nước chiếu trước.',
   },
+  'combination.wrong.mate.neutral': {
+    en: 'That move lets the opponent’s General escape. There is a forced mate: look for checks first.',
+    vi: 'Nước đó để Tướng đối phương thoát. Có một đòn chiếu bí bắt buộc: hãy tìm các nước chiếu trước.',
+  },
   'combination.wrong.material': {
-    en: 'That doesn’t win material against Black’s best defence.',
-    vi: 'Nước đó không thắng quân trước cách phòng thủ tốt nhất của Đen.',
+    en: 'That doesn’t win material against the opponent’s best defence.',
+    vi: 'Nước đó không thắng quân trước cách phòng thủ tốt nhất của đối phương.',
   },
   'lesson.tapPiece': { en: 'Tap a piece, then tap where it should go.', vi: 'Chạm vào một quân, rồi chạm vào điểm cần đến.' },
   'feedback.correct': { en: 'Correct!', vi: 'Chính xác!' },
@@ -159,12 +166,12 @@ export const messages = {
   },
   'verdict.not-check': { en: 'That move doesn’t give check.', vi: 'Nước đi đó không chiếu Tướng.' },
   'verdict.not-checkmate': {
-    en: 'Not checkmate: Black can still escape.',
-    vi: 'Chưa chiếu bí: bên Đen vẫn còn đường thoát.',
+    en: 'Not checkmate: the opponent’s General can still escape.',
+    vi: 'Chưa chiếu bí: Tướng đối phương vẫn còn đường thoát.',
   },
   'verdict.allows-mate': {
-    en: 'After that move Black can checkmate you. Stop the threat!',
-    vi: 'Sau nước đó Đen có thể chiếu bí bạn. Hãy chặn mối đe dọa!',
+    en: 'After that move your opponent can checkmate you. Stop the threat!',
+    vi: 'Sau nước đó đối phương có thể chiếu bí bạn. Hãy chặn mối đe dọa!',
   },
   'verdict.not-capture': { en: 'That move doesn’t capture anything.', vi: 'Nước đi đó không ăn quân nào.' },
   'verdict.not-best': {
@@ -183,6 +190,8 @@ export const messages = {
 
   // ---------- Board accessibility ----------
   'board.label': { en: 'Xiangqi board', vi: 'Bàn cờ tướng' },
+  'board.labelBlack': { en: 'Xiangqi board, Black at the bottom', vi: 'Bàn cờ tướng, bên Đen ở phía dưới' },
+  'side.toMove': { en: '{side} to move', vi: '{side} đi' },
   'board.empty': { en: 'empty point', vi: 'điểm trống' },
   'board.legal': { en: 'legal move', vi: 'nước đi hợp lệ' },
   'board.picked': { en: 'selected', vi: 'đã chọn' },
@@ -251,7 +260,7 @@ export const messages = {
   'theme.cannon': { en: 'Cannon', vi: 'Pháo' },
   'theme.soldier': { en: 'Soldier', vi: 'Tốt' },
   'theme.double-check': { en: 'Double check', vi: 'Chiếu đôi' },
-  'theme.flying-general': { en: 'Flying general', vi: 'Lộ mặt Tướng' },
+  'theme.flying-general': { en: 'Facing Generals', vi: 'Lộ mặt Tướng' },
   'theme.fork': { en: 'Fork', vi: 'Bắt đôi' },
   'theme.sacrifice': { en: 'Sacrifice', vi: 'Thí quân' },
 
@@ -264,12 +273,17 @@ export const messages = {
     en: 'Checkmate in two moves, whatever Black does.',
     vi: 'Chiếu bí trong hai nước, dù bên Đen đi thế nào.',
   },
+  'puzzle.prompt.mate-in-2.neutral': {
+    en: 'Checkmate in two moves, whatever your opponent does.',
+    vi: 'Chiếu bí trong hai nước, dù đối phương đi thế nào.',
+  },
   'puzzle.prompt.win-material': {
     en: 'Find the move that wins material.',
     vi: 'Tìm nước đi giúp bạn ăn được quân.',
   },
   'puzzle.yourMove': { en: 'Your move', vi: 'Đến lượt bạn' },
   'puzzle.opponentMoving': { en: 'Black replies…', vi: 'Bên Đen đang đi…' },
+  'puzzle.opponentMoving.neutral': { en: 'Your opponent replies…', vi: 'Đối phương đang đi…' },
   'puzzle.hint': { en: 'Hint', vi: 'Gợi ý' },
   'puzzle.hintMore': { en: 'Show target', vi: 'Xem điểm đến' },
   'puzzle.showSolution': { en: 'Show solution', vi: 'Xem lời giải' },
@@ -285,12 +299,12 @@ export const messages = {
   },
   'puzzle.wrong': { en: 'Not the winning move', vi: 'Chưa phải nước thắng' },
   'puzzle.wrong.wrong.mate': {
-    en: 'Black can escape after that. Look for a stronger move.',
-    vi: 'Sau nước đó bên Đen vẫn thoát được. Hãy tìm nước mạnh hơn.',
+    en: 'Your opponent can escape after that. Look for a stronger move.',
+    vi: 'Sau nước đó đối phương vẫn thoát được. Hãy tìm nước mạnh hơn.',
   },
   'puzzle.wrong.wrong.material': {
-    en: 'That doesn’t win material against Black’s best reply.',
-    vi: 'Nước đó không ăn được quân nếu bên Đen đáp trả tốt nhất.',
+    en: 'That doesn’t win material against your opponent’s best reply.',
+    vi: 'Nước đó không ăn được quân nếu đối phương đáp trả tốt nhất.',
   },
   'puzzle.wrong.illegal': { en: 'That piece can’t move there.', vi: 'Quân đó không thể đi tới điểm này.' },
   'puzzle.wrong.unsafe': {
@@ -320,7 +334,7 @@ export const messages = {
   },
   'hint.horse': { en: 'Your Horse can deliver the blow. Check its leg!', vi: 'Quân Mã có thể ra đòn. Nhớ kiểm tra chân Mã!' },
   'hint.fork': { en: 'Find a move that attacks two things at once.', vi: 'Tìm nước đi tấn công hai mục tiêu cùng lúc.' },
-  'hint.free-piece': { en: 'One black piece is not protected.', vi: 'Có một quân Đen không được bảo vệ.' },
+  'hint.free-piece': { en: 'One enemy piece is not protected.', vi: 'Có một quân của đối phương không được bảo vệ.' },
   'hint.chariot': {
     en: 'Your Chariot can reach the General along an open line.',
     vi: 'Xe của bạn có thể chiếu Tướng theo một đường trống.',

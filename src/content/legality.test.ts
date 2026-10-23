@@ -51,6 +51,21 @@ describe('legality: reachable points and piece counts', () => {
     ]);
   });
 
+  it('allows at most one own Soldier per file before it crosses the river', () => {
+    // Two unpromoted Black Soldiers on file a (u13l2#4): impossible, each file starts with one.
+    expect(placementProblems(positionFromPieces({ e0: 'K', e9: 'k', a5: 'p', a6: 'p' }).board)).toEqual([
+      '2 black soldiers on file a before the river (a5, a6)',
+    ]);
+    expect(placementProblems(positionFromPieces({ e0: 'K', d9: 'k', e3: 'P', e4: 'P' }).board)).toEqual([
+      '2 red soldiers on file e before the river (e3, e4)',
+    ]);
+    // Crossed Soldiers may share a file, also with one that has not crossed yet.
+    expect(placementProblems(positionFromPieces({ e0: 'K', d9: 'k', c4: 'P', c5: 'P', c6: 'P' }).board)).toEqual([]);
+    expect(placementProblems(positionFromPieces({ e0: 'K', d9: 'k', g5: 'p', g4: 'p', g3: 'p' }).board)).toEqual([]);
+    // Different files, or different colours on one file, are fine.
+    expect(placementProblems(positionFromPieces({ e0: 'K', d9: 'k', a3: 'P', c3: 'P', a6: 'p' }).board)).toEqual([]);
+  });
+
   it('finds nothing to report in the shipped puzzles (the verifier applies the same rules)', () => {
     for (const p of puzzles) expect(placementProblems(startPosition(p).board), p.id).toEqual([]);
   });

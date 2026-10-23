@@ -1,4 +1,6 @@
 // Answer checking for lesson exercises. Everything is derived from the rules engine.
+// Colour-neutral: the mover is always the side to move in the exercise position (`pos.turn`), so a
+// Black exercise (`side: 'black'`, Black to move) is judged exactly like its Red twin.
 import {
   fileOf,
   gameStatus,
@@ -73,7 +75,7 @@ export type MoveVerdict =
   | 'wrong-target'
   | 'not-check'
   | 'not-checkmate'
-  /** The move leaves Black a checkmate in one. */
+  /** The move leaves the opponent a forced checkmate (in `goal.depth`, default one). */
   | 'allows-mate'
   | 'not-capture'
   | 'not-best';

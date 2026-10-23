@@ -434,12 +434,6 @@ function validateExercise(ex: unknown, ctx: ExerciseContext): string[] {
     case 'combination':
       checkKey('prompt', ex.prompt);
       checkKey('explanation', ex.explanation, true);
-      // The win-material judge measures material for Red (src/lessons/combination.ts) until S2.3 makes
-      // the judges colour-neutral; refuse rather than validate a Black item with a Red yardstick.
-      if (side === 'black' && ex.goal === 'win-material') {
-        problems.push('"win-material" combinations cannot be played as Black yet (the judge measures Red material)');
-        break;
-      }
       problems.push(...validateCombination(ex, pos, checkKey, options));
       break;
   }

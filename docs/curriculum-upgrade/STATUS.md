@@ -65,7 +65,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 - 2026-10-23 — **S2.1 done** (attempt 1): exercise metadata (`ExerciseMeta`), new-course id rules +
   `retired-ids.json` (u1–u15, all old lesson ids incl. `u8l4`), side-aware validation (Black fixtures validate),
-  shared `legality.ts` (puzzle verifier unchanged on all 60 puzzles; 12 legacy POS positions reported as notices),
+  shared `legality.ts` (puzzle verifier unchanged on all 60 puzzles; 12 legacy POS positions reported as notices — 13 since D5/S2.3),
   `normalize.ts` (7 duplicate groups reproduced), unit `pool`. Tester PASS (577 tests, old vs new verifier identical);
   reviewer APPROVE; content-reviewer APPROVE (reachable points checked on 1,260 point×piece×colour cases; 169
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
@@ -78,6 +78,23 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   builds — plain build has no `data_v2`/Supabase code, 692 tests, T8–T11 + remote T12, mutation checks caught every
   injected regression, 10,000 seeded merge-property pairs with 0 failures); its one FAIL was the CLAUDE.md T15 text,
   which was the driver's to apply and is now in CLAUDE.md. Reviewer APPROVE. **Owner action T15** recorded below.
+
+- 2026-10-23 — **S2.2 done** (attempt 2): units ordered by track rank then file name; release-state table
+  REL-0/REL-P/REL-1–5 with T1 (today = REL-0 only; per-level status rule separates REL-4 from REL-5); review records
+  bound to id + version + contentHash, latest content-reviewer verdict decides, author ≠ reviewer; drafts never
+  loaded; course preview `VITE_COURSE_PREVIEW=1` (never in the deployed build); new-course completion goes to the
+  learning records (lesson / placement), never the v1 list; slow content-verifier tests given explicit 120 s
+  timeouts (they took 36–75 s under load; no assertion changed). Tester PASS (two full runs 776/776, Home identical to
+  HEAD in en/vi, no review code in dist); reviewer APPROVE.
+- 2026-10-23 — **S2.3 done** (attempt 2): Board `orientation` (Black at the bottom) and opt-in per-side file numbers;
+  `src/notation/formatMove` (en + vi traditional notation; Advisors/Elephants never marked front/rear);
+  `docs/curriculum-upgrade/glossary.md` (letters, operators, markers confirmed by the content-reviewer; "Trough Horse"
+  proposed); combination material judge colour-neutral; Black twins of legacy exercises get mirrored verdicts;
+  Black win-material guard removed; one-Soldier-per-file placement rule (13 POS). Tester PASS (ui:check incl. a Black
+  fixture at 320/360/414/landscape); reviewer APPROVE; content-reviewer APPROVE (21,124 notation comparisons against
+  an independent implementation, 0 differences). Follow-ups: players must pass `orientation`/`fileNumbers` and use
+  the `.neutral` keys when Black exercises appear (S2.13/S2.14); `.board-fit` aspect with file numbers; colour-neutral
+  validator messages; rename `u8l1` "Palcorner Horse" → "Trough Horse" at migration.
 
 ## Blockers and failed gates
 

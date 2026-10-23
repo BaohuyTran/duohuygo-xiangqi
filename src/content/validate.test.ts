@@ -204,7 +204,8 @@ describe('content validator: combinations, defend and tracks', () => {
       expect(errorsFor({ ...defend2, goal: { kind: 'defend', depth: 4 } }).join('\n')).toMatch(/"goal.depth" must be 1, 2 or 3/);
       // As a mate-in-1 defence there is nothing to stop, which the validator reports.
       expect(errorsFor({ ...defend2, goal: { kind: 'defend', depth: 1 } }).join('\n')).toMatch(/no mate-in-1 threat/);
-    });
+      // Proving the mate-in-2 defence takes ~15 s (30 s default timeout); explicit budget so a loaded run does not time out.
+    }, 120_000);
   });
 });
 
@@ -397,9 +398,29 @@ describe('content validator: schema v2 (new-course units, metadata, side, legali
     expect(errorsOf(newUnit([{ ...blackDefend, fen: undefined, pieces: blackPieces, turn: 'black', solution: { from: 'a9', to: 'a8' } }])).join('\n')).toMatch(
       /Red has no mate-in-1 threat/,
     );
-    // The win-material judge still measures Red material (S2.3), so Black win-material combinations are refused.
-    const winMaterial = { ...meta('b01l1-01', { side: 'black' }), type: 'combination', pieces: blackPieces, turn: 'black', prompt: 'u8l2.p1', goal: 'win-material', moves: 2, solution: [{ from: 'a9', to: 'a8' }] };
-    expect(errorsOf(newUnit([winMaterial])).join('\n')).toMatch(/cannot be played as Black yet/);
+  });
+
+  it('validates a Black win-material combination now that the material judge is colour-neutral (S2.3)', () => {
+    // The colour-swapped twin of u9l1#1 (ranks flipped, Black to move) validates like the original.
+    const legacy = shippedUnits.flatMap((u) => u.lessons).find((l) => l.id === 'u9l1')!.exercises[1];
+    if (legacy.type !== 'combination' || legacy.goal !== 'win-material' || legacy.pieces === undefined) throw new Error('u9l1#1 changed');
+    const flip = (name: string) => `${name[0]}${9 - Number(name.slice(1))}`;
+    const flipStep = (s: { from: string; to: string }) => ({ from: flip(s.from), to: flip(s.to) });
+    const twin = {
+      ...meta('b01l1-01', { side: 'black' }),
+      type: 'combination',
+      fen: toFen(swapColours(positionFromPieces(legacy.pieces, legacy.turn ?? 'red'))),
+      prompt: legacy.prompt,
+      goal: 'win-material',
+      moves: legacy.moves,
+      solution: legacy.solution.map(flipStep),
+    };
+    expect(errorsOf(newUnit([twin]))).toEqual([]);
+    // A Black move that wins nothing is still refused, now by the colour-neutral judge.
+    const quiet = { ...twin, solution: [{ from: 'f9', to: 'f8' }] };
+    const errors = errorsOf(newUnit([quiet])).join('\n');
+    expect(errors).not.toMatch(/cannot be played as Black/);
+    expect(errors).toMatch(/solution\[0\] f9-f8 is not accepted \(wrong\)/);
   });
 
   it('fails unreachable points and extra pieces in new-course positions, and only reports them in legacy units', () => {
@@ -415,11 +436,16 @@ describe('content validator: schema v2 (new-course units, metadata, side, legali
     expect(report.notices).toEqual(['u1l1#0: red soldier on d3 can never stand there (legacy position, allowed while its lesson is live)']);
   });
 
-  // 05-migration.md §9 command 3: 12 legacy positions with an unreachable Soldier, no piece-count failure.
-  it('reports exactly the 12 legacy POS positions of the shipped content', () => {
-    const refs = legacyPlacementNotices(shippedUnits).map((n) => n.split(':')[0]);
-    expect(refs).toEqual(['u1l3#4', 'u3l1#2', 'u3l2#3', 'u9l1#3', 'u9l1#5', 'u11l1#4', 'u12l1#1', 'u12l1#5', 'u12l2#2', 'u12l3#3', 'u13l1#0', 'u13l1#1']);
-    expect(legacyPlacementNotices(shippedUnits).every((n) => / soldier on [a-i]\d can never stand there/.test(n))).toBe(true);
+  // 05-migration.md §9 command 3: 12 legacy positions with an unreachable Soldier, plus u13l2#4 with two
+  // unpromoted Black Soldiers on one file (DECISIONS.md D5, rule added in S2.3); no piece-count failure.
+  it('reports exactly the 13 legacy POS positions of the shipped content', () => {
+    const notices = legacyPlacementNotices(shippedUnits);
+    const refs = notices.map((n) => n.split(':')[0]);
+    expect(refs).toEqual([
+      'u1l3#4', 'u3l1#2', 'u3l2#3', 'u9l1#3', 'u9l1#5', 'u11l1#4', 'u12l1#1', 'u12l1#5', 'u12l2#2', 'u12l3#3', 'u13l1#0', 'u13l1#1', 'u13l2#4',
+    ]);
+    expect(notices.filter((n) => !n.startsWith('u13l2#4')).every((n) => / soldier on [a-i]\d can never stand there/.test(n))).toBe(true);
+    expect(notices.find((n) => n.startsWith('u13l2#4'))).toMatch(/: 2 black soldiers on file a before the river \(a5, a6\)/);
   });
 
   it('validates a unit pool like lesson items', () => {

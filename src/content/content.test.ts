@@ -9,7 +9,7 @@ import {
 } from '../lessons/answers';
 import { checkCombinationMove, combinationDone, combinationReply } from '../lessons/combination';
 import { toMove } from '../puzzles/logic';
-import { allLessons, units } from './index';
+import { allLessons, allUnits, units } from './index';
 import { hasMessage } from '../i18n/messages';
 import { validateUnits } from './validate';
 
@@ -17,7 +17,7 @@ describe('shipped lesson content', () => {
   // Proving every mate in 4 and defence against mate in 3 takes a while.
   it('passes the validator', () => {
     // DEEP_CONTENT=1 (npm run content:deep) also proves every stored firstMoves list is complete.
-    expect(validateUnits(units, { deep: process.env.DEEP_CONTENT === '1' })).toEqual([]);
+    expect(validateUnits(allUnits, { deep: process.env.DEEP_CONTENT === '1' })).toEqual([]);
   }, 1_800_000);
 
   it('has the five levels in order, each with 4-6 exercises per lesson', () => {
@@ -108,7 +108,8 @@ describe('shipped lesson content', () => {
           expect(check(solution)).toBe('correct');
           const wrong = legalMoves(pos).filter((m) => check(m) !== 'correct');
           if (!(ex.type === 'move' && ex.goal.kind === 'any')) expect(wrong.length).toBeGreaterThan(0);
-        });
+          // Judging every move of a mate-in-3 defence (u15l3) takes ~10-20 s under load; 30 s is the default timeout.
+        }, 120_000);
       });
     });
   }
