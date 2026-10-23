@@ -52,15 +52,15 @@ Design documents live in `docs/curriculum-upgrade/design/`.
 
 ### S1.3 — Reuse/migration map and content sourcing policy
 
-- **Status:** todo
+- **Status:** done (attempt 2, 2026-10-23, `5041558`: tester PASS, reviewer and content-reviewer APPROVE)
 - **Role focus:** curriculum designer + QA (migration risks)
 - **Depends on:** S1.1, S1.2
 - **Owned files:** `design/05-migration.md`, `design/07-sourcing.md`
 - **Acceptance criteria**
-  - [ ] Every existing lesson id (and the puzzle bank) mapped to keep / revise / move / retire, with target unit.
-  - [ ] Versioned progress migration: storage keys, what old completion maps to (completion only, never
+  - [x] Every existing lesson id (and the puzzle bank) mapped to keep / revise / move / retire, with target unit.
+  - [x] Versioned progress migration: storage keys, what old completion maps to (completion only, never
         mastery), sync/merge implications, rollback, tests needed.
-  - [ ] Sourcing, attribution/licensing and verification policy (original positions, engine-verified claims,
+  - [x] Sourcing, attribution/licensing and verification policy (original positions, engine-verified claims,
         review record tied to stable ids, draft status).
 
 ### S1.4 — Implementation backlog and pilot recommendation
@@ -81,6 +81,11 @@ Design documents live in `docs/curriculum-upgrade/design/`.
   match the 03 §5.2 table; say what `xb` becomes if the F2 games fail the §5.7 guard; note 03's override of 04
   ("safe-sparring for early Basic practice only") in DECISIONS.md; one-line note that F2 does not score the
   Basic game result.
+- **Carry-over from S1.3 reviews (non-blocking, resolve here):** fix the release order and regenerate 05 §8.4.1's
+  release table / T1 states from it; P3 re-tracking of `u10` must keep `10-combinations.json` next to the other
+  Advanced units in file order (`Home.tsx:106` headers) and say that linear unlocking may lock some `u12` lessons
+  during the transition (or order the remainder after `u12`); reword 02 §3.3 per 05 DV1 (completion only to
+  successors); one notation for quiet moves in validator output.
 - **Acceptance criteria**
   - [ ] Prioritized, dependency-ordered backlog for steps 2–4 with ownership and acceptance criteria, copied
         into this file as `S2.*`, `S3.*`, `S4.*` items.

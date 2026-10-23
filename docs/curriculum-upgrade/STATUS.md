@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 1 — Audit and design
-- **Active items:** S1.3 (attempt 1); S1.1 done; S1.2 out of attempts, remainder in S1.4
+- **Active items:** S1.4 (backlog, pilot, reconciliation incl. the S1.2 remainder); S1.1 and S1.3 done
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -40,9 +40,17 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   is unvalidated) — carried into S1.4, which owns cross-document reconciliation, and re-reviewed there.
 - Process: an API usage limit interrupted the S1.2 content review and S1.3 on 2026-10-22; both resumed.
 
+- 2026-10-23 — **S1.3 done** (attempt 2, `5041558`): tester PASS (completeness script re-run: 36 lessons, 195
+  exercises, 60 puzzles mapped exactly once; 12 unreachable-Soldier positions, the 2026-10-21 lesson-id reuse and
+  the sync fingerprint gap confirmed), reviewer APPROVE, content-reviewer APPROVE (u9l1 Cannon forks and u13l2
+  successor fixed after engine checks).
+
 ## Blockers and failed gates
 
-- None blocking. Open for S1.4 reconciliation: perpetual-chase adjudication (03 vs 04), opponent profile names,
+- None blocking. Owner decisions needed before release (not before implementation): licence of code and content
+  (07 S07-U2), historical annotated games allowed? (S07-U1), human review sample before release? (S07-U4), and a
+  real-Supabase check that old builds leave `data_v2` untouched (05 MU2 / 04 R5, test T15) before any deploy that
+  writes it. Open for S1.4 reconciliation: perpetual-chase adjudication (03 vs 04), opponent profile names,
   mastery merge rule, notation ownership, content volume (reviewer estimate ~160 lessons, 1,000–1,600 practice
   items) vs batch sizing.
 
