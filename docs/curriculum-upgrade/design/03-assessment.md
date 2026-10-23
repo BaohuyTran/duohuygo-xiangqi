@@ -2,7 +2,9 @@
 
 Backlog item S1.2 · Owner: curriculum designer · Companion: [02-curriculum.md](./02-curriculum.md) (units,
 exercise types, ids, notation). Architecture: [04-architecture.md](./04-architecture.md) (S1.1). Migration:
-`05-migration.md` (S1.3). Revision: attempt 3 (fixes the S1.2 review findings of attempts 1 and 2).
+`05-migration.md` (S1.3). Revision: attempt 3 (fixes the S1.2 review findings of attempts 1 and 2), plus the S1.4
+reconciliation (fallback F5 for opening tasks, `xi` in F4, reachability table, voided runs, `forcing-attack` capture
+rule; owners of open items in §13 point to [06-backlog.md](./06-backlog.md)).
 
 Labels as in 02-curriculum.md §0: **Verified**, **Proposal**, **Unresolved**, **Needs architecture confirmation**.
 Everything in §2–§11 not labelled otherwise is a **Proposal**. All numeric thresholds except the ≥ 90/100
@@ -46,10 +48,13 @@ Rules:
    graduated** = every level mastered and applied.
 4. Old completion migrates to **completed only**; the UI never presents it as mastery.
 5. Each grant records provenance (`check` / `placement` / `practical` / `exam` / `migration`), date, score and content
-   version.
-6. **Merge across devices** (for S1.4 to reconcile with 04 §5.8, which proposes the same): completed and applied =
-   union; mastery = per unit the record with the higher score, ties → later date. Monotone, so a failed later check
-   can never remove mastery on another device.
+   version. Exception (reconciled in S1.4, 05-migration.md §8.4, MD2): `migration` completion is derived at read time
+   from the old completion list and is never stored; it has no date, score or content version because the old data
+   has none.
+6. **Merge across devices** (reconciled in S1.4: identical to 04 §5.8 and 05-migration.md §8.6 item 4, which adds
+   deterministic tie-breaks): completed and applied = union (applied: per task the higher score); mastery = per unit
+   the record with the higher score, ties → later date. Monotone, so a failed later check can never remove mastery on
+   another device.
 
 ---
 
@@ -76,7 +81,8 @@ stay local and capped; states sync (§2 rule 6).
 | `review` | R7 ÷ 100 | Continuous | — |
 
 A move the runtime guard could not check within its budget is **voided** in assessments (no credit, no penalty,
-replaced by another item of the same strand or removed from numerator and denominator), as 04 §5.4 proposes.
+replaced by another item of the same strand or removed from numerator and denominator), as 04 §5.4 proposes. A
+`play` run in which a partner fell back to its d = 1 move on a slow device is voided as a whole (§5.6).
 
 **Hints and retries.** Checks, placement tests and exams offer **no hints and no retries**. Practice allows both,
 records them, shows "independent: 5 of 8", and never produces mastery or application.
@@ -169,8 +175,8 @@ partner with limited depth. It punishes loose pieces and short tactics but does 
 | --- | --- | --- |
 | `scripted` | The authored replies: `line` deviations, **threat trees** (attacker's ideas and answers to the main defences) and **counterplay trees** (defender's resources), forced claims proven | `line` items; first part of every hold, convert and opening task |
 | `best-defence` | Optimal within the forced-mate horizon | `combination` only |
-| `forcing-attack(k)` | Plays a forced mate or winning capture when one exists within k (k ≤ 2 at runtime, 3 in endgames), else hands over | Second link of the hold/convert chains |
-| `safe-sparring(2)` | Material search d = 2 + capture quiescence; never hangs material within 2 plies; random among moves within τ of its best (τ = 1.0 in Basic). Depth 2 already sees a mate in one against itself, because quiescence scores a side with no legal moves as mated (Verified `src/engine/solver.ts:123–125`) | **Early Basic practice** (b01–b09 drills), `b08-g1`, `b09-g1`, and the full-game fallback F2 below. Depth 3 only in positions of ≤ ~12 pieces (04 budget) |
+| `forcing-attack(k)` | Plays a forced mate within k (k ≤ 2 at runtime, 3 in positions of ≤ ~12 pieces) when one exists; otherwise a **winning capture** when one exists — a capture *m* with `moveScore(P, m, d)` − `materialBalance(P, mover)` ≥ *T* = 2 (`WIN_MATERIAL_THRESHOLD`), searched at *d* = 2 plies + capture quiescence (*d* = 3 in positions of ≤ ~12 pieces), the highest-scoring one, ties broken by the seed; otherwise hands over | Second link of the hold/convert chains |
+| `safe-sparring(2)` | Material search d = 2 + capture quiescence; never hangs material within 2 plies; random among moves within τ of its best (τ = 1.0 in Basic, 0.5 above). Depth 2 already sees a mate in one against itself, because quiescence scores a side with no legal moves as mated (Verified `src/engine/solver.ts:123–125`) | **Early Basic practice** (b01–b09 drills), `b08-g1`, `b09-g1`, the full-game fallbacks F2/F2b and the post-line continuation of opening tasks under F5 (below). Depth 3 only in positions of ≤ ~12 pieces (04 budget). This widens 04 §5.6 ("early Basic practice only"); recorded as a proposed decision in 06-backlog.md §7 |
 | `pressing(2)` | Material + palace pressure, attacked undefended pieces and mobility (04 §5.5), d = 2 + capture quiescence; prefers safe moves that attack the learner's palace and loose pieces. Heuristic weights | Game, play-out and plan tasks; last link of the hold/convert chains |
 | `restricted`, `greedy` | Drill partners | Practice only; **never** application evidence |
 
@@ -180,17 +186,18 @@ tree → `forcing-attack(2)` → `pressing(2)` (in positions of ≤ ~12 pieces `
 **verified** threat or counter-threat (04 §5.5 item 1). The earlier names `spar`, `defend`, `counter` and the strict
 `safe-sparring(4, 0)` are withdrawn: depth 4 does not fit the budget on a full board (04 R8).
 
-| Task kind | Examples | Partner |
-| --- | --- | --- |
-| Safety and development drills | `b08-g1`, `b09-g1` | `safe-sparring(2)` |
-| Opening (R6, R2) | `i08-g1`, `i09-g1`, `i11-g*`, `e08-g*`, `m06-g1` | `scripted` → `pressing(2)` |
-| Plan (R3) | `i01-g1`, `a03-g1`, `a06-g1`, `e03-g1`, `m02-g1` | `pressing(2)` |
-| Hold / defence (R5) | `i07-g1`, `a07-g1`, `a09-g2`, `e04-g1`, `e07-g1`, `m03-g1`, `m05-g2` | hold chain |
-| Convert (R4) | `i10-g1`, `a09-g1`, `e06-g*`, `m05-g1` | convert chain |
-| Full games | `b10-g1`, `b10-g2`, `xb` games, `pb-g*` | `scripted` opening → `pressing(2)` |
+| Task kind | Examples | Partner | Under fallback F (below) |
+| --- | --- | --- | --- |
+| Safety and development drills | `b08-g1`, `b09-g1` | `safe-sparring(2)` | unchanged |
+| Opening (R6, R2) | `i08-g1`, `i09-g1`, `i11-g*`, `e08-g*`, `m06-g1`; opening tasks of `xi`, repertoire tasks of `xe`, the opening task of `xm`; `pi-g*` | `scripted` → `pressing(2)` | F5 |
+| Plan (R3) | `i01-g1`, `a03-g1`, `a06-g1`, `e03-g1`, `m02-g1` | `pressing(2)` | F1 |
+| Hold / defence (R5) | `i07-g1`, `a07-g1`, `a09-g2`, `e04-g1`, `e07-g1`, `m03-g1`, `m05-g2` | hold chain | F1 |
+| Convert (R4) | `i10-g1`, `a09-g1`, `e06-g*`, `m05-g1`; conversion task of `xi` | convert chain | F1 |
+| Full games | `b10-g1`, `b10-g2`, `xb` games, `pb-g*` | `scripted` opening → `pressing(2)` | F2 (F2b if F2 fails §5.7) |
+| Reviews (R7) | `a10-g1`, `e09-g1`, `m08-g1` | none (post-game analysis) | unchanged |
 
 **Dependency on validating `pressing`.** Every assessment use of `pressing` (all rows above except the drills, and the
-`xb`, `xa`, `xe`, `xm` tasks that use them) depends on its step-2 validation (04 §5.5 item 4); until then `pressing`
+`xb`, `xi`, `xa`, `xe`, `xm` tasks that use them; the drills and reviews do not use it) depends on its step-2 validation (04 §5.5 item 4); until then `pressing`
 is a practice partner only. **Fallback F**, applied while `pressing` is not validated, if it fails validation, or for
 any single task that fails the §5.7 guard:
 
@@ -199,17 +206,59 @@ any single task that fails the §5.7 guard:
   the rubric scores the position reached. A task whose tree is too short to pass §5.7 stays practice only.
 - **F2 (full games: `b10-g1`, `b10-g2`, `xb` games, `pb-g*`):** partner `safe-sparring(2)` with τ = 1.0; the result
   is not scored (against `safe-sparring` it shows only safety, 04 §5.6): game score = R1 × 0.6 + R2 × 0.2 + R0 × 0.2.
-- **F3 (`xb`):** in addition to the two F2 games, two tree-bounded hold tasks from Basic-level positions (verified
-  threat at the start; threat tree → `forcing-attack(2)`), each ≥ 75.
-- **F4 (`xa`, `xe`, `xm`, placement practical tasks above Basic):** each `pressing`-dependent task is replaced by a
-  tree-bounded task with the same rubric.
+- **F2b (if the F2 games fail the §5.7 guard).** `safe-sparring` makes no threats, so a safe shuffler (N2) may pass an
+  F2 game. Then each game starts with a `scripted` Basic opening tree (short lines with deviations as in b09l4, at
+  least 4 learner moves) and is scored R1 × 0.4 + R2 × 0.2 + R0 × 0.1 + line share × 30, where *line share* (0 to 1) is
+  the share of the learner's line nodes answered target/sound (as in R6). If F2b also fails §5.7, the two games are still
+  played to their end and must finish without a critical failure (§5.6), but are not scored; the scored game evidence
+  of `xb` is then two F5 Basic opening tasks (one per colour, built like `b09-g1` with a scripted first part, scored
+  R6 × 0.5 + R1 × 0.5 like `i08-g1`).
+- **F3 (`xb`):** in addition to the two games (F2 or F2b), two tree-bounded hold tasks from Basic-level positions
+  (verified threat at the start; threat tree → `forcing-attack(2)`), each ≥ 75.
+- **F4 (`xi`, `xa`, `xe`, `xm`, placement practical tasks above Basic):** each `pressing`-dependent task is replaced by
+  a tree-bounded task (F1) with the same rubric, except opening and repertoire tasks, which follow F5. Under F, `xi` is
+  two F5 opening-to-middlegame tasks (one per colour) plus its endgame conversion task tree-bounded (F1: counterplay
+  tree → `forcing-attack(2)`, no `pressing`).
+- **F5 (opening tasks: `i08-g1`, `i09-g1`, `i11-g1`, `i11-g2`, `e08-g1`, `e08-g2`, `m06-g1`, the opening tasks of
+  `xi`, the repertoire tasks of `xe`, the opening task of `xm`, and `pi-g*`):**
+  1. *Line part unchanged.* The `scripted` tree plays the opponent; R6's line term is the share of the learner's line
+     nodes answered target/sound. A learner move off the tree that the default class (04 §5.4) does not class as
+     error ends the line part, not the task; an error-class move counts as a missed node.
+  2. *Continuation.* The opponent is `safe-sparring(2)` with τ = 0.5 for the task's remaining learner moves (the same
+     cap as with `pressing`). Only R2 and R1 are scored on it: R6 = line share × 60 + R2 × 0.4, with R2 taken over
+     the learner's first *n* moves of the **whole task** (line moves included), so a short line or an early off-tree
+     move does not shrink R2's window.
+  3. *R3 terms* (`i11-g1`, `i11-g2`) use only **own-side** predicates under F5 (placement and mobility of the learner's
+     pieces; a chosen target attacked by at least two learner pieces), evaluated at the end of the task. Predicates
+     that need the opponent's resistance are not used against `safe-sparring`.
+  4. No result, R4 or R5 term is earned against `safe-sparring`. The §5.7 guard runs on the F5 version of each task; a
+     task that fails it stays practice only and the pool supplies another.
 
-Mastery never depends on `pressing`: it comes from unit checks (and `xm` for m09, which under F4 has no `pressing`
-task), so Basic, Expert and Master mastery and graduation stay reachable under F.
+  Rationale: the scripted line carries the opening evidence and does not depend on `pressing`; R2 + R1 against
+  `safe-sparring(2)` is the evidence already accepted for `b09-g1`. τ = 0.5 above Basic makes the partner's replies
+  less random than the Basic setting.
+- **Provenance.** A grant earned under F records which fallback applied (`fallback: 'F1' … 'F5'`, 05-migration.md
+  §8.3). It is not revoked when `pressing` is validated later, and the portfolio (§6.1) lists fallback-based evidence.
+
+**Reachability under F.** Mastery never depends on `pressing`: it comes from unit checks (and `xm` for m09). Level
+application needs, for each exam slot, at least one published task that passes the §5.7 guard in its F form.
+Tree-bounded (F1), line-based (F5) and F2b tasks can be made to pass by authoring (longer trees, more narrow
+positions), so this is a production obligation that each level's release item checks (06-backlog.md S3.4, S3.8, S3.12,
+S3.16, S3.19). Under that obligation all five levels stay masterable and applied, and graduation stays reachable:
+
+| Level | Mastery under F | Level application under F | Unit practical tasks under F |
+| --- | --- | --- | --- |
+| Basic | Checks b01–b10 (b01, b10 short form) | `xb`: two games (F2, or F2b, or unscored games + two F5 Basic opening tasks) + two F3 hold tasks + R7 review | `b08-g1`, `b09-g1` unchanged (`safe-sparring`); `b10-g1`, `b10-g2` scored like the `xb` games |
+| Intermediate | Checks i01–i11 | `xi` (F4): two F5 opening-to-middlegame tasks + F1 conversion | `i01-g1` F1 (plan); `i07-g1` F1 (hold); `i08-g1`, `i09-g1`, `i11-g1`, `i11-g2` F5; `i10-g1` F1 (convert) |
+| Advanced | Checks a01–a10 | `xa` (F4): F1 improving/attack-building, F1 positional defence, F1 endgame + R7 review | `a03-g1`, `a06-g1` F1; `a07-g1`, `a09-g2` F1; `a09-g1` F1; `a10-g1` review (no partner) |
+| Expert | Checks e01–e09 (e09 short form) | `xe` (F4): two F5 repertoire tasks + F1 conversion + F1 holding + R7 review | `e03-g1` F1; `e04-g1`, `e07-g1` F1; `e06-g1`, `e06-g2` F1; `e08-g1`, `e08-g2` F5; `e09-g1` review |
+| Master | Checks m01–m08 (m07 short form); m09 by `xm` | `xm` (F4): ≥ 5 tasks — opening F5; middlegame, defence and endgame F1; both colours — and their reviews | `m02-g1`, `m03-g1` F1; `m05-g1`, `m05-g2` F1; `m06-g1` F5; `m08-g1` review |
+
+Placement practical tasks follow the same rules: `pb-g*` F2/F2b, `pi-g*` F5, `pa-g*` and `pe-g*` F1.
 
 **Answer to 04 R3:** results against `safe-sparring(2)` count only for `b08-g1`, `b09-g1` (safety and development
-process) and the F2 games, never as a game result. Results against `pressing(2)` count only after its validation, and
-only through rubrics whose process items it cannot inflate; a game result against it is at most 40 % of a Basic exam
+process), the F2/F2b games and the F5 continuation (R2 and R1 only), never as a game result. Results against
+`pressing(2)` count only after its validation, and only through rubrics whose process items it cannot inflate; a game result against it is at most 40 % of a Basic exam
 game (§6).
 
 All partners avoid creating a third repetition unless every alternative loses ≥ `WIN_MATERIAL_THRESHOLD` by their
@@ -298,6 +347,13 @@ assessed them in free play.
 - **Critical failures:** mated or stalemated; losing by repetition rule (1); in a conversion task, the opponent having
   a forced mate in the final position; a serious allowed loss in a task flagged `safety-gate`.
 - A failed task can be retried at once with a new seed; only a passing run grants "applied"; run count is recorded.
+- **Voided runs.** A run is voided — no grant, no penalty, not counted as a retry — when any partner move came from
+  the device-dependent fallback (04 §5.5: the safety-net time fired and the policy played its d = 1 move) or any
+  post-game signal of a learner move could not be computed within its budget ("not checked", 04 §5.4). So a slower
+  device can never face a weaker partner, or skip a penalty, in counted evidence. The learner is offered a new run
+  with a new seed; inside a placement test the voided practical task may be replayed once, and if it voids again the
+  test ends with "could not be assessed on this device" and changes nothing (§7.4 "Fail" rules apply, without a
+  retake limit). Voids are logged locally for content review.
 
 ### 5.7 Guarding against false success and false failure (authoring validation; Needs architecture confirmation)
 
@@ -331,11 +387,11 @@ Exam positions come from exam pools not used in practice, checks or placement.
 
 | Exam | Tasks (lengths calibrated in the pilot) | Pass |
 | --- | --- | --- |
-| `xb` Basic | Two full games from the initial position (one per colour), `scripted` opening → `pressing(2)`, ended per §5.5. **Per-game score** (also the rubric of `b10-g1`/`b10-g2`): result (training win 40, training draw 20, loss 0) + R1 × 0.4 + R2 × 0.2; then R7 review of either game. Under fallback F: F2 games + F3 hold tasks | Both games ≥ 75, no critical failure; review ≥ 60 (under F: also both hold tasks ≥ 75) |
-| `xi` Intermediate | Opening-to-middlegame task per colour (R6 + R1, `scripted` → `pressing(2)`); elementary endgame conversion (R4, convert chain) | All three ≥ 75 |
-| `xa` Advanced | Improving/attack-building (R3 + R1, `pressing(2)`); positional defence (R5, hold chain); endgame (R4 or R5, convert/hold chain); R7 review of one. Under F: F4 | All ≥ 75; review ≥ 60 |
-| `xe` Expert | Repertoire task per colour (R6 + R1); conversion with counterplay (R4, convert chain); holding (R5, hold chain); R7 review. Under F: F4 | All ≥ 75; review ≥ 70 |
-| `xm` Master (m09) | ≥ 5 unlabelled tasks across opening, middlegame, defence and endgame, both colours; R7 review of each, including the critical moment (m07). Under F: F4 | Every task ≥ 75 and every review ≥ 70 |
+| `xb` Basic | Two full games from the initial position (one per colour), `scripted` opening → `pressing(2)`, ended per §5.5. **Per-game score** (also the rubric of `b10-g1`/`b10-g2`): result (training win 40, training draw 20, loss 0) + R1 × 0.4 + R2 × 0.2; then R7 review of either game. Under fallback F: F2 games (F2b if they fail §5.7) + F3 hold tasks | Both games ≥ 75, no critical failure; review ≥ 60. Under F: also both hold tasks ≥ 75; if the F2b games are unscored, they must finish without a critical failure and both F5 Basic opening tasks must score ≥ 75 |
+| `xi` Intermediate | Opening-to-middlegame task per colour (R6 + R1, `scripted` → `pressing(2)`); elementary endgame conversion (R4, convert chain). Under F: F4 (opening tasks F5, conversion F1) | All three ≥ 75 |
+| `xa` Advanced | Improving/attack-building (R3 + R1, `pressing(2)`); positional defence (R5, hold chain); endgame (R4 or R5, convert/hold chain); R7 review of one. Under F: F4 (all F1) | All ≥ 75; review ≥ 60 |
+| `xe` Expert | Repertoire task per colour (R6 + R1); conversion with counterplay (R4, convert chain); holding (R5, hold chain); R7 review. Under F: F4 (repertoire tasks F5, the others F1) | All ≥ 75; review ≥ 70 |
+| `xm` Master (m09) | ≥ 5 unlabelled tasks across opening, middlegame, defence and endgame, both colours; R7 review of each, including the critical moment (m07). Under F: F4 (opening task F5, the others F1) | Every task ≥ 75 and every review ≥ 70 |
 
 ### 6.1 Portfolio (m09)
 
@@ -476,9 +532,15 @@ when forced; results are labelled "training result".
 - §5.7 guards: N1/N2 failure rates and narrow-position count on every published practical task.
 - Training ruleset: perpetual check loses; both/neither → draw; learner third-repetition refusal and its exceptions;
   no-capture limit and cap: same lead rule at both stops.
-- Partners and fallback: task kind → partner table; while `pressing` is unvalidated, F1–F4 apply (tree-bounded tasks
-  end when the tree and `forcing-attack(2)` run out; F2 game score has no result term; `xb` under F needs the F3 hold
-  tasks); mastery and graduation remain reachable.
+- Partners and fallback: task kind → partner table; while `pressing` is unvalidated, F1–F5 apply (tree-bounded tasks
+  end when the tree and `forcing-attack(2)` run out; F2 game score has no result term; F2b adds the scripted line term;
+  `xb` under F needs the F3 hold tasks; `xi` under F is two F5 tasks + an F1 conversion; F5 scores only line share,
+  R2 over the whole task and R1, R3 with own-side predicates only); grants record the fallback used; the reachability
+  table of §5.2 holds (every level masterable and applied, graduation reachable) on a fixture pool.
+- `forcing-attack`: plays a forced mate within k when one exists, else the highest winning capture (gain ≥ 2 at d = 2
+  + quiescence), else hands over; seeded tie-break.
+- Voided runs: a device fallback move or a "not checked" signal voids the run (no grant, no penalty, no retry
+  counted); a voided placement practical task is replayed once, then "could not be assessed".
 - Merge: higher score wins, ties later date; monotone.
 - Separation: assessment module does not import `src/gamification`; XP unchanged by checks.
 - Migration: old completion → completed only (S1.3).
@@ -508,9 +570,9 @@ when forced; results are labelled "training result".
    create a third repetition, 30-move no-capture limit, 80-move cap with material adjudication).
 5. Partners: 04's policies and chains (§5.2): hold = threat tree → `forcing-attack(2)` → `pressing(2)`; convert =
    counterplay tree → `forcing-attack(2)` → `pressing(2)`; games = `scripted` opening → `pressing(2)`;
-   `safe-sparring(2)` for early Basic practice, `b08-g1`, `b09-g1` and fallback F2 only. Assessment use of `pressing`
-   only after its step-2 validation; fallback F1–F4 otherwise. Withdraws `spar`/`defend`/`counter` and
-   `safe-sparring(4, 0)` (answers 04 R8).
+   `safe-sparring(2)` for early Basic practice, `b08-g1`, `b09-g1`, fallbacks F2/F2b and the F5 continuation only.
+   Assessment use of `pressing` only after its step-2 validation; fallback F1–F5 otherwise, with the reachability
+   table of §5.2. Withdraws `spar`/`defend`/`counter` and `safe-sparring(4, 0)` (answers 04 R8).
 6. Safety horizon table (§5.3) as the default guard for rubrics and `decision` items; *h* = 2 at runtime above Basic
    until step 2 measures *h* = 3 (answers 04 R7).
 7. Mastery merge: higher score, ties later date (same as 04 §5.8).
@@ -519,12 +581,15 @@ when forced; results are labelled "training result".
 
 ## 13. Unresolved
 
-| # | Question | Needed from |
+Owners are backlog items of [06-backlog.md](./06-backlog.md) (S1.4). Items resolved by another document are kept for
+traceability with a pointer.
+
+| # | Question | Status · owner |
 | --- | --- | --- |
-| UA1 | "Needs review" after a failed warm-up (§4.5) | LX reviewer, pilot |
-| UA2 | Daily retake limit for single-unit J2 (§7.4) | LX reviewer |
-| UA3 | Rulebook edition; CXA differences (§8.1) | Content reviewer |
-| UA4 | Storage/sync format for attempts and states (§3.1) | S1.1, S1.3 |
-| UA5 | Phone cost of *h* = 3 post-game signals and of `pressing(2)` (04 R6); whether `pressing` passes validation (04 §5.5 item 4), which decides between the main partners and fallback F | S2 pilot |
-| UA6 | N1/N2 failure-rate thresholds and the narrow-position count (§5.7) | Pilot |
-| UA7 | Whether the 80-move cap and 30-move no-capture limit make Basic full games too long on a phone | Pilot, LX reviewer |
+| UA1 | "Needs review" after a failed warm-up (§4.5) | Open · S2.20 (LX review of the pilot; default until then: suggestions only, no badge) |
+| UA2 | Daily retake limit for single-unit J2 (§7.4) | Open · S2.20 (LX; default: one attempt per target per local day, as §7.4) |
+| UA3 | Rulebook edition; CXA differences (§8.1) | Open · S3.2 (content reviewer, before b05l3 is published; same as 07 S07-U3) |
+| UA4 | Storage/sync format for attempts and states (§3.1) | **Resolved** by 05-migration.md §8.3 (`learning.records.v1`, local attempt log) and §8.6 (`data_v2`) |
+| UA5 | Phone cost of *h* = 3 post-game signals and of `pressing(2)` (04 R6); whether `pressing` passes validation (04 §5.5 item 4), which decides between the main partners and fallback F | Open · cost: S2.6; validation: S2.18. Fallback F (§5.2) keeps every level reachable either way |
+| UA6 | N1/N2 failure-rate thresholds and the narrow-position count (§5.7) | Open · S2.20 (calibrated on the pilot tasks with the S2.12 guard script) |
+| UA7 | Whether the 80-move cap and 30-move no-capture limit make Basic full games too long on a phone | Open · S2.20 (LX, with S2.6 timings); full games are not in the pilot, so it is confirmed again in S3.3 |

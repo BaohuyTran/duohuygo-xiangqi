@@ -14,6 +14,12 @@ Labels:
 Exercise identifiers: `<lessonId>#<i>` with `i` = 0-based index into the lesson's `exercises` array, learn cards
 included (same convention as [01-audit.md](./01-audit.md)); FENs are given where a position matters.
 
+**S1.4 reconciliation.** Later design documents settled several open points of this document: notation
+([02-curriculum.md §4](./02-curriculum.md)), partners, ruleset and fallback ([03-assessment.md §5.2, §5.5, §8](./03-assessment.md)),
+progress storage, migration and sync ([05-migration.md §8](./05-migration.md)). The affected paragraphs below carry a
+pointer; §8 lists every open item with its status and owner (a backlog item of [06-backlog.md](./06-backlog.md) or the
+owner).
+
 ---
 
 ## 1. Summary
@@ -150,7 +156,7 @@ several times slower than the desktop above, and throttles under sustained load.
 proposals: anything above ~100 ms desktop must not run on the UI thread; anything above ~1 s desktop must be
 precomputed at authoring time or run in a Worker with a budget and a graceful fallback. **Unresolved:** measure the
 same script (§A.1, packaged as a page) on at least one Android and one iOS device during the pilot (S2) and
-record the factor.
+record the factor (owner: backlog item S2.6, 06-backlog.md).
 
 ---
 
@@ -168,8 +174,8 @@ record the factor.
 - Feedback: one `explanation` key shown after a correct answer (`LessonPlayer.tsx:321, 380, 621`); a wrong answer
   gets a generic message per verdict (`illegal`, `unsafe`, `not-checkmate`, `allows-mate`, …). No
   position-specific "why the tempting move fails", no "key opponent response".
-- Hints: combinations only (one key per Red move, or "move this piece"); available even in jump tests; their use
-  is not recorded.
+- Hints: combinations only (one key per Red move, or "move this piece"); offered only while the learner is on the
+  stored main line (`LessonPlayer.tsx:538`, `:583`); available even in jump tests; their use is not recorded.
 - State: each exercise view is keyed by its index (`LessonPlayer.tsx:171-174`); retry resets the exercise's own
   state only. Nothing is persisted mid-lesson.
 
@@ -228,7 +234,8 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
     animations (`--dx/--dy` are computed from `at()`) and accessible labels follow automatically. The river
     labels are placed by hand (`Board.tsx:100-103`: 楚 河 on the left, 漢 界 on the right) and must be swapped
     explicitly. The orientation follows the learner's side for the whole exercise, including opponent replies.
-  - Coordinates: optional edge labels. **Unresolved (S1.2 / learning-experience):** which notation learners see —
+  - Coordinates: optional edge labels. **Resolved by 02-curriculum.md §4 (S1.2):** per-side file numbers 1–9 and
+    traditional notation per language; ICCS stays internal. The question was: which notation learners see —
     ICCS letters/digits (what the content uses), traditional file numbers 1–9 counted from each player's right
     (the convention of Chinese and Vietnamese notation, e.g. "Pháo 2 bình 5"), or both. The engine keeps ICCS
     internally either way; a pure `formatMove(move, position, notation, lang)` helper would render prompts.
@@ -280,6 +287,12 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   reviewer approves. The validator checks the table is complete, every claim it makes (e.g. "loses the chariot")
   is reproduced by the engine, and that at least two moves are accepted where the objective allows alternatives
   (so a single stored variation is never silently forced).
+- **Class names (reconciled in S1.4).** The content format uses the four classes of 02-curriculum.md §5.1 and
+  03-assessment.md §3.2; this section's names map onto them: `best`/`good` → **target** (serves the lesson's idea) or
+  **sound** (good, not the idea); `playable` → **dubious** (safe, misses the objective; in practice accepted with a
+  comment or "try again, without penalty" per item, in assessments credit 0, or 0.5 when flagged `partial`);
+  `mistake`/`blunder` → **error** (fails the safety guard; "serious" in the 03 §5.3 sense when the loss is ≥ 4 or a
+  mate is allowed).
 - Precomputing is possible because the starting position of a decision is fixed: there are only tens of legal
   moves, so deep checks (seconds each) are affordable at authoring time and cost nothing at runtime.
 
@@ -340,7 +353,7 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   | --- | --- | --- | --- |
   | `scripted` | none: authored replies (deviations from §5.2; threat trees, below) | exactly what the author wrote and the reviewer approved | knows nothing off the tree; hands over to the policy named in the exercise |
   | `best-defence` | exhaustive forced-mate search; material search for win-material (today's code) | optimal within the forced horizon | only meaningful in forced lines |
-  | `forcing-attack(k)` | exhaustive `forcedWinMoves` (k ≤ 2 at runtime, 3 in endgames) then material search | plays a forced mate or a winning capture whenever one exists within its horizon, otherwise hands over | sees nothing quieter than its horizon |
+  | `forcing-attack(k)` | exhaustive `forcedWinMoves` (k ≤ 2 at runtime, 3 in endgames) then material search | plays a forced mate or a winning capture whenever one exists within its horizon, otherwise hands over. **Winning capture** (defined in S1.4, 03 §5.2): a capture *m* with `moveScore(P, m, d)` − `materialBalance(P, mover)` ≥ 2 (`WIN_MATERIAL_THRESHOLD`), *d* = 2 plies + capture quiescence (3 in positions of ≤ ~12 pieces); the highest-scoring one, seeded tie-break | sees nothing quieter than its horizon |
   | `safe-sparring(d)` | material-only search (`moveScore`), d = 2 | never hangs material within d plies; otherwise random | no threats, no plans; a practice partner for safety habits only |
   | `pressing(d)` | material + features of §5.4: pressure on the enemy palace (attacked palace points), attacked undefended enemy pieces, mobility; capture quiescence; d = 2 | prefers safe moves that attack the learner's palace and loose pieces, so a defender faces real threats each move | shallow (2 plies + captures); threats may be superficial; no long plans; weights are heuristic and must be validated (below) |
   | `restricted(spec)` | any of the above, limited to some pieces or a fixed plan ("only develops", "only defends the palace") | a drill partner | deliberately unrealistic |
@@ -372,7 +385,10 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   used 2,400–4,800 nodes; a cap of ~20,000 nodes keeps an unlucky position bounded). The phone factor (R6) may
   force d = 1 + quiescence on slow devices — but because verdicts and opponents are defined by depth/node limits,
   a slow phone waits longer rather than seeing a weaker opponent; if the wait exceeds the safety-net time, the
-  policy falls back to its d = 1 move and the game record notes it.
+  policy falls back to its d = 1 move and the game record notes it. **Such a run is never counted evidence** (S1.4,
+  03-assessment.md §5.6 "Voided runs"): in unit checks, placement, practical tasks and exams the whole run is voided —
+  no grant, no penalty, not a retry — exactly like a "not checked" move (§5.4), so device speed cannot weaken an
+  assessed opponent.
 - **How defence, hold and convert tasks get a challenging, plausible opponent (Proposal):**
   1. **Choose positions where the pressure is concrete.** A `hold`/defence task is published only if, at
      authoring time, the attacker has a concrete threat at the start (a forced mate within k, or a material gain
@@ -384,15 +400,16 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   3. **Off the tree:** `forcing-attack` first (if a forced win or a winning capture exists, it is played), then
      `pressing(2)`. In `convert` tasks the learner's opponent is the defender, so `forcing-attack` plays its
      counter-threats and `pressing` its counterplay.
-  4. **Validation of `pressing` before any assessment uses it (S2):** play it against `safe-sparring` and against
+  4. **Validation of `pressing` before any assessment uses it (S2; backlog item S2.18):** play it against `safe-sparring` and against
      itself from the pilot positions; the content reviewer judges a sample of its moves for plausibility; weights
      are adjusted until no reviewed sample shows obviously aimless play. Until then it is a practice partner only.
 - **What a pass does and does not show:** passing a `hold` task shows the learner parried the verified threats and
   the threats `pressing` found within 2 plies + captures; passing `convert` shows the learner converted against
   verified counterplay and a shallow defender. Neither shows the result against a strong human or engine, nor
   that the learner understood the plan (the self-analysis tasks of 03-assessment address that).
-- **Unresolved (S1.2):** which practical tasks use which policy, and whether any assessment counts results against
-  `safe-sparring` or `pressing` (R3).
+- **Resolved by 03-assessment.md §5.2 (S1.2, reconciled in S1.4):** the task-kind → partner table, the chains, and
+  fallback F1–F5 while `pressing` is not validated; results against `safe-sparring` count only as safety/development
+  evidence (R3). Validation of `pressing`: backlog item S2.18.
 
 ### 5.6 Practical-play tasks
 
@@ -409,7 +426,9 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   scoring from `design/03-assessment.md`.
 - **Opponent per task (Proposal):** `hold` and defence tasks: threat tree → `forcing-attack(2)` → `pressing(2)`;
   `convert`: counterplay tree → `forcing-attack(2)` → `pressing(2)`; `play-out` and `game`: `pressing(2)`, with
-  `scripted` openings where the lesson needs specific deviations. `safe-sparring` is for early Basic practice only.
+  `scripted` openings where the lesson needs specific deviations. `safe-sparring` is for early Basic practice only —
+  **widened by 03-assessment.md §5.2** to `b08-g1`, `b09-g1`, the full-game fallbacks F2/F2b and the F5 continuation
+  of opening tasks, always without scoring a result (recorded as a proposed decision, 06-backlog.md §7).
   Position selection rules for `hold`/`convert` are in §5.5.
 - **Evidence limits (Proposal, for 03-assessment):** results against `safe-sparring` show only safety; results
   against threat trees + `pressing` show defence against verified and shallow threats (§5.5), not strength against
@@ -437,9 +456,10 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
 - **Disclosed limitation:** the training ruleset can call a perpetual chase a draw where official Asian/Chinese
   rules would make the chasing side change moves or lose. Tasks are designed so this does not decide the
   assessment (move caps, goals that a chase does not satisfy).
-- **Unresolved (S1.2 owns the ruleset choice, `design/03-assessment.md`):** which official ruleset the course
-  names as its reference, the no-capture limit for full games, and whether repetition draws count as a pass in
-  `hold` tasks.
+- **Resolved by 03-assessment.md §5.5 and §8 (S1.2):** AXF rules as the taught reference (rulebook edition: 03 UA3,
+  owner S3.2); 30-move no-capture limit and 80-move cap for full games, with the same material rule at both stops;
+  perpetual chase not adjudicated and the learner may not create a third repetition; in `hold` tasks a forced
+  repetition draw counts as "not mated" and the rubric scores the position reached.
 
 ### 5.8 Three-level progress (completed / mastered / applied)
 
@@ -453,16 +473,22 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
   - `applied`: per unit/strand a list of practical-play evidence `{ taskId, at, rubric }`;
   - `attempts`: a bounded log per assessment item `{ itemId, firstAttemptCorrect, hintsUsed, retries, at }`, also
     used for branch coverage (§5.2).
-  The v1 keys stay written and readable for rollback and for older builds (dual-write of `completedLessons`).
+  The v1 keys stay written and readable for rollback and for older builds (dual-write of `completedLessons`; 05 §8.7
+  narrows this: only completions of still-live legacy lessons are written to v1, new-course ids never are).
 - **Migration (owned by S1.3):** a pure, versioned `migrate(v1 ids, mapping)` that only fills `completed` from the
-  S1.3 mapping table; tests cover unknown ids, retired ids, repeated runs (idempotent) and rollback.
+  S1.3 mapping table; tests cover unknown ids, retired ids, repeated runs (idempotent) and rollback. **Superseded by
+  05-migration.md §8.3–§8.4 (S1.3):** legacy completion is *derived* at read time from the v1 list and a versioned
+  `LEGACY_MAP`, never materialised; the record format above is replaced by `LearningRecords` (05 §8.3: `completed`,
+  `mastered`, `applied`, `exposed`), and the attempt log stays local (05 MD7) instead of being merged.
 - **Proposal — sync:** keep `data` (v1 JSON) as is and add a **separate column** (e.g. `data_v2 jsonb`) by a new
   migration, so older builds — which upsert only `{ user_id, data }` (`src/sync/supabase.ts:79`) — cannot erase
   the new data. Merge for the new data: completion = union; mastery = per unit the record with the higher score
-  (ties: later `at`), i.e. monotone; applied and attempts = union by id, capped. **Unresolved:** confirm against a
-  real Supabase project that an upsert listing only `data` leaves `data_v2` unchanged (expected from PostgREST's
-  `ON CONFLICT DO UPDATE` on the given columns; not verified here), and whether mastery can be revoked by a later
-  failed reassessment (a monotone merge cannot express revocation; same limitation as "reset", `merge.ts:18-19`).
+  (ties: later `at`), i.e. monotone; applied and attempts = union by id, capped (05-migration.md §8.6 keeps the
+  attempt log local and syncs only the `exposed` id set). **Open (R5, owner S2.11 + an owner action before deploy):**
+  confirm against a real Supabase project that an upsert listing only `data` leaves `data_v2` unchanged (expected
+  from PostgREST's `ON CONFLICT DO UPDATE` on the given columns; not verified here; test T15 of 05 §8.10).
+  **Resolved:** mastery is not revoked by a later failed reassessment (03-assessment.md §4.5, 05-migration.md §8.6
+  item 8).
 
 ---
 
@@ -490,7 +516,7 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
 - Engine output is evidence, not verification (§2.4): the external engine both confirmed our mate line and, at a
   normal search depth, missed it.
 
-### 6.3 Licensing — Unresolved (owner decision)
+### 6.3 Licensing — Unresolved (owner decision; R4, same as 07 S07-U2)
 
 - The repository has no LICENSE file and `package.json` declares none, so the code is "all rights reserved" by
   default.
@@ -521,7 +547,8 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
 4. **Order for step 2** (inputs for S1.4): Black orientation and colour-neutral judges → move tables and objective
    predicates (single decisions) → Worker client with budgets/fallback → branching `line` exercises → training
    opponents + adjudicator → `play` tasks → three-level progress storage + migration + sync column. The pilot needs
-   all except possibly full games.
+   all except possibly full games. (Adopted in 06-backlog.md §4; storage, which depends on none of the others, runs in
+   parallel there, and full games are left out of the pilot.)
 5. **Budgets to adopt (to be confirmed on phones in S2):** UI-thread work ≤ ~50 ms desktop; Worker requests
    ≤ ~300 ms desktop at the chosen depth/node limits; anything slower precomputed at authoring time. Measured fits
    (§5.5): opponent policies at d = 2 + capture quiescence (≤ ~180 ms exact, ~77 ms windowed on a full board),
@@ -529,16 +556,20 @@ Each subsection: what exists (Verified), what is needed, the proposal, and open 
 
 ## 8. Unresolved decisions (collected)
 
-| # | Decision | Owner |
+Status after the S1.4 reconciliation. Resolved items stay listed with a pointer; open items name their owner (a
+backlog item of [06-backlog.md](./06-backlog.md) or the owner).
+
+| # | Decision | Status · owner |
 | --- | --- | --- |
-| R1 | Coordinates/notation shown to learners (ICCS, traditional 1–9 per side, both) | S1.2 / learning experience |
-| R2 | Reference ruleset, no-capture limit, perpetual-chase handling disclosure, repetition outcome in `hold` tasks | S1.2 (`03-assessment.md`) |
-| R3 | Whether any assessment counts results against `safe-sparring` or `pressing` opponents (only after `pressing` is validated, §5.5) | S1.2 |
-| R4 | Licence of this repository; whether a GPL engine may ever ship in the app | owner |
-| R5 | Supabase: separate `data_v2` column behaviour with old clients; mastery revocation | S1.3 + S2 test |
-| R6 | Phone slowdown factor: run §A.1 and §A.4 (packaged as a page) on at least one Android and one iOS device; confirm `pressing(2)` / `forcing-attack(2)` / mate guard stay within the 300 ms-desktop-equivalent budget, else drop to d = 1 + quiescence on slow devices | S2 pilot |
-| R7 | Default thresholds per level: mate guard k (2 at runtime, more at authoring), material horizon d (2 at runtime, 3–4 at authoring), loss threshold T, policy tolerance (0.5 in the measurements), node cap (~20,000 proposed) | S1.2 + content reviewer, measured in S2 |
-| R8 | Reconcile with `03-assessment.md` §5.2 and A2 (not edited here). (a) Its A2.3 adjudicates a **simplified perpetual chase** (the chasing side loses); §5.7 here does not adjudicate chase. (b) Partner names: `script` ≈ `scripted`; `spar` (material d = 2 + quiescence, tolerance 1 point) ≈ `safe-sparring(2)` (fits the budget: ~77 ms); `defend` (material search at depth 4 for its move + short mate search) and `counter` (`defend` plus a preference for checks/attacks within 0.5) are **material-based at depth 4**: choosing a move at depth 4 means scoring every root move at depth 4, which exceeds the measured ~720 ms already needed at d = 3 on a full board, so they fit the 300 ms budget only in small endgame positions or after S2 improvements; and a material-only base gives the tie problem of §5.5, which `counter`'s preference partly addresses. Proposed: `defend` ≈ threat tree → `forcing-attack(2)` → `pressing(2)`; `counter` ≈ `pressing(2)` with its tie-break. (c) 03's UA5 (phone cost of partners) is answered by §5.5's desktop numbers + R6 | S1.4 |
+| R1 | Coordinates/notation shown to learners (ICCS, traditional 1–9 per side, both) | **Resolved** by 02-curriculum.md §4: per-side numbers and traditional notation per language; ICCS internal. Vietnamese symbols and English names confirmed by the content reviewer in S2.3; an optional ICCS setting is 02 U5 (S2.20) |
+| R2 | Reference ruleset, no-capture limit, perpetual-chase handling disclosure, repetition outcome in `hold` tasks | **Resolved** by 03-assessment.md §5.5 and §8 (AXF reference; 30-move no-capture limit; chase not adjudicated, learner may not create a third repetition; forced repetition in `hold` = not mated). Rulebook edition: 03 UA3, owner S3.2 |
+| R3 | Whether any assessment counts results against `safe-sparring` or `pressing` opponents (only after `pressing` is validated, §5.5) | **Resolved** by 03-assessment.md §5.2: `safe-sparring` only as safety/development evidence (b08-g1, b09-g1, F2/F2b, F5 continuation), never a result; `pressing` only after validation (S2.18), fallback F1–F5 otherwise |
+| R4 | Licence of this repository; whether a GPL engine may ever ship in the app | Open · **owner decision** (same as 07 S07-U2). Not blocking: option A needs no GPL code |
+| R5 | Supabase: separate `data_v2` column behaviour with old clients; mastery revocation | Column behaviour: open · S2.11 implements and tests with a fake backend; test T15 on a real project is an **owner action** before any deploy that writes `data_v2`. Revocation: **resolved**, none (03 §4.5, 05 §8.6 item 8) |
+| R6 | Phone slowdown factor: run §A.1 and §A.4 (packaged as a page) on at least one Android and one iOS device; confirm `pressing(2)` / `forcing-attack(2)` / mate guard stay within the 300 ms-desktop-equivalent budget, else drop to d = 1 + quiescence on slow devices | Open · S2.6 (bench page and throttled-browser proxy runs; real-device runs need the owner's devices, requested there). A device fallback never counts as evidence (§5.5, 03 §5.6) |
+| R7 | Default thresholds per level: mate guard k (2 at runtime, more at authoring), material horizon d (2 at runtime, 3–4 at authoring), loss threshold T, policy tolerance (0.5 in the measurements), node cap (~20,000 proposed) | **Resolved as defaults** by 03-assessment.md §5.3 (safety-horizon table; T = 2) and §5.2 (τ, node cap); calibration: S2.20 |
+| R8 | Reconcile with `03-assessment.md` §5.2 and A2 (not edited here). (a) Its A2.3 adjudicates a **simplified perpetual chase** (the chasing side loses); §5.7 here does not adjudicate chase. (b) Partner names: `script` ≈ `scripted`; `spar` (material d = 2 + quiescence, tolerance 1 point) ≈ `safe-sparring(2)` (fits the budget: ~77 ms); `defend` (material search at depth 4 for its move + short mate search) and `counter` (`defend` plus a preference for checks/attacks within 0.5) are **material-based at depth 4**: choosing a move at depth 4 means scoring every root move at depth 4, which exceeds the measured ~720 ms already needed at d = 3 on a full board, so they fit the 300 ms budget only in small endgame positions or after S2 improvements; and a material-only base gives the tie problem of §5.5, which `counter`'s preference partly addresses. Proposed: `defend` ≈ threat tree → `forcing-attack(2)` → `pressing(2)`; `counter` ≈ `pressing(2)` with its tie-break. (c) 03's UA5 (phone cost of partners) is answered by §5.5's desktop numbers + R6 | **Resolved** (re-checked in S1.4 against the revised 03): (a) 03 §5.5 and §8.3 no longer adjudicate chase, aligned with §5.7 here; (b) 03 §5.2 uses this document's policy names and chains and withdraws `spar`/`defend`/`counter` and `safe-sparring(4, 0)`; (c) 03 UA5 now points to R6 (S2.6) and `pressing` validation (S2.18) |
+| — | Phones not measured (§2.5) | Open · S2.6 (same as R6) |
 
 ---
 

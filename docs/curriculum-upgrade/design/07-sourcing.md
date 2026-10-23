@@ -3,6 +3,7 @@
 Backlog item S1.3 · Role: curriculum designer + QA. Inputs: [01-audit.md](./01-audit.md),
 [04-architecture.md](./04-architecture.md) (approved), [02-curriculum.md](./02-curriculum.md),
 [03-assessment.md](./03-assessment.md) (attempt 3, HEAD `0125749`). Companion: [05-migration.md](./05-migration.md).
+S1.4 reconciliation: §11 lists the status and owner of each open item ([06-backlog.md](./06-backlog.md)).
 
 Labels: **Verified** (read from the repository at HEAD `0125749`, `file:line` or command given), **Proposal** (policy
 proposed here; binding once the S1 gate approves it), **Unresolved** (owner or reviewer decision needed). This
@@ -255,9 +256,11 @@ Proposed decisions (for DECISIONS.md): **SD1** original positions only (`generat
 bound to id + version + hash, author ≠ reviewer; **SD5** drafts outside the loaders and a release test; **SD6** ids
 never reused (`retired-ids.json`); **SD7** no citation or historical claim from model memory.
 
-| # | Question | Needed from |
+Status after the S1.4 reconciliation; owners are backlog items of [06-backlog.md](./06-backlog.md) or the owner.
+
+| # | Question | Status · owner |
 | --- | --- | --- |
-| S07-U1 | May historical games (option B/C) be used, under which jurisdictions' rules, and with which player-name policy | Owner |
-| S07-U2 | Licence of code and content; contributor terms | Owner (04 R4) |
-| S07-U3 | AXF rulebook edition to cite; noting CXA differences (03 UA3) | Content reviewer |
-| S07-U4 | Whether a human (not only agents) must review a sample of content before release | Owner, S1.4 |
+| S07-U1 | May historical games (option B/C) be used, under which jurisdictions' rules, and with which player-name policy | Open · **owner decision**. Not blocking: course games (option A) cover a10, e09 and m08 (S3.11, S3.15, S3.18) |
+| S07-U2 | Licence of code and content; contributor terms | Open · **owner decision** (04 R4). Not blocking implementation; listed for the release candidate (S4.7) |
+| S07-U3 | AXF rulebook edition to cite; noting CXA differences (03 UA3) | Open · S3.2 (content reviewer, before b05l3 is published; that item also creates `docs/curriculum-upgrade/references.md`, §5.3) |
+| S07-U4 | Whether a human (not only agents) must review a sample of content before release | Open · **owner decision**; S1.4 recommends a human sample of every level's assessment items before any deploy (06-backlog.md §7, PD-44); asked again in S4.7 |

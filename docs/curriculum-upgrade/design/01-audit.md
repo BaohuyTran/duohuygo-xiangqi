@@ -264,7 +264,8 @@ types in §1.4 (no type can judge a non-forcing move) it supports the gap findin
   - with 8 items, 6/8 first-attempt correct (75 %) passes; with 2 items, 0/2 first-attempt correct can pass
     (two wrong attempts, then correct retries);
   - combination hints remain available inside a test and do not affect the result (the hint button in
-    `CombinationView` does not depend on `test`, `LessonPlayer.tsx:583-593`);
+    `CombinationView` does not depend on `test`, `LessonPlayer.tsx:583-593`); as in lessons, the hint is offered only
+    while the learner is on the stored main line (`onMainLine`, `LessonPlayer.tsx:538`, `:583`);
   - prompts name the motif (the items are lesson exercises with lesson prompts such as mate-in-N).
 - Effect of passing: every skipped lesson is marked completed, without XP (`src/App.tsx:140-147`). Failing changes
   nothing. Real hearts are not used (`LessonPlayer.tsx:86`).
@@ -366,7 +367,11 @@ Additional findings not in the historical list (Verified):
 
 ## 7. Unresolved (for S1.3/S1.4)
 
+Both items were resolved by S1.3 (status recorded in the S1.4 reconciliation); no open item remains in this document.
+
 - U1. Whether old completion of a lesson that is later split or retired maps to completion of the new lesson(s)
-  (completion only, never mastery — required by 02-foundation-and-pilot.md).
+  (completion only, never mastery — required by 02-foundation-and-pilot.md). **Resolved** by 05-migration.md §2
+  rule 2 and §8.5: completion only, and only on the successor lesson(s) of 05 §3, derived at read time.
 - U2. Whether retired lesson ids stay in synced progress forever (union) or are pruned by a versioned migration
-  that every client version runs (see A5).
+  that every client version runs (see A5). **Resolved** by 05-migration.md §8.5: they stay (no pruning, because an
+  old build would re-add them); they are harmless inputs to the derived view.
