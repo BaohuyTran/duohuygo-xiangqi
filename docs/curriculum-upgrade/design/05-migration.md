@@ -2,7 +2,7 @@
 
 Backlog item S1.3 · Role: curriculum designer + QA (migration risks). Inputs: [01-audit.md](./01-audit.md) and
 [04-architecture.md](./04-architecture.md) (approved), [02-curriculum.md](./02-curriculum.md) and
-[03-assessment.md](./03-assessment.md) (attempt 3, HEAD `0125749`; still under review — see §11 for what this
+[03-assessment.md](./03-assessment.md) (attempt 3, HEAD `0125749`, unchanged at `83b2ade`; still under review — see §11 for what this
 document depends on). Companion: [07-sourcing.md](./07-sourcing.md) (sourcing, licensing, verification, review
 records).
 
@@ -25,8 +25,8 @@ included (01-audit.md convention). New ids are those of 02-curriculum.md §3.3 (
   exactly like earned ones (§8.1).
 - **Proposal — reuse.** Every old lesson has one **successor** lesson in the new curriculum (none is retired
   outright); 9 old lessons are **keep**, 19 **revise**, 8 **move** (successor at another level); together they have
-  26 distinct successors. Of the 195 exercises, 30 are keep, 141 revise, 16 move to a unit other than their lesson's
-  successor, 8 retire (all learn cards); by slot: 41 learn cards, 100 `core` practice items, 46 `pool` items (§9
+  25 distinct successors. Of the 195 exercises, 30 are keep, 145 revise, 12 move to a unit other than their lesson's
+  successor, 8 retire (all learn cards); by slot: 41 learn cards, 99 `core` practice items, 47 `pool` items (§9
   script output). Reused items are **practice only** — never unit-check, placement or exam items (02 §9.4, 03 §4.2
   rule 4). Items that do not fit a lesson sequence go to a per-unit **extra-practice pool** (Unresolved MU1). All 60
   puzzles stay in the puzzle bank unchanged.
@@ -59,7 +59,8 @@ included (01-audit.md convention). New ids are those of 02-curriculum.md §3.3 (
    counts and reachable points, claimed outcome, accepted alternatives). Mate-in-4 items keep their `firstMoves`
    lists and `npm run content:deep` runs after any change to them (CLAUDE.md "Lesson content").
 7. **One home per position.** An existing position is used in exactly one place (lesson or pool), except that a
-   learn card may show the position of the item that follows it (as today, §9 output: 7 such pairs).
+   learn card may show the position of the item that follows it (as today, §9 command 4: 7 such pairs). During phased
+   publishing this means at most one **live** home in every release state (§8.4.1).
 
 ### 2.1 Dispositions
 
@@ -76,12 +77,12 @@ included (01-audit.md convention). New ids are those of 02-curriculum.md §3.3 (
 | `LEAK` | **Prompt leaks the motif** ("Mate in 2. Look for a double check.", "Black threatens mate in 2"). Allowed for G2/G1 practice (02 §5.2); the item cannot become a G0 item without a neutral prompt, and never an assessment item (rule 4) | per item |
 | `BLK` | **Black version wanted**: a good candidate for a colour-swapped twin (ranks flipped, colours exchanged). The twin is a **new item** (new id, `derivedFrom`, re-verified), counts toward the ≥ 1/3 Black share of 02 rule 2, and is also practice only | per item |
 | `TXT` | Colour-specific or outdated wording ("Red sits at the bottom", "Red's side") must become neutral or name both sides | per item |
-| `POS` | **Unreachable Soldier** (a Soldier that could never stand there in a game: before its river and on an odd file). Legal for the engine, but fails the puzzle verifier's reachable-point rule; 12 positions (§9 command 3). Reposition or remove the Soldier and re-verify | per item |
+| `POS` | **Unreachable Soldier** (a Soldier that could never stand there in a game: before its river on an odd file, or behind its start rank). Accepted by the engine, but an illegal placement under 07-sourcing.md §4.1 (the puzzle verifier's reachable-point rule); 12 positions (§9 command 3). Reposition or remove the Soldier and re-verify | per item |
 | `HINT` | Has per-move `hints`; map them onto the hint ladder (02 §5.2: idea → piece → move) and record their use (03 §3.1) | per item |
 | `NAME` | Uses the name "Palcorner Horse"; rename to the glossary name (02 §4, Ngọa tào Horse) | per item |
 | `MSG` | Claims competence ("Master level!", "Masters find it…"); rewrite: no learner label from completion (03 §9) | per item |
 | `VAR` | Planned use needs the "varied defence" capability (02 e01, Needs architecture confirmation) | per item |
-| `MOTIF` | The explanation and the prompt disagree about the motif; the content reviewer confirms where the item belongs | per item |
+| `MOTIF` | The stored explanation or prompt misdescribes the motif (e.g. claims a quiet move where the main line has none); rewrite the text to what the line actually does | per item |
 
 ---
 
@@ -101,7 +102,7 @@ included (01-audit.md convention). New ids are those of 02-curriculum.md §3.3 (
 | `u3l1` | The Cannon | basics | revise | `b04l1` | `b05l2` | Mate item → b05; POS on a learn card |
 | `u3l2` | The Soldier | basics | revise | `b04l2` | `b05l2` | Mate item → b05; POS on a capture |
 | `u4l1` | Check | basics | revise | `b05l1` | `b02l2` (learn) | Facing-General learn cards → b02l2 (no completion: b02l2 practice is new) |
-| `u4l2` | Checkmate | basics | revise | `b05l2` | `b05l3` (learn), `i10l1`, `i10l2` | Stalemate card → b05l3; two few-piece mates → i10 warm-ups |
+| `u4l2` | Checkmate | basics | revise | `b05l2` | `b05l3` (learn) | Stalemate card → b05l3; all four mates stay in b05l2 (deviation from 02 i10, §11.1 DV5) |
 | `u7l1` | Double Cannon | intermediate | keep | `i05l1` | — | "When it fails" contrast items are new |
 | `u7l2` | Smothered General | intermediate | keep | `i05l2` | — | |
 | `u7l3` | Horse-behind-Cannon | intermediate | keep | `i05l3` | — | |
@@ -109,7 +110,7 @@ included (01-audit.md convention). New ids are those of 02-curriculum.md §3.3 (
 | `u8l2` | Two Chariots | intermediate | keep | `i06l2` | — | |
 | `u8l3` | Chariot and Horse | intermediate | keep | `i06l3` | — | |
 | `u8l4` | Your General attacks | intermediate | keep | `i06l4` | — | |
-| `u9l1` | Forks | intermediate | revise | `i02l1` | `i03l1`, `i03` pool | Two items whose explanation describes a screen change go to discovered attacks (MOTIF); POS ×2 |
+| `u9l1` | Forks | intermediate | revise | `i02l1` | `i02` pool | `#3`, `#5` are Cannon forks (the Cannon checks; every defence supplies the screen for the capture behind) — the only Cannon forks i02l1 gets; their explanations are rewritten (MOTIF); POS ×2 |
 | `u9l2` | Double check | intermediate | keep | `i03l2` | — | |
 | `u9l3` | Stop the threat | intermediate | revise | `i07l1` | `i07` pool | |
 | `u10l1` | Sacrifice to mate | intermediate | revise | `i04l2` | `e02l1` | Split; e02l1 gets two guided warm-ups only (no completion: Expert independent items are new) |
@@ -122,11 +123,11 @@ included (01-audit.md convention). New ids are those of 02-curriculum.md §3.3 (
 | `u12l2` | Horse and Cannon finish | advanced | revise | `a02l3` | `a02` pool | Learn card retired; POS ×1 |
 | `u12l3` | The quiet start | advanced | revise | `a06l3` | `a06` pool | Learn card retired (same idea as u10l2's); POS ×1 |
 | `u13l1` | The only move | expert | revise | `e04l1` | — | POS on the learn card and first item; ≥ half Black needed in e04 (twins) |
-| `u13l2` | Quiet moves, full board | expert | revise | `e01l1` | `e01` pool | VAR |
+| `u13l2` | Quiet moves, full board | expert | revise | `e01l3` | `e01l1`, `e01` pool | Its objective (quiet moves inside full-board mates in 3) is taken over by e01l3 "Long forcing lines"; two items serve e01l1 as practice without completion credit (its learners met only one defence, not several); VAR |
 | `u13l3` | Discovered attack in 3 | expert | revise | `e01l3` | `e01` pool | Learn card retired (idea taught in i03) |
 | `u14l1` | Mate in 4 | expert | revise | `e01l3` | `e01` pool | |
-| `u14l2` | The quiet follow-up | expert | revise | `e01l3` | `e01` pool | Learn card retired |
-| `u15l1` | Quiet mate in 4 | master | move | `e01l3` | `e01` pool | MSG; learn card retired |
+| `u14l2` | The quiet follow-up | expert | revise | `e01l3` | `e01` pool | Learn card retired; `#1`, `#2` contain no quiet move (MOTIF) |
+| `u15l1` | Quiet mate in 4 | master | move | `e01l3` | `e01` pool | MSG; learn card retired; `#5` contains no quiet move (MOTIF) |
 | `u15l2` | Full-board mate in 4 | master | move | `e01l3` | `e01` pool | Learn card retired |
 | `u15l3` | Master challenge | master | move | `e04l1` | `e01` pool | Split; "final test" learn card retired (MSG); mates in 4 → pool only |
 <!-- lesson-map:end -->
@@ -135,7 +136,7 @@ Consequences worth stating:
 
 - **No Master lesson receives old content** (02 §10: "Master reusable 0"). A learner who completed all of u15 gets
   completed Expert lessons (`e01l3`, `e04l1`), not Master ones; nothing in Master is completed by migration.
-- **New lessons stay open work.** Completed-by-migration can cover at most 26 of the 161 new lessons (the distinct successors); the
+- **New lessons stay open work.** Completed-by-migration can cover at most 25 of the 161 new lessons (the distinct successors); the
   rest — every new Black-side, quiet, opening, positional, endgame and practical lesson — is not completed.
 - **Unlocking does not jump.** Within a level, a lesson is available only when every earlier lesson is completed
   (Verified `src/lessons/progress.ts:11-26`); a completed later lesson shows as completed but does not unlock the
@@ -146,10 +147,10 @@ Consequences worth stating:
 
 | Level | Reused `core` items | Reused `pool` items | Black items reused | Notes |
 | --- | ---: | ---: | ---: | --- |
-| Basic | 24 | 0 | 0 | Every basic practice item reused (2 of them as i10 warm-ups); Black share must come from twins (`BLK`) and new items |
-| Intermediate | 52 | 8 | 0 | i05/i06 attack lessons nearly complete; their defend-as-Black lessons (i05l4, i06l5) are new |
+| Basic | 26 | 0 | 0 | Every basic practice item reused; Black share must come from twins (`BLK`) and new items |
+| Intermediate | 50 | 8 | 0 | i05/i06 attack lessons nearly complete; their defend-as-Black lessons (i05l4, i06l5) are new |
 | Advanced | 7 | 18 | 0 | Forcing-line and finishing practice only; a01, a03–a05, a07–a10 are new |
-| Expert | 17 | 20 | 0 | e01 (calculation), e04l1 (only move), two guided warm-ups in e02l1; the rest of e02–e09 is new |
+| Expert | 16 | 21 | 0 | e01 (calculation), e04l1 (only move), two guided warm-ups in e02l1; the rest of e02–e09 is new |
 | Master | 0 | 0 | 0 | |
 
 ---
@@ -191,10 +192,9 @@ disposition (§2.1) · target and slot (§2 rule 3) · changes (§2.2). Every it
 | `u4l1#2` | L | keep | `b05l1` · learn | — |
 | `u4l1#3`, `u4l1#4`, `u4l1#5` | mv/chk, mv/any, cap | revise | `b05l1` · core | FB, BLK |
 | `u4l2#0` | L | keep | `b05l2` · learn | — |
-| `u4l2#2`, `u4l2#3` | m1 | revise | `b05l2` · core | FB, LEAK, BLK |
+| `u4l2#1`, `u4l2#2`, `u4l2#3` | m1 | revise | `b05l2` · core | FB, LEAK, BLK |
 | `u4l2#4` | L | revise | `b05l3` · learn | TXT (stalemate wording checked against the reference rulebook, 03 §8.1) |
-| `u4l2#1` | m1 | move | `i10l1` · core | FB, LEAK |
-| `u4l2#5` | m1 | move | `i10l2` · core | FB |
+| `u4l2#5` | m1 | revise | `b05l2` · core | FB, LEAK (prompt names the Soldier) |
 | `u7l1#0` | L | keep | `i05l1` · learn | — |
 | `u7l1#1`–`#5` | m1 ×3, c2m ×2 | revise | `i05l1` · core | FB, LEAK, BLK (#1–#3) |
 | `u7l2#0` | L | keep | `i05l2` · learn | — |
@@ -211,8 +211,8 @@ disposition (§2.1) · target and slot (§2 rule 3) · changes (§2.2). Every it
 | `u8l4#1`–`#5` | m1 ×3, c2m ×2 | revise | `i06l4` · core | FB, LEAK, BLK (#1–#3) |
 | `u9l1#0` | L | keep | `i02l1` · learn | — |
 | `u9l1#1`, `u9l1#2`, `u9l1#4` | c2w | revise | `i02l1` · core | FB, LEAK, HINT, BLK |
-| `u9l1#3` | c2w | move | `i03l1` · core | FB, LEAK, HINT, POS (Red Soldier on d1), MOTIF |
-| `u9l1#5` | c2w | move | `i03` · pool | FB, LEAK, HINT, POS (Red Soldier on h3), MOTIF |
+| `u9l1#3` | c2w | revise | `i02l1` · core | FB, LEAK, HINT, POS (Red Soldier on d1, behind its start rank), MOTIF (Cannon fork: after c8-c7+ every Black reply leaves Cc7xh7 winning the Chariot; explanation must say the Cannon checks and every defence supplies the screen) |
+| `u9l1#5` | c2w | revise | `i02` · pool | FB, LEAK, HINT, POS (Red Soldier on h3), MOTIF (Cannon fork: after g6-g8+ every reply leaves Cg8xa8 winning the Horse) |
 | `u9l2#0` | L | keep | `i03l2` · learn | — |
 | `u9l2#1`–`#3` | c2m | revise | `i03l2` · core | FB, LEAK, HINT |
 | `u9l3#0` | L | keep | `i07l1` · learn | — |
@@ -252,21 +252,25 @@ disposition (§2.1) · target and slot (§2 rule 3) · changes (§2.2). Every it
 | `u13l1#0` | L | revise | `e04l1` · learn | POS (Red Soldier on b3) |
 | `u13l1#1` | def2 | revise | `e04l1` · core | FB, LEAK, POS (Red Soldier on b3) |
 | `u13l1#2`–`#5` | def2 | revise | `e04l1` · core | FB, LEAK, BLK |
-| `u13l2#0` | L | revise | `e01l1` · learn | TXT (rewrite toward "several defences") |
-| `u13l2#1`–`#3` | c3m | revise | `e01l1` · core | FB, LEAK, VAR |
+| `u13l2#0` | L | revise | `e01l3` · learn | TXT (second learn card of e01l3: quiet moves inside long forcing lines) |
+| `u13l2#1` | c3m | revise | `e01l3` · core | FB, LEAK |
+| `u13l2#2` | c3m | revise | `e01l1` · core | FB, LEAK, VAR |
+| `u13l2#3` | c3m | revise | `e01l1` · core | FB, LEAK, VAR, MOTIF (no quiet move: x+X) |
 | `u13l2#4`, `u13l2#5` | c3m | revise | `e01` · pool | FB, LEAK |
 | `u13l3#0` | L | retire | — | Discovered attacks are taught in i03; e01l3 keeps `u14l1#0` |
 | `u13l3#1` | c3m | revise | `e01l3` · core | FB, LEAK |
 | `u13l3#2`, `u13l3#3` | c3m | revise | `e01` · pool | FB, LEAK |
 | `u14l1#0` | L | keep | `e01l3` · learn | — |
-| `u14l1#1`, `u14l1#2` | c4m | revise | `e01l3` · core | FB, LEAK |
-| `u14l1#3`, `u14l1#4` | c4m | revise | `e01` · pool | FB, LEAK |
+| `u14l1#1` | c4m | revise | `e01l3` · core | FB, LEAK |
+| `u14l1#2`–`#4` | c4m | revise | `e01` · pool | FB, LEAK |
 | `u14l2#0` | L | retire | — | One learn card per lesson; e01l3 keeps `u14l1#0` |
-| `u14l2#1` | c4m | revise | `e01l3` · core | FB, LEAK |
-| `u14l2#2`–`#4` | c4m | revise | `e01` · pool | FB, LEAK |
+| `u14l2#3` | c4m | revise | `e01l3` · core | FB, LEAK |
+| `u14l2#1`, `u14l2#2` | c4m | revise | `e01` · pool | FB, LEAK, MOTIF (no quiet move: +Xx+, +xx+, although prompt and explanation claim one) |
+| `u14l2#4` | c4m | revise | `e01` · pool | FB, LEAK |
 | `u15l1#0` | L | retire | — | MSG ("Masters find it…") |
 | `u15l1#1` | c4m | revise | `e01l3` · core | FB, LEAK, MSG |
-| `u15l1#2`–`#5` | c4m | revise | `e01` · pool | FB, LEAK, MSG |
+| `u15l1#2`–`#4` | c4m | revise | `e01` · pool | FB, LEAK, MSG |
+| `u15l1#5` | c4m | revise | `e01` · pool | FB, LEAK, MSG, MOTIF (no quiet move: xxx+) |
 | `u15l2#0` | L | retire | — | Covered by e01l3's learn card |
 | `u15l2#1` | c4m | revise | `e01l3` · core | FB, LEAK |
 | `u15l2#2`–`#5` | c4m | revise | `e01` · pool | FB, LEAK |
@@ -422,6 +426,10 @@ interface ApplicationGrant { at: string; via: 'practical' | 'placement' | 'exam'
 // duohuygo:learning.attempts.v1 — local only, capped (e.g. newest 2,000 entries): the attempt record of 03 §3.1.
 ```
 
+- **Attempt log local only:** this departs from 04 §5.8, which merges `attempts` by id (capped). Reasons: size of the
+  account row, and 03 §3.1 allows it ("may stay local"). What other devices need from it — which assessment items the
+  learner has seen — syncs as the small `exposed` set (MU6).
+
 - Provenance values are those of 03 §2 rule 5 plus `lesson` (completion by working through). `migration` is **never
   stored**: it exists only in the derived view (§8.4).
 - After the upgrade every learner has `mastered = {}` and `applied = {}`; the UI shows "not assessed yet", never
@@ -449,18 +457,59 @@ export function completedView(records: LearningRecords, v1Ids: readonly string[]
   construction; (2) a mapping error can be fixed by shipping a corrected map — a materialised grant could never be
   removed again because completion merges by union; (3) old builds keep adding legacy ids to v1 during the
   mixed-version period (§8.1) and those are picked up with no "has this run?" flag; (4) rollback has nothing to undo.
-- **Phased publishing** (02 §10 reduction 3): `LEGACY_MAP` contains entries only for legacy lessons whose level has
-  been replaced; until then those legacy lessons stay live under their old ids and keep writing to the v1 list as
-  today. Adding a level's entries bumps `LEGACY_MAP_VERSION`.
+- **Deviations recorded:** the derived grant has `at: null` and no score or content version, which departs from
+  03 §2 rule 5 ("each grant records provenance, date, score and content version"): the v1 data has none of them.
+  The derived view itself departs from 04 §5.8's materialising `migrate()` for the reasons above. Both are proposed
+  decisions (§10).
+
+### 8.4.1 Phased publishing — Proposal
+
+02 §10 (reduction 3) allows publishing level by level while later levels keep the legacy content. Eight legacy
+lessons have a successor at another level (`u10l2`, `u10l3` → Advanced; `u11l1`–`u11l3` → Intermediate; `u15l1`–`u15l3`
+→ Expert), so the order of retirement must be defined.
+
+Rules:
+
+- **P1 — retirement follows the successor.** A legacy lesson stays live (old id, old file, writing to the v1 list as
+  today) until the release that publishes the level of its successor (every legacy lesson has exactly one successor
+  level, §3). In that release the legacy lesson is removed and its `LEGACY_MAP` entry is added (version bump). So the
+  map in any release contains exactly the retired legacy lessons plus the orphans, and every target it names is
+  published — T1 holds in every release state.
+- **P2 — one live home.** A reused item is published in a new lesson or pool only in a release where its legacy
+  lesson is retired. An item whose target level ships later than its legacy lesson's successor is **held** (served
+  nowhere) in between. Rule 7 of §2 therefore reads "at most one live home in every release state".
+- **P3 — remainders of a split legacy unit** keep their unit file and ids; the unit's `track` may be changed to the
+  successor's level, so the remaining legacy lessons appear at the level where their content will live. Ids do not
+  change, so stored progress is unaffected; within that track the usual linear unlocking applies
+  (`src/lessons/progress.ts:11-26`) and the first lesson of the track is open.
+- **P4 — a level with no content** (legacy lessons retired, new units not yet published) is not shown: Home lists
+  only tracks present in the content and the jump banner only considers those (Verified `progress.ts:71`).
+
+Example with the order Basic + Intermediate → Advanced → Expert → Master (the order itself is S1.4's choice; the
+rules are not):
+
+| Release | New levels published | Legacy lessons retired (map entries added) | Legacy lessons still live | Held items |
+| --- | --- | --- | --- | --- |
+| R0 (today) | — | — | all 36 | — |
+| R1 | Basic, Intermediate | `u1`–`u4`, `u7`–`u9` (all), `u10l1`, `u11l1`–`u11l3` | `u10l2`, `u10l3` (unit `u10` moved to the `advanced` track, P3), `u12`–`u15` | `u10l1#3`, `#4` (→ e02l1); `u11l3#3`, `#4` (→ a07 pool) |
+| R2 | Advanced | `u10l2`, `u10l3`, `u12l1`–`u12l3` | `u13`–`u15` | `u10l1#3`, `#4` |
+| R3 | Expert | `u13`–`u15` (all) | — | — (Master track empty until R4, P4) |
+| R4 | Master | — | — | — |
+
+Learners who completed `u11l*` see `i03l1`, `i04l2`, `i07l1` completed from R1; learners who completed `u10l2`/`u10l3`
+keep those legacy lessons (now under Advanced) until R2, when `a06l3`/`a02l3` show as completed. Held items were
+practice in their legacy lessons until those retired; they are unavailable until their target level ships (one
+release for `u11l3#3`, `#4`; two for `u10l1#3`, `#4` in this example).
 
 ### 8.5 Behaviour by case — Proposal (rules Verified where cited)
 
 | Case | Behaviour |
 | --- | --- |
 | Old lesson completed, single successor (e.g. `u7l1`) | Successor shown completed, provenance `migration`; no mastery, no applied |
-| Old lesson split (`u10l1`, `u11l3`, `u15l3`; and every lesson with pool/secondary items) | Only the successor(s) in "Completion →" are completed; secondary lessons and pools are not |
-| Two old lessons → one successor (e.g. `u13l3`, `u14l1`, `u14l2`, `u15l1`, `u15l2` → `e01l3`) | Completed if **any** of them is completed; `from` lists all of them |
-| Old lesson completed by passing a jump test | Identical to the above: v1 cannot tell them apart (Verified `App.tsx:143` vs `:168`), and the old jump test is not an assessment under 03 §7 (no score, retries, hints, motif prompts; 01-audit §3.4). Completed only |
+| Old lesson split (`u10l1`, `u11l3`, `u13l2`, `u15l3`; and every lesson with pool/secondary items) | Only the successor(s) in "Completion →" are completed; secondary lessons and pools are not |
+| Two old lessons → one successor (e.g. `u13l2`, `u13l3`, `u14l1`, `u14l2`, `u15l1`, `u15l2` → `e01l3`) | Completed if **any** of them is completed; `from` lists all of them |
+| Old lesson completed by passing a jump test | Identical to the above: v1 cannot tell them apart (Verified `App.tsx:143` vs `:168`), and the old jump test is not an assessment under 03 §7 (no score, retries, hints, motif prompts; 01-audit §3.4). Completed only. The old test samples at most 8 items across all skipped lessons (`src/lessons/progress.ts:55-60`), so a jump-completed lesson may have had **no** item answered; mapping it to completed is the one overstatement this migration accepts, limited to completion |
+| Successor teaches more than the old lesson (e.g. `a06l3` adds non-forced quiet threats that `u10l2` never taught; `i04l2` adds deflection; `e01l3` adds mates in 3–4 the learner may not have met) | Still completed (completion means "worked through the content", 03 §2), never mastered; the unit check covers the new objectives. Replay is available |
 | Orphan / unknown id in v1 (§6, typos, corrupt entries) | Ignored; kept in v1 untouched |
 | Retired ids in the account | Stay forever (union, `merge.ts:66`); harmless inputs to the derived view. 01-audit U2: **do not prune** (an old build would re-add them) |
 | New lesson whose content changed after a migrated completion | Still completed (completion is not invalidated by a new version, 03 §3.3); replay available |
@@ -492,11 +541,20 @@ export function completedView(records: LearningRecords, v1Ids: readonly string[]
    monotone). `applied` = per task the higher score, same ties. `exposed` = union. Unknown top-level fields: local
    value, else remote (preserved). Missing or corrupt remote → ignored field by field, never removes local data
    (same principle as `parseRemote`).
-5. **Fingerprint and scheduling.** The sync snapshot and `fingerprint` must include the synced records, otherwise a
-   change that touches only the new key is skipped by `scheduleSync` (§8.2). The account `store` wrapper already
-   schedules a sync on any key write (`service.ts:191-203`).
-6. **Missing column.** If a push with `data_v2` fails because the column does not exist (migration not run),
-   retry with `{ user_id, data }` only and report `sync: 'error'` for the v2 part; v1 sync keeps working.
+5. **Fingerprint and scheduling.** The sync snapshot and `fingerprint` must include the synced records. Two code
+   paths use the fingerprint: the scheduled-sync skip (`service.ts:186`) and the push skip in `syncOnce`
+   (`service.ts:149`, push only when the merged fingerprint differs from the remote one). If records are left out,
+   a records-only change is never synced, and a records difference with an otherwise equal remote is never pushed.
+   The account `store` wrapper already schedules a sync on any key write (`service.ts:191-203`).
+6. **Missing column (SQL migration not run yet).** A sync pulls before it pushes (`service.ts:138`) and any thrown
+   error ends the whole sync with `sync: 'error'` (`service.ts:171-172`), so both directions need a fallback:
+   - **pull:** if `select('data, data_v2')` fails with an unknown-column error (expected PostgreSQL code `42703`;
+     confirm in T15), re-run `select('data')`, mark `data_v2` unavailable for this session, skip the records merge
+     (local records stay as they are);
+   - **push:** while `data_v2` is unavailable, or if an upsert fails with an unknown-column error (expected
+     PostgREST code `PGRST204`; confirm in T15), upsert `{ user_id, data }` only;
+   - v1 data syncs normally; the account shows `sync: 'error'` so the problem stays visible; new-course records
+     remain local until the column exists. The check is repeated on the next app start.
 7. **Higher schema seen remotely** (`data_v2.schema` > supported): merge what is understood, preserve the rest,
    never lower `schema` (additive-only rule, §8.9).
 8. **Mastery revocation:** none (03 §2: not revoked). A monotone merge cannot express it anyway; recorded, not a
@@ -514,13 +572,17 @@ export function completedView(records: LearningRecords, v1Ids: readonly string[]
   reverse map would grant old completion for different content.
 - **Data rollback:** never drop `data_v2` or the new local keys during a rollback.
 - **Map correction:** ship a corrected `LEGACY_MAP` (version bump); the derived view changes everywhere at once.
+  Corrections may only **add** targets. Removing a target would remove derived completion, which 03 §2 says is lost
+  only by Reset; a target is removed only when the mapping is shown to be wrong, as a recorded decision, and the
+  change is disclosed to learners as an exception.
 
 ### 8.8 Idempotency and determinism — Proposal
 
 - `legacyCompletion` and `completedView` are pure functions of their inputs; loading writes nothing.
-- The records merge is idempotent (`merge(merge(l, r), r) = merge(l, r)`) and commutative (deterministic
-  tie-breaks), so two devices converge regardless of sync order; v1 merges keep their Verified properties
-  (`merge.ts:21-22`).
+- The records merge is idempotent (`merge(merge(l, r), r) = merge(l, r)`) and commutative for `completed`,
+  `mastered`, `applied` and `exposed` (deterministic tie-breaks), so two devices converge on those regardless of
+  sync order. It is **not** commutative for unknown top-level fields (local value, else remote — the same exception
+  as the per-device preferences of `merge.ts:15-16, 21-22`); those fields carry no progress state for this build.
 
 ### 8.9 Corrupt data and format evolution — Proposal
 
@@ -539,7 +601,7 @@ export function completedView(records: LearningRecords, v1Ids: readonly string[]
 
 | # | Test | Kind |
 | --- | --- | --- |
-| T1 | `LEGACY_MAP` lists every lesson id of today's content and the 9 orphans exactly once; every target exists in the new content; the map equals the §3 "Completion →" column | unit (content) |
+| T1 | **Per planned release state** (a table in the test: published levels, live legacy lessons): `LEGACY_MAP` contains exactly the retired legacy lessons (with their §3 "Completion →" targets) and the 9 orphans; every target is published in that state; no live legacy lesson is in the map; every published reused item's `legacyRef` belongs to a retired legacy lesson (P1, P2); no position has two live homes | unit (content) |
 | T2 | Every target of an old lesson contains ≥ 1 `core` item whose `legacyRef` belongs to that old lesson; every reused item's position equals its `legacyRef` position or carries a revision reason | content validator |
 | T3 | `legacyCompletion`: single, split and many-to-one cases; `from` lists; orphans and unknown ids ignored; duplicates; empty; corrupt v1 → none | unit |
 | T4 | Migration never yields `mastered` or `applied`, for any input (exhaustive over the map + random id sets) | unit |
@@ -548,20 +610,22 @@ export function completedView(records: LearningRecords, v1Ids: readonly string[]
 | T7 | Rollback simulation on one store: new build writes records; today's `readSnapshot`/`writeSnapshot`/`mergeSnapshots` run on the same store leave `learning.records.v1` byte-identical; rolling forward gives the same view | unit |
 | T8 | Mixed builds on one account (fake backend with `data` + `data_v2`): an old-build push leaves `data_v2`; a new build merges both; a legacy completion made by the old build appears in the new view | unit |
 | T9 | Records merge: union, higher score, tie later date, deterministic tie-breaks; idempotent, commutative, monotone (seeded random records) | unit |
-| T10 | Sync is scheduled after a records-only change (fingerprint covers records) | service test |
-| T11 | Missing `data_v2` column → fallback push of `data` only; status error; v1 data synced | service test |
+| T10 | A records-only change schedules a sync, and a records difference is pushed even when the v1 part equals the remote (both fingerprint uses, `service.ts:149, 186`) | service test |
+| T11 | Missing `data_v2` column: the pull falls back to `select('data')`, the push to `{ user_id, data }`; v1 data synced both ways; local records untouched; status `error` | service test (fake backend that rejects the column) |
 | T12 | Corrupt local records → backup key written, empty record, app usable; corrupt remote `data_v2` ignored; higher remote `schema` preserved | unit |
 | T13 | Reset clears v1 completed and records (incl. mastered/applied/exposed) and the attempt log; puzzles, settings and gamification unchanged | unit + App component |
 | T14 | Gamification untouched: migration does not change the stored gamification state; the XP rule decided in MU4 | unit |
 | T15 | Real Supabase project (or `supabase start`): an upsert with only `data` leaves `data_v2` unchanged on update and `null` on insert; RLS still limits both columns to the owner | manual/integration, before deploy |
 | T16 | UI: Home shows migrated lessons as completed and never as mastered; units show "not assessed yet"; the progress count includes migrated completion | component |
 | T17 | Purity: migration and assessment modules do not import `src/gamification` (03 §9 rule 1) | unit |
+| T18 | New-course ids are never written to `progress.completedLessons.v1`: completing a new lesson, passing placement, a unit check or a practical task writes only `learning.records.v1` (store spy) | unit + App component |
 
 ### 8.11 Rollout order — Proposal
 
 1. Run the SQL migration (§8.6 item 1) and T15 on the real project.
 2. Ship the build with the new repository, derived view, records sync and tests (no new content needed).
-3. Publish levels; each adds its `LEGACY_MAP` entries and removes the replaced legacy lessons in the same build.
+3. Publish levels following §8.4.1: each release removes the legacy lessons whose successor level it publishes, adds
+   their `LEGACY_MAP` entries, publishes the reused items whose legacy lesson is retired, and holds the others.
 4. Keep the v1 keys, `data` and the map indefinitely.
 
 ---
@@ -646,7 +710,7 @@ console.log({ lessons: lessons.length, exercises: exercises.length, puzzles: puz
 console.log(problems.length ? problems.join('\n') : 'OK: every lesson, exercise and puzzle is mapped exactly once');
 ```
 
-Output at HEAD `0125749` (with this document):
+Output on HEAD `83b2ade` with this document (attempt 2):
 
 ```
 {
@@ -656,9 +720,9 @@ Output at HEAD `0125749` (with this document):
   newLessonsIn02: 161,
   newUnitsIn02: 49,
   lessonDispositions: { revise: 19, keep: 9, move: 8 },
-  exerciseDispositions: { revise: 141, keep: 30, move: 16, retire: 8 },
-  slots: { learn: 41, core: 100, pool: 46, retired: 8 },
-  successors: 26
+  exerciseDispositions: { revise: 145, keep: 30, move: 12, retire: 8 },
+  slots: { learn: 41, core: 99, pool: 47, retired: 8 },
+  successors: 25
 }
 OK: every lesson, exercise and puzzle is mapped exactly once
 ```
@@ -681,6 +745,11 @@ Other commands quoted in this document (scratch scripts, read-only):
 4. Duplicates up to file mirror and colour swap over the 195 lesson positions and 60 puzzles: 7 groups, each a learn
    card showing the position of the item after it (`u1l1#0=#1`, `u1l1#2=#3`, `u9l3#0=#1`, `u11l2#0=#1`,
    `u11l3#0=#1`, `u13l1#0=#1`, `u15l3#0=#1`); no lesson position equals a puzzle.
+5. Main-line signatures (`MOTIF` basis for the quiet-move claims): a scratch `tsx` script plays each combination's
+   stored `solution` with `makeMove` and prints, per learner move, `+` check, `X` capture with check, `x` capture,
+   `.` quiet (`isInCheck` after the move). Relevant output: `u13l2#3 x+X`, `u14l2#1 +Xx+`, `u14l2#2 +xx+`,
+   `u15l1#5 xxx+` (no quiet move although the lesson's prompt/explanation claim one); the core items chosen for
+   e01l3 contain one: `u13l2#1 +.X`, `u14l2#3 +.++`, `u15l1#1 x.X+`.
 
 ---
 
@@ -690,18 +759,24 @@ Proposed decisions (DECISIONS.md):
 
 - **MD1** Successor rule (§2 rule 2) and the §3 map; reused items are practice only.
 - **MD2** Legacy completion is derived at read time from the v1 list and a versioned `LEGACY_MAP`; never stored,
-  never mastery or applied; old jump-test completions treated like any old completion.
+  never mastery or applied; old jump-test completions treated like any old completion. Records two deviations:
+  from 04 §5.8 (which materialises a `migrate()` result) and from 03 §2 rule 5 (a migrated grant has `at: null`, no
+  score, no content version — the v1 data has none).
 - **MD3** New evidence in `learning.records.v1` (local) and a new `data_v2` column (account); `data` keeps the v1
   shape; v1 keys are kept and dual-written for still-live legacy lessons, never deleted; no reverse map.
 - **MD4** Orphan ids and ids whose meaning changed on 2026-10-21 are read by their current meaning / ignored.
 - **MD5** Additive-only changes within a key; breaking changes get a new key and column.
+- **MD6** Phased publishing rules P1–P4 (§8.4.1): a legacy lesson retires with its successor's level; one live home
+  per position; held items; `LEGACY_MAP` corrections add targets only.
+- **MD7** The attempt log stays local (departs from 04 §5.8); the `exposed` id set syncs (MU6).
 
 Backlog items (S1.4 to place):
 
 - Storage: `createLearningRepository`, derived view, corrupt-data handling, Reset change (T3–T7, T12–T14, T17).
 - Sync: SQL migration file, `data_v2` pull/push/merge, fingerprint, missing-column fallback (T8–T11); T15 on a real
   project before the first deploy that writes `data_v2`.
-- Content: `legacyRef` field and validator check (T1, T2); POS fixes for the 12 positions; FB rewrite of all 146 reused
+- Content: `legacyRef` field and validator check, per release state (T1, T2); the transitional exemption of legacy
+  lessons from the release test (07-sourcing.md §6); POS fixes for the 12 positions, re-verifying each claim; FB rewrite of all 146 reused
   practice items (112 share an explanation, 26 have none, 8 have a unique one that still lacks the 02 §7 parts); NAME, MSG, TXT fixes; BLK twins as needed per level.
 - UI: migrated-completion display and "not assessed yet" (T16); optional one-time notice explaining the new course
   (MU5).
@@ -723,6 +798,17 @@ Backlog items (S1.4 to place):
 §8, the "Reuses" lines, §9.4 and §10 ("Master reusable 0"); and 03-assessment.md attempt 3: §2 (states, provenance,
 merge), §3.1 (attempt record), §3.3 (versions), §4.2 rule 4 (unseen positions), §4.3 (exposure), §9 (puzzles never
 count). If a later revision renames, adds or removes a lesson that appears in the "Completion →" or target columns,
-the §9 script reports it (unknown target) and the map must be updated. Deviations from 02's "Reuses" lines, made on
-purpose: `u12l*` go to a02/a06 rather than e01; `u10l1` gives two items (not a lesson) to e02; `u9l1#3`/`#5` go to i03
-(MOTIF); u4l2's few-piece mates give two items to i10.
+the §9 script reports it (unknown target) and the map must be updated.
+
+### 11.1 Deviations from 02-curriculum.md (for S1.4 to reconcile)
+
+| # | 02 says | This map does | Reason |
+| --- | --- | --- | --- |
+| DV1 | §3.3 (02:116-118): old completion maps to "completed" on the new lesson(s) in the unit's "Reuses" line | Completion goes **only to successors** (§2 rule 2); lessons that receive secondary items, pools or learn cards get none | A "Reuses" line lists every lesson that borrows items; granting completion to all of them would mark lessons as worked through when the learner met one warm-up item of them. S1.4 should reword 02 §3.3 to "the successor lesson(s) of 05-migration.md §3" |
+| DV2 | b06 Reuses: `capture` items of `u2l1`, `u2l2` (02:403) | Only `u2l1#3` goes to b06 (b06l2); `u2l2#4` goes to b03l3 | `u2l2#4` ("Win the biggest piece … watch out for blocked legs") practises Horse legs, which is b03l3's objective ("What can they take?"); `u2l1#3` (a defended piece) is b06l2's |
+| DV3 | b07 Reuses: `capture` items of `u2l*`, `u3l1`; win-material puzzles (02:427) | b07 gets **no** lesson item; the 8 win-material puzzles are linked as optional practice (§5) | Each existing capture item has a better home in b03/b04/b06 (rule 7: one home). The items are judged by a 1-ply exchange estimate (01-audit §3.2), while b07 counts captures and recaptures over several moves; b07 needs new items |
+| DV4 | b02 Reuses: `u1l2`, `u1l3` (02:303) | Also `u4l1#0`, `#1` (facing Generals, pinned piece) as b02l2 learn cards | They teach exactly b02l2's objective "Facing Generals"; learn cards only, no completion |
+| DV5 | i10 Reuses: few-piece items of `u4l2` (02:761) | None: `u4l2#1` and `#5` stay in b05l2 | Reviewer finding: they fit i10 loosely (in `#1` the General only covers a file; in `#5` the Chariot does the work while the prompt names the Soldier) |
+| DV6 | a02 / e01 Reuses list `u12l*` for both | `u12l*` → a02l3 / a06l3 (+ pools); e01 gets `u13`–`u15` | Calculation depth grows from a02 to e01; Expert pools are already large (21 items) |
+| DV7 | e02 Reuses: `u10l1` | Two items of `u10l1` as e02l1 guided warm-ups, no completion | `u10l1`'s successor is i04l2 (its learn card states decoying the General); Expert items must be harder |
+| DV8 | e01 Reuses: `u13l2` among calculation practice | `u13l2`'s successor is e01l3 ("Long forcing lines"); two items serve e01l1 without completion | Reviewer finding: e01l1 is about several defending branches, which u13l2's single-defence lines did not teach |
