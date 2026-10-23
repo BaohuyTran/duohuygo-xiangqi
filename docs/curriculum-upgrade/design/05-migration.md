@@ -79,7 +79,7 @@ included (01-audit.md convention). New ids are those of 02-curriculum.md §3.3 (
 | `LEAK` | **Prompt leaks the motif** ("Mate in 2. Look for a double check.", "Black threatens mate in 2"). Allowed for G2/G1 practice (02 §5.2); the item cannot become a G0 item without a neutral prompt, and never an assessment item (rule 4) | per item |
 | `BLK` | **Black version wanted**: a good candidate for a colour-swapped twin (ranks flipped, colours exchanged). The twin is a **new item** (new id, `derivedFrom`, re-verified), counts toward the ≥ 1/3 Black share of 02 rule 2, and is also practice only | per item |
 | `TXT` | Colour-specific or outdated wording ("Red sits at the bottom", "Red's side") must become neutral or name both sides | per item |
-| `POS` | **Unreachable Soldier** (a Soldier that could never stand there in a game: before its river on an odd file, or behind its start rank). Accepted by the engine, but an illegal placement under 07-sourcing.md §4.1 (the puzzle verifier's reachable-point rule); 12 positions (§9 command 3). Reposition or remove the Soldier and re-verify | per item |
+| `POS` | **Unreachable Soldier** (a Soldier that could never stand there in a game: before its river on an odd file, or behind its start rank; or two own Soldiers on one file before the river, added by D5). Accepted by the engine, but an illegal placement under 07-sourcing.md §4.1 (the puzzle verifier's reachable-point rule); 13 positions (§9 command 3). Reposition or remove the Soldier and re-verify | per item |
 | `HINT` | Has per-move `hints`; map them onto the hint ladder (02 §5.2: idea → piece → move) and record their use (03 §3.1) | per item |
 | `NAME` | Uses the name "Palcorner Horse"; rename to the glossary name (02 §4, Ngọa tào Horse) | per item |
 | `MSG` | Claims competence ("Master level!", "Masters find it…"); rewrite: no learner label from completion (03 §9) | per item |
@@ -258,7 +258,8 @@ disposition (§2.1) · target and slot (§2 rule 3) · changes (§2.2). Every it
 | `u13l2#1` | c3m | revise | `e01l3` · core | FB, LEAK |
 | `u13l2#2` | c3m | revise | `e01l1` · core | FB, LEAK, VAR |
 | `u13l2#3` | c3m | revise | `e01l1` · core | FB, LEAK, VAR, MOTIF (no quiet move: x+X) |
-| `u13l2#4`, `u13l2#5` | c3m | revise | `e01` · pool | FB, LEAK |
+| `u13l2#4` | c3m | revise | `e01` · pool | FB, LEAK, POS (two Black Soldiers on file a before the river, a5 + a6) |
+| `u13l2#5` | c3m | revise | `e01` · pool | FB, LEAK |
 | `u13l3#0` | L | retire | — | Discovered attacks are taught in i03; e01l3 keeps `u14l1#0` |
 | `u13l3#1` | c3m | revise | `e01l3` · core | FB, LEAK |
 | `u13l3#2`, `u13l3#3` | c3m | revise | `e01` · pool | FB, LEAK |
@@ -768,7 +769,9 @@ Other commands quoted in this document (scratch scripts, read-only):
    (not exported, so copied into a scratch `tsx` script) applied to every lesson position via `positionOf`
    (`src/lessons/answers.ts`). Output: `positions checked: 195; failing piece-count/reachable-point rules: 12` —
    `u1l3#4`, `u3l1#2`, `u3l2#3`, `u9l1#3`, `u9l1#5`, `u11l1#4`, `u12l1#1`, `u12l1#5`, `u12l2#2`, `u12l3#3`, `u13l1#0`,
-   `u13l1#1`, all an unreachable Soldier; no piece-count failure.
+   `u13l1#1`, all an unreachable Soldier; no piece-count failure. Since S2.1/S2.3 this is reproducible in the repository
+   with `legacyPlacementNotices` (`src/content/validate.ts`), and the D5 rule "at most one own Soldier per file before
+   it crosses the river" adds a 13th: `u13l2#4` (two Black Soldiers on a5 and a6).
 4. Duplicates up to file mirror and colour swap over the 195 lesson positions and 60 puzzles: 7 groups, each a learn
    card showing the position of the item after it (`u1l1#0=#1`, `u1l1#2=#3`, `u9l3#0=#1`, `u11l2#0=#1`,
    `u11l3#0=#1`, `u13l1#0=#1`, `u15l3#0=#1`); no lesson position equals a puzzle.
@@ -804,7 +807,7 @@ the level batches S3.1–S3.19, UI S2.13; listed here as written in S1.3):
 - Sync: SQL migration file, `data_v2` pull/push/merge, fingerprint, missing-column fallback (T8–T11); T15 on a real
   project before the first deploy that writes `data_v2`.
 - Content: `legacyRef` field and validator check, per release state (T1, T2); the transitional exemption of legacy
-  lessons from the release test (07-sourcing.md §6); POS fixes for the 12 positions, re-verifying each claim; FB rewrite of all 146 reused
+  lessons from the release test (07-sourcing.md §6); POS fixes for the 13 positions, re-verifying each claim; FB rewrite of all 146 reused
   practice items (112 share an explanation, 26 have none, 8 have a unique one that still lacks the 02 §7 parts); NAME, MSG, TXT fixes; BLK twins as needed per level.
 - UI: migrated-completion display and "not assessed yet" (T16); optional one-time notice explaining the new course
   (MU5).

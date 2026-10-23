@@ -114,7 +114,7 @@ opened source is removed. This is the main fabrication risk of the project.
 
 | Claim | How it is verified | Stated limit |
 | --- | --- | --- |
-| Position is legal | Validator: side not to move not in check, mover has a legal move, **piece counts and reachable points** (extend the puzzle rules to lessons: a Soldier before its river only on files a, c, e, g, i and never behind its start rank; catches the 12 `POS` positions) | Legal ≠ reachable from the start position; content says "position", not "game position", unless it is a course or cited game replayed from `START_FEN` (04 §2.1) |
+| Position is legal | Validator: side not to move not in check, mover has a legal move, **piece counts and reachable points** (extend the puzzle rules to lessons: a Soldier before its river only on files a, c, e, g, i, never behind its start rank, and at most one own Soldier per file before the river (D5); catches the 13 `POS` positions) | Legal ≠ reachable from the start position; content says "position", not "game position", unless it is a course or cited game replayed from `START_FEN` (04 §2.1) |
 | Move is legal / line legal | Engine `legalMoves` along the stored line | — |
 | Forced mate / forced win of material | Exhaustive solver for every defence; material claims by the stated search depth and threshold (`WIN_MATERIAL_THRESHOLD`, `src/puzzles/logic.ts:19-21`) | Within the stated horizon only |
 | Accepted alternatives | Complete move table per decision point (04 §5.3), each entry `computed` or `authored`, validator recomputes `computed` entries | Strategic classes are reviewed judgements, not proofs |
@@ -190,7 +190,7 @@ once, with the citation fields of §2.2; items refer to it by key.
 - Pool sizes (03 §4.3) are counted over `published` items only, so a pool short of reviewed items makes the check
   unavailable with a message, not padded with drafts.
 - Reused legacy items enter as `verified` (they pass today's validators) and become `published` only after the
-  changes listed for them in 05-migration.md §4 and review. Exception: the 12 `POS` items (05-migration.md §9
+  changes listed for them in 05-migration.md §4 and review. Exception: the 13 `POS` items (05-migration.md §9
   command 3) enter as **`draft`**, because their position must change; after repositioning, every claim is re-proven
   as for a new item — including the "only move" claim of `u13l1#1` (the defence must still be the unique move that
   stops the mate in 2) and the outcome and accepted alternatives of each combination.
