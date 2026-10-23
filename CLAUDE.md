@@ -55,7 +55,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
 ├── .github/workflows/      # ci.yml: npm ci + build + test on PRs · deploy.yml: GitHub Pages on push to main
 ├── .env.example            # Placeholder Supabase variables (copy to .env.local; never commit real keys)
 ├── supabase/
-│   └── migrations/         # SQL: `progress` table (one JSON row per user) + Row Level Security
+│   └── migrations/         # SQL: `progress` table (one JSON row per user) + Row Level Security; 20261023000000 adds `data_v2`
 ├── index.html              # HTML shell, PWA meta tags
 ├── vite.config.ts          # Vite, Tailwind, PWA manifest, Vitest config
 ├── public/                 # Static assets copied as-is (favicon, PWA icons)
@@ -122,7 +122,8 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── service.ts      # createAccountService: auth state, offline-first sync, debounced; backend injected. No React
     │   ├── config.ts       # readSyncConfig (env vars), appUrl (magic-link redirect = origin + base path)
     │   ├── supabase.ts     # The ONLY Supabase import; loaded via dynamic import() from main.tsx
-    │   └── fake-backend.ts # Test helper: in-memory SyncBackend (no network)
+    │   ├── merge-records.ts# data_v2 merge of the learning records (documented there), records fingerprint. Pure
+    │   └── fake-backend.ts # Test helper: in-memory SyncBackend (data + data_v2 columns, optional missing column; no network)
     └── engine/             # Pure TypeScript rules engine. NO React/DOM imports (enforced by a test)
         ├── types.ts        # Color, PieceType, Piece, Square, Position, Move, GameStatus
         ├── board.ts        # Coordinates, palace/river helpers, square names
@@ -274,13 +275,56 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   language, sound and daily goal = this device's value, the account's only fills in missing ones.
   Corrupt or missing remote fields are ignored. Idempotent; commutative except the preferences.
   Union cannot express deletion: "Reset progress" while signed in is undone by the next sync.
+- **Learning records (`data_v2`).** The whole `learning.records.v1` value syncs in a separate column,
+  `progress.data_v2` (migration `supabase/migrations/20261023000000_progress_data_v2.sql`); the attempt log stays
+  local. `data` keeps the v1 `RemoteData` shape for older builds, which read and upsert only `{ user_id, data }` and
+  so should leave `data_v2` untouched (confirmed only by T15 below). Pull = `select('data, data_v2')`, push =
+  `{ user_id, data, data_v2 }`. Merge (`src/sync/merge-records.ts`): completed = union, same id → earlier `at`, then
+  `lesson` before `placement`, then JSON order (`betterCompletion`, also used locally by `grantCompletion`);
+  mastered / applied = higher score, then later `at`, then JSON order (never lowered); exposed = union; schema = max;
+  unknown top-level fields = local value, else remote; corrupt remote data ignored field by field. Both fingerprint
+  uses (scheduled-sync skip and push skip) include the records; a null or corrupt remote `data_v2` is overwritten.
+  New enum values in a grant (e.g. a new `via`) are a **breaking** change: older new-format builds drop entries they
+  do not recognise and would push them away — use a new key/column instead (05 §8.9 additive-only rule).
+- **Missing `data_v2` column** (migration not run): pull falls back to `select('data')`, push to `{ user_id, data }`
+  (PostgreSQL `42703` / PostgREST `PGRST204`, remembered until the next app start, so a stale schema cache right
+  after the migration shows a sync error until restart). v1 data still syncs, records stay on the device, status
+  shows `error`.
+- **Owner action before any deploy that writes `data_v2`:** run the new migration on the real project, then pass
+  T15 steps 3–5. The automated tests use a fake backend; T15 is the only check against real PostgREST
+  (curriculum-upgrade 04 R5 / 05 MU2).
+
+**T15 (manual; real Supabase project or `supabase start`)**
+
+1. Apply `supabase/migrations/*.sql` in order. Check that `select column_name, is_nullable, column_default from
+   information_schema.columns where table_name = 'progress'` lists `data_v2`, nullable, no default, and that the
+   API sees it (the migration runs `notify pgrst, 'reload schema'`; otherwise wait a minute).
+2. Sign in as user A in a build that writes `data_v2` (`.env.local`, `npm run dev`). Create a record (complete
+   something that writes `learning.records.v1`, or set `duohuygo:learning.records.v1` by hand in devtools) and let
+   it sync. Check in the table editor that A's row has `data_v2`.
+3. **Update keeps `data_v2`:** run the previous build (e.g. `git worktree add ../xq-old <commit before S2.11>` and
+   `npm run dev` there; it uses supabase-js single-object upsert with `onConflict: 'user_id'`), sign in as A and
+   complete a lesson. `select data_v2::text from progress where user_id = '<A>'` before and after must be identical,
+   while `data` changed. (Alternatively curl with `Prefer: resolution=merge-duplicates` and `on_conflict=user_id`.)
+4. **Insert gives null:** with the previous build, sign in as a new user B and sync once: B's row has `data_v2`
+   null. Then sign in as B with the new build: `data_v2` is filled in.
+5. **RLS on both columns** with B's access token and the anon key (curl `/rest/v1/progress`): selecting A's row
+   (`select=data,data_v2&user_id=eq.<A>`) returns nothing; an update or upsert of A's row (including an insert with
+   A's `user_id`) affects 0 rows or is rejected; with the anon key alone, nothing is returned.
+6. **Fallback codes:** on a scratch project without the new migration, sync with the new build: status shows the
+   sync error, `data` still updates. Record the exact code and message of the select and the upsert errors; if they
+   are not `42703` / `PGRST204` and the message check also fails, fix `isMissingColumnError` in `src/sync/supabase.ts`
+   before deploying.
+7. Record date, project and pass/fail of steps 3–6 in `docs/curriculum-upgrade/STATUS.md`. **Do not deploy a build
+   that writes `data_v2` until the migration is applied and steps 3–5 pass.**
 - Logging out (`signOut({ scope: 'local' })`) keeps local progress. The auth session is stored through
   `createLocalStore('duohuygo:auth:')`. Magic links use the implicit flow (works when the email opens
   in another browser); the session arriving in the URL is picked up by supabase-js and the URL cleaned.
 
 Setup:
 
-1. Create a free project at supabase.com. In the SQL editor run `supabase/migrations/*.sql` in order
+1. Create a free project at supabase.com. In the SQL editor run `supabase/migrations/*.sql` in order (the
+   `data_v2` migration must run BEFORE deploying a build that writes it)
    (or `supabase db push` with the Supabase CLI). It creates `public.progress` with RLS: a user can
    select / insert / update only the row where `user_id = auth.uid()`.
 2. Authentication → Providers: keep Email enabled (magic link). Authentication → URL Configuration:

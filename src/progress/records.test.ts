@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   ATTEMPT_LOG_CAP,
   RECORDS_SCHEMA,
+  betterCompletion,
   betterScored,
   emptyRecords,
   isFirstRealCompletion,
@@ -131,6 +132,18 @@ describe('scored grants and first completion', () => {
     const a = { ...mastery, formId: 'A' };
     const b = { ...mastery, formId: 'B' };
     expect(betterScored(a, b)).toBe(betterScored(b, a));
+  });
+
+  it('keeps the earlier completion, then lesson before placement, deterministically', () => {
+    const a = { at: '2026-10-20T10:00:00.000Z', via: 'placement' as const, contentVersion: 1 };
+    const b = { at: '2026-10-21T10:00:00.000Z', via: 'lesson' as const, contentVersion: 1 };
+    expect(betterCompletion(a, b)).toBe(a);
+    expect(betterCompletion(b, a)).toBe(a);
+    const c = { ...a, via: 'lesson' as const };
+    expect(betterCompletion(a, c)).toBe(c);
+    expect(betterCompletion(c, a)).toBe(c);
+    const d = { ...c, contentVersion: 2 };
+    expect(betterCompletion(c, d)).toBe(betterCompletion(d, c));
   });
 
   it('counts only stored grants as completions for XP (MU4)', () => {

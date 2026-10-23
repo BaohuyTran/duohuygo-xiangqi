@@ -2,15 +2,34 @@
 // when VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set, so it never lands in the main bundle.
 //
 // Data model (supabase/migrations/): one row per user in `public.progress`
-// (user_id = auth.uid(), data = the RemoteData JSON from ./merge.ts), protected by Row Level Security.
+// (user_id = auth.uid(), data = the RemoteData JSON from ./merge.ts, data_v2 = the learning records from
+// ./merge-records.ts), protected by Row Level Security. Older builds read and upsert `data` only, which leaves
+// `data_v2` as it is (to be confirmed on the real project: manual test T15 in CLAUDE.md).
+//
+// Missing `data_v2` column (migration 20261023000000_progress_data_v2.sql not run yet, 05 §8.6 item 6): the pull
+// falls back to `select('data')` and the push to `{ user_id, data }`, and the column is treated as missing for
+// the rest of this app session (checked again on the next start). The service reports it as `sync: 'error'`.
 
 import { createClient, type Session } from '@supabase/supabase-js';
 import { createLocalStore } from '../storage';
 import type { SyncConfig } from './config';
+import type { LearningRecords } from '../progress/records';
 import type { RemoteData } from './merge';
-import type { SyncBackend, SyncUser } from './service';
+import type { PulledRow, SyncBackend, SyncUser } from './service';
 
 export const PROGRESS_TABLE = 'progress';
+
+/**
+ * Whether a Supabase error says the `data_v2` column does not exist: PostgreSQL `42703` (undefined column, from a
+ * select) or PostgREST `PGRST204` (column not in the schema cache, from an upsert). Codes to confirm in T15; the
+ * message check covers either code missing.
+ */
+export function isMissingColumnError(error: unknown): boolean {
+  if (typeof error !== 'object' || error === null) return false;
+  const { code, message } = error as { code?: unknown; message?: unknown };
+  if (code === '42703' || code === 'PGRST204') return true;
+  return typeof message === 'string' && message.includes('data_v2') && /does not exist|could not find/i.test(message);
+}
 
 const toUser = (session: Session | null): SyncUser | null =>
   session ? { id: session.user.id, email: session.user.email ?? null } : null;
@@ -47,6 +66,9 @@ export function createSupabaseBackend(config: SyncConfig, create: typeof createC
     },
   });
 
+  /** Set when the `data_v2` column turned out to be missing; kept for this app session. */
+  let noDataV2 = false;
+
   return {
     async getUser() {
       const { data, error } = await client.auth.getSession();
@@ -70,14 +92,33 @@ export function createSupabaseBackend(config: SyncConfig, create: typeof createC
       const { error } = await client.auth.signOut({ scope: 'local' });
       if (error) throw error;
     },
-    async pull(userId) {
-      const { data, error } = await client.from(PROGRESS_TABLE).select('data').eq('user_id', userId).maybeSingle();
+    async pull(userId): Promise<PulledRow> {
+      const select = (columns: string) => client.from(PROGRESS_TABLE).select(columns).eq('user_id', userId).maybeSingle();
+      if (!noDataV2) {
+        const { data, error } = await select('data, data_v2');
+        if (!error) {
+          const row = data as { data?: unknown; data_v2?: unknown } | null;
+          return { data: row?.data ?? null, dataV2: row?.data_v2 ?? null, dataV2Available: true };
+        }
+        if (!isMissingColumnError(error)) throw error;
+        noDataV2 = true;
+      }
+      const { data, error } = await select('data');
       if (error) throw error;
-      return (data as { data: unknown } | null)?.data ?? null;
+      return { data: (data as { data?: unknown } | null)?.data ?? null, dataV2: null, dataV2Available: false };
     },
-    async push(userId, data: RemoteData) {
-      const { error } = await client.from(PROGRESS_TABLE).upsert({ user_id: userId, data }, { onConflict: 'user_id' });
+    async push(userId, { data, dataV2 }: { data: RemoteData; dataV2: LearningRecords | null }) {
+      const upsert = (row: Record<string, unknown>) => client.from(PROGRESS_TABLE).upsert(row, { onConflict: 'user_id' });
+      if (dataV2 !== null && !noDataV2) {
+        const { error } = await upsert({ user_id: userId, data, data_v2: dataV2 });
+        if (!error) return { dataV2Written: true };
+        if (!isMissingColumnError(error)) throw error;
+        noDataV2 = true;
+      }
+      // Only `data`: an existing `data_v2` is left as it is.
+      const { error } = await upsert({ user_id: userId, data });
       if (error) throw error;
+      return { dataV2Written: false };
     },
   };
 }

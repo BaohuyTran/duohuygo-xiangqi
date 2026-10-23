@@ -1,7 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { createClient } from '@supabase/supabase-js';
 import { appUrl, readSyncConfig } from './config';
-import { cleanAuthUrl, createSupabaseBackend, PROGRESS_TABLE } from './supabase';
+import { emptyRecords } from '../progress/records';
+import { cleanAuthUrl, createSupabaseBackend, isMissingColumnError, PROGRESS_TABLE } from './supabase';
 
 describe('sync config', () => {
   it('needs both variables', () => {
@@ -32,12 +33,28 @@ describe('sync config', () => {
 function fakeClient() {
   const calls: unknown[][] = [];
   let authListener: ((event: string, session: unknown) => void) | null = null;
-  const result = { data: null as unknown, error: null as unknown };
+  const result = {
+    data: null as unknown,
+    error: null as unknown,
+    /** Simulates a project without the data_v2 column: its PostgREST errors for a select / upsert naming it. */
+    noDataV2: false,
+  };
+  let columns = '';
   const query = {
-    select: (...a: unknown[]) => (calls.push(['select', ...a]), query),
+    select: (...a: unknown[]) => (calls.push(['select', ...a]), (columns = String(a[0])), query),
     eq: (...a: unknown[]) => (calls.push(['eq', ...a]), query),
-    maybeSingle: async () => (calls.push(['maybeSingle']), result),
-    upsert: async (...a: unknown[]) => (calls.push(['upsert', ...a]), { error: result.error }),
+    maybeSingle: async () => {
+      calls.push(['maybeSingle']);
+      if (result.noDataV2 && columns.includes('data_v2'))
+        return { data: null, error: { code: '42703', message: 'column progress.data_v2 does not exist' } };
+      return result;
+    },
+    upsert: async (...a: unknown[]) => {
+      calls.push(['upsert', ...a]);
+      if (result.noDataV2 && Object.hasOwn(a[0] as object, 'data_v2'))
+        return { error: { code: 'PGRST204', message: "Could not find the 'data_v2' column of 'progress' in the schema cache" } };
+      return { error: result.error };
+    },
   };
   const client = {
     auth: {
@@ -90,17 +107,66 @@ describe('Supabase backend (mocked client)', () => {
     expect(fake.calls).toContainEqual(['signOut', { scope: 'local' }]);
   });
 
-  it('reads and upserts the one progress row of the user', async () => {
+  const data = { version: 1, completedLessons: [], solvedPuzzles: [], settings: { language: null, muted: null }, gamification: null };
+
+  it('reads data + data_v2 and upserts { user_id, data, data_v2 } for the one progress row of the user', async () => {
     const fake = fakeClient();
     const backend = createSupabaseBackend(config, fake.create);
-    expect(await backend.pull('u1')).toBeNull();
-    fake.result.data = { data: { version: 1 } };
-    expect(await backend.pull('u1')).toEqual({ version: 1 });
-    const data = { version: 1, completedLessons: [], solvedPuzzles: [], settings: { language: null, muted: null }, gamification: null };
-    await backend.push('u1', data);
+    expect(await backend.pull('u1')).toEqual({ data: null, dataV2: null, dataV2Available: true });
+    fake.result.data = { data: { version: 1 }, data_v2: null };
+    expect(await backend.pull('u1')).toEqual({ data: { version: 1 }, dataV2: null, dataV2Available: true });
+    fake.result.data = { data: { version: 1 }, data_v2: { schema: 1 } };
+    expect(await backend.pull('u1')).toEqual({ data: { version: 1 }, dataV2: { schema: 1 }, dataV2Available: true });
+    expect(fake.calls.filter((c) => c[0] === 'select')).toEqual([['select', 'data, data_v2'], ['select', 'data, data_v2'], ['select', 'data, data_v2']]);
+    const records = emptyRecords();
+    expect(await backend.push('u1', { data, dataV2: records })).toEqual({ dataV2Written: true });
     expect(fake.calls).toContainEqual(['from', PROGRESS_TABLE]);
     expect(fake.calls).toContainEqual(['eq', 'user_id', 'u1']);
+    expect(fake.calls).toContainEqual(['upsert', { user_id: 'u1', data, data_v2: records }, { onConflict: 'user_id' }]);
+  });
+
+  it('pushes { user_id, data } only when there are no records to write (what older builds send)', async () => {
+    const fake = fakeClient();
+    const backend = createSupabaseBackend(config, fake.create);
+    expect(await backend.push('u1', { data, dataV2: null })).toEqual({ dataV2Written: false });
     expect(fake.calls).toContainEqual(['upsert', { user_id: 'u1', data }, { onConflict: 'user_id' }]);
+  });
+
+  it('T11: without the data_v2 column, falls back to select(data) and { user_id, data } for the session', async () => {
+    const fake = fakeClient();
+    fake.result.noDataV2 = true;
+    fake.result.data = { data: { version: 1 } };
+    const backend = createSupabaseBackend(config, fake.create);
+    expect(await backend.pull('u1')).toEqual({ data: { version: 1 }, dataV2: null, dataV2Available: false });
+    expect(fake.calls.filter((c) => c[0] === 'select')).toEqual([['select', 'data, data_v2'], ['select', 'data']]);
+    // Known missing: the next pull and push go straight to the v1 columns.
+    fake.calls.length = 0;
+    await backend.pull('u1');
+    expect(await backend.push('u1', { data, dataV2: emptyRecords() })).toEqual({ dataV2Written: false });
+    expect(fake.calls.filter((c) => c[0] === 'select')).toEqual([['select', 'data']]);
+    expect(fake.calls.filter((c) => c[0] === 'upsert')).toEqual([['upsert', { user_id: 'u1', data }, { onConflict: 'user_id' }]]);
+  });
+
+  it('T11: an upsert rejected for the data_v2 column is retried with { user_id, data }', async () => {
+    const fake = fakeClient();
+    const backend = createSupabaseBackend(config, fake.create);
+    fake.result.noDataV2 = true; // e.g. a stale PostgREST schema cache after the pull worked
+    const records = emptyRecords();
+    expect(await backend.push('u1', { data, dataV2: records })).toEqual({ dataV2Written: false });
+    expect(fake.calls.filter((c) => c[0] === 'upsert')).toEqual([
+      ['upsert', { user_id: 'u1', data, data_v2: records }, { onConflict: 'user_id' }],
+      ['upsert', { user_id: 'u1', data }, { onConflict: 'user_id' }],
+    ]);
+    expect((await backend.pull('u1')).dataV2Available).toBe(false);
+  });
+
+  it('recognises missing-column errors only', () => {
+    expect(isMissingColumnError({ code: '42703', message: 'column progress.data_v2 does not exist' })).toBe(true);
+    expect(isMissingColumnError({ code: 'PGRST204', message: 'x' })).toBe(true);
+    expect(isMissingColumnError({ message: "Could not find the 'data_v2' column of 'progress' in the schema cache" })).toBe(true);
+    expect(isMissingColumnError({ code: '42501', message: 'permission denied for table progress' })).toBe(false);
+    expect(isMissingColumnError(new Error('JWT expired'))).toBe(false);
+    expect(isMissingColumnError(null)).toBe(false);
   });
 
   it('turns Supabase errors into rejections (the service shows them as a sync status)', async () => {
@@ -108,7 +174,8 @@ describe('Supabase backend (mocked client)', () => {
     const backend = createSupabaseBackend(config, fake.create);
     fake.result.error = new Error('JWT expired');
     await expect(backend.pull('u1')).rejects.toThrow('JWT expired');
-    await expect(backend.push('u1', { version: 1, completedLessons: [], solvedPuzzles: [], settings: { language: null, muted: null }, gamification: null })).rejects.toThrow();
+    await expect(backend.push('u1', { data, dataV2: emptyRecords() })).rejects.toThrow();
+    await expect(backend.push('u1', { data, dataV2: null })).rejects.toThrow();
     await expect(backend.sendMagicLink('a@b.co', 'x')).rejects.toThrow();
   });
 });

@@ -2,13 +2,20 @@
 // a fake in tests) is injected, so this file never imports Supabase.
 //
 // Local data stays the source of truth for the UI. While signed in and online, a sync pulls the
-// account's copy, merges it with the local copy (src/sync/merge.ts), writes the result locally and
+// account's copy, merges it with the local copy (src/sync/merge.ts for the v1 `data`,
+// src/sync/merge-records.ts for the learning records in `data_v2`), writes the result locally and
 // pushes it. A sync runs after sign-in / app start with a session, a short while after any local
 // change, and when the device comes back online. Every failure is caught and only reported as
 // `sync: 'error'` in the account state: gameplay never sees it.
+//
+// Missing `data_v2` column (the SQL migration has not been run yet, 05 §8.6 item 6): the backend reports it
+// (`dataV2Available: false` / `dataV2Written: false`); the v1 data still syncs both ways, the local records are
+// left as they are, and the status ends as `error` so the problem stays visible.
 
-import { readSnapshot, writeSnapshot, type KeyValueStore } from '../storage';
+import type { LearningRecords } from '../progress/records';
+import { createLearningRepository, readSnapshot, writeSnapshot, type KeyValueStore } from '../storage';
 import { fingerprint, mergeSnapshots, parseRemote, toRemote, type RemoteData } from './merge';
+import { mergeRecords, parseRemoteRecords, recordsFingerprint } from './merge-records';
 
 export interface SyncUser {
   id: string;
@@ -23,9 +30,28 @@ export interface SyncBackend {
   onAuthChange(callback: (user: SyncUser | null) => void): () => void;
   sendMagicLink(email: string, redirectTo: string): Promise<void>;
   signOut(): Promise<void>;
-  /** The account's stored JSON, or null when there is none yet. */
-  pull(userId: string): Promise<unknown>;
-  push(userId: string, data: RemoteData): Promise<void>;
+  /** The account's row (`data` null when there is no row yet). */
+  pull(userId: string): Promise<PulledRow>;
+  /**
+   * Upserts the row: `{ user_id, data, data_v2 }`, or `{ user_id, data }` only when `dataV2` is null or the
+   * column is missing (an upsert without `data_v2` leaves the stored `data_v2` as it is).
+   */
+  push(userId: string, row: PushedRow): Promise<{ dataV2Written: boolean }>;
+}
+
+export interface PulledRow {
+  /** The v1 JSON (`progress.data`, RemoteData), or null when the account has no row yet. */
+  data: unknown;
+  /** The `data_v2` JSON (learning records), or null (no row, never written, or no column). */
+  dataV2: unknown;
+  /** False when the `data_v2` column does not exist (SQL migration not run yet): records are not synced. */
+  dataV2Available: boolean;
+}
+
+export interface PushedRow {
+  data: RemoteData;
+  /** The merged learning records; null = do not write `data_v2`. */
+  dataV2: LearningRecords | null;
 }
 
 export type AuthStatus = 'loading' | 'signedOut' | 'linkSent' | 'signedIn';
@@ -109,8 +135,13 @@ export function createAccountService({
   let again = false;
   let timer: ReturnType<typeof setTimeout> | null = null;
   let disposed = false;
-  /** Fingerprint of the local data after the last successful sync. */
+  /** Fingerprint of the local data (v1 snapshot + records) after the last sync. */
   let lastSynced: string | null = null;
+  /** The last sync could not read or write `data_v2` (column missing): shown as `sync: 'error'`. */
+  let degraded = false;
+  const learning = createLearningRepository(local);
+  /** Both uses (scheduled-sync skip, push skip) include the records (05 §8.6 item 5). */
+  const localFingerprint = (at: Date): string => `${fingerprint(readSnapshot(local, at))}|${recordsFingerprint(learning.records())}`;
   const listeners = new Set<() => void>();
   const dataListeners = new Set<() => void>();
   const cleanups: (() => void)[] = [];
@@ -135,19 +166,39 @@ export function createAccountService({
     const b = backend;
     const uid = user?.id;
     if (!b || !uid) return;
-    const raw = await b.pull(uid);
+    const row = await b.pull(uid);
     if (user?.id !== uid) return; // signed out (or switched) meanwhile
     const at = now();
+    let changed = false;
+
+    // v1 `data` (src/sync/merge.ts). Written to the inner store directly, so it does not schedule another sync.
     const mine = readSnapshot(local, at);
-    const theirs = raw === null || raw === undefined ? null : parseRemote(raw, at);
+    const theirs = row.data === null || row.data === undefined ? null : parseRemote(row.data, at);
     const merged = theirs ? mergeSnapshots(mine, theirs, at) : mine;
     if (JSON.stringify(merged) !== JSON.stringify(mine)) {
-      // Written to the inner store directly, so it does not schedule another sync.
       writeSnapshot(local, merged);
-      if (fingerprint(merged) !== fingerprint(mine)) for (const l of dataListeners) l();
+      if (fingerprint(merged) !== fingerprint(mine)) changed = true;
     }
-    if (!theirs || fingerprint(merged) !== fingerprint(theirs)) await b.push(uid, toRemote(merged));
-    lastSynced = fingerprint(merged);
+    let push = !theirs || fingerprint(merged) !== fingerprint(theirs);
+
+    // `data_v2` (src/sync/merge-records.ts); skipped entirely while the column is missing.
+    const myRecords = learning.records();
+    let records: LearningRecords | null = null;
+    if (row.dataV2Available) {
+      records = mergeRecords(myRecords, parseRemoteRecords(row.dataV2));
+      if (recordsFingerprint(records) !== recordsFingerprint(myRecords)) {
+        learning.replace(records);
+        changed = true;
+      }
+      // Compared with the raw remote value, so a missing or corrupt `data_v2` is replaced by the merge.
+      if (recordsFingerprint(records) !== recordsFingerprint(row.dataV2)) push = true;
+    }
+    if (changed) for (const l of dataListeners) l();
+
+    let written = row.dataV2Available;
+    if (push) written = (await b.push(uid, { data: toRemote(merged), dataV2: records })).dataV2Written;
+    degraded = !row.dataV2Available || !written;
+    lastSynced = `${fingerprint(merged)}|${recordsFingerprint(records ?? myRecords)}`;
   }
 
   function sync(): Promise<void> {
@@ -167,7 +218,7 @@ export function createAccountService({
           again = false;
           await syncOnce();
         } while (again && user && !disposed);
-        setState({ sync: user ? 'synced' : 'idle' });
+        setState({ sync: user ? (degraded ? 'error' : 'synced') : 'idle' });
       } catch {
         setState({ sync: user ? 'error' : 'idle' });
       } finally {
@@ -183,7 +234,7 @@ export function createAccountService({
     timer = setTimeout(() => {
       timer = null;
       // Skip when nothing meaningful changed since the last sync (e.g. only the hearts clock moved).
-      if (lastSynced !== null && fingerprint(readSnapshot(local, now())) === lastSynced) return;
+      if (lastSynced !== null && localFingerprint(now()) === lastSynced) return;
       void sync();
     }, debounceMs);
   };

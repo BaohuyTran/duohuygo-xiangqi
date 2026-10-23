@@ -152,6 +152,12 @@ describe('learning repository (learning.records.v1, learning.attempts.v1)', () =
     repo.grantCompletion('b05l1', completion);
     repo.grantCompletion('b05l1', { ...completion, at: later, via: 'placement' });
     expect(repo.records().completed.b05l1).toEqual(completion);
+    // Same rule as the account merge (betterCompletion): an earlier grant replaces a later one.
+    const earlier = { ...completion, at: '2026-10-01T09:00:00.000Z', via: 'placement' as const };
+    repo.grantCompletion('b05l1', earlier);
+    expect(repo.records().completed.b05l1).toEqual(earlier);
+    repo.grantCompletion('b05l1', { ...earlier, via: 'lesson' }); // same date: lesson before placement
+    expect(repo.records().completed.b05l1).toEqual({ ...earlier, via: 'lesson' });
     repo.grantMastery('b05', mastery);
     repo.grantMastery('b05', { ...mastery, score: 60, at: later }); // a failed / lower later check never lowers mastery
     expect(repo.records().mastered.b05.score).toBe(80);
@@ -173,6 +179,20 @@ describe('learning repository (learning.records.v1, learning.attempts.v1)', () =
     repo.logAttempt({ ...attempt(1), credit: 3 });
     expect(writes).toEqual([]);
     expect(repo.records()).toEqual(emptyRecords());
+  });
+
+  it('replace (used by account sync): stores valid records, writes nothing when equal, backs up corrupt data', () => {
+    const { store, writes } = spyStore({ 'learning.records.v1': 'not json' });
+    const repo = createLearningRepository(store);
+    repo.replace(emptyRecords());
+    expect(writes).toEqual([]);
+    const next = { ...emptyRecords(), schema: 2, completed: { b05l1: completion, bad: { ...completion, at: 'x' } }, extra: 1 };
+    repo.replace(next as never);
+    expect(store.get('learning.records.v1.backup')).toBe('not json');
+    expect(repo.records()).toEqual({ ...emptyRecords(), schema: 2, completed: { b05l1: completion }, extra: 1 });
+    writes.length = 0;
+    repo.replace({ ...emptyRecords(), schema: 2, completed: { b05l1: completion }, extra: 1 });
+    expect(writes).toEqual([]);
   });
 
   it('keeps the attempt log local and capped at the newest 2,000 entries', () => {

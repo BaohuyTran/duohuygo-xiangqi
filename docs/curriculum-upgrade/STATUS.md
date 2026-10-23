@@ -72,8 +72,17 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
 
+- 2026-10-23 — **S2.11 done** (attempt 1): records sync in a new `progress.data_v2` column (migration
+  `20261023000000`), merge per 05 §8.6 item 4 (`src/sync/merge-records.ts`, canonical `betterCompletion` also used
+  locally), records in both fingerprint uses, missing-column fallbacks on pull and push. Tester: code PASS (lint, both
+  builds — plain build has no `data_v2`/Supabase code, 692 tests, T8–T11 + remote T12, mutation checks caught every
+  injected regression, 10,000 seeded merge-property pairs with 0 failures); its one FAIL was the CLAUDE.md T15 text,
+  which was the driver's to apply and is now in CLAUDE.md. Reviewer APPROVE. **Owner action T15** recorded below.
+
 ## Blockers and failed gates
 
+- **Owner action (before any deploy that writes `data_v2`):** apply migration `20261023000000_progress_data_v2.sql`
+  on the real Supabase project and pass T15 steps 3–5 (procedure in CLAUDE.md, "Account login and sync").
 - None blocking. Owner decisions needed before release (not before implementation): licence of code and content
   (07 S07-U2), historical annotated games allowed? (S07-U1), human review sample before release? (S07-U4), and a
   real-Supabase check that old builds leave `data_v2` untouched (05 MU2 / 04 R5, test T15) before any deploy that

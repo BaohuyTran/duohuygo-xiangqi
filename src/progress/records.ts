@@ -184,7 +184,7 @@ export function capAttempts(log: readonly AttemptRecord[], cap = ATTEMPT_LOG_CAP
   return log.slice(Math.max(0, log.length - cap));
 }
 
-// ---------- Granting (local rules; the cross-device merge is src/sync, S2.11) ----------
+// ---------- Granting (shared by the local repository and the cross-device merge in src/sync/merge-records.ts) ----------
 
 /** The grant to keep for a scored state: higher score, then later `at`, then JSON string order (deterministic). */
 export function betterScored<T extends { score: number; at: string }>(a: T, b: T): T {
@@ -192,6 +192,19 @@ export function betterScored<T extends { score: number; at: string }>(a: T, b: T
   const ta = Date.parse(a.at);
   const tb = Date.parse(b.at);
   if (ta !== tb) return ta > tb ? a : b;
+  return JSON.stringify(a) >= JSON.stringify(b) ? a : b;
+}
+
+/**
+ * The completion grant to keep when a lesson has two: the earlier `at`, then `via` order `lesson` < `placement`,
+ * then JSON string order (deterministic, so commutative). The ONE rule for completions, used both locally
+ * (`grantCompletion` in src/storage) and by the account merge (src/sync/merge-records.ts), 05 §8.6 item 4.
+ */
+export function betterCompletion(a: CompletionGrant, b: CompletionGrant): CompletionGrant {
+  const ta = Date.parse(a.at);
+  const tb = Date.parse(b.at);
+  if (ta !== tb) return ta < tb ? a : b;
+  if (a.via !== b.via) return COMPLETION_VIA.indexOf(a.via) <= COMPLETION_VIA.indexOf(b.via) ? a : b;
   return JSON.stringify(a) >= JSON.stringify(b) ? a : b;
 }
 

@@ -1,5 +1,6 @@
 import { parseState, type GamificationRepository, type GamificationState } from '../gamification';
 import {
+  betterCompletion,
   betterScored,
   capAttempts,
   parseApplicationGrant,
@@ -178,7 +179,16 @@ export function createGamificationRepository(store: KeyValueStore): Gamification
  */
 export interface LearningRepository {
   records(): LearningRecords;
-  /** Records a lesson completion; an existing grant is kept (the first completion counts). */
+  /**
+   * Replaces the stored records with `next` (used by account sync to store the merge; src/sync). Invalid entries
+   * are dropped as on read; nothing is written when the stored records already equal it. A corrupt stored value
+   * is copied to the backup key first, as with every write.
+   */
+  replace(next: LearningRecords): LearningRecords;
+  /**
+   * Records a lesson completion. With an existing grant the earlier one is kept (`betterCompletion`: earlier `at`,
+   * then `lesson` before `placement`), the same rule as the account merge, so a replay never changes it.
+   */
   grantCompletion(lessonId: string, grant: CompletionGrant): LearningRecords;
   /** Keeps the better grant per unit: higher score, then later date (mastery is never revoked). */
   grantMastery(unitId: string, grant: MasteryGrant): LearningRecords;
@@ -224,13 +234,18 @@ export function createLearningRepository(store: KeyValueStore): LearningReposito
   };
   return {
     records,
+    replace(next) {
+      const valid = parseRecords(next);
+      return update((r) => (JSON.stringify(r) === JSON.stringify(valid) ? null : valid));
+    },
     grantCompletion(lessonId, grant) {
       const valid = parseCompletionGrant(grant);
-      return update((r) =>
-        !lessonId || !valid || Object.hasOwn(r.completed, lessonId)
-          ? null
-          : { ...r, completed: Object.fromEntries([...Object.entries(r.completed), [lessonId, valid]]) },
-      );
+      return update((r) => {
+        if (!lessonId || !valid) return null;
+        const old = Object.hasOwn(r.completed, lessonId) ? r.completed[lessonId] : undefined;
+        const best = old ? betterCompletion(old, valid) : valid;
+        return best === old ? null : { ...r, completed: Object.fromEntries([...Object.entries(r.completed), [lessonId, best]]) };
+      });
     },
     grantMastery(unitId, grant) {
       const valid = parseMasteryGrant(grant);
