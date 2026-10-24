@@ -119,7 +119,7 @@ flags depth 3 "measured within budget" per task; S2.20 records each R6 task's vo
 | S2.3 | Playing Black: orientation, notation, colour-neutral judges | S2.1 | done (attempt 2, 2026-10-23) |
 | S2.4 | Analysis core (`src/analysis`) | — | done (attempt 2, 2026-10-23) |
 | S2.5 | Worker analysis client | S2.4 | done (attempt 1, 2026-10-23) |
-| S2.6 | Phone-cost measurement and runtime budgets | S2.5, S2.9 | todo |
+| S2.6 | Phone-cost measurement and runtime budgets | S2.5, S2.9 | done (attempt 2, 2026-10-24) |
 | S2.7 | Strategic decisions: move tables, `decision`, `choice`, feedback and hint ladder | S2.1, S2.3, S2.4 | done (attempt 3, 2026-10-24) |
 | S2.8 | Branching: `line` trees and varied defence | S2.5, S2.7 | todo |
 | S2.9 | Training partners and game adjudication (`src/play`) | S2.4, S2.5 | done (attempt 2, 2026-10-24) |

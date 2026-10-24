@@ -2,10 +2,13 @@ import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { legalMoves, parseFen, parseSquare, positionFromPieces, type Move } from '../engine';
 import {
   DEFAULT_TIMEOUT_MS,
+  MAX_TIMEOUT_MS,
   SYNC_BUDGET,
+  clampTimeout,
   createAnalysisClient,
   defaultWorkerFactory,
   getAnalysisClient,
+  mateDepth,
   type WorkerLike,
 } from './client';
 import { SAFETY_GUARDS, moveSignals, safetyGuard, winningCaptures } from './judge';
@@ -370,5 +373,179 @@ describe('analysis client: safety net, failures, cancellation', () => {
     const o = await createAnalysisClient().run({ kind: 'safety-guard', position: MID, move: mv('h0h6'), guard: basics });
     expect(isChecked(o)).toBe(true);
     if (isChecked(o)) expect(typeof o.value.safe).toBe('boolean');
+  });
+});
+
+describe('analysis client: S2.6 carry-overs (timeout clamp, no main-thread mate search after a Worker failure)', () => {
+  it('clampTimeout: NaN → default, negative → 0, Infinity and oversized → MAX_TIMEOUT_MS', () => {
+    expect(clampTimeout(undefined, 123)).toBe(123);
+    expect(clampTimeout(Number.NaN, 123)).toBe(123);
+    expect(clampTimeout(-5, 123)).toBe(0);
+    expect(clampTimeout(Infinity, 123)).toBe(MAX_TIMEOUT_MS);
+    expect(clampTimeout(2 ** 40, 123)).toBe(MAX_TIMEOUT_MS);
+    expect(clampTimeout(-Infinity, 123)).toBe(0);
+    expect(clampTimeout(750, 123)).toBe(750);
+  });
+
+  it('an Infinity / NaN timeout keeps a safety net (does not fire at once, fires at the clamp / default)', async () => {
+    vi.useFakeTimers();
+    const client = createAnalysisClient({ createWorker: () => fakeWorker('hang'), timeoutMs: Infinity });
+    const states: string[] = [];
+    const inf = client.run({ kind: 'ping' });
+    void inf.then((o) => states.push(`inf:${o.status === 'checked' ? 'checked' : o.reason}`));
+    await vi.advanceTimersByTimeAsync(10);
+    expect(states).toEqual([]); // an unclamped Infinity timer would have fired immediately
+    await vi.advanceTimersByTimeAsync(MAX_TIMEOUT_MS - 10);
+    expect(states).toEqual(['inf:timeout']);
+
+    const nan = client.run({ kind: 'ping' }, { timeoutMs: Number.NaN });
+    void nan.then((o) => states.push(`nan:${o.status === 'checked' ? 'checked' : o.reason}`));
+    await vi.advanceTimersByTimeAsync(MAX_TIMEOUT_MS - 1); // NaN → the client's default (clamped Infinity)
+    expect(states).toEqual(['inf:timeout']);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(states).toEqual(['inf:timeout', 'nan:timeout']);
+
+    const big = createAnalysisClient({ createWorker: () => fakeWorker('hang') });
+    const p = big.run({ kind: 'ping' }, { timeoutMs: 2 ** 40 });
+    let done = false;
+    void p.then(() => (done = true));
+    await vi.advanceTimersByTimeAsync(MAX_TIMEOUT_MS - 1);
+    expect(done).toBe(false);
+    await vi.advanceTimersByTimeAsync(1);
+    await expect(p).resolves.toMatchObject({ reason: 'timeout' });
+
+    const nanDefault = createAnalysisClient({ createWorker: () => fakeWorker('hang'), timeoutMs: Number.NaN });
+    const q = nanDefault.run({ kind: 'ping' });
+    await vi.advanceTimersByTimeAsync(DEFAULT_TIMEOUT_MS);
+    await expect(q).resolves.toMatchObject({ reason: 'timeout' });
+  });
+
+  it('mateDepth names the exhaustive mate depth of each request kind', () => {
+    const P = MID;
+    expect(mateDepth({ kind: 'ping' })).toBe(0);
+    expect(mateDepth({ kind: 'search', position: P, depth: 3 })).toBe(0);
+    expect(mateDepth({ kind: 'score-moves', position: P, depth: 2 })).toBe(0);
+    expect(mateDepth({ kind: 'winning-captures', position: P })).toBe(0);
+    expect(mateDepth({ kind: 'forced-wins', position: P, n: 3 })).toBe(3);
+    expect(mateDepth({ kind: 'mate-distances', position: P, k: 2 })).toBe(2);
+    expect(mateDepth({ kind: 'safety-guard', position: P, move: mv('h0h6'), guard: basics })).toBe(1);
+    expect(mateDepth({ kind: 'safety-guard', position: P, move: mv('h0h6'), guard: advanced })).toBe(2);
+    expect(mateDepth({ kind: 'move-signals', position: P, move: mv('h0h6'), guard: intermediate })).toBe(2);
+    expect(mateDepth({ kind: 'move-signals', position: P, move: mv('h0h6'), guard: { ...basics, missedMate: 2 } })).toBe(2);
+    expect(mateDepth({ kind: 'move-signals', position: P, move: mv('h0h6'), guard: { ...basics, missedMate: 2 }, missed: false })).toBe(1);
+    expect(mateDepth({ kind: 'threat', position: P, side: 'red', guard: { h: 2, k: 1, T: 2 } })).toBe(1);
+    expect(mateDepth({ kind: 'threat-at-end', position: P, opponent: 'black', guard: basics })).toBe(2);
+    expect(mateDepth({ kind: 'predicate', predicate: { kind: 'development' }, before: P, moves: [] })).toBe(0);
+    expect(mateDepth({ kind: 'predicate', predicate: { kind: 'not', of: { kind: 'threat' } }, before: P, moves: [] })).toBe(2);
+    expect(
+      mateDepth({ kind: 'predicate', predicate: { kind: 'all', of: [{ kind: 'no-hanging' }, { kind: 'threat', k: 1 }] }, before: P, moves: [] }),
+    ).toBe(1);
+  });
+
+  it('after the first Worker fails, the main thread runs no mate search of depth ≥ 2 (but everything else)', async () => {
+    const client = createAnalysisClient({ createWorker: () => fakeWorker('fail') });
+    const m2 = client.run({ kind: 'forced-wins', position: ENDGAME, n: 2 });
+    const md = client.run({ kind: 'mate-distances', position: MID, k: 2 });
+    const guard2 = client.run({ kind: 'safety-guard', position: MID, move: mv('h0h6'), guard: advanced });
+    const end = client.run({ kind: 'threat-at-end', position: MID, opponent: 'black', guard: basics });
+    const m1 = client.run({ kind: 'forced-wins', position: MATE1, n: 1 });
+    const guard1 = client.run({ kind: 'safety-guard', position: MID, move: mv('h0h6'), guard: basics });
+    const s = client.run({ kind: 'search', position: MID, depth: 2 });
+    for (const p of [m2, md, guard2, end]) {
+      await expect(p).resolves.toMatchObject({ status: 'not-checked', reason: 'error', message: expect.stringMatching(/mate search/) });
+    }
+    await expect(m1).resolves.toMatchObject({ status: 'checked', value: [mv('a1a9')] });
+    await expect(guard1).resolves.toMatchObject({ status: 'checked' });
+    await expect(s).resolves.toMatchObject({ status: 'checked' });
+    expect(client.mode).toBe('sync');
+    expect(client.fallback).toBe('worker-failed');
+  });
+
+  it('without any Worker (createWorker: null, or creation throws) every kind still runs synchronously', async () => {
+    const none = createAnalysisClient({ createWorker: null, syncBudget: DEFAULT_REQUEST_BUDGET, syncTimeoutMs: Infinity });
+    expect(none.fallback).toBe('no-worker');
+    await expect(none.run({ kind: 'forced-wins', position: MATE1, n: 2 })).resolves.toMatchObject({ status: 'checked' });
+    await expect(none.run({ kind: 'safety-guard', position: MID, move: mv('h0h6'), guard: advanced })).resolves.toMatchObject({ status: 'checked' });
+    const throws = createAnalysisClient({
+      createWorker: () => {
+        throw new Error('no workers here');
+      },
+    });
+    await expect(throws.run({ kind: 'forced-wins', position: MATE1, n: 2 })).resolves.toMatchObject({ status: 'checked' });
+    expect(throws.fallback).toBe('no-worker');
+  });
+
+  it('once a Worker has answered, a restarted Worker that fails before answering gives "error"; no main-thread fallback', async () => {
+    vi.useFakeTimers();
+    const workers: FakeWorker[] = [];
+    const kinds = ['answer', 'fail', 'answer'] as const;
+    const client = createAnalysisClient({
+      createWorker: () => {
+        const w = fakeWorker(kinds[Math.min(workers.length, 2)]);
+        workers.push(w);
+        return w;
+      },
+    });
+    const first = client.run({ kind: 'ping' });
+    await vi.advanceTimersByTimeAsync(5);
+    await expect(first).resolves.toMatchObject({ status: 'checked' });
+    // Make the answering Worker hang so the safety net fires and restarts it.
+    workers[0].postMessage = () => {};
+    const slow = client.run({ kind: 'forced-wins', position: ENDGAME, n: 3 }, { timeoutMs: 100 });
+    const retried = client.run({ kind: 'forced-wins', position: ENDGAME, n: 2 });
+    const third = client.run({ kind: 'forced-wins', position: MATE1, n: 1 });
+    await vi.advanceTimersByTimeAsync(100);
+    await expect(slow).resolves.toMatchObject({ status: 'not-checked', reason: 'timeout' });
+    await vi.advanceTimersByTimeAsync(5);
+    await expect(retried).resolves.toMatchObject({ status: 'not-checked', reason: 'error', message: 'boom' });
+    expect(client.mode).toBe('worker');
+    expect(client.fallback).toBeNull();
+    await vi.advanceTimersByTimeAsync(5);
+    await expect(third).resolves.toMatchObject({ status: 'checked', value: [mv('a1a9')] });
+    expect(workers).toHaveLength(3);
+  });
+
+  it('when no Worker has ever answered, a failing restarted Worker switches to sync, still without deep mate searches', async () => {
+    vi.useFakeTimers();
+    const workers: FakeWorker[] = [];
+    const client = createAnalysisClient({
+      createWorker: () => {
+        const w = fakeWorker(workers.length === 0 ? 'hang' : 'fail');
+        workers.push(w);
+        return w;
+      },
+    });
+    const slow = client.run({ kind: 'forced-wins', position: ENDGAME, n: 3 }, { timeoutMs: 100 });
+    const retried = client.run({ kind: 'forced-wins', position: ENDGAME, n: 2 });
+    const third = client.run({ kind: 'forced-wins', position: MATE1, n: 1 });
+    await vi.advanceTimersByTimeAsync(100);
+    await expect(slow).resolves.toMatchObject({ status: 'not-checked', reason: 'timeout' });
+    await vi.advanceTimersByTimeAsync(5);
+    await expect(retried).resolves.toMatchObject({ status: 'not-checked', reason: 'error', message: expect.stringMatching(/mate search/) });
+    await expect(third).resolves.toMatchObject({ status: 'checked', value: [mv('a1a9')] });
+    expect(client.mode).toBe('sync');
+    expect(client.fallback).toBe('worker-failed');
+    expect(workers).toHaveLength(2);
+  });
+
+  it('a Worker that cannot be re-created after a restart fails the request; no main-thread fallback', async () => {
+    let n = 0;
+    const client = createAnalysisClient({
+      createWorker: () => {
+        if (n++ === 0) return fakeWorker('answer');
+        throw new Error('cannot start');
+      },
+    });
+    await expect(client.run({ kind: 'ping' })).resolves.toMatchObject({ status: 'checked' });
+    const ac = new AbortController();
+    const p = client.run({ kind: 'ping' }, { signal: ac.signal });
+    ac.abort(); // terminates the running Worker
+    await expect(p).resolves.toMatchObject({ reason: 'cancelled' });
+    await expect(client.run({ kind: 'forced-wins', position: MATE1, n: 2 })).resolves.toMatchObject({
+      status: 'not-checked',
+      reason: 'error',
+      message: 'cannot start',
+    });
+    expect(client.mode).toBe('worker');
   });
 });

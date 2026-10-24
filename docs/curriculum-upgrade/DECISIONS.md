@@ -97,3 +97,15 @@ live in the design documents, marked "unresolved".
 - Material rule with the leader to move: the leader wins only if some leader move avoids a forced mate in 2.
 - Best-defence ranks a game-ending move first, then an escape from mate within k, then the longest resistance.
 - Learner-facing term for perpetual check: "chiếu mãi" (add to the glossary when the `play.*` texts are added, S2.12).
+
+## D9 — 2026-10-24 — Runtime budgets from the S2.6 bench (proxy, phones unmeasured)
+
+Source: `docs/curriculum-upgrade/measurements.md` §3 (headless Chromium throttled 1×/4×/6×; not a phone).
+- Node caps stay 20,000 per search / 50,000 per request / `SYNC_BUDGET` 1,500; safety net stays 5 s (worst pressing(2)
+  move 2.07 s at 6×).
+- Post-game signals stay at h = 2 (mean 247 ms per learner move at 6×); h = 3 not adopted for the pilot (≈ 4× cost and
+  1/15 moves not checked at default caps) — revisit at S2.20 with phone data.
+- Compute does not limit task lengths; compute each move's signals during the game in the Worker.
+- Resist mode k = d = 2 everywhere, k = 3 nowhere; forcing-attack(3) only at ≤ 12 pieces (timed on legacy endgames;
+  S2.12 records per-task cost on pilot positions); no depth-3 partners on a full board.
+- Owner action: real-device runs (≥ 1 Android, ≥ 1 iOS) per measurements.md §5; until then "phones unmeasured" (04 R6).

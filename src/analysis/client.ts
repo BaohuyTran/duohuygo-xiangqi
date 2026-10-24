@@ -9,16 +9,28 @@
 //   Worker is terminated (the only way to stop the engine's exhaustive mate search, which ignores
 //   `abort`), the request resolves 'not-checked' / 'timeout', and a fresh Worker is started for the
 //   next request. The timer starts when the request is sent, not while it waits in the queue.
-// - No Worker (jsdom, Node, old browsers), or a Worker that fails before its first answer (e.g. the
-//   chunk cannot load): the synchronous fallback runs `executeRequest` on the calling thread, in a
+// - Timeouts are clamped (S2.6): a non-finite, negative or oversized `timeoutMs` never disables the
+//   safety net (browsers fire an Infinity / > 2^31 ms timer at once): NaN → the default, below 0 → 0,
+//   above MAX_TIMEOUT_MS (incl. Infinity) → MAX_TIMEOUT_MS.
+// - No Worker (jsdom, Node, old browsers), or a Worker fails before ANY Worker has answered (e.g.
+//   the chunk cannot load): the synchronous fallback runs `executeRequest` on the calling thread, in a
 //   microtask, with the total budget capped at `syncBudget` (default SYNC_BUDGET, sized for ≤ ~50 ms
 //   of main-thread work on a desktop) and a `syncTimeoutMs` deadline that stops the material
 //   searches (not a running mate search). With the same effective budget both paths give the same
 //   outcome (client.test.ts); a request that needs more than the small budget is 'not-checked' here.
+// - Once some Worker has answered, a Worker (after a safety-net restart, a cancellation or a crash)
+//   that fails or cannot be created only fails the running request ('error'); the next request starts
+//   a new Worker. The client never falls back to the main thread after a Worker has worked once.
+// - After a Worker FAILURE (`fallback === 'worker-failed'`), the synchronous path does not run the
+//   request kinds whose exhaustive mate search is not node-limited at depth ≥ 2 (`mateDepth`:
+//   forced-wins, mate-distances, and guards/signals/threats/predicates with k ≥ 2): they answer
+//   'not-checked' / 'error' instead of blocking the main thread. Only where no Worker exists at all
+//   (`fallback === 'no-worker'`: jsdom, Node, tests with `createWorker: null`) do they run there.
 // - Never rejects: errors, cancellation (`signal`) and `dispose()` resolve as 'not-checked'.
 //
 // No React and no DOM: `Worker` and timers only. Components get the shared client from
 // `getAnalysisClient()` (or a client injected for tests).
+import { SAFETY_GUARDS, type Predicate } from './judge';
 import {
   executeRequest,
   type AnalysisKind,
@@ -35,6 +47,52 @@ export const DEFAULT_TIMEOUT_MS = 5_000;
 export const SYNC_BUDGET = 1_500;
 /** Safety-net deadline of the synchronous fallback (stops the material searches only). */
 export const SYNC_TIMEOUT_MS = 250;
+/** Largest safety net a request may ask for (clamp; S2.6). */
+export const MAX_TIMEOUT_MS = 60_000;
+
+/** A usable safety-net time: NaN → `fallback`, < 0 → 0, > MAX_TIMEOUT_MS (incl. Infinity) → MAX_TIMEOUT_MS. */
+export function clampTimeout(ms: number | undefined, fallback: number): number {
+  if (ms === undefined || typeof ms !== 'number' || Number.isNaN(ms)) return fallback;
+  return Math.min(MAX_TIMEOUT_MS, Math.max(0, ms));
+}
+
+/** Largest forced-mate depth a request asks the engine's exhaustive (not node-limited) mate search for. */
+export function mateDepth(request: AnalysisRequest): number {
+  switch (request.kind) {
+    case 'forced-wins':
+      return request.n;
+    case 'mate-distances':
+      return request.k;
+    case 'safety-guard':
+    case 'threat':
+      return request.guard.k;
+    case 'threat-at-end':
+      return 2; // judge.threatAtEnd always looks for a mate within 2
+    case 'move-signals':
+      return Math.max(request.guard.k, request.missed === false ? 0 : request.guard.missedMate);
+    case 'predicate':
+      return predicateMateDepth(request.predicate);
+    default:
+      return 0;
+  }
+}
+
+function predicateMateDepth(p: Predicate): number {
+  switch (p.kind) {
+    case 'threat':
+      return p.k ?? SAFETY_GUARDS.advanced.k;
+    case 'all':
+    case 'any':
+      return Math.max(0, ...p.of.map(predicateMateDepth));
+    case 'not':
+      return predicateMateDepth(p.of);
+    default:
+      return 0;
+  }
+}
+
+/** Mate depth from which a request is not run on the main thread after a Worker failure. */
+export const UNBOUNDED_MATE_DEPTH = 2;
 
 /** The part of a Worker the client uses (a real `Worker`, or a fake in tests). */
 export interface WorkerLike {
@@ -75,8 +133,14 @@ export interface RunOptions {
 
 export interface AnalysisClient {
   run<R extends AnalysisRequest>(request: R, options?: RunOptions): Promise<AnalysisOutcome<R['kind']>>;
-  /** 'worker' until the Worker is unavailable or fails before its first answer, then 'sync'. */
+  /** 'worker' until the Worker is unavailable or a Worker fails before any Worker has answered, then 'sync'. */
   readonly mode: 'worker' | 'sync';
+  /**
+   * Why the client runs synchronously: 'no-worker' (none could be created; every request kind runs),
+   * 'worker-failed' (a Worker failed before any answer; requests with `mateDepth` ≥ 2 answer
+   * 'not-checked'), or null in Worker mode.
+   */
+  readonly fallback: 'no-worker' | 'worker-failed' | null;
   /** Workers terminated so far (safety net, cancellation, errors). */
   readonly restarts: number;
   /** Terminates the Worker; pending requests resolve 'not-checked' / 'cancelled'. */
@@ -111,14 +175,16 @@ const notChecked = (kind: AnalysisKind, reason: NotCheckedReason, message?: stri
 
 export function createAnalysisClient(options: AnalysisClientOptions = {}): AnalysisClient {
   const factory = options.createWorker === undefined ? defaultWorkerFactory() : options.createWorker;
-  const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  const timeoutMs = clampTimeout(options.timeoutMs, DEFAULT_TIMEOUT_MS);
   const syncBudget = options.syncBudget ?? SYNC_BUDGET;
   const syncTimeoutMs = options.syncTimeoutMs ?? SYNC_TIMEOUT_MS;
   const now = options.now ?? (() => performance.now());
 
   let mode: 'worker' | 'sync' = factory ? 'worker' : 'sync';
+  let fallback: 'no-worker' | 'worker-failed' | null = factory ? null : 'no-worker';
   let worker: WorkerLike | null = null;
-  let answered = false; // the current Worker has answered at least once
+  let workersStarted = 0;
+  let everAnswered = false; // some Worker of this client has answered at least once
   let current: Job | null = null;
   const queue: Job[] = [];
   let nextId = 1;
@@ -150,14 +216,18 @@ export function createAnalysisClient(options: AnalysisClientOptions = {}): Analy
       if (job.settled) return;
       if (disposed || job.signal?.aborted) return settle(job, notChecked(job.request.kind, 'cancelled'));
       job.started = now();
+      if (fallback === 'worker-failed' && mateDepth(job.request) >= UNBOUNDED_MATE_DEPTH) {
+        return settle(job, notChecked(job.request.kind, 'error', 'no Worker: exhaustive mate search not run on the main thread'));
+      }
       const deadline = job.started + syncTimeoutMs;
       settle(job, executeRequest(job.request, { maxBudget: syncBudget, expired: () => now() > deadline }));
     });
   }
 
   /** The Worker cannot be used: run the current and all queued requests synchronously from now on. */
-  function switchToSync(): void {
+  function switchToSync(reason: 'no-worker' | 'worker-failed'): void {
     mode = 'sync';
+    fallback = reason;
     kill();
     const pending = current ? [current, ...queue] : [...queue];
     current = null;
@@ -170,7 +240,7 @@ export function createAnalysisClient(options: AnalysisClientOptions = {}): Analy
 
   function onMessage(from: WorkerLike, data: WorkerResponseMessage): void {
     if (from !== worker) return;
-    answered = true;
+    everAnswered = true;
     const job = current;
     if (!job || data.id !== job.id) return;
     current = null;
@@ -180,7 +250,9 @@ export function createAnalysisClient(options: AnalysisClientOptions = {}): Analy
 
   function onWorkerFailure(from: WorkerLike, event: unknown): void {
     if (from !== worker) return;
-    if (!answered) return switchToSync();
+    // A failure before any Worker has ever answered means "Workers do not work here". The mateDepth
+    // gate of the sync path still keeps the unbounded mate searches off the main thread.
+    if (!everAnswered) return switchToSync('worker-failed');
     const job = current;
     current = null;
     kill();
@@ -193,7 +265,7 @@ export function createAnalysisClient(options: AnalysisClientOptions = {}): Analy
     if (worker) return worker;
     const w = factory!();
     worker = w;
-    answered = false;
+    workersStarted++;
     w.onmessage = (event) => onMessage(w, event.data);
     w.onerror = (event) => onWorkerFailure(w, event);
     w.onmessageerror = (event) => onWorkerFailure(w, event);
@@ -207,8 +279,13 @@ export function createAnalysisClient(options: AnalysisClientOptions = {}): Analy
     let w: WorkerLike;
     try {
       w = ensureWorker();
-    } catch {
-      return switchToSync();
+    } catch (e) {
+      if (workersStarted === 0) return switchToSync('no-worker');
+      if (!everAnswered) return switchToSync('worker-failed');
+      // A restart failed after Workers worked: fail this request, never fall back to the main thread.
+      current = null;
+      settle(job, notChecked(job.request.kind, 'error', e instanceof Error ? e.message : String(e)));
+      return pump();
     }
     job.started = now();
     job.timer = setTimeout(() => {
@@ -247,6 +324,9 @@ export function createAnalysisClient(options: AnalysisClientOptions = {}): Analy
     get mode() {
       return mode;
     },
+    get fallback() {
+      return fallback;
+    },
     get restarts() {
       return restarts;
     },
@@ -255,7 +335,7 @@ export function createAnalysisClient(options: AnalysisClientOptions = {}): Analy
         const job: Job = {
           id: nextId++,
           request,
-          timeoutMs: runOptions.timeoutMs ?? timeoutMs,
+          timeoutMs: clampTimeout(runOptions.timeoutMs, timeoutMs),
           signal: runOptions.signal,
           resolve,
           onAbort: () => cancel(job),

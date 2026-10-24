@@ -134,6 +134,11 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   decision/choice screens at 360×740 (scroll needed) → S2.19; choice radiogroup arrow keys; placement scoring by
   first-answer credit (S2.13).
 
+- 2026-10-24 — **S2.6 done** (attempt 2): dev-only bench (`npm run bench`, real Worker client + src/play partners,
+  throttled headless Chromium as a proxy), `measurements.md`, budgets D9; client: timeout clamp, sync fallback only
+  while no Worker has answered, no depth ≥ 2 mate search on the main thread after a Worker failure. Reviewer APPROVE
+  (figures checked against raw outputs). Owner action: phone runs (measurements.md §5).
+
 ## Blockers and failed gates
 
 - **Owner action (before any deploy that writes `data_v2`):** apply migration `20261023000000_progress_data_v2.sql`
