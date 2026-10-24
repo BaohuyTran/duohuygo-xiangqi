@@ -81,3 +81,19 @@ live in the design documents, marked "unresolved".
   is ready in main branch." The push to `main` at S2.gate does not wait for the `data_v2` migration / T15; until the
   migration runs, signed-in testers may see a sync error (v1 data still syncs). T15 stays an owner action before real
   users.
+
+## D8 — 2026-10-24 — Training-ruleset interpretations in `src/play` (S2.9)
+
+- The repetition cycle is the moves between the **last two** occurrences of the position key; a quiet move before the
+  repeated sequence does not excuse a perpetual check.
+- The learner may create a third occurrence when the opponent checked perpetually in that cycle
+  (`opponent-perpetual-check`), so the victim of perpetual check can claim the win; this widens 03 §5.5 in line with
+  its rule (1) and AXF (now written into 03 §8.3). Otherwise the refusal stays, also when an alternative could not be
+  checked.
+- Partners avoid any third occurrence unless every alternative loses ≥ 2 (measured against the best repeating move by
+  the partner's own scores); they also avoid one that would make them win by the learner's perpetual check (favours the
+  learner; a learner's perpetual check is punished only through the learner's own third occurrence).
+- Any not-checked partner request except a cancel (incl. node-limit) triggers the flagged d = 1 move and voids the run.
+- Material rule with the leader to move: the leader wins only if some leader move avoids a forced mate in 2.
+- Best-defence ranks a game-ending move first, then an escape from mate within k, then the longest resistance.
+- Learner-facing term for perpetual check: "chiếu mãi" (add to the glossary when the `play.*` texts are added, S2.12).

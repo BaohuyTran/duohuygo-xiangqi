@@ -12,15 +12,16 @@
 // A request stopped by either limit is 'not-checked' (reason 'node-limit'): no penalty, no credit (04 §5.4).
 //
 // NOT bounded by node limits: the engine's exhaustive `hasForcedWin` / `forcedWinMoves` (the mate
-// guard of judge.ts with k ≤ 2, the `forced-wins` request). They ignore `abort`, so the only stop is
-// the wall-clock safety net: the client terminates and restarts the Worker (reason 'timeout'). In the
+// guard of judge.ts with k ≤ 2, the `forced-wins` and `mate-distances` requests). They ignore
+// `abort`, so the only stop is the wall-clock safety net: the client terminates and restarts the
+// Worker (reason 'timeout'). In the
 // synchronous fallback a deadline can only stop the material searches, never a running mate search.
 //
 // Adding a request kind: add a variant to `AnalysisRequest`, its result type to `AnalysisResults`
 // and a case in `run` below that says when the value counts as checked. The Worker and the client
 // need no change (the protocol carries any request). Values must survive structured cloning
 // (plain data: no functions, no class instances; an evaluator is named by `EvalSpec`).
-import { forcedWinMoves, legalMoves } from '../engine';
+import { forcedWinMoves, hasForcedWin, legalMoves, makeMove } from '../engine';
 import type { Color, Move, Position } from '../engine';
 import { featureEvaluator, materialEval, type EvalWeights, type Evaluator } from './eval';
 import {
@@ -103,6 +104,12 @@ export type AnalysisRequest =
     })
   /** engine forcedWinMoves(position, n): exhaustive, NOT node-limited (n ≤ MAX_RUNTIME_MATE_DEPTH). */
   | (Base & { readonly kind: 'forced-wins'; readonly position: Position; readonly n: number })
+  /**
+   * For each of `moves` (default: every legal move, in the engine's order): the smallest n ≤ k such
+   * that the OPPONENT forces a win within n moves after it (engine hasForcedWin), or null. Exhaustive,
+   * NOT node-limited (k ≤ MAX_RUNTIME_MATE_DEPTH). The mate guard of `best-defence` (S2.9, 03 §5.2).
+   */
+  | (Base & { readonly kind: 'mate-distances'; readonly position: Position; readonly k: number; readonly moves?: readonly Move[] })
   /** judge.evaluatePredicate: an objective predicate after `moves` from `before` (null = not checked). */
   | (Base & {
       readonly kind: 'predicate';
@@ -120,6 +127,12 @@ export interface ScoredMove {
   readonly score: number;
 }
 
+export interface MateDistance {
+  readonly move: Move;
+  /** Smallest n ≤ k with a forced win for the opponent within n moves after `move`; null = none within k. */
+  readonly mateIn: number | null;
+}
+
 /** The value each request kind answers with. */
 export interface AnalysisResults {
   ping: null;
@@ -133,6 +146,8 @@ export interface AnalysisResults {
   /** In the order of the request's moves; when not checked, only the moves scored completely before the stop. */
   'score-moves': readonly ScoredMove[];
   'forced-wins': readonly Move[];
+  /** In the order of the request's moves. */
+  'mate-distances': readonly MateDistance[];
   predicate: boolean;
 }
 
@@ -267,6 +282,17 @@ function run(request: AnalysisRequest, limits: JudgeLimits): Ran<AnalysisKind> {
         throw new Error(`forced-wins: n must be 1–${MAX_RUNTIME_MATE_DEPTH} at runtime (got ${request.n})`);
       }
       return { value: forcedWinMoves(request.position, request.n), complete: true };
+    }
+    case 'mate-distances': {
+      if (!(request.k >= 1 && request.k <= MAX_RUNTIME_MATE_DEPTH)) {
+        throw new Error(`mate-distances: k must be 1–${MAX_RUNTIME_MATE_DEPTH} at runtime (got ${request.k})`);
+      }
+      const value = (request.moves ?? legalMoves(request.position)).map((move) => {
+        const after = makeMove(request.position, move);
+        for (let n = 1; n <= request.k; n++) if (hasForcedWin(after, n)) return { move, mateIn: n };
+        return { move, mateIn: null };
+      });
+      return { value, complete: true };
     }
     case 'predicate': {
       const v = evaluatePredicate(request.predicate, {

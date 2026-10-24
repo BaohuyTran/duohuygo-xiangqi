@@ -391,11 +391,14 @@ assessed them in free play.
 
 - **Mate / stalemate** end the task (stalemate: the stalemated side loses).
 - **Repetition (training ruleset, aligned with 04 §5.7):** position key = board + side to move. At a third occurrence:
-  (1) one side gave check on every move of the cycle and the other did not → the checking side loses; (2) both or
+  (1) one side gave check on every move of the cycle (the moves between the last two occurrences, D8) and the other
+  did not → the checking side loses; (2) both or
   neither checked → draw; (3) **perpetual chase is not adjudicated** (disclosed; it needs judging new attacks on
   unprotected pieces with many official exceptions). To stop rule (3) being exploited, **the learner may not play a
-  move that creates a third occurrence** unless it is the only legal move or every other legal move fails the level's
-  safety guard; the move is refused with an explanation. Partners avoid it as in §5.2. Hence a repetition can only
+  move that creates a third occurrence** unless it is the only legal move, every other legal move fails the level's
+  safety guard, or the opponent checked perpetually in that cycle (the learner then claims the win by rule (1), D8);
+  the move is refused with an explanation. If the learner's own allowed move would lose by rule (1), the app warns
+  first. Partners avoid it as in §5.2. Hence a repetition can only
   end a task when it is forced.
 - **Move cap** (tasks): ends the task with no result; rubrics score the position reached.
 - **Full games** (b10, `xb`, placement `pb-g*`): the game stops at the **cap of 80 learner moves** or at the

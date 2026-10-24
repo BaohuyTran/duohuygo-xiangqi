@@ -113,6 +113,15 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   with S2.7 (owner of CLAUDE.md this round). Carried to S2.6: clamp non-finite `timeoutMs`; do not run unbounded mate
   searches on the main thread after a Worker crash; exercise the real client in a browser bench.
 
+- 2026-10-24 — **S2.9 done** (attempt 2): `src/play` — seeded training partners (scripted, best-defence incl. resist
+  mode, forcing-attack, safe-sparring, pressing, restricted, greedy, chains) running their searches as analysis
+  requests; game record with safety-net flag (voids the run); adjudicator of 03 §5.5 (perpetual check loses, both/
+  neither → draw, chase not adjudicated, learner's third-repetition refusal with exceptions, task caps, 80-move /
+  30-no-capture stops with one material rule). Tester PASS (determinism over 20 positions × 9 policies × 2 seeds, Worker
+  vs direct identical, real-board repetition cases); reviewer APPROVE; content-reviewer APPROVE after two rule fixes
+  (victim may claim perpetual check; cycle = last two occurrences). Disclosure/outcome/warning texts (en+vi, reviewed)
+  go into messages.ts with S2.12. Interpretations: D8. CLAUDE.md `src/play` entry added with S2.7.
+
 ## Blockers and failed gates
 
 - **Owner action (before any deploy that writes `data_v2`):** apply migration `20261023000000_progress_data_v2.sql`
