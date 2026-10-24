@@ -8,11 +8,15 @@ import {
   legalMoves,
   legalMovesFrom,
   makeMove,
+  materialBalance,
+  moveScore,
   parseSquare,
+  searchScore,
   squareName,
+  type Move,
   type Position,
 } from '../engine';
-import { predicateErrors, type Predicate } from '../analysis';
+import { evaluatePredicate, predicateErrors, safetyGuard, type Predicate } from '../analysis';
 import { hasMessage } from '../i18n/messages';
 import {
   bestCaptureGain,
@@ -22,7 +26,8 @@ import {
   positionOf,
 } from '../lessons/answers';
 import { decisionGuard, isAccepted, moveKey, parseMoveKey } from '../lessons/decision';
-import { computeMoveClass, syncSafety } from '../lessons/decision-table';
+import { computeMoveClass, syncSafety, TABLE_MAX_NODES } from '../lessons/decision-table';
+import { linePositionKey } from '../lessons/line';
 import { resolveGuard } from '../lessons/guard';
 
 import {
@@ -31,6 +36,7 @@ import {
   combinationDone,
   isWinningMove,
   searchWinningMove,
+  variedDefenceReplies,
 } from '../lessons/combination';
 import { sameMove, toMove } from '../puzzles/logic';
 import { placementProblems } from './legality';
@@ -45,6 +51,7 @@ import {
   type CombinationExercise,
   type DecisionExercise,
   type Exercise,
+  type LineExercise,
   type Track,
   type Unit,
 } from './types';
@@ -53,11 +60,11 @@ import {
 const SAFETY = syncSafety();
 
 const REGIONS = ['red-palace', 'black-palace', 'red-side', 'black-side'];
-const EXERCISE_TYPES = ['learn', 'move', 'select-squares', 'capture', 'combination', 'decision', 'choice'];
+const EXERCISE_TYPES = ['learn', 'move', 'select-squares', 'capture', 'combination', 'decision', 'choice', 'line'];
 const GOALS = ['reach', 'any', 'check', 'checkmate', 'defend', 'safe'];
 const QUERY_KINDS = ['attacked-by', 'attacked-pieces', 'hanging', 'can-capture', 'point'];
 /** Item types that ask for a move: at G1/G0/TR they need the four feedback parts (02-curriculum.md §7). */
-const MOVE_ITEM_TYPES = ['move', 'capture', 'combination', 'decision'];
+const MOVE_ITEM_TYPES = ['move', 'capture', 'combination', 'decision', 'line'];
 const FEEDBACK_ASSIST = ['G1', 'G0', 'TR'];
 const TRACKS = ['basics', 'intermediate', 'advanced', 'expert', 'master'];
 
@@ -229,7 +236,7 @@ function metaProblems(ex: Obj, retired: ReadonlySet<string>, required = true): s
   if (need('source', true)) problems.push(...sourceProblems(ex.source, retired));
   need('side', true); // its value is checked by validateExercise
   if (ex.assist !== undefined && !ASSIST_LEVELS.includes(ex.assist as never)) problems.push(`"assist" must be one of ${ASSIST_LEVELS.join(', ')}`);
-  if (ex.assist === undefined && (ex.type === 'decision' || ex.type === 'choice')) problems.push(`"assist" (${ASSIST_LEVELS.join(', ')}) is required on a "${String(ex.type)}" item`);
+  if (ex.assist === undefined && (ex.type === 'decision' || ex.type === 'choice' || ex.type === 'line')) problems.push(`"assist" (${ASSIST_LEVELS.join(', ')}) is required on a "${String(ex.type)}" item`);
   if (need('strand', false) && !STRANDS.includes(ex.strand as never)) problems.push(`"strand" must be one of ${STRANDS.join(', ')}`);
   if (need('nature', false) && ex.nature !== 'tactic' && ex.nature !== 'quiet') problems.push('"nature" must be "tactic" or "quiet"');
   if (need('critical', false) && typeof ex.critical !== 'boolean') problems.push('"critical" must be true or false');
@@ -480,6 +487,12 @@ function validateExercise(ex: unknown, ctx: ExerciseContext): string[] {
       checkKey('explanation', ex.explanation, true);
       problems.push(...validateChoice(ex, pos, checkKey));
       break;
+
+    case 'line':
+      checkKey('prompt', ex.prompt);
+      checkKey('explanation', ex.explanation, true);
+      problems.push(...validateLine(ex, pos, checkKey));
+      break;
   }
   if (problems.length === 0) problems.push(...feedbackProblems(ex, pos, checkKey));
   return problems;
@@ -560,8 +573,10 @@ function feedbackProblems(ex: Obj, pos: Position, checkKey: (field: string, valu
       rejected = checkCombinationMove(ex as unknown as CombinationExercise, 0, pos, move) !== 'correct';
       break;
     default: {
+      // decision, or a line (its root node's table)
       const d = ex as unknown as DecisionExercise;
-      const row = d.table.find((r) => r.move === alt.move);
+      const table = ex.type === 'line' ? (ex as unknown as LineExercise).root.table : d.table;
+      const row = table.find((r) => r.move === alt.move);
       // A dubious move the item accepts (`dubious: "accept"`) solves it, so it is not a rejected move.
       rejected = row !== undefined && !isAccepted(row.class) && !(row.class === 'dubious' && d.dubious === 'accept');
     }
@@ -644,6 +659,237 @@ function validateDecision(ex: Obj, pos: Position, checkKey: (field: string, valu
   return problems;
 }
 
+/** Most nodes a line tree may hold (keeps the validator and the attempt log bounded). */
+export const MAX_LINE_NODES = 200;
+const PARTNER_KINDS = ['best-defence', 'forcing-attack', 'safe-sparring', 'pressing'];
+const LEAF_GOALS = ['checkmate', 'material', 'predicate', 'end'];
+
+/** A leaf goal's shape (and, for predicates, its predicate) — `allowEnd` false for `handOver.goal`. */
+function lineGoalShapeProblems(goal: unknown, field: string, start: Position, allowEnd: boolean): string[] {
+  if (!isObj(goal) || typeof goal.kind !== 'string' || !LEAF_GOALS.includes(goal.kind) || (!allowEnd && goal.kind === 'end')) {
+    return [`"${field}.kind" must be one of ${LEAF_GOALS.filter((g) => allowEnd || g !== 'end').join(', ')}`];
+  }
+  for (const key of Object.keys(goal)) if (!['kind', 'gain', 'predicate'].includes(key)) return [`"${field}.${key}" is not a goal field`];
+  if (goal.kind === 'material' && !(Number.isInteger(goal.gain) && (goal.gain as number) >= 1 && (goal.gain as number) <= 40)) return [`"${field}.gain" must be an integer 1–40`];
+  if (goal.kind === 'predicate') return predicateErrors(goal.predicate, start, `${field}.predicate`);
+  return [];
+}
+
+function partnerProblems(spec: unknown, field: string, pieces: number): string[] {
+  if (!isObj(spec) || typeof spec.kind !== 'string' || !PARTNER_KINDS.includes(spec.kind)) return [`"${field}.kind" must be one of ${PARTNER_KINDS.join(', ')}`];
+  const allowed: Record<string, string[]> = { 'best-defence': ['k', 'resist', 'd'], 'forcing-attack': ['k'], 'safe-sparring': ['d', 'tau'], pressing: ['d'] };
+  const problems: string[] = [];
+  for (const key of Object.keys(spec)) if (key !== 'kind' && !allowed[spec.kind].includes(key)) problems.push(`"${field}.${key}" is not a field of "${spec.kind}"`);
+  // 03 §5.2 / 04 §5.5: depth or k = 3 fits the runtime budget only in positions of ≤ ~12 pieces.
+  const depth = (key: string) => {
+    const v = spec[key];
+    if (v === undefined) return;
+    if (!(Number.isInteger(v) && (v as number) >= 1 && (v as number) <= 3)) problems.push(`"${field}.${key}" must be an integer 1–3`);
+    else if (v === 3 && pieces > 12) problems.push(`"${field}.${key}": 3 only in positions of at most 12 pieces (runtime budget, 03 §5.2)`);
+  };
+  depth('k');
+  depth('d');
+  if (spec.resist !== undefined && typeof spec.resist !== 'boolean') problems.push(`"${field}.resist" must be true or false`);
+  if (spec.tau !== undefined && !(typeof spec.tau === 'number' && spec.tau >= 0 && spec.tau <= 5)) problems.push(`"${field}.tau" must be a number 0–5`);
+  return problems;
+}
+
+/**
+ * A `line` (04-architecture.md §5.2; S2.8): every node legal and of the right side; every learner node a complete
+ * move table under the `decision` rules (drift, guard, authored rows, accepted count) with at least one accepted
+ * move that continues; every authored opponent reply legal, passing the safety guard from the opponent's side and
+ * continuing to a node or leaf, so every branch reaches a leaf; leaf goals hold on the stored path; forced claims
+ * proven for EVERY defence; no position repeated on a stored path (07-sourcing.md §4.1); `handOver` well formed.
+ */
+function validateLine(ex: Obj, start: Position, checkKey: (field: string, value: unknown, optional?: boolean) => void): string[] {
+  const problems: string[] = [...guardOverrideProblems(ex.guard, 'guard')];
+  if (ex.objective !== undefined) problems.push(...predicateErrors(ex.objective, start, 'objective'));
+  if (ex.partial !== undefined && typeof ex.partial !== 'boolean') problems.push('"partial" must be true or false');
+  if (ex.dubious !== undefined && ex.dubious !== 'retry' && ex.dubious !== 'accept') problems.push('"dubious" must be "retry" or "accept"');
+  if (ex.handOver !== undefined) {
+    const h = ex.handOver;
+    if (!isObj(h)) problems.push('"handOver" must be { "partner": [...], "moves": n, "goal"? }');
+    else {
+      for (const key of Object.keys(h)) if (!['partner', 'moves', 'goal'].includes(key)) problems.push(`"handOver.${key}" is not a hand-over field`);
+      const pieces = start.board.filter(Boolean).length;
+      if (!Array.isArray(h.partner) || h.partner.length === 0) problems.push('"handOver.partner" must be a non-empty list of partners');
+      else h.partner.forEach((p, i) => problems.push(...partnerProblems(p, `handOver.partner[${i}]`, pieces)));
+      if (!(Number.isInteger(h.moves) && (h.moves as number) >= 1 && (h.moves as number) <= 20)) problems.push('"handOver.moves" must be an integer 1–20');
+      if (h.goal !== undefined) problems.push(...lineGoalShapeProblems(h.goal, 'handOver.goal', start, false));
+    }
+  }
+  if (!isObj(ex.root) || ex.root.kind !== 'learner') return [...problems, '"root" must be a learner node { "kind": "learner", "table": [...] }'];
+  if (problems.length) return problems;
+
+  const side = (ex.side ?? 'red') as 'red' | 'black';
+  const guard = resolveGuard({ itemId: ex.id as string | undefined, override: ex.guard as never });
+  const limits = { maxNodes: TABLE_MAX_NODES };
+  let count = 0;
+
+  /** `mateIn`: the mate claim (moves left for the learner) of the learner node above an opponent node. */
+  const walk = (node: unknown, cur: Position, moves: Move[], seen: string[], where: string, mateIn?: number): void => {
+    if (++count > MAX_LINE_NODES) {
+      if (count === MAX_LINE_NODES + 1) problems.push(`the tree has more than ${MAX_LINE_NODES} nodes`);
+      return;
+    }
+    const err = (msg: string) => problems.push(`${where}: ${msg}`);
+    if (!isObj(node)) return void err('must be a node object with "kind": "learner" | "opponent" | "leaf"');
+    /** Follows `move` to `child`, refusing a repeated position (07 §4.1). */
+    const follow = (move: Move, child: unknown, label: string, claim?: number) => {
+      const after = makeMove(cur, move);
+      const key = linePositionKey(after);
+      if (seen.includes(key)) return void problems.push(`${where}>${label}: repeats a position of the stored line (07-sourcing.md §4.1)`);
+      walk(child, after, [...moves, move], [...seen, key], `${where}>${label}`, claim);
+    };
+
+    if (node.kind === 'leaf') {
+      for (const key of Object.keys(node)) if (!['kind', 'goal', 'text'].includes(key)) err(`"${key}" is not a leaf field`);
+      checkKey(`${where}.text`, node.text, true);
+      const shape = lineGoalShapeProblems(node.goal, 'goal', start, true);
+      if (shape.length) return void shape.forEach(err);
+      const goal = node.goal as Obj;
+      if (goal.kind === 'checkmate' && !(cur.turn !== side && legalMoves(cur).length === 0)) err('leaf "checkmate": the opponent is not mated (or stalemated) here');
+      if (goal.kind === 'material' && materialBalance(cur.board, side) - materialBalance(start.board, side) < (goal.gain as number)) {
+        err(`leaf "material": the learner is not ${String(goal.gain)} points up here`);
+      }
+      if (goal.kind === 'predicate') {
+        const v = evaluatePredicate(goal.predicate as Predicate, { before: start, moves, side, limits });
+        if (v === null) err('leaf "predicate" could not be checked within the node limit');
+        else if (!v) err('leaf "predicate" does not hold at the leaf');
+      }
+      return;
+    }
+
+    if (node.kind === 'opponent') {
+      for (const key of Object.keys(node)) if (!['kind', 'replies'].includes(key)) err(`"${key}" is not an opponent-node field`);
+      if (cur.turn === side) return void err('an opponent node needs the opponent to move');
+      if (!Array.isArray(node.replies) || node.replies.length === 0) return void err('"replies" must list at least one authored reply');
+      const legal = new Map(legalMoves(cur).map((m) => [moveKey(m), m]));
+      // A forced line: the main reply (played in tests) must be a best defence, i.e. of the longest mate distance.
+      if (mateIn !== undefined && mateIn > 1 && isObj(node.replies[0]) && legal.has(node.replies[0].move as string)) {
+        const distance = (m: Move) => {
+          const after = makeMove(cur, m);
+          for (let k = 1; k < mateIn; k++) if (hasForcedWin(after, k)) return k;
+          return mateIn;
+        };
+        const longest = Math.max(...[...legal.values()].map(distance));
+        const main = node.replies[0].move as string;
+        if (distance(legal.get(main)!) < longest) err(`replies[0] ${main} (the main reply, played in tests) is not a best defence: another reply delays the mate longer`);
+      }
+      const used = new Set<string>();
+      node.replies.forEach((reply, i) => {
+        const rw = `replies[${i}]`;
+        if (!isObj(reply)) return void err(`${rw} must be { "move", "weight"?, "text"?, "next" }`);
+        for (const key of Object.keys(reply)) if (!['move', 'weight', 'text', 'next'].includes(key)) err(`${rw}.${key} is not a reply field`);
+        const m = typeof reply.move === 'string' ? legal.get(reply.move) : undefined;
+        if (!m) return void err(`${rw}.move ${JSON.stringify(reply.move)} is not a legal move`);
+        if (used.has(reply.move as string)) err(`${rw}: ${String(reply.move)} is listed twice`);
+        used.add(reply.move as string);
+        if (reply.weight !== undefined && !(typeof reply.weight === 'number' && Number.isFinite(reply.weight) && reply.weight > 0)) err(`${rw}.weight must be a positive number`);
+        checkKey(`${where}.${rw}.text`, reply.text, true);
+        // 07 §4.1: authored replies are not blunders (the item's guard, from the opponent's side).
+        const v = safetyGuard(cur, m, guard, limits);
+        if (v.status !== 'checked') err(`${rw}: ${String(reply.move)} could not be checked by the safety guard within the node limit`);
+        else if (!v.safe) {
+          const why = v.allowedMate || v.allowedLoss?.mate ? 'allows a mate' : `loses ${v.allowedLoss?.loss ?? '?'} points`;
+          err(`${rw}: the authored reply ${String(reply.move)} fails the safety guard (${why} within the horizon)`);
+        }
+        if (reply.next === undefined) return void err(`${rw} needs "next" (a learner node or a leaf): every branch must reach a leaf`);
+        if (isObj(reply.next) && reply.next.kind === 'opponent') return void err(`${rw}.next must be a learner node or a leaf`);
+        follow(m, reply.next, reply.move as string);
+      });
+      return;
+    }
+
+    if (node.kind !== 'learner') return void err('"kind" must be "learner", "opponent" or "leaf"');
+    for (const key of Object.keys(node)) if (!['kind', 'table', 'objective', 'alternatives', 'claim', 'hints', 'next'].includes(key)) err(`"${key}" is not a learner-node field`);
+    if (cur.turn !== side) return void err('a learner node needs the learner to move');
+    const legal = new Map(legalMoves(cur).map((m) => [moveKey(m), m]));
+    if (legal.size === 0) return void err('the learner has no legal move here: end the branch with a leaf');
+    // The decision rules on this node's table (complete, drift, guard, authored rows, accepted count, hints).
+    const asDecision: Obj = {
+      id: ex.id,
+      guard: ex.guard,
+      misconceptions: ex.misconceptions,
+      table: node.table,
+      objective: node.objective ?? ex.objective,
+      alternatives: node.alternatives,
+      hints: node.hints,
+    };
+    for (const p of validateDecision(asDecision, cur, (f, v, o) => checkKey(`${where}.${f}`, v, o))) err(p);
+    const table = Array.isArray(node.table) ? (node.table as Obj[]).filter(isObj) : [];
+    const rowOf = (key: string) => table.find((r) => r.move === key);
+    const accepted = table.filter((r) => typeof r.move === 'string' && legal.has(r.move) && isAccepted(r.class as never)).map((r) => legal.get(r.move as string)!);
+
+    /** Every legal move that keeps the claim must be accepted, every accepted move must keep it (`alternatives`). */
+    const claimProblems = (keeps: (m: Move) => boolean, what: string) => {
+      const keepers = new Set([...legal.values()].filter(keeps).map(moveKey));
+      for (const m of accepted) if (!keepers.has(moveKey(m))) err(`${moveKey(m)} is accepted but does not ${what}`);
+      for (const key of keepers) {
+        const row = rowOf(key);
+        if (row && !isAccepted(row.class as never)) err(`${key} does ${what} but the table classes it "${String(row.class)}": every move that keeps the claim must be target or sound`);
+      }
+      if (node.alternatives === false && keepers.size > 1) err(`"alternatives": false, but ${keepers.size} moves ${what}`);
+    };
+    if (node.claim !== undefined) {
+      const c = node.claim;
+      if (!isObj(c) || (c.kind !== 'mate' && c.kind !== 'material')) err('"claim" must be { "kind": "mate", "moves" } or { "kind": "material", "gain", "depth" }');
+      else if (c.kind === 'mate') {
+        const n = c.moves as number;
+        if (!(Number.isInteger(n) && n >= 1 && n <= 3)) err('"claim.moves" must be 1, 2 or 3');
+        else if (!hasForcedWin(cur, n)) err(`claim: the learner has no forced mate in ${n}`);
+        else {
+          // Proven for every defence: a move keeps the claim when EVERY reply (not only the authored ones) still loses.
+          // The table must accept exactly the moves that keep it (a forced line never rejects another winning move).
+          const keeps = (m: Move) => {
+            const after = makeMove(cur, m);
+            const replies = legalMoves(after);
+            return replies.length === 0 || (n > 1 && replies.every((r) => hasForcedWin(makeMove(after, r), n - 1)));
+          };
+          claimProblems(keeps, `keep the forced mate in ${n} against every defence`);
+        }
+      } else {
+        const gain = c.gain as number;
+        const depth = c.depth as number;
+        if (!(Number.isInteger(gain) && gain >= 1 && gain <= 40)) err('"claim.gain" must be an integer 1–40');
+        else if (!(Number.isInteger(depth) && depth >= 1 && depth <= 4)) err('"claim.depth" must be 1–4 plies');
+        else {
+          const base = materialBalance(cur.board, cur.turn);
+          if (searchScore(cur, depth) - base < gain) err(`claim: the learner does not win ${gain} points within ${depth} plies`);
+          else claimProblems((m) => moveScore(cur, m, depth) - base >= gain, `win ${gain} points within ${depth} plies`);
+        }
+      }
+    }
+
+    const next = node.next;
+    if (next === undefined) return void err('no accepted move continues the line ("next"): every branch must reach a leaf');
+    if (!isObj(next)) return void err('"next" must map moves ("h2-e2") to an opponent node or a leaf');
+    let continues = false;
+    for (const [key, child] of Object.entries(next)) {
+      const m = legal.get(key);
+      const row = rowOf(key);
+      if (!m || !row) {
+        err(`next: ${key} is not a legal move of the table`);
+        continue;
+      }
+      if (row.class === 'error') {
+        err(`next: ${key} is an "error" row; an error is never played on`);
+        continue;
+      }
+      if (isAccepted(row.class as never)) continues = true;
+      if (isObj(child) && child.kind === 'learner') {
+        err(`next: ${key} must lead to an opponent node or a leaf`);
+        continue;
+      }
+      const c = node.claim;
+      follow(m, child, key, isObj(c) && c.kind === 'mate' && typeof c.moves === 'number' ? c.moves : undefined);
+    }
+    if (!continues) err('no accepted move continues the line ("next"): every branch must reach a leaf');
+  };
+  walk(ex.root, start, [], [linePositionKey(start)], 'root');
+  return problems;
+}
+
 /** A `choice`: 3–4 options, unique ids, a key (exactly one correct unless `multi`), per-option feedback. */
 function validateChoice(ex: Obj, pos: Position, checkKey: (field: string, value: unknown, optional?: boolean) => void): string[] {
   const problems: string[] = [];
@@ -702,6 +948,10 @@ function validateCombination(
     ex.hints.forEach((h, i) => checkKey(`hints[${i}]`, h));
   }
   const problems: string[] = [];
+  if (ex.variedDefence !== undefined && typeof ex.variedDefence !== 'boolean') return ['"variedDefence" must be true or false'];
+  // The longest-resistance set needs mate searches up to depth moves − 2 on the main thread at runtime; mates in 4 (depth 3)
+  // are not measured within the budget (S2.6), so varied defence is limited to 2–3 learner moves for now.
+  if (ex.variedDefence === true && combo.moves >= 4) return ['"variedDefence" is limited to combinations of 2 or 3 learner moves (runtime budget)'];
   if (combo.moves >= 4 && ex.firstMoves === undefined) return ['"firstMoves" is required when "moves" is 4'];
   if (ex.firstMoves !== undefined) {
     const first = ex.firstMoves;
@@ -733,6 +983,8 @@ function validateCombination(
 
   // Play the stored line: each Red move must be accepted, each Black reply a best defence.
   let cur = pos;
+  /** Varied defence: some opponent step of the stored line has two or more best replies. */
+  let branches = false;
   for (let step = 0; step < line.length; step++) {
     const move = { from: parseSquare(line[step].from as string), to: parseSquare(line[step].to as string) };
     const name = `solution[${step}] ${line[step].from}-${line[step].to}`;
@@ -740,8 +992,10 @@ function validateCombination(
     if (step % 2 === 0) {
       const verdict = checkCombinationMove(combo, step, cur, move);
       if (verdict !== 'correct') return [...problems, `${name} is not accepted (${verdict})`];
-    } else if (!bestCombinationReplies(combo, cur, step).some((m) => sameMove(m, move))) {
-      problems.push(`${name} is not a best defence`);
+    } else {
+      if (!bestCombinationReplies(combo, cur, step).some((m) => sameMove(m, move))) problems.push(`${name} is not a best defence`);
+      // Varied defence draws from the longest-resistance replies only (`variedDefenceReplies`).
+      if (ex.variedDefence === true && variedDefenceReplies(combo, cur, step).length >= 2) branches = true;
     }
     const after = makeMove(cur, move);
     if (step % 2 === 0 && combinationDone(combo, after, step) !== (step === line.length - 1)) {
@@ -750,6 +1004,7 @@ function validateCombination(
     cur = after;
   }
   if (combo.goal === 'checkmate' && gameStatus(cur).kind !== 'checkmate') problems.push('the stored line does not end in checkmate');
+  if (ex.variedDefence === true && !branches) problems.push('"variedDefence": the defender has only one best reply at every step of the stored line, so nothing varies');
   return problems;
 }
 

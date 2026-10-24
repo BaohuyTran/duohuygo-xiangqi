@@ -35,6 +35,8 @@ Must work in desktop and phone browsers and as an installable, offline-capable P
 | Phone-width UI smoke check (after `npm run build`; needs Playwright installed globally; also builds + checks the Black fixture page, `-- --no-black` skips it) | `npm run ui:check [-- --width 320 --height 740]` |
 | Review-record hashes of a unit (id, version, contentHash) | `npx tsx scripts/review-hash.ts <unitId or unit.json>` |
 | Offline PWA + installability check (builds first; `-- --no-build` to skip; Playwright global); also checks the analysis Worker chunk is precached, answers offline, restarts after terminate, main-thread ≤ 50 ms per request | `npm run offline:check` |
+| Phone-cost bench (proxy: throttled headless Chromium 1×/4×/6×, real Worker client + src/play partners; type-checks scripts/bench first; Playwright global; `-- --quick`, `-- --rates 1,4`, `-- --serve` for a real phone) | `npm run bench` |
+| Verify `line` trees + varied-defence combinations (validator, node selectivity, depth, replies at h + 1, best replies) | `npx tsx scripts/verify-lines.ts [unitId or unit.json …]` (default: all units) or `npx tsx scripts/verify-lines.ts --fixtures` |
 | Propose the complete move table of a `decision` item (dev-time; keeps `authored` rows) | `npx tsx scripts/move-table.ts <unitId or unit.json> <itemId>` or `npx tsx scripts/move-table.ts --fen "<fen>" [--unit b09] [--objective '<json>'] [--guard '{"h":2}']` |
 
 `npm run build`, `npm test` and `npm run lint` must pass before committing.
@@ -67,6 +69,9 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
 │   ├── review-hash.ts      # Prints id / version / contentHash of a unit's items for review records
 │   ├── ui-check.mjs        # Phone-size Playwright smoke check of the built app (used by the tester)
 │   ├── ui-fixtures/        # Test-only Black-orientation page for ui:check (own vite.config.mjs; never in the app build)
+│   ├── bench.mjs           # Phone-cost bench driver
+│   ├── bench/              # Dev-only bench page (own vite.config.mjs + tsconfig → ui-check-output/bench-dist; never in the app build)
+│   ├── verify-lines.ts     # Authoring-time check of `line` trees and varied-defence combinations
 │   ├── offline-check.mjs   # Build, load once, go offline, reload, open a lesson + puzzle; manifest/icons
 │   └── generate-puzzles.ts # Dev-time puzzle generator (run with tsx; not part of the app)
 └── src/
@@ -80,7 +85,8 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── LessonPlayer.tsx# One exercise at a time, feedback, retry, completion screen; attempt/hint events (`onEvent`), `judge`
     │   ├── DecisionView.tsx# `decision` items: table verdict, refutation, hint ladder, keyboard `MovePicker`
     │   ├── ChoiceView.tsx  # `choice` items: seeded order, radio / checkbox options, digit keys, per-option feedback
-    │   ├── FeedbackPanel.tsx# Shared fixed feedback footer + PrimaryButton (decision / choice)
+    │   ├── LineView.tsx    # `line` items: tree play, authored replies by coverage + seed, hand-over to a partner off the tree
+    │   ├── FeedbackPanel.tsx# Shared fixed feedback footer + PrimaryButton (decision / choice / line)
     │   ├── PuzzleList.tsx  # Puzzles grouped by difficulty or theme, solved state
     │   ├── PuzzlePlayer.tsx# Puzzle play: hints, auto reply, show solution, next puzzle
     │   ├── BottomNav.tsx   # Lessons / Puzzles tab bar
@@ -111,7 +117,9 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── guard.ts        # guardFor(itemId, override): the item's safety guard (loaded lazily by screens)
     │   ├── choice.ts       # `choice`: seeded shuffle (fixed options stay), exact-set judging, misconception of a wrong pick
     │   ├── test-fixtures.ts# TEST-ONLY decision / choice / safe fixtures (no real new-course units yet)
-    │   ├── combination.ts  # Combination exercises: accepted moves, engine best-defence replies
+    │   ├── line.ts         # `line` runtime: node lookup, coverage (`coverageCounts`, `chooseByCoverage`), credit, `LineJudge` (lazy Worker), S2.12 helpers
+    │   ├── line-fixtures.ts# TEST-ONLY line trees + varied-defence combination (also `verify-lines.ts --fixtures`)
+    │   ├── combination.ts  # Combination exercises: accepted moves, engine best-defence replies, `variedCombinationReply`
     │   └── progress.ts     # Locked / available / completed lesson states (per track)
     ├── progress/           # Three-level learning records. Pure: NO React/DOM/storage/gamification (enforced by a test)
     │   ├── records.ts      # LearningRecords format (completed / mastered / applied / exposed), lenient field-level parser, attempt log (cap 2,000)
@@ -170,7 +178,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Add or edit lessons in `src/content/lessons/NN-name.json`; every string field is an i18n key
   that must exist in `src/i18n/messages.ts` with both `en` and `vi` text.
 - Exercise types: `learn`, `select-squares`, `move` (goals: `reach`, `any`, `check`, `checkmate`,
-  `defend`, `safe`), `capture`, `combination`, `decision`, `choice`. Answers are computed by the engine; `solution`
+  `defend`, `safe`), `capture`, `combination`, `decision`, `choice`, `line`. Answers are computed by the engine; `solution`
   fields are only verified, never trusted.
 - `select-squares` takes exactly one of `square` (legal moves), `region` or `query` (computed, never stored):
   `attacked-by` (points where a side could legally capture an enemy piece, its own pieces excluded),
@@ -197,7 +205,31 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - `choice`: 3–4 `options` `{ id, text?, move?, correct, feedback, misconception?, fixed? }`; single-select has
   exactly one correct option, `multi` at least one correct and one wrong; every distractor needs a misconception
   listed in the item's `misconceptions`. Order = `shuffleOptions(options, itemSeed(sessionSeed, itemId))`.
-- `assist` (G3 G2 G1 G0 TR) is required on decision/choice. Move items (move, capture, combination, decision) at
+- `line` (02 §5.1, 04 §5.2; `LineExercise` in types.ts): a move tree from `root`. Learner nodes `{ kind: 'learner',
+  table, objective?, alternatives?, claim?, hints?, next: { "h2-e2": opponent node | leaf } }` use the `decision` table
+  rules unchanged (validated per node); opponent nodes `{ kind: 'opponent', replies: [{ move, weight?, text?, next }] }`
+  (main reply first); leaves `{ kind: 'leaf', goal: checkmate | material {gain} | predicate | end, text? }`. Validator:
+  legal nodes of the right side, every branch reaches a leaf (each learner node has an accepted move that continues;
+  every reply has `next`), `error` rows never continue, leaf goals hold, `claim` (mate 1–3 / material gain within
+  depth) proven for EVERY defence, and the table accepts exactly the moves that keep it (`alternatives: false` only when
+  one move does); under a mate claim the main reply (`replies[0]`, played in tests) has the longest mate distance;
+  authored replies pass the item guard from the
+  opponent's side, no repeated position (board + side) on a stored path, ≤ 200 nodes. Practice picks a reply by
+  coverage (least met first, from the attempt log's `path`, `coverageCounts`) then the seed (weighted); jump tests play
+  the main reply, no hints, dubious moves do not retry. An accepted move without `next` leaves the tree: without
+  `handOver` the item ends (F1); with `handOver { partner: [src/play partners], moves, goal? }` the partner chain moves
+  and the learner's moves get the default class (guard → error, item `objective` → target, else dubious, accepted with
+  a comment) in the Worker (`LineJudge`); if the partner leaves the learner without a legal move the item ends with
+  "The game is over" (no purpose text); `not-checked` = neutral, no heart, record `voided`. Credit (03 §3.2): 1 if every
+  on-tree first answer is target/sound, 0 after any error, per-node mean with `partial`. Attempt records of lines add
+  `path` and `steps` (class + `table` | `default` per learner move; F5 line share input), `LessonPlayer` takes
+  `attempts` (the local attempt log, for coverage) and `lineJudge`. S2.12: `lineScript` (scripted partner),
+  `learnerNodeStats` (selectivity ≤ 1/3), `lineDepth`.
+- Varied defence: `combination.variedDefence: true` (opt-in, 2–3 learner moves; the validator needs ≥ 2 such replies at
+  some stored step) makes the practice opponent pick among `variedDefenceReplies` (mate: the longest mate distance
+  only, never a reply allowing a quicker mate; win-material: best search score), unseen first, then by seed; the
+  record gets `path`. Without the flag, and in jump tests, the stored line is played as before.
+- `assist` (G3 G2 G1 G0 TR) is required on decision/choice/line. Move items (move, capture, combination, decision, line) at
   G1/G0/TR need `feedback { purpose, keyReply, commonError, temptingAlternative: { move, text } }`; the tempting move
   must be a legal move the item rejects. Hint ladder (decision `hints { idea, move }`, a target): 1 idea text, 2 the
   piece marked, 3 the move marked + named; none in jump tests (nor the combination hint of a NEW-COURSE item, i.e.
@@ -336,6 +368,9 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   `hasForcedWin` is not node-limited: only terminating the Worker stops it. Tests needing full verdicts create a
   client with `createWorker: null, syncBudget: DEFAULT_REQUEST_BUDGET, syncTimeoutMs: Infinity`. Add request kinds
   only in `requests.ts` (union + result type + one `run` case); requests and results are plain data.
+- Timeouts are clamped (MAX_TIMEOUT_MS 60 s). A Worker failure before any Worker has answered switches to the sync
+  fallback ('worker-failed'; no mate searches of depth ≥ 2 on the main thread); later failures only fail the running
+  request. Budgets: docs/curriculum-upgrade/measurements.md, DECISIONS D9 (phones unmeasured).
 
 ## Practical play (curriculum upgrade, `src/play`)
 
@@ -391,6 +426,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Fixed footers: the players measure the footer (`useElementHeight`) and render a spacer of that height
   after the board, and `.board-fit` caps the board so it fits above the footer on short screens. Do not
   go back to fixed `pb-*` guesses. Fixed bars add safe-area insets (`.safe-px`, `env(safe-area-inset-*)`).
+- `npm run ui:check` uses ports 4199/4198; if another preview holds them, pass `-- --port N --fixture-port M`.
 - `npm run ui:check` fails on horizontal scroll, controls under 44px or clipped at the edge, and a fixed
   bar covering the board's last row. Run it at 320, 360, 414 wide and in landscape (`--width 740 --height 360`).
 

@@ -110,6 +110,11 @@ describe('shipped lesson content', () => {
             for (const r of accepted) expect(judgeDecision(ex, parseMoveKey(r.move)!, pos)).toEqual({ kind: 'class', entry: r });
             return;
           }
+          if (ex.type === 'line') {
+            // The validator proves the tree; the root has an accepted move that continues.
+            expect(ex.root.table.some((r) => isAccepted(r.class) && ex.root.next?.[r.move] !== undefined)).toBe(true);
+            return;
+          }
           if (ex.type === 'choice') {
             expect(checkChoice(ex, ex.options.filter((o) => o.correct).map((o) => o.id)).correct).toBe(true);
             return;

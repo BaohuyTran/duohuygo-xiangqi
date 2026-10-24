@@ -234,6 +234,38 @@ export const messages = {
   'decision.hint.next.piece': { en: 'Which piece?', vi: 'Quân nào?' },
   'decision.hint.next.move': { en: 'Show the move', vi: 'Xem nước đi' },
   'decision.hint.move': { en: 'One good move: {move}.', vi: 'Một nước tốt: {move}.' },
+  'lesson.type.line': { en: 'Play the line', vi: 'Đi theo biến' },
+  'line.done': { en: 'Line complete!', vi: 'Hoàn thành biến!' },
+  'line.end.tree': {
+    en: 'A good move. The lesson’s line does not go further from here, so this exercise ends.',
+    vi: 'Một nước tốt. Biến của bài không đi tiếp từ đây, nên bài tập kết thúc.',
+  },
+  'line.end.cap': { en: 'You played the required moves safely.', vi: 'Bạn đã đi đủ số nước một cách an toàn.' },
+  'line.end.goal': { en: 'You reached the goal.', vi: 'Bạn đã đạt mục tiêu.' },
+  'line.end.no-move': { en: 'The game cannot go on from here, so this exercise ends.', vi: 'Ván cờ không thể tiếp tục từ đây, nên bài tập kết thúc.' },
+  'line.offTree': {
+    en: 'Off the lesson’s line · your move · moves left: {n}',
+    vi: 'Ngoài biến của bài · lượt của bạn · còn {n} nước',
+  },
+  'line.partner': {
+    en: 'Your opponent is now a training partner with limited depth. It punishes loose pieces and short tactics but does not plan.',
+    vi: 'Đối thủ bây giờ là bạn tập có độ sâu giới hạn. Nó trừng phạt quân không được bảo vệ và đòn chiến thuật ngắn, nhưng không lập kế hoạch.',
+  },
+  'line.mated': { en: 'The game is over', vi: 'Ván cờ đã kết thúc' },
+  'line.end.mated': {
+    en: 'Your training partner’s move left you without a legal move, so you lost this game. The exercise ends here; look back at your last moves.',
+    vi: 'Nước đi của bạn tập khiến bạn không còn nước hợp lệ, nên bạn đã thua ván này. Bài tập kết thúc; hãy xem lại các nước vừa đi.',
+  },
+  'line.partnerThinking': { en: 'Your training partner is thinking…', vi: 'Bạn tập đang suy nghĩ…' },
+  'line.offTree.target': { en: 'Safe, and it serves the plan.', vi: 'An toàn, và phục vụ kế hoạch.' },
+  'line.offTree.dubious': {
+    en: 'Safe for the next moves, but it does not serve the plan of this lesson.',
+    vi: 'An toàn trong vài nước tới, nhưng chưa phục vụ kế hoạch của bài.',
+  },
+  'line.notChecked': {
+    en: 'This move could not be checked in time. It is not one of the plans this lesson covers; no heart lost.',
+    vi: 'Chưa kiểm tra kịp nước này. Đây không phải kế hoạch bài này đề cập; bạn không bị mất tim.',
+  },
   'picker.title': { en: 'Enter the move with the keyboard', vi: 'Nhập nước đi bằng bàn phím' },
   'picker.piece': { en: 'Piece', vi: 'Quân' },
   'picker.target': { en: 'Move to', vi: 'Đi đến' },

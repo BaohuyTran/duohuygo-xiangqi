@@ -84,8 +84,8 @@ export interface ExerciseMeta {
   misconceptions?: string[];
   /**
    * Assistance level (02-curriculum.md §5.2): G3 demonstrate, G2 guided, G1 prompted, G0 independent,
-   * TR transfer. Required on `decision` and `choice` items. Items at G1, G0 or TR that ask for a move
-   * (`move`, `capture`, `combination`, `decision`) need `feedback`.
+   * TR transfer. Required on `decision`, `choice` and `line` items. Items at G1, G0 or TR that ask for a move
+   * (`move`, `capture`, `combination`, `decision`, `line`) need `feedback`.
    */
   assist?: AssistLevel;
   /** The four feedback parts of 02-curriculum.md §7 (required for G1/G0/TR move items, see `assist`). */
@@ -237,6 +237,12 @@ export type CombinationExercise = PositionSpec & ExerciseMeta & {
   firstMoves?: { from: string; to: string }[];
   /** Optional i18n hint per Red move (index 0 = first Red move). */
   hints?: string[];
+  /**
+   * Varied defence (02-curriculum.md e01, 05 `VAR`; opt-in): in practice the opponent picks among ALL its
+   * best-defence replies (`bestCombinationReplies`), unseen ones first (from the local attempt log), then by
+   * the seed, instead of the stored main line. Jump tests keep the stored line. Default false: unchanged.
+   */
+  variedDefence?: boolean;
   explanation?: string;
 };
 
@@ -323,6 +329,114 @@ export type ChoiceExercise = PositionSpec & ExerciseMeta & {
   explanation?: string;
 };
 
+// ---------- `line`: an authored move tree (04-architecture.md §5.2; S2.8) ----------
+
+/**
+ * What a leaf of a line tree states (validated at authoring time on the stored path; reaching the leaf ends the item):
+ * - `checkmate`: the opponent, to move, has no legal move (mate, or stalemate, also a win);
+ * - `material`: the learner's material (static count, `materialBalance`) is ≥ `gain` points above the start;
+ * - `predicate`: the objective predicate holds, evaluated with `before` = the line's start position and `moves` =
+ *   the whole path (so pieces are named by their squares in the start position);
+ * - `end`: "reached the plan position": nothing to prove; the leaf's `text` is the summary.
+ */
+export type LineGoal =
+  | { kind: 'checkmate' }
+  | { kind: 'material'; gain: number }
+  | { kind: 'predicate'; predicate: Predicate }
+  | { kind: 'end' };
+
+export interface LineLeaf {
+  kind: 'leaf';
+  goal: LineGoal;
+  /** i18n key shown when the leaf is reached (the summary). */
+  text?: string;
+}
+
+/**
+ * A forced claim at a learner node, proven by the validator for EVERY defence (not only the authored replies):
+ * `mate`: the learner forces mate within `moves` (1–3) and every accepted move keeps it; `material`: the learner
+ * wins ≥ `gain` points within `depth` plies (searchScore / moveScore + capture quiescence) and every accepted move
+ * keeps it.
+ */
+export type LineClaim = { kind: 'mate'; moves: number } | { kind: 'material'; gain: number; depth: number };
+
+/**
+ * A learner node: the COMPLETE move table of its position (the `decision` table format and rules: classes, computed
+ * vs authored rows, guard), and the continuation after each move that has one. A target/sound move without a
+ * continuation leaves the tree (hand-over, or the item ends under F1). `error` rows never have a continuation.
+ */
+export interface LineLearnerNode {
+  kind: 'learner';
+  table: MoveTableEntry[];
+  /** The objective of the computed rows (default: the item's `objective`). */
+  objective?: Predicate;
+  /** As on `decision`: false = exactly one accepted move (a forced line); default ≥ 2. */
+  alternatives?: boolean;
+  claim?: LineClaim;
+  /** Hint ladder of this node (as `decision.hints`; practice only). */
+  hints?: { idea: string; move: string };
+  /** Move key ("h2-e2") -> what follows it. */
+  next?: Record<string, LineOpponentNode | LineLeaf>;
+}
+
+/** One authored opponent reply: a weight for the seeded choice (default 1) and an explanation key ("Black deviates…"). */
+export interface LineReply {
+  move: string;
+  weight?: number;
+  text?: string;
+  next: LineLearnerNode | LineLeaf;
+}
+
+/**
+ * An opponent node: one or more authored replies (main line first). Practice picks one by coverage (replies this
+ * learner has not met yet first, from the local attempt log) and the seed, weighted; tests always play the first.
+ * Every authored reply must pass the item's safety guard from the opponent's side (07-sourcing.md §4.1).
+ */
+export interface LineOpponentNode {
+  kind: 'opponent';
+  replies: LineReply[];
+}
+
+export type LineNode = LineLearnerNode | LineOpponentNode | LineLeaf;
+
+/** A training partner of src/play by name (03-assessment.md §5.2), for play off the tree. */
+export type PartnerSpec =
+  | { kind: 'best-defence'; k?: number; resist?: boolean; d?: number }
+  | { kind: 'forcing-attack'; k?: number }
+  | { kind: 'safe-sparring'; d?: number; tau?: number }
+  | { kind: 'pressing'; d?: number };
+
+/**
+ * Play after the learner leaves the tree: the opponent is the chain of `partner` (src/play `chain`), the learner's
+ * moves are classed in the analysis Worker by the default class (04 §5.4), and the item ends when `goal` holds, after
+ * `moves` learner moves, or when the partner has no move. Without `handOver` the item ends where the tree ends (F1).
+ */
+export interface LineHandOver {
+  partner: PartnerSpec[];
+  /** Learner moves off the tree before the item ends (1–20). */
+  moves: number;
+  goal?: Exclude<LineGoal, { kind: 'end' }>;
+}
+
+/**
+ * A move tree played from one side (02-curriculum.md §5.1 `line`, 04 §5.2). `objective` is the default objective of
+ * the computed rows and of the default class off the tree; `guard` overrides the level's safety horizon (for the
+ * learner's moves and the authored replies). Credit (03 §3.2): 1 when every on-tree learner move was target/sound at
+ * the first answer; with `partial`, the per-node credit (sum ÷ nodes); 0 after an error-class move.
+ */
+export type LineExercise = PositionSpec & ExerciseMeta & {
+  type: 'line';
+  prompt: string;
+  root: LineLearnerNode;
+  objective?: Predicate;
+  guard?: GuardOverride;
+  /** As on `decision`: a dubious move is "try again" (default) or accepted with a comment. */
+  dubious?: 'retry' | 'accept';
+  partial?: boolean;
+  handOver?: LineHandOver;
+  explanation?: string;
+};
+
 export type Exercise =
   | LearnExercise
   | SelectSquaresExercise
@@ -330,7 +444,8 @@ export type Exercise =
   | CaptureExercise
   | CombinationExercise
   | DecisionExercise
-  | ChoiceExercise;
+  | ChoiceExercise
+  | LineExercise;
 export type ExerciseType = Exercise['type'];
 
 export interface Lesson {

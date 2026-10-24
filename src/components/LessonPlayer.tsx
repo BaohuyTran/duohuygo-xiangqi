@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import type { CaptureExercise, ChoiceExercise, CombinationExercise, DecisionExercise, Exercise, Lesson } from '../content/types';
+import type { CaptureExercise, ChoiceExercise, CombinationExercise, DecisionExercise, Exercise, Lesson, LineExercise } from '../content/types';
 import {
   findGeneral,
   isInCheck,
@@ -37,8 +37,10 @@ import {
   combinationDone,
   combinationReply,
   redMovesLeft,
+  variedCombinationReply,
   type CombinationVerdict,
 } from '../lessons/combination';
+import { appLineJudge, coverageCounts, pathKeys, type LineJudge } from '../lessons/line';
 import { sameMove, toMove } from '../puzzles/logic';
 import { JUMP_TEST_LIVES } from '../lessons/progress';
 import { moveSound, useSound } from '../sound';
@@ -46,6 +48,7 @@ import { Board, type MarkTone } from './Board';
 import { Celebration } from './Celebration';
 import { ChoiceView } from './ChoiceView';
 import { DecisionView, type AnswerReport } from './DecisionView';
+import { LineView, type LineResult } from './LineView';
 import { PrimaryButton, type HeartNote } from './FeedbackPanel';
 import { SoundToggle } from './SoundToggle';
 import { HeartIcon } from './StatsBar';
@@ -78,6 +81,13 @@ export interface LessonPlayerProps {
   seed?: number;
   /** Runtime analysis (goal `safe`, decision refutations). Default: the app's analysis Worker client. */
   judge?: MoveJudge;
+  /** Runtime analysis of `line` items off the tree (default class, partner moves). Default: the app's Worker client. */
+  lineJudge?: LineJudge;
+  /**
+   * The local attempt log (the app passes `createLearningRepository(store).attempts`): coverage of line deviations and
+   * varied-defence replies (unseen first). Default: none (every reply unseen).
+   */
+  attempts?: () => readonly AttemptRecord[];
 }
 
 /** New-course items carry an id and a version (schema v2); the new rules (03 §3.2) apply only to them. */
@@ -99,8 +109,11 @@ export function LessonPlayer({
   now = () => new Date(),
   seed: seedProp,
   judge: judgeProp,
+  lineJudge: lineJudgeProp,
+  attempts,
 }: LessonPlayerProps) {
   const judge = useMemo(() => judgeProp ?? clientJudge(loadAppAnalysisClient), [judgeProp]);
+  const lineJudge = useMemo(() => lineJudgeProp ?? appLineJudge(), [lineJudgeProp]);
   const { t } = useI18n();
   const { play } = useSound();
   const [index, setIndex] = useState(0);
@@ -146,6 +159,22 @@ export function LessonPlayer({
     a.firstCredit = 0;
     a.voided = true;
   };
+  /** Extra attempt-record fields of the current item (`path` of a line / varied combination, the line's steps). */
+  const extra = useRef<{ index: number; data: Record<string, unknown> }>({ index: 0, data: {} });
+  const setExtra = (data: Record<string, unknown>) => {
+    extra.current = { index, data };
+  };
+  /** How often each continuation of `prefix` was met in earlier attempts of the current item (coverage). */
+  const coverage = (prefix: readonly string[]) => coverageCounts(attempts?.() ?? [], current?.id, prefix);
+  /** A finished line: its 03 §3.2 credit replaces the first-answer credit; the run goes into the record. */
+  const lineFinished = (result: LineResult) => {
+    const a = tracked();
+    a.firstCredit = result.credit;
+    if (result.voided) a.voided = true;
+    setExtra({ path: result.path, steps: result.steps, ...(result.safetyNet ? { safetyNet: true } : {}) });
+    finishExercise(result.firstTry);
+  };
+
   const hinted = (step: HintStep) => {
     const a = tracked();
     a.hints += 1;
@@ -165,7 +194,7 @@ export function LessonPlayer({
       if (a.firstCredit === null) a.firstCredit = 1;
       if (current.type === 'choice') a.seed = currentSeed;
       const record = attemptRecord(current, a, test ? 'placement' : 'practice', now());
-      if (record) onEvent({ type: 'attempt', record });
+      if (record) onEvent({ type: 'attempt', record: extra.current.index === index ? { ...record, ...extra.current.data } : record });
     }
     if (index + 1 >= total) play('complete');
     setIndex((i) => i + 1);
@@ -271,7 +300,18 @@ export function LessonPlayer({
             seed: currentSeed,
           };
           return ex.type === 'combination' ? (
-            <CombinationView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} onOutOfLives={outOfLives} onHint={hinted} noHints={test && isNewCourseItem(ex)} />
+            <CombinationView
+              key={index}
+              exercise={ex}
+              onFinished={finishExercise}
+              onMistake={mistake}
+              onOutOfLives={outOfLives}
+              onHint={hinted}
+              noHints={test && isNewCourseItem(ex)}
+              varied={ex.variedDefence === true && !test ? { seed: currentSeed, coverage, onPath: (path) => setExtra({ path }) } : undefined}
+            />
+          ) : ex.type === 'line' ? (
+            <LineView key={index} exercise={ex} {...common} onDone={lineFinished} lineJudge={lineJudge} coverage={coverage} />
           ) : ex.type === 'decision' ? (
             <DecisionView key={index} exercise={ex} {...common} />
           ) : ex.type === 'choice' ? (
@@ -295,7 +335,7 @@ function ExerciseView({
   onVoid,
   judge,
 }: {
-  exercise: Exclude<Exercise, CombinationExercise | DecisionExercise | ChoiceExercise>;
+  exercise: Exclude<Exercise, CombinationExercise | DecisionExercise | ChoiceExercise | LineExercise>;
   onFinished: (firstTry: boolean) => void;
   onMistake: () => HeartNote | null;
   /** Set when a jump-ahead test has no lives left: replaces "Try again". */
@@ -613,6 +653,7 @@ function CombinationView({
   onOutOfLives,
   onHint,
   noHints,
+  varied,
 }: {
   exercise: CombinationExercise;
   onFinished: (firstTry: boolean) => void;
@@ -622,6 +663,11 @@ function CombinationView({
   onHint: (step: HintStep) => void;
   /** A new-course item in a jump-ahead test: no hints (03-assessment.md §3.2). Legacy items keep their hint. */
   noHints: boolean;
+  /**
+   * Varied defence (`variedDefence`, practice only): the opponent picks among all best replies, unseen first (coverage
+   * from the attempt log), then by the seed; the moves played are reported for the attempt record (`onPath`).
+   */
+  varied?: { seed: number; coverage: (prefix: readonly string[]) => ReadonlyMap<string, number>; onPath: (path: string[]) => void };
 }) {
   const { t } = useI18n();
   const { play } = useSound();
@@ -642,6 +688,8 @@ function CombinationView({
   const [captured, setCaptured] = useState<{ at: Square; piece: Piece } | null>(null);
   /** The rejected move and its step, for the tempting-alternative feedback (first move only). */
   const [rejected, setRejected] = useState<{ move: Move; step: number } | null>(null);
+  /** Moves played so far (learner and opponent), for varied-defence coverage. */
+  const played = useRef<Move[]>([]);
 
   // The pending auto-reply is cancelled on unmount.
   const timers = useRef<number[]>([]);
@@ -693,13 +741,18 @@ function CombinationView({
     showMove(pos, move);
     setShowHint(false);
     play('correct', 0.12);
+    played.current = [...played.current, move];
     if (combinationDone(ex, after, step)) {
+      varied?.onPath(pathKeys(played.current));
       setPhase('done');
       return;
     }
     setPhase('opponent');
     later(() => {
-      const reply = combinationReply(ex, step + 1, after, stillMain);
+      const reply = varied
+        ? variedCombinationReply(ex, step + 1, after, { seed: varied.seed, counts: varied.coverage(pathKeys(played.current)) })
+        : combinationReply(ex, step + 1, after, stillMain);
+      played.current = [...played.current, reply];
       setPos(makeMove(after, reply));
       showMove(after, reply);
       setOnMainLine(stillMain && ex.solution[step + 1] !== undefined && sameMove(reply, toMove(ex.solution[step + 1])));

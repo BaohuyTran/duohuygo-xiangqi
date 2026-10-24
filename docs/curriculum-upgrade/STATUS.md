@@ -139,6 +139,13 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   while no Worker has answered, no depth ≥ 2 mate search on the main thread after a Worker failure. Reviewer APPROVE
   (figures checked against raw outputs). Owner action: phone runs (measurements.md §5).
 
+- 2026-10-24 — **S2.8 done** (attempt 2): `line` exercises (authored trees: learner nodes with complete tables,
+  weighted opponent replies chosen by coverage then seed, leaves with goals; off-tree moves classed in the Worker,
+  hand-over to a partner chain or F1 end); validator proves claims over all defences and requires every move that
+  keeps a claim to be accepted; varied defence for combinations (opt-in, longest-resistance replies only, not on
+  4-move combinations until measured). Reviewer APPROVE; content-reviewer APPROVE (no mixed mate distances left in
+  93 legacy steps). For S2.13: wire `attempts`/`logAttempt` so coverage works in the app.
+
 ## Blockers and failed gates
 
 - **Owner action (before any deploy that writes `data_v2`):** apply migration `20261023000000_progress_data_v2.sql`

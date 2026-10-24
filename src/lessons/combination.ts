@@ -9,6 +9,9 @@ import type { CombinationExercise } from '../content/types';
 import { forcedWinMoves, hasForcedWin, legalMoves, makeMove, materialBalance, moveScore, searchScore, type Move, type Position } from '../engine';
 import { sameMove, toMove, WIN_MATERIAL_THRESHOLD } from '../puzzles/logic';
 import { legality, positionOf } from './answers';
+import { moveKey } from './decision';
+import { chooseByCoverage } from './line';
+import { deriveSeed } from '../play/rng';
 
 export type CombinationVerdict = 'correct' | 'wrong' | 'illegal' | 'unsafe';
 
@@ -97,4 +100,33 @@ export function combinationReply(ex: CombinationExercise, step: number, pos: Pos
 export function combinationDone(ex: CombinationExercise, after: Position, step: number): boolean {
   if (legalMoves(after).length === 0) return true;
   return step + 1 >= ex.moves * 2 - 1;
+}
+
+/**
+ * The replies varied defence chooses from at line index `step` (odd): the opponent's BEST defences in the strict sense.
+ * Mate: the replies with the longest mate distance (the learner has no shorter forced mate after them), so the defender
+ * never walks into a quicker mate (`bestCombinationReplies` ranks by fewest winning answers, which can mix distances).
+ * Win-material: the replies with the best search score (`bestCombinationReplies`).
+ */
+export function variedDefenceReplies(ex: CombinationExercise, pos: Position, step: number): Move[] {
+  if (ex.goal === 'win-material') return bestCombinationReplies(ex, pos, step);
+  const left = learnerMovesLeft(ex, step + 1);
+  let longest = legalMoves(pos);
+  // Keep the replies not mated within n, for n = 1, 2, … while some reply survives.
+  for (let n = 1; n < left; n++) {
+    const surviving = longest.filter((r) => !hasForcedWin(makeMove(pos, r), n));
+    if (surviving.length === 0) break;
+    longest = surviving;
+  }
+  return longest;
+}
+
+/**
+ * Varied defence (02 e01, `VAR`; `variedDefence: true`): the opponent's reply at line index `step`, picked among the
+ * longest-resistance replies (`variedDefenceReplies`): those this learner met least often after the same moves
+ * (`counts`, from the attempt log via `coverageCounts`) first, then by the seed derived for this step.
+ */
+export function variedCombinationReply(ex: CombinationExercise, step: number, pos: Position, ctx: { seed: number; counts: ReadonlyMap<string, number> }): Move {
+  const best = [...variedDefenceReplies(ex, pos, step)].sort((a, b) => a.from * 90 + a.to - (b.from * 90 + b.to));
+  return chooseByCoverage(best, moveKey, ctx.counts, deriveSeed(ctx.seed, step));
 }
