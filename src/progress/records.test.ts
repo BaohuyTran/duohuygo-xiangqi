@@ -121,6 +121,12 @@ describe('attempt log', () => {
     expect(kept[0].seed).toBe(5);
     expect(kept[1999].seed).toBe(2004);
   });
+
+  it('keeps the voided flag of an attempt the analysis could not check', () => {
+    const voided: AttemptRecord = { ...attempt(1), credit: 0, voided: true };
+    expect(parseAttempts([voided])).toEqual([voided]);
+    expect(parseAttempts([voided])[0].voided).toBe(true);
+  });
 });
 
 describe('scored grants and first completion', () => {

@@ -10,6 +10,7 @@
  * - new-course units (ids per 02-curriculum.md §3.3: `b05`, lessons `b05l2`, items `b05l2-04`, pool items
  *   `b05-p03`): every exercise must carry `ExerciseMeta`, and no id may appear in src/content/retired-ids.json.
  */
+import type { Predicate } from '../analysis/judge';
 
 /** Content statuses (07-sourcing.md §6): draft -> verified -> reviewed -> published; retired = id reserved. */
 export const CONTENT_STATUSES = ['draft', 'verified', 'reviewed', 'published', 'retired'] as const;
@@ -81,6 +82,32 @@ export interface ExerciseMeta {
   critical?: boolean;
   /** Misconception ids (`b06.m2`) that wrong answers of this item tag. May be empty. */
   misconceptions?: string[];
+  /**
+   * Assistance level (02-curriculum.md §5.2): G3 demonstrate, G2 guided, G1 prompted, G0 independent,
+   * TR transfer. Required on `decision` and `choice` items. Items at G1, G0 or TR that ask for a move
+   * (`move`, `capture`, `combination`, `decision`) need `feedback`.
+   */
+  assist?: AssistLevel;
+  /** The four feedback parts of 02-curriculum.md §7 (required for G1/G0/TR move items, see `assist`). */
+  feedback?: ItemFeedback;
+}
+
+export const ASSIST_LEVELS = ['G3', 'G2', 'G1', 'G0', 'TR'] as const;
+export type AssistLevel = (typeof ASSIST_LEVELS)[number];
+
+/**
+ * Feedback of a move item (02-curriculum.md §7). Every field is an i18n key.
+ * - `purpose`: what the right move achieves HERE (shown when correct);
+ * - `keyReply`: the opponent's most important reply to it (shown when correct);
+ * - `commonError`: the error behind the most common wrong answer (shown when wrong);
+ * - `temptingAlternative`: the most tempting wrong move (ICCS `from-to`, must be a move the item rejects)
+ *   and why it fails; its text replaces `commonError` when the learner plays exactly that move.
+ */
+export interface ItemFeedback {
+  purpose: string;
+  keyReply: string;
+  commonError: string;
+  temptingAlternative: { move: string; text: string };
 }
 
 /**
@@ -107,12 +134,36 @@ export type LearnExercise = PositionSpec & ExerciseMeta & {
   allowNoMoves?: boolean;
 };
 
-/** Tap every square the piece on `square` can legally move to, or every point of `region`. */
+/**
+ * What a `select-squares` exercise asks for, computed from the position by src/lessons/answers.ts
+ * (`querySquares`), never stored. Every fact is LEGAL (02 b06.m4): a pinned piece (or one standing between
+ * the Generals) neither attacks nor defends, and cannon screens count as they are before and after a capture.
+ * - `attacked-by`: every point (not holding a `side` piece) where `side` could legally capture an enemy piece;
+ * - `attacked-pieces`: pieces of `side` (Generals excluded) the other side can legally capture;
+ * - `hanging`: pieces of `side` (Generals excluded) with a legal capture that has no legal recapture;
+ * - `can-capture`: the opponent's pieces that can legally capture the piece on `target` now;
+ * - `point`: one authored point or piece (e.g. "the worst-placed piece"): a judgement, reviewed.
+ */
+export type SquareQuery =
+  | { kind: 'attacked-by'; side: 'red' | 'black' }
+  | { kind: 'attacked-pieces'; side: 'red' | 'black' }
+  | { kind: 'hanging'; side: 'red' | 'black' }
+  | { kind: 'can-capture'; target: string }
+  | { kind: 'point'; square: string };
+
+/**
+ * Tap every square the piece on `square` can legally move to, every point of `region`, or every point
+ * matching `query`. Exactly one of the three.
+ */
 export type SelectSquaresExercise = PositionSpec & ExerciseMeta & {
   type: 'select-squares';
   prompt: string;
   explanation?: string;
-} & ({ square: string; region?: never } | { region: Region; square?: never });
+} & (
+    | { square: string; region?: never; query?: never }
+    | { region: Region; square?: never; query?: never }
+    | { query: SquareQuery; square?: never; region?: never }
+  );
 
 export type MoveGoal =
   /** Land on one of these squares. */
@@ -127,7 +178,20 @@ export type MoveGoal =
    * Black threatens mate in `depth` moves (1 to 3, default 1): the move must leave Black without a forced
    * checkmate (or stalemate) within `depth` Black moves.
    */
-  | { kind: 'defend'; depth?: number };
+  | { kind: 'defend'; depth?: number }
+  /**
+   * The move passes the safety guard of the item's level (03-assessment.md §5.3, src/analysis `safetyGuard`):
+   * no allowed mate within k, no allowed loss ≥ T within h compared with the best alternative. The level
+   * comes from the item id (`b05l2-04` -> Basic; `guardForUnit`), else Basic; `guard` overrides h/k/T.
+   */
+  | { kind: 'safe'; guard?: GuardOverride };
+
+/** Per-item safety-horizon override (04-architecture.md §5.4, R7): h 0–3 plies, k 0–2 moves, T ≥ 1 point. */
+export interface GuardOverride {
+  h?: number;
+  k?: number;
+  T?: number;
+}
 
 /** Make one move that satisfies `goal`. `solution` documents a correct answer and is verified in tests. */
 export type MoveExercise = PositionSpec & ExerciseMeta & {
@@ -176,7 +240,97 @@ export type CombinationExercise = PositionSpec & ExerciseMeta & {
   explanation?: string;
 };
 
-export type Exercise = LearnExercise | SelectSquaresExercise | MoveExercise | CaptureExercise | CombinationExercise;
+/**
+ * Move classes of a `decision` (02-curriculum.md §5.1/§5.3; 04-architecture.md §5.3 names in brackets):
+ * - `target` [best/good]: serves the lesson's idea — accepted;
+ * - `sound` [best/good]: good, but not the idea — accepted (authored only);
+ * - `dubious` [playable]: safe, misses the objective — "try again, no penalty" or accepted with a comment
+ *   (`dubious`); assessments give 0, or 0.5 with `partial`;
+ * - `error` [mistake/blunder]: fails the safety guard (an allowed mate within k or a loss ≥ T within h) —
+ *   rejected, the refutation is shown, a heart is lost.
+ */
+export const MOVE_CLASSES = ['target', 'sound', 'dubious', 'error'] as const;
+export type MoveClass = (typeof MOVE_CLASSES)[number];
+
+/**
+ * One row of a complete move table: every legal move of the position has exactly one row.
+ * `computed`: the class the analysis rule gives (src/lessons/decision.ts `computeMoveClass`: guard fails ->
+ * error; objective met -> target; else dubious); the validator recomputes it and fails on drift.
+ * `authored`: set or confirmed by the author; `reason` (an i18n key saying why) is then required. An authored
+ * target/sound/dubious move must still pass the guard; an authored `error` may be a refutation beyond the horizon.
+ */
+export interface MoveTableEntry {
+  /** ICCS `from-to`, e.g. "h2-e2". */
+  move: string;
+  class: MoveClass;
+  source: 'computed' | 'authored';
+  /** i18n key: feedback for this move. Required when `source` is `authored`. */
+  reason?: string;
+  /** Misconception id (`b06.m2`) a learner playing this move shows; must be listed in `misconceptions`. */
+  misconception?: string;
+}
+
+/**
+ * One move where several are reasonable (02-curriculum.md §5.1). The verdict is a lookup in the complete,
+ * committed `table` (no runtime search; `scripts/move-table.ts` proposes the table, the author edits, the
+ * validator recomputes the computed rows). `objective` is the declarative predicate (src/analysis
+ * `Predicate`) that widens "target"; `guard` overrides the level's safety horizon.
+ */
+export type DecisionExercise = PositionSpec & ExerciseMeta & {
+  type: 'decision';
+  prompt: string;
+  objective?: Predicate;
+  guard?: GuardOverride;
+  table: MoveTableEntry[];
+  /**
+   * Default true: the objective allows several moves, so at least two moves must be target/sound (a single
+   * stored variation is never silently forced). false: exactly one accepted move.
+   */
+  alternatives?: boolean;
+  /** `retry` (default): a dubious move is "try again", no heart. `accept`: accepted with a comment. */
+  dubious?: 'retry' | 'accept';
+  /** Assessments: a dubious move earns 0.5 instead of 0 (03-assessment.md §3.2). */
+  partial?: boolean;
+  /** Hint ladder (02 §5.2): 1 the idea (`idea` key), 2 the piece (`move`'s from point), 3 the move. `move` is a target. */
+  hints?: { idea: string; move: string };
+  explanation?: string;
+};
+
+/** One answer of a `choice`. `text` is an i18n key; `move` (ICCS `from-to`) shows a move on the board and in notation. */
+export interface ChoiceOption {
+  /** Stable id within the item (`a`, `b`, `none`): attempts and feedback refer to it, never to the shuffled position. */
+  id: string;
+  text?: string;
+  move?: string;
+  correct: boolean;
+  /** i18n key shown after answering when this option was picked (or, for a correct one, missed). */
+  feedback: string;
+  /** Distractors: the misconception id this choice reveals (listed in the item's `misconceptions`). */
+  misconception?: string;
+  /** Keep this option at its authored place when shuffling (e.g. "none of these" last). */
+  fixed?: boolean;
+}
+
+/**
+ * A question about a position with 3–4 options, shuffled with a seed (src/lessons/choice.ts). `multi`: tick
+ * every correct option (exact set). Never the only evidence for an outcome about acting (02 §5.1).
+ */
+export type ChoiceExercise = PositionSpec & ExerciseMeta & {
+  type: 'choice';
+  prompt: string;
+  multi?: boolean;
+  options: ChoiceOption[];
+  explanation?: string;
+};
+
+export type Exercise =
+  | LearnExercise
+  | SelectSquaresExercise
+  | MoveExercise
+  | CaptureExercise
+  | CombinationExercise
+  | DecisionExercise
+  | ChoiceExercise;
 export type ExerciseType = Exercise['type'];
 
 export interface Lesson {

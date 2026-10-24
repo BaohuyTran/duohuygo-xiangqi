@@ -2,6 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { positionFromPieces, toFen } from '../engine';
 import { units as shippedUnits } from './index';
 import { swapColours } from './normalize';
+import { SAFETY_GUARDS } from '../analysis';
+import { proposeMoveTable } from '../lessons/decision-table';
+import { choiceFixture, decisionFixture, newCourseUnit, safeMoveFixture } from '../lessons/test-fixtures';
+import type { DecisionExercise, MoveTableEntry } from './types';
 import { legacyPlacementNotices, RETIRED_IDS, validateContent, validateUnits } from './validate';
 
 const K = { e0: 'K', d9: 'k' };
@@ -461,5 +465,117 @@ describe('content validator: schema v2 (new-course units, metadata, side, legali
     // Legacy units may have a pool too (no metadata needed).
     const legacyUnit = { id: 'u1', title: 'u1.title', description: 'u1.desc', lessons: [{ id: 'u1l1', title: 'u1l1.title', exercises: [learn] }], pool: [{ type: 'select-squares', pieces: { ...K, a0: 'R' }, square: 'a0', prompt: 'u3l1.e2' }] };
     expect(errorsOf(legacyUnit)).toEqual([]);
+  });
+});
+
+describe('content validator: decisions, choices, queries and goal "safe" (S2.7)', () => {
+  const errors = (...items: unknown[]) => validateUnits(newCourseUnit(...items));
+  const decision = (patch: Partial<DecisionExercise> = {}) => ({ ...decisionFixture(), ...patch });
+  const withRow = (move: string, row: Partial<MoveTableEntry> | null) => {
+    const base = decisionFixture();
+    const table = base.table.flatMap((r) => (r.move !== move ? [r] : row === null ? [] : [{ ...r, ...row }]));
+    return { ...base, table };
+  };
+  const meta = { version: 1, status: 'draft', source: { kind: 'authored' }, side: 'red', strand: 'RS', nature: 'quiet', critical: false, misconceptions: [] };
+
+  it('accepts the fixtures', () => {
+    expect(errors(decisionFixture(), choiceFixture(), { ...choiceFixture(true), id: 'b09l3-06' })).toEqual([]);
+  });
+
+  it.each([
+    ['an incomplete table', withRow('e0-d0', null), /e0-d0 is missing/],
+    ['a move listed twice', decision({ table: [...decisionFixture().table, { move: 'b0-c2', class: 'target', source: 'computed' }] }), /listed twice/],
+    ['an illegal move', decision({ table: [...decisionFixture().table, { move: 'b0-b5', class: 'dubious', source: 'computed' }] }), /b0-b5 is not a legal move/],
+    ['drift in a computed row', withRow('b0-a2', { class: 'error' }), /b0-a2: drift .*"error".*"dubious"/],
+    ['drift in a computed error row', withRow('i0-i4', { class: 'dubious' }), /i0-i4: drift .*"dubious".*"error"/],
+    ['a computed "sound" row (sound is a judgement)', withRow('b0-d1', { class: 'sound' }), /b0-d1 is accepted \("sound"\): the author must decide it/],
+    ['an authored accepted move that fails the guard', withRow('i0-i5', { class: 'sound', source: 'authored', reason: 'u3l1.e2' }), /i0-i5: classed "sound" but it fails the safety guard \(allows a mate/],
+    ['an authored dubious move that fails the guard', withRow('i0-i5', { class: 'dubious', source: 'authored', reason: 'u3l1.e2' }), /i0-i5: classed "dubious" but it fails/],
+    ['an authored row without a reason', withRow('i0-g0', { reason: undefined }), /authored row needs a "reason"/],
+    ['an unknown reason key', withRow('i0-g0', { reason: 'nope.key' }), /nope\.key/],
+    ['a misconception not listed on the item', withRow('b0-a2', { misconception: 'b09.m7' }), /b09\.m7 is not listed/],
+    ['fewer than two accepted moves', withRow('i0-g0', { class: 'dubious', source: 'computed', reason: undefined }), /at least two moves must be accepted/],
+    ['"alternatives": false with two accepted moves', decision({ alternatives: false }), /exactly one accepted move, found 2/],
+    ['an unknown class', withRow('b0-d1', { class: 'great' as never }), /class must be one of target, sound, dubious, error/],
+    ['a bad objective', decision({ objective: { kind: 'mobility', piece: 'a9' } as never }), /objective/],
+    ['a bad guard override', decision({ guard: { h: 9 } }), /"guard\.h" must be an integer 0–3/],
+    ['a hint move that is not a target', decision({ hints: { idea: 'u3l1.e4', move: 'i0-g0' } }), /"hints\.move" must be a target/],
+    ['no assistance level', decision({ assist: undefined }), /"assist" .* is required on a "decision" item/],
+    ['missing feedback at G1', decision({ feedback: undefined }), /"feedback" .* is required at G1/],
+    ['a tempting alternative the item accepts', decision({ feedback: { ...decisionFixture().feedback!, temptingAlternative: { move: 'i0-g0', text: 'u2l1.e4' } } }), /i0-g0 is accepted by the item/],
+    ['an empty table', decision({ table: [] }), /"table" must list every legal move/],
+  ])('rejects a decision with %s', (_name, item, pattern) => {
+    expect(errors(item).join('\n')).toMatch(pattern);
+  });
+
+  it('requires the author to decide every accepted move, capture and check (04 §5.3)', () => {
+    expect(errors(withRow('b0-c2', { source: 'computed', reason: undefined })).join('\n')).toMatch(/b0-c2 is accepted \("target"\): the author must decide it/);
+    expect(errors(withRow('i0-i9', { source: 'computed', reason: undefined })).join('\n')).toMatch(/i0-i9 gives check .*the author must decide it/);
+    // A capture: Ra0xa6 in a small position, table proposed entirely `computed`.
+    const pieces = { e0: 'K', e1: 'A', a0: 'R', i0: 'R', a6: 'p', e9: 'k', h7: 'r' };
+    const pos = positionFromPieces(pieces, 'red');
+    const table = proposeMoveTable(pos, SAFETY_GUARDS.basics).map(({ notes: _notes, ...row }) => row);
+    expect(errors({ ...decisionFixture(), pieces, objective: undefined, hints: undefined, feedback: undefined, assist: 'G2', table }).join('\n')).toMatch(
+      /a0-a6 is a capture \(a tempting move\): the author must decide it/,
+    );
+  });
+
+  it('a dubious move the item accepts is not a valid tempting alternative', () => {
+    const fb = { ...decisionFixture().feedback!, temptingAlternative: { move: 'b0-a2', text: 'u2l1.e4' } };
+    expect(errors(decision({ feedback: fb }))).toEqual([]);
+    expect(errors(decision({ feedback: fb, dubious: 'accept' })).join('\n')).toMatch(/b0-a2 is accepted by the item/);
+  });
+
+  it('lets an authored row mark a guard-passing move as error (a refutation beyond the horizon)', () => {
+    expect(errors(withRow('e0-f0', { class: 'error', source: 'authored', reason: 'u3l1.e2' }))).toEqual([]);
+  });
+
+  it('allows "alternatives": false with exactly one accepted move, and G3 items without feedback', () => {
+    expect(errors({ ...withRow('i0-g0', { class: 'dubious', source: 'computed', reason: undefined }), alternatives: false })).toEqual([]);
+    expect(errors(decision({ assist: 'G3', feedback: undefined }))).toEqual([]);
+  });
+
+  it('requires feedback on other move items at G1/G0/TR, and checks the tempting move is rejected', () => {
+    const move = { ...safeMoveFixture(), ...meta, id: 'b09l3-07', assist: 'G0' };
+    expect(errors(move).join('\n')).toMatch(/"feedback" .* is required at G0/);
+    const feedback = { purpose: 'u2l1.e1', keyReply: 'u2l1.e2', commonError: 'u2l1.e3', temptingAlternative: { move: 'i0-i9', text: 'u2l1.e4' } };
+    expect(errors({ ...move, feedback }).join('\n')).toMatch(/i0-i9 is accepted by the item/);
+    expect(errors({ ...move, feedback: { ...feedback, temptingAlternative: { move: 'i0-i5', text: 'u2l1.e4' } } })).toEqual([]);
+    expect(errors({ ...move, assist: 'G2' })).toEqual([]);
+  });
+
+  it.each([
+    ['two options', { options: choiceFixture().options.slice(0, 2) }, /3 or 4 options/],
+    ['two keyed options in a single-select', { options: choiceFixture().options.map((o) => (o.id === 'b' ? { ...o, correct: true, misconception: undefined } : o)) }, /exactly one correct option, found 2/],
+    ['a distractor without a misconception', { options: choiceFixture().options.map((o) => (o.id === 'b' ? { ...o, misconception: undefined } : o)) }, /distractor needs a "misconception"/],
+    ['duplicate option ids', { options: choiceFixture().options.map((o) => (o.id === 'c' ? { ...o, id: 'a' } : o)) }, /id "a" is used twice/],
+    ['an illegal option move', { options: choiceFixture().options.map((o) => (o.id === 'b' ? { ...o, move: 'b0-b5' } : o)) }, /options\[1\]\.move must be a legal move/],
+    ['an option with neither text nor move', { options: choiceFixture().options.map((o) => (o.id === 'c' ? { ...o, text: undefined } : o)) }, /needs "text", "move" or both/],
+    ['missing option feedback', { options: choiceFixture().options.map((o) => (o.id === 'a' ? { ...o, feedback: undefined } : o)) }, /options\[0\]\.feedback/],
+    ['a multi-select where every option is right', { multi: true, options: choiceFixture().options.map((o) => ({ ...o, correct: true, misconception: undefined })) }, /at least one correct and one wrong/],
+    ['no assistance level', { assist: undefined }, /"assist" .* is required on a "choice" item/],
+    ['feedback parts (only for move items)', { feedback: decisionFixture().feedback }, /"feedback" is only for move items/],
+  ])('rejects a choice with %s', (_name, patch, pattern) => {
+    expect(errors({ ...choiceFixture(), ...patch }).join('\n')).toMatch(pattern);
+  });
+
+  it('validates select-squares queries', () => {
+    const base = { ...meta, id: 'b09l3-08', type: 'select-squares', prompt: 'u3l1.e2', pieces: { e0: 'K', e1: 'A', a0: 'R', c2: 'N', h2: 'C', e9: 'k', a6: 'p', b4: 'n', h9: 'r' } };
+    expect(errors({ ...base, query: { kind: 'hanging', side: 'red' } })).toEqual([]);
+    expect(errors({ ...base, query: { kind: 'can-capture', target: 'b4' } })).toEqual([]);
+    expect(errors({ ...base, query: { kind: 'point', square: 'c2' } })).toEqual([]);
+    expect(errors({ ...base, query: { kind: 'moon' } }).join('\n')).toMatch(/"query\.kind" must be one of/);
+    expect(errors({ ...base, query: { kind: 'hanging', side: 'green' } }).join('\n')).toMatch(/"query\.side"/);
+    expect(errors({ ...base, query: { kind: 'can-capture', target: 'd5' } }).join('\n')).toMatch(/must hold a piece/);
+    expect(errors({ ...base, query: { kind: 'can-capture', target: 'a0' } }).join('\n')).toMatch(/matches no point/);
+    expect(errors({ ...base, query: { kind: 'point', square: 'c2' }, region: 'red-palace' }).join('\n')).toMatch(/exactly one of "square", "region" or "query"/);
+  });
+
+  it('validates goal "safe": the solution passes the guard and some move fails it', () => {
+    const base = { ...safeMoveFixture(), ...meta, id: 'b09l3-09' };
+    expect(errors(base)).toEqual([]);
+    expect(errors({ ...base, solution: { from: 'i0', to: 'i5' } }).join('\n')).toMatch(/not accepted \(allows-mate\)/);
+    expect(errors({ ...base, pieces: { e0: 'K', e1: 'A', a0: 'R', e9: 'k' }, solution: { from: 'a0', to: 'a1' } }).join('\n')).toMatch(/every move is safe/);
+    expect(errors({ ...base, goal: { kind: 'safe', guard: { k: 5 } } }).join('\n')).toMatch(/"goal\.guard\.k" must be an integer 0–2/);
   });
 });

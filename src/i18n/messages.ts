@@ -154,6 +154,7 @@ export const messages = {
   'lesson.tapPiece': { en: 'Tap a piece, then tap where it should go.', vi: 'Chạm vào một quân, rồi chạm vào điểm cần đến.' },
   'feedback.correct': { en: 'Correct!', vi: 'Chính xác!' },
   'feedback.incorrect': { en: 'Not quite', vi: 'Chưa đúng' },
+  'feedback.notChecked': { en: 'Not checked', vi: 'Chưa kiểm tra được' },
   'verdict.illegal': { en: 'That piece can’t move there.', vi: 'Quân đó không thể đi tới điểm này.' },
   'verdict.unsafe': {
     en: 'That move would leave your General under attack.',
@@ -181,6 +182,73 @@ export const messages = {
   'verdict.selection': {
     en: 'Some points are missing or wrong. Green rings show what you missed, red marks show wrong picks.',
     vi: 'Còn thiếu hoặc chọn sai. Vòng xanh là điểm bị thiếu, dấu đỏ là điểm chọn sai.',
+  },
+  'verdict.loses-material': {
+    en: 'That move lets your opponent win material. Keep your pieces safe.',
+    vi: 'Nước đó để đối phương ăn được quân. Hãy giữ an toàn cho các quân của bạn.',
+  },
+  'verdict.not-checked': {
+    en: 'This move could not be checked in time. No heart lost: try another move.',
+    vi: 'Chưa kiểm tra kịp nước này. Bạn không bị mất tim: hãy thử nước khác.',
+  },
+  // ---------- Decisions, choices, feedback and the hint ladder (curriculum upgrade S2.7) ----------
+  'lesson.type.decision': { en: 'Choose a move', vi: 'Chọn nước đi' },
+  'lesson.type.choice': { en: 'Choose the answer', vi: 'Chọn đáp án' },
+  'feedback.label.purpose': { en: 'Why it works:', vi: 'Vì sao hiệu quả:' },
+  'feedback.label.keyReply': { en: 'Their best reply:', vi: 'Nước đáp tốt nhất của đối phương:' },
+  'feedback.label.tempting': { en: 'Tempting, but:', vi: 'Hấp dẫn, nhưng:' },
+  'feedback.label.idea': { en: 'Think about:', vi: 'Hãy nghĩ tới:' },
+  'decision.title.sound': { en: 'Good move!', vi: 'Nước đi tốt!' },
+  'decision.sound.body': {
+    en: 'A good move, though not the idea this lesson is about.',
+    vi: 'Một nước đi tốt, dù không phải ý chính của bài này.',
+  },
+  'decision.title.dubious': { en: 'Safe, but not the idea', vi: 'An toàn, nhưng chưa đúng ý' },
+  'decision.dubious.body': {
+    en: 'That move doesn’t lose anything, but it doesn’t do what this position needs.',
+    vi: 'Nước đó không mất gì, nhưng chưa làm điều thế cờ này cần.',
+  },
+  'decision.dubious.final': {
+    en: 'Not the idea of this position, so no point here. The test moves on.',
+    vi: 'Chưa đúng ý của thế cờ này nên không được điểm. Bài kiểm tra tiếp tục.',
+  },
+  'decision.dubious.retry': { en: 'Try again. No heart lost.', vi: 'Hãy thử lại. Bạn không bị mất tim.' },
+  'decision.dubious.accepted': {
+    en: 'Accepted, but look for a move that serves the plan next time.',
+    vi: 'Chấp nhận được, nhưng lần sau hãy tìm nước phục vụ kế hoạch.',
+  },
+  'decision.refuting': { en: 'Finding your opponent’s best reply…', vi: 'Đang tìm nước đáp tốt nhất của đối phương…' },
+  'decision.refute.mate': {
+    en: 'Your opponent answers {move} and forces checkmate.',
+    vi: 'Đối phương đáp {move} và có đòn chiếu bí bắt buộc.',
+  },
+  'decision.refute.material': {
+    en: 'Your opponent answers {move} and wins material.',
+    vi: 'Đối phương đáp {move} và sẽ ăn được quân.',
+  },
+  'decision.error.generic': {
+    en: 'That move loses material or allows a checkmate.',
+    vi: 'Nước đó bị mất quân hoặc để đối phương chiếu bí.',
+  },
+  'decision.hint.next.idea': { en: 'Show a hint', vi: 'Xem gợi ý' },
+  'decision.hint.next.piece': { en: 'Which piece?', vi: 'Quân nào?' },
+  'decision.hint.next.move': { en: 'Show the move', vi: 'Xem nước đi' },
+  'decision.hint.move': { en: 'One good move: {move}.', vi: 'Một nước tốt: {move}.' },
+  'picker.title': { en: 'Enter the move with the keyboard', vi: 'Nhập nước đi bằng bàn phím' },
+  'picker.piece': { en: 'Piece', vi: 'Quân' },
+  'picker.target': { en: 'Move to', vi: 'Đi đến' },
+  'picker.choosePiece': { en: 'Choose a piece', vi: 'Chọn một quân' },
+  'picker.chooseTarget': { en: 'Choose a point', vi: 'Chọn một điểm' },
+  'picker.play': { en: 'Play move', vi: 'Đi nước này' },
+  'choice.pickOne': { en: 'Choose one answer.', vi: 'Chọn một đáp án.' },
+  'choice.pickAll': { en: 'Choose every correct answer.', vi: 'Chọn tất cả các đáp án đúng.' },
+  'choice.keys': { en: '(Keys 1–{n} also work.)', vi: '(Có thể dùng phím 1–{n}.)' },
+  'choice.label.right': { en: 'Right:', vi: 'Đúng:' },
+  'choice.label.wrong': { en: 'Not this one:', vi: 'Chưa đúng:' },
+  'choice.wrong': { en: 'Read the note under your answer, then try again.', vi: 'Hãy đọc ghi chú dưới đáp án của bạn rồi thử lại.' },
+  'choice.missedSome': {
+    en: 'Some correct answers are still missing. Read the notes, then try again.',
+    vi: 'Vẫn còn đáp án đúng chưa chọn. Hãy đọc ghi chú rồi thử lại.',
   },
   'done.title': { en: 'Lesson complete!', vi: 'Hoàn thành bài học!' },
   'done.stats': {

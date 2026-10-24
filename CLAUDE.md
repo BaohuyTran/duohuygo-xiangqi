@@ -34,7 +34,8 @@ Must work in desktop and phone browsers and as an installable, offline-capable P
 | Regenerate placeholder PWA icons | `npm run icons` |
 | Phone-width UI smoke check (after `npm run build`; needs Playwright installed globally; also builds + checks the Black fixture page, `-- --no-black` skips it) | `npm run ui:check [-- --width 320 --height 740]` |
 | Review-record hashes of a unit (id, version, contentHash) | `npx tsx scripts/review-hash.ts <unitId or unit.json>` |
-| Offline PWA + installability check (builds first; `-- --no-build` to skip; Playwright global) | `npm run offline:check` |
+| Offline PWA + installability check (builds first; `-- --no-build` to skip; Playwright global); also checks the analysis Worker chunk is precached, answers offline, restarts after terminate, main-thread ≤ 50 ms per request | `npm run offline:check` |
+| Propose the complete move table of a `decision` item (dev-time; keeps `authored` rows) | `npx tsx scripts/move-table.ts <unitId or unit.json> <itemId>` or `npx tsx scripts/move-table.ts --fen "<fen>" [--unit b09] [--objective '<json>'] [--guard '{"h":2}']` |
 
 `npm run build`, `npm test` and `npm run lint` must pass before committing.
 
@@ -76,7 +77,10 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     ├── components/
     │   ├── Board.tsx       # Responsive SVG 9x10 board (dots, marks, selection; `orientation`, `fileNumbers`)
     │   ├── Home.tsx        # Duolingo-style unit/lesson path
-    │   ├── LessonPlayer.tsx# One exercise at a time, feedback, retry, completion screen
+    │   ├── LessonPlayer.tsx# One exercise at a time, feedback, retry, completion screen; attempt/hint events (`onEvent`), `judge`
+    │   ├── DecisionView.tsx# `decision` items: table verdict, refutation, hint ladder, keyboard `MovePicker`
+    │   ├── ChoiceView.tsx  # `choice` items: seeded order, radio / checkbox options, digit keys, per-option feedback
+    │   ├── FeedbackPanel.tsx# Shared fixed feedback footer + PrimaryButton (decision / choice)
     │   ├── PuzzleList.tsx  # Puzzles grouped by difficulty or theme, solved state
     │   ├── PuzzlePlayer.tsx# Puzzle play: hints, auto reply, show solution, next puzzle
     │   ├── BottomNav.tsx   # Lessons / Puzzles tab bar
@@ -101,17 +105,26 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── drafts/         # Unreviewed material; never loaded by any glob
     │   └── index.ts        # Loads the JSON: `allUnits`, `units` (path Home shows), `COURSE_PREVIEW`, `allLessons`, `findLesson`
     ├── lessons/
-    │   ├── answers.ts      # Answer checking for every exercise type, via the engine
+    │   ├── answers.ts      # Answer checking for every exercise type, via the engine; select-squares queries; attempt records
+    │   ├── decision.ts     # `decision` runtime: table lookup, credit, `MoveJudge` over the (lazily loaded) analysis client
+    │   ├── decision-table.ts # Move tables at authoring time (computed-row rule, proposer, sync judge). Validator/scripts/tests ONLY
+    │   ├── guard.ts        # guardFor(itemId, override): the item's safety guard (loaded lazily by screens)
+    │   ├── choice.ts       # `choice`: seeded shuffle (fixed options stay), exact-set judging, misconception of a wrong pick
+    │   ├── test-fixtures.ts# TEST-ONLY decision / choice / safe fixtures (no real new-course units yet)
     │   ├── combination.ts  # Combination exercises: accepted moves, engine best-defence replies
     │   └── progress.ts     # Locked / available / completed lesson states (per track)
     ├── progress/           # Three-level learning records. Pure: NO React/DOM/storage/gamification (enforced by a test)
     │   ├── records.ts      # LearningRecords format (completed / mastered / applied / exposed), lenient field-level parser, attempt log (cap 2,000)
     │   └── legacy.ts       # LEGACY_MAP (versioned; v1 = the 9 orphan ids, no targets) + completedView: legacy completion DERIVED from the v1 list, never stored
+    ├── play/               # Training partners (policies.ts), game record (record.ts), training-ruleset adjudicator (adjudicate.ts), seeded RNG (rng.ts), index.ts. Pure: NO React/DOM/storage/gamification/clock/Math.random (enforced by purity.test.ts)
     ├── analysis/           # Pure analysis layer (no React/DOM, no gamification; imports only '../engine'; enforced by purity.test.ts)
     │   ├── search.ts       # Iterative-deepening alpha-beta + Zobrist TT, node limit, abort flag → { score, pv, depth, nodes, complete }
     │   ├── eval.ts         # materialEval (= engine material) and featureEvaluator (terms reported separately; weights unvalidated until S2.18)
     │   ├── features.ts     # Control maps (cannons by capture squares), hanging/en-prise, mobility, horse legs, cannon screens, pieces ahead, general-file exposure, soldiers, palace, development
     │   ├── judge.ts        # 03 §5.3 safety horizons + signals, a06 threat, forcing-attack winning capture, declarative predicates
+    │   ├── requests.ts     # Request union (move-signals, safety-guard, predicate, …); executeRequest never throws; outcome checked / not-checked with a reason; per-search maxNodes + per-request budget
+    │   ├── worker.ts       # Web Worker entry (its own precached chunk) running executeRequest
+    │   ├── client.ts       # createAnalysisClient / getAnalysisClient: Promise API, one request at a time, timeout terminates + restarts the Worker, sync fallback capped at SYNC_BUDGET (1,500 nodes); createWorker injectable
     │   └── index.ts        # Public API: import from './analysis'
     ├── notation/
     │   └── format.ts       # formatMove: traditional notation en/vi (C2=5 · P2-5), per-side file numbers; pure
@@ -157,8 +170,47 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Add or edit lessons in `src/content/lessons/NN-name.json`; every string field is an i18n key
   that must exist in `src/i18n/messages.ts` with both `en` and `vi` text.
 - Exercise types: `learn`, `select-squares`, `move` (goals: `reach`, `any`, `check`, `checkmate`,
-  `defend`), `capture`, `combination`. Answers are computed by the engine; `solution` fields are only
-  verified, never trusted.
+  `defend`, `safe`), `capture`, `combination`, `decision`, `choice`. Answers are computed by the engine; `solution`
+  fields are only verified, never trusted.
+- `select-squares` takes exactly one of `square` (legal moves), `region` or `query` (computed, never stored):
+  `attacked-by` (points where a side could legally capture an enemy piece, its own pieces excluded),
+  `attacked-pieces`, `hanging` (a legal capture with no legal recapture; Generals excluded), `can-capture` (opponent
+  pieces that can legally take the piece on `target`), `point` (one authored point). All facts are LEGAL
+  (`captureFacts`): pinned pieces and pieces between the Generals neither attack nor defend; cannon screens count
+  as they are before and after the capture (b06.m4).
+- Goal `safe`: the move passes the item's safety guard (level from the item id via `guardFor`, Basic without one;
+  `goal.guard` overrides h 0–3 / k 0–2 / T). Verdicts `allows-mate`, `loses-material`, or `not-checked` (neutral, no
+  heart). The player judges it through the analysis client after "Checking your move…"; `checkMove` needs an injected
+  `SafetyCheck` (the validator passes `syncSafety()`), else it answers 'not-checked'.
+- `decision` (02 §5.1/§5.3, 04 §5.3–§5.4): a COMPLETE `table` (every legal move once) of rows `{ move: "h2-e2", class:
+  target | sound | dubious | error, source: computed | authored, reason?, misconception? }`. Computed rule
+  (`computeMoveClass`, src/lessons/decision-table.ts): fails the guard → error, meets `objective` (a `Predicate`) →
+  target, else dubious; `sound` is always authored. Authored rows need a `reason` key; every accepted (target/sound)
+  row and every capture or check row MUST be `authored` (04 §5.3: the author decides accepted and tempting moves);
+  target/sound/dubious rows must pass the guard (an authored `error` may be a refutation beyond the horizon). The
+  validator recomputes computed rows (fails on drift, node limit `TABLE_MAX_NODES`), needs ≥ 2 accepted moves unless
+  `alternatives: false` (then exactly one), and at least one non-accepted move. `dubious`: `retry` (default, no heart)
+  or `accept`; in a jump test a dubious move always ends the item (no free retry); `partial` = 0.5 credit. Run
+  `scripts/move-table.ts` to (re)propose a table; author every REVIEW row. At runtime the verdict is a lookup; an
+  `error` costs a heart. The refutation (forced mate within k, else the best reply line) is shown on the board only
+  when the guard fails; otherwise (authored error beyond the horizon) only the row's reason, never an engine claim.
+- `choice`: 3–4 `options` `{ id, text?, move?, correct, feedback, misconception?, fixed? }`; single-select has
+  exactly one correct option, `multi` at least one correct and one wrong; every distractor needs a misconception
+  listed in the item's `misconceptions`. Order = `shuffleOptions(options, itemSeed(sessionSeed, itemId))`.
+- `assist` (G3 G2 G1 G0 TR) is required on decision/choice. Move items (move, capture, combination, decision) at
+  G1/G0/TR need `feedback { purpose, keyReply, commonError, temptingAlternative: { move, text } }`; the tempting move
+  must be a legal move the item rejects. Hint ladder (decision `hints { idea, move }`, a target): 1 idea text, 2 the
+  piece marked, 3 the move marked + named; none in jump tests (nor the combination hint of a NEW-COURSE item, i.e.
+  one with id + version; legacy combinations keep theirs). Every player shows the parts: correct → purpose + key reply
+  (decision: also the row's reason); wrong → the tempting text when exactly that move was played (combinations: first
+  move), else the common error. For new-course items the completion screen's "right on the first try" counts only
+  answers with no hint before them and not voided; legacy items count as before.
+- Attempt events: `LessonPlayer` `onEvent` emits `{ type: 'hint', itemId, step }` per hint step and `{ type:
+  'attempt', record }` (`AttemptRecord`: first-answer credit, hints, hintStep, hintBeforeFirstAnswer, attempts before
+  success, choice seed, first wrong answer's misconception; mode `practice`, `placement` in jump tests) per finished
+  item with an id and version. A first answer the analysis could not check (`not-checked`) is `voided: true` (typed on
+  `AttemptRecord`): no
+  credit, no heart, no test life; scoring must skip it. Nothing is persisted yet (S2.10/S2.13 wire it to `src/storage`).
 - `defend` (`goal.depth` 1–3, default 1): Black threatens mate in `depth`; any move that leaves Black
   without a forced mate in `depth` is correct. Depth 3 is judged after a short "Checking your move…" pause.
 - `combination` (`src/lessons/combination.ts`): 2–4 moves of the learner's side (Red in all legacy content) against the engine's best defence,
@@ -253,7 +305,8 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - `Board` takes `orientation` (`'red'` default | `'black'`: turned 180°, a point is drawn at x = 8 − file,
   y = rank; river labels swapped; board name "…, Black at the bottom") and `fileNumbers` (opt-in: each side's
   numbers 1–9 along its own edge, counted from that side's right). Taps and accessible names stay on ICCS squares.
-  The players do not pass these props yet; legacy boards are unchanged.
+  The lesson player passes `orientation` from the exercise `side` (legacy content is Red, so unchanged); decision and
+  choice boards also show `fileNumbers`. A Black combination uses the `.neutral` keys.
 - Learners read traditional notation; ICCS stays internal. `formatMove(move, positionBefore, 'traditional' |
   'iccs', lang)` in `src/notation/format.ts`; names, letters, symbols and front/rear markers are in
   `docs/curriculum-upgrade/glossary.md` (the source; change both together).
@@ -277,6 +330,28 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   `general-file {against: 'both'}` for palace safety (`'cannon'` alone is "closed" when nothing stands in front);
   `threat {created: true}` compares with `before`, so callers judging "at some move" pass the position before that
   move; set `h`/`k` on `threat` explicitly below Advanced. Add new kinds in `judge.ts` only, never per-item code.
+- Run analysis from UI code via `getAnalysisClient().run({ kind, … })` (the lesson player loads it lazily through
+  `loadAppAnalysisClient` / `clientJudge` so judge + search stay out of the main chunk), never synchronously in a
+  handler. Verdicts depend only on node limits; the wall-clock safety net (default 5 s) gives 'not-checked'.
+  `hasForcedWin` is not node-limited: only terminating the Worker stops it. Tests needing full verdicts create a
+  client with `createWorker: null, syncBudget: DEFAULT_REQUEST_BUDGET, syncTimeoutMs: Infinity`. Add request kinds
+  only in `requests.ts` (union + result type + one `run` case); requests and results are plain data.
+
+## Practical play (curriculum upgrade, `src/play`)
+
+- Partners compute every search as an analysis request through an injected `Analyzer` (`getAnalysisClient()` in the
+  app, `directAnalyzer()` in tests and scripts). Choices, the repetition rule and tie-breaks live in `src/play`, with
+  `deriveSeed(record.seed, ply)`: deterministic per seed.
+- A not-checked request (anything except a cancel) makes the policy play its d = 1 move (k = 1 for mate guards),
+  flagged `safetyNet`; `isVoided(record)` then voids the run (03 §5.6).
+- Repetition = the moves between the last two occurrences of the position. Partners never play a move that loses by
+  perpetual check unless forced, and avoid a third occurrence unless every alternative loses ≥ 2.
+- `adjudicate(record, ruleset)` implements 03 §5.5: perpetual check loses, both / neither → draw, chasing is not
+  adjudicated, task caps; full games stop at 80 learner moves or 30 without a capture, with one material rule.
+  `checkLearnerMove` refuses the learner's third occurrence except for an only move, when every alternative fails the
+  guard, or against the opponent's perpetual check.
+- Request kind `mate-distances` (exhaustive, k ≤ 3) is the best-defence mate guard; depth 3 / `forcing-attack(3)` only
+  in positions of ≤ ~12 pieces (authoring + S2.12 validation). Interpretations: DECISIONS.md D8.
 
 ## Learning records (curriculum upgrade)
 

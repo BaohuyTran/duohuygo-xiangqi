@@ -7,7 +7,9 @@ import {
   expectedSelection,
   positionOf,
 } from '../lessons/answers';
+import { checkChoice } from '../lessons/choice';
 import { checkCombinationMove, combinationDone, combinationReply } from '../lessons/combination';
+import { isAccepted, judgeDecision, parseMoveKey } from '../lessons/decision';
 import { toMove } from '../puzzles/logic';
 import { allLessons, allUnits, units } from './index';
 import { hasMessage } from '../i18n/messages';
@@ -99,6 +101,17 @@ describe('shipped lesson content', () => {
               const legal = legalMoves(pos).filter((m) => m.from === parseSquare(ex.square!)).map((m) => m.to);
               expect(answer.map(squareName).sort()).toEqual(legal.map(squareName).sort());
             }
+            return;
+          }
+          if (ex.type === 'decision') {
+            // The validator proves the table; here the player's lookup accepts every accepted row.
+            const accepted = ex.table.filter((r) => isAccepted(r.class));
+            expect(accepted.length).toBeGreaterThan(0);
+            for (const r of accepted) expect(judgeDecision(ex, parseMoveKey(r.move)!, pos)).toEqual({ kind: 'class', entry: r });
+            return;
+          }
+          if (ex.type === 'choice') {
+            expect(checkChoice(ex, ex.options.filter((o) => o.correct).map((o) => o.id)).correct).toBe(true);
             return;
           }
           const solution = { from: parseSquare(ex.solution.from), to: parseSquare(ex.solution.to) };

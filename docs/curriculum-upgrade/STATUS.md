@@ -122,6 +122,18 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   (victim may claim perpetual check; cycle = last two occurrences). Disclosure/outcome/warning texts (en+vi, reviewed)
   go into messages.ts with S2.12. Interpretations: D8. CLAUDE.md `src/play` entry added with S2.7.
 
+- 2026-10-24 — **S2.7 done** (attempt 3): `decision` (complete move tables target/sound/dubious/error; computed rows
+  recomputed by the validator, accepted/capture/check rows must be authored; refutation claims only for real losses),
+  `choice` (seeded shuffle, multi-select, per-option feedback, misconceptions), legal `select-squares` queries (pins and
+  screens counted), goal `safe`, four-part feedback on move/capture/combination/decision items, idea→piece→move hint
+  ladder, attempt events (first-answer credit, hints, `voided`), no free retries or hints for new-course items in jump
+  tests; legacy lessons unchanged. Analysis client loaded lazily (main chunk +30 kB raw / +9 kB gzip vs before S2.5).
+  Tester PASS (989 tests, offline:check, ui:check 320/360, a 360×740 harness of every new flow in en/vi); reviewer
+  APPROVE; content-reviewer APPROVE (5 constructed positions + colour twins for queries; fixture tables reproduced).
+  S2.7 alone verified in a clean worktree (lint, build, 982 tests). Follow-ups: board rows under the feedback footer on
+  decision/choice screens at 360×740 (scroll needed) → S2.19; choice radiogroup arrow keys; placement scoring by
+  first-answer credit (S2.13).
+
 ## Blockers and failed gates
 
 - **Owner action (before any deploy that writes `data_v2`):** apply migration `20261023000000_progress_data_v2.sql`

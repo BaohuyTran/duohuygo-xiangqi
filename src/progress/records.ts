@@ -95,6 +95,11 @@ export interface AttemptRecord {
   seed?: number;
   /** Misconception tag of the first wrong answer (e.g. `b06.m2`). */
   misconception?: string;
+  /**
+   * The first answer could not be checked (analysis 'not-checked'): no credit and no penalty; scoring skips the
+   * record (04-architecture.md §5.4, 03-assessment.md §3.2). Optional and additive: older entries have none.
+   */
+  voided?: boolean;
   [unknownField: string]: unknown;
 }
 
