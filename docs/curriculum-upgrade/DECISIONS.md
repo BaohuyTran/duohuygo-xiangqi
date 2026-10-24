@@ -109,3 +109,11 @@ Source: `docs/curriculum-upgrade/measurements.md` §3 (headless Chromium throttl
 - Resist mode k = d = 2 everywhere, k = 3 nowhere; forcing-attack(3) only at ≤ 12 pieces (timed on legacy endgames;
   S2.12 records per-task cost on pilot positions); no depth-3 partners on a full board.
 - Owner action: real-device runs (≥ 1 Android, ≥ 1 iOS) per measurements.md §5; until then "phones unmeasured" (04 R6).
+
+## D10 — 2026-10-24 — Owner: weekly token budget checkpoint (option 1)
+
+- Context: ~65% of the owner's weekly token allowance used; the rest of step 2 was estimated at ~9–11M tokens.
+- **Decision (owner):** finish S2.12 and S2.13 this week, then pause; continue S2.14–S2.20 and S2.gate next week without
+  trimming scope. The merge to `main` (D7) happens only when step 2 is complete. From now on no separate tester agent
+  (the driver runs lint, build, tests and ui:check), one code reviewer, and a content-reviewer only for chess content,
+  chess logic or assessment correctness; review fixes are rechecked, not re-reviewed in full.

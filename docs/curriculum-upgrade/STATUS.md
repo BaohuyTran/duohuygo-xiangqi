@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
-- **Active items:** S2.1 ∥ S2.4 ∥ S2.10 (round A of 06 §2.2)
+- **Active items:** S2.12 (practical tasks); then S2.13; then pause until next week (D10)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -159,5 +159,5 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. Step 2 round A in parallel: S2.1 (content schema v2), S2.4 (analysis core), S2.10 (three-level progress storage).
-2. Then rounds B–D and the pilot items in the order of 06 §2.2; S2.gate before any step-3 batch.
+1. S2.12 → review → commit; S2.13 → review → commit; then pause (owner's weekly budget, D10).
+2. Next week: S2.14–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
