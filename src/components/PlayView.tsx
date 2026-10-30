@@ -44,7 +44,10 @@ export interface PlayViewProps {
   onDone: (report: PlayReport) => void;
   /** Seed of a new run (partner choices, tree replies). */
   seed: number;
-  /** Assessment run (placement): the main authored replies, no coverage. */
+  /**
+   * Assessment run (jump test, check, placement, exam): the main authored replies, no coverage, and ONE run (03 §7.3
+   * rule 4: no retry inside the test). Only a voided run may be replayed, once (03 §5.6); a second void ends the task.
+   */
   test: boolean;
   /** Games in progress (src/storage `createPlayRepository`): a reload or a tab switch resumes the game. */
   store: PlayRepository;
@@ -375,7 +378,7 @@ export function PlayView({ exercise: ex, onDone, seed, test, store, regime = PAR
           title={panel.title}
           actions={
             phase === 'done' ? (
-              result && !result.result.score.pass ? (
+              result && !result.result.score.pass && (!test || (result.result.score.voided && runs.current.voided === 0)) ? (
                 <>
                   <PrimaryButton tone="red" onClick={newGame}>
                     {t('play.newGame')}

@@ -9,7 +9,7 @@ import { formatMove } from '../notation/format';
 import { useSound } from '../sound';
 import { Board } from './Board';
 import type { ItemViewProps } from './DecisionView';
-import { FeedbackLine, FeedbackPanel, PrimaryButton, type HeartNote } from './FeedbackPanel';
+import { FeedbackLine, FeedbackPanel, PrimaryButton, useOnwardKey, type HeartNote } from './FeedbackPanel';
 import { useElementHeight } from './useElementHeight';
 
 /**
@@ -19,6 +19,7 @@ import { useElementHeight } from './useElementHeight';
  */
 export function ChoiceView({ exercise: ex, onFinished, onMistake, onAnswer, onOutOfLives, seed }: ItemViewProps<ChoiceExercise>) {
   const { t, lang } = useI18n();
+  const onwardKey = useOnwardKey();
   const { play } = useSound();
   const [footerRef, footerHeight] = useElementHeight<HTMLElement>();
   const start = useMemo(() => positionOf(ex), [ex]);
@@ -173,7 +174,7 @@ export function ChoiceView({ exercise: ex, onFinished, onMistake, onAnswer, onOu
               <PrimaryButton onClick={() => onFinished(!hadMiss)}>{t('lesson.continue')}</PrimaryButton>
             ) : (
               <PrimaryButton tone="red" onClick={onOutOfLives ?? retry}>
-                {t(onOutOfLives ? 'jump.seeResult' : 'lesson.retry')}
+                {t(onOutOfLives ? onwardKey : 'lesson.retry')}
               </PrimaryButton>
             )
           }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Unit } from '../content/types';
-import { JUMP_TEST_MAX, furthestLesson, jumpBannerTrack, jumpTest, lessonStates, skippedLessons } from './progress';
+import { JUMP_TEST_MAX, furthestLesson, jumpBannerTrack, jumpTest, lessonStates, levelOpen, levelSkippedLessons, skippedLessons, unitsOfLessons } from './progress';
 
 const units = [
   { id: 'a', title: '', description: '', lessons: [{ id: 'a1', title: '', exercises: [] }, { id: 'a2', title: '', exercises: [] }] },
@@ -33,6 +33,41 @@ describe('lessonStates with tracks', () => {
 
   it('unlocks each track on its own', () => {
     expect(Object.fromEntries(lessonStates(tracked, ['c1']))).toEqual({ a1: 'available', a2: 'locked', b1: 'locked', c1: 'completed', c2: 'available' });
+  });
+});
+
+describe('level entry gate (PD-35) for published new-course levels', () => {
+  const L = (id: string) => ({ id, title: '', exercises: [] });
+  const course = [
+    { id: 'b01', track: 'basics', title: '', description: '', lessons: [L('b01l1'), L('b01l2')] },
+    { id: 'i01', track: 'intermediate', title: '', description: '', lessons: [L('i01l1'), L('i01l2')] },
+    { id: 'a01', track: 'advanced', title: '', description: '', lessons: [L('a01l1')] },
+  ] as Unit[];
+  const gated = new Set(['basics', 'intermediate', 'advanced'] as const);
+
+  it('Basic is open; a higher level is closed until the previous level is completed', () => {
+    expect(Object.fromEntries(lessonStates(course, [], gated))).toEqual({ b01l1: 'available', b01l2: 'locked', i01l1: 'locked', i01l2: 'locked', a01l1: 'locked' });
+    expect(lessonStates(course, ['b01l1', 'b01l2'], gated).get('i01l1')).toBe('available');
+    expect(lessonStates(course, ['b01l1', 'b01l2'], gated).get('a01l1')).toBe('locked');
+  });
+
+  it('opens when the learner already has a completed lesson in that level or above (placement, migration, older builds)', () => {
+    expect(lessonStates(course, ['i01l1'], gated).get('i01l2')).toBe('available');
+    expect(levelOpen(course, 'intermediate', ['a01l1'], gated)).toBe(true);
+    expect(levelOpen(course, 'advanced', ['i01l1'], gated)).toBe(false);
+  });
+
+  it('a passed J1 completes every skipped lesson, which opens the target level', () => {
+    const skipped = levelSkippedLessons(course, 'advanced', ['b01l1']).map((l) => l.id);
+    expect(skipped).toEqual(['b01l2', 'i01l1', 'i01l2']);
+    expect(lessonStates(course, ['b01l1', ...skipped], gated).get('a01l1')).toBe('available');
+    expect(unitsOfLessons(course, levelSkippedLessons(course, 'advanced', [])).map((u) => u.id)).toEqual(['b01', 'i01']);
+  });
+
+  it('tracks outside the gate (legacy tracks, the course preview) keep today’s rule: first lesson of every track open', () => {
+    expect(Object.fromEntries(lessonStates(course, []))).toEqual({ b01l1: 'available', b01l2: 'locked', i01l1: 'available', i01l2: 'locked', a01l1: 'available' });
+    expect(lessonStates(course, [], new Set(['advanced'] as const)).get('i01l1')).toBe('available');
+    expect(lessonStates(course, [], new Set(['advanced'] as const)).get('a01l1')).toBe('locked');
   });
 });
 

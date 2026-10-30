@@ -99,10 +99,15 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── Celebration.tsx # Confetti burst on lesson / puzzle completion
     │   ├── Account.tsx     # Account button (Home header) + panel: magic link, link sent, signed in / sync status / log out
     │   ├── useElementHeight.ts # Measures the fixed footers so the page reserves room below the board
+    │   ├── AssessmentPlayer.tsx# Unit check / placement / exam / warm-up: neutral intro, LessonPlayer `assessment` mode, result screen
+    │   ├── assessmentRuns.ts   # Builds those runs from the served pools + records and persists their outcomes (no React, no gamification)
     │   └── LanguageToggle.tsx
     ├── content/
     │   ├── lessons/*.json  # One file per unit, loaded in track-rank, then file-name order
     │   ├── puzzles/*.json  # mate-in-1 / mate-in-2 / win-material, each ordered by difficulty
+    │   ├── assessment/*.json # Assessment pools (check / placement / placement-practical / exam); none yet (S2.16 adds the first)
+    │   ├── pools.ts        # Pool loader (`allPools`), `servablePools` (published, reviewed in the preview; drafts never), `poolsOf`
+    │   ├── validate-pools.ts # Pool validator (ids per kind, 03 §4.2 rule 9 metadata, uniqueness corpus). Tests/scripts ONLY
     │   ├── types.ts        # Lesson/exercise JSON format (documented there)
     │   ├── puzzle-types.ts # Puzzle JSON format (documented there)
     │   ├── validate.ts     # Lesson validator (shape, i18n keys, metadata, side, legal + solvable exercises, pools)
@@ -124,11 +129,18 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── line.ts         # `line` runtime: node lookup, coverage (`coverageCounts`, `chooseByCoverage`), credit, `LineJudge` (lazy Worker), S2.12 helpers
     │   ├── line-fixtures.ts# TEST-ONLY line trees + varied-defence combination (also `verify-lines.ts --fixtures`)
     │   ├── combination.ts  # Combination exercises: accepted moves, engine best-defence replies, `variedCombinationReply`
-    │   └── progress.ts     # Locked / available / completed lesson states (per track)
+    │   └── progress.ts     # Locked / available / completed lesson states (per track), level entry gate (PD-35), legacy jump test
     ├── progress/           # Three-level learning records. Pure: NO React/DOM/storage/gamification (enforced by a test)
     │   ├── records.ts      # LearningRecords format (completed / mastered / applied / exposed), lenient field-level parser, attempt log (cap 2,000)
     │   └── legacy.ts       # LEGACY_MAP (versioned; v1 = the 9 orphan ids, no targets) + completedView: legacy completion DERIVED from the v1 list, never stored
-    ├── assessment/         # Practical tasks (S2.12)
+    ├── assessment/         # Practical tasks (S2.12) + assessment engine (S2.13). Pure: NO React/DOM/storage/gamification (purity.test.ts)
+    │   ├── credit.ts       # 03 §3.2 credit per item type, first answer only, voided answers, "independent: n of m"
+    │   ├── form.ts         # Seeded form solver (needs / caps, need-directed search, node budget), seeded shuffle, spread by unit
+    │   ├── checks.ts       # Unit checks: blueprint, exposure / half-exposed fallback, mastery ≥ 80 + critical, remediation, retake, warm-up
+    │   ├── placement.ts    # J1 / J2 forms, exact integer scoring (§7.3), strand minimums, early stop, outcome, one attempt per target per day
+    │   ├── exams.ts        # Level exams (slots per regime, F3/F4 provenance), unit / level / course states, portfolio (03 §6.1)
+    │   ├── index.ts        # Public API of the pure engine (NOT practical.ts)
+    │   ├── test-fixtures.ts# TEST-ONLY check-pool / choice-item fixtures
     │   ├── rubrics.ts      # R0–R7, line share, scoring weights by fallback, pass rules. Pure, no runtime analysis import
     │   ├── practical.ts    # Regimes + partner chains, F3/F4 exam slots + reachability, TaskState turns, facts, grants, simulated learners (LAZY: never in the main chunk)
     │   ├── regime.ts       # `PARTNER_REGIME` ('fallback' until S2.18)
@@ -251,7 +263,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   success, choice seed, first wrong answer's misconception; mode `practice`, `placement` in jump tests) per finished
   item with an id and version. A first answer the analysis could not check (`not-checked`) is `voided: true` (typed on
   `AttemptRecord`): no
-  credit, no heart, no test life; scoring must skip it. Nothing is persisted yet (S2.10/S2.13 wire it to `src/storage`).
+  credit, no heart, no test life; scoring must skip it. App persists the events through `createLearningRepository` (attempt log; `applied` grants).
 - `defend` (`goal.depth` 1–3, default 1): Black threatens mate in `depth`; any move that leaves Black
   without a forced mate in `depth` is correct. Depth 3 is judged after a short "Checking your move…" pause.
 - `combination` (`src/lessons/combination.ts`): 2–4 moves of the learner's side (Red in all legacy content) against the engine's best defence,
@@ -419,9 +431,48 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   that loses by perpetual check asks for confirmation (`play.warn.ownPerpetualCheck`). Greedy/restricted partners show
   only their own disclosure.
 - `LessonPlayer` emits `{ type: 'applied', taskId, grant }` for a passed, non-voided practice task (grant records the
-  fallback); the attempt record gets `score`, `fallback`, `path`. Persisting grants is S2.13.
+  fallback); the attempt record gets `score`, `fallback`, `path`, `runs`, `voidedRuns`. App persists it (S2.13).
+- In any test (`test` or `assessment`) a practical task is ONE run: a failed run offers no new game; only a voided run may
+  be replayed, once. In the legacy jump test a failed (not voided) run costs a test life. Run counts live in the screen
+  only and reset on reload; no credit or grant depends on them (a reload abandons the whole assessment).
 - `review` (`ReviewExercise`): authored game `moves`, 1–3 `turningPoints { ply, category, table }` (validated: learner
   moves, the level's signals detect the category, largest first, the game move not accepted). R7 = 40 + 40 + 20.
+
+## Assessment engine (curriculum upgrade, S2.13; 03 §2–§4, §6, §7, §9)
+
+- Pools: `src/content/assessment/<pool>.json` (`AssessmentPool` in types.ts): `check` (`b09-check`, items `b09-cNN`,
+  `unit`, `primaryStrand`), `placement` (`pb`…`pe`, items `pb-NN`; no `pm`), `placement-practical` (`pb-g`, items
+  `pb-gN` with `equivalentOf` = the unit task), `exam` (`xb`…, items `xb-gN` / `xb-rN` with a `slot` of exams.ts).
+  Every item: all new-course metadata + `unit` + `objective` (lesson id); RS placement items only in `pb` (`fullBoard`
+  ones tagged b08). Interleaved check items live in their own unit's check pool. Served only `published` (`reviewed` in
+  the preview) for levels the path shows; the release test needs an approving record per served item (placement ids
+  `pb-NN` do not yet fit gate.ts' per-unit record files — S2.16 must extend it). `npx vitest run src/content` validates.
+- Assessments run in `LessonPlayer`'s `assessment` mode (no hearts/lives, no hints, no retries: a wrong first answer's
+  red button is "Continue"; records get that mode). No XP, no hearts, available at 0 hearts; `src/assessment` never
+  imports gamification. Every answer is logged (annotated with `strand`, `unit`, `objective`, `formId`) and its item
+  marked exposed. Summaries (`form: true` attempt-log entries: check outcome + failed items, placement `started` /
+  end) drive the retake rules locally.
+- Unit checks (Home "Unit check" on new-course units with a pool): mastery ≥ 80 exact + every critical item; voided
+  answers leave the score; a voided critical item, or voids breaking §4.1 coverage (an objective with no scorable item,
+  < 6 scorable own items, short form < 4) = incomplete (retake at once). Failed — or quit after a non-voided wrong
+  answer — → Home "Mastery: not mastered yet" + remediation practice (lessons' G1/G0 items not right first time + learn
+  cards of the misconception; no hearts, works at 0 hearts) → retake.
+- Placement voids: items keep their fixed share of the total (no practical inflation); more than a quarter of a strand
+  voided (any in a strand of < 4), a voided critical item or a still-voided practical task = "could not be assessed".
+- Jump-ahead: legacy tracks keep the old jump test (05 P5). New-course tracks: J2 when the served pools build a form,
+  else the old jump test; never inside Master; J1 from the "jump to <level>" banner when a form exists. Pass → skipped
+  lessons completed (`placement`), covered units mastered (`placement`), the practical task's `equivalentOf` applied
+  (`via: placement`, `equivalentOf` = the placement task). One attempt per target per local day (counted at Start;
+  "could not be assessed" releases it).
+- Level entry gate (PD-35): `lessonStates(units, completed, gated)` with `gated` = published new-course levels of
+  `CURRENT_RELEASE` (none in REL-0; the course preview is not gated).
+- Exams (`xb` games one per colour in both regimes): grants `applied[xb…]` with `fallback: 'F3'` (`xb`) / `'F4'` while `PARTNER_REGIME` is `fallback`; `xm` also
+  masters `m09`. Home shows level status + "Level exam" only when an exam pool exists for the level.
+- Home (new-course units only): completed / mastered (how) / applied lines, "Mastery: not assessed yet" (also for
+  migrated completion, T16), "More practice" for unit pools (MU1, hearts as lessons, no XP). Warm-up after 30 days
+  without activity (attempt log) with mastered units: unexposed check items, suggestions only (UA1 default).
+- MU4: a new-course lesson earns first-completion XP (10) until it has a STORED completion grant (migrated completion
+  does not count); legacy lessons keep the v1 rule.
 
 ## Learning records (curriculum upgrade)
 

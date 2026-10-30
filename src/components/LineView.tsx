@@ -21,7 +21,7 @@ import { formatMove } from '../notation/format';
 import { moveSound, useSound } from '../sound';
 import { Board, type MarkTone } from './Board';
 import { MovePicker, type ItemViewProps } from './DecisionView';
-import { FeedbackLine, FeedbackPanel, PrimaryButton } from './FeedbackPanel';
+import { FeedbackLine, FeedbackPanel, PrimaryButton, useOnwardKey } from './FeedbackPanel';
 import { useElementHeight } from './useElementHeight';
 
 /** Delay before the opponent's authored reply (as in combinations). */
@@ -65,6 +65,7 @@ const HINT_ORDER: readonly HintStep[] = ['idea', 'piece', 'move'];
  */
 export function LineView({ exercise: ex, onDone, onMistake, onAnswer, onHint, onOutOfLives, allowHints, test, judge, seed, lineJudge, coverage }: LineViewProps) {
   const { t, lang } = useI18n();
+  const onwardKey = useOnwardKey();
   const { play } = useSound();
   const [footerRef, footerHeight] = useElementHeight<HTMLElement>();
   const start = useMemo(() => positionOf(ex), [ex]);
@@ -466,7 +467,7 @@ export function LineView({ exercise: ex, onDone, onMistake, onAnswer, onHint, on
               <PrimaryButton onClick={retry}>{t('lesson.retry')}</PrimaryButton>
             ) : (
               <PrimaryButton tone="red" onClick={onOutOfLives ?? retry}>
-                {t(onOutOfLives ? 'jump.seeResult' : 'lesson.retry')}
+                {t(onOutOfLives ? onwardKey : 'lesson.retry')}
               </PrimaryButton>
             )
           }

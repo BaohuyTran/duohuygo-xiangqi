@@ -131,3 +131,19 @@ Source: `docs/curriculum-upgrade/measurements.md` §3 (headless Chromium throttl
 - A review mark that is not a turning point scores 0 for the better move; the reflection is not scored. Reviews
   must list every move among the top 3 by deduction, ties at the cut-off included.
 - Reset progress also clears practical games in progress (`play.inProgress.v1`).
+
+## D12 — 2026-10-30 — Assessment-engine interpretations (S2.13)
+
+- Placement applied grants are stored under the unit task (`applied['b10-g1']`, `equivalentOf: 'pb-g1'`, 03 §7.4).
+- Check / warm-up / placement summaries are `form: true` entries of the local attempt log (retake rules are local).
+- A J1/J2 attempt counts toward the daily limit at Start; "could not be assessed" releases it.
+- Voids: a voided critical item, a strand losing more than floor(n/4) items (any in a strand < 4), or a check whose
+  scorable items break 03 §4.1 coverage → "could not be assessed" / `incomplete`, never a pass (no replacement items).
+- A check quit after a non-voided wrong answer counts as failed for the retake rule.
+- Retakes of checks, placement and exams allow at most half exposed items (placement/exam: extension of 03 §7.4).
+- Defaults: new-course tracks use J2 only when pools can build a form (else today's jump test); the unit check is
+  offered whenever a form can be built; exams show when the level has an exam pool and all lessons are completed.
+- Not modelled: the F2b unscored `xb` game path (every play task must reach 75 — stricter than 03).
+- `xb` needs one game per colour under both regimes. The uniqueness corpus exempts `task: game` play items.
+- MU4 counts stored grants only; a placement-completed lesson replayed gets replay XP. Warm-up items are marked exposed.
+- Remediation practice runs without hearts (cost 0, available at 0 hearts).

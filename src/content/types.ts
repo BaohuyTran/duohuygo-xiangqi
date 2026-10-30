@@ -577,3 +577,50 @@ export interface Unit {
    */
   pool?: Exercise[];
 }
+
+// ---------- Assessment pools (03-assessment.md §4, §6, §7; backlog S2.13) ----------
+
+/**
+ * Pool kinds, each a separate file `src/content/assessment/<pool id>.json` (03 §4.3, §6, §7.2; separate from practice
+ * and from each other):
+ * - `check`: a unit check pool `<unit>-check` (items `<unit>-cNN`; interleaved items of an earlier unit live in that
+ *   unit's check pool, tagged with it);
+ * - `placement`: a level placement pool `p<prefix>` (items `p<prefix>-NN`, e.g. `pi-14`);
+ * - `placement-practical`: a level's placement practical tasks `p<prefix>-g` (items `p<prefix>-gN`, each with
+ *   `equivalentOf` = the unit task it stands for, 03 §7.4);
+ * - `exam`: a level exam pool `x<prefix>` (items `x<prefix>-gN` play tasks, `x<prefix>-rN` reviews, each with `slot`).
+ */
+export const POOL_KINDS = ['check', 'placement', 'placement-practical', 'exam'] as const;
+export type PoolKind = (typeof POOL_KINDS)[number];
+
+/**
+ * An assessment item: an exercise (every new-course metadata field required: id, version, status, source, side,
+ * strand, nature, critical, misconceptions) plus the 03 §4.2 rule 9 fields that only assessment items carry.
+ */
+export type AssessmentItem = Exercise & {
+  /** The unit the item is tagged with (coverage, interleaving, remediation). RS placement items: b01–b08. */
+  unit: string;
+  /** The lesson whose objective the item tests (`b05l2`); remediation maps a miss to it (03 §4.4). */
+  objective: string;
+  /** RS placement item set in a full-board position typical of a higher level (03 §7.2; tagged b08). */
+  fullBoard?: boolean;
+  /** Placement practical task: the unit task (`b10-g1`) a pass is counted as (03 §7.4). */
+  equivalentOf?: string;
+  /** Exam task: the slot of 03 §6 it fills (`xb-games`, `xi-F5-opening`, …; see src/assessment/exams.ts). */
+  slot?: string;
+};
+
+export interface AssessmentPool {
+  /** = the file name: `b09-check`, `pb`, `pb-g`, `xb`. */
+  id: string;
+  kind: PoolKind;
+  /** Check pools: the unit. */
+  unit?: string;
+  /** Placement, placement-practical and exam pools: the level. */
+  level?: Track;
+  /** Check pools: the unit's primary strand (PA / OD / DE units need ≥ 1/4 quiet items, 03 §4.1). */
+  primaryStrand?: Strand;
+  /** Assessment version (recorded on grants as `assessmentVersion`), integer ≥ 1. */
+  version: number;
+  items: AssessmentItem[];
+}

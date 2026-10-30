@@ -25,10 +25,12 @@ import {
   trackOrderProblems,
   trackRank,
 } from './release';
+import { b09CheckPool } from '../assessment/test-fixtures';
+import { allPools, isServable, poolLevel, servablePools } from './pools';
 import { contentHash } from './reviews/hash';
-import { isApproved, releaseGateProblems, reviewFileProblems, type ReviewRecord } from './reviews/gate';
+import { isApproved, matchingRecord, releaseGateProblems, reviewFileProblems, type ReviewRecord } from './reviews/gate';
 import { reviewFiles, reviewRecords } from './reviews/index';
-import type { ContentStatus, Exercise, Track, Unit } from './types';
+import type { AssessmentItem, AssessmentPool, ContentStatus, Exercise, Track, Unit } from './types';
 import { isNewCourseUnit } from './validate';
 
 const legacy = { map: LEGACY_MAP, version: LEGACY_MAP_VERSION };
@@ -376,6 +378,60 @@ describe('release test (07 §6)', () => {
     const errors = releaseGateProblems(stale, RELEASE_STATES['REL-1'], recordsFor(stale), { preview: false }).join('\n');
     expect(errors).toMatch(/u1l1#0 is legacy content that is not live in REL-1/);
     expect(errors).not.toMatch(/u7l1/);
+  });
+});
+
+// ---------- Assessment pools (03 §4.2 rule 9: draft or unreviewed items are never served) ----------
+
+/**
+ * The release test for assessment pools: every item the app may serve (src/content/pools.ts `servablePools`) has an
+ * approving review record bound to its id + version + hash; every loaded item that CLAIMS `reviewed` / `published`
+ * needs one too; a `published` item belongs to a published level (pre-release items are `reviewed` at most).
+ */
+function poolReleaseProblems(pools: readonly AssessmentPool[], state: (typeof RELEASE_STATES)[keyof typeof RELEASE_STATES], records: readonly ReviewRecord[], preview: boolean): string[] {
+  const problems: string[] = [];
+  const where = preview ? 'preview' : 'default path';
+  for (const pool of servablePools(pools, { preview, state })) {
+    for (const item of pool.items) if (!matchingRecord(item, records)) problems.push(`${where}: ${pool.id}/${item.id} is served without an approving review record`);
+  }
+  for (const pool of pools) {
+    const level = poolLevel(pool);
+    for (const item of pool.items) {
+      if ((item.status === 'reviewed' || item.status === 'published') && !matchingRecord(item, records)) problems.push(`loaded: ${pool.id}/${item.id} is ${item.status} without an approving review record`);
+      if (item.status === 'published' && (!level || !state.published.includes(level))) problems.push(`${pool.id}/${item.id} is published but its level "${String(level)}" is not published in ${state.id}`);
+    }
+  }
+  return problems;
+}
+
+describe('assessment pools in the release test', () => {
+  it('passes for the shipped pools (none yet), default path and preview', () => {
+    const state = RELEASE_STATES[CURRENT_RELEASE];
+    expect(poolReleaseProblems(allPools, state, reviewRecords, false)).toEqual([]);
+    expect(poolReleaseProblems(allPools, state, reviewRecords, true)).toEqual([]);
+  });
+
+  it('REL-1 fixture: a published check pool with records passes; a missing record or a stale hash fails', () => {
+    const state = RELEASE_STATES['REL-1'];
+    const pool = b09CheckPool('published');
+    const records = pool.items.map((i) => record(i));
+    expect(poolReleaseProblems([pool], state, records, false)).toEqual([]);
+    expect(poolReleaseProblems([pool], state, records.slice(1), false).join('\n')).toMatch(/b09-check\/b09-c01 is served without an approving review record/);
+    const edited = { ...pool, items: [{ ...pool.items[0], prompt: 'u3l1.e1' } as AssessmentItem, ...pool.items.slice(1)] };
+    expect(poolReleaseProblems([edited], state, records, false).join('\n')).toMatch(/b09-c01 is served without/);
+  });
+
+  it('drafts are never served and need no record; reviewed items are served only in the preview; published needs a published level', () => {
+    const draft = b09CheckPool('draft');
+    expect(servablePools([draft], { preview: true, state: RELEASE_STATES['REL-P'] })).toEqual([]);
+    expect(poolReleaseProblems([draft], RELEASE_STATES['REL-P'], [], true)).toEqual([]);
+    const reviewed = b09CheckPool('reviewed');
+    expect(servablePools([reviewed], { preview: false, state: RELEASE_STATES['REL-P'] })).toEqual([]);
+    expect(poolReleaseProblems([reviewed], RELEASE_STATES['REL-P'], reviewed.items.map((i) => record(i)), true)).toEqual([]);
+    expect(poolReleaseProblems([reviewed], RELEASE_STATES['REL-P'], [], true).join('\n')).toMatch(/preview: b09-check\/b09-c01 is served without/);
+    const early = b09CheckPool('published');
+    expect(poolReleaseProblems([early], RELEASE_STATES['REL-P'], early.items.map((i) => record(i)), true).join('\n')).toMatch(/b09-c01 is published but its level "basics" is not published in REL-P/);
+    expect(isServable({ status: 'verified' }, true)).toBe(false);
   });
 });
 

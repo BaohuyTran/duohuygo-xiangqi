@@ -54,7 +54,7 @@ import { DecisionView, type AnswerReport } from './DecisionView';
 import { LineView, type LineResult } from './LineView';
 import { PlayView, type PlayReport } from './PlayView';
 import { ReviewView, type ReviewReport } from './ReviewView';
-import { PrimaryButton, type HeartNote } from './FeedbackPanel';
+import { OnwardKeyProvider, PrimaryButton, useOnwardKey, type HeartNote } from './FeedbackPanel';
 import { SoundToggle } from './SoundToggle';
 import { HeartIcon } from './StatsBar';
 import { useElementHeight } from './useElementHeight';
@@ -99,6 +99,13 @@ export interface LessonPlayerProps {
   regime?: PartnerRegime;
   /** Analysis for practical tasks (default: the app's Worker client). Tests pass `() => Promise.resolve(directAnalyzer())`. */
   playAnalyzer?: () => Promise<Analyzer>;
+  /**
+   * An assessment run (src/components/AssessmentPlayer.tsx; 03-assessment.md §3.2, §4.2, §7.2) with this attempt-record
+   * mode: no hearts and no lives, no hints, no retries — after a wrong first answer the red button is "Continue" and
+   * the item ends with no credit; a practical task is one run (a voided run may be replayed once). The caller ends the
+   * run from the attempt events (no completion screen of its own is needed).
+   */
+  assessment?: AttemptRecord['mode'];
 }
 
 /** New-course items carry an id and a version (schema v2); the new rules (03 §3.2) apply only to them. */
@@ -127,7 +134,10 @@ export function LessonPlayer({
   playStore: playStoreProp,
   regime,
   playAnalyzer,
+  assessment,
 }: LessonPlayerProps) {
+  // An assessment behaves like a test for the item views (no hints, no free retries, main replies) but has no lives.
+  const testLike = test || assessment !== undefined;
   const playStore = useMemo(() => playStoreProp ?? createPlayRepository(createLocalStore()), [playStoreProp]);
   const judge = useMemo(() => judgeProp ?? clientJudge(loadAppAnalysisClient), [judgeProp]);
   const lineJudge = useMemo(() => lineJudgeProp ?? appLineJudge(), [lineJudgeProp]);
@@ -139,7 +149,7 @@ export function LessonPlayer({
   const [failed, setFailed] = useState(false);
   const [randomSeed] = useState(() => Math.floor(Math.random() * 2 ** 32));
   const seed = seedProp ?? randomSeed;
-  const hearts = test ? JUMP_TEST_LIVES - heartsLost : realHearts;
+  const hearts = assessment !== undefined ? undefined : test ? JUMP_TEST_LIVES - heartsLost : realHearts;
   const total = lesson.exercises.length;
   const done = index >= total;
   const current = lesson.exercises[index] as Exercise | undefined;
@@ -207,6 +217,16 @@ export function LessonPlayer({
       ...(r.critical.length ? { critical: r.critical } : {}),
     });
     if (r.grant && current?.id) onEvent?.({ type: 'applied', taskId: current.id, grant: r.grant });
+    // In a jump-ahead test a failed (assessed, not voided) practical task costs a test life like a wrong answer;
+    // with no life left the test ends (carry-over of S2.12). A voided run costs nothing.
+    if (test && assessment === undefined && !r.pass && !r.voided) {
+      const left = JUMP_TEST_LIVES - heartsLost - 1;
+      setHeartsLost((n) => n + 1);
+      if (left <= 0) {
+        setFailed(true);
+        return;
+      }
+    }
     finishExercise(r.pass && !r.voided);
   };
   /** A finished review: credit = R7 / 100. */
@@ -235,7 +255,7 @@ export function LessonPlayer({
       const a = tracked();
       if (a.firstCredit === null) a.firstCredit = 1;
       if (current.type === 'choice') a.seed = currentSeed;
-      const record = attemptRecord(current, a, test ? 'placement' : 'practice', now());
+      const record = attemptRecord(current, a, assessment ?? (test ? 'placement' : 'practice'), now());
       if (record) onEvent({ type: 'attempt', record: extra.current.index === index ? { ...record, ...extra.current.data } : record });
     }
     if (index + 1 >= total) play('complete');
@@ -251,134 +271,153 @@ export function LessonPlayer({
     return { lost: true, left: hearts - 1 };
   };
 
-  return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col">
-      <header className="flex items-center gap-3 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-2">
-        <button
-          type="button"
-          onClick={onExit}
-          aria-label={t('lesson.quit')}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-stone-500 hover:bg-stone-200"
-        >
-          <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden>
-            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
-        </button>
-        <div
-          role="progressbar"
-          aria-label={t('lesson.progress', { n: Math.min(index + 1, total), total })}
-          aria-valuemin={0}
-          aria-valuemax={total}
-          aria-valuenow={index}
-          className="h-4 flex-1 overflow-hidden rounded-full bg-stone-200"
-        >
-          <div className="h-full rounded-full bg-green-500 transition-[width] duration-300" style={{ width: `${(index / total) * 100}%` }} />
-        </div>
-        <SoundToggle />
-        {hearts !== undefined && (
-          <div className={`flex min-h-11 shrink-0 items-center gap-1 ${hearts > 0 ? 'text-red-500' : 'text-stone-400'}`} data-testid="lesson-hearts">
-            {/* Re-keyed on every lost heart so the shake animation replays. */}
-            <span key={heartsLost} className={heartsLost > 0 ? 'heart-lost' : undefined}>
-              <HeartIcon className="h-7 w-7" />
-            </span>
-            <span className="sr-only">{t('lesson.hearts', { n: hearts })}</span>
-            <span aria-hidden className="text-lg font-extrabold">
-              {hearts}
-            </span>
-          </div>
-        )}
-      </header>
+  /**
+   * Quit. In an assessment an item already answered but not yet continued is reported first (its first-answer record),
+   * so quitting on the feedback screen cannot hide a wrong answer (03 §4.3 retake rule).
+   */
+  const quit = () => {
+    if (assessment !== undefined && current && onEvent && !done && !failed) {
+      const a = tracked();
+      if (a.firstCredit !== null) {
+        const record = attemptRecord(current, a, assessment, now());
+        if (record) onEvent({ type: 'attempt', record: extra.current.index === index ? { ...record, ...extra.current.data } : record });
+      }
+    }
+    onExit();
+  };
 
-      {failed ? (
-        <section className="flex flex-1 flex-col items-center justify-center gap-6 px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center">
-          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-stone-200 text-stone-500" aria-hidden>
-            <HeartIcon className="h-14 w-14" />
-          </div>
-          <h2 className="text-3xl font-extrabold text-stone-700">{t('jump.failed.title')}</h2>
-          <p className="text-lg text-stone-600">{t('jump.failed.body')}</p>
+  return (
+    <OnwardKeyProvider value={assessment !== undefined ? 'lesson.continue' : 'jump.seeResult'}>
+      <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col">
+        <header className="flex items-center gap-3 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-2">
           <button
             type="button"
-            onClick={onExit}
-            className="h-12 w-full max-w-xs rounded-2xl bg-green-500 text-lg font-bold text-white shadow-[0_4px_0_#15803d] active:translate-y-1 active:shadow-none"
+            onClick={quit}
+            aria-label={t('lesson.quit')}
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-stone-500 hover:bg-stone-200"
           >
-            {t('jump.back')}
+            <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden>
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
           </button>
-        </section>
-      ) : done ? (
-        <section className="flex flex-1 flex-col items-center justify-center gap-6 px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center">
-          <Celebration />
-          <div className="celebrate-pop flex h-28 w-28 items-center justify-center rounded-full bg-amber-400 text-6xl text-white shadow-lg" aria-hidden>
-            ★
+          <div
+            role="progressbar"
+            aria-label={t('lesson.progress', { n: Math.min(index + 1, total), total })}
+            aria-valuemin={0}
+            aria-valuemax={total}
+            aria-valuenow={index}
+            className="h-4 flex-1 overflow-hidden rounded-full bg-stone-200"
+          >
+            <div className="h-full rounded-full bg-green-500 transition-[width] duration-300" style={{ width: `${(index / total) * 100}%` }} />
           </div>
-          <h2 className="text-3xl font-extrabold text-amber-600">{t(test ? 'jump.passed.title' : 'done.title')}</h2>
-          <p className="text-lg text-stone-600">{t(test ? 'jump.passed.body' : 'done.stats', { correct: firstTryCorrect, total })}</p>
-          {completionXp !== undefined && (
-            <p className="rounded-2xl border-2 border-amber-300 bg-amber-50 px-5 py-2 text-2xl font-extrabold text-amber-600">
-              {t('xp.earned', { xp: completionXp })}
-            </p>
+          <SoundToggle />
+          {hearts !== undefined && (
+            <div className={`flex min-h-11 shrink-0 items-center gap-1 ${hearts > 0 ? 'text-red-500' : 'text-stone-400'}`} data-testid="lesson-hearts">
+              {/* Re-keyed on every lost heart so the shake animation replays. */}
+              <span key={heartsLost} className={heartsLost > 0 ? 'heart-lost' : undefined}>
+                <HeartIcon className="h-7 w-7" />
+              </span>
+              <span className="sr-only">{t('lesson.hearts', { n: hearts })}</span>
+              <span aria-hidden className="text-lg font-extrabold">
+                {hearts}
+              </span>
+            </div>
           )}
-          <button
-            type="button"
-            onClick={onComplete}
-            className="h-12 w-full max-w-xs rounded-2xl bg-green-500 text-lg font-bold text-white shadow-[0_4px_0_#15803d] active:translate-y-1 active:shadow-none"
-          >
-            {t('lesson.continue')}
-          </button>
-        </section>
-      ) : (
-        (() => {
-          const ex = lesson.exercises[index];
-          // In a test with no lives left, the red button ends the test instead of retrying.
-          const outOfLives = test && hearts !== undefined && hearts <= 0 ? () => setFailed(true) : undefined;
-          const common = {
-            onFinished: finishExercise,
-            onMistake: mistake,
-            onAnswer: answered,
-            onHint: hinted,
-            onOutOfLives: outOfLives,
-            allowHints: !test,
-            test,
-            judge,
-            seed: currentSeed,
-          };
-          return ex.type === 'combination' ? (
-            <CombinationView
-              key={index}
-              exercise={ex}
-              onFinished={finishExercise}
-              onMistake={mistake}
-              onOutOfLives={outOfLives}
-              onHint={hinted}
-              noHints={test && isNewCourseItem(ex)}
-              varied={ex.variedDefence === true && !test ? { seed: currentSeed, coverage, onPath: (path) => setExtra({ path }) } : undefined}
-            />
-          ) : ex.type === 'line' ? (
-            <LineView key={index} exercise={ex} {...common} onDone={lineFinished} lineJudge={lineJudge} coverage={coverage} />
-          ) : ex.type === 'play' ? (
-            <PlayView
-              key={index}
-              exercise={ex}
-              onDone={playFinished}
-              seed={currentSeed}
-              test={test}
-              store={playStore}
-              {...(regime ? { regime } : {})}
-              {...(playAnalyzer ? { analyzer: playAnalyzer } : {})}
-              coverage={coverage}
-              now={now}
-            />
-          ) : ex.type === 'review' ? (
-            <ReviewView key={index} exercise={ex} onDone={reviewFinished} />
-          ) : ex.type === 'decision' ? (
-            <DecisionView key={index} exercise={ex} {...common} />
-          ) : ex.type === 'choice' ? (
-            <ChoiceView key={index} exercise={ex} {...common} />
-          ) : (
-            <ExerciseView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} onOutOfLives={outOfLives} onVoid={voidAnswer} judge={judge} />
-          );
-        })()
-      )}
-    </div>
+        </header>
+
+        {failed ? (
+          <section className="flex flex-1 flex-col items-center justify-center gap-6 px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center">
+            <div className="flex h-28 w-28 items-center justify-center rounded-full bg-stone-200 text-stone-500" aria-hidden>
+              <HeartIcon className="h-14 w-14" />
+            </div>
+            <h2 className="text-3xl font-extrabold text-stone-700">{t('jump.failed.title')}</h2>
+            <p className="text-lg text-stone-600">{t('jump.failed.body')}</p>
+            <button
+              type="button"
+              onClick={onExit}
+              className="h-12 w-full max-w-xs rounded-2xl bg-green-500 text-lg font-bold text-white shadow-[0_4px_0_#15803d] active:translate-y-1 active:shadow-none"
+            >
+              {t('jump.back')}
+            </button>
+          </section>
+        ) : done ? (
+          <section className="flex flex-1 flex-col items-center justify-center gap-6 px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center">
+            <Celebration />
+            <div className="celebrate-pop flex h-28 w-28 items-center justify-center rounded-full bg-amber-400 text-6xl text-white shadow-lg" aria-hidden>
+              ★
+            </div>
+            <h2 className="text-3xl font-extrabold text-amber-600">{t(test ? 'jump.passed.title' : 'done.title')}</h2>
+            <p className="text-lg text-stone-600">{t(test ? 'jump.passed.body' : 'done.stats', { correct: firstTryCorrect, total })}</p>
+            {completionXp !== undefined && (
+              <p className="rounded-2xl border-2 border-amber-300 bg-amber-50 px-5 py-2 text-2xl font-extrabold text-amber-600">
+                {t('xp.earned', { xp: completionXp })}
+              </p>
+            )}
+            <button
+              type="button"
+              onClick={onComplete}
+              className="h-12 w-full max-w-xs rounded-2xl bg-green-500 text-lg font-bold text-white shadow-[0_4px_0_#15803d] active:translate-y-1 active:shadow-none"
+            >
+              {t('lesson.continue')}
+            </button>
+          </section>
+        ) : (
+          (() => {
+            const ex = lesson.exercises[index];
+            // In a test with no lives left, the red button ends the test instead of retrying.
+            // In an assessment every item is answered once: after a wrong answer the red button moves on.
+            const outOfLives =
+              assessment !== undefined ? () => finishExercise(false) : test && hearts !== undefined && hearts <= 0 ? () => setFailed(true) : undefined;
+            const common = {
+              onFinished: finishExercise,
+              onMistake: mistake,
+              onAnswer: answered,
+              onHint: hinted,
+              onOutOfLives: outOfLives,
+              allowHints: !testLike,
+              test: testLike,
+              judge,
+              seed: currentSeed,
+            };
+            return ex.type === 'combination' ? (
+              <CombinationView
+                key={index}
+                exercise={ex}
+                onFinished={finishExercise}
+                onMistake={mistake}
+                onOutOfLives={outOfLives}
+                onHint={hinted}
+                noHints={testLike && (isNewCourseItem(ex) || assessment !== undefined)}
+                varied={ex.variedDefence === true && !testLike ? { seed: currentSeed, coverage, onPath: (path) => setExtra({ path }) } : undefined}
+              />
+            ) : ex.type === 'line' ? (
+              <LineView key={index} exercise={ex} {...common} onDone={lineFinished} lineJudge={lineJudge} coverage={coverage} />
+            ) : ex.type === 'play' ? (
+              <PlayView
+                key={index}
+                exercise={ex}
+                onDone={playFinished}
+                seed={currentSeed}
+                test={testLike}
+                store={playStore}
+                {...(regime ? { regime } : {})}
+                {...(playAnalyzer ? { analyzer: playAnalyzer } : {})}
+                coverage={coverage}
+                now={now}
+              />
+            ) : ex.type === 'review' ? (
+              <ReviewView key={index} exercise={ex} onDone={reviewFinished} />
+            ) : ex.type === 'decision' ? (
+              <DecisionView key={index} exercise={ex} {...common} />
+            ) : ex.type === 'choice' ? (
+              <ChoiceView key={index} exercise={ex} {...common} />
+            ) : (
+              <ExerciseView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} onOutOfLives={outOfLives} onVoid={voidAnswer} judge={judge} />
+            );
+          })()
+        )}
+      </div>
+    </OnwardKeyProvider>
   );
 }
 
@@ -402,6 +441,7 @@ function ExerciseView({
   judge: MoveJudge;
 }) {
   const { t } = useI18n();
+  const onwardKey = useOnwardKey();
   const { play } = useSound();
   const [footerRef, footerHeight] = useElementHeight<HTMLElement>();
   const start = useMemo(() => positionOf(ex), [ex]);
@@ -684,7 +724,7 @@ function ExerciseView({
           {status === 'incorrect' && neutral && <PrimaryButton onClick={retry}>{t('lesson.retry')}</PrimaryButton>}
           {status === 'incorrect' && !neutral && (
             <PrimaryButton tone="red" onClick={onOutOfLives ?? retry}>
-              {t(onOutOfLives ? 'jump.seeResult' : 'lesson.retry')}
+              {t(onOutOfLives ? onwardKey : 'lesson.retry')}
             </PrimaryButton>
           )}
         </div>
@@ -727,6 +767,7 @@ function CombinationView({
   varied?: { seed: number; coverage: (prefix: readonly string[]) => ReadonlyMap<string, number>; onPath: (path: string[]) => void };
 }) {
   const { t } = useI18n();
+  const onwardKey = useOnwardKey();
   const { play } = useSound();
   const [footerRef, footerHeight] = useElementHeight<HTMLElement>();
   const start = useMemo(() => positionOf(ex), [ex]);
@@ -957,7 +998,7 @@ function CombinationView({
               <PrimaryButton onClick={() => onFinished(!hadMistake)}>{t('lesson.continue')}</PrimaryButton>
             ) : (
               <PrimaryButton tone="red" onClick={onOutOfLives ?? retry}>
-                {t(onOutOfLives ? 'jump.seeResult' : 'lesson.retry')}
+                {t(onOutOfLives ? onwardKey : 'lesson.retry')}
               </PrimaryButton>
             )}
           </div>

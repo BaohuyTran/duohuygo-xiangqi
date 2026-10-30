@@ -227,6 +227,24 @@ export function validateContent(input: unknown, options: ValidateOptions = {}): 
 }
 
 /**
+ * Problems with one standalone new-course practice item outside a unit (the assessment pools of
+ * src/content/pools.ts): the same exercise rules and required metadata as a unit pool item (no `learn` cards).
+ * Ids, uniqueness and the assessment-only fields are checked by the caller.
+ */
+export function validateItem(ex: unknown, options: ValidateOptions = {}): string[] {
+  const retired = new Set(options.retiredIds ?? RETIRED_IDS);
+  const problems: string[] = [];
+  const checkKey = (field: string, value: unknown, optional = false) => {
+    if (value === undefined && optional) return;
+    if (typeof value !== 'string') return void problems.push(`"${field}" must be an i18n key string`);
+    if (!hasMessage(value)) problems.push(`"${field}" key "${value}" is missing from src/i18n/messages.ts`);
+  };
+  problems.push(...validateExercise(ex, { checkKey, options, newCourse: true, inPool: true }));
+  if (isObj(ex)) problems.push(...metaProblems(ex, retired, true));
+  return problems;
+}
+
+/**
  * Problems with an exercise's metadata (07-sourcing.md §5.1). `required`: a new-course item, where
  * `version`, `status`, `source` and `side` are required on every item and `strand`, `nature`, `critical`
  * and `misconceptions` on every item except `learn` cards. Optional fields are type-checked when present.

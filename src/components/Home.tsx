@@ -1,4 +1,5 @@
-import type { Unit } from '../content/types';
+import type { Track, Unit } from '../content/types';
+import type { UnitProgress } from '../assessment/exams';
 import { minutesUntil, type DailyGoal, type GamificationSummary } from '../gamification';
 import { useI18n } from '../i18n/I18nProvider';
 import { useEffect, useRef, useState } from 'react';
@@ -28,9 +29,73 @@ export interface HomeProps {
   onGoalChange: (goal: DailyGoal) => void;
   /** Account login + sync; absent when sync is not configured (then no account UI at all). */
   account?: AccountService;
+  /**
+   * New-course units only (03 §2, MU1): the three progress states shown separately, the unit check and the "more
+   * practice" entry. Units without a panel (legacy units) look exactly as before.
+   */
+  unitPanels?: ReadonlyMap<string, UnitPanel>;
+  onCheck?: (unitId: string) => void;
+  /** Practise the remediation set of a failed check (unlocks the retake). */
+  onRemediate?: (unitId: string) => void;
+  onPractice?: (unitId: string) => void;
+  /** New-course levels: level mastered / exam passed, and whether the level exam can be taken. */
+  levelPanels?: ReadonlyMap<Track, LevelPanel>;
+  onExam?: (track: Track) => void;
+  /** J1 level placement offered in the "jump to <level>" banner (03 §7.1), when a form can be built. */
+  placement?: { track: Track; usedToday: boolean } | null;
+  onPlacement?: (track: Track) => void;
+  /** How a jump to a locked lesson works; default `legacy` (today's jump test). */
+  jumpInfo?: (lessonId: string) => JumpInfo;
+  /** A warm-up is offered after a long break (03 §4.5; suggestions only). */
+  warmUp?: boolean;
+  onWarmUp?: () => void;
+  onDismissWarmUp?: () => void;
 }
 
-export function Home({ units, states, onStart, onJump, onReset, stats, onGoalChange, account, focusLessonId, onFocused }: HomeProps) {
+export interface UnitPanel {
+  progress: UnitProgress;
+  check: 'none' | 'available' | 'remediation' | 'mastered' | 'unavailable' | 'no-check';
+  /** The latest check of the unit failed (not mastered): "Not mastered yet" instead of "not assessed yet". */
+  checkFailed?: boolean;
+  practice: boolean;
+}
+
+export interface LevelPanel {
+  mastered: boolean;
+  applied: boolean;
+  exam: boolean;
+}
+
+/**
+ * `legacy`: today's jump test; `J2`: the unit test-out of 03 §7 (`usedToday`: one attempt per target per day);
+ * `master`: no test-out inside Master; `closed`: the level entry gate (PD-35) is shut, reached by J1 or the previous level.
+ */
+export type JumpInfo = { kind: 'legacy' } | { kind: 'J2'; questions: number; practical: boolean; usedToday: boolean } | { kind: 'master' } | { kind: 'closed' };
+
+export function Home({
+  units,
+  states,
+  onStart,
+  onJump,
+  onReset,
+  stats,
+  onGoalChange,
+  account,
+  focusLessonId,
+  onFocused,
+  unitPanels,
+  onCheck,
+  onRemediate,
+  onPractice,
+  levelPanels,
+  onExam,
+  placement,
+  onPlacement,
+  jumpInfo = () => ({ kind: 'legacy' }),
+  warmUp,
+  onWarmUp,
+  onDismissWarmUp,
+}: HomeProps) {
   const { t } = useI18n();
   const pathRef = useRef<HTMLOListElement>(null);
   // Bring the focus lesson to the middle of the screen at once (no smooth scroll: Home just appeared).
@@ -84,7 +149,40 @@ export function Home({ units, states, onStart, onJump, onReset, stats, onGoalCha
         {completedCount === all.length && <p className="mt-2 font-semibold text-green-700">{t('home.allDone')}</p>}
       </div>
 
-      {bannerTrack && (
+      {warmUp && (
+        <div role="status" className="mb-6 rounded-2xl border-2 border-sky-200 bg-sky-50 px-4 py-3 text-sky-900" data-testid="warmup">
+          <p className="font-extrabold">{t('warmup.title')}</p>
+          <p className="text-sm">{t('warmup.body')}</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button type="button" onClick={onWarmUp} className="min-h-11 rounded-xl bg-sky-600 px-4 font-bold text-white">
+              {t('warmup.start')}
+            </button>
+            <button type="button" onClick={onDismissWarmUp} className="min-h-11 rounded-xl px-4 font-bold text-sky-800">
+              {t('jump.cancel')}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {bannerTrack && placement?.track === bannerTrack && (
+        <div className="mb-6 rounded-2xl border-2 border-violet-200 bg-violet-50 px-4 py-3 text-violet-800" data-testid="placement-banner">
+          <span className="block font-extrabold">{t(`track.${bannerTrack}.jumpTitle`)}</span>
+          <span className="block text-sm">{t('placement.banner.body')}</span>
+          {placement.usedToday ? (
+            <p className="mt-2 text-sm font-semibold">{t('placement.tomorrow')}</p>
+          ) : (
+            <button
+              type="button"
+              onClick={() => onPlacement?.(bannerTrack)}
+              className="mt-2 min-h-11 rounded-xl bg-violet-600 px-4 font-bold text-white shadow-[0_3px_0_#5b21b6] active:translate-y-0.5 active:shadow-none"
+            >
+              {t('placement.start')}
+            </button>
+          )}
+        </div>
+      )}
+
+      {bannerTrack && placement?.track !== bannerTrack && (
         <a
           href={`#track-${bannerTrack}`}
           className="mb-6 flex min-h-11 items-center justify-between gap-3 rounded-2xl border-2 border-violet-200 bg-violet-50 px-4 py-3 text-violet-800"
@@ -110,6 +208,7 @@ export function Home({ units, states, onStart, onJump, onReset, stats, onGoalCha
                 <div id={`track-${track}`} className="mb-5 scroll-mt-4 border-b-2 border-stone-200 pb-2">
                   <h2 className="text-xl font-extrabold text-stone-800">{t(`track.${track}.title`)}</h2>
                   <p className="text-sm text-stone-500">{t(`track.${track}.desc`)}</p>
+                  {levelPanels?.get(track) && <LevelStatus panel={levelPanels.get(track)!} onExam={() => onExam?.(track)} />}
                 </div>
               )}
               <section aria-labelledby={`${unit.id}-title`}>
@@ -119,7 +218,15 @@ export function Home({ units, states, onStart, onJump, onReset, stats, onGoalCha
                     {t(unit.title)}
                   </h2>
                   <p className="text-sm opacity-90">{t(unit.description)}</p>
-                  {states.get(unit.lessons[0].id) === 'locked' && (
+                  {unitPanels?.get(unit.id) && (
+                    <UnitStatus
+                      panel={unitPanels.get(unit.id)!}
+                      onCheck={() => onCheck?.(unit.id)}
+                      onRemediate={() => onRemediate?.(unit.id)}
+                      onPractice={() => onPractice?.(unit.id)}
+                    />
+                  )}
+                  {states.get(unit.lessons[0].id) === 'locked' && ['legacy', 'J2'].includes(jumpInfo(unit.lessons[0].id).kind) && (
                     <button
                       type="button"
                       onClick={() => setJumpTarget(unit.lessons[0].id)}
@@ -154,6 +261,7 @@ export function Home({ units, states, onStart, onJump, onReset, stats, onGoalCha
           lessonTitle={t(all.find((l) => l.id === jumpTarget)?.title ?? '')}
           skipped={skippedLessons(units, jumpTarget, completedIds).length}
           questions={jumpTest(units, jumpTarget, completedIds)?.exercises.length ?? 0}
+          info={jumpInfo(jumpTarget)}
           onStart={() => {
             onJump(jumpTarget);
             setJumpTarget(null);
@@ -232,16 +340,29 @@ function JumpDialog({
   lessonTitle,
   skipped,
   questions,
+  info,
   onStart,
   onCancel,
 }: {
   lessonTitle: string;
   skipped: number;
   questions: number;
+  info: JumpInfo;
   onStart: () => void;
   onCancel: () => void;
 }) {
   const { t } = useI18n();
+  const body =
+    info.kind === 'J2'
+      ? info.usedToday
+        ? t('placement.tomorrow')
+        : t(info.practical ? 'placement.dialog.bodyPractical' : 'placement.dialog.body', { skipped, questions: info.questions })
+      : info.kind === 'master'
+        ? t('placement.master')
+        : info.kind === 'closed'
+          ? t('placement.closed')
+          : t('jump.dialog.body', { skipped, questions, lives: JUMP_TEST_LIVES });
+  const canStart = info.kind === 'legacy' || (info.kind === 'J2' && !info.usedToday);
   return (
     <div className="safe-px fixed inset-0 z-30 flex items-end justify-center bg-black/40 sm:items-center" onClick={onCancel}>
       <div
@@ -254,20 +375,75 @@ function JumpDialog({
         <h2 id="jump-title" className="text-xl font-extrabold text-stone-800">
           {t('jump.dialog.title', { lesson: lessonTitle })}
         </h2>
-        <p className="mt-2 text-stone-600">{t('jump.dialog.body', { skipped, questions, lives: JUMP_TEST_LIVES })}</p>
+        <p className="mt-2 text-stone-600">{body}</p>
         <div className="mt-5 flex flex-col gap-3">
-          <button
-            type="button"
-            onClick={onStart}
-            className="min-h-12 rounded-2xl bg-violet-600 text-lg font-bold text-white shadow-[0_4px_0_#5b21b6] active:translate-y-1 active:shadow-none"
-          >
-            {t('jump.start')}
-          </button>
+          {canStart && (
+            <button
+              type="button"
+              onClick={onStart}
+              className="min-h-12 rounded-2xl bg-violet-600 text-lg font-bold text-white shadow-[0_4px_0_#5b21b6] active:translate-y-1 active:shadow-none"
+            >
+              {t('jump.start')}
+            </button>
+          )}
           <button type="button" onClick={onCancel} className="min-h-11 rounded-2xl font-bold text-stone-500">
             {t('jump.cancel')}
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+/** The three progress states of a new-course unit, shown separately (03 §2), plus its check and "more practice". */
+function UnitStatus({ panel, onCheck, onRemediate, onPractice }: { panel: UnitPanel; onCheck: () => void; onRemediate: () => void; onPractice: () => void }) {
+  const { t } = useI18n();
+  const p = panel.progress;
+  const mastery = p.mastered ? t(`unit.status.mastered.${p.mastered.via}`) : t(panel.checkFailed ? 'unit.status.notMastered' : 'unit.status.notAssessed');
+  const applied =
+    p.applied === 'some' ? t('unit.status.applied.some', { n: p.appliedTasks.length, total: p.tasks.length }) : t(`unit.status.applied.${p.applied}`);
+  const button = 'min-h-11 rounded-xl border-2 border-white/70 bg-white/15 px-3 text-sm font-extrabold';
+  return (
+    <div className="mt-2 text-sm" data-testid={`unit-status-${p.unitId}`}>
+      <ul className="flex flex-col gap-0.5 opacity-95">
+        <li>{t('unit.status.completed', { done: p.completed, total: p.lessons })}</li>
+        <li data-testid={`unit-mastery-${p.unitId}`}>{mastery}</li>
+        <li>{applied}</li>
+      </ul>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {panel.check === 'available' && (
+          <button type="button" onClick={onCheck} className={button}>
+            {t('unit.check.start')}
+          </button>
+        )}
+        {panel.check === 'remediation' && (
+          <button type="button" onClick={onRemediate} className={button}>
+            {t('unit.check.remediation')}
+          </button>
+        )}
+        {panel.check === 'unavailable' && <p className="text-xs">{t('unit.check.unavailable')}</p>}
+        {panel.practice && (
+          <button type="button" onClick={onPractice} className={button}>
+            {t('unit.morePractice')}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** Level mastered (every unit) and applied (exam passed), and the level exam entry (03 §2 rule 3, §6). */
+function LevelStatus({ panel, onExam }: { panel: LevelPanel; onExam: () => void }) {
+  const { t } = useI18n();
+  return (
+    <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-stone-600">
+      <span>{t(panel.mastered ? 'level.mastered' : 'level.notMastered')}</span>
+      <span>{t(panel.applied ? 'level.applied' : 'level.notApplied')}</span>
+      {panel.exam && !panel.applied && (
+        <button type="button" onClick={onExam} className="min-h-11 rounded-xl bg-violet-600 px-3 font-bold text-white">
+          {t('level.exam.start')}
+        </button>
+      )}
     </div>
   );
 }

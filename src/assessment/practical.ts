@@ -139,14 +139,14 @@ export interface ExamSlot {
 
 /**
  * 03 §5.2 F3 (`xb`) and F4 (`xi`, `xa`, `xe`, `xm`): what each exam is built from while `pressing` is not validated.
- * `xb`: two games (F2/F2b) + two F3 hold tasks (tree-bounded, F1) + a review; `xi`: two F5 opening tasks (one per
+ * `xb`: two games (F2/F2b, one per colour) + two F3 hold tasks (tree-bounded, F1) + a review; `xi`: two F5 opening tasks (one per
  * colour) + an F1c conversion; `xa`: F1 plan + F1 positional defence + an endgame (F1c or F1) + review; `xe`: two F5
  * repertoire tasks + F1c conversion + F1 holding + review; `xm`: ≥ 5 tasks — opening F5, middlegame F1, defence F1,
  * endgame F1c or F1, review — both colours.
  */
 export const EXAM_SLOTS_UNDER_F: Readonly<Record<Level, readonly ExamSlot[]>> = {
   basics: [
-    { name: 'xb-games', kinds: ['game'], fallback: 'F2', count: 2 },
+    { name: 'xb-games', kinds: ['game'], fallback: 'F2', count: 2, bothColours: true },
     { name: 'xb-F3-hold', kinds: ['hold'], fallback: 'F1', count: 2 },
     { name: 'xb-review', kinds: ['review'], fallback: null, count: 1 },
   ],

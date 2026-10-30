@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
-- **Active items:** S2.13 (assessment engine and progress-state UI); then S2.14–S2.20, S2.gate (D10: resumed 2026-10-30)
+- **Active items:** S2.14 (pilot P1); then S2.15–S2.20, S2.gate (D10: resumed 2026-10-30)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,19 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-10-30 — **S2.13 done** (attempt 2): `src/assessment` credit / form solver / unit checks / J1-J2 placement /
+  level exams / level-course states / portfolio; pool loader + validator (`src/content/pools.ts`,
+  `validate-pools.ts`), pools in the release test; `AssessmentPlayer` (LessonPlayer `assessment` mode, no XP or
+  hearts, works at 0 hearts); PD-35 level gate (empty in REL-0); Home completed / mastered (how) / applied, "not
+  assessed yet" for migrated completion, "More practice", warm-up suggestions only; App persists attempt records and
+  applied grants. No pool files exist yet, so the app behaves as before. Driver: lint clean, build OK, 1,201 tests
+  (73 files), ui:check 360 + 320 px PASS, engine untouched. Reviewer APPROVE (attempt 1); content-reviewer APPROVE
+  (attempt 2 recheck: voids → "could not be assessed" / check incomplete, quit after a wrong answer = failed, `xb`
+  one game per colour; §7.3 table rerun). Known limits: the remediation gate lives in the local attempt log (cap
+  2,000, reset, one device; closing the tab mid-check is not logged as a quit); the J2 daily limit is per target
+  lesson (UA2). **Carry-over to S2.16:** `reviews/gate.ts` record ids do not accept placement ids (`pb-NN`); decide
+  where placement review records live.
 
 - 2026-10-30 — **S2.12 done** (attempt 2): `play` / `review` exercise types (types + validator), `src/assessment`
   (rubrics R0–R7, line share, fallback F weights, pass rules on the unrounded score, partner plans per regime with
@@ -171,5 +184,4 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. S2.13 → review → commit.
-2. Then S2.14–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
+1. S2.14–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).

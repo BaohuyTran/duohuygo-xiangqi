@@ -1,4 +1,4 @@
-import type { ReactNode, Ref } from 'react';
+import { createContext, useContext, type ReactNode, type Ref } from 'react';
 import { useI18n } from '../i18n/I18nProvider';
 import { HeartIcon } from './StatsBar';
 
@@ -7,6 +7,14 @@ export interface HeartNote {
   lost: boolean;
   left: number;
 }
+
+/**
+ * The i18n key of the red button that replaces "Try again" when `onOutOfLives` is set: "See result" in a jump-ahead
+ * test with no lives left (default), "Continue" in an assessment (each item answered once, 03-assessment.md §7.2).
+ */
+const OnwardKey = createContext('jump.seeResult');
+export const OnwardKeyProvider = OnwardKey.Provider;
+export const useOnwardKey = (): string => useContext(OnwardKey);
 
 export type FeedbackTone = 'correct' | 'incorrect' | 'neutral' | 'idle';
 

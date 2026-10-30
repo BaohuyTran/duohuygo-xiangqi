@@ -7,12 +7,18 @@ export type LessonState = 'locked' | 'available' | 'completed';
  * lesson of the same track is completed. The first lesson of every track is open from the start, so
  * experienced players can begin the intermediate track without the basics. Completed lessons stay
  * replayable.
+ *
+ * Level entry gate (PD-35, 05-migration.md P5): for the tracks in `gated` (published new-course levels) the first
+ * lesson is open only when the track is Basic, the previous track of the path is completed (any provenance:
+ * lesson, placement — a passed J1 completes every skipped lesson — or migration), or the learner already has a
+ * completed lesson in that track or a later one. Otherwise the whole track is locked (reached by J1). Tracks not in
+ * `gated` (legacy tracks, the course preview) keep today's rule.
  */
-export function lessonStates(units: readonly Unit[], completed: Iterable<string>): Map<string, LessonState> {
+export function lessonStates(units: readonly Unit[], completed: Iterable<string>, gated: ReadonlySet<Track> = new Set()): Map<string, LessonState> {
   const done = new Set(completed);
   const states = new Map<string, LessonState>();
   for (const lessons of trackLessons(units)) {
-    let unlocked = true;
+    let unlocked = gated.size === 0 || levelOpen(units, trackOfLesson(units, lessons[0].id), done, gated);
     for (const lesson of lessons) {
       if (done.has(lesson.id)) {
         states.set(lesson.id, 'completed');
@@ -25,14 +31,36 @@ export function lessonStates(units: readonly Unit[], completed: Iterable<string>
   return states;
 }
 
-/** Lessons grouped by track, each group in curriculum order. */
-function trackLessons(units: readonly Unit[]): Lesson[][] {
+const trackOfLesson = (units: readonly Unit[], lessonId: string): Track =>
+  units.find((u) => u.lessons.some((l) => l.id === lessonId))?.track ?? 'basics';
+
+/**
+ * PD-35: whether a track's first lesson may open. Always true for tracks outside `gated` and for Basic; otherwise
+ * the previous track of the path is wholly completed, or a lesson of this or a later track is completed.
+ */
+export function levelOpen(units: readonly Unit[], track: Track, completed: Iterable<string>, gated: ReadonlySet<Track>): boolean {
+  if (!gated.has(track) || track === 'basics') return true;
+  const done = new Set(completed);
+  const groups = [...trackGroups(units)];
+  const i = groups.findIndex(([t]) => t === track);
+  if (i <= 0) return true;
+  if (groups.slice(i).some(([, lessons]) => lessons.some((l) => done.has(l.id)))) return true;
+  return groups[i - 1][1].every((l) => done.has(l.id));
+}
+
+/** Lessons grouped by track (in path order), each group in curriculum order. */
+function trackGroups(units: readonly Unit[]): Map<Track, Lesson[]> {
   const groups = new Map<Track, Lesson[]>();
   for (const unit of units) {
     const track = unit.track ?? 'basics';
     groups.set(track, [...(groups.get(track) ?? []), ...unit.lessons]);
   }
-  return [...groups.values()];
+  return groups;
+}
+
+/** Lessons grouped by track, each group in curriculum order. */
+function trackLessons(units: readonly Unit[]): Lesson[][] {
+  return [...trackGroups(units).values()];
 }
 
 /** Lives in a jump-ahead test: this many wrong answers end it. It never costs real hearts. */
@@ -86,4 +114,19 @@ export function furthestLesson(units: readonly Unit[], completed: Iterable<strin
   const track = started[started.length - 1];
   if (!track) return null;
   return (track.find((l) => !done.has(l.id)) ?? track[track.length - 1]).id;
+}
+
+/** J1 into `target` (03 §7.1): every not-yet-completed lesson of the tracks before it in the path, in order. */
+export function levelSkippedLessons(units: readonly Unit[], target: Track, completed: Iterable<string>): Lesson[] {
+  const done = new Set(completed);
+  const groups = [...trackGroups(units)];
+  const i = groups.findIndex(([t]) => t === target);
+  if (i <= 0) return [];
+  return groups.slice(0, i).flatMap(([, lessons]) => lessons.filter((l) => !done.has(l.id)));
+}
+
+/** The units (in path order) that hold some of `lessons`. */
+export function unitsOfLessons(units: readonly Unit[], lessons: readonly Lesson[]): Unit[] {
+  const ids = new Set(lessons.map((l) => l.id));
+  return units.filter((u) => u.lessons.some((l) => ids.has(l.id)));
 }

@@ -17,7 +17,7 @@ import { decisionCredit, decisionGuard, isAccepted, judgeDecision, parseMoveKey,
 import { formatMove } from '../notation/format';
 import { moveSound, useSound } from '../sound';
 import { Board, type MarkTone } from './Board';
-import { FeedbackLine, FeedbackPanel, PrimaryButton, type HeartNote } from './FeedbackPanel';
+import { FeedbackLine, FeedbackPanel, PrimaryButton, useOnwardKey, type HeartNote } from './FeedbackPanel';
 import { useElementHeight } from './useElementHeight';
 
 /** What a view reports about an answer that is not a heart-costing mistake (accepted, or dubious). */
@@ -59,6 +59,7 @@ const HINT_ORDER: readonly HintStep[] = ['idea', 'piece', 'move'];
  */
 export function DecisionView({ exercise: ex, onFinished, onMistake, onAnswer, onHint, onOutOfLives, allowHints, test, judge }: ItemViewProps<DecisionExercise>) {
   const { t, lang } = useI18n();
+  const onwardKey = useOnwardKey();
   const { play } = useSound();
   const [footerRef, footerHeight] = useElementHeight<HTMLElement>();
   const start = useMemo(() => positionOf(ex), [ex]);
@@ -265,7 +266,7 @@ export function DecisionView({ exercise: ex, onFinished, onMistake, onAnswer, on
               <PrimaryButton onClick={retry}>{t('lesson.retry')}</PrimaryButton>
             ) : (
               <PrimaryButton tone="red" onClick={onOutOfLives ?? retry}>
-                {t(onOutOfLives ? 'jump.seeResult' : 'lesson.retry')}
+                {t(onOutOfLives ? onwardKey : 'lesson.retry')}
               </PrimaryButton>
             )
           }
