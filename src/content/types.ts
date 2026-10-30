@@ -437,6 +437,111 @@ export type LineExercise = PositionSpec & ExerciseMeta & {
   explanation?: string;
 };
 
+// ---------- `play` and `review`: practical tasks (03-assessment.md §5; S2.12) ----------
+
+/**
+ * Task kinds of 03 §5.2 (the "task kind → partner" table). The kind fixes the partner chain of each regime
+ * (src/assessment/practical.ts `partnerPlan`):
+ * - `drill`: safety and development drills (`b08-g1`): safe-sparring(2, τ of the level) in both regimes;
+ * - `opening`: scripted tree → pressing(2); under fallback F5: tree → safe-sparring(2, τ);
+ * - `plan`, `hold`: (threat) tree → forcing-attack(2) → pressing(2); under F1 the task ends when only pressing would move;
+ * - `convert`: counterplay tree → forcing-attack(2) → pressing(2); under F1c → best-defence in resist mode;
+ * - `game`: a full game (80-move cap, 30-move no-capture limit, material rule): optional tree → pressing(2); under
+ *   F2 safe-sparring(2, 1.0), result not scored; F2b (task flag `f2b`) adds the scripted line and its line share.
+ */
+export const TASK_KINDS = ['drill', 'opening', 'plan', 'hold', 'convert', 'game'] as const;
+export type TaskKind = (typeof TASK_KINDS)[number];
+
+/** Rubrics of 03 §5.3 (R7 only on `review` items). */
+export const RUBRIC_IDS = ['R0', 'R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7'] as const;
+export type RubricId = (typeof RUBRIC_IDS)[number];
+
+/** One rubric of a task and its weight in percent (the weights of a task sum to 100). */
+export interface RubricWeight {
+  rubric: Exclude<RubricId, 'R7'>;
+  weight: number;
+}
+
+/**
+ * A practical task (03-assessment.md §5.1): start position, learner side (`side`), task kind (→ partner chain and
+ * fallback), move cap, rubrics with weights, objective predicates, pass mark and a neutral prompt (the goal, not the
+ * method). Played by src/components/PlayView.tsx through src/assessment/practical.ts; scored by
+ * src/assessment/rubrics.ts.
+ */
+export type PlayExercise = PositionSpec & ExerciseMeta & {
+  type: 'play';
+  prompt: string;
+  task: TaskKind;
+  /** Learner moves before the task ends with no result (1–80). `game` tasks use the full-game rules (80) instead. */
+  cap: number;
+  /** The scripted first part: opening tree, threat tree or counterplay tree, in the `line` node format. */
+  tree?: LineLearnerNode;
+  rubrics: RubricWeight[];
+  /** R3's objective predicate (judged at the end, `before` = the start position, `moves` = the whole game); also the
+   * objective of the default class off the tree (line share). */
+  objective?: Predicate;
+  /**
+   * R5's holding predicate (03 §5.3): `end` = judged at the end like `objective`; `any-move` = after some learner move
+   * (`before` = the position before that move, `moves` = [that move]; e.g. `threat { created: true }` = counterplay).
+   */
+  holding?: { predicate: Predicate; when?: 'end' | 'any-move' };
+  /** R2: developed pieces by learner move `n` ≥ `target` (03 §5.3). */
+  development?: { n: number; target: number };
+  /** Line share window L (≥ 6 counted moves) of R6 and of F2b. */
+  lineShare?: number;
+  /** A serious allowed loss is a critical failure (03 §5.6). */
+  safetyGate?: boolean;
+  /** Pass mark (default 75). */
+  passMark?: number;
+  guard?: GuardOverride;
+  /** Resist mode may run at k = d = 3: the task's positions were measured within budget (S2.6). Default k = d = 2. */
+  measured?: boolean;
+  /** `game` tasks: F2 failed the §5.7 guard, so the fallback is F2b (scripted tree + line share; needs `tree`, `lineShare`). */
+  f2b?: boolean;
+  /** The task claims counterplay or resistance: §5.7 item 5 requires a partner threat in the reference run. */
+  resistance?: boolean;
+  /**
+   * §5.7 reference runs: authored learner lines (move keys, learner moves only, in order). The first is the reference
+   * run, the second the reviewer's second plan. Where a line runs out (or does not apply), the reference player
+   * (forcing-attack, then pressing) continues.
+   */
+  reference?: string[][];
+  explanation?: string;
+};
+
+/** The 03 §5.3 signal categories a review asks for (R7: "reason category"). */
+export const REVIEW_CATEGORIES = ['allowed-loss', 'missed-gain', 'missed-mate', 'allowed-mate'] as const;
+export type ReviewCategory = (typeof REVIEW_CATEGORIES)[number];
+
+/** One turning point of a reviewed game: a learner move, its detected category and the better-move table there. */
+export interface TurningPoint {
+  /** Index into `moves` (a learner move). */
+  ply: number;
+  category: ReviewCategory;
+  /** COMPLETE move table of the position before that move (the `decision` rules): target/sound = a better move. */
+  table: MoveTableEntry[];
+  objective?: Predicate;
+  /** i18n key: what went wrong (shown after the review). */
+  text?: string;
+}
+
+/**
+ * A `review` task (03-assessment.md §5.3 R7, `a10-g1`): an authored game from the start position (both sides' moves,
+ * the learner plays `side`). The learner marks the turning point, plays a better move there (as a `decision`, judged
+ * by the turning point's table) and chooses the reason. `turningPoints`: the top 1–3 by size, largest first
+ * (verified by the validator with the level's signals). Positional reflection is not scored.
+ */
+export type ReviewExercise = PositionSpec & ExerciseMeta & {
+  type: 'review';
+  prompt: string;
+  /** Every move of the game, move keys ("h2-e2"). */
+  moves: string[];
+  turningPoints: TurningPoint[];
+  guard?: GuardOverride;
+  passMark?: number;
+  explanation?: string;
+};
+
 export type Exercise =
   | LearnExercise
   | SelectSquaresExercise
@@ -445,7 +550,9 @@ export type Exercise =
   | CombinationExercise
   | DecisionExercise
   | ChoiceExercise
-  | LineExercise;
+  | LineExercise
+  | PlayExercise
+  | ReviewExercise;
 export type ExerciseType = Exercise['type'];
 
 export interface Lesson {

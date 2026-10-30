@@ -119,6 +119,8 @@ describe('shipped lesson content', () => {
             expect(checkChoice(ex, ex.options.filter((o) => o.correct).map((o) => o.id)).correct).toBe(true);
             return;
           }
+          // Practical tasks and reviews are proven by the validator and scripts/verify-practical.ts.
+          if (ex.type === 'play' || ex.type === 'review') return;
           const solution = { from: parseSquare(ex.solution.from), to: parseSquare(ex.solution.to) };
           expect(legalMoves(pos)).toContainEqual(solution);
           expect(() => makeMove(pos, solution)).not.toThrow();

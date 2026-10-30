@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import type { CaptureExercise, ChoiceExercise, CombinationExercise, DecisionExercise, Exercise, Lesson, LineExercise } from '../content/types';
+import type { CaptureExercise, ChoiceExercise, CombinationExercise, DecisionExercise, Exercise, Lesson, LineExercise, PlayExercise, ReviewExercise } from '../content/types';
 import {
   findGeneral,
   isInCheck,
@@ -31,7 +31,10 @@ import {
 } from '../lessons/answers';
 import { itemSeed } from '../lessons/choice';
 import { clientJudge, loadAppAnalysisClient, moveKey, type MoveJudge } from '../lessons/decision';
-import type { AttemptRecord } from '../progress/records';
+import type { ApplicationGrant, AttemptRecord } from '../progress/records';
+import type { PartnerRegime } from '../assessment/regime';
+import type { Analyzer } from '../play/policies';
+import { createLocalStore, createPlayRepository, type PlayRepository } from '../storage';
 import {
   checkCombinationMove,
   combinationDone,
@@ -49,6 +52,8 @@ import { Celebration } from './Celebration';
 import { ChoiceView } from './ChoiceView';
 import { DecisionView, type AnswerReport } from './DecisionView';
 import { LineView, type LineResult } from './LineView';
+import { PlayView, type PlayReport } from './PlayView';
+import { ReviewView, type ReviewReport } from './ReviewView';
 import { PrimaryButton, type HeartNote } from './FeedbackPanel';
 import { SoundToggle } from './SoundToggle';
 import { HeartIcon } from './StatsBar';
@@ -88,6 +93,12 @@ export interface LessonPlayerProps {
    * varied-defence replies (unseen first). Default: none (every reply unseen).
    */
   attempts?: () => readonly AttemptRecord[];
+  /** Practical-task games in progress (resumed after a reload or tab switch). Default: local storage. */
+  playStore?: PlayRepository;
+  /** Partner regime of practical tasks (default `PARTNER_REGIME`: fallback until S2.18). */
+  regime?: PartnerRegime;
+  /** Analysis for practical tasks (default: the app's Worker client). Tests pass `() => Promise.resolve(directAnalyzer())`. */
+  playAnalyzer?: () => Promise<Analyzer>;
 }
 
 /** New-course items carry an id and a version (schema v2); the new rules (03 §3.2) apply only to them. */
@@ -95,7 +106,9 @@ const isNewCourseItem = (ex: Exercise | undefined): boolean => ex !== undefined 
 
 export type LessonEvent =
   | { type: 'hint'; itemId: string; step: HintStep; at: string }
-  | { type: 'attempt'; record: AttemptRecord };
+  | { type: 'attempt'; record: AttemptRecord }
+  /** A practical task passed (not voided, not a test): the 03 §5.6 grant with its fallback. Persisted by the app (S2.13). */
+  | { type: 'applied'; taskId: string; grant: ApplicationGrant };
 
 export function LessonPlayer({
   lesson,
@@ -111,7 +124,11 @@ export function LessonPlayer({
   judge: judgeProp,
   lineJudge: lineJudgeProp,
   attempts,
+  playStore: playStoreProp,
+  regime,
+  playAnalyzer,
 }: LessonPlayerProps) {
+  const playStore = useMemo(() => playStoreProp ?? createPlayRepository(createLocalStore()), [playStoreProp]);
   const judge = useMemo(() => judgeProp ?? clientJudge(loadAppAnalysisClient), [judgeProp]);
   const lineJudge = useMemo(() => lineJudgeProp ?? appLineJudge(), [lineJudgeProp]);
   const { t } = useI18n();
@@ -173,6 +190,31 @@ export function LessonPlayer({
     if (result.voided) a.voided = true;
     setExtra({ path: result.path, steps: result.steps, ...(result.safetyNet ? { safetyNet: true } : {}) });
     finishExercise(result.firstTry);
+  };
+
+  /** A finished practical task: credit = score / 100 (03 §3.2); the score, runs, fallback and game path go into the record. */
+  const playFinished = (r: PlayReport) => {
+    const a = tracked();
+    // 03 §3.2: the task score as credit; 0 after a critical failure or a failed line share gate. A voided run stays voided.
+    a.firstCredit = r.voided || r.critical.length > 0 || r.gateFailed ? 0 : r.score / 100;
+    if (r.voided) a.voided = true;
+    setExtra({
+      path: r.path,
+      score: r.score,
+      runs: r.runs,
+      voidedRuns: r.voidedRuns,
+      ...(r.fallback ? { fallback: r.fallback } : {}),
+      ...(r.critical.length ? { critical: r.critical } : {}),
+    });
+    if (r.grant && current?.id) onEvent?.({ type: 'applied', taskId: current.id, grant: r.grant });
+    finishExercise(r.pass && !r.voided);
+  };
+  /** A finished review: credit = R7 / 100. */
+  const reviewFinished = (r: ReviewReport) => {
+    const a = tracked();
+    a.firstCredit = r.score / 100;
+    setExtra({ score: r.score, markedPly: r.markedPly, betterMove: r.betterMove, reason: r.reason });
+    finishExercise(r.pass);
   };
 
   const hinted = (step: HintStep) => {
@@ -312,6 +354,21 @@ export function LessonPlayer({
             />
           ) : ex.type === 'line' ? (
             <LineView key={index} exercise={ex} {...common} onDone={lineFinished} lineJudge={lineJudge} coverage={coverage} />
+          ) : ex.type === 'play' ? (
+            <PlayView
+              key={index}
+              exercise={ex}
+              onDone={playFinished}
+              seed={currentSeed}
+              test={test}
+              store={playStore}
+              {...(regime ? { regime } : {})}
+              {...(playAnalyzer ? { analyzer: playAnalyzer } : {})}
+              coverage={coverage}
+              now={now}
+            />
+          ) : ex.type === 'review' ? (
+            <ReviewView key={index} exercise={ex} onDone={reviewFinished} />
           ) : ex.type === 'decision' ? (
             <DecisionView key={index} exercise={ex} {...common} />
           ) : ex.type === 'choice' ? (
@@ -335,7 +392,7 @@ function ExerciseView({
   onVoid,
   judge,
 }: {
-  exercise: Exclude<Exercise, CombinationExercise | DecisionExercise | ChoiceExercise | LineExercise>;
+  exercise: Exclude<Exercise, CombinationExercise | DecisionExercise | ChoiceExercise | LineExercise | PlayExercise | ReviewExercise>;
   onFinished: (firstTry: boolean) => void;
   onMistake: () => HeartNote | null;
   /** Set when a jump-ahead test has no lives left: replaces "Try again". */

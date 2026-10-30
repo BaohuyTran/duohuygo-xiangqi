@@ -16,7 +16,10 @@ import {
   type Move,
   type Position,
 } from '../engine';
-import { evaluatePredicate, predicateErrors, safetyGuard, type Predicate } from '../analysis';
+import { evaluatePredicate, mobility, moveSignals, predicateErrors, safetyGuard, threatAtEnd, threatOf, type Predicate } from '../analysis';
+import { developmentFacts } from '../assessment/practical';
+import { PASS_MARK, R1_DEDUCTIONS, r0, r2, r3, r5, scoreTask, scoringWeights, type ScoreTerm } from '../assessment/rubrics';
+import { createRecord, appendMove } from '../play/record';
 import { hasMessage } from '../i18n/messages';
 import {
   bestCaptureGain,
@@ -45,13 +48,17 @@ import {
   ASSIST_LEVELS,
   CONTENT_STATUSES,
   MOVE_CLASSES,
+  REVIEW_CATEGORIES,
+  RUBRIC_IDS,
   SOURCE_KINDS,
+  TASK_KINDS,
   STRANDS,
   TRANSFORMS,
   type CombinationExercise,
   type DecisionExercise,
   type Exercise,
   type LineExercise,
+  type PlayExercise,
   type Track,
   type Unit,
 } from './types';
@@ -60,7 +67,7 @@ import {
 const SAFETY = syncSafety();
 
 const REGIONS = ['red-palace', 'black-palace', 'red-side', 'black-side'];
-const EXERCISE_TYPES = ['learn', 'move', 'select-squares', 'capture', 'combination', 'decision', 'choice', 'line'];
+const EXERCISE_TYPES = ['learn', 'move', 'select-squares', 'capture', 'combination', 'decision', 'choice', 'line', 'play', 'review'];
 const GOALS = ['reach', 'any', 'check', 'checkmate', 'defend', 'safe'];
 const QUERY_KINDS = ['attacked-by', 'attacked-pieces', 'hanging', 'can-capture', 'point'];
 /** Item types that ask for a move: at G1/G0/TR they need the four feedback parts (02-curriculum.md §7). */
@@ -493,6 +500,18 @@ function validateExercise(ex: unknown, ctx: ExerciseContext): string[] {
       checkKey('explanation', ex.explanation, true);
       problems.push(...validateLine(ex, pos, checkKey));
       break;
+
+    case 'play':
+      checkKey('prompt', ex.prompt);
+      checkKey('explanation', ex.explanation, true);
+      problems.push(...validatePlay(ex, pos, checkKey));
+      break;
+
+    case 'review':
+      checkKey('prompt', ex.prompt);
+      checkKey('explanation', ex.explanation, true);
+      problems.push(...validateReview(ex, pos, checkKey));
+      break;
   }
   if (problems.length === 0) problems.push(...feedbackProblems(ex, pos, checkKey));
   return problems;
@@ -887,6 +906,260 @@ function validateLine(ex: Obj, start: Position, checkKey: (field: string, value:
     if (!continues) err('no accepted move continues the line ("next"): every branch must reach a leaf');
   };
   walk(ex.root, start, [], [linePositionKey(start)], 'root');
+  return problems;
+}
+
+// ---------- Practical tasks and reviews (03-assessment.md §5; S2.12) ----------
+
+const META_FIELDS = ['id', 'version', 'status', 'source', 'side', 'strand', 'nature', 'critical', 'misconceptions', 'assist', 'feedback'];
+const PLAY_FIELDS = [
+  'type', 'prompt', 'task', 'cap', 'tree', 'rubrics', 'objective', 'holding', 'development', 'lineShare', 'safetyGate', 'passMark',
+  'guard', 'measured', 'f2b', 'resistance', 'reference', 'explanation',
+];
+
+/** Does a predicate use a kind that needs the opponent's resistance (`threat`)? F5 allows own-side predicates only. */
+function usesThreat(p: unknown): boolean {
+  if (!isObj(p)) return false;
+  if (p.kind === 'threat') return true;
+  if (Array.isArray(p.of)) return p.of.some(usesThreat);
+  return isObj(p.of) ? usesThreat(p.of) : false;
+}
+
+/**
+ * F1's scoring-leaf rule (03 §5.2): the task's rubrics evaluated on the position after an accepted tree move, as if the
+ * task ended there with every earlier learner move target/sound (no R1 penalty), must reach the pass mark.
+ */
+function leafScore(ex: PlayExercise, start: Position, moves: readonly Move[]): number | null {
+  const side = ex.side ?? 'red';
+  const opponent = side === 'red' ? 'black' : 'red';
+  const limits = { maxNodes: TABLE_MAX_NODES };
+  const end = moves.reduce(makeMove, start);
+  const guard = resolveGuard({ itemId: ex.id, override: ex.guard });
+  const values: Partial<Record<ScoreTerm, number>> = { R1: 100, R0: r0(materialBalance(start.board, side), materialBalance(end.board, side)) };
+  let record = createRecord(start, { learner: side, seed: 0 });
+  for (const m of moves) record = appendMove(record, m);
+  values.R2 = ex.development ? r2(developmentFacts(record, ex.development.n, ex.development.target)) : 0;
+  const pred = (p: Predicate) => evaluatePredicate(p, { before: start, moves, side, limits });
+  if (ex.objective) {
+    const met = pred(ex.objective);
+    if (met === null) return null;
+    values.R3 = r3({ objectiveMet: met, r1: 100, mobilityStart: mobility(start.board, side), mobilityEnd: mobility(end.board, side) });
+  } else values.R3 = 0;
+  const t = threatAtEnd(end, opponent, guard, limits);
+  if (t.status !== 'checked') return null;
+  let holding = false;
+  if (ex.holding) {
+    if ((ex.holding.when ?? 'end') === 'end') holding = pred(ex.holding.predicate) === true;
+    else {
+      let cur = start;
+      for (const m of moves) {
+        if (cur.turn === side && evaluatePredicate(ex.holding.predicate, { before: cur, moves: [m], side, limits }) === true) holding = true;
+        cur = makeMove(cur, m);
+      }
+    }
+  }
+  values.R5 = r5({ mated: false, startDeficit: -materialBalance(start.board, side), endDeficit: -materialBalance(end.board, side), threatAtEnd: t.isThreat, r1: 100, holding });
+  return scoreTask({ weights: scoringWeights(ex.rubrics, 'F1'), values, critical: [], voids: [] }).score;
+}
+
+/**
+ * A practical task (03 §5.1): kind, cap, rubrics (weights sum to 100) with the facts they need (R3 objective, R5 holding
+ * predicate, R2 development, R6 line share window + tree), a verified threat at the start of hold / convert tasks, the
+ * scripted tree under the `line` rules, and for F1 tasks (plan, hold) the scoring-leaf rule: every accepted tree move
+ * continues or ends in a leaf, leaves only at selective nodes (credited ≤ 1/3 of the guard-passing moves), and the
+ * position at each leaf reaches the pass mark.
+ */
+function validatePlay(ex: Obj, start: Position, checkKey: (field: string, value: unknown, optional?: boolean) => void): string[] {
+  const problems: string[] = [...guardOverrideProblems(ex.guard, 'guard')];
+  for (const key of Object.keys(ex)) if (!PLAY_FIELDS.includes(key) && !META_FIELDS.includes(key) && !['fen', 'pieces', 'turn'].includes(key)) problems.push(`"${key}" is not a play-task field`);
+  if (typeof ex.task !== 'string' || !TASK_KINDS.includes(ex.task as never)) problems.push(`"task" must be one of ${TASK_KINDS.join(', ')}`);
+  if (!(Number.isInteger(ex.cap) && (ex.cap as number) >= 1 && (ex.cap as number) <= 80)) problems.push('"cap" must be an integer 1–80 (learner moves)');
+  const rubrics = Array.isArray(ex.rubrics) ? (ex.rubrics as unknown[]) : null;
+  const used = new Set<string>();
+  if (!rubrics || rubrics.length === 0) problems.push('"rubrics" must list at least one { "rubric": "R0"–"R6", "weight" }');
+  else {
+    let total = 0;
+    rubrics.forEach((r, i) => {
+      if (!isObj(r) || typeof r.rubric !== 'string' || !RUBRIC_IDS.includes(r.rubric as never) || r.rubric === 'R7') return void problems.push(`rubrics[${i}].rubric must be one of R0–R6 (R7 is the review task)`);
+      if (!(typeof r.weight === 'number' && r.weight > 0 && r.weight <= 100)) problems.push(`rubrics[${i}].weight must be a number in (0, 100]`);
+      else total += r.weight;
+      if (used.has(r.rubric)) problems.push(`rubrics[${i}]: ${r.rubric} is listed twice`);
+      used.add(r.rubric);
+    });
+    if (Math.abs(total - 100) > 1e-6) problems.push(`rubric weights must sum to 100 (got ${total})`);
+  }
+  if (used.has('R3') && ex.objective === undefined) problems.push('R3 needs an "objective" predicate');
+  if (ex.objective !== undefined) problems.push(...predicateErrors(ex.objective, start, 'objective'));
+  if (used.has('R5') && ex.holding === undefined) problems.push('R5 needs a "holding" predicate (without it R5 is at most 70, below the pass mark)');
+  if (ex.holding !== undefined) {
+    if (!isObj(ex.holding)) problems.push('"holding" must be { "predicate", "when"?: "end" | "any-move" }');
+    else {
+      problems.push(...predicateErrors(ex.holding.predicate, start, 'holding.predicate'));
+      if (ex.holding.when !== undefined && ex.holding.when !== 'end' && ex.holding.when !== 'any-move') problems.push('"holding.when" must be "end" or "any-move"');
+    }
+  }
+  if ((used.has('R2') || used.has('R6') || ex.task === 'game') && ex.development === undefined) problems.push('R2 / R6 (and full games, scored with R2 under F2) need "development" { "n", "target" }');
+  if (ex.development !== undefined) {
+    const d = ex.development;
+    if (!isObj(d) || !(Number.isInteger(d.n) && (d.n as number) >= 1 && (d.n as number) <= 30) || !(Number.isInteger(d.target) && (d.target as number) >= 1 && (d.target as number) <= 12)) {
+      problems.push('"development" must be { "n": 1–30 learner moves, "target": 1–12 developed pieces }');
+    }
+  }
+  const needsShare = used.has('R6') || ex.f2b === true;
+  if (needsShare && ex.lineShare === undefined) problems.push('R6 and F2b need "lineShare" (the window L, ≥ 6 counted moves)');
+  if (ex.lineShare !== undefined && !(Number.isInteger(ex.lineShare) && (ex.lineShare as number) >= 6 && (ex.lineShare as number) <= 30)) problems.push('"lineShare" must be an integer 6–30');
+  if (needsShare && ex.tree === undefined) problems.push('R6 and F2b need a scripted "tree"');
+  if (ex.f2b !== undefined && (ex.f2b !== true || ex.task !== 'game')) problems.push('"f2b": true only on "game" tasks');
+  if (ex.measured !== undefined && (typeof ex.measured !== 'boolean' || ex.task !== 'convert')) problems.push('"measured" (resist mode at k = d = 3) only on "convert" tasks');
+  if (ex.measured === true && start.board.filter(Boolean).length > 12) problems.push('"measured": depth 3 only in positions of at most 12 pieces (runtime budget)');
+  for (const flag of ['safetyGate', 'resistance'] as const) if (ex[flag] !== undefined && typeof ex[flag] !== 'boolean') problems.push(`"${flag}" must be true or false`);
+  if (ex.passMark !== undefined && !(typeof ex.passMark === 'number' && ex.passMark > 0 && ex.passMark <= 100)) problems.push('"passMark" must be a number in (0, 100]');
+  if (ex.reference !== undefined) {
+    const ok = Array.isArray(ex.reference) && ex.reference.every((line) => Array.isArray(line) && line.every((k) => parseMoveKey(k) !== null));
+    if (!ok) problems.push('"reference" must be a list of learner lines (lists of moves like "h2-e2")');
+  }
+  // §5.7 item 4: R1 is always paired with another rubric (pure caution never passes a task).
+  if (used.size === 1 && used.has('R1')) problems.push('R1 must be paired with another rubric (03 §5.7 item 4)');
+  // F5 scores only R6 (line share, R2), R1, R2, R3: an opening task must keep R6, and must not reduce to R1 alone.
+  if (ex.task === 'opening' && rubrics && problems.length === 0) {
+    const f5 = scoringWeights(ex.rubrics as never, 'F5').map((w) => w.term);
+    if (!f5.includes('R6')) problems.push('opening tasks need R6 (their fallback F5 scores the line share)');
+    else if (f5.every((t) => t === 'R1')) problems.push('opening tasks must not reduce to R1 alone under F5');
+  }
+  // F5: only own-side predicates in R3 (03 §5.2 F5 item 3).
+  if (ex.task === 'opening' && used.has('R3') && usesThreat(ex.objective)) problems.push('opening tasks (F5) may use only own-side predicates in R3: no "threat"');
+  if (problems.length) return problems;
+
+  const side = (ex.side ?? 'red') as 'red' | 'black';
+  const opponent = side === 'red' ? 'black' : 'red';
+  const guard = resolveGuard({ itemId: ex.id as string | undefined, override: ex.guard as never });
+  // 04 §5.5 item 1: hold and convert tasks start from a verified threat (counter-threat) of the opponent.
+  if (ex.task === 'hold' || ex.task === 'convert') {
+    const t = threatOf(start, opponent, guard, { maxNodes: TABLE_MAX_NODES });
+    if (t.status !== 'checked') problems.push('the opponent\'s threat at the start could not be checked within the node limit');
+    else if (!t.isThreat) problems.push(`"${String(ex.task)}" tasks start from a verified threat: ${capital(opponent)} (moving) has no forced mate within k nor a gain ≥ T here`);
+  }
+  if (ex.tree !== undefined) {
+    const asLine: Obj = { type: 'line', id: ex.id, side: ex.side, guard: ex.guard, misconceptions: ex.misconceptions, objective: ex.objective, root: ex.tree };
+    for (const p of validateLine(asLine, start, checkKey)) problems.push(`tree: ${p}`);
+    if (problems.length) return problems;
+    if (ex.task === 'plan' || ex.task === 'hold') {
+      const task = ex as unknown as PlayExercise;
+      const passMark = task.passMark ?? PASS_MARK;
+      const walk = (node: Obj, cur: Position, moves: Move[], where: string) => {
+        const table = (node.table as Obj[]) ?? [];
+        const passing = table.filter((r) => r.class !== 'error').length;
+        const credited = table.filter((r) => isAccepted(r.class as never));
+        const selective = credited.length > 0 && credited.length * 3 <= passing;
+        const next = (node.next ?? {}) as Record<string, Obj>;
+        for (const row of credited) {
+          const key = row.move as string;
+          const child = next[key];
+          const m = parseMoveKey(key)!;
+          if (child === undefined) {
+            problems.push(`tree ${where}: F1 needs a continuation or a scoring leaf for every accepted move; ${key} has none`);
+            continue;
+          }
+          if (child.kind === 'leaf') {
+            if (!selective) problems.push(`tree ${where}: a scoring leaf at a non-selective node (${credited.length} of ${passing} guard-passing moves credited > 1/3): give ${key} a continuation`);
+            const score = leafScore(task, start, [...moves, m]);
+            if (score === null) problems.push(`tree ${where}>${key}: the scoring leaf could not be evaluated within the node limit`);
+            else if (score < passMark) problems.push(`tree ${where}>${key}: the scoring leaf scores ${score} < ${passMark} (03 §5.2 F1): continue the tree instead`);
+            continue;
+          }
+          if (child.kind === 'opponent') {
+            const after = makeMove(cur, m);
+            for (const reply of (child.replies as Obj[]) ?? []) {
+              const r = parseMoveKey(reply.move);
+              const n = reply.next as Obj | undefined;
+              if (!r || !isObj(n)) continue;
+              const at = `${where}>${key}>${String(reply.move)}`;
+              if (n.kind === 'leaf') {
+                // A leaf after an authored reply also ends the task under F1: the same selectivity and pass-mark rule,
+                // scored on the position after the reply (else a shuffler could end the task early there).
+                if (!selective) problems.push(`tree ${at}: a scoring leaf reached through a non-selective node (${credited.length} of ${passing} guard-passing moves credited > 1/3): continue the tree instead`);
+                const score = leafScore(task, start, [...moves, m, r]);
+                if (score === null) problems.push(`tree ${at}: the scoring leaf could not be evaluated within the node limit`);
+                else if (score < passMark) problems.push(`tree ${at}: the scoring leaf scores ${score} < ${passMark} (03 §5.2 F1): continue the tree instead`);
+                continue;
+              }
+              if (n.kind === 'learner') walk(n, makeMove(after, r), [...moves, m, r], at);
+            }
+          }
+        }
+      };
+      walk(ex.tree as Obj, start, [], 'root');
+    }
+  }
+  return problems;
+}
+
+/** Signal size of a learner move for the review's turning points: its R1 deduction (0 = none). */
+function reviewCategory(penalty: string | null): string | null {
+  if (penalty === null) return null;
+  return penalty === 'serious-allowed-loss' ? 'allowed-loss' : penalty;
+}
+
+/**
+ * A `review` (03 §5.3 R7): a legal game; 1–3 turning points at learner moves, largest first, each a complete decision
+ * table of the position before the move (the played move not accepted) and the category the level's signals detect;
+ * no unlisted learner move has a larger R1 deduction than the smallest listed one (the top turning points).
+ */
+function validateReview(ex: Obj, start: Position, checkKey: (field: string, value: unknown, optional?: boolean) => void): string[] {
+  const problems: string[] = [...guardOverrideProblems(ex.guard, 'guard')];
+  for (const key of Object.keys(ex)) if (!['type', 'prompt', 'moves', 'turningPoints', 'guard', 'passMark', 'explanation'].includes(key) && !META_FIELDS.includes(key) && !['fen', 'pieces', 'turn'].includes(key)) problems.push(`"${key}" is not a review field`);
+  if (!Array.isArray(ex.moves) || ex.moves.length < 2) return [...problems, '"moves" must list the game\'s moves ("h2-e2"), at least two'];
+  const positions: Position[] = [start];
+  for (const [i, key] of (ex.moves as unknown[]).entries()) {
+    const m = parseMoveKey(key);
+    const cur = positions[positions.length - 1];
+    if (!m || !legalMoves(cur).some((x) => x.from === m.from && x.to === m.to)) return [...problems, `moves[${i}] ${JSON.stringify(key)} is not a legal move`];
+    positions.push(makeMove(cur, m));
+  }
+  if (ex.passMark !== undefined && !(typeof ex.passMark === 'number' && ex.passMark > 0 && ex.passMark <= 100)) problems.push('"passMark" must be a number in (0, 100]');
+  const tps = ex.turningPoints;
+  if (!Array.isArray(tps) || tps.length < 1) return [...problems, '"turningPoints" must list the top turning points (1–3, more only for ties)'];
+  if (problems.length) return problems;
+  const side = ex.side ?? 'red';
+  const guard = resolveGuard({ itemId: ex.id as string | undefined, override: ex.guard as never });
+  const limits = { maxNodes: TABLE_MAX_NODES };
+  const moves = (ex.moves as string[]).map((k) => parseMoveKey(k)!);
+  // The learner's signals for every learner move (sizes = R1 deductions).
+  const sizes = new Map<number, { size: number; category: string | null }>();
+  for (let ply = 0; ply < moves.length; ply++) {
+    if (positions[ply].turn !== side) continue;
+    const sig = moveSignals(positions[ply], moves[ply], guard, { ...limits });
+    if (sig.status !== 'checked') return [...problems, `moves[${ply}]: the signals could not be computed within the node limit`];
+    sizes.set(ply, { size: sig.penalty ? R1_DEDUCTIONS[sig.penalty] : 0, category: reviewCategory(sig.penalty) });
+  }
+  const listed: number[] = [];
+  (tps as unknown[]).forEach((tp, i) => {
+    const where = `turningPoints[${i}]`;
+    if (!isObj(tp)) return void problems.push(`${where} must be { "ply", "category", "table", "objective"?, "text"? }`);
+    for (const key of Object.keys(tp)) if (!['ply', 'category', 'table', 'objective', 'text'].includes(key)) problems.push(`${where}.${key} is not a turning-point field`);
+    const ply = tp.ply as number;
+    if (!(Number.isInteger(ply) && ply >= 0 && ply < moves.length) || !sizes.has(ply)) return void problems.push(`${where}.ply must index a learner move of "moves"`);
+    if (listed.includes(ply)) problems.push(`${where}: ply ${ply} is listed twice`);
+    listed.push(ply);
+    if (typeof tp.category !== 'string' || !REVIEW_CATEGORIES.includes(tp.category as never)) problems.push(`${where}.category must be one of ${REVIEW_CATEGORIES.join(', ')}`);
+    else if (sizes.get(ply)!.category !== tp.category) problems.push(`${where}: the level's signals detect ${JSON.stringify(sizes.get(ply)!.category)} at ply ${ply}, not "${tp.category}"`);
+    checkKey(`${where}.text`, tp.text, true);
+    const asDecision: Obj = { id: ex.id, guard: ex.guard, misconceptions: ex.misconceptions, table: tp.table, objective: tp.objective };
+    for (const p of validateDecision(asDecision, positions[ply], (f, v, o) => checkKey(`${where}.${f}`, v, o))) problems.push(`${where}: ${p}`);
+    const played = Array.isArray(tp.table) ? (tp.table as Obj[]).find((r) => isObj(r) && r.move === moveKey(moves[ply])) : undefined;
+    if (played && isAccepted(played.class as never)) problems.push(`${where}: the game's move ${moveKey(moves[ply])} must not be accepted (it is the mistake)`);
+  });
+  if (problems.length) return problems;
+  const sizeOf = (ply: number) => sizes.get(ply)!.size;
+  for (let i = 1; i < listed.length; i++) if (sizeOf(listed[i]) > sizeOf(listed[i - 1])) problems.push('turning points must be listed largest first');
+  // The top min(3, moves with a signal) by deduction, every move tied at the cutoff included (the cap rises for ties).
+  const signalled = [...sizes].filter(([, v]) => v.size > 0).sort((a, b) => b[1].size - a[1].size);
+  if (signalled.length > 0) {
+    const cutoff = signalled[Math.min(3, signalled.length) - 1][1].size;
+    const required = signalled.filter(([, v]) => v.size >= cutoff).map(([ply]) => ply);
+    for (const ply of required) if (!listed.includes(ply)) problems.push(`ply ${ply} (deduction ${sizeOf(ply)}) is one of the top turning points: list it (with its table)`);
+    for (const ply of listed) if (!required.includes(ply)) problems.push(`ply ${ply} is not one of the top turning points`);
+  }
   return problems;
 }
 

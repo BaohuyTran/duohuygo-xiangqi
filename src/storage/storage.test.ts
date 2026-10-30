@@ -4,6 +4,8 @@ import {
   createGamificationRepository,
   createLearningRepository,
   createMemoryStore,
+  createPlayRepository,
+  PLAY_IN_PROGRESS_KEY,
   createProgressRepository,
   createPuzzleProgressRepository,
   createSettingsRepository,
@@ -287,5 +289,24 @@ describe('learning repository (learning.records.v1, learning.attempts.v1)', () =
     expect(repo.records()).toEqual(emptyRecords());
     expect(repo.attempts()).toEqual([]);
     expect(untouched.map((k) => store.get(k))).toEqual(before);
+  });
+});
+
+describe('practical games in progress (S2.12)', () => {
+  it('saves, loads and clears one state per task; a corrupt value reads as empty; reset progress clears them', () => {
+    const store = createMemoryStore();
+    const play = createPlayRepository(store);
+    expect(play.load('b10l9-01')).toBeNull();
+    play.save('b10l9-01', { v: 1, moves: [1, 2] });
+    play.save('b10l9-02', { v: 1 });
+    expect(play.load('b10l9-01')).toEqual({ v: 1, moves: [1, 2] });
+    play.clear('b10l9-01');
+    expect(play.load('b10l9-01')).toBeNull();
+    expect(play.load('b10l9-02')).toEqual({ v: 1 });
+    store.set(PLAY_IN_PROGRESS_KEY, '{oops');
+    expect(play.load('b10l9-02')).toBeNull();
+    play.save('b10l9-02', { v: 1 });
+    createLearningRepository(store).reset();
+    expect(store.get(PLAY_IN_PROGRESS_KEY)).toBeNull();
   });
 });

@@ -37,6 +37,7 @@ Must work in desktop and phone browsers and as an installable, offline-capable P
 | Offline PWA + installability check (builds first; `-- --no-build` to skip; Playwright global); also checks the analysis Worker chunk is precached, answers offline, restarts after terminate, main-thread ≤ 50 ms per request | `npm run offline:check` |
 | Phone-cost bench (proxy: throttled headless Chromium 1×/4×/6×, real Worker client + src/play partners; type-checks scripts/bench first; Playwright global; `-- --quick`, `-- --rates 1,4`, `-- --serve` for a real phone) | `npm run bench` |
 | Verify `line` trees + varied-defence combinations (validator, node selectivity, depth, replies at h + 1, best replies) | `npx tsx scripts/verify-lines.ts [unitId or unit.json …]` (default: all units) or `npx tsx scripts/verify-lines.ts --fixtures` |
+| §5.7 checks of practical tasks (reference run, N1/N2 failure rates, narrow positions, resistance, second plan, void rate, resist-mode cost) | `npx tsx scripts/verify-practical.ts [unitId or unit.json …] [--fixtures] [--runs N] [--regime main\|fallback] [--strict]` |
 | Propose the complete move table of a `decision` item (dev-time; keeps `authored` rows) | `npx tsx scripts/move-table.ts <unitId or unit.json> <itemId>` or `npx tsx scripts/move-table.ts --fen "<fen>" [--unit b09] [--objective '<json>'] [--guard '{"h":2}']` |
 
 `npm run build`, `npm test` and `npm run lint` must pass before committing.
@@ -72,6 +73,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
 │   ├── bench.mjs           # Phone-cost bench driver
 │   ├── bench/              # Dev-only bench page (own vite.config.mjs + tsconfig → ui-check-output/bench-dist; never in the app build)
 │   ├── verify-lines.ts     # Authoring-time check of `line` trees and varied-defence combinations
+│   ├── verify-practical.ts # §5.7 checks of `play` tasks (runs src/assessment/practical.ts with simulated learners)
 │   ├── offline-check.mjs   # Build, load once, go offline, reload, open a lesson + puzzle; manifest/icons
 │   └── generate-puzzles.ts # Dev-time puzzle generator (run with tsx; not part of the app)
 └── src/
@@ -86,6 +88,8 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── DecisionView.tsx# `decision` items: table verdict, refutation, hint ladder, keyboard `MovePicker`
     │   ├── ChoiceView.tsx  # `choice` items: seeded order, radio / checkbox options, digit keys, per-option feedback
     │   ├── LineView.tsx    # `line` items: tree play, authored replies by coverage + seed, hand-over to a partner off the tree
+    │   ├── PlayView.tsx    # `play` tasks: game vs a training partner, disclosures, refusal/warning, saved mid-game, rubric result
+    │   ├── ReviewView.tsx  # `review` tasks: mark the turning point, play a better move, choose the reason (R7)
     │   ├── FeedbackPanel.tsx# Shared fixed feedback footer + PrimaryButton (decision / choice / line)
     │   ├── PuzzleList.tsx  # Puzzles grouped by difficulty or theme, solved state
     │   ├── PuzzlePlayer.tsx# Puzzle play: hints, auto reply, show solution, next puzzle
@@ -124,6 +128,11 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     ├── progress/           # Three-level learning records. Pure: NO React/DOM/storage/gamification (enforced by a test)
     │   ├── records.ts      # LearningRecords format (completed / mastered / applied / exposed), lenient field-level parser, attempt log (cap 2,000)
     │   └── legacy.ts       # LEGACY_MAP (versioned; v1 = the 9 orphan ids, no targets) + completedView: legacy completion DERIVED from the v1 list, never stored
+    ├── assessment/         # Practical tasks (S2.12)
+    │   ├── rubrics.ts      # R0–R7, line share, scoring weights by fallback, pass rules. Pure, no runtime analysis import
+    │   ├── practical.ts    # Regimes + partner chains, F3/F4 exam slots + reachability, TaskState turns, facts, grants, simulated learners (LAZY: never in the main chunk)
+    │   ├── regime.ts       # `PARTNER_REGIME` ('fallback' until S2.18)
+    │   └── play-fixtures.ts# TEST-ONLY play / review fixtures (also `verify-practical.ts --fixtures`)
     ├── play/               # Training partners (policies.ts), game record (record.ts), training-ruleset adjudicator (adjudicate.ts), seeded RNG (rng.ts), index.ts. Pure: NO React/DOM/storage/gamification/clock/Math.random (enforced by purity.test.ts)
     ├── analysis/           # Pure analysis layer (no React/DOM, no gamification; imports only '../engine'; enforced by purity.test.ts)
     │   ├── search.ts       # Iterative-deepening alpha-beta + Zobrist TT, node limit, abort flag → { score, pv, depth, nodes, complete }
@@ -151,7 +160,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── SoundProvider.tsx # useSound(): play / muted / setMuted; unlocks audio on the first gesture
     │   └── fake-audio.ts   # Test helper: fake AudioContext that records scheduled notes
     ├── storage/
-    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings (language, muted), gamification and learning (`createLearningRepository`) repos; readSnapshot/writeSnapshot for sync
+    │   └── index.ts        # KeyValueStore (localStorage w/ memory fallback); lesson, puzzle, settings (language, muted), gamification, learning (`createLearningRepository`) and practical games in progress (`createPlayRepository`) repos; readSnapshot/writeSnapshot for sync
     ├── sync/               # Optional account login + sync. UI never imports Supabase (enforced by a test)
     │   ├── merge.ts        # THE merge rule (documented there), RemoteData JSON format, parseRemote. Pure
     │   ├── service.ts      # createAccountService: auth state, offline-first sync, debounced; backend injected. No React
@@ -178,7 +187,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Add or edit lessons in `src/content/lessons/NN-name.json`; every string field is an i18n key
   that must exist in `src/i18n/messages.ts` with both `en` and `vi` text.
 - Exercise types: `learn`, `select-squares`, `move` (goals: `reach`, `any`, `check`, `checkmate`,
-  `defend`, `safe`), `capture`, `combination`, `decision`, `choice`, `line`. Answers are computed by the engine; `solution`
+  `defend`, `safe`), `capture`, `combination`, `decision`, `choice`, `line`, `play`, `review`. Answers are computed by the engine; `solution`
   fields are only verified, never trusted.
 - `select-squares` takes exactly one of `square` (legal moves), `region` or `query` (computed, never stored):
   `attacked-by` (points where a side could legally capture an enemy piece, its own pieces excluded),
@@ -388,6 +397,32 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Request kind `mate-distances` (exhaustive, k ≤ 3) is the best-defence mate guard; depth 3 / `forcing-attack(3)` only
   in positions of ≤ ~12 pieces (authoring + S2.12 validation). Interpretations: DECISIONS.md D8.
 
+## Practical tasks (curriculum upgrade, `src/assessment`, S2.12)
+
+- `play` (`PlayExercise`, 03 §5.1): `task` (drill · opening · plan · hold · convert · game), `cap` (learner moves; games
+  use the full-game rules), optional scripted `tree` (line node format, validated like a line), `rubrics` (R0–R6,
+  weights sum to 100), `objective` (R3; also the default class off the tree), `holding { predicate, when: end |
+  any-move }` (R5), `development { n, target }` (R2/R6/games), `lineShare` (L ≥ 6, R6/F2b), `safetyGate`, `passMark`,
+  `measured` (convert only, ≤ 12 pieces: resist mode at 3), `f2b` (games), `resistance`, `reference` (authored learner
+  lines for §5.7). Validator: hold/convert start from a verified opponent threat; plan/hold (F1) need a continuation or
+  a scoring leaf for every accepted tree move, leaves only at selective nodes, and each leaf's rubric score ≥ pass mark;
+  F5 R3 objectives may not use `threat`.
+- Partner regime: `PARTNER_REGIME` = `fallback` until S2.18. Task kind → chain in `partnerPlan` (03 §5.2): F1 (tree →
+  forcing-attack(2), the task ends when it hands over), F1c (tree → forcing-attack(2) → resist mode k = d = 2), F2
+  (safe-sparring(2, 1.0)), F2b (tree + line share), F5 (tree → safe-sparring(2, τ)), drills safe-sparring(2, τ);
+  τ = 1.0 Basic, 0.5 above. F3/F4: `EXAM_SLOTS_UNDER_F` + `levelReachable`. `scoringWeights` applies the F scoring.
+- A run is a JSON `TaskState` saved after every move (`createPlayRepository`, key `play.inProgress.v1`, local only;
+  reset progress clears it) and resumed by `parseTaskState`. Each learner move's signals (level guard, h = 2 above
+  Basic) are computed during the game in the Worker; a not-checked signal or a partner safety-net move voids the run
+  (no grant). The material rule and final facts run inside the async turn functions (after "Checking…").
+- The learner's third occurrence goes through `checkLearnerMove` (refusal text); an only-move / all-fail-guard move
+  that loses by perpetual check asks for confirmation (`play.warn.ownPerpetualCheck`). Greedy/restricted partners show
+  only their own disclosure.
+- `LessonPlayer` emits `{ type: 'applied', taskId, grant }` for a passed, non-voided practice task (grant records the
+  fallback); the attempt record gets `score`, `fallback`, `path`. Persisting grants is S2.13.
+- `review` (`ReviewExercise`): authored game `moves`, 1–3 `turningPoints { ply, category, table }` (validated: learner
+  moves, the level's signals detect the category, largest first, the game move not accepted). R7 = 40 + 40 + 20.
+
 ## Learning records (curriculum upgrade)
 
 - New-course progress is stored through `createLearningRepository` under `learning.records.v1` (completed /
@@ -397,7 +432,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - New-course ids are never written to `progress.completedLessons.v1`. Legacy completion is derived at read time
   (`completedView` in `src/progress/legacy.ts`) and never stored; loading writes nothing. Each release that retires
   legacy lessons adds their `LEGACY_MAP` entries and bumps `LEGACY_MAP_VERSION` (corrections only add targets).
-- Reset progress clears the v1 completed list, the records and the attempt log; puzzles, settings and gamification
+- Reset progress clears the v1 completed list, the records, the attempt log and practical games in progress; puzzles, settings and gamification
   are untouched. Design: `docs/curriculum-upgrade/design/05-migration.md` §8.
 
 ## XP, hearts, daily goal and streak

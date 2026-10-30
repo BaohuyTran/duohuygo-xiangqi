@@ -103,6 +103,14 @@ The Vietnamese names already in `src/i18n/messages.ts` are Verified there for Tr
 | Mã hậu pháo | 马后炮 | Horse-behind-Cannon | The Horse stands on the line between the Cannon and the enemy General, serving as the Cannon's screen, and covers the General's flight points |
 | Song xa | 双车 | Two Chariots | Mate by the two Chariots |
 
+### 4.1 Rules terms of the training ruleset (S2.12)
+
+| Vietnamese | Chinese | English used in the course | Meaning |
+| --- | --- | --- | --- |
+| Chiếu mãi | 长将 | Perpetual check | One side checks on every move of a repeated sequence; under the course's training ruleset that side loses at the third repetition (DECISIONS D8). "Chiếu mãi" is the learner-facing term (`play.end.perpetualCheck`); "trường chiếu" (the Sino-Vietnamese synonym) is not used in the UI. |
+| Lặp lại thế cờ | 重复局面 | Repetition (of the position) | The same position with the same side to move occurs again; a third occurrence ends the game under the training ruleset |
+| Kết quả tập luyện | — | Training result | A result by the course's training rules (repetition, move cap, no-capture limit), not an official rule |
+
 ## 5. Colour-neutral wording
 
 Generic feedback names neither colour: "your opponent" / "đối phương", "the opponent's General" / "Tướng đối

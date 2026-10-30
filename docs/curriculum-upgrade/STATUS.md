@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
-- **Active items:** S2.12 (practical tasks); then S2.13; then pause until next week (D10)
+- **Active items:** S2.13 (assessment engine and progress-state UI); then S2.14–S2.20, S2.gate (D10: resumed 2026-10-30)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,18 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-10-30 — **S2.12 done** (attempt 2): `play` / `review` exercise types (types + validator), `src/assessment`
+  (rubrics R0–R7, line share, fallback F weights, pass rules on the unrounded score, partner plans per regime with
+  `PARTNER_REGIME = 'fallback'`, task state resumable via `play.inProgress.v1`, grants recording the fallback,
+  simulated N1/N2 learners through `checkLearnerMove`), `PlayView` / `ReviewView` (new game with a new seed after a
+  failed or voided run; credit = score/100, review R7/100), `scripts/verify-practical.ts` (03 §5.7 checks; fixture
+  tasks stay practice only). Driver: lint clean, build OK, 1,096 tests (63 files), ui:check 360 px PASS, engine
+  untouched. Reviewer APPROVE (attempt 2 recheck of 3 findings); content-reviewer APPROVE (recheck of 6 findings:
+  rounding, unchecked line-share facts void, F1 leaves after a reply validated, repetition exceptions, review
+  top-3 with ties, continuous credit). Follow-ups for S2.13: persist `applied` grants and attempt records (run
+  counts reset on reload), failed play task and test lives in jump tests, exam-level F3/F4 provenance. No pilot
+  content uses `play` / `review` yet (S2.14+), so ui:check does not reach the new screens.
 
 - 2026-10-23 — **S2.11 done** (attempt 1): records sync in a new `progress.data_v2` column (migration
   `20261023000000`), merge per 05 §8.6 item 4 (`src/sync/merge-records.ts`, canonical `betterCompletion` also used
@@ -159,5 +171,5 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. S2.12 → review → commit; S2.13 → review → commit; then pause (owner's weekly budget, D10).
-2. Next week: S2.14–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
+1. S2.13 → review → commit.
+2. Then S2.14–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).

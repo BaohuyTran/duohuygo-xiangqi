@@ -199,7 +199,7 @@ export interface LearningRepository {
   attempts(): AttemptRecord[];
   /** Appends to the attempt log (invalid entries ignored), keeping the newest ATTEMPT_LOG_CAP. */
   logAttempt(attempt: AttemptRecord): AttemptRecord[];
-  /** "Reset progress": removes the records and the attempt log (the backup key is left alone). */
+  /** "Reset progress": removes the records, the attempt log and practical games in progress (the backup key stays). */
   reset(): void;
 }
 
@@ -282,7 +282,50 @@ export function createLearningRepository(store: KeyValueStore): LearningReposito
     reset() {
       store.remove(LEARNING_RECORDS_KEY);
       store.remove(LEARNING_ATTEMPTS_KEY);
+      // Games of practical tasks in progress belong to the learning progress too (S2.12).
+      store.remove(PLAY_IN_PROGRESS_KEY);
     },
+  };
+}
+
+// ---------- Practical tasks in progress (S2.12) ----------
+
+export const PLAY_IN_PROGRESS_KEY = 'play.inProgress.v1';
+
+/**
+ * Games of practical tasks in progress, one JSON state per task id (src/assessment/practical.ts `TaskState`), so a
+ * reload or a tab switch does not lose the game. Local only (not synced); the state is validated by the task screen
+ * (`parseTaskState`) before it is resumed. A corrupt stored value reads as empty. "Reset progress" clears it.
+ */
+export interface PlayRepository {
+  load(taskId: string): unknown;
+  save(taskId: string, state: unknown): void;
+  clear(taskId: string): void;
+  clearAll(): void;
+}
+
+export function createPlayRepository(store: KeyValueStore): PlayRepository {
+  const read = (): Record<string, unknown> => {
+    try {
+      const v: unknown = JSON.parse(store.get(PLAY_IN_PROGRESS_KEY) ?? '{}');
+      return typeof v === 'object' && v !== null && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
+    } catch {
+      return {};
+    }
+  };
+  return {
+    load: (taskId) => (Object.hasOwn(read(), taskId) ? read()[taskId] : null),
+    save(taskId, state) {
+      store.set(PLAY_IN_PROGRESS_KEY, JSON.stringify({ ...read(), [taskId]: state }));
+    },
+    clear(taskId) {
+      const all = read();
+      if (!Object.hasOwn(all, taskId)) return;
+      delete all[taskId];
+      if (Object.keys(all).length === 0) store.remove(PLAY_IN_PROGRESS_KEY);
+      else store.set(PLAY_IN_PROGRESS_KEY, JSON.stringify(all));
+    },
+    clearAll: () => store.remove(PLAY_IN_PROGRESS_KEY),
   };
 }
 

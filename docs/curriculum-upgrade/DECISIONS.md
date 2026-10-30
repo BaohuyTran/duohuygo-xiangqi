@@ -117,3 +117,17 @@ Source: `docs/curriculum-upgrade/measurements.md` §3 (headless Chromium throttl
   trimming scope. The merge to `main` (D7) happens only when step 2 is complete. From now on no separate tester agent
   (the driver runs lint, build, tests and ui:check), one code reviewer, and a content-reviewer only for chess content,
   chess logic or assessment correctness; review fixes are rechecked, not re-reviewed in full.
+
+## D11 — 2026-10-30 — Practical-task interpretations (S2.12)
+
+- Material for R0, the R4 lead and the R5 deficit is the static count of the final board; only the full-game stop
+  rule uses the quiescence-resolved count (03 §5.5). Alternative (quiescence everywhere) left open for S2.18.
+- R5 holding predicate: `when: 'end'` or `'any-move'` (after any single learner move, for counterplay).
+- F5 keeps R1, R2, R3 and R6, rescaled to 100; opening tasks must keep R6 under F5 and no task may score R1 alone.
+- `forcing-attack` stays at k = 2 in convert tasks (03 allows 3 at ≤ 12 pieces, does not require it).
+- The pass is decided on the unrounded score; shown and stored scores are rounded down to one decimal.
+- A line-share fact that cannot be checked before the window fills voids the run (`fact-not-checked`).
+- 03 §5.7 failure rates are measured over runs that were not voided; voided runs are reported separately.
+- A review mark that is not a turning point scores 0 for the better move; the reflection is not scored. Reviews
+  must list every move among the top 3 by deduction, ties at the cut-off included.
+- Reset progress also clears practical games in progress (`play.inProgress.v1`).
