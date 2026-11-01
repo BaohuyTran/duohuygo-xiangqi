@@ -1274,6 +1274,252 @@ export const messages = {
     en: 'Master challenge complete. Calculated to the end!',
     vi: 'Hoàn thành thử thách kiện tướng. Tính toán đến tận cùng!',
   },
+
+  // ---------- New course: b09 "Opening development principles" (pilot lesson b09l3 + task b09-g1, S2.14) ----------
+  'b09.title': { en: 'Opening development principles', vi: 'Nguyên tắc ra quân trong khai cuộc' },
+  'b09.desc': {
+    en: 'Bring your pieces into play safely and meet the central Cannon.',
+    vi: 'Đưa quân ra an toàn và đối phó với Pháo đầu.',
+  },
+  'b09l3.title': { en: 'Meeting the central Cannon', vi: 'Đối phó Pháo đầu' },
+  'b09l3.e1': {
+    en: 'Red opened with the central Cannon (C2=5). It uses Red’s own central Soldier as its screen and aims at your central Soldier. Answer with a move that develops a piece AND guards that Soldier: a Horse toward the centre, H8+7 or H2+3, does both.',
+    vi: 'Đỏ khai cuộc bằng Pháo đầu (P2-5). Pháo lấy Tốt đầu của chính Đỏ làm ngòi và nhắm vào Tốt đầu của bạn. Hãy đáp bằng một nước vừa ra quân VỪA bảo vệ con Tốt đó: nhảy Mã vào giữa, M8.7 hoặc M2.3, làm được cả hai việc.',
+  },
+  'b09l3.e2': {
+    en: 'Contrast: here Black answered R9+1. Bringing out a Chariot is useful, but nothing guards the central Soldier any more: Red takes it with C5+4 for free, and the Cannon now stands right in front of your palace. A developing move must also answer the threat.',
+    vi: 'So sánh: ở đây Đen đáp X9.1. Ra Xe là có ích, nhưng không còn quân nào bảo vệ Tốt đầu: Đỏ ăn không con Tốt bằng P5.4, và Pháo đứng ngay trước cung của bạn. Nước ra quân cũng phải hóa giải được mối đe dọa.',
+  },
+  'b09l3.c3.p': {
+    en: 'Red’s central Cannon aims at your central Soldier. Tick every move that guards the Soldier and also develops a new piece.',
+    vi: 'Pháo đầu của Đỏ nhắm vào Tốt đầu của bạn. Hãy chọn mọi nước vừa bảo vệ con Tốt vừa đưa thêm một quân mới ra trận.',
+  },
+  'b09l3.c3.a': {
+    en: 'Yes: H8+7 guards the central Soldier and brings a Horse toward the centre.',
+    vi: 'Đúng: M8.7 bảo vệ Tốt đầu và đưa một con Mã vào giữa.',
+  },
+  'b09l3.c3.b': {
+    en: 'Yes: H2+3 does the same job from the other side. There is more than one good answer: an opening is a set of purposes, not one memorised move.',
+    vi: 'Đúng: M2.3 làm cùng việc đó từ phía bên kia. Có nhiều hơn một cách đáp tốt: khai cuộc là các mục đích, không phải một nước học thuộc lòng.',
+  },
+  'b09l3.c3.c': {
+    en: 'No: stepping the General up guards nothing and loosens your palace. The Soldier still falls to C5+4.',
+    vi: 'Sai: đưa Tướng lên không bảo vệ được gì mà còn làm cung yếu đi. Con Tốt vẫn bị P5.4 ăn.',
+  },
+  'b09l3.c3.d': {
+    en: 'No: “Chariots out early” is a good rule, but this move ignores the threat. C5+4 still takes the Soldier.',
+    vi: 'Sai: “ra Xe sớm” là một quy tắc tốt, nhưng nước này bỏ qua mối đe dọa. P5.4 vẫn ăn được con Tốt.',
+  },
+  'b09l3.c4.p': {
+    en: 'This time the other Red Cannon came to the centre. Tick every move that guards your central Soldier and also develops a new piece.',
+    vi: 'Lần này Pháo còn lại của Đỏ vào giữa. Hãy chọn mọi nước vừa bảo vệ Tốt đầu của bạn vừa đưa thêm một quân mới ra trận.',
+  },
+  'b09l3.c4.a': {
+    en: 'Yes: H2+3 guards the central Soldier and develops a Horse toward the centre.',
+    vi: 'Đúng: M2.3 bảo vệ Tốt đầu và đưa một con Mã vào giữa.',
+  },
+  'b09l3.c4.b': {
+    en: 'Yes: H8+7 works just as well. Which Cannon Red used does not change the idea.',
+    vi: 'Đúng: M8.7 cũng tốt như vậy. Đỏ dùng Pháo nào thì ý tưởng vẫn không đổi.',
+  },
+  'b09l3.c4.c': {
+    en: 'No: A4+5 develops nothing and does not guard the Soldier. C5+4 still takes it.',
+    vi: 'Sai: S4.5 không ra thêm quân nào và không bảo vệ con Tốt. P5.4 vẫn ăn được.',
+  },
+  'b09l3.c4.d': {
+    en: 'No: copying Red’s central Cannon (C8=5) is a real opening, but it does not guard the Soldier. Do not play a move only because it is a known pattern: check what it does here.',
+    vi: 'Sai: bắt chước Pháo đầu của Đỏ (P8-5) là một khai cuộc có thật, nhưng nó không bảo vệ con Tốt. Đừng đi một nước chỉ vì nó quen thuộc: hãy xem nó làm được gì ở đây.',
+  },
+  'b09l3.d6.p': {
+    en: 'Red’s central Cannon attacks your central Soldier, and you have already played C8=6. Guard the Soldier with a move that also develops a piece.',
+    vi: 'Pháo đầu của Đỏ đang dọa Tốt đầu của bạn, và bạn đã đi P8-6. Hãy bảo vệ con Tốt bằng một nước đồng thời ra quân.',
+  },
+  'b09l3.d6.hint': {
+    en: 'Check each Horse’s leg: a Horse cannot jump past a piece standing right beside it in the direction it moves.',
+    vi: 'Hãy xem chân của từng con Mã: Mã không nhảy được khi có quân đứng sát bên cạnh theo hướng nó đi (cản chân Mã).',
+  },
+  'b09l3.d6.purpose': {
+    en: 'The central Soldier is guarded, and a new piece is in play.',
+    vi: 'Tốt đầu đã được bảo vệ, và thêm một quân đã ra trận.',
+  },
+  'b09l3.d6.key': {
+    en: 'If Red takes anyway (C5+4), you take the Cannon back: a Cannon for a Soldier is a bad trade for Red.',
+    vi: 'Nếu Đỏ vẫn ăn (P5.4), bạn ăn lại Pháo: đổi một Pháo lấy một Tốt là thiệt cho Đỏ.',
+  },
+  'b09l3.d6.error': {
+    en: 'That move left the central Soldier unguarded: C5+4 takes it for free.',
+    vi: 'Nước đó để Tốt đầu không được bảo vệ: P5.4 ăn không con Tốt.',
+  },
+  'b09l3.d6.tempt': {
+    en: 'H8+7 develops, but there the Horse’s leg toward the central Soldier is blocked by your own Cannon right beside it. It does not guard the Soldier, and C5+4 takes it.',
+    vi: 'M8.7 có ra quân, nhưng ở đó chân Mã hướng về Tốt đầu bị chính Pháo của bạn đứng sát bên cản lại. Nó không bảo vệ được con Tốt, và P5.4 sẽ ăn.',
+  },
+  'b09l3.d5.p': {
+    en: 'Red’s central Cannon attacks your central Soldier. Guard it with a move that also develops a piece.',
+    vi: 'Pháo đầu của Đỏ đang dọa Tốt đầu của bạn. Hãy bảo vệ nó bằng một nước đồng thời ra quân.',
+  },
+  'b09l3.d5.hint': {
+    en: 'Which of your pieces can come out and guard the central Soldier in one move?',
+    vi: 'Quân nào của bạn có thể ra trận và bảo vệ Tốt đầu chỉ trong một nước?',
+  },
+  'b09l3.d5.purpose': {
+    en: 'The central Soldier is guarded, and a new piece is in play.',
+    vi: 'Tốt đầu đã được bảo vệ, và thêm một quân đã ra trận.',
+  },
+  'b09l3.d5.key': {
+    en: 'If Red takes anyway (C5+4), you take the Cannon back: Red gives a Cannon for a Soldier.',
+    vi: 'Nếu Đỏ vẫn ăn (P5.4), bạn ăn lại Pháo: Đỏ mất một Pháo để đổi lấy một Tốt.',
+  },
+  'b09l3.d5.error': {
+    en: 'That move left the central Soldier unguarded: C5+4 takes it for free.',
+    vi: 'Nước đó để Tốt đầu không được bảo vệ: P5.4 ăn không con Tốt.',
+  },
+  'b09l3.d5.tempt': {
+    en: 'P5+1 only moves the Soldier along the Cannon’s file. It is still attacked: C5+3 takes it.',
+    vi: 'B5.1 chỉ đẩy con Tốt đi trên cùng đường của Pháo. Nó vẫn bị dọa: P5.3 ăn được.',
+  },
+  'b09l3.d7.p': {
+    en: 'Your move as Black. Develop a piece without leaving anything loose.',
+    vi: 'Đến lượt Đen. Hãy ra quân mà không để quân nào bị bỏ ngỏ.',
+  },
+  'b09l3.d7.purpose': {
+    en: 'The central Soldier is guarded against the central Cannon, and nothing is left loose.',
+    vi: 'Tốt đầu đã được bảo vệ trước Pháo đầu, và không quân nào bị bỏ ngỏ.',
+  },
+  'b09l3.d7.key': {
+    en: 'Red would like C5+4, but your guard takes the Cannon back. Expect Red to keep developing instead.',
+    vi: 'Đỏ muốn đi P5.4, nhưng quân bảo vệ của bạn sẽ ăn lại Pháo. Nhiều khả năng Đỏ sẽ tiếp tục ra quân.',
+  },
+  'b09l3.d7.error': {
+    en: 'Before you move, check what your move leaves behind: the central Soldier facing the Cannon, and the Horse next to your Chariot.',
+    vi: 'Trước khi đi, hãy kiểm tra nước đi để lại gì phía sau: Tốt đầu đang đối mặt với Pháo, và con Mã cạnh Xe của bạn.',
+  },
+  'b09l3.d7.tempt': {
+    en: 'R9+1 develops the Chariot, but the Horse beside it loses its only guard: Red’s other Cannon jumps over yours and takes it, C2+7.',
+    vi: 'X9.1 ra Xe, nhưng con Mã bên cạnh mất quân bảo vệ duy nhất: Pháo còn lại của Đỏ nhảy qua Pháo của bạn và ăn Mã, P2.7.',
+  },
+  'b09l3.d7.e8': {
+    en: 'R1=5 also guards the central Soldier: the Chariot would take back. It works, but no new piece came out, and the Chariot now stands in front of its own General.',
+    vi: 'X1-5 cũng bảo vệ được Tốt đầu: Xe sẽ ăn lại. Cách này được, nhưng không có quân mới nào ra trận, và Xe lại đứng chắn trước Tướng của mình.',
+  },
+  'b09l3.d7.i8': {
+    en: 'The Horse next to your Chariot loses its only guard: Red’s Cannon jumps over your Cannon and takes it (C2+7).',
+    vi: 'Con Mã cạnh Xe mất quân bảo vệ duy nhất: Pháo của Đỏ nhảy qua Pháo của bạn và ăn Mã (P2.7).',
+  },
+  'b09l3.l8.p': {
+    en: 'Play two moves as Black. Develop your pieces and keep every piece safe.',
+    vi: 'Cầm quân Đen đi hai nước. Hãy ra quân và giữ an toàn cho mọi quân.',
+  },
+  'b09l3.l8.hint': {
+    en: 'Before you move, look at what each enemy Cannon aims at.',
+    vi: 'Trước khi đi, hãy xem mỗi khẩu Pháo của đối phương đang nhắm vào đâu.',
+  },
+  'b09l3.l8.develop': {
+    en: 'Another piece comes out, and nothing is left loose.',
+    vi: 'Thêm một quân ra trận, và không quân nào bị bỏ ngỏ.',
+  },
+  'b09l3.l8.done': {
+    en: 'Well played: the central Soldier is guarded and two of your pieces are developed.',
+    vi: 'Chơi tốt: Tốt đầu đã được bảo vệ và hai quân của bạn đã ra trận.',
+  },
+  'b09l3.l8.h6done': {
+    en: 'Your Cannon guards the central Soldier. That works; a Horse move would also have developed a new piece.',
+    vi: 'Pháo của bạn bảo vệ Tốt đầu. Cách này được; một nước Mã thì còn đưa thêm một quân mới ra trận.',
+  },
+  'b09l3.l8.purpose': {
+    en: 'You met the threat to your central Soldier with a developing move, then brought out another piece without leaving anything loose.',
+    vi: 'Bạn đã hóa giải mối đe dọa với Tốt đầu bằng một nước ra quân, rồi đưa thêm một quân ra mà không để quân nào bị bỏ ngỏ.',
+  },
+  'b09l3.l8.key': {
+    en: 'Red keeps developing with a Horse. Note that Red’s other Cannon still stands on its home point and looks up your 8th file.',
+    vi: 'Đỏ tiếp tục ra Mã. Hãy để ý Pháo còn lại của Đỏ vẫn đứng ở chỗ cũ và nhìn thẳng lên cột 8 của bạn.',
+  },
+  'b09l3.l8.error': {
+    en: 'That move left a piece loose or did not bring out a new piece. Before each move, check what every enemy Cannon aims at.',
+    vi: 'Nước đó để một quân bị bỏ ngỏ hoặc không đưa thêm quân mới ra. Trước mỗi nước, hãy kiểm tra mỗi khẩu Pháo đối phương nhắm vào đâu.',
+  },
+  'b09l3.l8.tempt': {
+    en: 'R9+1 brings out a Chariot, but the Horse beside it loses its only guard: Red’s Cannon on its home point jumps over your Cannon and takes it (C2+7).',
+    vi: 'X9.1 ra Xe, nhưng con Mã bên cạnh mất quân bảo vệ duy nhất: Pháo của Đỏ ở chỗ cũ nhảy qua Pháo của bạn và ăn Mã (P2.7).',
+  },
+  'b09l3.r.g7': {
+    en: 'H8+7 develops a Horse toward the centre and guards the central Soldier.',
+    vi: 'M8.7 đưa Mã vào giữa và bảo vệ Tốt đầu.',
+  },
+  'b09l3.r.c7': {
+    en: 'H2+3 develops a Horse toward the centre and guards the central Soldier: just as good as H8+7.',
+    vi: 'M2.3 đưa Mã vào giữa và bảo vệ Tốt đầu: tốt ngang với M8.7.',
+  },
+  'b09l3.r.cannon6': {
+    en: 'This guards the central Soldier too: your Cannon would take back, with a Soldier on its rank as the screen. It works, but a Horse move would also develop a piece that has to come out anyway.',
+    vi: 'Nước này cũng bảo vệ được Tốt đầu: Pháo của bạn sẽ ăn lại, lấy một con Tốt cùng hàng làm ngòi. Cách này được, nhưng một nước Mã còn đưa ra một quân đằng nào cũng phải ra.',
+  },
+  'b09l3.r.general': {
+    en: 'The General steps out for no reason: it guards nothing and opens lines toward your palace.',
+    vi: 'Tướng bước ra mà không có lý do: nó không bảo vệ được gì và còn mở đường vào cung của bạn.',
+  },
+  'b09l3.r.advisor': {
+    en: 'An Advisor move develops nothing here and does not answer the threat.',
+    vi: 'Nước Sĩ ở đây không ra thêm quân nào và không hóa giải được mối đe dọa.',
+  },
+  'b09l3.r.run': {
+    en: 'The Soldier stays on the Cannon’s file, so it is still attacked.',
+    vi: 'Con Tốt vẫn nằm trên đường của Pháo, nên vẫn bị dọa.',
+  },
+  'b09l3.r.copy': {
+    en: 'A central Cannon of your own is a real opening (you will meet it later), but it does not guard the central Soldier.',
+    vi: 'Tự đặt Pháo đầu cũng là một khai cuộc thật (bạn sẽ gặp sau), nhưng nó không bảo vệ Tốt đầu.',
+  },
+  'b09l3.r.chariot': {
+    en: '“Chariots out early” is a good rule, but first answer the threat: the central Soldier is still loose.',
+    vi: '“Ra Xe sớm” là quy tắc tốt, nhưng trước hết hãy hóa giải mối đe dọa: Tốt đầu vẫn bị bỏ ngỏ.',
+  },
+  'b09l3.r.grab': {
+    en: 'Cannon takes Horse, Chariot takes Cannon: at best an even trade, and it helps the opponent’s Chariot into play.',
+    vi: 'Pháo ăn Mã, Xe ăn lại Pháo: cùng lắm là đổi ngang, mà còn giúp Xe đối phương ra trận.',
+  },
+  'b09l3.r.edge': {
+    en: 'A Horse on the edge reaches few points. Bring Horses toward the centre.',
+    vi: 'Mã ở biên đi được ít điểm. Hãy đưa Mã vào giữa.',
+  },
+  'b09-g1.p': {
+    en: 'Play the first moves as Red. Bring your pieces into play and keep every piece safe.',
+    vi: 'Cầm quân Đỏ đi những nước đầu tiên. Hãy đưa quân ra trận và giữ an toàn cho mọi quân.',
+  },
+  'b09-g1.r.horse': { en: 'Develops a Horse toward the centre.', vi: 'Đưa một con Mã vào giữa.' },
+  'b09-g1.r.chariot': { en: 'Brings a Chariot into play.', vi: 'Đưa một Xe ra trận.' },
+  'b09-g1.r.cannon': {
+    en: 'The central Cannon: a classic first move that aims at the opponent’s central Soldier.',
+    vi: 'Pháo đầu: một nước khai cuộc kinh điển nhắm vào Tốt đầu của đối phương.',
+  },
+  'b09-g1.r.elephant': {
+    en: 'An Elephant to the centre: solid, it strengthens your defence.',
+    vi: 'Lên Tượng giữa: vững chắc, củng cố phòng thủ.',
+  },
+  'b09-g1.r.soldier': {
+    en: 'One step with a Soldier opens a road for a Horse: a sound developing move.',
+    vi: 'Tiến một bước Tốt mở đường cho Mã: một nước ra quân tốt.',
+  },
+  'b09-g1.r.capture': {
+    en: 'This capture gives back more than it wins: count the recapture before you take.',
+    vi: 'Nước ăn quân này mất lại nhiều hơn được: hãy tính nước ăn lại trước khi ăn.',
+  },
+  'b09l3.d6.g7': {
+    en: 'The Horse’s leg toward the central Soldier is blocked by your Cannon right beside it, so this Horse does not guard the Soldier.',
+    vi: 'Chân Mã hướng về Tốt đầu bị Pháo của bạn đứng sát bên cản, nên con Mã này không bảo vệ được con Tốt.',
+  },
+  'b09l3.l8.h9': {
+    en: 'R9=8 is the usual developing move, but here Red’s other Cannon, still on its home point, jumps over your Cannon and takes the Chariot (C2+7).',
+    vi: 'X9-8 là nước ra quân thường gặp, nhưng ở đây Pháo còn lại của Đỏ, vẫn ở chỗ cũ, nhảy qua Pháo của bạn và ăn Xe (P2.7).',
+  },
+  'b09-g1.r.trade': {
+    en: 'An even trade: it does not help your development.',
+    vi: 'Đổi quân ngang nhau: không giúp bạn ra quân.',
+  },
+  'b09-g1.r.again': {
+    en: 'The same piece moves again while others are still at home. Bring out a new piece first.',
+    vi: 'Cùng một quân lại đi tiếp trong khi các quân khác vẫn chưa ra. Hãy đưa quân mới ra trước.',
+  },
 } satisfies Record<string, Entry>;
 
 export type MessageKey = keyof typeof messages;

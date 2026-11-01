@@ -214,7 +214,12 @@ export function validateContent(input: unknown, options: ValidateOptions = {}): 
         return err(lw, '"exercises" must be a non-empty array');
       }
       const itemId = new RegExp(`^${String(lesson.id)}-\\d\\d$`);
-      lesson.exercises.forEach((ex, ei) => checkItem(`${String(lesson.id)}/exercise[${ei}]`, ex, itemId, newCourse, false));
+      // A unit's practical tasks (`play` / `review`) keep their unit-level id `<unit>-g<k>` (03 §2, `unitTasks`).
+      const taskId = new RegExp(`^(${String(lesson.id)}-\\d\\d|${String(unit.id)}-g\\d+)$`);
+      lesson.exercises.forEach((ex, ei) => {
+        const practical = isObj(ex) && (ex.type === 'play' || ex.type === 'review');
+        checkItem(`${String(lesson.id)}/exercise[${ei}]`, ex, practical ? taskId : itemId, newCourse, false);
+      });
     });
 
     if (unit.pool !== undefined) {

@@ -147,3 +147,16 @@ Source: `docs/curriculum-upgrade/measurements.md` §3 (headless Chromium throttl
 - `xb` needs one game per colour under both regimes. The uniqueness corpus exempts `task: game` play items.
 - MU4 counts stored grants only; a placement-completed lesson replayed gets replay XP. Warm-up items are marked exposed.
 - Remediation practice runs without hearts (cost 0, available at 0 hearts).
+
+## D13 — 2026-11-01 — Pilot P1 rulings (S2.14, content-reviewer)
+
+- The pilot runs in **REL-P** from S2.14 on (06 §3 "Migration"); the deployed default path stays legacy-only.
+- **03 §5.7 item 3 for R6-gated tasks:** narrow positions are not required when the task scores line share, every
+  counted tree node is selective (0 < credited ≤ 1/3), N2 fails ≥ 80 %, the partner searches beyond h and the reference
+  run reaches L counted moves; `verify-practical` then reports item 3 "N/A (R6 gate)" (`src/assessment/narrow-ruling.ts`).
+  Reason: an opening from the start position has no narrow positions; 03 §5.2 remedy (2) says the gate guarantees the
+  N2 failure rate. Alternative (require narrow positions) would make every opening task practice-only.
+- **`b09-g1` is Red only** (deviation from 06 §3.1 seeded colour, for S2.20): the play format has a fixed `side`, and
+  remedy (2) makes the task tree-specific; "either colour" is b09l4's outcome.
+- **`b09-g1` remedy order** (03 §5.2): R2 + R1 and R2 + R0 + R1 failed §5.7 (see STATUS 2026-11-01); remedy (2) passes.
+- Lesson items may carry the unit task id `<unit>-g<k>` on `play` / `review` items only (02 §3.3).

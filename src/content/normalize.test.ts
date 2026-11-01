@@ -3,7 +3,7 @@ import { parseFen, positionFromPieces, toFen } from '../engine';
 import { positionOf } from '../lessons/answers';
 import { puzzles } from '../puzzles/catalog';
 import { startPosition } from '../puzzles/logic';
-import { units } from './index';
+import { allUnits, units } from './index';
 import { duplicateGroups, mirrorFiles, normalKey, swapColours, variants } from './normalize';
 
 // A lopsided position so every transformation gives a different placement.
@@ -62,5 +62,18 @@ describe('normalize', () => {
       ['u13l1#0', 'u13l1#1'],
       ['u15l3#0', 'u15l3#1'],
     ]);
+  });
+
+  // New-course items (REL-P pilot b09, S2.14) against every loaded lesson position and puzzle. The only duplicate is
+  // intended: the practical task b09-g1 starts from the initial position (02 b09: "play from the start position"),
+  // which the legacy learn cards u1l1#0/#1 also show. The lesson positions themselves are all distinct.
+  it('new-course positions duplicate nothing except b09-g1 = the initial position', () => {
+    const entries = [
+      ...allUnits.flatMap((u) => u.lessons.flatMap((l) => l.exercises.map((e, i) => ({ ref: e.id ?? `${l.id}#${i}`, position: positionOf(e) })))),
+      ...puzzles.map((p) => ({ ref: p.id, position: startPosition(p) })),
+    ];
+    expect(entries).toHaveLength(264);
+    const isNew = (ref: string) => /^[biaem]\d\d/.test(ref);
+    expect(duplicateGroups(entries).filter((g) => g.some(isNew))).toEqual([['u1l1#0', 'u1l1#1', 'b09-g1']]);
   });
 });

@@ -1,0 +1,1778 @@
+{
+  "id": "b09",
+  "track": "basics",
+  "title": "b09.title",
+  "description": "b09.desc",
+  "lessons": [
+    {
+      "id": "b09l3",
+      "title": "b09l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b09l3-01",
+          "version": 1,
+          "status": "reviewed",
+          "source": { "kind": "authored" },
+          "side": "black",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C4/9/RNBAKABNR b - - 1 1",
+          "text": "b09l3.e1",
+          "highlight": ["e2", "e3", "e6"]
+        },
+        {
+          "type": "learn",
+          "id": "b09l3-02",
+          "version": 1,
+          "status": "reviewed",
+          "source": { "kind": "authored" },
+          "side": "black",
+          "fen": "rnbakabn1/8r/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C4/9/RNBAKABNR w - - 2 2",
+          "text": "b09l3.e2",
+          "highlight": ["e2", "e6", "i8"]
+        },
+        {
+          "type": "choice",
+          "id": "b09l3-03",
+          "version": 1,
+          "status": "reviewed",
+          "source": { "kind": "authored" },
+          "side": "black",
+          "strand": "OD",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": ["b09.m1", "b09.m3"],
+          "assist": "G2",
+          "fen": "rnbakabnr/9/1c5c1/p3p1p1p/2p6/6P2/P1P1P3P/1C2C4/9/RNBAKABNR b - - 3 2",
+          "prompt": "b09l3.c3.p",
+          "multi": true,
+          "options": [
+            { "id": "a", "move": "h9-g7", "correct": true, "feedback": "b09l3.c3.a" },
+            { "id": "b", "move": "b9-c7", "correct": true, "feedback": "b09l3.c3.b" },
+            { "id": "c", "move": "e9-e8", "correct": false, "feedback": "b09l3.c3.c", "misconception": "b09.m3" },
+            { "id": "d", "move": "i9-i8", "correct": false, "feedback": "b09l3.c3.d", "misconception": "b09.m1" }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b09l3-04",
+          "version": 1,
+          "status": "reviewed",
+          "source": { "kind": "authored" },
+          "side": "black",
+          "strand": "OD",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": ["b09.m1", "b09.m3"],
+          "assist": "G2",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p2/8p/9/P1P1P1P1P/4C1NC1/9/RNBAKAB1R b - - 3 2",
+          "prompt": "b09l3.c4.p",
+          "multi": true,
+          "options": [
+            { "id": "a", "move": "b9-c7", "correct": true, "feedback": "b09l3.c4.a" },
+            { "id": "b", "move": "h9-g7", "correct": true, "feedback": "b09l3.c4.b" },
+            { "id": "c", "move": "d9-e8", "correct": false, "feedback": "b09l3.c4.c", "misconception": "b09.m3" },
+            { "id": "d", "move": "h7-e7", "correct": false, "feedback": "b09l3.c4.d", "misconception": "b09.m1" }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b09l3-05",
+          "version": 1,
+          "status": "reviewed",
+          "source": { "kind": "authored" },
+          "side": "black",
+          "strand": "OD",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": ["b09.m1", "b09.m3"],
+          "assist": "G1",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p3p/6p2/9/P1P1P1P1P/1CN1C4/9/R1BAKABNR b - - 3 2",
+          "prompt": "b09l3.d5.p",
+          "objective": {
+            "kind": "all",
+            "of": [
+              { "kind": "development", "increaseBy": 1 },
+              { "kind": "no-hanging" }
+            ]
+          },
+          "table": [
+            { "move": "g5-g4", "class": "dubious", "source": "computed" },
+            { "move": "a6-a5", "class": "dubious", "source": "computed" },
+            { "move": "c6-c5", "class": "dubious", "source": "computed" },
+            { "move": "e6-e5", "class": "dubious", "source": "authored", "reason": "b09l3.r.run" },
+            { "move": "i6-i5", "class": "dubious", "source": "computed" },
+            { "move": "b7-c7", "class": "dubious", "source": "computed" },
+            { "move": "b7-d7", "class": "dubious", "source": "computed" },
+            { "move": "b7-e7", "class": "dubious", "source": "authored", "reason": "b09l3.r.copy" },
+            { "move": "b7-f7", "class": "dubious", "source": "computed" },
+            { "move": "b7-g7", "class": "dubious", "source": "computed" },
+            { "move": "b7-a7", "class": "dubious", "source": "computed" },
+            { "move": "b7-b8", "class": "dubious", "source": "computed" },
+            { "move": "b7-b6", "class": "sound", "source": "authored", "reason": "b09l3.r.cannon6" },
+            { "move": "b7-b5", "class": "dubious", "source": "computed" },
+            { "move": "b7-b4", "class": "dubious", "source": "computed" },
+            { "move": "b7-b3", "class": "dubious", "source": "computed" },
+            { "move": "h7-i7", "class": "dubious", "source": "computed" },
+            { "move": "h7-g7", "class": "dubious", "source": "computed" },
+            { "move": "h7-f7", "class": "dubious", "source": "computed" },
+            { "move": "h7-e7", "class": "dubious", "source": "authored", "reason": "b09l3.r.copy" },
+            { "move": "h7-d7", "class": "dubious", "source": "computed" },
+            { "move": "h7-c7", "class": "dubious", "source": "computed" },
+            { "move": "h7-h8", "class": "dubious", "source": "computed" },
+            { "move": "h7-h6", "class": "dubious", "source": "computed" },
+            { "move": "h7-h5", "class": "dubious", "source": "computed" },
+            { "move": "h7-h4", "class": "dubious", "source": "computed" },
+            { "move": "h7-h3", "class": "dubious", "source": "computed" },
+            { "move": "h7-h2", "class": "dubious", "source": "computed" },
+            { "move": "h7-h1", "class": "dubious", "source": "computed" },
+            { "move": "a9-a8", "class": "error", "source": "computed" },
+            { "move": "a9-a7", "class": "error", "source": "computed" },
+            { "move": "b9-c7", "class": "target", "source": "authored", "reason": "b09l3.r.c7" },
+            { "move": "b9-a7", "class": "dubious", "source": "computed" },
+            { "move": "c9-e7", "class": "dubious", "source": "computed" },
+            { "move": "c9-a7", "class": "dubious", "source": "computed" },
+            { "move": "d9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+            { "move": "e9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+            { "move": "f9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+            { "move": "g9-i7", "class": "dubious", "source": "computed" },
+            { "move": "g9-e7", "class": "dubious", "source": "computed" },
+            { "move": "h9-i7", "class": "dubious", "source": "computed" },
+            { "move": "h9-g7", "class": "target", "source": "authored", "reason": "b09l3.r.g7" },
+            { "move": "i9-i8", "class": "dubious", "source": "authored", "reason": "b09l3.r.chariot", "misconception": "b09.m1" },
+            { "move": "i9-i7", "class": "dubious", "source": "authored", "reason": "b09l3.r.chariot", "misconception": "b09.m1" }
+          ],
+          "hints": { "idea": "b09l3.d5.hint", "move": "h9-g7" },
+          "feedback": {
+            "purpose": "b09l3.d5.purpose",
+            "keyReply": "b09l3.d5.key",
+            "commonError": "b09l3.d5.error",
+            "temptingAlternative": { "move": "e6-e5", "text": "b09l3.d5.tempt" }
+          }
+        },
+        {
+          "type": "decision",
+          "id": "b09l3-06",
+          "version": 1,
+          "status": "reviewed",
+          "source": { "kind": "authored" },
+          "side": "black",
+          "strand": "OD",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": ["b09.m1", "b09.m3"],
+          "assist": "G1",
+          "fen": "rnbakabnr/9/1c3c3/p1p1p1p1p/9/9/P1P1P1P1P/4C1NC1/9/RNBAKAB1R b - - 3 2",
+          "prompt": "b09l3.d6.p",
+          "objective": {
+            "kind": "all",
+            "of": [
+              { "kind": "development", "increaseBy": 1 },
+              { "kind": "no-hanging" }
+            ]
+          },
+          "table": [
+            { "move": "a6-a5", "class": "dubious", "source": "computed" },
+            { "move": "c6-c5", "class": "dubious", "source": "computed" },
+            { "move": "e6-e5", "class": "dubious", "source": "authored", "reason": "b09l3.r.run" },
+            { "move": "g6-g5", "class": "dubious", "source": "computed" },
+            { "move": "i6-i5", "class": "dubious", "source": "computed" },
+            { "move": "b7-c7", "class": "dubious", "source": "computed" },
+            { "move": "b7-d7", "class": "dubious", "source": "computed" },
+            { "move": "b7-e7", "class": "dubious", "source": "authored", "reason": "b09l3.r.copy" },
+            { "move": "b7-a7", "class": "dubious", "source": "computed" },
+            { "move": "b7-b8", "class": "dubious", "source": "computed" },
+            { "move": "b7-b6", "class": "sound", "source": "authored", "reason": "b09l3.r.cannon6" },
+            { "move": "b7-b5", "class": "dubious", "source": "computed" },
+            { "move": "b7-b4", "class": "dubious", "source": "computed" },
+            { "move": "b7-b3", "class": "dubious", "source": "computed" },
+            { "move": "b7-b2", "class": "dubious", "source": "computed" },
+            { "move": "b7-b1", "class": "dubious", "source": "computed" },
+            { "move": "f7-g7", "class": "dubious", "source": "computed" },
+            { "move": "f7-h7", "class": "dubious", "source": "computed" },
+            { "move": "f7-i7", "class": "dubious", "source": "computed" },
+            { "move": "f7-e7", "class": "dubious", "source": "computed" },
+            { "move": "f7-d7", "class": "dubious", "source": "computed" },
+            { "move": "f7-c7", "class": "dubious", "source": "computed" },
+            { "move": "f7-f8", "class": "dubious", "source": "computed" },
+            { "move": "f7-f6", "class": "dubious", "source": "computed" },
+            { "move": "f7-f5", "class": "dubious", "source": "computed" },
+            { "move": "f7-f4", "class": "dubious", "source": "computed" },
+            { "move": "f7-f3", "class": "dubious", "source": "computed" },
+            { "move": "f7-f2", "class": "error", "source": "computed" },
+            { "move": "f7-f1", "class": "dubious", "source": "computed" },
+            { "move": "a9-a8", "class": "dubious", "source": "computed" },
+            { "move": "a9-a7", "class": "dubious", "source": "computed" },
+            { "move": "b9-c7", "class": "target", "source": "authored", "reason": "b09l3.r.c7" },
+            { "move": "b9-a7", "class": "dubious", "source": "computed" },
+            { "move": "c9-e7", "class": "dubious", "source": "computed" },
+            { "move": "c9-a7", "class": "dubious", "source": "computed" },
+            { "move": "d9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+            { "move": "e9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+            { "move": "f9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+            { "move": "g9-i7", "class": "dubious", "source": "computed" },
+            { "move": "g9-e7", "class": "dubious", "source": "computed" },
+            { "move": "h9-i7", "class": "dubious", "source": "computed" },
+            { "move": "h9-g7", "class": "dubious", "source": "authored", "reason": "b09l3.d6.g7" },
+            { "move": "i9-i8", "class": "dubious", "source": "authored", "reason": "b09l3.r.chariot", "misconception": "b09.m1" },
+            { "move": "i9-i7", "class": "dubious", "source": "authored", "reason": "b09l3.r.chariot", "misconception": "b09.m1" }
+          ],
+          "hints": { "idea": "b09l3.d6.hint", "move": "b9-c7" },
+          "feedback": {
+            "purpose": "b09l3.d6.purpose",
+            "keyReply": "b09l3.d6.key",
+            "commonError": "b09l3.d6.error",
+            "temptingAlternative": { "move": "h9-g7", "text": "b09l3.d6.tempt" }
+          }
+        },
+        {
+          "type": "decision",
+          "id": "b09l3-07",
+          "version": 1,
+          "status": "reviewed",
+          "source": { "kind": "authored" },
+          "side": "black",
+          "strand": "OD",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": ["b09.m1", "b09.m3"],
+          "assist": "G0",
+          "fen": "1nbakabnr/r8/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/4C1NC1/9/RNBAKAB1R b - - 3 2",
+          "prompt": "b09l3.d7.p",
+          "objective": {
+            "kind": "all",
+            "of": [
+              { "kind": "development", "increaseBy": 1 },
+              { "kind": "no-hanging" }
+            ]
+          },
+          "table": [
+            { "move": "a6-a5", "class": "dubious", "source": "computed" },
+            { "move": "c6-c5", "class": "dubious", "source": "computed" },
+            { "move": "e6-e5", "class": "dubious", "source": "authored", "reason": "b09l3.r.run" },
+            { "move": "g6-g5", "class": "dubious", "source": "computed" },
+            { "move": "i6-i5", "class": "dubious", "source": "computed" },
+            { "move": "b7-c7", "class": "dubious", "source": "computed" },
+            { "move": "b7-d7", "class": "dubious", "source": "computed" },
+            { "move": "b7-e7", "class": "dubious", "source": "authored", "reason": "b09l3.r.copy" },
+            { "move": "b7-f7", "class": "dubious", "source": "computed" },
+            { "move": "b7-g7", "class": "dubious", "source": "computed" },
+            { "move": "b7-a7", "class": "dubious", "source": "computed" },
+            { "move": "b7-b8", "class": "dubious", "source": "computed" },
+            { "move": "b7-b6", "class": "sound", "source": "authored", "reason": "b09l3.r.cannon6" },
+            { "move": "b7-b5", "class": "dubious", "source": "computed" },
+            { "move": "b7-b4", "class": "dubious", "source": "computed" },
+            { "move": "b7-b3", "class": "dubious", "source": "computed" },
+            { "move": "b7-b2", "class": "dubious", "source": "computed" },
+            { "move": "b7-b1", "class": "dubious", "source": "computed" },
+            { "move": "h7-i7", "class": "dubious", "source": "computed" },
+            { "move": "h7-g7", "class": "dubious", "source": "computed" },
+            { "move": "h7-f7", "class": "dubious", "source": "computed" },
+            { "move": "h7-e7", "class": "dubious", "source": "authored", "reason": "b09l3.r.copy" },
+            { "move": "h7-d7", "class": "dubious", "source": "computed" },
+            { "move": "h7-c7", "class": "dubious", "source": "computed" },
+            { "move": "h7-h8", "class": "dubious", "source": "computed" },
+            { "move": "h7-h6", "class": "sound", "source": "authored", "reason": "b09l3.r.cannon6" },
+            { "move": "h7-h5", "class": "dubious", "source": "computed" },
+            { "move": "h7-h4", "class": "dubious", "source": "computed" },
+            { "move": "h7-h3", "class": "dubious", "source": "computed" },
+            { "move": "a8-b8", "class": "dubious", "source": "computed" },
+            { "move": "a8-c8", "class": "dubious", "source": "computed" },
+            { "move": "a8-d8", "class": "dubious", "source": "computed" },
+            { "move": "a8-e8", "class": "sound", "source": "authored", "reason": "b09l3.d7.e8" },
+            { "move": "a8-f8", "class": "dubious", "source": "computed" },
+            { "move": "a8-g8", "class": "dubious", "source": "computed" },
+            { "move": "a8-h8", "class": "error", "source": "computed" },
+            { "move": "a8-i8", "class": "dubious", "source": "computed" },
+            { "move": "a8-a9", "class": "dubious", "source": "computed" },
+            { "move": "a8-a7", "class": "dubious", "source": "computed" },
+            { "move": "b9-c7", "class": "target", "source": "authored", "reason": "b09l3.r.c7" },
+            { "move": "b9-a7", "class": "dubious", "source": "computed" },
+            { "move": "c9-e7", "class": "dubious", "source": "computed" },
+            { "move": "c9-a7", "class": "dubious", "source": "computed" },
+            { "move": "d9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+            { "move": "e9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+            { "move": "f9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+            { "move": "g9-i7", "class": "dubious", "source": "computed" },
+            { "move": "g9-e7", "class": "dubious", "source": "computed" },
+            { "move": "h9-i7", "class": "dubious", "source": "computed" },
+            { "move": "h9-g7", "class": "target", "source": "authored", "reason": "b09l3.r.g7" },
+            { "move": "i9-i8", "class": "error", "source": "authored", "reason": "b09l3.d7.i8", "misconception": "b09.m1" },
+            { "move": "i9-i7", "class": "error", "source": "authored", "reason": "b09l3.d7.i8", "misconception": "b09.m1" }
+          ],
+          "feedback": {
+            "purpose": "b09l3.d7.purpose",
+            "keyReply": "b09l3.d7.key",
+            "commonError": "b09l3.d7.error",
+            "temptingAlternative": { "move": "i9-i8", "text": "b09l3.d7.tempt" }
+          }
+        },
+        {
+          "type": "line",
+          "id": "b09l3-08",
+          "version": 1,
+          "status": "reviewed",
+          "source": { "kind": "authored" },
+          "side": "black",
+          "strand": "OD",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": ["b09.m1", "b09.m3"],
+          "assist": "G0",
+          "fen": "rnbakabnr/9/1c5c1/2p1p1p1p/p8/2P6/P3P1P1P/4C2C1/9/RNBAKABNR b - - 3 2",
+          "prompt": "b09l3.l8.p",
+          "objective": {
+            "kind": "all",
+            "of": [
+              { "kind": "development", "increaseBy": 1 },
+              { "kind": "no-hanging" }
+            ]
+          },
+          "root": {
+            "kind": "learner",
+            "table": [
+              { "move": "a5-a4", "class": "dubious", "source": "computed" },
+              { "move": "c6-c5", "class": "dubious", "source": "computed" },
+              { "move": "e6-e5", "class": "dubious", "source": "authored", "reason": "b09l3.r.run" },
+              { "move": "g6-g5", "class": "dubious", "source": "computed" },
+              { "move": "i6-i5", "class": "dubious", "source": "computed" },
+              { "move": "b7-c7", "class": "dubious", "source": "computed" },
+              { "move": "b7-d7", "class": "dubious", "source": "computed" },
+              { "move": "b7-e7", "class": "dubious", "source": "authored", "reason": "b09l3.r.copy" },
+              { "move": "b7-f7", "class": "dubious", "source": "computed" },
+              { "move": "b7-g7", "class": "dubious", "source": "computed" },
+              { "move": "b7-a7", "class": "dubious", "source": "computed" },
+              { "move": "b7-b8", "class": "dubious", "source": "computed" },
+              { "move": "b7-b6", "class": "sound", "source": "authored", "reason": "b09l3.r.cannon6" },
+              { "move": "b7-b5", "class": "dubious", "source": "computed" },
+              { "move": "b7-b4", "class": "dubious", "source": "computed" },
+              { "move": "b7-b3", "class": "dubious", "source": "computed" },
+              { "move": "b7-b2", "class": "error", "source": "computed" },
+              { "move": "b7-b1", "class": "dubious", "source": "computed" },
+              { "move": "h7-i7", "class": "dubious", "source": "computed" },
+              { "move": "h7-g7", "class": "dubious", "source": "computed" },
+              { "move": "h7-f7", "class": "dubious", "source": "computed" },
+              { "move": "h7-e7", "class": "dubious", "source": "authored", "reason": "b09l3.r.copy" },
+              { "move": "h7-d7", "class": "dubious", "source": "computed" },
+              { "move": "h7-c7", "class": "dubious", "source": "computed" },
+              { "move": "h7-h8", "class": "dubious", "source": "computed" },
+              { "move": "h7-h6", "class": "sound", "source": "authored", "reason": "b09l3.r.cannon6" },
+              { "move": "h7-h5", "class": "dubious", "source": "computed" },
+              { "move": "h7-h4", "class": "dubious", "source": "computed" },
+              { "move": "h7-h3", "class": "dubious", "source": "computed" },
+              { "move": "h7-h0", "class": "dubious", "source": "authored", "reason": "b09l3.r.grab" },
+              { "move": "a9-a8", "class": "dubious", "source": "computed" },
+              { "move": "a9-a7", "class": "dubious", "source": "computed" },
+              { "move": "a9-a6", "class": "dubious", "source": "computed" },
+              { "move": "b9-c7", "class": "target", "source": "authored", "reason": "b09l3.r.c7" },
+              { "move": "b9-a7", "class": "dubious", "source": "computed" },
+              { "move": "c9-e7", "class": "dubious", "source": "computed" },
+              { "move": "c9-a7", "class": "dubious", "source": "computed" },
+              { "move": "d9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+              { "move": "e9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+              { "move": "f9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+              { "move": "g9-i7", "class": "dubious", "source": "computed" },
+              { "move": "g9-e7", "class": "dubious", "source": "computed" },
+              { "move": "h9-i7", "class": "dubious", "source": "computed" },
+              { "move": "h9-g7", "class": "target", "source": "authored", "reason": "b09l3.r.g7" },
+              { "move": "i9-i8", "class": "error", "source": "authored", "reason": "b09l3.r.chariot", "misconception": "b09.m1" },
+              { "move": "i9-i7", "class": "error", "source": "authored", "reason": "b09l3.r.chariot", "misconception": "b09.m1" }
+            ],
+            "hints": { "idea": "b09l3.l8.hint", "move": "h9-g7" },
+            "next": {
+              "h9-g7": {
+                "kind": "opponent",
+                "replies": [
+                  {
+                    "move": "h0-g2",
+                    "next": {
+                      "kind": "learner",
+                      "table": [
+                        { "move": "a5-a4", "class": "dubious", "source": "computed" },
+                        { "move": "c6-c5", "class": "dubious", "source": "computed" },
+                        { "move": "e6-e5", "class": "dubious", "source": "computed" },
+                        { "move": "g6-g5", "class": "dubious", "source": "computed" },
+                        { "move": "i6-i5", "class": "dubious", "source": "computed" },
+                        { "move": "b7-c7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-d7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-e7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-f7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-a7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b8", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b6", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b5", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b4", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b3", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b2", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b1", "class": "dubious", "source": "computed" },
+                        { "move": "g7-h9", "class": "dubious", "source": "computed" },
+                        { "move": "g7-e8", "class": "dubious", "source": "computed" },
+                        { "move": "h7-i7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h8", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h9", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h6", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h5", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h4", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h3", "class": "dubious", "source": "computed" },
+                        { "move": "a9-a8", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a6", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "b9-c7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "b9-a7", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                        { "move": "c9-e7", "class": "dubious", "source": "computed" },
+                        { "move": "c9-a7", "class": "dubious", "source": "computed" },
+                        { "move": "d9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "e9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                        { "move": "f9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "g9-i7", "class": "dubious", "source": "computed" },
+                        { "move": "g9-e7", "class": "dubious", "source": "computed" },
+                        { "move": "i9-h9", "class": "error", "source": "authored", "reason": "b09l3.l8.h9" },
+                        { "move": "i9-i8", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "i9-i7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" }
+                      ],
+                      "objective": {
+                        "kind": "all",
+                        "of": [
+                          {
+                            "kind": "any",
+                            "of": [
+                              { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                              { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                            ]
+                          },
+                          { "kind": "no-hanging" }
+                        ]
+                      },
+                      "next": {
+                        "a9-a8": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a6": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "b9-c7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "i9-i8": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "i9-i7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "move": "b0-c2",
+                    "next": {
+                      "kind": "learner",
+                      "table": [
+                        { "move": "a5-a4", "class": "dubious", "source": "computed" },
+                        { "move": "c6-c5", "class": "dubious", "source": "computed" },
+                        { "move": "e6-e5", "class": "dubious", "source": "computed" },
+                        { "move": "g6-g5", "class": "dubious", "source": "computed" },
+                        { "move": "i6-i5", "class": "dubious", "source": "computed" },
+                        { "move": "b7-c7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-d7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-e7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-f7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-a7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b8", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b6", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b5", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b4", "class": "error", "source": "computed" },
+                        { "move": "b7-b3", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b2", "class": "error", "source": "computed" },
+                        { "move": "b7-b1", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b0", "class": "error", "source": "computed" },
+                        { "move": "g7-h9", "class": "dubious", "source": "computed" },
+                        { "move": "g7-e8", "class": "dubious", "source": "computed" },
+                        { "move": "h7-i7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h8", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h9", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h6", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h5", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h4", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h3", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h0", "class": "dubious", "source": "authored", "reason": "b09l3.r.grab" },
+                        { "move": "a9-a8", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a6", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "b9-c7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "b9-a7", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                        { "move": "c9-e7", "class": "dubious", "source": "computed" },
+                        { "move": "c9-a7", "class": "dubious", "source": "computed" },
+                        { "move": "d9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "e9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                        { "move": "f9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "g9-i7", "class": "dubious", "source": "computed" },
+                        { "move": "g9-e7", "class": "dubious", "source": "computed" },
+                        { "move": "i9-h9", "class": "error", "source": "authored", "reason": "b09l3.l8.h9" },
+                        { "move": "i9-i8", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "i9-i7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" }
+                      ],
+                      "objective": {
+                        "kind": "all",
+                        "of": [
+                          {
+                            "kind": "any",
+                            "of": [
+                              { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                              { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                            ]
+                          },
+                          { "kind": "no-hanging" }
+                        ]
+                      },
+                      "next": {
+                        "a9-a8": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a6": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "b9-c7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "i9-i8": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "i9-i7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "b9-c7": {
+                "kind": "opponent",
+                "replies": [
+                  {
+                    "move": "b0-c2",
+                    "next": {
+                      "kind": "learner",
+                      "table": [
+                        { "move": "a5-a4", "class": "dubious", "source": "computed" },
+                        { "move": "c6-c5", "class": "dubious", "source": "computed" },
+                        { "move": "e6-e5", "class": "dubious", "source": "computed" },
+                        { "move": "g6-g5", "class": "dubious", "source": "computed" },
+                        { "move": "i6-i5", "class": "dubious", "source": "computed" },
+                        { "move": "b7-a7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b8", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b9", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b6", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b5", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b4", "class": "error", "source": "computed" },
+                        { "move": "b7-b3", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b2", "class": "error", "source": "computed" },
+                        { "move": "b7-b1", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b0", "class": "error", "source": "computed" },
+                        { "move": "c7-b9", "class": "dubious", "source": "computed" },
+                        { "move": "c7-e8", "class": "dubious", "source": "computed" },
+                        { "move": "h7-i7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-g7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-f7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-e7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-d7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h8", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h6", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h5", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h4", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h3", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h0", "class": "dubious", "source": "authored", "reason": "b09l3.r.grab" },
+                        { "move": "a9-b9", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a8", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a6", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "c9-e7", "class": "dubious", "source": "computed" },
+                        { "move": "c9-a7", "class": "dubious", "source": "computed" },
+                        { "move": "d9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "e9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                        { "move": "f9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "g9-i7", "class": "dubious", "source": "computed" },
+                        { "move": "g9-e7", "class": "dubious", "source": "computed" },
+                        { "move": "h9-i7", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                        { "move": "h9-g7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "i9-i8", "class": "error", "source": "computed" },
+                        { "move": "i9-i7", "class": "error", "source": "computed" }
+                      ],
+                      "objective": {
+                        "kind": "all",
+                        "of": [
+                          {
+                            "kind": "any",
+                            "of": [
+                              { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                              { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                            ]
+                          },
+                          { "kind": "no-hanging" }
+                        ]
+                      },
+                      "next": {
+                        "a9-b9": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a8": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a6": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "h9-g7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "move": "h0-g2",
+                    "next": {
+                      "kind": "learner",
+                      "table": [
+                        { "move": "a5-a4", "class": "dubious", "source": "computed" },
+                        { "move": "c6-c5", "class": "dubious", "source": "computed" },
+                        { "move": "e6-e5", "class": "dubious", "source": "computed" },
+                        { "move": "g6-g5", "class": "dubious", "source": "computed" },
+                        { "move": "i6-i5", "class": "dubious", "source": "computed" },
+                        { "move": "b7-a7", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b8", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b9", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b6", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b5", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b4", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b3", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b2", "class": "dubious", "source": "computed" },
+                        { "move": "b7-b1", "class": "dubious", "source": "computed" },
+                        { "move": "c7-b9", "class": "dubious", "source": "computed" },
+                        { "move": "c7-e8", "class": "dubious", "source": "computed" },
+                        { "move": "h7-i7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-g7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-f7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-e7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-d7", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h8", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h6", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h5", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h4", "class": "dubious", "source": "computed" },
+                        { "move": "h7-h3", "class": "dubious", "source": "computed" },
+                        { "move": "a9-b9", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a8", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "a9-a6", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "c9-e7", "class": "dubious", "source": "computed" },
+                        { "move": "c9-a7", "class": "dubious", "source": "computed" },
+                        { "move": "d9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "e9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                        { "move": "f9-e8", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "g9-i7", "class": "dubious", "source": "computed" },
+                        { "move": "g9-e7", "class": "dubious", "source": "computed" },
+                        { "move": "h9-i7", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                        { "move": "h9-g7", "class": "target", "source": "authored", "reason": "b09l3.l8.develop" },
+                        { "move": "i9-i8", "class": "error", "source": "computed" },
+                        { "move": "i9-i7", "class": "error", "source": "computed" }
+                      ],
+                      "objective": {
+                        "kind": "all",
+                        "of": [
+                          {
+                            "kind": "any",
+                            "of": [
+                              { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                              { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                            ]
+                          },
+                          { "kind": "no-hanging" }
+                        ]
+                      },
+                      "next": {
+                        "a9-b9": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a8": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "a9-a6": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        },
+                        "h9-g7": {
+                          "kind": "leaf",
+                          "goal": { "kind": "end" },
+                          "text": "b09l3.l8.done"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "h7-h6": {
+                "kind": "leaf",
+                "goal": { "kind": "end" },
+                "text": "b09l3.l8.h6done"
+              },
+              "b7-b6": {
+                "kind": "leaf",
+                "goal": { "kind": "end" },
+                "text": "b09l3.l8.h6done"
+              }
+            }
+          },
+          "feedback": {
+            "purpose": "b09l3.l8.purpose",
+            "keyReply": "b09l3.l8.key",
+            "commonError": "b09l3.l8.error",
+            "temptingAlternative": { "move": "i9-i8", "text": "b09l3.l8.tempt" }
+          }
+        },
+        {
+          "type": "play",
+          "id": "b09-g1",
+          "version": 1,
+          "status": "reviewed",
+          "source": { "kind": "authored" },
+          "side": "red",
+          "strand": "OD",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": ["b09.m2", "b09.m3", "b09.m4"],
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w - - 0 1",
+          "prompt": "b09-g1.p",
+          "task": "opening",
+          "cap": 8,
+          "tree": {
+            "kind": "learner",
+            "table": [
+              { "move": "a0-a1", "class": "error", "source": "computed" },
+              { "move": "a0-a2", "class": "error", "source": "computed" },
+              { "move": "b0-c2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+              { "move": "b0-a2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+              { "move": "c0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+              { "move": "c0-a2", "class": "dubious", "source": "computed" },
+              { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+              { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+              { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+              { "move": "g0-i2", "class": "dubious", "source": "computed" },
+              { "move": "g0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+              { "move": "h0-i2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+              { "move": "h0-g2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+              { "move": "i0-i1", "class": "error", "source": "computed" },
+              { "move": "i0-i2", "class": "error", "source": "computed" },
+              { "move": "b2-c2", "class": "dubious", "source": "computed" },
+              { "move": "b2-d2", "class": "dubious", "source": "computed" },
+              { "move": "b2-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.cannon" },
+              { "move": "b2-f2", "class": "dubious", "source": "computed" },
+              { "move": "b2-g2", "class": "dubious", "source": "computed" },
+              { "move": "b2-a2", "class": "dubious", "source": "computed" },
+              { "move": "b2-b3", "class": "dubious", "source": "computed" },
+              { "move": "b2-b4", "class": "dubious", "source": "computed" },
+              { "move": "b2-b5", "class": "dubious", "source": "computed" },
+              { "move": "b2-b6", "class": "dubious", "source": "computed" },
+              { "move": "b2-b9", "class": "dubious", "source": "authored", "reason": "b09-g1.r.trade" },
+              { "move": "b2-b1", "class": "dubious", "source": "computed" },
+              { "move": "h2-i2", "class": "dubious", "source": "computed" },
+              { "move": "h2-g2", "class": "dubious", "source": "computed" },
+              { "move": "h2-f2", "class": "dubious", "source": "computed" },
+              { "move": "h2-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.cannon" },
+              { "move": "h2-d2", "class": "dubious", "source": "computed" },
+              { "move": "h2-c2", "class": "dubious", "source": "computed" },
+              { "move": "h2-h3", "class": "dubious", "source": "computed" },
+              { "move": "h2-h4", "class": "dubious", "source": "computed" },
+              { "move": "h2-h5", "class": "dubious", "source": "computed" },
+              { "move": "h2-h6", "class": "dubious", "source": "computed" },
+              { "move": "h2-h9", "class": "dubious", "source": "authored", "reason": "b09-g1.r.trade" },
+              { "move": "h2-h1", "class": "dubious", "source": "computed" },
+              { "move": "a3-a4", "class": "dubious", "source": "computed" },
+              { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+              { "move": "e3-e4", "class": "dubious", "source": "computed" },
+              { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+              { "move": "i3-i4", "class": "dubious", "source": "computed" }
+            ],
+            "objective": {
+              "kind": "any",
+              "of": [
+                { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+              ]
+            },
+            "next": {
+              "h2-e2": {
+                "kind": "opponent",
+                "replies": [
+                  {
+                    "move": "h9-g7",
+                    "next": {
+                      "kind": "learner",
+                      "table": [
+                        { "move": "a0-a1", "class": "error", "source": "computed" },
+                        { "move": "a0-a2", "class": "error", "source": "computed" },
+                        { "move": "b0-c2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                        { "move": "b0-a2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                        { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                        { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                        { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                        { "move": "h0-i2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                        { "move": "h0-g2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                        { "move": "i0-i1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                        { "move": "i0-i2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                        { "move": "b2-c2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-d2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b9", "class": "dubious", "source": "authored", "reason": "b09-g1.r.trade" },
+                        { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                        { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-g2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-h2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-i2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-c2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                        { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                        { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                        { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                        { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                        { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                        { "move": "i3-i4", "class": "dubious", "source": "computed" }
+                      ],
+                      "objective": {
+                        "kind": "any",
+                        "of": [
+                          { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                          { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                        ]
+                      },
+                      "next": {
+                        "h0-g2": {
+                          "kind": "opponent",
+                          "replies": [
+                            {
+                              "move": "i9-h9",
+                              "next": {
+                                "kind": "learner",
+                                "table": [
+                                  { "move": "a0-a1", "class": "error", "source": "computed" },
+                                  { "move": "a0-a2", "class": "error", "source": "computed" },
+                                  { "move": "b0-c2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                                  { "move": "b0-a2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                                  { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                  { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                  { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                  { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                  { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                  { "move": "i0-h0", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                  { "move": "i0-i1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                  { "move": "i0-i2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                  { "move": "b2-c2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-d2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b9", "class": "dubious", "source": "authored", "reason": "b09-g1.r.trade" },
+                                  { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                  { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                                  { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                                  { "move": "e2-c2", "class": "dubious", "source": "computed" },
+                                  { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                                  { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                                  { "move": "g2-h0", "class": "dubious", "source": "computed" },
+                                  { "move": "g2-i1", "class": "dubious", "source": "computed" },
+                                  { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                  { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                  { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                  { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                  { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                  { "move": "i3-i4", "class": "dubious", "source": "computed" }
+                                ],
+                                "objective": {
+                                  "kind": "any",
+                                  "of": [
+                                    { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                    { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                  ]
+                                },
+                                "next": {
+                                  "i0-h0": {
+                                    "kind": "opponent",
+                                    "replies": [
+                                      {
+                                        "move": "b9-c7",
+                                        "next": {
+                                          "kind": "learner",
+                                          "table": [
+                                            { "move": "a0-a1", "class": "error", "source": "computed" },
+                                            { "move": "a0-a2", "class": "error", "source": "computed" },
+                                            { "move": "b0-c2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                                            { "move": "b0-a2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                                            { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                            { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                            { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                            { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                            { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-i0", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h1", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h2", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h3", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h4", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h5", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h6", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h7", "class": "error", "source": "authored", "reason": "b09-g1.r.capture" },
+                                            { "move": "b2-c2", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-d2", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                            { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                                            { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                                            { "move": "e2-c2", "class": "dubious", "source": "computed" },
+                                            { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                                            { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                                            { "move": "g2-i1", "class": "dubious", "source": "computed" },
+                                            { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                            { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                            { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                            { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                            { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                            { "move": "i3-i4", "class": "dubious", "source": "computed" }
+                                          ],
+                                          "objective": {
+                                            "kind": "any",
+                                            "of": [
+                                              { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                              { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                            ]
+                                          },
+                                          "next": {
+                                            "b0-c2": {
+                                              "kind": "opponent",
+                                              "replies": [
+                                                {
+                                                  "move": "h7-h6",
+                                                  "next": {
+                                                    "kind": "learner",
+                                                    "table": [
+                                                      { "move": "a0-b0", "class": "error", "source": "computed" },
+                                                      { "move": "a0-a1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                      { "move": "a0-a2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                      { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                                      { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                      { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                                      { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                      { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-i0", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h1", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h2", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h3", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h4", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h5", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture" },
+                                                      { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b0", "class": "dubious", "source": "computed" },
+                                                      { "move": "c2-b0", "class": "dubious", "source": "computed" },
+                                                      { "move": "c2-e1", "class": "dubious", "source": "computed" },
+                                                      { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                                                      { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                                                      { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                                                      { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                                                      { "move": "g2-i1", "class": "dubious", "source": "computed" },
+                                                      { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                                      { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                                      { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                                      { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                                      { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                                      { "move": "i3-i4", "class": "dubious", "source": "computed" }
+                                                    ],
+                                                    "objective": {
+                                                      "kind": "any",
+                                                      "of": [
+                                                        { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                                        { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                                      ]
+                                                    },
+                                                    "next": {
+                                                      "g3-g4": {
+                                                        "kind": "opponent",
+                                                        "replies": [
+                                                          {
+                                                            "move": "a9-a8",
+                                                            "next": {
+                                                              "kind": "learner",
+                                                              "table": [
+                                                                { "move": "a0-b0", "class": "error", "source": "computed" },
+                                                                { "move": "a0-a1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                                { "move": "a0-a2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                                { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                                                { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                                { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                                                { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                                { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-i0", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h1", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h2", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h3", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h4", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h5", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture" },
+                                                                { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b0", "class": "dubious", "source": "computed" },
+                                                                { "move": "c2-b0", "class": "dubious", "source": "computed" },
+                                                                { "move": "c2-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                                                                { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                                                                { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                                                                { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "g2-h4", "class": "error", "source": "computed" },
+                                                                { "move": "g2-f4", "class": "dubious", "source": "authored", "reason": "b09-g1.r.again", "misconception": "b09.m2" },
+                                                                { "move": "g2-i1", "class": "dubious", "source": "computed" },
+                                                                { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                                                { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                                                { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                                                { "move": "i3-i4", "class": "dubious", "source": "computed" },
+                                                                { "move": "g4-g5", "class": "dubious", "source": "computed" }
+                                                              ],
+                                                              "objective": {
+                                                                "kind": "any",
+                                                                "of": [
+                                                                  { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                                                  { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                                                ]
+                                                              },
+                                                              "next": {
+                                                                "a0-a1": {
+                                                                  "kind": "leaf",
+                                                                  "goal": { "kind": "end" }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "move": "b9-c7",
+                    "next": {
+                      "kind": "learner",
+                      "table": [
+                        { "move": "a0-a1", "class": "error", "source": "computed" },
+                        { "move": "a0-a2", "class": "error", "source": "computed" },
+                        { "move": "b0-c2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                        { "move": "b0-a2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                        { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                        { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                        { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                        { "move": "h0-i2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                        { "move": "h0-g2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                        { "move": "i0-i1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                        { "move": "i0-i2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                        { "move": "b2-c2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-d2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                        { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-g2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-h2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-i2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-c2", "class": "dubious", "source": "computed" },
+                        { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                        { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                        { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                        { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                        { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                        { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                        { "move": "i3-i4", "class": "dubious", "source": "computed" }
+                      ],
+                      "objective": {
+                        "kind": "any",
+                        "of": [
+                          { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                          { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                        ]
+                      },
+                      "next": {
+                        "h0-g2": {
+                          "kind": "opponent",
+                          "replies": [
+                            {
+                              "move": "i9-i8",
+                              "next": {
+                                "kind": "learner",
+                                "table": [
+                                  { "move": "a0-a1", "class": "error", "source": "computed" },
+                                  { "move": "a0-a2", "class": "error", "source": "computed" },
+                                  { "move": "b0-c2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                                  { "move": "b0-a2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                                  { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                  { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                  { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                  { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                  { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                  { "move": "i0-h0", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                  { "move": "i0-i1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                  { "move": "i0-i2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                  { "move": "b2-c2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-d2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                  { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                                  { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                                  { "move": "e2-c2", "class": "dubious", "source": "computed" },
+                                  { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                                  { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                                  { "move": "g2-h0", "class": "dubious", "source": "computed" },
+                                  { "move": "g2-i1", "class": "dubious", "source": "computed" },
+                                  { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                  { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                  { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                  { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                  { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                  { "move": "i3-i4", "class": "dubious", "source": "computed" }
+                                ],
+                                "objective": {
+                                  "kind": "any",
+                                  "of": [
+                                    { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                    { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                  ]
+                                },
+                                "next": {
+                                  "i0-h0": {
+                                    "kind": "opponent",
+                                    "replies": [
+                                      {
+                                        "move": "i8-h8",
+                                        "next": {
+                                          "kind": "learner",
+                                          "table": [
+                                            { "move": "a0-a1", "class": "error", "source": "computed" },
+                                            { "move": "a0-a2", "class": "error", "source": "computed" },
+                                            { "move": "b0-c2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                                            { "move": "b0-a2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                                            { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                            { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                            { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                            { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                            { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-i0", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h1", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h2", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h3", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h4", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h5", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h6", "class": "dubious", "source": "computed" },
+                                            { "move": "h0-h7", "class": "error", "source": "authored", "reason": "b09-g1.r.capture" },
+                                            { "move": "b2-c2", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-d2", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                            { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                                            { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                                            { "move": "e2-c2", "class": "dubious", "source": "computed" },
+                                            { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                                            { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                                            { "move": "g2-i1", "class": "dubious", "source": "computed" },
+                                            { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                            { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                            { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                            { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                            { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                            { "move": "i3-i4", "class": "dubious", "source": "computed" }
+                                          ],
+                                          "objective": {
+                                            "kind": "any",
+                                            "of": [
+                                              { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                              { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                            ]
+                                          },
+                                          "next": {
+                                            "b0-c2": {
+                                              "kind": "opponent",
+                                              "replies": [
+                                                {
+                                                  "move": "h7-h6",
+                                                  "next": {
+                                                    "kind": "learner",
+                                                    "table": [
+                                                      { "move": "a0-b0", "class": "error", "source": "computed" },
+                                                      { "move": "a0-a1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                      { "move": "a0-a2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                      { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                                      { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                      { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                                      { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                      { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-i0", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h1", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h2", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h3", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h4", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h5", "class": "dubious", "source": "computed" },
+                                                      { "move": "h0-h6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture" },
+                                                      { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b0", "class": "dubious", "source": "computed" },
+                                                      { "move": "c2-b0", "class": "dubious", "source": "computed" },
+                                                      { "move": "c2-e1", "class": "dubious", "source": "computed" },
+                                                      { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                                                      { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                                                      { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                                                      { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                                                      { "move": "g2-i1", "class": "dubious", "source": "computed" },
+                                                      { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                                      { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                                      { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                                      { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                                      { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                                      { "move": "i3-i4", "class": "dubious", "source": "computed" }
+                                                    ],
+                                                    "objective": {
+                                                      "kind": "any",
+                                                      "of": [
+                                                        { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                                        { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                                      ]
+                                                    },
+                                                    "next": {
+                                                      "g3-g4": {
+                                                        "kind": "opponent",
+                                                        "replies": [
+                                                          {
+                                                            "move": "a9-a8",
+                                                            "next": {
+                                                              "kind": "learner",
+                                                              "table": [
+                                                                { "move": "a0-b0", "class": "error", "source": "computed" },
+                                                                { "move": "a0-a1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                                { "move": "a0-a2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                                { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                                                { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                                { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                                                { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                                { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-i0", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h1", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h2", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h3", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h4", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h5", "class": "dubious", "source": "computed" },
+                                                                { "move": "h0-h6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture" },
+                                                                { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b0", "class": "dubious", "source": "computed" },
+                                                                { "move": "c2-b0", "class": "dubious", "source": "computed" },
+                                                                { "move": "c2-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "e2-f2", "class": "dubious", "source": "computed" },
+                                                                { "move": "e2-d2", "class": "dubious", "source": "computed" },
+                                                                { "move": "e2-e6", "class": "error", "source": "authored", "reason": "b09-g1.r.capture", "misconception": "b09.m4" },
+                                                                { "move": "e2-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "g2-h4", "class": "error", "source": "computed" },
+                                                                { "move": "g2-f4", "class": "dubious", "source": "authored", "reason": "b09-g1.r.again", "misconception": "b09.m2" },
+                                                                { "move": "g2-i1", "class": "dubious", "source": "computed" },
+                                                                { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                                                { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                                                { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                                                { "move": "i3-i4", "class": "dubious", "source": "computed" },
+                                                                { "move": "g4-g5", "class": "dubious", "source": "computed" }
+                                                              ],
+                                                              "objective": {
+                                                                "kind": "any",
+                                                                "of": [
+                                                                  { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                                                  { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                                                ]
+                                                              },
+                                                              "next": {
+                                                                "a0-a1": {
+                                                                  "kind": "leaf",
+                                                                  "goal": { "kind": "end" }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "h0-g2": {
+                "kind": "opponent",
+                "replies": [
+                  {
+                    "move": "h9-g7",
+                    "next": {
+                      "kind": "learner",
+                      "table": [
+                        { "move": "a0-a1", "class": "error", "source": "computed" },
+                        { "move": "a0-a2", "class": "error", "source": "computed" },
+                        { "move": "b0-c2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                        { "move": "b0-a2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                        { "move": "c0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                        { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                        { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                        { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                        { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                        { "move": "g0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                        { "move": "i0-h0", "class": "error", "source": "computed" },
+                        { "move": "i0-i1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                        { "move": "i0-i2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                        { "move": "b2-c2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-d2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.cannon" },
+                        { "move": "b2-f2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                        { "move": "b2-b9", "class": "dubious", "source": "authored", "reason": "b09-g1.r.trade" },
+                        { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                        { "move": "g2-h0", "class": "dubious", "source": "computed" },
+                        { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                        { "move": "h2-i2", "class": "dubious", "source": "computed" },
+                        { "move": "h2-h3", "class": "dubious", "source": "computed" },
+                        { "move": "h2-h4", "class": "dubious", "source": "computed" },
+                        { "move": "h2-h5", "class": "dubious", "source": "computed" },
+                        { "move": "h2-h6", "class": "dubious", "source": "computed" },
+                        { "move": "h2-h1", "class": "dubious", "source": "computed" },
+                        { "move": "h2-h0", "class": "dubious", "source": "computed" },
+                        { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                        { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                        { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                        { "move": "g3-g4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                        { "move": "i3-i4", "class": "dubious", "source": "computed" }
+                      ],
+                      "objective": {
+                        "kind": "any",
+                        "of": [
+                          { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                          { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                        ]
+                      },
+                      "next": {
+                        "g3-g4": {
+                          "kind": "opponent",
+                          "replies": [
+                            {
+                              "move": "b9-c7",
+                              "next": {
+                                "kind": "learner",
+                                "table": [
+                                  { "move": "a0-a1", "class": "error", "source": "computed" },
+                                  { "move": "a0-a2", "class": "error", "source": "computed" },
+                                  { "move": "b0-c2", "class": "target", "source": "authored", "reason": "b09-g1.r.horse" },
+                                  { "move": "b0-a2", "class": "dubious", "source": "authored", "reason": "b09l3.r.edge" },
+                                  { "move": "c0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                                  { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                  { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                  { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                  { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                  { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                  { "move": "g0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                                  { "move": "i0-h0", "class": "error", "source": "computed" },
+                                  { "move": "i0-i1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                  { "move": "i0-i2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                  { "move": "b2-c2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-d2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.cannon" },
+                                  { "move": "b2-f2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                  { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                  { "move": "g2-h4", "class": "error", "source": "computed" },
+                                  { "move": "g2-f4", "class": "dubious", "source": "authored", "reason": "b09-g1.r.again", "misconception": "b09.m2" },
+                                  { "move": "g2-h0", "class": "dubious", "source": "computed" },
+                                  { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                  { "move": "h2-i2", "class": "dubious", "source": "computed" },
+                                  { "move": "h2-h3", "class": "dubious", "source": "computed" },
+                                  { "move": "h2-h4", "class": "dubious", "source": "computed" },
+                                  { "move": "h2-h5", "class": "dubious", "source": "computed" },
+                                  { "move": "h2-h6", "class": "dubious", "source": "computed" },
+                                  { "move": "h2-h1", "class": "dubious", "source": "computed" },
+                                  { "move": "h2-h0", "class": "dubious", "source": "computed" },
+                                  { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                  { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                  { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                  { "move": "i3-i4", "class": "dubious", "source": "computed" },
+                                  { "move": "g4-g5", "class": "dubious", "source": "computed" }
+                                ],
+                                "objective": {
+                                  "kind": "any",
+                                  "of": [
+                                    { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                    { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                  ]
+                                },
+                                "next": {
+                                  "b0-c2": {
+                                    "kind": "opponent",
+                                    "replies": [
+                                      {
+                                        "move": "i9-i8",
+                                        "next": {
+                                          "kind": "learner",
+                                          "table": [
+                                            { "move": "a0-b0", "class": "error", "source": "computed" },
+                                            { "move": "a0-a1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                            { "move": "a0-a2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                            { "move": "c0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                                            { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                            { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                            { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                            { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                            { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                            { "move": "g0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                                            { "move": "i0-h0", "class": "error", "source": "computed" },
+                                            { "move": "i0-i1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                            { "move": "i0-i2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                            { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                            { "move": "b2-b0", "class": "dubious", "source": "computed" },
+                                            { "move": "c2-b0", "class": "dubious", "source": "computed" },
+                                            { "move": "c2-e1", "class": "dubious", "source": "computed" },
+                                            { "move": "g2-h4", "class": "dubious", "source": "authored", "reason": "b09-g1.r.again", "misconception": "b09.m2" },
+                                            { "move": "g2-f4", "class": "dubious", "source": "authored", "reason": "b09-g1.r.again", "misconception": "b09.m2" },
+                                            { "move": "g2-h0", "class": "dubious", "source": "computed" },
+                                            { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                            { "move": "h2-i2", "class": "dubious", "source": "computed" },
+                                            { "move": "h2-h3", "class": "dubious", "source": "computed" },
+                                            { "move": "h2-h4", "class": "dubious", "source": "computed" },
+                                            { "move": "h2-h5", "class": "dubious", "source": "computed" },
+                                            { "move": "h2-h6", "class": "dubious", "source": "computed" },
+                                            { "move": "h2-h1", "class": "dubious", "source": "computed" },
+                                            { "move": "h2-h0", "class": "dubious", "source": "computed" },
+                                            { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                            { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                            { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                            { "move": "i3-i4", "class": "dubious", "source": "computed" },
+                                            { "move": "g4-g5", "class": "dubious", "source": "computed" }
+                                          ],
+                                          "objective": {
+                                            "kind": "any",
+                                            "of": [
+                                              { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                              { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                            ]
+                                          },
+                                          "next": {
+                                            "a0-a1": {
+                                              "kind": "opponent",
+                                              "replies": [
+                                                {
+                                                  "move": "a9-a8",
+                                                  "next": {
+                                                    "kind": "learner",
+                                                    "table": [
+                                                      { "move": "c0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                                                      { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                                      { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                      { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                                      { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                      { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                                      { "move": "g0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                                                      { "move": "i0-h0", "class": "error", "source": "computed" },
+                                                      { "move": "i0-i1", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                      { "move": "i0-i2", "class": "target", "source": "authored", "reason": "b09-g1.r.chariot" },
+                                                      { "move": "a1-b1", "class": "error", "source": "computed" },
+                                                      { "move": "a1-c1", "class": "dubious", "source": "computed" },
+                                                      { "move": "a1-d1", "class": "dubious", "source": "computed" },
+                                                      { "move": "a1-e1", "class": "dubious", "source": "computed" },
+                                                      { "move": "a1-f1", "class": "dubious", "source": "computed" },
+                                                      { "move": "a1-g1", "class": "dubious", "source": "computed" },
+                                                      { "move": "a1-h1", "class": "error", "source": "computed" },
+                                                      { "move": "a1-i1", "class": "dubious", "source": "computed" },
+                                                      { "move": "a1-a2", "class": "dubious", "source": "computed" },
+                                                      { "move": "a1-a0", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                                      { "move": "b2-b0", "class": "dubious", "source": "computed" },
+                                                      { "move": "c2-b0", "class": "error", "source": "computed" },
+                                                      { "move": "c2-e1", "class": "dubious", "source": "computed" },
+                                                      { "move": "g2-h4", "class": "dubious", "source": "authored", "reason": "b09-g1.r.again", "misconception": "b09.m2" },
+                                                      { "move": "g2-f4", "class": "dubious", "source": "authored", "reason": "b09-g1.r.again", "misconception": "b09.m2" },
+                                                      { "move": "g2-h0", "class": "dubious", "source": "computed" },
+                                                      { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                                      { "move": "h2-i2", "class": "dubious", "source": "computed" },
+                                                      { "move": "h2-h3", "class": "dubious", "source": "computed" },
+                                                      { "move": "h2-h4", "class": "dubious", "source": "computed" },
+                                                      { "move": "h2-h5", "class": "dubious", "source": "computed" },
+                                                      { "move": "h2-h6", "class": "dubious", "source": "computed" },
+                                                      { "move": "h2-h1", "class": "dubious", "source": "computed" },
+                                                      { "move": "h2-h0", "class": "dubious", "source": "computed" },
+                                                      { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                                      { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                                      { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                                      { "move": "i3-i4", "class": "dubious", "source": "computed" },
+                                                      { "move": "g4-g5", "class": "dubious", "source": "computed" }
+                                                    ],
+                                                    "objective": {
+                                                      "kind": "any",
+                                                      "of": [
+                                                        { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                                        { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                                      ]
+                                                    },
+                                                    "next": {
+                                                      "i0-i1": {
+                                                        "kind": "opponent",
+                                                        "replies": [
+                                                          {
+                                                            "move": "g9-e7",
+                                                            "next": {
+                                                              "kind": "learner",
+                                                              "table": [
+                                                                { "move": "c0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                                                                { "move": "c0-a2", "class": "dubious", "source": "computed" },
+                                                                { "move": "d0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                                { "move": "e0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.general", "misconception": "b09.m3" },
+                                                                { "move": "f0-e1", "class": "dubious", "source": "authored", "reason": "b09l3.r.advisor", "misconception": "b09.m3" },
+                                                                { "move": "g0-i2", "class": "dubious", "source": "computed" },
+                                                                { "move": "g0-e2", "class": "sound", "source": "authored", "reason": "b09-g1.r.elephant" },
+                                                                { "move": "a1-b1", "class": "error", "source": "computed" },
+                                                                { "move": "a1-c1", "class": "dubious", "source": "computed" },
+                                                                { "move": "a1-d1", "class": "dubious", "source": "computed" },
+                                                                { "move": "a1-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "a1-f1", "class": "dubious", "source": "computed" },
+                                                                { "move": "a1-g1", "class": "dubious", "source": "computed" },
+                                                                { "move": "a1-h1", "class": "error", "source": "computed" },
+                                                                { "move": "a1-a2", "class": "dubious", "source": "computed" },
+                                                                { "move": "a1-a0", "class": "dubious", "source": "computed" },
+                                                                { "move": "i1-h1", "class": "error", "source": "computed" },
+                                                                { "move": "i1-g1", "class": "dubious", "source": "computed" },
+                                                                { "move": "i1-f1", "class": "dubious", "source": "computed" },
+                                                                { "move": "i1-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "i1-d1", "class": "dubious", "source": "computed" },
+                                                                { "move": "i1-c1", "class": "dubious", "source": "computed" },
+                                                                { "move": "i1-b1", "class": "error", "source": "computed" },
+                                                                { "move": "i1-i2", "class": "dubious", "source": "computed" },
+                                                                { "move": "i1-i0", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-a2", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b3", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b4", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b5", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b6", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b1", "class": "dubious", "source": "computed" },
+                                                                { "move": "b2-b0", "class": "dubious", "source": "computed" },
+                                                                { "move": "c2-b0", "class": "error", "source": "computed" },
+                                                                { "move": "c2-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "g2-h4", "class": "dubious", "source": "authored", "reason": "b09-g1.r.again", "misconception": "b09.m2" },
+                                                                { "move": "g2-f4", "class": "dubious", "source": "authored", "reason": "b09-g1.r.again", "misconception": "b09.m2" },
+                                                                { "move": "g2-h0", "class": "error", "source": "computed" },
+                                                                { "move": "g2-e1", "class": "dubious", "source": "computed" },
+                                                                { "move": "h2-i2", "class": "dubious", "source": "computed" },
+                                                                { "move": "h2-h3", "class": "dubious", "source": "computed" },
+                                                                { "move": "h2-h4", "class": "dubious", "source": "computed" },
+                                                                { "move": "h2-h5", "class": "dubious", "source": "computed" },
+                                                                { "move": "h2-h6", "class": "dubious", "source": "computed" },
+                                                                { "move": "h2-h1", "class": "dubious", "source": "computed" },
+                                                                { "move": "h2-h0", "class": "dubious", "source": "computed" },
+                                                                { "move": "a3-a4", "class": "dubious", "source": "computed" },
+                                                                { "move": "c3-c4", "class": "sound", "source": "authored", "reason": "b09-g1.r.soldier" },
+                                                                { "move": "e3-e4", "class": "dubious", "source": "computed" },
+                                                                { "move": "i3-i4", "class": "dubious", "source": "computed" },
+                                                                { "move": "g4-g5", "class": "dubious", "source": "computed" }
+                                                              ],
+                                                              "objective": {
+                                                                "kind": "any",
+                                                                "of": [
+                                                                  { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+                                                                  { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+                                                                ]
+                                                              },
+                                                              "next": {
+                                                                "c3-c4": {
+                                                                  "kind": "leaf",
+                                                                  "goal": { "kind": "end" }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "rubrics": [
+            { "rubric": "R6", "weight": 50 },
+            { "rubric": "R1", "weight": 50 }
+          ],
+          "objective": {
+            "kind": "any",
+            "of": [
+              { "kind": "development", "measure": "horses-out", "increaseBy": 1 },
+              { "kind": "development", "measure": "chariots-out", "increaseBy": 1 }
+            ]
+          },
+          "development": { "n": 6, "target": 4 },
+          "lineShare": 6,
+          "reference": [
+            ["h2-e2", "h0-g2", "i0-h0", "b0-c2", "g3-g4", "a0-a1"],
+            ["h0-g2", "g3-g4", "b0-c2", "a0-a1", "i0-i1", "c3-c4"]
+          ]
+        }
+      ]
+    }
+  ]
+}

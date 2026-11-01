@@ -1,0 +1,323 @@
+{
+  "unit": "b09",
+  "records": [
+    {
+      "id": "b09l3-01",
+      "version": 1,
+      "contentHash": "0c5d86e00d3ed450c24da7fc09e605a88144533f317a98d8fd996b6165957089",
+      "author": "implementer-S2.14",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20; npx tsx scripts/verify-lines.ts b09",
+          "result": "pass",
+          "at": "2026-11-01"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.14",
+          "at": "2026-11-01",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
+        }
+      ]
+    },
+    {
+      "id": "b09l3-02",
+      "version": 1,
+      "contentHash": "bf3d8082257a4b54fd06d93b6831d4376a2a306d74719feeb58b202b21d72226",
+      "author": "implementer-S2.14",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20; npx tsx scripts/verify-lines.ts b09",
+          "result": "pass",
+          "at": "2026-11-01"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.14",
+          "at": "2026-11-01",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
+        }
+      ]
+    },
+    {
+      "id": "b09l3-03",
+      "version": 1,
+      "contentHash": "e43e170e614973f6b99f1d6f675e16299183c77b30c1142f32949075d8c2c2a8",
+      "author": "implementer-S2.14",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20; npx tsx scripts/verify-lines.ts b09",
+          "result": "pass",
+          "at": "2026-11-01"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.14",
+          "at": "2026-11-01",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
+        }
+      ]
+    },
+    {
+      "id": "b09l3-04",
+      "version": 1,
+      "contentHash": "55f6468fffad7e9c9c4e0f0a3f9433b2babad8d7f73e2ee1a6a5daca0ec49f7d",
+      "author": "implementer-S2.14",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20; npx tsx scripts/verify-lines.ts b09",
+          "result": "pass",
+          "at": "2026-11-01"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.14",
+          "at": "2026-11-01",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
+        }
+      ]
+    },
+    {
+      "id": "b09l3-05",
+      "version": 1,
+      "contentHash": "cd46489653ad2e49e3fb6d11e321199c216c493eb9ba9ea99b0b0a944d9b25be",
+      "author": "implementer-S2.14",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20; npx tsx scripts/verify-lines.ts b09",
+          "result": "pass",
+          "at": "2026-11-01"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.14",
+          "at": "2026-11-01",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
+        }
+      ]
+    },
+    {
+      "id": "b09l3-06",
+      "version": 1,
+      "contentHash": "f6afa21959b671d7a5df66d760f17bf99f7b131b37e265598cad07d98cf5d4f3",
+      "author": "implementer-S2.14",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20; npx tsx scripts/verify-lines.ts b09",
+          "result": "pass",
+          "at": "2026-11-01"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.14",
+          "at": "2026-11-01",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
+        }
+      ]
+    },
+    {
+      "id": "b09l3-07",
+      "version": 1,
+      "contentHash": "4d55fee3e622568ac7d117a219c8d7d09155b8d5fcdcf961f8b3e6349454ef0b",
+      "author": "implementer-S2.14",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20; npx tsx scripts/verify-lines.ts b09",
+          "result": "pass",
+          "at": "2026-11-01"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.14",
+          "at": "2026-11-01",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
+        }
+      ]
+    },
+    {
+      "id": "b09l3-08",
+      "version": 1,
+      "contentHash": "bc9c4370be9a631a80b2294e174abac3b4090ba83a89561e5c791930d8b0301b",
+      "author": "implementer-S2.14",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "line tree",
+          "tool": "npx tsx scripts/verify-lines.ts b09",
+          "result": "5 learner nodes, all selective, depth 2",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20; npx tsx scripts/verify-lines.ts b09",
+          "result": "pass",
+          "at": "2026-11-01"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.14",
+          "at": "2026-11-01",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
+        }
+      ]
+    },
+    {
+      "id": "b09-g1",
+      "version": 1,
+      "contentHash": "bd9382619feccd3e834effb1f9c0a454f967243ac30cb793691acff47655a34d",
+      "author": "implementer-S2.14",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "03 §5.7 guard (F5, 20 seeds)",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20",
+          "result": "items 1, 2 (N1 100 %, N2 100 %), 6 pass; item 3 n/a (ruling A, R6 gate)",
+          "at": "2026-11-01"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts b09 --runs 20; npx tsx scripts/verify-lines.ts b09",
+          "result": "pass",
+          "at": "2026-11-01"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.14",
+          "at": "2026-11-01",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
+        }
+      ]
+    }
+  ]
+}

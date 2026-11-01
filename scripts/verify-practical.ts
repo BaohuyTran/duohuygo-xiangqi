@@ -20,6 +20,8 @@ import {
   PARTNER_REGIME,
   fallbackOf,
   guardOf,
+  partnerPlan,
+  scoresLineShare,
   randomLearner,
   referenceLearner,
   safeShuffler,
@@ -28,7 +30,9 @@ import {
   type SimLearner,
   type SimRun,
 } from '../src/assessment/practical';
+import { narrowPositionsRuling } from '../src/assessment/narrow-ruling';
 import { allPlayFixtures, playUnits } from '../src/assessment/play-fixtures';
+import { learnerNodeStats } from '../src/lessons/line';
 import { validateContent } from '../src/content/validate';
 import type { Exercise, PlayExercise, Unit } from '../src/content/types';
 import { legalMoves } from '../src/engine';
@@ -141,7 +145,7 @@ async function main() {
         const counted = rs.filter((r) => !r.result.score.voided);
         return { failed: counted.filter((r) => !r.result.score.pass).length, of: counted.length };
       };
-      const checks: [string, boolean, string][] = [];
+      const checks: [string, boolean | 'n/a', string][] = [];
       checks.push(['1 reference run passes every seed', passes(ref) === runs, `${passes(ref)}/${runs} (scores ${ref.map((r) => r.result.score.score).join(', ')})`]);
       const f1 = failRate(n1);
       checks.push(['2 N1 fails ≥ 90 %', f1.of > 0 && f1.failed >= 0.9 * f1.of, `${f1.failed}/${f1.of} = ${pct(f1.failed, f1.of)} · voided ${voided(n1)}`]);
@@ -149,13 +153,24 @@ async function main() {
       checks.push(['2 N2 fails ≥ 80 %', f2.of > 0 && f2.failed >= 0.8 * f2.of, `${f2.failed}/${f2.of} = ${pct(f2.failed, f2.of)} · voided ${voided(n2)}`]);
       if (ex.task !== 'game') {
         const narrow = narrowPositions(ex, ref[0]);
-        checks.push(['3 ≥ 3 narrow positions in the reference run', narrow >= 3, `${narrow}`]);
+        // Ruling A (S2.14 content review): with the R6 line-share gate the item is n/a when the gate does its job.
+        const ruling = narrowPositionsRuling({
+          scoresLineShare: scoresLineShare(ex, fb),
+          treeNodesSelective: ex.tree ? learnerNodeStats({ root: ex.tree }).every((s) => s.selective) : true,
+          n2: f2,
+          partner: partnerPlan(ex, regime).links,
+          h: guardOf(ex).h,
+          referenceCounted: ref[0].state.facts.filter((f) => f.share?.counted === true).length,
+          L: ex.lineShare,
+        });
+        if (narrow < 3 && ruling === 'n/a') checks.push(['3 ≥ 3 narrow positions in the reference run', 'n/a', `${narrow} — n/a (R6 gate: selective nodes, N2 fails, partner deeper than h, L reached)`]);
+        else checks.push(['3 ≥ 3 narrow positions in the reference run', narrow >= 3, `${narrow}`]);
       }
       if (ex.resistance) checks.push(['5 real resistance (a partner threat)', partnerThreatened(ex, ref[0]), '']);
       if (second) checks.push(['6 second plan passes every seed', passes(second) === runs, `${passes(second)}/${runs}`]);
       for (const [name, ok, detail] of checks) {
-        console.log(`  ${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? `: ${detail}` : ''}`);
-        if (!ok) failures++;
+        console.log(`  ${ok === 'n/a' ? 'N/A ' : ok ? 'PASS' : 'FAIL'}  ${name}${detail ? `: ${detail}` : ''}`);
+        if (ok === false) failures++;
       }
       const all = [...ref, ...(second ?? []), ...n1, ...n2];
       console.log(`  void rate (runs with < L counted moves): ${windowVoids(all)}/${all.length} = ${pct(windowVoids(all), all.length)} · any void ${voided(all)}`);

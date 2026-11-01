@@ -127,7 +127,7 @@ flags depth 3 "measured within budget" per task; S2.20 records each R6 task's vo
 | S2.11 | Account sync of the new records (`data_v2`) | S2.10 | done (attempt 1, 2026-10-23) |
 | S2.12 | Practical tasks: `play`, `review`, rubrics, fallback F, practical guard | S2.8, S2.9, S2.10 | done (attempt 2, 2026-10-30) |
 | S2.13 | Assessment engine and progress-state UI | S2.2, S2.7, S2.10, S2.12 | done (attempt 2, 2026-10-30) |
-| S2.14 | Pilot P1: `b09l3` + `b09-g1` | S2.2, S2.3, S2.7, S2.8, S2.12 | todo |
+| S2.14 | Pilot P1: `b09l3` + `b09-g1` | S2.2, S2.3, S2.7, S2.8, S2.12 | done (attempt 2, 2026-11-01) |
 | S2.15 | Pilot P2: `i08l3` + `i08-g1` | S2.14 | todo |
 | S2.16 | Pilot P3 + P5: unit `a03`, `a03-g1`, the `a03` check pool and a placement slice | S2.13, S2.15 | todo |
 | S2.17 | Pilot P4: `a07l4` + `a07-g1` | S2.16 | todo |

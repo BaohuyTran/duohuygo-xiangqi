@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
-- **Active items:** S2.14 (pilot P1); then S2.15–S2.20, S2.gate (D10: resumed 2026-10-30)
+- **Active items:** S2.15 (pilot P2); then S2.16–S2.20, S2.gate (D10: resumed 2026-10-30)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,19 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-01 — **S2.14 done** (attempt 2): pilot `b09l3` (8 items, all Black: 2 learn, G2 choice ×2, G1 decision ×2,
+  G0 decision + line) and `b09-g1` (Red, start position, F5 opening task, remedy (2): scripted Central Cannon /
+  Horse-opening tree + line share L = 6, R6 50 + R1 50) in `src/content/lessons/b09-opening-development.json`;
+  content now in **REL-P** (default path legacy-only; preview shows `b09`). Items `reviewed` with an approving record
+  in `src/content/reviews/b09.json`. §5.7 (`verify-practical b09 --runs 20`): reference 20/20 at 100, N1 fails 100 %,
+  N2 fails 100 %, second plan 20/20, item 3 N/A (R6 gate, D13), void 1/80. Remedy order evidence: R2 + R1 drill N1
+  40–55 % / N2 20–30 % fail; + R0 N1 50 % / N2 15–40 % fail (implementer and content-reviewer runs). Driver: lint,
+  both builds, 1,218 tests, ui:check 360 px PASS, engine untouched. Reviewer APPROVE (attempts 1 + 2 recheck);
+  content-reviewer CHANGES_REQUESTED (attempt 1: missing Elephant in -06, tree dropping Soldiers, G0 line not
+  independent) → APPROVE (attempt 2). Notes for S2.18/S2.20: in the main regime `partnerPlan` gives opening tasks
+  `pressing(2)`, while 03 §5.2 keeps `b09-g1` on `safe-sparring(2)`; b09l3-08 credited second moves allow C2=3 winning
+  the g6 Soldier at d4 (beyond Basic h = 1); R2+6 is uncredited in `b09-g1` (watch pilot data).
 
 - 2026-10-30 — **S2.13 done** (attempt 2): `src/assessment` credit / form solver / unit checks / J1-J2 placement /
   level exams / level-course states / portfolio; pool loader + validator (`src/content/pools.ts`,
@@ -184,4 +197,4 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. S2.14–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
+1. S2.15–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).

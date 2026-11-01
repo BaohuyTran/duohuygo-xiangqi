@@ -168,7 +168,7 @@ export const RELEASE_STATES: Readonly<Record<ReleaseStateId, ReleaseState>> = {
  * The release state of the shipped content. A release item (S3.4, S3.8, …) changes it together with the content,
  * LEGACY_MAP and LEGACY_MAP_VERSION; src/content/release.test.ts proves the content matches this state and no other.
  */
-export const CURRENT_RELEASE: ReleaseStateId = 'REL-0';
+export const CURRENT_RELEASE: ReleaseStateId = 'REL-P';
 
 /** Legacy lessons still live in a state: exempt from the release test (07-sourcing.md §6), checked by today's validators. */
 export function liveLegacyLessons(state: ReleaseState): string[] {

@@ -13,6 +13,7 @@ import { isAccepted, judgeDecision, parseMoveKey } from '../lessons/decision';
 import { toMove } from '../puzzles/logic';
 import { allLessons, allUnits, units } from './index';
 import { hasMessage } from '../i18n/messages';
+import { isNewCourseUnitId } from './release';
 import { validateUnits } from './validate';
 
 describe('shipped lesson content', () => {
@@ -47,8 +48,36 @@ describe('shipped lesson content', () => {
   });
 
   it('uses every exercise type', () => {
-    const types = new Set(allLessons.flatMap((l) => l.exercises.map((e) => e.type)));
+    // The legacy course (u1–u15); new-course lessons (REL-P pilot b09, S2.14) are checked below by the 02 §5.2 ladder.
+    const legacyLessons = allUnits.filter((u) => !isNewCourseUnitId(u.id)).flatMap((u) => u.lessons);
+    const types = new Set(legacyLessons.flatMap((l) => l.exercises.map((e) => e.type)));
     expect([...types].sort()).toEqual(['capture', 'combination', 'learn', 'move', 'select-squares']);
+  });
+
+  it('new-course lessons follow the 02 §5.2 ladder and lesson size of their level', () => {
+    // 02-curriculum.md §5.2 "Ladder by level": counts of G2 / G1 / G0 / TR items and non-learn lesson size.
+    const ladder: Record<string, { G2: [number, number]; G1: [number, number]; G0: [number, number]; TR: [number, number]; size: [number, number] }> = {
+      basics: { G2: [2, 3], G1: [2, 3], G0: [1, 2], TR: [0, 1], size: [5, 8] },
+      intermediate: { G2: [2, 3], G1: [2, 3], G0: [1, 2], TR: [0, 1], size: [5, 8] },
+      advanced: { G2: [0, 0], G1: [2, 2], G0: [2, 3], TR: [1, 1], size: [5, 7] },
+      expert: { G2: [0, 0], G1: [1, 2], G0: [2, 3], TR: [1, 1], size: [4, 6] },
+      master: { G2: [0, 0], G1: [0, 0], G0: [3, 4], TR: [1, 1], size: [4, 5] },
+    };
+    const inRange = (n: number, [lo, hi]: [number, number]) => n >= lo && n <= hi;
+    for (const unit of allUnits.filter((u) => isNewCourseUnitId(u.id))) {
+      const rule = ladder[unit.track ?? 'basics'];
+      for (const lesson of unit.lessons) {
+        const practice = lesson.exercises.filter((e) => e.type !== 'learn');
+        // A practical task (play / review) is a TR item even without an `assist` field.
+        const level = (e: (typeof practice)[number]) => e.assist ?? (e.type === 'play' || e.type === 'review' ? 'TR' : undefined);
+        expect(lesson.exercises.some((e) => e.type === 'learn'), `${lesson.id}: a learn card or worked example`).toBe(true);
+        expect(inRange(practice.length, rule.size), `${lesson.id}: ${practice.length} non-learn items`).toBe(true);
+        for (const g of ['G2', 'G1', 'G0', 'TR'] as const) {
+          const n = practice.filter((e) => level(e) === g).length;
+          expect(inRange(n, rule[g]), `${lesson.id}: ${n} ${g} items`).toBe(true);
+        }
+      }
+    }
   });
 
   it('makes the intermediate track harder: mostly multi-move combinations and mates', () => {

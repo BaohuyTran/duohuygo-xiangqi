@@ -35,8 +35,10 @@ import { isNewCourseUnit } from './validate';
 
 const legacy = { map: LEGACY_MAP, version: LEGACY_MAP_VERSION };
 const ids = (list: readonly Unit[]) => list.map((u) => u.id);
+/** The 36 live legacy lessons' units. REL-P (S2.14) also loads the pilot unit b09; the state fixtures start from these. */
+const legacyUnits = allUnits.filter((u) => !isNewCourseUnitId(u.id));
 
-// ---------- Fixtures: new-course units (there is no new-course content yet) ----------
+// ---------- Fixtures: new-course units (the shipped pilot b09 is a REL-P unit; these model other states) ----------
 
 function item(id: string, status: ContentStatus, extra: Partial<Exercise> = {}): Exercise {
   return {
@@ -76,10 +78,10 @@ function record(it: Exercise, author = 'author-run-1', by = 'reviewer-run-2'): R
 const recordsFor = (list: readonly Unit[]) =>
   list.filter((u) => isNewCourseUnitId(u.id)).flatMap((u) => u.lessons.flatMap((l) => l.exercises.map((e) => record(e))));
 
-/** Loader input for today's files plus extra fixture files. */
+/** Loader input for today's legacy files plus extra fixture files (the shipped pilot unit is left out: fixtures model states). */
 function files(extra: Record<string, Unit> = {}, drop: string[] = []): Record<string, Unit> {
   const out: Record<string, Unit> = {};
-  allUnits.forEach((u, i) => {
+  legacyUnits.forEach((u, i) => {
     if (!drop.includes(u.id)) out[`./lessons/${String(i).padStart(2, '0')}-${u.id}.json`] = u;
   });
   return { ...out, ...extra };
@@ -128,8 +130,8 @@ function laterState(id: 'REL-4' | 'REL-5', extra: Record<string, Unit> = {}): { 
 // ---------- Unit order (05 §8.4.1 P3) ----------
 
 describe('unit order', () => {
-  it('orders units by track rank, then file name; today that is the file-name order', () => {
-    expect(ids(allUnits)).toEqual(['u1', 'u2', 'u3', 'u4', 'u7', 'u8', 'u9', 'u10', 'u11', 'u12', 'u13', 'u14', 'u15']);
+  it('orders units by track rank, then file name; the pilot b09 lands inside the basics block', () => {
+    expect(ids(allUnits)).toEqual(['u1', 'u2', 'u3', 'u4', 'b09', 'u7', 'u8', 'u9', 'u10', 'u11', 'u12', 'u13', 'u14', 'u15']);
     expect(trackOrderProblems(allUnits)).toEqual([]);
     expect([...new Set(allUnits.map(trackOf))]).toEqual(TRACK_ORDER);
   });
@@ -150,9 +152,10 @@ describe('unit order', () => {
     expect(trackRank(undefined)).toBe(0);
   });
 
-  it('shows today exactly the loaded units, unchanged (default build)', () => {
-    expect(units).toEqual(allUnits);
-    expect(coursePath(allUnits, { preview: false, state: RELEASE_STATES['REL-0'] })).toEqual(allUnits);
+  it('shows today exactly the legacy units, unchanged (default build): the pilot is preview-only in REL-P', () => {
+    expect(units).toEqual(legacyUnits);
+    expect(coursePath(allUnits, { preview: false, state: RELEASE_STATES['REL-P'] })).toEqual(legacyUnits);
+    expect(coursePath(legacyUnits, { preview: false, state: RELEASE_STATES['REL-0'] })).toEqual(legacyUnits);
   });
 
   it('recognises new-course units like the validator', () => {
@@ -164,10 +167,10 @@ describe('unit order', () => {
 
 describe('release states', () => {
   it('lists the 36 legacy lessons of today and the 9 orphans', () => {
-    const loaded = allUnits.flatMap((u) => u.lessons.map((l) => l.id));
+    const loaded = legacyUnits.flatMap((u) => u.lessons.map((l) => l.id));
     expect(Object.keys(LEGACY_LESSONS).sort()).toEqual([...loaded].sort());
     expect(loaded).toHaveLength(36);
-    for (const u of allUnits) for (const l of u.lessons) expect(LEGACY_LESSONS[l.id].track, l.id).toBe(trackOf(u));
+    for (const u of legacyUnits) for (const l of u.lessons) expect(LEGACY_LESSONS[l.id].track, l.id).toBe(trackOf(u));
     expect(ORPHAN_IDS).toHaveLength(9);
   });
 
@@ -204,10 +207,13 @@ describe('release states', () => {
 // ---------- T1 (05 §8.10) ----------
 
 describe('T1: content matches exactly one release state', () => {
-  it('today: REL-0 and nothing else, and it is CURRENT_RELEASE', () => {
-    expect(releaseProblems(allUnits, RELEASE_STATES['REL-0'], legacy)).toEqual([]);
+  it('today: REL-P (pilot b09 loaded, nothing published) and nothing else, and it is CURRENT_RELEASE', () => {
+    expect(releaseProblems(allUnits, RELEASE_STATES['REL-P'], legacy)).toEqual([]);
     expect(matchingStates(allUnits, legacy)).toEqual([CURRENT_RELEASE]);
-    expect(CURRENT_RELEASE).toBe('REL-0');
+    expect(CURRENT_RELEASE).toBe('REL-P');
+    expect(releaseProblems(allUnits, RELEASE_STATES['REL-0'], legacy).join('\n')).toMatch(/no new-course unit may be loaded \(found b09\)/);
+    // Without the pilot the legacy content is exactly REL-0 (the state before S2.14).
+    expect(matchingStates(legacyUnits, legacy)).toEqual(['REL-0']);
   });
 
   it('REL-P fixture: pilot units loaded, none published; legacy path unchanged', () => {
@@ -215,7 +221,7 @@ describe('T1: content matches exactly one release state', () => {
     expect(releaseProblems(pilotUnits, RELEASE_STATES['REL-P'], legacy)).toEqual([]);
     expect(matchingStates(pilotUnits, legacy)).toEqual(['REL-P']);
     expect(releaseProblems(pilotUnits, RELEASE_STATES['REL-0'], legacy).join('\n')).toMatch(/no new-course unit may be loaded/);
-    expect(coursePath(pilotUnits, { preview: false, state: RELEASE_STATES['REL-P'] })).toEqual(allUnits);
+    expect(coursePath(pilotUnits, { preview: false, state: RELEASE_STATES['REL-P'] })).toEqual(legacyUnits);
   });
 
   it('REL-P fixture fails for a wrong LEGACY_MAP, a missing or re-tracked legacy lesson', () => {
@@ -274,9 +280,9 @@ describe('T1: content matches exactly one release state', () => {
   });
 
   it('a track never mixes legacy and new-course units, and a published level needs content', () => {
-    const mixed = orderUnits({ ...rel1Files, './lessons/01-board.json': allUnits[0] });
+    const mixed = orderUnits({ ...rel1Files, './lessons/01-board.json': legacyUnits[0] });
     expect(releaseProblems(mixed, RELEASE_STATES['REL-1'], rel1Legacy).join('\n')).toMatch(/track "basics" mixes legacy and new-course units/);
-    expect(releaseProblems(allUnits, RELEASE_STATES['REL-1'], rel1Legacy).join('\n')).toMatch(/published level "basics" has no new-course unit/);
+    expect(releaseProblems(legacyUnits, RELEASE_STATES['REL-1'], rel1Legacy).join('\n')).toMatch(/published level "basics" has no new-course unit/);
   });
 });
 
@@ -374,7 +380,7 @@ describe('release test (07 §6)', () => {
   });
 
   it('derives the legacy exemption from the release state: a retired legacy lesson still loaded fails', () => {
-    const stale = orderUnits({ ...rel1Files, './lessons/01-board.json': allUnits[0] });
+    const stale = orderUnits({ ...rel1Files, './lessons/01-board.json': legacyUnits[0] });
     const errors = releaseGateProblems(stale, RELEASE_STATES['REL-1'], recordsFor(stale), { preview: false }).join('\n');
     expect(errors).toMatch(/u1l1#0 is legacy content that is not live in REL-1/);
     expect(errors).not.toMatch(/u7l1/);
@@ -516,15 +522,16 @@ describe('course preview', () => {
   it('is off by default', async () => {
     const content = await import('./index');
     expect(content.COURSE_PREVIEW).toBe(false);
-    expect(content.units).toEqual(content.allUnits);
+    expect(content.units).toEqual(content.allUnits.filter((u) => !isNewCourseUnitId(u.id)));
   });
 
-  it('VITE_COURSE_PREVIEW=1 shows the new-course path instead of the legacy path (empty today)', async () => {
+  it('VITE_COURSE_PREVIEW=1 shows the new-course path instead of the legacy path (the reviewed b09 pilot)', async () => {
     vi.stubEnv('VITE_COURSE_PREVIEW', '1');
     vi.resetModules();
     const content = await import('./index');
     expect(content.COURSE_PREVIEW).toBe(true);
-    expect(content.units).toEqual([]);
+    // b09 is fully reviewed: the preview shows exactly the new-course units, here only the pilot.
+    expect(content.units.map((u) => u.id)).toEqual(['b09']);
     expect(content.findLesson('u1l1')).toBeUndefined();
   });
 
