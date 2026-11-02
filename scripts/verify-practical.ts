@@ -162,8 +162,11 @@ async function main() {
           h: guardOf(ex).h,
           referenceCounted: ref[0].state.facts.filter((f) => f.share?.counted === true).length,
           L: ex.lineShare,
+          fallback: fb,
+          n2Runs: { voided: voided(n2), total: n2.length },
         });
         if (narrow < 3 && ruling === 'n/a') checks.push(['3 ≥ 3 narrow positions in the reference run', 'n/a', `${narrow} — n/a (R6 gate: selective nodes, N2 fails, partner deeper than h, L reached)`]);
+        else if (narrow < 3 && ruling === 'n/a-D') checks.push(['3 ≥ 3 narrow positions in the reference run', 'n/a', `${narrow} — n/a (ruling D: ${fb}, h ≥ partner depth, selective nodes, N2 fails, N2 voids ≤ 1/5, L reached)`]);
         else checks.push(['3 ≥ 3 narrow positions in the reference run', narrow >= 3, `${narrow}`]);
       }
       if (ex.resistance) checks.push(['5 real resistance (a partner threat)', partnerThreatened(ex, ref[0]), '']);

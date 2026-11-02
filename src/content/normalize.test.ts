@@ -67,13 +67,15 @@ describe('normalize', () => {
   // New-course items (REL-P pilot b09, S2.14) against every loaded lesson position and puzzle. The only duplicate is
   // intended: the practical task b09-g1 starts from the initial position (02 b09: "play from the start position"),
   // which the legacy learn cards u1l1#0/#1 also show. The lesson positions themselves are all distinct.
-  it('new-course positions duplicate nothing except b09-g1 = the initial position', () => {
+  it('new-course positions duplicate nothing except the practical tasks b09-g1 and i08-g1 = the initial position', () => {
     const entries = [
       ...allUnits.flatMap((u) => u.lessons.flatMap((l) => l.exercises.map((e, i) => ({ ref: e.id ?? `${l.id}#${i}`, position: positionOf(e) })))),
       ...puzzles.map((p) => ({ ref: p.id, position: startPosition(p) })),
     ];
-    expect(entries).toHaveLength(264);
+    // 264 + the 8 items of the i08 pilot (S2.15).
+    expect(entries).toHaveLength(272);
     const isNew = (ref: string) => /^[biaem]\d\d/.test(ref);
-    expect(duplicateGroups(entries).filter((g) => g.some(isNew))).toEqual([['u1l1#0', 'u1l1#1', 'b09-g1']]);
+    // i08-g1 (S2.15, `line` → `play` from the initial position) joins the same intended group.
+    expect(duplicateGroups(entries).filter((g) => g.some(isNew))).toEqual([['u1l1#0', 'u1l1#1', 'b09-g1', 'i08-g1']]);
   });
 });

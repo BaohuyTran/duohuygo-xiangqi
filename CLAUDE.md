@@ -144,7 +144,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── rubrics.ts      # R0–R7, line share, scoring weights by fallback, pass rules. Pure, no runtime analysis import
     │   ├── practical.ts    # Regimes + partner chains, F3/F4 exam slots + reachability, TaskState turns, facts, grants, simulated learners (LAZY: never in the main chunk)
     │   ├── regime.ts       # `PARTNER_REGIME` ('fallback' until S2.18)
-    │   ├── narrow-ruling.ts# §5.7 item 3 ruling A: n/a for R6 line-share-gate tasks (selective nodes, N2 fails, partner deeper than h, L reached)
+    │   ├── narrow-ruling.ts# §5.7 item 3 rulings A + D: n/a for R6 line-share-gate tasks (selective nodes, N2 fails, L reached; partner deeper than h, or F5/F2b with N2 voids ≤ 1/5)
     │   └── play-fixtures.ts# TEST-ONLY play / review fixtures (also `verify-practical.ts --fixtures`)
     ├── play/               # Training partners (policies.ts), game record (record.ts), training-ruleset adjudicator (adjudicate.ts), seeded RNG (rng.ts), index.ts. Pure: NO React/DOM/storage/gamification/clock/Math.random (enforced by purity.test.ts)
     ├── analysis/           # Pure analysis layer (no React/DOM, no gamification; imports only '../engine'; enforced by purity.test.ts)
@@ -424,8 +424,11 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Pilot `b09` (S2.14: `b09l3` + `b09-g1`) is `src/content/lessons/b09-opening-development.json`; with it the content is in
   REL-P (`CURRENT_RELEASE`): the default path stays legacy-only, the preview shows `b09` once every item is `reviewed`
   with an approving record (items are `verified` until the independent review). `src/content/pilot-b09.test.ts`.
+- Pilot `i08` (S2.15: `i08l3` + `i08-g1`, Red) is `src/content/lessons/i08-central-cannon.json` (`verified` until review);
+  `src/content/pilot-i08.test.ts` pins its ladder, deviations, contrasts and the material safety of accepted moves / replies.
 - `verify-practical.ts` reports §5.7 item 3 as `N/A (R6 gate)` instead of FAIL when `narrowPositionsRuling` (ruling A,
-  S2.14 content review) holds; otherwise the 3-narrow-positions rule applies unchanged.
+  S2.14 content review) holds, or `N/A (ruling D)` for F5 / F2b tasks whose level h ≥ the partner depth (then N2 voids ≤ 1/5
+  too; the task text discloses that the continuation partner adds no pressure); otherwise the 3-narrow-positions rule applies.
 - Partner regime: `PARTNER_REGIME` = `fallback` until S2.18. Task kind → chain in `partnerPlan` (03 §5.2): F1 (tree →
   forcing-attack(2), the task ends when it hands over), F1c (tree → forcing-attack(2) → resist mode k = d = 2), F2
   (safe-sparring(2, 1.0)), F2b (tree + line share), F5 (tree → safe-sparring(2, τ)), drills safe-sparring(2, τ);

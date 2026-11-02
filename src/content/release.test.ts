@@ -131,7 +131,8 @@ function laterState(id: 'REL-4' | 'REL-5', extra: Record<string, Unit> = {}): { 
 
 describe('unit order', () => {
   it('orders units by track rank, then file name; the pilot b09 lands inside the basics block', () => {
-    expect(ids(allUnits)).toEqual(['u1', 'u2', 'u3', 'u4', 'b09', 'u7', 'u8', 'u9', 'u10', 'u11', 'u12', 'u13', 'u14', 'u15']);
+    // Pilots b09 (S2.14) and i08 (S2.15) land at the end of their track's block (file names sort after the legacy NN-…).
+    expect(ids(allUnits)).toEqual(['u1', 'u2', 'u3', 'u4', 'b09', 'u7', 'u8', 'u9', 'u10', 'i08', 'u11', 'u12', 'u13', 'u14', 'u15']);
     expect(trackOrderProblems(allUnits)).toEqual([]);
     expect([...new Set(allUnits.map(trackOf))]).toEqual(TRACK_ORDER);
   });
@@ -207,11 +208,11 @@ describe('release states', () => {
 // ---------- T1 (05 §8.10) ----------
 
 describe('T1: content matches exactly one release state', () => {
-  it('today: REL-P (pilot b09 loaded, nothing published) and nothing else, and it is CURRENT_RELEASE', () => {
+  it('today: REL-P (pilots b09 and i08 loaded, nothing published) and nothing else, and it is CURRENT_RELEASE', () => {
     expect(releaseProblems(allUnits, RELEASE_STATES['REL-P'], legacy)).toEqual([]);
     expect(matchingStates(allUnits, legacy)).toEqual([CURRENT_RELEASE]);
     expect(CURRENT_RELEASE).toBe('REL-P');
-    expect(releaseProblems(allUnits, RELEASE_STATES['REL-0'], legacy).join('\n')).toMatch(/no new-course unit may be loaded \(found b09\)/);
+    expect(releaseProblems(allUnits, RELEASE_STATES['REL-0'], legacy).join('\n')).toMatch(/no new-course unit may be loaded \(found b09, i08\)/);
     // Without the pilot the legacy content is exactly REL-0 (the state before S2.14).
     expect(matchingStates(legacyUnits, legacy)).toEqual(['REL-0']);
   });
@@ -530,8 +531,8 @@ describe('course preview', () => {
     vi.resetModules();
     const content = await import('./index');
     expect(content.COURSE_PREVIEW).toBe(true);
-    // b09 is fully reviewed: the preview shows exactly the new-course units, here only the pilot.
-    expect(content.units.map((u) => u.id)).toEqual(['b09']);
+    // b09 and i08 are fully reviewed: the preview shows exactly the two pilots, in level order.
+    expect(content.units.map((u) => u.id)).toEqual(['b09', 'i08']);
     expect(content.findLesson('u1l1')).toBeUndefined();
   });
 

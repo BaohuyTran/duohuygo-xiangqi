@@ -1,0 +1,277 @@
+{
+  "unit": "i08",
+  "records": [
+    {
+      "id": "i08l3-01",
+      "version": 1,
+      "contentHash": "287fe9d8353dd3b5553790b890801c40f5374b6eb4a53a6e03bc09730a5eff89",
+      "author": "implementer-S2.15",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-02"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts i08 --runs 20; npx tsx scripts/verify-lines.ts i08",
+          "result": "pass",
+          "at": "2026-11-02"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.15",
+          "at": "2026-11-02",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: legality, complete tables, d2/d4 material walk of every line and the i08-g1 tree (0 problems), opening names and plans (ruling E), notation and en/vi; ruling D for item 3."
+        }
+      ]
+    },
+    {
+      "id": "i08l3-02",
+      "version": 1,
+      "contentHash": "ebeed11b3a6989616019398aa6671a9308252d9f9eeb4a578d0fd54403b6d12c",
+      "author": "implementer-S2.15",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-02"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts i08 --runs 20; npx tsx scripts/verify-lines.ts i08",
+          "result": "pass",
+          "at": "2026-11-02"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.15",
+          "at": "2026-11-02",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: legality, complete tables, d2/d4 material walk of every line and the i08-g1 tree (0 problems), opening names and plans (ruling E), notation and en/vi; ruling D for item 3."
+        }
+      ]
+    },
+    {
+      "id": "i08l3-03",
+      "version": 1,
+      "contentHash": "4684ee45563f55a2bdfc11a2f4de379229602e5efa2df9c23c7fb31547b06d91",
+      "author": "implementer-S2.15",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-02"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts i08 --runs 20; npx tsx scripts/verify-lines.ts i08",
+          "result": "pass",
+          "at": "2026-11-02"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.15",
+          "at": "2026-11-02",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: legality, complete tables, d2/d4 material walk of every line and the i08-g1 tree (0 problems), opening names and plans (ruling E), notation and en/vi; ruling D for item 3."
+        }
+      ]
+    },
+    {
+      "id": "i08l3-04",
+      "version": 1,
+      "contentHash": "2643900de672936c6d2a3e9c106060d71b43bf7c6300ee8ec21502762162a440",
+      "author": "implementer-S2.15",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-02"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts i08 --runs 20; npx tsx scripts/verify-lines.ts i08",
+          "result": "pass",
+          "at": "2026-11-02"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.15",
+          "at": "2026-11-02",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: legality, complete tables, d2/d4 material walk of every line and the i08-g1 tree (0 problems), opening names and plans (ruling E), notation and en/vi; ruling D for item 3."
+        }
+      ]
+    },
+    {
+      "id": "i08l3-05",
+      "version": 1,
+      "contentHash": "8a3574345b6fc8b8033b52596a0bd090bfb4224df397abddab5ee45a45f48a4a",
+      "author": "implementer-S2.15",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-02"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts i08 --runs 20; npx tsx scripts/verify-lines.ts i08",
+          "result": "pass",
+          "at": "2026-11-02"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.15",
+          "at": "2026-11-02",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: legality, complete tables, d2/d4 material walk of every line and the i08-g1 tree (0 problems), opening names and plans (ruling E), notation and en/vi; ruling D for item 3."
+        }
+      ]
+    },
+    {
+      "id": "i08l3-06",
+      "version": 1,
+      "contentHash": "d2e6cf273d45fdfd39b6d05e6f1d8732ab10abac1d6a520fdd16b8e805f528c2",
+      "author": "implementer-S2.15",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-02"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts i08 --runs 20; npx tsx scripts/verify-lines.ts i08",
+          "result": "pass",
+          "at": "2026-11-02"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.15",
+          "at": "2026-11-02",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: legality, complete tables, d2/d4 material walk of every line and the i08-g1 tree (0 problems), opening names and plans (ruling E), notation and en/vi; ruling D for item 3."
+        }
+      ]
+    },
+    {
+      "id": "i08l3-07",
+      "version": 1,
+      "contentHash": "d092c350e46118b9cda8eeaeef18f7abe9fee4926d30867511e618419c18987f",
+      "author": "implementer-S2.15",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-02"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts i08 --runs 20; npx tsx scripts/verify-lines.ts i08",
+          "result": "pass",
+          "at": "2026-11-02"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.15",
+          "at": "2026-11-02",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: legality, complete tables, d2/d4 material walk of every line and the i08-g1 tree (0 problems), opening names and plans (ruling E), notation and en/vi; ruling D for item 3."
+        }
+      ]
+    },
+    {
+      "id": "i08-g1",
+      "version": 1,
+      "contentHash": "b01088ef76e786d86b9f961294471d80d07597e08ecaee4703e00e98ff36c306",
+      "author": "implementer-S2.15",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-02"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts i08 --runs 20; npx tsx scripts/verify-lines.ts i08",
+          "result": "pass",
+          "at": "2026-11-02"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.15",
+          "at": "2026-11-02",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: legality, complete tables, d2/d4 material walk of every line and the i08-g1 tree (0 problems), opening names and plans (ruling E), notation and en/vi; ruling D for item 3."
+        }
+      ]
+    }
+  ]
+}

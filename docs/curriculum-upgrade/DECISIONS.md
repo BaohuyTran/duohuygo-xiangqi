@@ -160,3 +160,17 @@ Source: `docs/curriculum-upgrade/measurements.md` §3 (headless Chromium throttl
   remedy (2) makes the task tree-specific; "either colour" is b09l4's outcome.
 - **`b09-g1` remedy order** (03 §5.2): R2 + R1 and R2 + R0 + R1 failed §5.7 (see STATUS 2026-11-01); remedy (2) passes.
 - Lesson items may carry the unit task id `<unit>-g<k>` on `play` / `review` items only (02 §3.3).
+
+## D14 — 2026-11-02 — §5.7 item 3 ruling D and i08 rulings (S2.15, content-reviewer)
+
+- **Ruling D (amends D13):** for an R6-gated task under F5 or F2b, the condition "the partner searches beyond h" is
+  dropped when the level's h ≥ the partner depth, provided every other D13 condition holds, N2's voided runs are ≤ 1/5
+  of N2 runs (else the failure rate is not evidence and item 3 stays required), every scored tree node is selective,
+  and the task text discloses that the continuation partner adds no pressure beyond the guard (`i08-g1.p`).
+  Implemented as `'n/a-D'` in `src/assessment/narrow-ruling.ts`. Scope: i08-g1, i09-g1, i11-g*, e08-g*, m06-g1 and the
+  F5 tasks of `xi` / `xe` / `xm` / `pi-g*`. Reason: 03 §5.2 F5 itself prescribes safe-sparring(2) above Basic; the
+  scripted line and the gated line share carry the opening evidence. Alternative (deeper partner) rejected: depth 3
+  does not fit the 04 budget on full boards and `pressing` is unvalidated (S2.18).
+- **Ruling E:** Pháo đầu / Central Cannon (C2=5), Bình phong mã / Screen Horses, Thuận pháo / Same-direction (C8=5),
+  Nghịch pháo / Opposite-direction (C2=5 for Black) and their main lines are correct as taught.
+- Standard plans (C8=7 Five-Seven Cannons, R2+6 river-crossing Chariot) are accepted `sound` wherever they lose < 1.
