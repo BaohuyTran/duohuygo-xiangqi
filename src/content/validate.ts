@@ -13,10 +13,11 @@ import {
   parseSquare,
   searchScore,
   squareName,
+  toFen,
   type Move,
   type Position,
 } from '../engine';
-import { evaluatePredicate, mobility, moveSignals, predicateErrors, safetyGuard, threatAtEnd, threatOf, type Predicate } from '../analysis';
+import { evaluatePredicate, mobility, moveSignals, predicateErrors, safetyGuard, threatAtEnd, threatOf, type Predicate, type SafetyGuard } from '../analysis';
 import { developmentFacts } from '../assessment/practical';
 import { PASS_MARK, R1_DEDUCTIONS, r0, r2, r3, r5, scoreTask, scoringWeights, type ScoreTerm } from '../assessment/rubrics';
 import { createRecord, appendMove } from '../play/record';
@@ -149,7 +150,37 @@ interface ExerciseContext {
   inPool: boolean;
 }
 
+/**
+ * Computed classes memoised within one `validateContent` / `validateItem` run. Verdicts are deterministic (node limits,
+ * never time), so a position + move + guard + objective seen twice (transpositions inside a tree, a lesson node that
+ * repeats a task node) is computed once. Scoped to the run: the memo is dropped when the outermost call returns.
+ */
+let classMemo: Map<string, ReturnType<typeof computeMoveClass>> | null = null;
+function memoMoveClass(pos: Position, move: Move, guard: SafetyGuard, objective: Predicate | undefined): ReturnType<typeof computeMoveClass> {
+  if (!classMemo) return computeMoveClass(pos, move, guard, objective);
+  const key = `${toFen(pos)}|${move.from}-${move.to}|${JSON.stringify(guard)}|${JSON.stringify(objective ?? null)}`;
+  let c = classMemo.get(key);
+  if (!c) {
+    c = computeMoveClass(pos, move, guard, objective);
+    classMemo.set(key, c);
+  }
+  return c;
+}
+function withClassMemo<T>(run: () => T): T {
+  if (classMemo) return run();
+  classMemo = new Map();
+  try {
+    return run();
+  } finally {
+    classMemo = null;
+  }
+}
+
 export function validateContent(input: unknown, options: ValidateOptions = {}): ValidationReport {
+  return withClassMemo(() => validateContentRun(input, options));
+}
+
+function validateContentRun(input: unknown, options: ValidateOptions = {}): ValidationReport {
   const errors: string[] = [];
   const ids = new Set<string>();
   const retired = new Set(options.retiredIds ?? RETIRED_IDS);
@@ -237,6 +268,10 @@ export function validateContent(input: unknown, options: ValidateOptions = {}): 
  * Ids, uniqueness and the assessment-only fields are checked by the caller.
  */
 export function validateItem(ex: unknown, options: ValidateOptions = {}): string[] {
+  return withClassMemo(() => validateItemRun(ex, options));
+}
+
+function validateItemRun(ex: unknown, options: ValidateOptions = {}): string[] {
   const retired = new Set(options.retiredIds ?? RETIRED_IDS);
   const problems: string[] = [];
   const checkKey = (field: string, value: unknown, optional = false) => {
@@ -670,7 +705,7 @@ function validateDecision(ex: Obj, pos: Position, checkKey: (field: string, valu
   const table = ex.table as DecisionExercise['table'];
   const guard = resolveGuard(decisionGuard(ex as unknown as DecisionExercise));
   for (const row of table) {
-    const c = computeMoveClass(pos, legal.get(row.move)!, guard, ex.objective as Predicate | undefined);
+    const c = memoMoveClass(pos, legal.get(row.move)!, guard, ex.objective as Predicate | undefined);
     if (c.class === 'not-checked') {
       problems.push(`${row.move}: the guard or objective could not be checked within the node limit; simplify the position`);
       continue;

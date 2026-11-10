@@ -30,11 +30,12 @@ import {
   type SimLearner,
   type SimRun,
 } from '../src/assessment/practical';
-import { narrowPositionsRuling } from '../src/assessment/narrow-ruling';
+import { narrowPositionsRuling, narrowRulingF } from '../src/assessment/narrow-ruling';
+import { PASS_MARK, scoringWeights } from '../src/assessment/rubrics';
 import { allPlayFixtures, playUnits } from '../src/assessment/play-fixtures';
 import { learnerNodeStats } from '../src/lessons/line';
 import { validateContent } from '../src/content/validate';
-import type { Exercise, PlayExercise, Unit } from '../src/content/types';
+import type { Exercise, LineNode, PlayExercise, Unit } from '../src/content/types';
 import { legalMoves } from '../src/engine';
 import { directAnalyzer, positionsOf } from '../src/play';
 
@@ -120,6 +121,19 @@ function partnerThreatened(ex: PlayExercise, run: SimRun): boolean {
   });
 }
 
+/** Learner nodes of the tree on the reference path (reference[0], first authored reply at each opponent node). */
+function referenceTreeNodes(ex: PlayExercise): number {
+  let node: LineNode | undefined = ex.tree;
+  let n = 0;
+  for (const key of ex.reference?.[0] ?? []) {
+    if (!node || node.kind !== 'learner') break;
+    n++;
+    const next: LineNode | undefined = node.next?.[key];
+    node = next && next.kind === 'opponent' ? next.replies[0]?.next : undefined;
+  }
+  return n;
+}
+
 async function main() {
   const units = loadUnits();
   const report = validateContent(units);
@@ -167,7 +181,20 @@ async function main() {
         });
         if (narrow < 3 && ruling === 'n/a') checks.push(['3 ≥ 3 narrow positions in the reference run', 'n/a', `${narrow} — n/a (R6 gate: selective nodes, N2 fails, partner deeper than h, L reached)`]);
         else if (narrow < 3 && ruling === 'n/a-D') checks.push(['3 ≥ 3 narrow positions in the reference run', 'n/a', `${narrow} — n/a (ruling D: ${fb}, h ≥ partner depth, selective nodes, N2 fails, N2 voids ≤ 1/5, L reached)`]);
-        else checks.push(['3 ≥ 3 narrow positions in the reference run', narrow >= 3, `${narrow}`]);
+        else {
+          // Ruling F (S2.16): R3 / R4 tasks whose objective is necessary, with ≥ 3 selective tree nodes on the reference
+          // path and a genuinely different second plan that passes every seed.
+          const f = narrowRulingF({
+            weights: scoringWeights(ex.rubrics, fb),
+            passMark: ex.passMark ?? PASS_MARK,
+            referenceTreeNodes: referenceTreeNodes(ex),
+            treeNodesSelective: ex.tree ? learnerNodeStats({ root: ex.tree }).every((s) => s.selective) : false,
+            secondPlanPasses: second !== null && passes(second) === runs,
+            secondPlanDiffers: !!ex.reference?.[1] && JSON.stringify(ex.reference[1]) !== JSON.stringify(ex.reference[0]),
+          });
+          if (narrow < 3 && f === 'n/a-F') checks.push(['3 ≥ 3 narrow positions in the reference run', 'n/a', `${narrow} — n/a (ruling F: objective necessary, ≥ 3 selective tree nodes, second plan passes)`]);
+          else checks.push(['3 ≥ 3 narrow positions in the reference run', narrow >= 3, `${narrow}`]);
+        }
       }
       if (ex.resistance) checks.push(['5 real resistance (a partner threat)', partnerThreatened(ex, ref[0]), '']);
       if (second) checks.push(['6 second plan passes every seed', passes(second) === runs, `${passes(second)}/${runs}`]);

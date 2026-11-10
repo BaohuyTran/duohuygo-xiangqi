@@ -26,7 +26,7 @@ Must work in desktop and phone browsers and as an installable, offline-capable P
 | Run all tests once | `npm test` |
 | Tests in watch mode | `npm run test:watch` |
 | Run one test file | `npx vitest run src/engine/pieces.test.ts` |
-| Validate lesson + puzzle content only | `npx vitest run src/content` |
+| Validate lesson + puzzle content only (new-course units in parallel shards `validate-shard-*.test.ts`) | `npx vitest run src/content` |
 | Deep lesson proof (slow, ~6 min): every mate-in-4 `firstMoves` list wins and is complete | `npm run content:deep` |
 | Regenerate puzzles (dev-time, ~10 min, deterministic) | `npm run puzzles:generate` |
 | Lint (oxlint) | `npm run lint` |
@@ -105,12 +105,13 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     ├── content/
     │   ├── lessons/*.json  # One file per unit, loaded in track-rank, then file-name order
     │   ├── puzzles/*.json  # mate-in-1 / mate-in-2 / win-material, each ordered by difficulty
-    │   ├── assessment/*.json # Assessment pools (check / placement / placement-practical / exam); none yet (S2.16 adds the first)
+    │   ├── assessment/*.json # Assessment pools (check / placement / placement-practical / exam): a03-check, pa (slice), i01-check, b08-check (S2.16)
     │   ├── pools.ts        # Pool loader (`allPools`), `servablePools` (published, reviewed in the preview; drafts never), `poolsOf`
     │   ├── validate-pools.ts # Pool validator (ids per kind, 03 §4.2 rule 9 metadata, uniqueness corpus). Tests/scripts ONLY
     │   ├── types.ts        # Lesson/exercise JSON format (documented there)
     │   ├── puzzle-types.ts # Puzzle JSON format (documented there)
     │   ├── validate.ts     # Lesson validator (shape, i18n keys, metadata, side, legal + solvable exercises, pools)
+    │   ├── validate-shard.ts # TEST-ONLY: new-course units k mod 4 → validate-shard-k.test.ts (parallel validation)
     │   ├── validate-puzzles.ts # Puzzle verifier (legal FEN, goal reached, UNIQUE first move)
     │   ├── legality.ts     # Piece-count + reachable-point rules (shared by both validators)
     │   ├── normalize.ts    # Normal form up to file mirror + colour swap (duplicate / uniqueness checks)
@@ -144,7 +145,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── rubrics.ts      # R0–R7, line share, scoring weights by fallback, pass rules. Pure, no runtime analysis import
     │   ├── practical.ts    # Regimes + partner chains, F3/F4 exam slots + reachability, TaskState turns, facts, grants, simulated learners (LAZY: never in the main chunk)
     │   ├── regime.ts       # `PARTNER_REGIME` ('fallback' until S2.18)
-    │   ├── narrow-ruling.ts# §5.7 item 3 rulings A + D: n/a for R6 line-share-gate tasks (selective nodes, N2 fails, L reached; partner deeper than h, or F5/F2b with N2 voids ≤ 1/5)
+    │   ├── narrow-ruling.ts# §5.7 item 3 rulings A + D + F: n/a for R6 line-share-gate tasks (selective nodes, N2 fails, L reached; partner deeper than h, or F5/F2b with N2 voids ≤ 1/5); F: R3/R4 objective necessary + ≥ 3 selective tree nodes
     │   └── play-fixtures.ts# TEST-ONLY play / review fixtures (also `verify-practical.ts --fixtures`)
     ├── play/               # Training partners (policies.ts), game record (record.ts), training-ruleset adjudicator (adjudicate.ts), seeded RNG (rng.ts), index.ts. Pure: NO React/DOM/storage/gamification/clock/Math.random (enforced by purity.test.ts)
     ├── analysis/           # Pure analysis layer (no React/DOM, no gamification; imports only '../engine'; enforced by purity.test.ts)
@@ -426,9 +427,16 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   with an approving record (items are `verified` until the independent review). `src/content/pilot-b09.test.ts`.
 - Pilot `i08` (S2.15: `i08l3` + `i08-g1`, Red) is `src/content/lessons/i08-central-cannon.json` (`verified` until review);
   `src/content/pilot-i08.test.ts` pins its ladder, deviations, contrasts and the material safety of accepted moves / replies.
+- Pilot `a03` (S2.16: `a03l1`–`a03l3` + `a03-g1`, both colours) is `src/content/lessons/a03-improving-pieces.json`, with the
+  first assessment pools `assessment/a03-check.json`, `pa.json` (slice), `i01-check.json`, `b08-check.json` (all `verified`);
+  `src/content/pilot-a03.test.ts`. A pool `decision` / `line` carries no predicate (its `objective` is the lesson id; every
+  accepted row is authored); placement records live in `reviews/<pool>.json` (`pa.json`: `pa-NN`, `pa-gN`).
 - `verify-practical.ts` reports §5.7 item 3 as `N/A (R6 gate)` instead of FAIL when `narrowPositionsRuling` (ruling A,
   S2.14 content review) holds, or `N/A (ruling D)` for F5 / F2b tasks whose level h ≥ the partner depth (then N2 voids ≤ 1/5
-  too; the task text discloses that the continuation partner adds no pressure); otherwise the 3-narrow-positions rule applies.
+  too; the task text discloses that the continuation partner adds no pressure), or `N/A (ruling F)` (`narrowRulingF`, S2.16)
+  for R3/R4 tasks whose maximum score without the objective is below the pass mark, whose reference path has ≥ 3 learner
+  tree nodes each crediting ≤ 1/3 of the guard-passing moves, and whose items 4 and 6 pass; otherwise the
+  3-narrow-positions rule applies.
 - Partner regime: `PARTNER_REGIME` = `fallback` until S2.18. Task kind → chain in `partnerPlan` (03 §5.2): F1 (tree →
   forcing-attack(2), the task ends when it hands over), F1c (tree → forcing-attack(2) → resist mode k = d = 2), F2
   (safe-sparring(2, 1.0)), F2b (tree + line share), F5 (tree → safe-sparring(2, τ)), drills safe-sparring(2, τ);
@@ -456,7 +464,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   Every item: all new-course metadata + `unit` + `objective` (lesson id); RS placement items only in `pb` (`fullBoard`
   ones tagged b08). Interleaved check items live in their own unit's check pool. Served only `published` (`reviewed` in
   the preview) for levels the path shows; the release test needs an approving record per served item (placement ids
-  `pb-NN` do not yet fit gate.ts' per-unit record files — S2.16 must extend it). `npx vitest run src/content` validates.
+  `pa-NN` / `pa-gN` live in `reviews/<pool>.json`, e.g. `reviews/pa.json`; S2.16). `npx vitest run src/content` validates.
 - Assessments run in `LessonPlayer`'s `assessment` mode (no hearts/lives, no hints, no retries: a wrong first answer's
   red button is "Continue"; records get that mode). No XP, no hearts, available at 0 hearts; `src/assessment` never
   imports gamification. Every answer is logged (annotated with `strand`, `unit`, `objective`, `formId`) and its item

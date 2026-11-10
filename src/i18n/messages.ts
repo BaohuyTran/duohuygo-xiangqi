@@ -1834,6 +1834,992 @@ export const messages = {
     en: 'A playable opening, but this task practises the Central Cannon.',
     vi: 'Một cách khai cuộc đi được, nhưng bài này luyện Pháo đầu.',
   },
+
+  // ---------- New course: a03 "Improving poorly placed pieces" + interleaved i01 / b08 check items (S2.16) ----------
+  'a03.title': {
+    en: 'Improving poorly placed pieces',
+    vi: 'Cải thiện quân đứng kém',
+  },
+  'a03.desc': {
+    en: 'Find your worst-placed piece and give it a better square before you attack.',
+    vi: 'Tìm quân đứng kém nhất của bạn và đưa nó đến chỗ tốt hơn trước khi tấn công.',
+  },
+  'a03l1.title': {
+    en: 'The worst piece',
+    vi: 'Quân đứng kém nhất',
+  },
+  'a03l2.title': {
+    en: 'Routes',
+    vi: 'Đường đi của quân',
+  },
+  'a03l3.title': {
+    en: 'Improve instead of attack',
+    vi: 'Cải thiện thay vì tấn công',
+  },
+  'a03-g1.p.black': {
+    en: 'Black to move. Over the next three moves, give your worst-placed piece real scope, then free your next poorly placed piece. Keep everything safe.',
+    vi: 'Đen đi. Trong ba nước tới, hãy giúp quân đứng kém nhất thật sự hoạt động, rồi giải phóng quân đứng kém tiếp theo. Giữ an toàn cho mọi quân.',
+  },
+  'a03-g1.r.route': {
+    en: 'Starts the route: your worst-placed piece gains several moves, and nothing is lost.',
+    vi: 'Bắt đầu đường đi: quân đứng kém nhất có thêm nhiều nước đi, và không mất gì.',
+  },
+  'a03-g1.done': {
+    en: 'Your worst-placed piece has real scope now, the next one has more room too, and nothing was lost on the way.',
+    vi: 'Quân đứng kém nhất giờ đã thật sự hoạt động, quân kế tiếp cũng có thêm chỗ, và không mất gì trên đường đi.',
+  },
+  'a03.ss.p': {
+    en: 'Count how many moves each of your Chariots, Horses and Cannons has. Tap the one that is placed worst.',
+    vi: 'Hãy đếm số nước đi của từng Xe, Mã và Pháo của bạn. Chạm vào quân đứng kém nhất.',
+  },
+  'a03.n.ss.red': {
+    en: 'Red to move. Tap Red’s worst-placed piece.',
+    vi: 'Đỏ đi. Chạm vào quân đứng kém nhất của Đỏ.',
+  },
+  'a03.n.ss.black': {
+    en: 'Black to move. Tap Black’s worst-placed piece.',
+    vi: 'Đen đi. Chạm vào quân đứng kém nhất của Đen.',
+  },
+  'a03.n.red': {
+    en: 'Red to move. Play the best move.',
+    vi: 'Đỏ đi. Hãy đi nước tốt nhất.',
+  },
+  'a03.n.black': {
+    en: 'Black to move. Play the best move.',
+    vi: 'Đen đi. Hãy đi nước tốt nhất.',
+  },
+  'a03.d.p1': {
+    en: 'One of your pieces has almost no moves. Find a safe move that gives it more.',
+    vi: 'Một quân của bạn gần như không có nước đi. Hãy tìm một nước an toàn giúp nó có thêm nước đi.',
+  },
+  'a03.d.p0': {
+    en: 'Your move. Improve your position without losing material.',
+    vi: 'Đến lượt bạn. Hãy cải thiện thế cờ mà không mất quân.',
+  },
+  'a03.d.p3': {
+    en: 'An attacking move looks tempting here. Look for the move that really improves your position.',
+    vi: 'Ở đây có một nước tấn công trông hấp dẫn. Hãy tìm nước thật sự cải thiện thế cờ.',
+  },
+  'a03.r.small': {
+    en: 'This moves your worst piece, but it still has few moves afterwards: it is not well placed yet.',
+    vi: 'Nước này có di chuyển quân đứng kém nhất, nhưng sau đó nó vẫn có ít nước đi: nó vẫn chưa đứng tốt.',
+  },
+  'a03.r.decoycheck': {
+    en: 'This check looks active, but your opponent answers it and wins material.',
+    vi: 'Nước chiếu này trông tích cực, nhưng đối phương đỡ được và ăn được quân.',
+  },
+  'a03.r.decoycapture': {
+    en: 'This capture looks attractive, but your opponent wins back more than you take.',
+    vi: 'Nước ăn quân này trông hấp dẫn, nhưng đối phương ăn lại nhiều hơn.',
+  },
+  'a03.r.trade': {
+    en: 'An even trade at best, and your worst piece stays where it is.',
+    vi: 'Cùng lắm là đổi ngang, và quân đứng kém nhất vẫn ở chỗ cũ.',
+  },
+  'a03.r.win': {
+    en: 'This wins material by force, so it is a good answer too, even though it is not the improving plan.',
+    vi: 'Nước này ăn được quân một cách bắt buộc, nên cũng là một nước tốt, dù không phải kế hoạch cải thiện quân.',
+  },
+  'a03.l.win': {
+    en: 'That wins material by force: a good answer, and the exercise ends here.',
+    vi: 'Nước đó ăn được quân một cách bắt buộc: một nước tốt, và bài tập kết thúc ở đây.',
+  },
+  'a03.r.drop': {
+    en: 'This would improve a piece, but it leaves material for your opponent to win.',
+    vi: 'Nước này cải thiện một quân, nhưng để đối phương ăn được quân.',
+  },
+  'a03.r.check': {
+    en: 'A check that wins nothing, and your worst piece stays where it is.',
+    vi: 'Nước chiếu không được gì, và quân đứng kém nhất vẫn ở chỗ cũ.',
+  },
+  'a03.l.p1': {
+    en: 'Your worst piece needs a route. Improve it now, then keep improving after your opponent’s reply.',
+    vi: 'Quân đứng kém nhất của bạn cần một đường đi. Hãy cải thiện nó ngay, rồi tiếp tục cải thiện sau nước đáp của đối phương.',
+  },
+  'a03.l.p0': {
+    en: 'Your move. Improve your position over the next two moves without losing material.',
+    vi: 'Đến lượt bạn. Hãy cải thiện thế cờ trong hai nước tới mà không mất quân.',
+  },
+  'a03.l.hint2': {
+    en: 'Which of your pieces now has the fewest moves?',
+    vi: 'Giờ quân nào của bạn có ít nước đi nhất?',
+  },
+  'a03.l.reply': {
+    en: 'Your opponent answers with a safe move.',
+    vi: 'Đối phương đáp bằng một nước an toàn.',
+  },
+  'a03.l.done': {
+    en: 'Two improving moves in a row, and you lost nothing on the way.',
+    vi: 'Hai nước cải thiện liên tiếp, và bạn không mất gì trên đường đi.',
+  },
+  'a03.l.early': {
+    en: 'A good improving move that loses nothing.',
+    vi: 'Một nước cải thiện tốt mà không mất gì.',
+  },
+  'a03l1-01.text': {
+    en: 'The marked points are all the moves of your Horse on file 5: only 2. It has a piece on its leg, while your other Chariots, Horses and Cannons have at least 5 moves each. Before you look for an attack, ask which piece is doing the least.',
+    vi: 'Các điểm được đánh dấu là mọi nước đi của Mã ở cột 5 của bạn: chỉ 2. Nó đang bị cản chân, trong khi các Xe, Mã, Pháo khác của bạn có ít nhất 5 nước mỗi quân. Trước khi tìm nước tấn công, hãy hỏi quân nào đang làm ít việc nhất.',
+  },
+  'a03l1-02.x': {
+    en: 'Your Horse on file 3 has a piece on its leg: it has only 2 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 5).',
+    vi: 'Mã ở cột 3 của bạn đang bị cản chân: nó chỉ có 2 nước đi, ít hơn mọi Xe, Mã, Pháo khác của bạn (quân kế tiếp có 5).',
+  },
+  'a03l1-03.r.free': {
+    en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 7 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'a03l1-03.tempt': {
+    en: 'R2+5 looks active, but after R8+3 your opponent wins material. Freeing your Horse on file 7 is the better plan.',
+    vi: 'X2.5 trông tích cực, nhưng sau X8.3 đối phương ăn được quân. Giải phóng Mã ở cột 7 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l1-03.hint': {
+    en: 'Count the moves of each Chariot, Horse and Cannon: your Horse on file 7 has the fewest.',
+    vi: 'Hãy đếm nước đi của từng Xe, Mã, Pháo: Mã ở cột 7 của bạn có ít nhất.',
+  },
+  'a03l1-03.purpose': {
+    en: 'Your Horse on file 7 has a piece on its leg and had only 1 moves. C7=8, C7=9, H7+5, P7+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 7 của bạn đang bị cản chân và chỉ có 1 nước đi. P7-8, P7-9, M7.5, B7.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l1-03.key': {
+    en: 'After H7+5, your opponent\'s best reply by the engine is R8+8; it wins nothing.',
+    vi: 'Sau M7.5, nước đáp tốt nhất của đối phương theo máy là X8.8; nó không ăn được gì.',
+  },
+  'a03l1-03.error': {
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: C7=8, C7=9, H7+5, P7+1.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P7-8, P7-9, M7.5, B7.1.',
+  },
+  'a03l1-04.r.free': {
+    en: 'Your Horse on file 6 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 6 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'a03l1-04.tempt': {
+    en: 'R3=4 looks active, but after R6-1 your opponent wins material. Freeing your Horse on file 6 is the better plan.',
+    vi: 'X3-4 trông tích cực, nhưng sau X6/1 đối phương ăn được quân. Giải phóng Mã ở cột 6 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l1-04.purpose': {
+    en: 'Your Horse on file 6 has a piece on its leg and had only 1 moves. R7-1, R7+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 6 của bạn đang bị cản chân và chỉ có 1 nước đi. X7/1, X7.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l1-04.key': {
+    en: 'After R7-1, your opponent\'s best reply by the engine is R6-1; it wins nothing.',
+    vi: 'Sau X7/1, nước đáp tốt nhất của đối phương theo máy là X6/1; nó không ăn được gì.',
+  },
+  'a03l1-04.error': {
+    en: 'That move leaves your Horse on file 6 with few moves, or it loses material. Look for the move that frees it: R7-1, R7+1.',
+    vi: 'Nước đó để Mã ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X7/1, X7.1.',
+  },
+  'a03l1-05.r.free': {
+    en: 'Your Cannon on file 9 gets at least 3 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Pháo ở cột 9 của bạn có thêm ít nhất 3 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'a03l1-05.tempt': {
+    en: 'R2+8 looks active, but after R9=8 your opponent wins material. Freeing your Cannon on file 9 is the better plan.',
+    vi: 'X2.8 trông tích cực, nhưng sau X9-8 đối phương ăn được quân. Giải phóng Pháo ở cột 9 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l1-05.purpose': {
+    en: 'Your Cannon on file 9 is hemmed in where it stands and had only 1 moves. C9=8, H9+8, H9+7 give it real scope without losing anything.',
+    vi: 'Pháo ở cột 9 của bạn đang bị bó buộc ở chỗ đứng và chỉ có 1 nước đi. P9-8, M9.8, M9.7 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l1-05.key': {
+    en: 'After C9=8, your opponent\'s best reply by the engine is C6-1; it wins nothing.',
+    vi: 'Sau P9-8, nước đáp tốt nhất của đối phương theo máy là P6/1; nó không ăn được gì.',
+  },
+  'a03l1-05.error': {
+    en: 'That move leaves your Cannon on file 9 with few moves, or it loses material. Look for the move that frees it: C9=8, H9+8, H9+7.',
+    vi: 'Nước đó để Pháo ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P9-8, M9.8, M9.7.',
+  },
+  'a03l1-06.r.free': {
+    en: 'Your Horse on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 1 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03l1-06.tempt': {
+    en: 'C6=7 looks active, but after C7=4 your opponent wins material. Freeing your Horse on file 1 is the better plan.',
+    vi: 'P6-7 trông tích cực, nhưng sau P7-4 đối phương ăn được quân. Giải phóng Mã ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l1-06.purpose': {
+    en: 'Your Horse on file 1 has a piece on its leg and had only 2 moves. H1+2, H1-3 give it real scope without losing anything.',
+    vi: 'Mã ở cột 1 của bạn đang bị cản chân và chỉ có 2 nước đi. M1.2, M1/3 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l1-06.key': {
+    en: 'After H1+2, your opponent\'s best reply by the engine is C3=4; it wins nothing.',
+    vi: 'Sau M1.2, nước đáp tốt nhất của đối phương theo máy là P3-4; nó không ăn được gì.',
+  },
+  'a03l1-06.error': {
+    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look for the move that frees it: H1+2, H1-3.',
+    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1.2, M1/3.',
+  },
+  'a03l2-01.text': {
+    en: 'Your Horse on file 3 has moved before, yet it has only 1 moves (marked): a piece is not well placed just because it has moved. Plan a route of two or three moves that gives it real scope.',
+    vi: 'Mã ở cột 3 của bạn đã từng di chuyển, nhưng vẫn chỉ có 1 nước đi (được đánh dấu): một quân không phải đã đứng tốt chỉ vì nó đã di chuyển. Hãy tính một đường đi hai, ba nước giúp nó thật sự hoạt động.',
+  },
+  'a03l2-02.r.free': {
+    en: 'Your Horse on file 3 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 3 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'a03l2-02.tempt': {
+    en: 'R8+7 looks active, but after C6=2 your opponent wins material. Freeing your Horse on file 3 is the better plan.',
+    vi: 'X8.7 trông tích cực, nhưng sau P6-2 đối phương ăn được quân. Giải phóng Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-02.n1.r.free': {
+    en: 'Your Horse on file 3 gets at least 2 more moves this way (it had 3), and nothing is lost.',
+    vi: 'Mã ở cột 3 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 3), và không mất gì.',
+  },
+  'a03l2-02.n1.tempt': {
+    en: 'R8+7 looks active, but after C6=2 your opponent wins material. Freeing your Horse on file 3 is the better plan.',
+    vi: 'X8.7 trông tích cực, nhưng sau P6-2 đối phương ăn được quân. Giải phóng Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-02.n2.r.free': {
+    en: 'Your Horse on file 4 gets at least 2 more moves this way (it had 5), and nothing is lost.',
+    vi: 'Mã ở cột 4 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 5), và không mất gì.',
+  },
+  'a03l2-02.n2.tempt': {
+    en: 'R8+7 looks active, but after C6=2 your opponent wins material. Freeing your Horse on file 4 is the better plan.',
+    vi: 'X8.7 trông tích cực, nhưng sau P6-2 đối phương ăn được quân. Giải phóng Mã ở cột 4 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-02.hint': {
+    en: 'Which piece has the fewest moves? Start its route.',
+    vi: 'Quân nào có ít nước đi nhất? Hãy bắt đầu đường đi của nó.',
+  },
+  'a03l2-02.purpose': {
+    en: 'Your Horse on file 3 has a piece on its leg and had only 1 moves. H3-5, P3+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 3 của bạn đang bị cản chân và chỉ có 1 nước đi. M3/5, B3.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l2-02.key': {
+    en: 'After H3-5, your opponent\'s best reply by the engine is P9+1; it wins nothing.',
+    vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là B9.1; nó không ăn được gì.',
+  },
+  'a03l2-02.error': {
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: H3-5, P3+1.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M3/5, B3.1.',
+  },
+  'a03l2-03.r.free': {
+    en: 'Your Horse on file 2 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 2 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'a03l2-03.tempt': {
+    en: 'C3=5 looks active, but after H7+5 your opponent wins material. Freeing your Horse on file 2 is the better plan.',
+    vi: 'P3-5 trông tích cực, nhưng sau M7.5 đối phương ăn được quân. Giải phóng Mã ở cột 2 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-03.n1.r.free': {
+    en: 'Your Horse on file 3 gets at least 2 more moves this way (it had 5), and nothing is lost.',
+    vi: 'Mã ở cột 3 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 5), và không mất gì.',
+  },
+  'a03l2-03.n1.tempt': {
+    en: 'C3=5 looks active, but after H7+5 your opponent wins material. Freeing your Horse on file 3 is the better plan.',
+    vi: 'P3-5 trông tích cực, nhưng sau M7.5 đối phương ăn được quân. Giải phóng Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-03.hint': {
+    en: 'Which piece has the fewest moves? Start its route.',
+    vi: 'Quân nào có ít nước đi nhất? Hãy bắt đầu đường đi của nó.',
+  },
+  'a03l2-03.purpose': {
+    en: 'Your Horse on file 2 has a piece on its leg and had only 1 moves. H2-3, P3+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 2 của bạn đang bị cản chân và chỉ có 1 nước đi. M2/3, B3.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l2-03.key': {
+    en: 'After H2-3, your opponent\'s best reply by the engine is R8=9; it wins nothing.',
+    vi: 'Sau M2/3, nước đáp tốt nhất của đối phương theo máy là X8-9; nó không ăn được gì.',
+  },
+  'a03l2-03.error': {
+    en: 'That move leaves your Horse on file 2 with few moves, or it loses material. Look for the move that frees it: H2-3, P3+1.',
+    vi: 'Nước đó để Mã ở cột 2 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M2/3, B3.1.',
+  },
+  'a03l2-04.r.free': {
+    en: 'Your Cannon on file 6 gets at least 3 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Pháo ở cột 6 của bạn có thêm ít nhất 3 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03l2-04.tempt': {
+    en: 'R4+8 looks active, but after K5=6 your opponent wins material. Freeing your Cannon on file 6 is the better plan.',
+    vi: 'X4.8 trông tích cực, nhưng sau Tg5-6 đối phương ăn được quân. Giải phóng Pháo ở cột 6 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-04.n1.r.free': {
+    en: 'Your Cannon on file 6 gets at least 4 more moves this way (it had 8), and nothing is lost.',
+    vi: 'Pháo ở cột 6 của bạn có thêm ít nhất 4 nước đi theo cách này (trước đó chỉ có 8), và không mất gì.',
+  },
+  'a03l2-04.n1.tempt': {
+    en: 'R4+8 looks active, but after K5=6 your opponent wins material. Freeing your Cannon on file 6 is the better plan.',
+    vi: 'X4.8 trông tích cực, nhưng sau Tg5-6 đối phương ăn được quân. Giải phóng Pháo ở cột 6 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-04.n2.r.free': {
+    en: 'Your Cannon on file 6 gets at least 4 more moves this way (it had 12), and nothing is lost.',
+    vi: 'Pháo ở cột 6 của bạn có thêm ít nhất 4 nước đi theo cách này (trước đó chỉ có 12), và không mất gì.',
+  },
+  'a03l2-04.n2.tempt': {
+    en: 'R4+8 looks active, but after K5=6 your opponent wins material. Freeing your Cannon on file 6 is the better plan.',
+    vi: 'X4.8 trông tích cực, nhưng sau Tg5-6 đối phương ăn được quân. Giải phóng Pháo ở cột 6 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-04.purpose': {
+    en: 'Your Cannon on file 6 is hemmed in where it stands and had only 2 moves. H7+6, H7-9, -C-1, E5+3 give it real scope without losing anything.',
+    vi: 'Pháo ở cột 6 của bạn đang bị bó buộc ở chỗ đứng và chỉ có 2 nước đi. M7.6, M7/9, Ps/1, T5.3 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l2-04.key': {
+    en: 'After -C-1, your opponent\'s best reply by the engine is C4=7; it wins nothing.',
+    vi: 'Sau Ps/1, nước đáp tốt nhất của đối phương theo máy là P4-7; nó không ăn được gì.',
+  },
+  'a03l2-04.error': {
+    en: 'That move leaves your Cannon on file 6 with few moves, or it loses material. Look for the move that frees it: H7+6, H7-9, -C-1, E5+3.',
+    vi: 'Nước đó để Pháo ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M7.6, M7/9, Ps/1, T5.3.',
+  },
+  'a03l2-05.r.free': {
+    en: 'Your Horse on file 5 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 5 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03l2-05.tempt': {
+    en: 'R6=7 looks active, but after P3+1 your opponent wins material. Freeing your Horse on file 5 is the better plan.',
+    vi: 'X6-7 trông tích cực, nhưng sau B3.1 đối phương ăn được quân. Giải phóng Mã ở cột 5 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-05.purpose': {
+    en: 'Your Horse on file 5 has a piece on its leg and had only 2 moves. H5+6, H5+4 give it real scope without losing anything.',
+    vi: 'Mã ở cột 5 của bạn đang bị cản chân và chỉ có 2 nước đi. M5.6, M5.4 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l2-05.key': {
+    en: 'After H5+6, your opponent\'s best reply by the engine is C4+4; it wins nothing.',
+    vi: 'Sau M5.6, nước đáp tốt nhất của đối phương theo máy là P4.4; nó không ăn được gì.',
+  },
+  'a03l2-05.error': {
+    en: 'That move leaves your Horse on file 5 with few moves, or it loses material. Look for the move that frees it: H5+6, H5+4.',
+    vi: 'Nước đó để Mã ở cột 5 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M5.6, M5.4.',
+  },
+  'a03l2-06.r.free': {
+    en: 'Your Cannon on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Pháo ở cột 1 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03l2-06.tempt': {
+    en: 'R6+6 looks active, but after R1=4 your opponent wins material. Freeing your Cannon on file 1 is the better plan.',
+    vi: 'X6.6 trông tích cực, nhưng sau X1-4 đối phương ăn được quân. Giải phóng Pháo ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-06.n1.r.free': {
+    en: 'Your Cannon on file 1 gets at least 1 more moves this way (it had 4), and nothing is lost.',
+    vi: 'Pháo ở cột 1 của bạn có thêm ít nhất 1 nước đi theo cách này (trước đó chỉ có 4), và không mất gì.',
+  },
+  'a03l2-06.n1.tempt': {
+    en: 'R6+6 looks active, but after R1=4 your opponent wins material. Freeing your Cannon on file 1 is the better plan.',
+    vi: 'X6.6 trông tích cực, nhưng sau X1-4 đối phương ăn được quân. Giải phóng Pháo ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l2-06.purpose': {
+    en: 'Your Cannon on file 1 is hemmed in where it stands and had only 2 moves. H1-3, C1+2 give it real scope without losing anything.',
+    vi: 'Pháo ở cột 1 của bạn đang bị bó buộc ở chỗ đứng và chỉ có 2 nước đi. M1/3, P1.2 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l2-06.key': {
+    en: 'After C1+2, your opponent\'s best reply by the engine is C8=9; it wins nothing.',
+    vi: 'Sau P1.2, nước đáp tốt nhất của đối phương theo máy là P8-9; nó không ăn được gì.',
+  },
+  'a03l2-06.error': {
+    en: 'That move leaves your Cannon on file 1 with few moves, or it loses material. Look for the move that frees it: H1-3, C1+2.',
+    vi: 'Nước đó để Pháo ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1/3, P1.2.',
+  },
+  'a03l3-01.text': {
+    en: 'Contrast: C8+3 (to the highlighted point) looks active, but your opponent answers it and wins material. Freeing your Horse on file 3, whose few moves are marked, is the better plan here.',
+    vi: 'So sánh: P8.3 (vào điểm được tô sáng) trông tích cực, nhưng đối phương đỡ được và ăn được quân. Ở đây, giải phóng Mã ở cột 3 của bạn, có ít nước đi đã được đánh dấu, là kế hoạch tốt hơn.',
+  },
+  'a03l3-02.r.free': {
+    en: 'Your Cannon on file 9 gets at least 3 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Pháo ở cột 9 của bạn có thêm ít nhất 3 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03l3-02.tempt': {
+    en: 'R2=3 looks active, but after E5-7 your opponent wins material. Freeing your Cannon on file 9 is the better plan.',
+    vi: 'X2-3 trông tích cực, nhưng sau T5/7 đối phương ăn được quân. Giải phóng Pháo ở cột 9 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l3-02.hint': {
+    en: 'Count the moves of each Chariot, Horse and Cannon: your Cannon on file 9 has the fewest.',
+    vi: 'Hãy đếm nước đi của từng Xe, Mã, Pháo: Pháo ở cột 9 của bạn có ít nhất.',
+  },
+  'a03l3-02.purpose': {
+    en: 'Your Cannon on file 9 is hemmed in where it stands and had only 2 moves. R9=8, C9=8 give it real scope without losing anything.',
+    vi: 'Pháo ở cột 9 của bạn đang bị bó buộc ở chỗ đứng và chỉ có 2 nước đi. X9-8, P9-8 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l3-02.key': {
+    en: 'After C9=8, your opponent\'s best reply by the engine is R2=1; it wins nothing.',
+    vi: 'Sau P9-8, nước đáp tốt nhất của đối phương theo máy là X2-1; nó không ăn được gì.',
+  },
+  'a03l3-02.error': {
+    en: 'That move leaves your Cannon on file 9 with few moves, or it loses material. Look for the move that frees it: R9=8, C9=8.',
+    vi: 'Nước đó để Pháo ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X9-8, P9-8.',
+  },
+  'a03l3-03.r.free': {
+    en: 'Your Cannon on file 4 gets at least 4 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Pháo ở cột 4 của bạn có thêm ít nhất 4 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'a03l3-03.tempt': {
+    en: 'R7+1 looks active, but after P3+1 your opponent wins material. Freeing your Cannon on file 4 is the better plan.',
+    vi: 'X7.1 trông tích cực, nhưng sau B3.1 đối phương ăn được quân. Giải phóng Pháo ở cột 4 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l3-03.hint': {
+    en: 'Count the moves of each Chariot, Horse and Cannon: your Cannon on file 4 has the fewest.',
+    vi: 'Hãy đếm nước đi của từng Xe, Mã, Pháo: Pháo ở cột 4 của bạn có ít nhất.',
+  },
+  'a03l3-03.purpose': {
+    en: 'Your Cannon on file 4 is hemmed in where it stands and had only 1 moves. E5-3, C4-1 give it real scope without losing anything.',
+    vi: 'Pháo ở cột 4 của bạn đang bị bó buộc ở chỗ đứng và chỉ có 1 nước đi. T5/3, P4/1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l3-03.key': {
+    en: 'After C4-1, your opponent\'s best reply by the engine is C8+2; it wins nothing.',
+    vi: 'Sau P4/1, nước đáp tốt nhất của đối phương theo máy là P8.2; nó không ăn được gì.',
+  },
+  'a03l3-03.error': {
+    en: 'That move leaves your Cannon on file 4 with few moves, or it loses material. Look for the move that frees it: E5-3, C4-1.',
+    vi: 'Nước đó để Pháo ở cột 4 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: T5/3, P4/1.',
+  },
+  'a03l3-04.r.free': {
+    en: 'Your Horse on file 9 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 9 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03l3-04.tempt': {
+    en: 'C2+4 looks active, but after H6+8 your opponent wins material. Freeing your Horse on file 9 is the better plan.',
+    vi: 'P2.4 trông tích cực, nhưng sau M6.8 đối phương ăn được quân. Giải phóng Mã ở cột 9 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l3-04.purpose': {
+    en: 'Your Horse on file 9 has a piece on its leg and had only 2 moves. H9+8, H9-7 give it real scope without losing anything.',
+    vi: 'Mã ở cột 9 của bạn đang bị cản chân và chỉ có 2 nước đi. M9.8, M9/7 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l3-04.key': {
+    en: 'After H9+8, your opponent\'s best reply by the engine is R9=6; it wins nothing.',
+    vi: 'Sau M9.8, nước đáp tốt nhất của đối phương theo máy là X9-6; nó không ăn được gì.',
+  },
+  'a03l3-04.error': {
+    en: 'That move leaves your Horse on file 9 with few moves, or it loses material. Look for the move that frees it: H9+8, H9-7.',
+    vi: 'Nước đó để Mã ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M9.8, M9/7.',
+  },
+  'a03l3-05.r.free': {
+    en: 'Your Horse on file 3 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 3 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03l3-05.tempt': {
+    en: 'R2+5 looks active, but after R8+2 your opponent wins material. Freeing your Horse on file 3 is the better plan.',
+    vi: 'X2.5 trông tích cực, nhưng sau X8.2 đối phương ăn được quân. Giải phóng Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03l3-05.purpose': {
+    en: 'Your Horse on file 3 has a piece on its leg and had only 2 moves. H3-5, P3+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 3 của bạn đang bị cản chân và chỉ có 2 nước đi. M3/5, B3.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03l3-05.key': {
+    en: 'After H3-5, your opponent\'s best reply by the engine is C4=2; it wins nothing.',
+    vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là P4-2; nó không ăn được gì.',
+  },
+  'a03l3-05.error': {
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: H3-5, P3+1.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M3/5, B3.1.',
+  },
+  'a03-c01.x': {
+    en: 'Your Chariot on file 1 has not left its corner yet: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 2).',
+    vi: 'Xe ở cột 1 của bạn vẫn chưa rời góc: nó chỉ có 0 nước đi, ít hơn mọi Xe, Mã, Pháo khác của bạn (quân kế tiếp có 2).',
+  },
+  'a03-c02.r.free': {
+    en: 'Your Horse on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 1 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03-c02.tempt': {
+    en: 'R8=7 looks active, but after P3+1 your opponent wins material. Freeing your Horse on file 1 is the better plan.',
+    vi: 'X8-7 trông tích cực, nhưng sau B3.1 đối phương ăn được quân. Giải phóng Mã ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c02.purpose': {
+    en: 'Your Horse on file 1 has a piece on its leg and had only 2 moves. H1-3, H1+3 give it real scope without losing anything.',
+    vi: 'Mã ở cột 1 của bạn đang bị cản chân và chỉ có 2 nước đi. M1/3, M1.3 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c02.key': {
+    en: 'After H1-3, your opponent\'s best reply by the engine is A6+5; it wins nothing.',
+    vi: 'Sau M1/3, nước đáp tốt nhất của đối phương theo máy là S6.5; nó không ăn được gì.',
+  },
+  'a03-c02.error': {
+    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look for the move that frees it: H1-3, H1+3.',
+    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1/3, M1.3.',
+  },
+  'a03-c03.r.free': {
+    en: 'Your Horse on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 1 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03-c03.tempt': {
+    en: 'C2+5 looks active, but after C5=8 your opponent wins material. Freeing your Horse on file 1 is the better plan.',
+    vi: 'P2.5 trông tích cực, nhưng sau P5-8 đối phương ăn được quân. Giải phóng Mã ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c03.purpose': {
+    en: 'Your Horse on file 1 has a piece on its leg and had only 2 moves. H1+2, H1-3 give it real scope without losing anything.',
+    vi: 'Mã ở cột 1 của bạn đang bị cản chân và chỉ có 2 nước đi. M1.2, M1/3 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c03.key': {
+    en: 'After H1+2, your opponent\'s best reply by the engine is C7+3; it wins nothing.',
+    vi: 'Sau M1.2, nước đáp tốt nhất của đối phương theo máy là P7.3; nó không ăn được gì.',
+  },
+  'a03-c03.error': {
+    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look for the move that frees it: H1+2, H1-3.',
+    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1.2, M1/3.',
+  },
+  'a03-c04.r.free': {
+    en: 'Your Chariot on file 1 gets at least 7 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Xe ở cột 1 của bạn có thêm ít nhất 7 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03-c04.tempt': {
+    en: 'C8=5 looks active, but after R2+5 your opponent wins material. Freeing your Chariot on file 1 is the better plan.',
+    vi: 'P8-5 trông tích cực, nhưng sau X2.5 đối phương ăn được quân. Giải phóng Xe ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c04.purpose': {
+    en: 'Your Chariot on file 1 has not left its corner yet and had only 2 moves. R1=2, R1+1 give it real scope without losing anything.',
+    vi: 'Xe ở cột 1 của bạn vẫn chưa rời góc và chỉ có 2 nước đi. X1-2, X1.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c04.key': {
+    en: 'After R1=2, your opponent\'s best reply by the engine is R8+9; it wins nothing.',
+    vi: 'Sau X1-2, nước đáp tốt nhất của đối phương theo máy là X8.9; nó không ăn được gì.',
+  },
+  'a03-c04.error': {
+    en: 'That move leaves your Chariot on file 1 with few moves, or it loses material. Look for the move that frees it: R1=2, R1+1.',
+    vi: 'Nước đó để Xe ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X1-2, X1.1.',
+  },
+  'a03-c05.r.free': {
+    en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 7 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'a03-c05.tempt': {
+    en: 'C2=3 looks active, but after H6-7 your opponent wins material. Freeing your Horse on file 7 is the better plan.',
+    vi: 'P2-3 trông tích cực, nhưng sau M6/7 đối phương ăn được quân. Giải phóng Mã ở cột 7 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c05.purpose': {
+    en: 'Your Horse on file 7 has a piece on its leg and had only 1 moves. P7+1, R7=8, R7=6 give it real scope without losing anything.',
+    vi: 'Mã ở cột 7 của bạn đang bị cản chân và chỉ có 1 nước đi. B7.1, X7-8, X7-6 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c05.key': {
+    en: 'After P7+1, your opponent\'s best reply by the engine is A6+5; it wins nothing.',
+    vi: 'Sau B7.1, nước đáp tốt nhất của đối phương theo máy là S6.5; nó không ăn được gì.',
+  },
+  'a03-c05.error': {
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: P7+1, R7=8, R7=6.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: B7.1, X7-8, X7-6.',
+  },
+  'a03-c06.x': {
+    en: 'Your Horse on file 4 has a piece on its leg: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 2).',
+    vi: 'Mã ở cột 4 của bạn đang bị cản chân: nó chỉ có 0 nước đi, ít hơn mọi Xe, Mã, Pháo khác của bạn (quân kế tiếp có 2).',
+  },
+  'a03-c07.r.free': {
+    en: 'Your Horse on file 4 gets at least 2 more moves this way (it had 0), and nothing is lost.',
+    vi: 'Mã ở cột 4 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 0), và không mất gì.',
+  },
+  'a03-c07.tempt': {
+    en: 'R6+4 looks active, but after C2=4 your opponent wins material. Freeing your Horse on file 4 is the better plan.',
+    vi: 'X6.4 trông tích cực, nhưng sau P2-4 đối phương ăn được quân. Giải phóng Mã ở cột 4 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c07.purpose': {
+    en: 'Your Horse on file 4 has a piece on its leg and had only 0 moves. C3=2, C3=1, C3-1, C3+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 4 của bạn đang bị cản chân và chỉ có 0 nước đi. P3-2, P3-1, P3/1, P3.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c07.key': {
+    en: 'After C3=2, your opponent\'s best reply by the engine is A6+5; it wins nothing.',
+    vi: 'Sau P3-2, nước đáp tốt nhất của đối phương theo máy là S6.5; nó không ăn được gì.',
+  },
+  'a03-c07.error': {
+    en: 'That move leaves your Horse on file 4 with few moves, or it loses material. Look for the move that frees it: C3=2, C3=1, C3-1, C3+1.',
+    vi: 'Nước đó để Mã ở cột 4 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P3-2, P3-1, P3/1, P3.1.',
+  },
+  'a03-c08.r.free': {
+    en: 'Your Horse on file 5 gets at least 2 more moves this way (it had 0), and nothing is lost.',
+    vi: 'Mã ở cột 5 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 0), và không mất gì.',
+  },
+  'a03-c08.tempt': {
+    en: 'C5+4 looks active, but after H3+5 your opponent wins material. Freeing your Horse on file 5 is the better plan.',
+    vi: 'P5.4 trông tích cực, nhưng sau M3.5 đối phương ăn được quân. Giải phóng Mã ở cột 5 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c08.purpose': {
+    en: 'Your Horse on file 5 has a piece on its leg and had only 0 moves. C5=6, C5=4 give it real scope without losing anything.',
+    vi: 'Mã ở cột 5 của bạn đang bị cản chân và chỉ có 0 nước đi. P5-6, P5-4 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c08.key': {
+    en: 'After C5=6, your opponent\'s best reply by the engine is +C=1; it wins nothing.',
+    vi: 'Sau P5-6, nước đáp tốt nhất của đối phương theo máy là Pt-1; nó không ăn được gì.',
+  },
+  'a03-c08.error': {
+    en: 'That move leaves your Horse on file 5 with few moves, or it loses material. Look for the move that frees it: C5=6, C5=4.',
+    vi: 'Nước đó để Mã ở cột 5 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P5-6, P5-4.',
+  },
+  'a03-c09.x': {
+    en: 'Your Horse on file 8 is still at home with a piece on its leg: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 2).',
+    vi: 'Mã ở cột 8 của bạn vẫn ở chỗ cũ và bị cản chân: nó chỉ có 0 nước đi, ít hơn mọi Xe, Mã, Pháo khác của bạn (quân kế tiếp có 2).',
+  },
+  'a03-c10.r.free': {
+    en: 'Your Cannon on file 9 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Pháo ở cột 9 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03-c10.tempt': {
+    en: 'R4+2 looks active, but after -C=6 your opponent wins material. Freeing your Cannon on file 9 is the better plan.',
+    vi: 'X4.2 trông tích cực, nhưng sau Ps-6 đối phương ăn được quân. Giải phóng Pháo ở cột 9 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c10.purpose': {
+    en: 'Your Cannon on file 9 is hemmed in where it stands and had only 2 moves. H7-6, C9=8, R9=7 give it real scope without losing anything.',
+    vi: 'Pháo ở cột 9 của bạn đang bị bó buộc ở chỗ đứng và chỉ có 2 nước đi. M7/6, P9-8, X9-7 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c10.key': {
+    en: 'After C9=8, your opponent\'s best reply by the engine is E7+5; it wins nothing.',
+    vi: 'Sau P9-8, nước đáp tốt nhất của đối phương theo máy là T7.5; nó không ăn được gì.',
+  },
+  'a03-c10.error': {
+    en: 'That move leaves your Cannon on file 9 with few moves, or it loses material. Look for the move that frees it: H7-6, C9=8, R9=7.',
+    vi: 'Nước đó để Pháo ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M7/6, P9-8, X9-7.',
+  },
+  'a03-c11.r.free': {
+    en: 'Your Horse on file 6 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 6 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'a03-c11.tempt': {
+    en: 'R1+4 looks active, but after R4+7 your opponent wins material. Freeing your Horse on file 6 is the better plan.',
+    vi: 'X1.4 trông tích cực, nhưng sau X4.7 đối phương ăn được quân. Giải phóng Mã ở cột 6 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c11.purpose': {
+    en: 'Your Horse on file 6 has a piece on its leg and had only 1 moves. C7=8, C7=9, C7-1, C7+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 6 của bạn đang bị cản chân và chỉ có 1 nước đi. P7-8, P7-9, P7/1, P7.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c11.key': {
+    en: 'After C7=8, your opponent\'s best reply by the engine is H9+8; it wins nothing.',
+    vi: 'Sau P7-8, nước đáp tốt nhất của đối phương theo máy là M9.8; nó không ăn được gì.',
+  },
+  'a03-c11.error': {
+    en: 'That move leaves your Horse on file 6 with few moves, or it loses material. Look for the move that frees it: C7=8, C7=9, C7-1, C7+1.',
+    vi: 'Nước đó để Mã ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P7-8, P7-9, P7/1, P7.1.',
+  },
+  'a03-c12.r.free': {
+    en: 'Your Cannon on file 1 gets at least 3 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Pháo ở cột 1 của bạn có thêm ít nhất 3 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'a03-c12.tempt': {
+    en: 'C6+5 looks active, but your Cannon on file 1 still has only 1 moves after it. Free that piece first.',
+    vi: 'P6.5 trông tích cực, nhưng sau đó Pháo ở cột 1 của bạn vẫn chỉ có 1 nước đi. Hãy giải phóng quân đó trước.',
+  },
+  'a03-c12.purpose': {
+    en: 'Your Cannon on file 1 is hemmed in where it stands and had only 1 moves. H1+2, H1+3 give it real scope without losing anything.',
+    vi: 'Pháo ở cột 1 của bạn đang bị bó buộc ở chỗ đứng và chỉ có 1 nước đi. M1.2, M1.3 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c12.key': {
+    en: 'After H1+2, your opponent\'s best reply by the engine is C9+6; it wins nothing.',
+    vi: 'Sau M1.2, nước đáp tốt nhất của đối phương theo máy là P9.6; nó không ăn được gì.',
+  },
+  'a03-c12.error': {
+    en: 'That move leaves your Cannon on file 1 with few moves, or it loses material. Look for the move that frees it: H1+2, H1+3.',
+    vi: 'Nước đó để Pháo ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1.2, M1.3.',
+  },
+  'a03-c13.r.free': {
+    en: 'Your Horse on file 3 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 3 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03-c13.tempt': {
+    en: 'R8=7 looks active, but after R3-1 your opponent wins material. Freeing your Horse on file 3 is the better plan.',
+    vi: 'X8-7 trông tích cực, nhưng sau X3/1 đối phương ăn được quân. Giải phóng Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c13.purpose': {
+    en: 'Your Horse on file 3 has a piece on its leg and had only 2 moves. P3+1, H3-5 give it real scope without losing anything.',
+    vi: 'Mã ở cột 3 của bạn đang bị cản chân và chỉ có 2 nước đi. B3.1, M3/5 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c13.key': {
+    en: 'After H3-5, your opponent\'s best reply by the engine is K5=4; it wins nothing.',
+    vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là Tg5-4; nó không ăn được gì.',
+  },
+  'a03-c13.error': {
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: P3+1, H3-5.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: B3.1, M3/5.',
+  },
+  'a03-c14.x': {
+    en: 'Your Cannon on file 5 is hemmed in where it stands: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 4).',
+    vi: 'Pháo ở cột 5 của bạn đang bị bó buộc ở chỗ đứng: nó chỉ có 0 nước đi, ít hơn mọi Xe, Mã, Pháo khác của bạn (quân kế tiếp có 4).',
+  },
+  'a03-c15.r.free': {
+    en: 'Your Horse on file 3 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 3 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03-c15.tempt': {
+    en: 'R8+5 looks active, but after R2+1 your opponent wins material. Freeing your Horse on file 3 is the better plan.',
+    vi: 'X8.5 trông tích cực, nhưng sau X2.1 đối phương ăn được quân. Giải phóng Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c15.purpose': {
+    en: 'Your Horse on file 3 has a piece on its leg and had only 2 moves. H3-5, P3+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 3 của bạn đang bị cản chân và chỉ có 2 nước đi. M3/5, B3.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c15.key': {
+    en: 'After H3-5, your opponent\'s best reply by the engine is P1+1; it wins nothing.',
+    vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là B1.1; nó không ăn được gì.',
+  },
+  'a03-c15.error': {
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: H3-5, P3+1.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M3/5, B3.1.',
+  },
+  'a03-c16.r.free': {
+    en: 'Your Cannon on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Pháo ở cột 1 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'a03-c16.tempt': {
+    en: 'C6=9 looks active, but after H3+1 your opponent wins material. Freeing your Cannon on file 1 is the better plan.',
+    vi: 'P6-9 trông tích cực, nhưng sau M3.1 đối phương ăn được quân. Giải phóng Pháo ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-c16.purpose': {
+    en: 'Your Cannon on file 1 is hemmed in where it stands and had only 2 moves. C1+4, H3-4, H3+5 give it real scope without losing anything.',
+    vi: 'Pháo ở cột 1 của bạn đang bị bó buộc ở chỗ đứng và chỉ có 2 nước đi. P1.4, M3/4, M3.5 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'a03-c16.key': {
+    en: 'After C1+4, your opponent\'s best reply by the engine is C5+3; it wins nothing.',
+    vi: 'Sau P1.4, nước đáp tốt nhất của đối phương theo máy là P5.3; nó không ăn được gì.',
+  },
+  'a03-c16.error': {
+    en: 'That move leaves your Cannon on file 1 with few moves, or it loses material. Look for the move that frees it: C1+4, H3-4, H3+5.',
+    vi: 'Nước đó để Pháo ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P1.4, M3/4, M3.5.',
+  },
+  'pa-01.x': {
+    en: 'Your Horse on file 6 has a piece on its leg: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 2).',
+    vi: 'Mã ở cột 6 của bạn đang bị cản chân: nó chỉ có 0 nước đi, ít hơn mọi Xe, Mã, Pháo khác của bạn (quân kế tiếp có 2).',
+  },
+  'pa-02.r.free': {
+    en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 7 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'pa-02.tempt': {
+    en: 'C2=5 looks active, but after R8+3 your opponent wins material. Freeing your Horse on file 7 is the better plan.',
+    vi: 'P2-5 trông tích cực, nhưng sau X8.3 đối phương ăn được quân. Giải phóng Mã ở cột 7 của bạn là kế hoạch tốt hơn.',
+  },
+  'pa-02.purpose': {
+    en: 'Your Horse on file 7 has a piece on its leg and had only 1 moves. P7+1, R7=6 give it real scope without losing anything.',
+    vi: 'Mã ở cột 7 của bạn đang bị cản chân và chỉ có 1 nước đi. B7.1, X7-6 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'pa-02.key': {
+    en: 'After P7+1, your opponent\'s best reply by the engine is C7+3; it wins nothing.',
+    vi: 'Sau B7.1, nước đáp tốt nhất của đối phương theo máy là P7.3; nó không ăn được gì.',
+  },
+  'pa-02.error': {
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: P7+1, R7=6.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: B7.1, X7-6.',
+  },
+  'pa-03.r.free': {
+    en: 'Your Horse on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 1 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'pa-03.tempt': {
+    en: 'C2=5 looks active, but after H3+5 your opponent wins material. Freeing your Horse on file 1 is the better plan.',
+    vi: 'P2-5 trông tích cực, nhưng sau M3.5 đối phương ăn được quân. Giải phóng Mã ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'pa-03.purpose': {
+    en: 'Your Horse on file 1 has a piece on its leg and had only 2 moves. H1+3, H1-3 give it real scope without losing anything.',
+    vi: 'Mã ở cột 1 của bạn đang bị cản chân và chỉ có 2 nước đi. M1.3, M1/3 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'pa-03.key': {
+    en: 'After H1+3, your opponent\'s best reply by the engine is C2=4; it wins nothing.',
+    vi: 'Sau M1.3, nước đáp tốt nhất của đối phương theo máy là P2-4; nó không ăn được gì.',
+  },
+  'pa-03.error': {
+    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look for the move that frees it: H1+3, H1-3.',
+    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1.3, M1/3.',
+  },
+  'pa-04.r.free': {
+    en: 'Your Horse on file 6 gets at least 3 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 6 của bạn có thêm ít nhất 3 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'pa-04.tempt': {
+    en: 'H3+4 looks active, but after R6+5 your opponent wins material. Freeing your Horse on file 6 is the better plan.',
+    vi: 'M3.4 trông tích cực, nhưng sau X6.5 đối phương ăn được quân. Giải phóng Mã ở cột 6 của bạn là kế hoạch tốt hơn.',
+  },
+  'pa-04.purpose': {
+    en: 'Your Horse on file 6 has a piece on its leg and had only 2 moves. H6+7, H6+8 give it real scope without losing anything.',
+    vi: 'Mã ở cột 6 của bạn đang bị cản chân và chỉ có 2 nước đi. M6.7, M6.8 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'pa-04.key': {
+    en: 'After H6+7, your opponent\'s best reply by the engine is P7+1; it wins nothing.',
+    vi: 'Sau M6.7, nước đáp tốt nhất của đối phương theo máy là B7.1; nó không ăn được gì.',
+  },
+  'pa-04.error': {
+    en: 'That move leaves your Horse on file 6 with few moves, or it loses material. Look for the move that frees it: H6+7, H6+8.',
+    vi: 'Nước đó để Mã ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M6.7, M6.8.',
+  },
+  'pa-05.r.free': {
+    en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 7 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'pa-05.tempt': {
+    en: 'C6+2 looks active, but after R5=4 your opponent wins material. Freeing your Horse on file 7 is the better plan.',
+    vi: 'P6.2 trông tích cực, nhưng sau X5-4 đối phương ăn được quân. Giải phóng Mã ở cột 7 của bạn là kế hoạch tốt hơn.',
+  },
+  'pa-05.purpose': {
+    en: 'Your Horse on file 7 has a piece on its leg and had only 1 moves. R7=8, R7=6 give it real scope without losing anything.',
+    vi: 'Mã ở cột 7 của bạn đang bị cản chân và chỉ có 1 nước đi. X7-8, X7-6 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'pa-05.key': {
+    en: 'After R7=8, your opponent\'s best reply by the engine is P3+1; it wins nothing.',
+    vi: 'Sau X7-8, nước đáp tốt nhất của đối phương theo máy là B3.1; nó không ăn được gì.',
+  },
+  'pa-05.error': {
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: R7=8, R7=6.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X7-8, X7-6.',
+  },
+  'pa-06.x': {
+    en: 'Your Horse on file 9 has a piece on its leg: it has only 2 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 4).',
+    vi: 'Mã ở cột 9 của bạn đang bị cản chân: nó chỉ có 2 nước đi, ít hơn mọi Xe, Mã, Pháo khác của bạn (quân kế tiếp có 4).',
+  },
+  'pa-07.r.free': {
+    en: 'Your Horse on file 3 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 3 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'pa-07.tempt': {
+    en: 'C8=9 looks active, but after E3+1 your opponent wins material. Freeing your Horse on file 3 is the better plan.',
+    vi: 'P8-9 trông tích cực, nhưng sau T3.1 đối phương ăn được quân. Giải phóng Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'pa-07.purpose': {
+    en: 'Your Horse on file 3 has a piece on its leg and had only 1 moves. P3+1, H3-5 give it real scope without losing anything.',
+    vi: 'Mã ở cột 3 của bạn đang bị cản chân và chỉ có 1 nước đi. B3.1, M3/5 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'pa-07.key': {
+    en: 'After H3-5, your opponent\'s best reply by the engine is R8+1; it wins nothing.',
+    vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là X8.1; nó không ăn được gì.',
+  },
+  'pa-07.error': {
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: P3+1, H3-5.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: B3.1, M3/5.',
+  },
+  'pa-08.r.free': {
+    en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 7 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'pa-08.tempt': {
+    en: 'R2+4 looks active, but after C5=8 your opponent wins material. Freeing your Horse on file 7 is the better plan.',
+    vi: 'X2.4 trông tích cực, nhưng sau P5-8 đối phương ăn được quân. Giải phóng Mã ở cột 7 của bạn là kế hoạch tốt hơn.',
+  },
+  'pa-08.purpose': {
+    en: 'Your Horse on file 7 has a piece on its leg and had only 2 moves. C7=6, C7+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 7 của bạn đang bị cản chân và chỉ có 2 nước đi. P7-6, P7.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'pa-08.key': {
+    en: 'After C7=6, your opponent\'s best reply by the engine is E7+9; it wins nothing.',
+    vi: 'Sau P7-6, nước đáp tốt nhất của đối phương theo máy là T7.9; nó không ăn được gì.',
+  },
+  'pa-08.error': {
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: C7=6, C7+1.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P7-6, P7.1.',
+  },
+  'pa-09.x': {
+    en: 'Your Horse on file 3 has a piece on its leg: it has only 1 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 3).',
+    vi: 'Mã ở cột 3 của bạn đang bị cản chân: nó chỉ có 1 nước đi, ít hơn mọi Xe, Mã, Pháo khác của bạn (quân kế tiếp có 3).',
+  },
+  'pa-10.r.free': {
+    en: 'Your Horse on file 4 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 4 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'pa-10.tempt': {
+    en: 'C4=7 looks active, but after R3+3 your opponent wins material. Freeing your Horse on file 4 is the better plan.',
+    vi: 'P4-7 trông tích cực, nhưng sau X3.3 đối phương ăn được quân. Giải phóng Mã ở cột 4 của bạn là kế hoạch tốt hơn.',
+  },
+  'pa-10.purpose': {
+    en: 'Your Horse on file 4 has a piece on its leg and had only 2 moves. H4+2, A5+4 give it real scope without losing anything.',
+    vi: 'Mã ở cột 4 của bạn đang bị cản chân và chỉ có 2 nước đi. M4.2, S5.4 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'pa-10.key': {
+    en: 'After H4+2, your opponent\'s best reply by the engine is E7+5; it wins nothing.',
+    vi: 'Sau M4.2, nước đáp tốt nhất của đối phương theo máy là T7.5; nó không ăn được gì.',
+  },
+  'pa-10.error': {
+    en: 'That move leaves your Horse on file 4 with few moves, or it loses material. Look for the move that frees it: H4+2, A5+4.',
+    vi: 'Nước đó để Mã ở cột 4 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M4.2, S5.4.',
+  },
+  'i01-c01.r.free': {
+    en: 'Your Horse on file 8 gets at least 2 more moves this way (it had 1), and nothing is lost.',
+    vi: 'Mã ở cột 8 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 1), và không mất gì.',
+  },
+  'i01-c01.tempt': {
+    en: 'R8=7 looks active, but after E1-3 your opponent wins material. Freeing your Horse on file 8 is the better plan.',
+    vi: 'X8-7 trông tích cực, nhưng sau T1/3 đối phương ăn được quân. Giải phóng Mã ở cột 8 của bạn là kế hoạch tốt hơn.',
+  },
+  'i01-c01.purpose': {
+    en: 'Your Horse on file 8 is still at home with a piece on its leg and had only 1 moves. C8=9, C8=7 give it real scope without losing anything.',
+    vi: 'Mã ở cột 8 của bạn vẫn ở chỗ cũ và bị cản chân và chỉ có 1 nước đi. P8-9, P8-7 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'i01-c01.key': {
+    en: 'After C8=9, your opponent\'s best reply by the engine is C8=9; it wins nothing.',
+    vi: 'Sau P8-9, nước đáp tốt nhất của đối phương theo máy là P8-9; nó không ăn được gì.',
+  },
+  'i01-c01.error': {
+    en: 'That move leaves your Horse on file 8 with few moves, or it loses material. Look for the move that frees it: C8=9, C8=7.',
+    vi: 'Nước đó để Mã ở cột 8 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P8-9, P8-7.',
+  },
+  'i01-c02.r.free': {
+    en: 'Your Chariot on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Xe ở cột 1 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'i01-c02.tempt': {
+    en: 'C3+4 looks active, but after C2=7 your opponent wins material. Freeing your Chariot on file 1 is the better plan.',
+    vi: 'P3.4 trông tích cực, nhưng sau P2-7 đối phương ăn được quân. Giải phóng Xe ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'i01-c02.purpose': {
+    en: 'Your Chariot on file 1 has not left its corner yet and had only 2 moves. R1=2, R1+1, H1-3 give it real scope without losing anything.',
+    vi: 'Xe ở cột 1 của bạn vẫn chưa rời góc và chỉ có 2 nước đi. X1-2, X1.1, M1/3 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'i01-c02.key': {
+    en: 'After R1=2, your opponent\'s best reply by the engine is R8+9; it wins nothing.',
+    vi: 'Sau X1-2, nước đáp tốt nhất của đối phương theo máy là X8.9; nó không ăn được gì.',
+  },
+  'i01-c02.error': {
+    en: 'That move leaves your Chariot on file 1 with few moves, or it loses material. Look for the move that frees it: R1=2, R1+1, H1-3.',
+    vi: 'Nước đó để Xe ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X1-2, X1.1, M1/3.',
+  },
+  'b08-c01.r.free': {
+    en: 'Your Horse on file 9 gets at least 2 more moves this way (it had 0), and nothing is lost.',
+    vi: 'Mã ở cột 9 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 0), và không mất gì.',
+  },
+  'b08-c01.tempt': {
+    en: 'C2+2 looks active, but after C2+7 your opponent wins material. Freeing your Horse on file 9 is the better plan.',
+    vi: 'P2.2 trông tích cực, nhưng sau P2.7 đối phương ăn được quân. Giải phóng Mã ở cột 9 của bạn là kế hoạch tốt hơn.',
+  },
+  'b08-c01.purpose': {
+    en: 'Your Horse on file 9 has a piece on its leg and had only 0 moves. -R=7, -R-1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 9 của bạn đang bị cản chân và chỉ có 0 nước đi. Xs-7, Xs/1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'b08-c01.key': {
+    en: 'After -R=7, your opponent\'s best reply by the engine is R9+1; it wins nothing.',
+    vi: 'Sau Xs-7, nước đáp tốt nhất của đối phương theo máy là X9.1; nó không ăn được gì.',
+  },
+  'b08-c01.error': {
+    en: 'That move leaves your Horse on file 9 with few moves, or it loses material. Look for the move that frees it: -R=7, -R-1.',
+    vi: 'Nước đó để Mã ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: Xs-7, Xs/1.',
+  },
+  'b08-c02.r.free': {
+    en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 2), and nothing is lost.',
+    vi: 'Mã ở cột 7 của bạn có thêm ít nhất 2 nước đi theo cách này (trước đó chỉ có 2), và không mất gì.',
+  },
+  'b08-c02.tempt': {
+    en: 'C4=1 looks active, but after H7+9 your opponent wins material. Freeing your Horse on file 7 is the better plan.',
+    vi: 'P4-1 trông tích cực, nhưng sau M7.9 đối phương ăn được quân. Giải phóng Mã ở cột 7 của bạn là kế hoạch tốt hơn.',
+  },
+  'b08-c02.purpose': {
+    en: 'Your Horse on file 7 has a piece on its leg and had only 2 moves. H7-5, P7+1 give it real scope without losing anything.',
+    vi: 'Mã ở cột 7 của bạn đang bị cản chân và chỉ có 2 nước đi. M7/5, B7.1 giúp nó thật sự hoạt động mà không mất gì.',
+  },
+  'b08-c02.key': {
+    en: 'After H7-5, your opponent\'s best reply by the engine is C2=5; it wins nothing.',
+    vi: 'Sau M7/5, nước đáp tốt nhất của đối phương theo máy là P2-5; nó không ăn được gì.',
+  },
+  'b08-c02.error': {
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: H7-5, P7+1.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M7/5, B7.1.',
+  },
+  'a03.r.decoyadvance': {
+    en: 'This advance looks active, but your opponent answers it and wins material.',
+    vi: 'Nước tiến quân này trông tích cực, nhưng đối phương đỡ được và ăn được quân.',
+  },
+  'a03-g1.t1': {
+    en: 'R9=8 looks active, but after R2+7 your opponent wins material. Improving your Cannon on file 1 is the better plan.',
+    vi: 'X9-8 trông tích cực, nhưng sau X2.7 đối phương ăn được quân. Cải thiện Pháo ở cột 1 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-g1.t2': {
+    en: 'R9=8 looks active, but after R2+7 your opponent wins material. Improving your Horse on file 3 is the better plan.',
+    vi: 'X9-8 trông tích cực, nhưng sau X2.7 đối phương ăn được quân. Cải thiện Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-g1.t3': {
+    en: 'R9=8 looks active, but after R2+7 your opponent wins material. Improving your Horse on file 3 is the better plan.',
+    vi: 'X9-8 trông tích cực, nhưng sau X2.7 đối phương ăn được quân. Cải thiện Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-g1.t4': {
+    en: 'C6+4 looks active, but after C8=1 your opponent wins material. Improving your Horse on file 3 is the better plan.',
+    vi: 'P6.4 trông tích cực, nhưng sau P8-1 đối phương ăn được quân. Cải thiện Mã ở cột 3 của bạn là kế hoạch tốt hơn.',
+  },
+  'a03-g1.r.route2': {
+    en: 'Continues the route: your Cannon now has at least 11 moves, and nothing is lost.',
+    vi: 'Tiếp tục đường đi: Pháo của bạn giờ có ít nhất 11 nước đi, và không mất gì.',
+  },
+  'a03-g1.r.next': {
+    en: 'Your Cannon keeps at least 11 moves, and this gives your Horse more room (at least 4 moves) without losing anything.',
+    vi: 'Pháo của bạn vẫn giữ ít nhất 11 nước đi, và nước này giúp Mã có thêm chỗ (ít nhất 4 nước đi) mà không mất gì.',
+  },
+  'a03-g1.r.small2': {
+    en: 'This moves your next poorly placed Horse, but it still has few moves afterwards: free its point first.',
+    vi: 'Nước này có di chuyển con Mã đứng kém tiếp theo, nhưng sau đó nó vẫn có ít nước đi: hãy giải phóng điểm của nó trước.',
+  },
 } satisfies Record<string, Entry>;
 
 export type MessageKey = keyof typeof messages;

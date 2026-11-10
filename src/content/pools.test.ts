@@ -17,14 +17,16 @@ const files = (...pools: AssessmentPool[]) => Object.fromEntries(pools.map((p) =
 const withItems = (pool: AssessmentPool, items: AssessmentItem[]): AssessmentPool => ({ ...pool, items });
 
 describe('assessment pool loader', () => {
-  it('loads src/content/assessment/*.json (none yet: the app behaves exactly as before)', () => {
+  it('loads src/content/assessment/*.json (nothing served by default: the deployed app behaves exactly as before)', () => {
     expect(allPools).toEqual(Object.values(poolFiles));
     expect(servablePools(allPools, { preview: false, state: RELEASE_STATES['REL-0'] })).toEqual([]);
   });
 
+  // S2.16 ships the first real pools (a03-check, pa, i01-check, b08-check): every item is validated through the engine,
+  // so this carries an explicit timeout like the other content verifiers.
   it('every loaded pool is valid against the loaded units', () => {
     expect(validatePools(poolFiles, allUnits)).toEqual([]);
-  });
+  }, 600_000);
 
   it('serves only published items (reviewed in the preview), only for levels the path shows; drafts never', () => {
     const pool = b09CheckPool();
@@ -90,6 +92,12 @@ describe('pool validator (03 §4.2 rule 9, rule 4; 02 §3.3 ids)', () => {
     expect(pbgProblems).toContain('"equivalentOf" must name the unit task');
     const xb = { id: 'xb', kind: 'exam', level: 'basics', version: 1, items: [{ ...choiceItem({ id: 'xb-g1', unit: 'b10', objective: 'b10l1', point: 26 }), type: 'play', slot: 'nope' }] };
     expect(validatePools({ xb }, [], { shapeOnly: true }).join()).toContain('"slot" must be one of');
+  });
+
+  it('a pool line may not hand over to a partner (its objective is the lesson id, not a predicate; fail closed)', () => {
+    const line = { ...choiceItem({ id: 'b09-c01', unit: 'b09', objective: 'b09l1', point: 25 }), type: 'line', handOver: { partner: [{ kind: 'safe-sparring' }], moves: 2 } };
+    const pool = { id: 'b09-check', kind: 'check', unit: 'b09', version: 1, items: [line] };
+    expect(validatePools({ 'b09-check': pool }, [], { shapeOnly: true }).join()).toContain('may not have `handOver`');
   });
 
   it('uniqueness corpus: no position shared with a lesson item, a unit pool item or another pool (mirror, colour swap)', () => {

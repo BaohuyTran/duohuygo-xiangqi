@@ -7,7 +7,8 @@
 //   `p<x>-NN` (no Master pool: no J2 within Master, J1 into Master uses `pe`); placement practical `p<x>-g` /
 //   `p<x>-gN` (play / review, `equivalentOf` a unit task `<unit>-gN`); exam `x<x>` / `x<x>-gN` (play) or `x<x>-rN`
 //   (review) with a known `slot`;
-// - every item: the exercise rules and ALL new-course metadata (validateItem: id, version, status, source, side,
+// - every item: the exercise rules (a decision / line validated without a predicate: `objective` is the lesson id) and
+//   ALL new-course metadata (validateItem: id, version, status, source, side,
 //   strand, nature, critical, misconceptions) plus `unit` (of the pool's level; check items: the pool's unit) and
 //   `objective` (a lesson id of that unit, which must exist when the unit is loaded) — 03 §4.2 rule 9;
 // - ids unique across pools and units, never retired;
@@ -144,7 +145,12 @@ export function validatePools(files: Readonly<Record<string, unknown>>, units: r
       if (pool.kind !== 'placement-practical' && ex.equivalentOf !== undefined) w('"equivalentOf" is only for placement practical tasks');
       if (pool.kind === 'exam' && (typeof ex.slot !== 'string' || !ALL_EXAM_SLOTS.has(ex.slot))) w(`"slot" must be one of ${[...ALL_EXAM_SLOTS].join(', ')}`);
       if (pool.kind === 'exam' && typeof id === 'string' && ((ex.type === 'review') !== /-r\d+$/.test(id))) w('exam reviews are `x<x>-rN`, exam play tasks `x<x>-gN`');
-      if (!options.shapeOnly) for (const problem of validateItem(ex, options)) w(problem);
+      // An assessment item's `objective` is its lesson id (03 §4.2 rule 9). On a `decision` / `line` that field is the
+      // predicate of the computed rows, so a pool decision carries no predicate: every accepted row is authored.
+      const asExercise = (ex.type === 'decision' || ex.type === 'line') && typeof ex.objective === 'string' ? { ...ex, objective: undefined } : ex;
+      // Fail closed: a pool line has no predicate, so it cannot class learner moves off the tree.
+      if (ex.type === 'line' && ex.handOver !== undefined) w('a pool `line` may not have `handOver` (its `objective` is the lesson id, so moves off the tree cannot be classed)');
+      if (!options.shapeOnly) for (const problem of validateItem(asExercise, options)) w(problem);
       else if (ex.status === undefined) w('"status" is required');
       // 03 §4.2 rule 4: unseen positions.
       const key = corpusKey(ex);

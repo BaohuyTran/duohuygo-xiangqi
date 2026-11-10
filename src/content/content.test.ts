@@ -14,14 +14,24 @@ import { toMove } from '../puzzles/logic';
 import { allLessons, allUnits, units } from './index';
 import { hasMessage } from '../i18n/messages';
 import { isNewCourseUnitId } from './release';
+import { SHARD_COUNT, shardUnits } from './validate-shard';
 import { validateUnits } from './validate';
 
 describe('shipped lesson content', () => {
   // Proving every mate in 4 and defence against mate in 3 takes a while.
-  it('passes the validator', () => {
-    // DEEP_CONTENT=1 (npm run content:deep) also proves every stored firstMoves list is complete.
-    expect(validateUnits(allUnits, { deep: process.env.DEEP_CONTENT === '1' })).toEqual([]);
+  // The legacy units here (DEEP_CONTENT=1, `npm run content:deep`, also proves every stored firstMoves list is complete);
+  // each new-course unit is validated in its own shard file (validate-shard-*.test.ts) so Vitest runs them in parallel.
+  it('passes the validator (legacy units)', () => {
+    expect(validateUnits(allUnits.filter((u) => !isNewCourseUnitId(u.id)), { deep: process.env.DEEP_CONTENT === '1' })).toEqual([]);
   }, 1_800_000);
+
+  it('validates every new-course unit in exactly one shard, and ids are unique across all units', () => {
+    const shards = Array.from({ length: SHARD_COUNT }, (_, k) => shardUnits(k).map((u) => u.id));
+    expect(shards.flat().sort()).toEqual(allUnits.filter((u) => isNewCourseUnitId(u.id)).map((u) => u.id).sort());
+    // validateContent checks id uniqueness within one call; the shards split the units, so check it across all here.
+    const ids = allUnits.flatMap((u) => [u.id, ...u.lessons.flatMap((l) => [l.id, ...l.exercises.flatMap((e) => (e.id ? [e.id] : []))]), ...(u.pool ?? []).flatMap((e) => (e.id ? [e.id] : []))]);
+    expect(ids.filter((id, i) => ids.indexOf(id) !== i)).toEqual([]);
+  });
 
   it('has the five levels in order, each with 4-6 exercises per lesson', () => {
     const tracks = units.map((u) => u.track ?? 'basics');

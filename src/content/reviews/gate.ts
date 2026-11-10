@@ -1,7 +1,8 @@
 // Review records (07-sourcing.md §5.2) and the release test (07-sourcing.md §6). Used by tests only: the records are
 // never imported by app code, so they are not bundled (src/content/release.test.ts enforces it).
 //
-// - A record file is `src/content/reviews/<unitId>.json` (`puzzles.json` for puzzles): `{ "unit": "<unitId>",
+// - A record file is `src/content/reviews/<unitId>.json` (`puzzles.json` for puzzles, `<pool>.json` for a placement pool
+//   `pb` / `pi` / `pa` / `pe`, holding its `pa-NN` items and `pa-gN` placement practical tasks): `{ "unit": "<unitId>",
 //   "records": [ReviewRecord, …] }`. A record applies to one `id` + `version` + `contentHash` (./hash.ts).
 // - Independence: no review may be by the record's `author`. No personal data: `author` / `by` must not contain "@".
 // - A record APPROVES its item when it has a `content-reviewer` review with verdict `approve` covering chess, en and vi.
@@ -59,6 +60,16 @@ const isPerson = (v: unknown): boolean => isText(v) && !v.includes('@');
  */
 const unitItemId = (unit: string): RegExp => new RegExp(`^${unit.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(l\\d|-p|-c|-g)`);
 
+/**
+ * Placement pools have no unit: their records live in `reviews/<pool>.json` named by the level's placement pool
+ * (`pb`, `pi`, `pa`, `pe`; there is no `pm`), holding both the placement items `pa-07` and the placement practical
+ * tasks `pa-g1` (pool `pa-g`) of that level (03 §7.2; 07 §5.2).
+ */
+const PLACEMENT_FILE = /^p[biae]$/;
+const placementItemId = (pool: string): RegExp => new RegExp(`^${pool}-(\\d\\d|g\\d+)$`);
+/** The id rule of record file `name`: a unit's items, or a placement pool's items. */
+const fileItemId = (name: string): RegExp => (PLACEMENT_FILE.test(name) ? placementItemId(name) : unitItemId(name));
+
 /** Problems with one record file (`name` = file name without `.json`). Empty means well-formed. */
 export function reviewFileProblems(name: string, file: unknown): string[] {
   const problems: string[] = [];
@@ -71,7 +82,7 @@ export function reviewFileProblems(name: string, file: unknown): string[] {
     const w = `record[${i}]`;
     if (!isObj(r)) return p(`${w} must be an object`);
     if (!isText(r.id)) p(`${w}: "id" is required`);
-    else if (name !== 'puzzles' && !unitItemId(name).test(r.id)) p(`${w}: id "${r.id}" does not belong to unit ${name}`);
+    else if (name !== 'puzzles' && !fileItemId(name).test(r.id)) p(`${w}: id "${r.id}" does not belong to ${PLACEMENT_FILE.test(name) ? 'placement pool' : 'unit'} ${name}`);
     if (!(Number.isInteger(r.version) && (r.version as number) >= 1)) p(`${w}: "version" must be an integer ≥ 1`);
     if (typeof r.contentHash !== 'string' || !/^[0-9a-f]{64}$/.test(r.contentHash)) p(`${w}: "contentHash" must be 64 lower-case hex digits`);
     const key = `${String(r.id)}@${String(r.version)}`;

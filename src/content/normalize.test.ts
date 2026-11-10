@@ -73,7 +73,8 @@ describe('normalize', () => {
       ...puzzles.map((p) => ({ ref: p.id, position: startPosition(p) })),
     ];
     // 264 + the 8 items of the i08 pilot (S2.15).
-    expect(entries).toHaveLength(272);
+    // + the 18 lesson items of the a03 pilot (S2.16; its assessment pools are checked by the pool validator's corpus).
+    expect(entries).toHaveLength(290);
     const isNew = (ref: string) => /^[biaem]\d\d/.test(ref);
     // i08-g1 (S2.15, `line` → `play` from the initial position) joins the same intended group.
     expect(duplicateGroups(entries).filter((g) => g.some(isNew))).toEqual([['u1l1#0', 'u1l1#1', 'b09-g1', 'i08-g1']]);

@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
-- **Active items:** S2.16 (pilot P3 + P5); then S2.17–S2.20, S2.gate (D10: resumed 2026-10-30)
+- **Active items:** S2.17 (pilot P4); then S2.18–S2.20, S2.gate
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,21 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-10 — **S2.16 done** (attempt 3): unit `a03` (3 lessons, 15 practice items, 7 Black, all quiet; lines with
+  2–3 learner nodes) + `a03-g1` (F1 plan task, Black: route the hemmed-in a9 Cannon, then free the c7 Horse; 3 selective
+  learner nodes per path, replies react to the plan, two different routes) in `src/content/lessons/a03-improving-pieces.json`;
+  first pools `assessment/a03-check.json` (16), `pa.json` (10), `i01-check.json` (2), `b08-check.json` (2). All 48 items
+  `reviewed`, records `reviews/a03.json`, `pa.json`, `i01.json`, `b08.json`; preview shows b09, i08, a03. Infrastructure:
+  per-run memo of computed move classes in validate.ts; new-course units validated in parallel shards
+  (`validate-shard-{0..3}.test.ts`, `content:deep` covers them); `reviews/gate.ts` placement record files `pb/pi/pa/pe`;
+  pool decisions carry no predicate, pool lines may not hand over. §5.7 a03-g1 (--runs 20): reference 20/20, N1/N2 fail
+  100 %, item 3 N/A (ruling F, D15), second plan 20/20, void 0. Driver: lint, both builds, 1,265 tests (~190–230 s),
+  ui:check 360 px PASS, engine untouched. Reviewer APPROVE (attempts 1–2). Content-reviewer CHANGES_REQUESTED ×2
+  (attempt 1: relocated-piece positions not realistic, generic feedback, rejected win, 2-move g1; attempt 2: two wins
+  rejected beyond d2, g1 shuffling replies / rejected routes) → APPROVE (attempt 3). Notes: a03-g1's last step is a small
+  gain; worst-piece margins are often thin (1 vs 2 moves); an i08 `verify-practical --runs 3` sample showed 1/3 voided
+  (20-run figure 4/80) — watch in S2.20.
 
 - 2026-11-02 — **S2.15 done** (attempt 3): pilot `i08l3` (Red: learn + contrast, lines for Same-direction /
   Opposite-direction / E3+5 / Screen Horses (G0), decision G1) and `i08-g1` (Red, start position, F5 opening task:
@@ -210,4 +225,4 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. S2.16–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
+1. S2.17–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).

@@ -1,0 +1,1161 @@
+{
+  "unit": "a03",
+  "records": [
+    {
+      "id": "a03l1-01",
+      "version": 1,
+      "contentHash": "fdda436a3b1a3dcde36c03a0966657d39115886b759dbdd4d46b5a361d70bb2b",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l1-02",
+      "version": 1,
+      "contentHash": "8a1c4c222f2e077371c556957023d533f41a82fa460614e71bdd32668f2452f1",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l1-03",
+      "version": 1,
+      "contentHash": "90042e49004924ca5b13a320723bf110dad3176d9105bdcd77b12869d77d693e",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l1-04",
+      "version": 1,
+      "contentHash": "c484388ff9732c774751239cd603c4c0c2fea885cf32ce657f9584af202fe84e",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l1-05",
+      "version": 1,
+      "contentHash": "29375d8155d552ae1e615da2c08256a3376ed0c316864262d6c7b0cfdec5bfd1",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l1-06",
+      "version": 1,
+      "contentHash": "3e126d3759a71b57ed5f13e211ce8cab96e2b3f9dbcf9be026ef36a5c1de2cf0",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l2-01",
+      "version": 1,
+      "contentHash": "42e27f61f81ac0f28ca4932a36503bae5dcebb7df69ac47cbef5859eab6a6fdb",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l2-02",
+      "version": 1,
+      "contentHash": "739f8c10f02e6b06ce165f94d6acce5cb64d997ee58fc46d9c37fdd671cd2d57",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l2-03",
+      "version": 1,
+      "contentHash": "839fd93ca62a40253ed70628c471838d76c91f4d40ddbbfdc83f9694fee2532f",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l2-04",
+      "version": 1,
+      "contentHash": "296a97b3623a1cde3cff73fe3aa8712f7c46f2ff644bb6a6f9cdba9ef10af5b9",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l2-05",
+      "version": 1,
+      "contentHash": "1a3455525e6dbc662da077e7a7e785a32d13030559351234139aa6d22e317838",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l2-06",
+      "version": 1,
+      "contentHash": "8d1813a0eccc41df819569e4469e408a3b5a3f71c429fa172a69fca3fb24d375",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l3-01",
+      "version": 1,
+      "contentHash": "40bc8de97dc3040d6c19203f8d332bee1480a27e0554ac856680baa22832c853",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l3-02",
+      "version": 1,
+      "contentHash": "40c5a71516b738b30d4998ffa9e26b9b755795e53a39c4e95d3242f1429e6a81",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l3-03",
+      "version": 1,
+      "contentHash": "f1f270640105d8bb5791eec574e991bbb70f1d9ca8ac08a58f35cfda6568c565",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l3-04",
+      "version": 1,
+      "contentHash": "c7595bb0691343a1b40f2b11cdb2b07a9e7df8c80d930322ae613d6427e13eee",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03l3-05",
+      "version": 1,
+      "contentHash": "c48590c2b2de7f7a56be93c6d2268913234f02652714b11101c17d47eafb03b1",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-g1",
+      "version": 1,
+      "contentHash": "aa2a1924ca7580249afd5b4321a3d4f1976d5c516097b81da370ffcc5f77b803",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "content validator + verify-lines/verify-practical",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c01",
+      "version": 1,
+      "contentHash": "beb89b07582ee8d21018adf6af716210cb7d744070383ccfcb0c163031b2ec4d",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c02",
+      "version": 1,
+      "contentHash": "50ec008cadfd504fe8bd98bb7bba364c8065cb4ca3a1731f767029f53b580384",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c03",
+      "version": 1,
+      "contentHash": "549d7d214fc43620582a92905777068a771d23cbf848d231162ba759a94b614f",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c04",
+      "version": 1,
+      "contentHash": "b354fec13857a6789e90334ae9c2d09f238b8a10757ba1467de3338b041cfb04",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c05",
+      "version": 1,
+      "contentHash": "84481e2ae49cc6c8df052284e4eb7a2d95f75bb8a4677c1f98de36f545e283ef",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c06",
+      "version": 1,
+      "contentHash": "f034d2411ff627bdbcd47f1a71944801c8cf332a4c0899571b66b4a78dad622a",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c07",
+      "version": 1,
+      "contentHash": "d70c011e7b48f75807bd025619a21374d8beba4f7326ead5964383f1286121c9",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c08",
+      "version": 1,
+      "contentHash": "82477870a749bc7a59f21b1d21fa41a51becc88eefe045d29bbc6574d8751fb5",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c09",
+      "version": 1,
+      "contentHash": "cf02f1609d5670d6b2aef1c373b144a305bbc5270cd3f2ab2b8fde38b367d707",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c10",
+      "version": 1,
+      "contentHash": "36ca4241e9dd8e0be23f2de31a3f400f40271564a75a704d4a5d7b8298d0b88b",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c11",
+      "version": 1,
+      "contentHash": "0ebbc33ee33f0ad8c1774b7dfe5fb3d3ab750d2b9ab430b2f34e55c110af0f04",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c12",
+      "version": 1,
+      "contentHash": "00abe7f3b204d9a15de766bd5da0eab943f9628de387bb3a22d07944a71fb8e3",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c13",
+      "version": 1,
+      "contentHash": "4d7923a4d710905dfbbbd1e835cdf0bccf1b68227db9403d8d36463b162ce731",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c14",
+      "version": 1,
+      "contentHash": "cbfc412aeae5489c6df7167cc4bb6d417c9ee4d0aef5311366d8308aee808ffb",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c15",
+      "version": 1,
+      "contentHash": "1ee182a73cb72df52af4f9e1d57552f7c8fae5faf4c103b86002538b1b28fe53",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a03-c16",
+      "version": 1,
+      "contentHash": "7676f9cc7af6eb7cc526ce31b4276de740576cdf2a05497a2471d6b3a5560ba4",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    }
+  ]
+}

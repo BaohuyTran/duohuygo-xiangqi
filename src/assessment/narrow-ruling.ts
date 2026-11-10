@@ -54,3 +54,37 @@ export function narrowPositionsRuling(x: NarrowRulingInput): NarrowRuling {
     x.n2Runs.voided * 5 <= x.n2Runs.total;
   return ruleD ? 'n/a-D' : 'required';
 }
+
+/**
+ * Ruling F (S2.16 content review, plan / convert tasks): item 3 does not apply to a task scored with R3 or R4 when
+ * (a) its objective predicate is necessary to pass (the best score without it is below the pass mark) and (b) the
+ * scripted tree gives the reference run ≥ 3 learner nodes, every tree node accepts ≤ 1/3 of its guard-passing moves, and
+ * items 4 and 6 hold (a genuinely different second plan passes every seed).
+ */
+export interface RulingFInput {
+  /** The task's scoring terms and weights (percent). */
+  weights: readonly { term: string; weight: number }[];
+  passMark: number;
+  /** Learner nodes of the tree the reference run passes through. */
+  referenceTreeNodes: number;
+  /** Every learner node of the tree: 0 < credited ≤ 1/3 of the guard-passing moves. */
+  treeNodesSelective: boolean;
+  /** Item 6: a second plan different from the reference passes every seed. */
+  secondPlanPasses: boolean;
+  secondPlanDiffers: boolean;
+}
+
+/** Best value of a term when the objective is NOT met: R3 keeps only its mobility 20, R4 without a mate is ≤ 70. */
+const MAX_WITHOUT_OBJECTIVE: Readonly<Record<string, number>> = { R3: 20, R4: 70 };
+
+/** The best task score without the objective (every other term at 100). */
+export function maxScoreWithoutObjective(weights: RulingFInput['weights']): number {
+  return weights.reduce((s, w) => s + (w.weight * (MAX_WITHOUT_OBJECTIVE[w.term] ?? 100)) / 100, 0);
+}
+
+export function narrowRulingF(x: RulingFInput): 'n/a-F' | 'required' {
+  const usesObjective = x.weights.some((w) => w.term === 'R3' || w.term === 'R4');
+  const necessary = maxScoreWithoutObjective(x.weights) < x.passMark;
+  const tree = x.referenceTreeNodes >= 3 && x.treeNodesSelective;
+  return usesObjective && necessary && tree && x.secondPlanPasses && x.secondPlanDiffers ? 'n/a-F' : 'required';
+}

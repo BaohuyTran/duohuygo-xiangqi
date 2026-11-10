@@ -174,3 +174,17 @@ Source: `docs/curriculum-upgrade/measurements.md` §3 (headless Chromium throttl
 - **Ruling E:** Pháo đầu / Central Cannon (C2=5), Bình phong mã / Screen Horses, Thuận pháo / Same-direction (C8=5),
   Nghịch pháo / Opposite-direction (C2=5 for Black) and their main lines are correct as taught.
 - Standard plans (C8=7 Five-Seven Cannons, R2+6 river-crossing Chariot) are accepted `sound` wherever they lose < 1.
+
+## D15 — 2026-11-10 — S2.16 rulings (content-reviewer) and placement records
+
+- **Ruling F (§5.7 item 3 for R3/R4 tasks):** narrow positions are not required when the objective predicate is necessary
+  to pass (maximum score without it below the pass mark, R3 counted at 20 and R4 at 70 when unmet), the reference path
+  has ≥ 3 learner tree nodes, every tree node credits ≤ 1/3 of the guard-passing moves, and items 4 and 6 hold (a
+  genuinely different second plan passes). `narrowRulingF` in `src/assessment/narrow-ruling.ts`.
+- **Ruling G (realism):** positions must come from plausible play where the poor piece arose naturally; relocating a piece
+  onto a legal but unnatural point does not meet 03-curriculum-production "realistic". Feedback names the piece, route and
+  the opponent's key reply. Every move gaining ≥ T at d2 or d4 is accepted (pilot test).
+- Placement review records live in `reviews/<pool>.json` (`pb`, `pi`, `pa`, `pe`; ids `<pool>-NN`, `<pool>-gN`).
+- Pool `decision` / `line` items carry no predicate objective (the field is the lesson id); pool lines may not hand over.
+- New-course units are validated per unit in parallel shards with a per-run memo of computed move classes (no check
+  dropped; cross-unit id uniqueness and track order are tested separately).

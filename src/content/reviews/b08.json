@@ -1,0 +1,73 @@
+{
+  "unit": "b08",
+  "records": [
+    {
+      "id": "b08-c01",
+      "version": 1,
+      "contentHash": "36ef19d344348ef57eca2c8cd0d578d137dd6f160c9f0317a4907b3b26a848f7",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "b08-c02",
+      "version": 1,
+      "contentHash": "f01e09013cea742a0ce0fc566ed6d659a2aff163c362950cff9ab9f0f48497cc",
+      "author": "implementer-S2.16",
+      "checks": [
+        {
+          "name": "pool validator + uniqueness corpus",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks + line trees",
+          "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.16",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        }
+      ]
+    }
+  ]
+}

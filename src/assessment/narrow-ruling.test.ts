@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { narrowPositionsRuling, partnerPlies, type NarrowRulingInput } from './narrow-ruling';
+import { maxScoreWithoutObjective, narrowPositionsRuling, narrowRulingF, partnerPlies, type NarrowRulingInput, type RulingFInput } from './narrow-ruling';
 
 const ok: NarrowRulingInput = {
   scoresLineShare: true,
@@ -43,5 +43,30 @@ describe('§5.7 item 3 ruling A (R6 line-share gate)', () => {
     expect(partnerPlies({ kind: 'pressing', d: 2 })).toBe(2);
     expect(partnerPlies({ kind: 'forcing-attack', k: 2 })).toBe(3);
     expect(partnerPlies({ kind: 'forcing-attack' })).toBe(0);
+  });
+
+  it('ruling F: R3 / R4 tasks whose objective is necessary, with ≥ 3 selective tree nodes and a passing second plan', () => {
+    const f: RulingFInput = {
+      weights: [
+        { term: 'R3', weight: 70 },
+        { term: 'R1', weight: 30 },
+      ],
+      passMark: 75,
+      referenceTreeNodes: 3,
+      treeNodesSelective: true,
+      secondPlanPasses: true,
+      secondPlanDiffers: true,
+    };
+    expect(maxScoreWithoutObjective(f.weights)).toBe(44);
+    expect(narrowRulingF(f)).toBe('n/a-F');
+    // R3 at 20 % no longer makes the objective necessary: 4 + 80 = 84 ≥ 75.
+    expect(narrowRulingF({ ...f, weights: [{ term: 'R3', weight: 20 }, { term: 'R1', weight: 80 }] })).toBe('required');
+    expect(narrowRulingF({ ...f, weights: [{ term: 'R2', weight: 50 }, { term: 'R1', weight: 50 }] })).toBe('required');
+    expect(narrowRulingF({ ...f, referenceTreeNodes: 2 })).toBe('required');
+    expect(narrowRulingF({ ...f, treeNodesSelective: false })).toBe('required');
+    expect(narrowRulingF({ ...f, secondPlanPasses: false })).toBe('required');
+    expect(narrowRulingF({ ...f, secondPlanDiffers: false })).toBe('required');
+    // R4 without a mate is at most 70: R4 80 % + R1 20 % → 56 + 20 = 76 ≥ 75, so not necessary.
+    expect(narrowRulingF({ ...f, weights: [{ term: 'R4', weight: 80 }, { term: 'R1', weight: 20 }] })).toBe('required');
   });
 });
