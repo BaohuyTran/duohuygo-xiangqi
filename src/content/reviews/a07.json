@@ -1,0 +1,243 @@
+{
+  "unit": "a07",
+  "records": [
+    {
+      "id": "a07l4-01",
+      "version": 1,
+      "contentHash": "322faf242cc7d445cb1fc93d2c667e7cfb75c9ecb3374f8b04a4d27e5cb12d36",
+      "author": "implementer-S2.17",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks",
+          "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.17",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a07l4-02",
+      "version": 1,
+      "contentHash": "92e3f885a747a821500dff57db1b595cbd1b2a9289a1aa23205c20191c6680df",
+      "author": "implementer-S2.17",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks",
+          "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.17",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a07l4-03",
+      "version": 1,
+      "contentHash": "0e133138eb838dd7b0e861b820d6bbb07b6fb06acf98250f935bacd9e1b7436f",
+      "author": "implementer-S2.17",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks",
+          "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.17",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a07l4-04",
+      "version": 1,
+      "contentHash": "c098d58e58e2a00de2d102413db9d1a4dd7b3d4402de50b68143f76accc0d0f0",
+      "author": "implementer-S2.17",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks",
+          "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.17",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a07l4-05",
+      "version": 1,
+      "contentHash": "a39b6c59cde92f8ac060802456fcedcf8106ca0c17db51c91b036835a303faff",
+      "author": "implementer-S2.17",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks",
+          "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.17",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a07l4-06",
+      "version": 1,
+      "contentHash": "4ac604c8e90d60f157d548c018ca5bd6b9c3d24c0388e634506097336a7813a2",
+      "author": "implementer-S2.17",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks",
+          "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.17",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        }
+      ]
+    },
+    {
+      "id": "a07-g1",
+      "version": 1,
+      "contentHash": "9ea52a3441944054cfea6fa9b5d6ba139947f8c575061211c1547427fa0cf676",
+      "author": "implementer-S2.17",
+      "checks": [
+        {
+          "name": "content validator + release test",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-10"
+        },
+        {
+          "name": "§5.7 practical checks",
+          "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
+          "result": "pass",
+          "at": "2026-11-10"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.17",
+          "at": "2026-11-10",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        }
+      ]
+    }
+  ]
+}

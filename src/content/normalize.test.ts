@@ -74,7 +74,8 @@ describe('normalize', () => {
     ];
     // 264 + the 8 items of the i08 pilot (S2.15).
     // + the 18 lesson items of the a03 pilot (S2.16; its assessment pools are checked by the pool validator's corpus).
-    expect(entries).toHaveLength(290);
+    // + the 7 items of the a07 pilot (S2.17: a07l4 and a07-g1; positions from distinct seeded games, no duplicates).
+    expect(entries).toHaveLength(297);
     const isNew = (ref: string) => /^[biaem]\d\d/.test(ref);
     // i08-g1 (S2.15, `line` → `play` from the initial position) joins the same intended group.
     expect(duplicateGroups(entries).filter((g) => g.some(isNew))).toEqual([['u1l1#0', 'u1l1#1', 'b09-g1', 'i08-g1']]);

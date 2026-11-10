@@ -431,6 +431,11 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   first assessment pools `assessment/a03-check.json`, `pa.json` (slice), `i01-check.json`, `b08-check.json` (all `verified`);
   `src/content/pilot-a03.test.ts`. A pool `decision` / `line` carries no predicate (its `objective` is the lesson id; every
   accepted row is authored); placement records live in `reviews/<pool>.json` (`pa.json`: `pa-NN`, `pa-gN`).
+- Pilot `a07` (S2.17: `a07l4` + `a07-g1`, Black) is `src/content/lessons/a07-positional-defence.json` (`verified` until
+  review): positions from seeded Central Cannon games; `decision` tables accept every safe move (guard + depth 2 and 4
+  > −1) and every win ≥ T; `a07-g1` is a hold task (R5 90 + R1 10, holding predicate `threat {created}` on any move)
+  whose threat tree has narrow hold nodes (every safe move continues) and a selective counterplay node (objective =
+  the holding predicate). `src/content/pilot-a07.test.ts`.
 - `verify-practical.ts` reports §5.7 item 3 as `N/A (R6 gate)` instead of FAIL when `narrowPositionsRuling` (ruling A,
   S2.14 content review) holds, or `N/A (ruling D)` for F5 / F2b tasks whose level h ≥ the partner depth (then N2 voids ≤ 1/5
   too; the task text discloses that the continuation partner adds no pressure), or `N/A (ruling F)` (`narrowRulingF`, S2.16)

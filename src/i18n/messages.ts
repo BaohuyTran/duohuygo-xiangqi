@@ -2820,6 +2820,228 @@ export const messages = {
     en: 'This moves your next poorly placed Horse, but it still has few moves afterwards: free its point first.',
     vi: 'Nước này có di chuyển con Mã đứng kém tiếp theo, nhưng sau đó nó vẫn có ít nước đi: hãy giải phóng điểm của nó trước.',
   },
+
+  // ---------- New course: a07 "Positional defence and counterplay", pilot lesson a07l4 + task a07-g1 (S2.17) ----------
+  'a07.title': {
+    en: 'Positional defence and counterplay',
+    vi: 'Phòng thủ thế trận và phản công',
+  },
+  'a07.desc': {
+    en: 'Stop your opponent\'s plan before it becomes a tactic, then create threats of your own.',
+    vi: 'Chặn kế hoạch của đối phương trước khi nó thành đòn chiến thuật, rồi tạo đòn đe dọa của riêng bạn.',
+  },
+  'a07l4.title': {
+    en: 'Under pressure as Black',
+    vi: 'Cầm quân Đen dưới sức ép',
+  },
+  'a07.p.hold': {
+    en: 'Black to move. Red is pressing. Find a move that stops Red\'s plan without losing anything.',
+    vi: 'Đen đi. Đỏ đang gây sức ép. Hãy tìm nước chặn được kế hoạch của Đỏ mà không mất gì.',
+  },
+  'a07.n.black': {
+    en: 'Black to move. Play the best move.',
+    vi: 'Đen đi. Hãy đi nước tốt nhất.',
+  },
+  'a07.r.nocounter': {
+    en: 'Safe, but it creates no threat of your own: Red keeps the initiative. Look for the safe move that also threatens something.',
+    vi: 'An toàn, nhưng không tạo đòn đe dọa nào: Đỏ vẫn giữ thế chủ động. Hãy tìm nước an toàn đồng thời đe dọa được quân đối phương.',
+  },
+  'a07.r.passive': {
+    en: 'A passive retreat: it does not stop Red\'s plan, and Red wins material within the next two moves.',
+    vi: 'Một nước lui bị động: nó không chặn được kế hoạch của Đỏ, và Đỏ ăn được quân trong hai nước tới.',
+  },
+  'a07.r.later': {
+    en: 'Nothing big is lost at once, but this does not stop Red\'s plan: Red wins material within the next two moves.',
+    vi: 'Không mất gì lớn ngay, nhưng nước này không chặn được kế hoạch của Đỏ: Đỏ ăn được quân trong hai nước tới.',
+  },
+  'a07.r.check': {
+    en: 'This check gains nothing, and Red\'s answer wins material or leads to mate.',
+    vi: 'Nước chiếu này không được gì, và nước đáp của Đỏ ăn được quân hoặc dẫn đến chiếu bí.',
+  },
+  'a07.r.capture': {
+    en: 'This capture loses more than it takes, or lets Red mate.',
+    vi: 'Nước ăn quân này mất nhiều hơn được, hoặc để Đỏ chiếu bí.',
+  },
+  'a07-g1.p': {
+    en: 'Black to move. Red is attacking. Hold the position without losing anything, and create a threat of your own when you can.',
+    vi: 'Đen đi. Đỏ đang tấn công. Hãy giữ thế mà không mất gì, và tạo đòn đe dọa của riêng bạn khi có thể.',
+  },
+  'a07-g1.done': {
+    en: 'You held Red\'s attack and created a threat of your own.',
+    vi: 'Bạn đã giữ vững trước đòn tấn công của Đỏ và tạo được đòn đe dọa của riêng mình.',
+  },
+  'a07l4-01.text': {
+    en: 'Under Central Cannon pressure, first ask what Red wants. Here Red threatens C2=7 (that move is highlighted). A good defence stops the threat without losing anything, and is not merely passive: when you can, choose the safe move that also creates a threat of your own.',
+    vi: 'Khi bị Pháo đầu gây sức ép, trước hết hãy hỏi Đỏ muốn gì. Ở đây Đỏ đe dọa P2-7 (nước đi đó được tô sáng). Phòng thủ tốt là chặn được đòn đe dọa mà không mất gì, và không chỉ bị động: khi có thể, hãy chọn nước an toàn đồng thời tạo đòn đe dọa của riêng bạn.',
+  },
+  'a07l4-02.r.b8-c8': {
+    en: 'C2=3 meets Red\'s threat (R8+3) and keeps your pieces safe for the next moves.',
+    vi: 'P2-3 chặn được đòn đe dọa của Đỏ (X8.3) và giữ an toàn cho các quân trong những nước tới.',
+  },
+  'a07l4-02.r.b8-d8': {
+    en: 'C2=4 meets Red\'s threat (R8+3) and keeps your pieces safe for the next moves.',
+    vi: 'P2-4 chặn được đòn đe dọa của Đỏ (X8.3) và giữ an toàn cho các quân trong những nước tới.',
+  },
+  'a07l4-02.tempt': {
+    en: 'C8-2 looks solid, but Red answers C5=3 and wins material within two moves.',
+    vi: 'P8/2 trông chắc chắn, nhưng Đỏ đáp P5-3 và ăn được quân trong vòng hai nước.',
+  },
+  'a07l4-02.hint': {
+    en: 'What does Red threaten if you do nothing? Look at R8+3.',
+    vi: 'Nếu bạn không làm gì, Đỏ đe dọa điều gì? Hãy xem nước X8.3.',
+  },
+  'a07l4-02.purpose': {
+    en: 'Red was threatening R8+3. C2=3, C2=4 each stop it and lose nothing in the next moves.',
+    vi: 'Đỏ đang đe dọa X8.3. P2-3, P2-4 đều chặn được và không mất gì trong những nước tới.',
+  },
+  'a07l4-02.key': {
+    en: 'After C2=3, Red\'s best reply is E7+9, and your pieces stay safe.',
+    vi: 'Sau P2-3, nước đáp tốt nhất của Đỏ là T7.9, và các quân của bạn vẫn an toàn.',
+  },
+  'a07l4-02.error': {
+    en: 'That move does not stop Red\'s plan: R8+3 or its follow-up wins material within two moves. Holding moves here: C2=3, C2=4.',
+    vi: 'Nước đó không chặn được kế hoạch của Đỏ: X8.3 hoặc nước tiếp theo ăn được quân trong hai nước. Các nước giữ được thế ở đây: P2-3, P2-4.',
+  },
+  'a07l4-03.r.i7-g8': {
+    en: 'H9-7 meets Red\'s threat (R2+5) and keeps your pieces safe for the next moves.',
+    vi: 'M9/7 chặn được đòn đe dọa của Đỏ (X2.5) và giữ an toàn cho các quân trong những nước tới.',
+  },
+  'a07l4-03.r.f8-f2': {
+    en: 'R6+6 meets Red\'s threat (R2+5), keeps your pieces safe and creates a threat of your own.',
+    vi: 'X6.6 chặn được đòn đe dọa của Đỏ (X2.5), giữ an toàn cho các quân và tạo đòn đe dọa của riêng bạn.',
+  },
+  'a07l4-03.tempt': {
+    en: 'P5+1 looks active: it takes a Soldier. But Red answers R2+5 and wins your Cannon.',
+    vi: 'B5.1 trông tích cực: nó ăn được một Tốt. Nhưng Đỏ đáp X2.5 và ăn mất Pháo của bạn.',
+  },
+  'a07l4-03.hint': {
+    en: 'What does Red threaten if you do nothing? Look at R2+5.',
+    vi: 'Nếu bạn không làm gì, Đỏ đe dọa điều gì? Hãy xem nước X2.5.',
+  },
+  'a07l4-03.purpose': {
+    en: 'Red was threatening R2+5. H9-7, R6+6 each stop it and lose nothing in the next moves.',
+    vi: 'Đỏ đang đe dọa X2.5. M9/7, X6.6 đều chặn được và không mất gì trong những nước tới.',
+  },
+  'a07l4-03.key': {
+    en: 'After H9-7, Red\'s best reply is P5+1, and your pieces stay safe.',
+    vi: 'Sau M9/7, nước đáp tốt nhất của Đỏ là B5.1, và các quân của bạn vẫn an toàn.',
+  },
+  'a07l4-03.error': {
+    en: 'That move does not stop Red\'s plan: R2+5 or its follow-up wins material within two moves. Holding moves here: H9-7, R6+6.',
+    vi: 'Nước đó không chặn được kế hoạch của Đỏ: X2.5 hoặc nước tiếp theo ăn được quân trong hai nước. Các nước giữ được thế ở đây: M9/7, X6.6.',
+  },
+  'a07l4-04.r.h2-e2': {
+    en: 'C8=5 meets Red\'s threat (C5=2), keeps your pieces safe and creates a threat of your own.',
+    vi: 'P8-5 chặn được đòn đe dọa của Đỏ (P5-2), giữ an toàn cho các quân và tạo đòn đe dọa của riêng bạn.',
+  },
+  'a07l4-04.r.h2-h6': {
+    en: 'C8-4 meets Red\'s threat (C5=2) and keeps your pieces safe for the next moves.',
+    vi: 'P8/4 chặn được đòn đe dọa của Đỏ (P5-2) và giữ an toàn cho các quân trong những nước tới.',
+  },
+  'a07l4-04.tempt': {
+    en: 'C5+4 looks active: it takes a Soldier with check. But Red answers H7+5 and wins your Cannon.',
+    vi: 'P5.4 trông tích cực: nó ăn một Tốt và chiếu tướng. Nhưng Đỏ đáp M7.5 và ăn mất Pháo của bạn.',
+  },
+  'a07l4-04.purpose': {
+    en: 'Red was threatening C5=2. C8=5, C8-4 each stop it and lose nothing in the next moves.',
+    vi: 'Đỏ đang đe dọa P5-2. P8-5, P8/4 đều chặn được và không mất gì trong những nước tới.',
+  },
+  'a07l4-04.key': {
+    en: 'After C8=5, Red\'s best reply is E7+5, and your pieces stay safe.',
+    vi: 'Sau P8-5, nước đáp tốt nhất của Đỏ là T7.5, và các quân của bạn vẫn an toàn.',
+  },
+  'a07l4-04.error': {
+    en: 'That move does not stop Red\'s plan: C5=2 or its follow-up wins material within two moves. Holding moves here: C8=5, C8-4.',
+    vi: 'Nước đó không chặn được kế hoạch của Đỏ: P5-2 hoặc nước tiếp theo ăn được quân trong hai nước. Các nước giữ được thế ở đây: P8-5, P8/4.',
+  },
+  'a07l4-05.purpose': {
+    en: 'Red had no mate at once, but threatened mate in two, starting with R8+9. R1=2, R1=3, R1-2, C3=2, C3-1, K4=5 each stop it.',
+    vi: 'Đỏ chưa chiếu bí ngay được, nhưng đe dọa chiếu bí sau hai nước, bắt đầu bằng X8.9. X1-2, X1-3, X1/2, P3-2, P3/1, Tg4-5 đều chặn được.',
+  },
+  'a07l4-05.key': {
+    en: 'After R1-2, Red\'s best reply is C5=6, and no mate follows within two moves.',
+    vi: 'Sau X1/2, nước đáp tốt nhất của Đỏ là P5-6, và không có đòn chiếu bí trong hai nước.',
+  },
+  'a07l4-05.error': {
+    en: 'There is no mate in one, but that move does not stop the mate in two: Red plays R8+9 (or another first move) and mates next move. Defend before the threat is immediate.',
+    vi: 'Không có đòn chiếu bí một nước, nhưng nước đó không chặn được đòn chiếu bí hai nước: Đỏ đi X8.9 (hoặc một nước đầu khác) rồi chiếu bí ở nước sau. Hãy phòng thủ trước khi đòn đe dọa đến sát.',
+  },
+  'a07l4-05.tempt': {
+    en: 'P7+1 looks safe: it loses no material and allows no mate in one. But Red plays R8+9 and mates next move.',
+    vi: 'B7.1 trông an toàn: không mất quân và không để bị chiếu bí ngay. Nhưng Đỏ đi X8.9 rồi chiếu bí ở nước sau.',
+  },
+  'a07l4-06.purpose': {
+    en: 'Red had no mate at once, but threatened mate in two, starting with C6-4. C4=5, C4-1, C4-3, C4-4, H3+4, R1=4, C2+4, C2+5, R9=8 each stop it.',
+    vi: 'Đỏ chưa chiếu bí ngay được, nhưng đe dọa chiếu bí sau hai nước, bắt đầu bằng P6/4. P4-5, P4/1, P4/3, P4/4, M3.4, X1-4, P2.4, P2.5, X9-8 đều chặn được.',
+  },
+  'a07l4-06.key': {
+    en: 'After C4-1, Red\'s best reply is E7+5, and no mate follows within two moves.',
+    vi: 'Sau P4/1, nước đáp tốt nhất của Đỏ là T7.5, và không có đòn chiếu bí trong hai nước.',
+  },
+  'a07l4-06.error': {
+    en: 'There is no mate in one, but that move does not stop the mate in two: Red plays C6-4 (or another first move) and mates next move. Defend before the threat is immediate.',
+    vi: 'Không có đòn chiếu bí một nước, nhưng nước đó không chặn được đòn chiếu bí hai nước: Đỏ đi P6/4 (hoặc một nước đầu khác) rồi chiếu bí ở nước sau. Hãy phòng thủ trước khi đòn đe dọa đến sát.',
+  },
+  'a07l4-06.tempt': {
+    en: 'C4=9 wins a Soldier and allows no mate in one. But Red plays C6-4 and mates next move.',
+    vi: 'P4-9 ăn được một Tốt và không để bị chiếu bí ngay. Nhưng Đỏ đi P6/4 rồi chiếu bí ở nước sau.',
+  },
+  'a07-g1.n1.h4-e4': {
+    en: '+C=5 meets Red\'s threat (H3+2) and keeps your pieces safe; Red answers C5=4.',
+    vi: 'Pt-5 chặn được đòn đe dọa của Đỏ (M3.2) và giữ an toàn cho các quân; Đỏ đáp P5-4.',
+  },
+  'a07-g1.n1.h6-g6': {
+    en: '-C=7 meets Red\'s threat (H3+2) and keeps your pieces safe; Red answers R9=2.',
+    vi: 'Ps-7 chặn được đòn đe dọa của Đỏ (M3.2) và giữ an toàn cho các quân; Đỏ đáp X9-2.',
+  },
+  'a07-g1.n1.tempt': {
+    en: '-C-1 looks solid, but Red answers P5+1 and wins material within two moves.',
+    vi: 'Ps/1 trông chắc chắn, nhưng Đỏ đáp B5.1 và ăn được quân trong vòng hai nước.',
+  },
+  'a07-g1.n1.h4-e4.reply': {
+    en: 'Red answers C5=4 and now threatens H3+2.',
+    vi: 'Đỏ đáp P5-4 và giờ đe dọa M3.2.',
+  },
+  'a07-g1.n2.h6-g6': {
+    en: 'C8=7 meets Red\'s threat (H3+2) and keeps your pieces safe; Red answers R9=4.',
+    vi: 'P8-7 chặn được đòn đe dọa của Đỏ (M3.2) và giữ an toàn cho các quân; Đỏ đáp X9-4.',
+  },
+  'a07-g1.n2.tempt': {
+    en: 'C8-1 looks solid, but Red answers H3+4 and wins material within two moves.',
+    vi: 'P8/1 trông chắc chắn, nhưng Đỏ đáp M3.4 và ăn được quân trong vòng hai nước.',
+  },
+  'a07-g1.n2.h6-g6.reply': {
+    en: 'Red answers R9=4 and now threatens C4+7.',
+    vi: 'Đỏ đáp X9-4 và giờ đe dọa P4.7.',
+  },
+  'a07-g1.n3.g3-h3': {
+    en: 'Counterplay: P7=8 keeps your pieces safe and now you threaten C7+6.',
+    vi: 'Phản công: B7-8 giữ an toàn cho các quân và giờ bạn đe dọa P7.6.',
+  },
+  'a07-g1.n3.tempt': {
+    en: 'A4+5 looks solid, but Red answers R4+1 and wins material within two moves.',
+    vi: 'S4.5 trông chắc chắn, nhưng Đỏ đáp X4.1 và ăn được quân trong vòng hai nước.',
+  },
+  'a07-g1.n1.h6-g6.reply': {
+    en: 'Red answers R9=2 and now threatens R2-1.',
+    vi: 'Đỏ đáp X9-2 và giờ đe dọa X2/1.',
+  },
+  'a07-g1.n4.h4-e4': {
+    en: 'C8=5 meets Red\'s threat (R2-1) and keeps your pieces safe; Red answers A6+5.',
+    vi: 'P8-5 chặn được đòn đe dọa của Đỏ (X2/1) và giữ an toàn cho các quân; Đỏ đáp S6.5.',
+  },
+  'a07-g1.n4.h4-e4.reply': {
+    en: 'Red answers A6+5 and now threatens R2+4.',
+    vi: 'Đỏ đáp S6.5 và giờ đe dọa X2.4.',
+  },
+  'a07-g1.n5.b7-b2': {
+    en: 'Counterplay: R2+5 keeps your pieces safe and now you threaten R2=3.',
+    vi: 'Phản công: X2.5 giữ an toàn cho các quân và giờ bạn đe dọa X2-3.',
+  },
+  'a07-g1.n5.tempt': {
+    en: 'P7=6 creates a threat, but Red answers H3+5 and wins a Soldier.',
+    vi: 'B7-6 tạo được đòn đe dọa, nhưng Đỏ đáp M3.5 và ăn được một Tốt.',
+  },
 } satisfies Record<string, Entry>;
 
 export type MessageKey = keyof typeof messages;

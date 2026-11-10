@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
-- **Active items:** S2.17 (pilot P4); then S2.18–S2.20, S2.gate
+- **Active items:** S2.18 (`pressing` validation); then S2.19, S2.20, S2.gate
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,16 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-10 — **S2.17 done** (attempt 3): `a07l4` (Black, positions from seeded Central Cannon games: learn, decision
+  G1 ×2, decision G0, `defend` depth 2 ×2 with a real mate in 2 and no mate in 1) and `a07-g1` (hold, F1, R5 90 + R1 10,
+  holding predicate `threat {created: true}`; verified starting threat H3+2; replies each create a new threat; counterplay
+  nodes ≤ 1/3) in `src/content/lessons/a07-positional-defence.json`; record `reviews/a07.json`; preview shows b09, i08, a03,
+  a07. §5.7 (--runs 20, no ruling needed): reference 20/20, N1 fail 100 %, N2 fail 95 %, 3 narrow positions, resistance
+  PASS, second plan 20/20, void 0. Driver: lint, both builds, 1,280 tests (~185–215 s), ui:check 360 px PASS, engine
+  untouched. Reviewer APPROVE. Content-reviewer CHANGES_REQUESTED (attempt 1: defend items were mate in 1; attempt 2: vi
+  notation T5.1 → B5.1) → APPROVE (attempt 3; driver applied the vi text fix and "Tốt" naming). Note: -02 and the hold
+  nodes' tempting moves are passive retreats (fit a07.m1).
 
 - 2026-11-10 — **S2.16 done** (attempt 3): unit `a03` (3 lessons, 15 practice items, 7 Black, all quiet; lines with
   2–3 learner nodes) + `a03-g1` (F1 plan task, Black: route the hemmed-in a9 Cannon, then free the c7 Horse; 3 selective
@@ -225,4 +235,4 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. S2.17–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
+1. S2.18–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
