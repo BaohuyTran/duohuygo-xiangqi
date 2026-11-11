@@ -7,24 +7,37 @@
 // -> back -> Puzzles -> first puzzle (incl. a move and its feedback), and fails if any page has
 // horizontal scroll, a button smaller than 44x44px or clipped at the screen edge, a fixed footer that
 // still covers the board's last row when scrolled to the bottom, a console error or an uncaught
-// exception. Screenshots go to --out (default: ui-check-output/, git-ignored).
+// exception. Screenshots go to --out (default: ui-check-output/, git-ignored). It also checks that Home shows exactly
+// the legacy lessons (units u1–u15) and no new-course lesson (S2.19: the default build's legacy path is unchanged).
 //
 // Playing Black (S2.3): afterwards it builds the test-only fixture page scripts/ui-fixtures/black.html
 // (its own Vite config; never part of the app build) into ui-check-output/fixture-dist/, serves it on
 // --fixture-port (default 4198) and checks the same rules with Black at the bottom: the
 // board is turned (e9 below e0, i9 left of a9), a tap on the Black Horse b9 then c7 plays the move, and
 // the footer shows it in traditional notation (en "H2+3", vi "M2.3"). `--no-black` skips this part.
-// The course preview (VITE_COURSE_PREVIEW=1) has no Black unit yet and the players do not pass an
-// orientation yet, so the fixture page is the Black check until a reviewed Black unit exists.
+// The default build has no Black content, so the fixture page stays its Black check; the reviewed Black pilot units
+// of the course preview are played by the preview walkthrough below.
+//
+// Course preview walkthrough (S2.19): `npm run ui:check -- --preview [options]` does NOT run the checks above; it
+// starts scripts/ui-walkthrough/walkthrough.ts (with tsx, so it can use the content and the engine as its answer key),
+// which builds the course preview (VITE_COURSE_PREVIEW=1) into ui-check-output/preview-dist and the test-only J1
+// fixture page (scripts/ui-fixtures/j1.*), and plays the pilot end to end at 320/360/414, landscape and desktop
+// (keyboard): lessons → unit check fail → remediation → retake, practical tasks incl. a voided run by fault
+// injection, the J2 test-out of a03 and a J1 placement on the fixture pool. Options: --viewports, --flows, --port,
+// --fixture-port, --out, --no-build, --parallel (see that file). Record: docs/curriculum-upgrade/pilot/walkthrough.md.
 //
 // Playwright is NOT a project dependency: the script uses a globally installed `playwright`
 // (as in the cloud dev container) or a local one if present.
-import { spawn, execSync } from 'node:child_process';
-import { mkdirSync } from 'node:fs';
+import { spawn, spawnSync, execSync } from 'node:child_process';
+import { mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
 const args = process.argv.slice(2);
+if (args.includes('--preview')) {
+  const run = spawnSync('npx', ['tsx', 'scripts/ui-walkthrough/walkthrough.ts', ...args.filter((a) => a !== '--preview')], { stdio: 'inherit' });
+  process.exit(run.status ?? 1);
+}
 const arg = (name, fallback) => {
   const i = args.indexOf(`--${name}`);
   return i >= 0 ? args[i + 1] : fallback;
@@ -123,6 +136,18 @@ try {
 
   await page.goto(BASE);
   await audit('01-lessons-home');
+  // Legacy path unchanged (S2.19): Home shows exactly the legacy lessons (units u1–u15), no new-course lesson.
+  const legacyIds = readdirSync('src/content/lessons')
+    .filter((f) => f.endsWith('.json'))
+    .map((f) => JSON.parse(readFileSync(path.join('src/content/lessons', f), 'utf8')))
+    .filter((u) => /^u\d+$/.test(u.id))
+    .flatMap((u) => u.lessons.map((l) => l.id));
+  const shownIds = await page.$$eval('[data-lesson-id]', (els) => els.map((el) => el.getAttribute('data-lesson-id')));
+  const newCourse = shownIds.filter((id) => /^[biaem]\d\dl\d$/.test(id));
+  if (newCourse.length) fail(`legacy path: new-course lessons on Home: ${newCourse.join(', ')}`);
+  if (shownIds.length !== legacyIds.length || legacyIds.some((id) => !shownIds.includes(id))) {
+    fail(`legacy path: Home shows ${shownIds.length} lessons, expected the ${legacyIds.length} legacy lessons`);
+  }
 
   await tapButton(/\((start|bắt đầu)\)$/i);
   await page.waitForSelector('[role="grid"]');
