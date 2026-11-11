@@ -4,7 +4,7 @@
     {
       "id": "b08-c01",
       "version": 1,
-      "contentHash": "36ef19d344348ef57eca2c8cd0d578d137dd6f160c9f0317a4907b3b26a848f7",
+      "contentHash": "79ccb981f06cfd42debb000ca40c951a6531cc31e4ef6c4f0782f9c5519875a8",
       "author": "implementer-S2.16",
       "checks": [
         {
@@ -18,6 +18,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -32,13 +38,25 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },
     {
       "id": "b08-c02",
       "version": 1,
-      "contentHash": "f01e09013cea742a0ce0fc566ed6d659a2aff163c362950cff9ab9f0f48497cc",
+      "contentHash": "f08071eae1abef4a914f0f3f7793e3aed9c3f0330d4467f9a1414cfdf4784a43",
       "author": "implementer-S2.16",
       "checks": [
         {
@@ -52,6 +70,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -66,6 +90,18 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     }

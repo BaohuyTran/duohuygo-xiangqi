@@ -1998,8 +1998,8 @@ export const messages = {
     vi: 'Sau M7.5, nước đáp tốt nhất của đối phương theo máy là X8.8; nó không ăn được gì.',
   },
   'a03l1-03.error': {
-    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: C7=8, C7=9, H7+5, P7+1.',
-    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P7-8, P7-9, M7.5, B7.1.',
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03l1-04.r.free': {
     en: 'Your Horse on file 6 gets at least 2 more moves this way (it had 1), and nothing is lost.',
@@ -2018,8 +2018,8 @@ export const messages = {
     vi: 'Sau X7/1, nước đáp tốt nhất của đối phương theo máy là X6/1; nó không ăn được gì.',
   },
   'a03l1-04.error': {
-    en: 'That move leaves your Horse on file 6 with few moves, or it loses material. Look for the move that frees it: R7-1, R7+1.',
-    vi: 'Nước đó để Mã ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X7/1, X7.1.',
+    en: 'That move leaves your Horse on file 6 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03l1-05.r.free': {
     en: 'Your Cannon on file 9 gets at least 3 more moves this way (it had 1), and nothing is lost.',
@@ -2038,8 +2038,8 @@ export const messages = {
     vi: 'Sau P9-8, nước đáp tốt nhất của đối phương theo máy là P6/1; nó không ăn được gì.',
   },
   'a03l1-05.error': {
-    en: 'That move leaves your Cannon on file 9 with few moves, or it loses material. Look for the move that frees it: C9=8, H9+8, H9+7.',
-    vi: 'Nước đó để Pháo ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P9-8, M9.8, M9.7.',
+    en: 'That move leaves your Cannon on file 9 with few moves, or it loses material. A Cannon needs open lines: give it a free file or rank, or move the piece that hems it in, without losing anything.',
+    vi: 'Nước đó để Pháo ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Pháo cần đường thông thoáng: cho nó một cột hoặc hàng trống, hoặc dời quân đang bó buộc nó, mà không mất gì.',
   },
   'a03l1-06.r.free': {
     en: 'Your Horse on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2058,8 +2058,8 @@ export const messages = {
     vi: 'Sau M1.2, nước đáp tốt nhất của đối phương theo máy là P3-4; nó không ăn được gì.',
   },
   'a03l1-06.error': {
-    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look for the move that frees it: H1+2, H1-3.',
-    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1.2, M1/3.',
+    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03l2-01.text': {
     en: 'Your Horse on file 3 has moved before, yet it has only 1 moves (marked): a piece is not well placed just because it has moved. Plan a route of two or three moves that gives it real scope.',
@@ -2102,8 +2102,8 @@ export const messages = {
     vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là B9.1; nó không ăn được gì.',
   },
   'a03l2-02.error': {
-    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: H3-5, P3+1.',
-    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M3/5, B3.1.',
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03l2-03.r.free': {
     en: 'Your Horse on file 2 gets at least 2 more moves this way (it had 1), and nothing is lost.',
@@ -2134,8 +2134,8 @@ export const messages = {
     vi: 'Sau M2/3, nước đáp tốt nhất của đối phương theo máy là X8-9; nó không ăn được gì.',
   },
   'a03l2-03.error': {
-    en: 'That move leaves your Horse on file 2 with few moves, or it loses material. Look for the move that frees it: H2-3, P3+1.',
-    vi: 'Nước đó để Mã ở cột 2 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M2/3, B3.1.',
+    en: 'That move leaves your Horse on file 2 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 2 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03l2-04.r.free': {
     en: 'Your Cannon on file 6 gets at least 3 more moves this way (it had 2), and nothing is lost.',
@@ -2170,8 +2170,8 @@ export const messages = {
     vi: 'Sau Ps/1, nước đáp tốt nhất của đối phương theo máy là P4-7; nó không ăn được gì.',
   },
   'a03l2-04.error': {
-    en: 'That move leaves your Cannon on file 6 with few moves, or it loses material. Look for the move that frees it: H7+6, H7-9, -C-1, E5+3.',
-    vi: 'Nước đó để Pháo ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M7.6, M7/9, Ps/1, T5.3.',
+    en: 'That move leaves your Cannon on file 6 with few moves, or it loses material. A Cannon needs open lines: give it a free file or rank, or move the piece that hems it in, without losing anything.',
+    vi: 'Nước đó để Pháo ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Pháo cần đường thông thoáng: cho nó một cột hoặc hàng trống, hoặc dời quân đang bó buộc nó, mà không mất gì.',
   },
   'a03l2-05.r.free': {
     en: 'Your Horse on file 5 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2190,8 +2190,8 @@ export const messages = {
     vi: 'Sau M5.6, nước đáp tốt nhất của đối phương theo máy là P4.4; nó không ăn được gì.',
   },
   'a03l2-05.error': {
-    en: 'That move leaves your Horse on file 5 with few moves, or it loses material. Look for the move that frees it: H5+6, H5+4.',
-    vi: 'Nước đó để Mã ở cột 5 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M5.6, M5.4.',
+    en: 'That move leaves your Horse on file 5 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 5 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03l2-06.r.free': {
     en: 'Your Cannon on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2218,8 +2218,8 @@ export const messages = {
     vi: 'Sau P1.2, nước đáp tốt nhất của đối phương theo máy là P8-9; nó không ăn được gì.',
   },
   'a03l2-06.error': {
-    en: 'That move leaves your Cannon on file 1 with few moves, or it loses material. Look for the move that frees it: H1-3, C1+2.',
-    vi: 'Nước đó để Pháo ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1/3, P1.2.',
+    en: 'That move leaves your Cannon on file 1 with few moves, or it loses material. A Cannon needs open lines: give it a free file or rank, or move the piece that hems it in, without losing anything.',
+    vi: 'Nước đó để Pháo ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Pháo cần đường thông thoáng: cho nó một cột hoặc hàng trống, hoặc dời quân đang bó buộc nó, mà không mất gì.',
   },
   'a03l3-01.text': {
     en: 'Contrast: C8+3 (to the highlighted point) looks active, but your opponent answers it and wins material. Freeing your Horse on file 3, whose few moves are marked, is the better plan here.',
@@ -2246,8 +2246,8 @@ export const messages = {
     vi: 'Sau P9-8, nước đáp tốt nhất của đối phương theo máy là X2-1; nó không ăn được gì.',
   },
   'a03l3-02.error': {
-    en: 'That move leaves your Cannon on file 9 with few moves, or it loses material. Look for the move that frees it: R9=8, C9=8.',
-    vi: 'Nước đó để Pháo ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X9-8, P9-8.',
+    en: 'That move leaves your Cannon on file 9 with few moves, or it loses material. A Cannon needs open lines: give it a free file or rank, or move the piece that hems it in, without losing anything.',
+    vi: 'Nước đó để Pháo ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Pháo cần đường thông thoáng: cho nó một cột hoặc hàng trống, hoặc dời quân đang bó buộc nó, mà không mất gì.',
   },
   'a03l3-03.r.free': {
     en: 'Your Cannon on file 4 gets at least 4 more moves this way (it had 1), and nothing is lost.',
@@ -2270,8 +2270,8 @@ export const messages = {
     vi: 'Sau P4/1, nước đáp tốt nhất của đối phương theo máy là P8.2; nó không ăn được gì.',
   },
   'a03l3-03.error': {
-    en: 'That move leaves your Cannon on file 4 with few moves, or it loses material. Look for the move that frees it: E5-3, C4-1.',
-    vi: 'Nước đó để Pháo ở cột 4 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: T5/3, P4/1.',
+    en: 'That move leaves your Cannon on file 4 with few moves, or it loses material. A Cannon needs open lines: give it a free file or rank, or move the piece that hems it in, without losing anything.',
+    vi: 'Nước đó để Pháo ở cột 4 của bạn vẫn ít nước đi, hoặc bị mất quân. Pháo cần đường thông thoáng: cho nó một cột hoặc hàng trống, hoặc dời quân đang bó buộc nó, mà không mất gì.',
   },
   'a03l3-04.r.free': {
     en: 'Your Horse on file 9 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2290,8 +2290,8 @@ export const messages = {
     vi: 'Sau M9.8, nước đáp tốt nhất của đối phương theo máy là X9-6; nó không ăn được gì.',
   },
   'a03l3-04.error': {
-    en: 'That move leaves your Horse on file 9 with few moves, or it loses material. Look for the move that frees it: H9+8, H9-7.',
-    vi: 'Nước đó để Mã ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M9.8, M9/7.',
+    en: 'That move leaves your Horse on file 9 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03l3-05.r.free': {
     en: 'Your Horse on file 3 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2310,8 +2310,8 @@ export const messages = {
     vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là P4-2; nó không ăn được gì.',
   },
   'a03l3-05.error': {
-    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: H3-5, P3+1.',
-    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M3/5, B3.1.',
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03-c01.x': {
     en: 'Your Chariot on file 1 has not left its corner yet: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 2).',
@@ -2334,8 +2334,8 @@ export const messages = {
     vi: 'Sau M1/3, nước đáp tốt nhất của đối phương theo máy là S6.5; nó không ăn được gì.',
   },
   'a03-c02.error': {
-    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look for the move that frees it: H1-3, H1+3.',
-    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1/3, M1.3.',
+    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03-c03.r.free': {
     en: 'Your Horse on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2354,8 +2354,8 @@ export const messages = {
     vi: 'Sau M1.2, nước đáp tốt nhất của đối phương theo máy là P7.3; nó không ăn được gì.',
   },
   'a03-c03.error': {
-    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look for the move that frees it: H1+2, H1-3.',
-    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1.2, M1/3.',
+    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03-c04.r.free': {
     en: 'Your Chariot on file 1 gets at least 7 more moves this way (it had 2), and nothing is lost.',
@@ -2374,8 +2374,8 @@ export const messages = {
     vi: 'Sau X1-2, nước đáp tốt nhất của đối phương theo máy là X8.9; nó không ăn được gì.',
   },
   'a03-c04.error': {
-    en: 'That move leaves your Chariot on file 1 with few moves, or it loses material. Look for the move that frees it: R1=2, R1+1.',
-    vi: 'Nước đó để Xe ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X1-2, X1.1.',
+    en: 'That move leaves your Chariot on file 1 with few moves, or it loses material. Bring that Chariot out of its corner onto an open file or rank, without losing anything.',
+    vi: 'Nước đó để Xe ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy đưa Xe đó ra khỏi góc, lên một cột hoặc hàng thông thoáng, mà không mất gì.',
   },
   'a03-c05.r.free': {
     en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 1), and nothing is lost.',
@@ -2394,8 +2394,8 @@ export const messages = {
     vi: 'Sau B7.1, nước đáp tốt nhất của đối phương theo máy là S6.5; nó không ăn được gì.',
   },
   'a03-c05.error': {
-    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: P7+1, R7=8, R7=6.',
-    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: B7.1, X7-8, X7-6.',
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03-c06.x': {
     en: 'Your Horse on file 4 has a piece on its leg: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 2).',
@@ -2418,8 +2418,8 @@ export const messages = {
     vi: 'Sau P3-2, nước đáp tốt nhất của đối phương theo máy là S6.5; nó không ăn được gì.',
   },
   'a03-c07.error': {
-    en: 'That move leaves your Horse on file 4 with few moves, or it loses material. Look for the move that frees it: C3=2, C3=1, C3-1, C3+1.',
-    vi: 'Nước đó để Mã ở cột 4 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P3-2, P3-1, P3/1, P3.1.',
+    en: 'That move leaves your Horse on file 4 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 4 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03-c08.r.free': {
     en: 'Your Horse on file 5 gets at least 2 more moves this way (it had 0), and nothing is lost.',
@@ -2438,8 +2438,8 @@ export const messages = {
     vi: 'Sau P5-6, nước đáp tốt nhất của đối phương theo máy là Pt-1; nó không ăn được gì.',
   },
   'a03-c08.error': {
-    en: 'That move leaves your Horse on file 5 with few moves, or it loses material. Look for the move that frees it: C5=6, C5=4.',
-    vi: 'Nước đó để Mã ở cột 5 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P5-6, P5-4.',
+    en: 'That move leaves your Horse on file 5 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 5 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03-c09.x': {
     en: 'Your Horse on file 8 is still at home with a piece on its leg: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 2).',
@@ -2462,8 +2462,8 @@ export const messages = {
     vi: 'Sau P9-8, nước đáp tốt nhất của đối phương theo máy là T7.5; nó không ăn được gì.',
   },
   'a03-c10.error': {
-    en: 'That move leaves your Cannon on file 9 with few moves, or it loses material. Look for the move that frees it: H7-6, C9=8, R9=7.',
-    vi: 'Nước đó để Pháo ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M7/6, P9-8, X9-7.',
+    en: 'That move leaves your Cannon on file 9 with few moves, or it loses material. A Cannon needs open lines: give it a free file or rank, or move the piece that hems it in, without losing anything.',
+    vi: 'Nước đó để Pháo ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Pháo cần đường thông thoáng: cho nó một cột hoặc hàng trống, hoặc dời quân đang bó buộc nó, mà không mất gì.',
   },
   'a03-c11.r.free': {
     en: 'Your Horse on file 6 gets at least 2 more moves this way (it had 1), and nothing is lost.',
@@ -2482,8 +2482,8 @@ export const messages = {
     vi: 'Sau P7-8, nước đáp tốt nhất của đối phương theo máy là M9.8; nó không ăn được gì.',
   },
   'a03-c11.error': {
-    en: 'That move leaves your Horse on file 6 with few moves, or it loses material. Look for the move that frees it: C7=8, C7=9, C7-1, C7+1.',
-    vi: 'Nước đó để Mã ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P7-8, P7-9, P7/1, P7.1.',
+    en: 'That move leaves your Horse on file 6 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03-c12.r.free': {
     en: 'Your Cannon on file 1 gets at least 3 more moves this way (it had 1), and nothing is lost.',
@@ -2502,8 +2502,8 @@ export const messages = {
     vi: 'Sau M1.2, nước đáp tốt nhất của đối phương theo máy là P9.6; nó không ăn được gì.',
   },
   'a03-c12.error': {
-    en: 'That move leaves your Cannon on file 1 with few moves, or it loses material. Look for the move that frees it: H1+2, H1+3.',
-    vi: 'Nước đó để Pháo ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1.2, M1.3.',
+    en: 'That move leaves your Cannon on file 1 with few moves, or it loses material. A Cannon needs open lines: give it a free file or rank, or move the piece that hems it in, without losing anything.',
+    vi: 'Nước đó để Pháo ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Pháo cần đường thông thoáng: cho nó một cột hoặc hàng trống, hoặc dời quân đang bó buộc nó, mà không mất gì.',
   },
   'a03-c13.r.free': {
     en: 'Your Horse on file 3 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2522,8 +2522,8 @@ export const messages = {
     vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là Tg5-4; nó không ăn được gì.',
   },
   'a03-c13.error': {
-    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: P3+1, H3-5.',
-    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: B3.1, M3/5.',
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03-c14.x': {
     en: 'Your Cannon on file 5 is hemmed in where it stands: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 4).',
@@ -2546,8 +2546,8 @@ export const messages = {
     vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là B1.1; nó không ăn được gì.',
   },
   'a03-c15.error': {
-    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: H3-5, P3+1.',
-    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M3/5, B3.1.',
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03-c16.r.free': {
     en: 'Your Cannon on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2566,8 +2566,8 @@ export const messages = {
     vi: 'Sau P1.4, nước đáp tốt nhất của đối phương theo máy là P5.3; nó không ăn được gì.',
   },
   'a03-c16.error': {
-    en: 'That move leaves your Cannon on file 1 with few moves, or it loses material. Look for the move that frees it: C1+4, H3-4, H3+5.',
-    vi: 'Nước đó để Pháo ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P1.4, M3/4, M3.5.',
+    en: 'That move leaves your Cannon on file 1 with few moves, or it loses material. A Cannon needs open lines: give it a free file or rank, or move the piece that hems it in, without losing anything.',
+    vi: 'Nước đó để Pháo ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Pháo cần đường thông thoáng: cho nó một cột hoặc hàng trống, hoặc dời quân đang bó buộc nó, mà không mất gì.',
   },
   'pa-01.x': {
     en: 'Your Horse on file 6 has a piece on its leg: it has only 0 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 2).',
@@ -2590,8 +2590,8 @@ export const messages = {
     vi: 'Sau B7.1, nước đáp tốt nhất của đối phương theo máy là P7.3; nó không ăn được gì.',
   },
   'pa-02.error': {
-    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: P7+1, R7=6.',
-    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: B7.1, X7-6.',
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'pa-03.r.free': {
     en: 'Your Horse on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2610,8 +2610,8 @@ export const messages = {
     vi: 'Sau M1.3, nước đáp tốt nhất của đối phương theo máy là P2-4; nó không ăn được gì.',
   },
   'pa-03.error': {
-    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look for the move that frees it: H1+3, H1-3.',
-    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M1.3, M1/3.',
+    en: 'That move leaves your Horse on file 1 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'pa-04.r.free': {
     en: 'Your Horse on file 6 gets at least 3 more moves this way (it had 2), and nothing is lost.',
@@ -2630,8 +2630,8 @@ export const messages = {
     vi: 'Sau M6.7, nước đáp tốt nhất của đối phương theo máy là B7.1; nó không ăn được gì.',
   },
   'pa-04.error': {
-    en: 'That move leaves your Horse on file 6 with few moves, or it loses material. Look for the move that frees it: H6+7, H6+8.',
-    vi: 'Nước đó để Mã ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M6.7, M6.8.',
+    en: 'That move leaves your Horse on file 6 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 6 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'pa-05.r.free': {
     en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 1), and nothing is lost.',
@@ -2650,8 +2650,8 @@ export const messages = {
     vi: 'Sau X7-8, nước đáp tốt nhất của đối phương theo máy là B3.1; nó không ăn được gì.',
   },
   'pa-05.error': {
-    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: R7=8, R7=6.',
-    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X7-8, X7-6.',
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'pa-06.x': {
     en: 'Your Horse on file 9 has a piece on its leg: it has only 2 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 4).',
@@ -2674,8 +2674,8 @@ export const messages = {
     vi: 'Sau M3/5, nước đáp tốt nhất của đối phương theo máy là X8.1; nó không ăn được gì.',
   },
   'pa-07.error': {
-    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look for the move that frees it: P3+1, H3-5.',
-    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: B3.1, M3/5.',
+    en: 'That move leaves your Horse on file 3 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 3 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'pa-08.r.free': {
     en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2694,8 +2694,8 @@ export const messages = {
     vi: 'Sau P7-6, nước đáp tốt nhất của đối phương theo máy là T7.9; nó không ăn được gì.',
   },
   'pa-08.error': {
-    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: C7=6, C7+1.',
-    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P7-6, P7.1.',
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'pa-09.x': {
     en: 'Your Horse on file 3 has a piece on its leg: it has only 1 moves, fewer than any of your other Chariots, Horses and Cannons (the next has 3).',
@@ -2718,8 +2718,8 @@ export const messages = {
     vi: 'Sau M4.2, nước đáp tốt nhất của đối phương theo máy là T7.5; nó không ăn được gì.',
   },
   'pa-10.error': {
-    en: 'That move leaves your Horse on file 4 with few moves, or it loses material. Look for the move that frees it: H4+2, A5+4.',
-    vi: 'Nước đó để Mã ở cột 4 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M4.2, S5.4.',
+    en: 'That move leaves your Horse on file 4 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 4 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'i01-c01.r.free': {
     en: 'Your Horse on file 8 gets at least 2 more moves this way (it had 1), and nothing is lost.',
@@ -2738,8 +2738,8 @@ export const messages = {
     vi: 'Sau P8-9, nước đáp tốt nhất của đối phương theo máy là P8-9; nó không ăn được gì.',
   },
   'i01-c01.error': {
-    en: 'That move leaves your Horse on file 8 with few moves, or it loses material. Look for the move that frees it: C8=9, C8=7.',
-    vi: 'Nước đó để Mã ở cột 8 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: P8-9, P8-7.',
+    en: 'That move leaves your Horse on file 8 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 8 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'i01-c02.r.free': {
     en: 'Your Chariot on file 1 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2758,8 +2758,8 @@ export const messages = {
     vi: 'Sau X1-2, nước đáp tốt nhất của đối phương theo máy là X8.9; nó không ăn được gì.',
   },
   'i01-c02.error': {
-    en: 'That move leaves your Chariot on file 1 with few moves, or it loses material. Look for the move that frees it: R1=2, R1+1, H1-3.',
-    vi: 'Nước đó để Xe ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: X1-2, X1.1, M1/3.',
+    en: 'That move leaves your Chariot on file 1 with few moves, or it loses material. Bring that Chariot out of its corner onto an open file or rank, without losing anything.',
+    vi: 'Nước đó để Xe ở cột 1 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy đưa Xe đó ra khỏi góc, lên một cột hoặc hàng thông thoáng, mà không mất gì.',
   },
   'b08-c01.r.free': {
     en: 'Your Horse on file 9 gets at least 2 more moves this way (it had 0), and nothing is lost.',
@@ -2778,8 +2778,8 @@ export const messages = {
     vi: 'Sau Xs-7, nước đáp tốt nhất của đối phương theo máy là X9.1; nó không ăn được gì.',
   },
   'b08-c01.error': {
-    en: 'That move leaves your Horse on file 9 with few moves, or it loses material. Look for the move that frees it: -R=7, -R-1.',
-    vi: 'Nước đó để Mã ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: Xs-7, Xs/1.',
+    en: 'That move leaves your Horse on file 9 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 9 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'b08-c02.r.free': {
     en: 'Your Horse on file 7 gets at least 2 more moves this way (it had 2), and nothing is lost.',
@@ -2798,8 +2798,8 @@ export const messages = {
     vi: 'Sau M7/5, nước đáp tốt nhất của đối phương theo máy là P2-5; nó không ăn được gì.',
   },
   'b08-c02.error': {
-    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look for the move that frees it: H7-5, P7+1.',
-    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy tìm nước giải phóng nó: M7/5, B7.1.',
+    en: 'That move leaves your Horse on file 7 with few moves, or it loses material. Look at that Horse\'s legs: free a blocked leg, or move it to a point where it has more moves, without losing anything.',
+    vi: 'Nước đó để Mã ở cột 7 của bạn vẫn ít nước đi, hoặc bị mất quân. Hãy xem chân của con Mã đó: gỡ chân bị cản, hoặc đưa nó đến điểm có nhiều nước đi hơn, mà không mất gì.',
   },
   'a03.r.decoyadvance': {
     en: 'This advance looks active, but your opponent answers it and wins material.',
@@ -2912,8 +2912,8 @@ export const messages = {
     vi: 'Sau P2-3, nước đáp tốt nhất của Đỏ là T7.9, và các quân của bạn vẫn an toàn.',
   },
   'a07l4-02.error': {
-    en: 'That move does not stop Red\'s plan: R8+3 or its follow-up wins material within two moves. Holding moves here: C2=3, C2=4.',
-    vi: 'Nước đó không chặn được kế hoạch của Đỏ: X8.3 hoặc nước tiếp theo ăn được quân trong hai nước. Các nước giữ được thế ở đây: P2-3, P2-4.',
+    en: 'That move does not stop Red\'s plan: R8+3 or its follow-up wins material within two moves. Find a safe move that meets this threat: protect the target, move it out of the attack, or block Red\'s line, then check Red\'s reply.',
+    vi: 'Nước đó không chặn được kế hoạch của Đỏ: X8.3 hoặc nước tiếp theo ăn được quân trong hai nước. Hãy tìm nước an toàn chặn đòn này: bảo vệ quân bị nhắm, đưa nó ra khỏi đòn đánh, hoặc chặn đường của Đỏ, rồi kiểm tra nước đáp của Đỏ.',
   },
   'a07l4-03.r.i7-g8': {
     en: 'H9-7 meets Red\'s threat (R2+5) and keeps your pieces safe for the next moves.',
@@ -2940,8 +2940,8 @@ export const messages = {
     vi: 'Sau M9/7, nước đáp tốt nhất của Đỏ là B5.1, và các quân của bạn vẫn an toàn.',
   },
   'a07l4-03.error': {
-    en: 'That move does not stop Red\'s plan: R2+5 or its follow-up wins material within two moves. Holding moves here: H9-7, R6+6.',
-    vi: 'Nước đó không chặn được kế hoạch của Đỏ: X2.5 hoặc nước tiếp theo ăn được quân trong hai nước. Các nước giữ được thế ở đây: M9/7, X6.6.',
+    en: 'That move does not stop Red\'s plan: R2+5 or its follow-up wins material within two moves. Find a safe move that meets this threat: protect the target, move it out of the attack, or block Red\'s line, then check Red\'s reply.',
+    vi: 'Nước đó không chặn được kế hoạch của Đỏ: X2.5 hoặc nước tiếp theo ăn được quân trong hai nước. Hãy tìm nước an toàn chặn đòn này: bảo vệ quân bị nhắm, đưa nó ra khỏi đòn đánh, hoặc chặn đường của Đỏ, rồi kiểm tra nước đáp của Đỏ.',
   },
   'a07l4-04.r.h2-e2': {
     en: 'C8=5 meets Red\'s threat (C5=2), keeps your pieces safe and creates a threat of your own.',
@@ -2964,8 +2964,8 @@ export const messages = {
     vi: 'Sau P8-5, nước đáp tốt nhất của Đỏ là T7.5, và các quân của bạn vẫn an toàn.',
   },
   'a07l4-04.error': {
-    en: 'That move does not stop Red\'s plan: C5=2 or its follow-up wins material within two moves. Holding moves here: C8=5, C8-4.',
-    vi: 'Nước đó không chặn được kế hoạch của Đỏ: P5-2 hoặc nước tiếp theo ăn được quân trong hai nước. Các nước giữ được thế ở đây: P8-5, P8/4.',
+    en: 'That move does not stop Red\'s plan: C5=2 or its follow-up wins material within two moves. Find a safe move that meets this threat: protect the target, move it out of the attack, or block Red\'s line, then check Red\'s reply.',
+    vi: 'Nước đó không chặn được kế hoạch của Đỏ: P5-2 hoặc nước tiếp theo ăn được quân trong hai nước. Hãy tìm nước an toàn chặn đòn này: bảo vệ quân bị nhắm, đưa nó ra khỏi đòn đánh, hoặc chặn đường của Đỏ, rồi kiểm tra nước đáp của Đỏ.',
   },
   'a07l4-05.purpose': {
     en: 'Red had no mate at once, but threatened mate in two, starting with R8+9. R1=2, R1=3, R1-2, C3=2, C3-1, K4=5 each stop it.',

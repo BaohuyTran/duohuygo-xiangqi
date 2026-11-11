@@ -38,7 +38,7 @@
     {
       "id": "a07l4-02",
       "version": 1,
-      "contentHash": "92e3f885a747a821500dff57db1b595cbd1b2a9289a1aa23205c20191c6680df",
+      "contentHash": "50b1a4896edc7ccb434e8a71449d31dab21043dce546a80aa4d069fe2ad6cfd8",
       "author": "implementer-S2.17",
       "checks": [
         {
@@ -52,6 +52,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -66,13 +72,25 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },
     {
       "id": "a07l4-03",
       "version": 1,
-      "contentHash": "0e133138eb838dd7b0e861b820d6bbb07b6fb06acf98250f935bacd9e1b7436f",
+      "contentHash": "469ad3b73c65621ae2edf8e1c3c868a449a0f5a2fe7a229961ac5e3e3dafd629",
       "author": "implementer-S2.17",
       "checks": [
         {
@@ -86,6 +104,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -100,13 +124,25 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },
     {
       "id": "a07l4-04",
       "version": 1,
-      "contentHash": "c098d58e58e2a00de2d102413db9d1a4dd7b3d4402de50b68143f76accc0d0f0",
+      "contentHash": "99d9b1e502378c4e763dce09d732764a36e754555e7e464a128f2ef4b5197ad4",
       "author": "implementer-S2.17",
       "checks": [
         {
@@ -120,6 +156,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a07 --runs 20",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -134,6 +176,18 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible Central Cannon play, complete tables at d2/d4, verified threats, real mates in 2 (no mate in 1), a07-g1 hold tree with 3 narrow positions and reacting replies; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },

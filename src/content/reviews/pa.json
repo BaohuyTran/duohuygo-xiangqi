@@ -38,7 +38,7 @@
     {
       "id": "pa-02",
       "version": 1,
-      "contentHash": "553eebd21266524e84272d83785379faceb75b98ca7e9381ab20ada7167a238f",
+      "contentHash": "0374f0c5fc023b80c8a73a13015d2fb00f2092098dc452f726b70d706763b4fa",
       "author": "implementer-S2.16",
       "checks": [
         {
@@ -52,6 +52,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -66,13 +72,25 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },
     {
       "id": "pa-03",
       "version": 1,
-      "contentHash": "d735d64f11d154cbce3f16801548a8926d1e1aa7c9e9f6c53fc1ada89a424040",
+      "contentHash": "16976f834fdc5b49a7946087d7687f5ed3fb6b53496db4b2cbc983edcc05ac4e",
       "author": "implementer-S2.16",
       "checks": [
         {
@@ -86,6 +104,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -100,13 +124,25 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },
     {
       "id": "pa-04",
       "version": 1,
-      "contentHash": "a2991a6c9c7bedffe3d24c268095c7be973714005bd9c3621e7ac05354f46a18",
+      "contentHash": "01a9a357b532af46e662a7ab788c51075cebd0d891ca6cf4b94459ef5481017a",
       "author": "implementer-S2.16",
       "checks": [
         {
@@ -120,6 +156,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -134,13 +176,25 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },
     {
       "id": "pa-05",
       "version": 1,
-      "contentHash": "524dec266a9264bff320e868142f437d1879c749641fb5a8a91c2ca61cbcf443",
+      "contentHash": "9bfdd54cc41e431192c4a38ddb9c2a4926de943ed23a85d1dc65d5eb5804257e",
       "author": "implementer-S2.16",
       "checks": [
         {
@@ -154,6 +208,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -168,6 +228,18 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },
@@ -208,7 +280,7 @@
     {
       "id": "pa-07",
       "version": 1,
-      "contentHash": "d75db1e0537d994c849093a5945285c42722271d0d4b01fc7e864e8ff1c4a652",
+      "contentHash": "4fdefd00c86af5ca80b7b63222bb07dcadf3cbb34ea79837d111152f57e0dbc5",
       "author": "implementer-S2.16",
       "checks": [
         {
@@ -222,6 +294,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -236,13 +314,25 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },
     {
       "id": "pa-08",
       "version": 1,
-      "contentHash": "95003365df4ce8a06fbb3a2496ec0df719ed88608451868fd911cc2d3d3a42ec",
+      "contentHash": "b45614c12514a683094631f6714bd10d9deb8b189b85aea99de61f01f25c9f46",
       "author": "implementer-S2.16",
       "checks": [
         {
@@ -256,6 +346,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -270,6 +366,18 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     },
@@ -310,7 +418,7 @@
     {
       "id": "pa-10",
       "version": 1,
-      "contentHash": "d02d6bd5ececbdd2eedaded2d2eeb895ffba7e78346d0d530aed02a0022ace23",
+      "contentHash": "75a7c728a71a15a9bd767089990c0da551199862696da9b0e3448aac2c6a2fed",
       "author": "implementer-S2.16",
       "checks": [
         {
@@ -324,6 +432,12 @@
           "tool": "npx tsx scripts/verify-practical.ts a03 --runs 20; npx tsx scripts/verify-lines.ts a03",
           "result": "pass",
           "at": "2026-11-10"
+        },
+        {
+          "name": "W10 feedback-leak test + content validator",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-11"
         }
       ],
       "reviews": [
@@ -338,6 +452,18 @@
             "vi"
           ],
           "notes": "Attempt 3: positions from plausible play (ruling G), complete tables, d2/d4 material walk incl. no rejected win ≥ T, a03-g1 tree with reacting replies, ruling F; notation and en/vi."
+        },
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S2.20",
+          "at": "2026-11-11",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
     }
