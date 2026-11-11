@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
-- **Active items:** S2.18 (`pressing` validation); then S2.19, S2.20, S2.gate
+- **Active items:** S2.19 (pilot integration and walkthrough); then S2.20, S2.gate
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,14 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-11 — **S2.18 done** (attempt 1), verdict **not validated** (D16): `scripts/self-play.ts` (seeded, deterministic per
+  seed independent of `--jobs`) played 135 games from 15 pilot positions (pressing vs safe-sparring both colours, pressing
+  vs itself); results in measurements.md §6. pressing: 1.3–2.1 % drops vs safe-sparring 8.4–8.5 %, 18 games lost by its own
+  perpetual check, 6 node-limit safety nets in 4,792 moves, p95 ~0.5 s (Node) / ~3 s and max ~16 s at the 6× proxy.
+  `verify-practical --regime main`: b09 pass, i08 fails item 3, a03 fails items 1/3/6, a07 fails item 2; `--regime
+  fallback`: all four pass. Weights unchanged. Content-reviewer APPROVE (sample 60 moves: 48 plausible, 10 dubious,
+  2 implausible beyond d = 2) and concurs with "not validated"; reviewer APPROVE. Driver: lint, build, 1,280 tests.
 
 - 2026-11-10 — **S2.17 done** (attempt 3): `a07l4` (Black, positions from seeded Central Cannon games: learn, decision
   G1 ×2, decision G0, `defend` depth 2 ×2 with a real mate in 2 and no mate in 1) and `a07-g1` (hold, F1, R5 90 + R1 10,
@@ -235,4 +243,4 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. S2.18–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
+1. S2.19–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).

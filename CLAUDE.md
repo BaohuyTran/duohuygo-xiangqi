@@ -38,6 +38,7 @@ Must work in desktop and phone browsers and as an installable, offline-capable P
 | Phone-cost bench (proxy: throttled headless Chromium 1×/4×/6×, real Worker client + src/play partners; type-checks scripts/bench first; Playwright global; `-- --quick`, `-- --rates 1,4`, `-- --serve` for a real phone) | `npm run bench` |
 | Verify `line` trees + varied-defence combinations (validator, node selectivity, depth, replies at h + 1, best replies) | `npx tsx scripts/verify-lines.ts [unitId or unit.json …]` (default: all units) or `npx tsx scripts/verify-lines.ts --fixtures` |
 | §5.7 checks of practical tasks (reference run, N1/N2 failure rates, narrow positions, resistance, second plan, void rate, resist-mode cost) | `npx tsx scripts/verify-practical.ts [unitId or unit.json …] [--fixtures] [--runs N] [--regime main\|fallback] [--strict]` |
+| `pressing` self-play from pilot task positions (dev-time, ~4 min; results in ui-check-output/self-play/, sample in docs/curriculum-upgrade/pressing-sample.md) | `npx tsx scripts/self-play.ts [--seeds N] [--jobs N] [--tasks …] [--weights k=v] [--no-sample]` |
 | Propose the complete move table of a `decision` item (dev-time; keeps `authored` rows) | `npx tsx scripts/move-table.ts <unitId or unit.json> <itemId>` or `npx tsx scripts/move-table.ts --fen "<fen>" [--unit b09] [--objective '<json>'] [--guard '{"h":2}']` |
 
 `npm run build`, `npm test` and `npm run lint` must pass before committing.
@@ -74,6 +75,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
 │   ├── bench/              # Dev-only bench page (own vite.config.mjs + tsconfig → ui-check-output/bench-dist; never in the app build)
 │   ├── verify-lines.ts     # Authoring-time check of `line` trees and varied-defence combinations
 │   ├── verify-practical.ts # §5.7 checks of `play` tasks (runs src/assessment/practical.ts with simulated learners)
+│   ├── self-play.ts    # Dev-time seeded self-play of `pressing` vs `safe-sparring` / itself from pilot task positions (S2.18; writes ui-check-output/self-play/ and the plausibility sample)
 │   ├── offline-check.mjs   # Build, load once, go offline, reload, open a lesson + puzzle; manifest/icons
 │   └── generate-puzzles.ts # Dev-time puzzle generator (run with tsx; not part of the app)
 └── src/
@@ -144,13 +146,13 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── test-fixtures.ts# TEST-ONLY check-pool / choice-item fixtures
     │   ├── rubrics.ts      # R0–R7, line share, scoring weights by fallback, pass rules. Pure, no runtime analysis import
     │   ├── practical.ts    # Regimes + partner chains, F3/F4 exam slots + reachability, TaskState turns, facts, grants, simulated learners (LAZY: never in the main chunk)
-    │   ├── regime.ts       # `PARTNER_REGIME` ('fallback' until S2.18)
+    │   ├── regime.ts       # `PARTNER_REGIME` ('fallback': `pressing` not validated in S2.18, DECISIONS D16)
     │   ├── narrow-ruling.ts# §5.7 item 3 rulings A + D + F: n/a for R6 line-share-gate tasks (selective nodes, N2 fails, L reached; partner deeper than h, or F5/F2b with N2 voids ≤ 1/5); F: R3/R4 objective necessary + ≥ 3 selective tree nodes
     │   └── play-fixtures.ts# TEST-ONLY play / review fixtures (also `verify-practical.ts --fixtures`)
     ├── play/               # Training partners (policies.ts), game record (record.ts), training-ruleset adjudicator (adjudicate.ts), seeded RNG (rng.ts), index.ts. Pure: NO React/DOM/storage/gamification/clock/Math.random (enforced by purity.test.ts)
     ├── analysis/           # Pure analysis layer (no React/DOM, no gamification; imports only '../engine'; enforced by purity.test.ts)
     │   ├── search.ts       # Iterative-deepening alpha-beta + Zobrist TT, node limit, abort flag → { score, pv, depth, nodes, complete }
-    │   ├── eval.ts         # materialEval (= engine material) and featureEvaluator (terms reported separately; weights unvalidated until S2.18)
+    │   ├── eval.ts         # materialEval (= engine material) and featureEvaluator (terms reported separately; weights not validated: S2.18 kept `pressing` out of use, D16)
     │   ├── features.ts     # Control maps (cannons by capture squares), hanging/en-prise, mobility, horse legs, cannon screens, pieces ahead, general-file exposure, soldiers, palace, development
     │   ├── judge.ts        # 03 §5.3 safety horizons + signals, a06 threat, forcing-attack winning capture, declarative predicates
     │   ├── requests.ts     # Request union (move-signals, safety-guard, predicate, …); executeRequest never throws; outcome checked / not-checked with a reason; per-search maxNodes + per-request budget
@@ -442,7 +444,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   for R3/R4 tasks whose maximum score without the objective is below the pass mark, whose reference path has ≥ 3 learner
   tree nodes each crediting ≤ 1/3 of the guard-passing moves, and whose items 4 and 6 pass; otherwise the
   3-narrow-positions rule applies.
-- Partner regime: `PARTNER_REGIME` = `fallback` until S2.18. Task kind → chain in `partnerPlan` (03 §5.2): F1 (tree →
+- Partner regime: `PARTNER_REGIME` = `fallback` (S2.18: `pressing` not validated, DECISIONS D16; re-validation needs the D16 checklist). Task kind → chain in `partnerPlan` (03 §5.2): F1 (tree →
   forcing-attack(2), the task ends when it hands over), F1c (tree → forcing-attack(2) → resist mode k = d = 2), F2
   (safe-sparring(2, 1.0)), F2b (tree + line share), F5 (tree → safe-sparring(2, τ)), drills safe-sparring(2, τ);
   τ = 1.0 Basic, 0.5 above. F3/F4: `EXAM_SLOTS_UNDER_F` + `levelReachable`. `scoringWeights` applies the F scoring.

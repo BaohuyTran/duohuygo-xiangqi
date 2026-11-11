@@ -160,3 +160,111 @@ much slower would wait).
 5. Wait 2 minutes and run it once more (thermal throttling); send the second result too.
 6. The results go into this file as a new "Real devices" section (factor vs the 1× proxy per row); then R6 and the
    decisions above are confirmed or revised, and the readiness report may stop saying "phones unmeasured".
+
+## 6. `pressing` validation (S2.18)
+
+Input for the S2.18 decision (03 §5.2 "Dependency on validating `pressing`", 04 §5.5 item 4). Node (tsx) on the
+machine of §1 (4 vCPU cloud container), 2026-11-11; not a phone, not a browser. Proposed verdict at the end; the
+driver records the decision after the independent content review of the sample.
+
+### 6.1 Self-play
+
+Command: `npx tsx scripts/self-play.ts --seeds 3 --jobs 4` (247 s wall clock). From each pilot task (`b09-g1`, `i08-g1`,
+`a03-g1`, `a07-g1`) its start position plus ≤ 3 tree hand-over positions (after an accepted learner move with no authored
+continuation; evenly spread over the tree): 15 start positions, 135 games. Pairings: **P×S** = `pressing(2)` on the
+task's partner side vs `safe-sparring(2, τ)` (τ of the level) on the learner's side; **S×P** = colours swapped; **P×P**
+= `pressing(2)` against itself. Full-game rules with a 30-move cap (learner-side moves), default weights
+(`DEFAULT_WEIGHTS` mobility 0.03, palace pressure 0.08, hanging 0.3, crossed soldier 0.5), `directAnalyzer()`,
+default node limits (20,000 per search, 50,000 per request). *Drop* = the quiescence-resolved material from the mover's
+view is ≥ 2 lower after the opponent's reply than before the move. Raw games: `ui-check-output/self-play/self-play.json`.
+
+| Pairing | Games | Pressing W / D / L | End reasons | Plies mean (min–max) | Max material swing (mean) | Final material Δ, pressing view (mean) | Pressing drops / moves | Safe drops / moves | Third occ. | Perpetual check | Rep. draws | Safety nets |
+| --- | ---: | --- | --- | --- | ---: | ---: | --- | --- | ---: | ---: | ---: | ---: |
+| P×S | 45 | 33 / 8 / 4 | move-cap 34, mate 6, perpetual 3, rep. draw 2 | 55.5 (12–60) | 11.2 | +7.5 | 16 / 1,246 (1.3 %) | 105 / 1,252 (8.4 %) | 5 | 3 | 2 | 1 |
+| S×P | 45 | 28 / 9 / 8 | move-cap 31, perpetual 5, mate 9 | 53.9 (20–60) | 11.3 | +7.1 | 26 / 1,216 (2.1 %) | 103 / 1,209 (8.5 %) | 5 | 5 | 0 | 4 |
+| P×P | 45 | 24 decisive / 21 other | move-cap 32, mate 2, perpetual 10, rep. draw 1 | 51.8 (23–60) | 8.7 | \|Δ\| 4.1 | 90 / 2,330 (3.9 %) | — | 11 | 10 | 1 | 1 |
+
+Per task (P×S + S×P, pressing W / D / L): `b09-g1` 20 / 2 / 2, `i08-g1` 19 / 3 / 2, `a03-g1` 15 / 7 / 2, `a07-g1` 7 / 5 / 6
+(the a07 hold positions start with Black under pressure; pressing drops 18 vs safe 29 there).
+
+Findings:
+- **Material safety: good.** `pressing` drops material after 1.3–2.1 % of its moves against `safe-sparring` (which
+  drops after 8.4 %) and wins 61 of 90 mixed games. In the plausibility sample (§6.3) 6 of 60 chosen moves score 1 point
+  (a soldier) below the material-best move at d = 2 for feature terms; none ≥ 2 at d = 2 (at d = 4, sample rows 14 and 52 lose 3.5 and 2.5 more than the material-best move: depth limits, see the content review).
+- **Perpetual check: a defect of the partner logic, not of the weights.** 18 of 135 games end by the repetition rule
+  (1); in the mixed games `pressing` was the checker and lost 6 times (8 perpetual games, the other 2 lost by
+  safe-sparring), and in P×P 10 times. Pattern (every case inspected): the partner checks with one piece back and forth,
+  each check creating only a second occurrence; the defender's reply creates the third occurrence, so the checker
+  loses. The policy's repetition filter (policies.ts `repetitionFilter`) looks only at the third occurrence created by
+  its OWN move. In a task the learner may make that third occurrence against the opponent's perpetual check
+  (`checkLearnerMove` exception), so a learner can win or hold "for free" against `pressing`. A weight experiment
+  (`--weights palacePressure=0.04`, 2 seeds, 90 games, `--out sp-pal04`) did not help: 9 perpetual games (P×S 1, S×P 1,
+  P×P 7) vs 9 with the default weights at 2 seeds. A fix needs a policy change (e.g. treat a check that makes a second
+  occurrence of a position, when the defender's best reply repeats, as losing ≥ T), which is outside S2.18's
+  "weights only" scope.
+- **Safety nets: 6 of 4,792 `pressing` moves (0.13 %), in 5 of 135 games**, all `node-limit` at the 50,000 per-request
+  budget (busy middlegames, d = 2 over ~40 moves). Each would void a learner run (03 §5.6). Safe-sparring: none.
+- No weight change: the self-play shows no defect the weights can fix (material safety is good; the perpetual-check
+  defect is logic). `src/play/policies.ts` and `eval.ts` `DEFAULT_WEIGHTS` are unchanged.
+
+Cost per move against the D9 budgets (Node, 4 games in parallel on 4 vCPU, so slower than §2's single-thread rows):
+
+| Policy | Moves | Nodes / move median · p95 · max | Largest request | Requests at the 50,000 budget | ms / move median · p95 · max |
+| --- | ---: | --- | ---: | ---: | --- |
+| `pressing(2)` | 4,792 | 2,485 · 11,145 · 55,998 | 50,001 | 6 | 108 · 499 · 2,734 |
+| `safe-sparring(2)` | 2,461 | 1,652 · 4,531 · 17,734 | 17,734 | 0 | 21 · 64 · 321 |
+
+With §2's 6× factor (~5.9×) the `pressing` p95 is ~3 s and the max ~16 s on the proxy; the max exceeds the 5 s safety
+net (D9), which would add `timeout` safety nets on slow phones beyond the node-limit ones above (phones unmeasured).
+
+### 6.2 `verify-practical --regime main` (10 seeds)
+
+Command: `npx tsx scripts/verify-practical.ts b09 i08 a03 a07 --regime main` (8 min 6 s).
+
+| Task | Main form | 1 reference | 2 N1 ≥ 90 % | 2 N2 ≥ 80 % | 3 narrow positions | 5 resistance | 6 second plan | Result |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `b09-g1` | opening: tree → `pressing(2)` | PASS 10/10 (100) | PASS 9/9 (1 void) | PASS 10/10 | N/A (R6 gate, ruling A) | — | PASS 10/10 | **pass** |
+| `i08-g1` | opening: tree → `pressing(2)` | PASS 10/10 (100) | PASS 9/9 (1 void) | PASS 9/9 (1 void) | **FAIL** (1; ruling A needs a partner deeper than h = 2, ruling D covers only F5/F2b) | — | PASS 10/10 | **fail** |
+| `a03-g1` | plan: tree → `forcing-attack(2)` → `pressing(2)` | **FAIL** 0/10 (44 each) | PASS 10/10 | PASS 10/10 | **FAIL** (0) | — | **FAIL** 5/10 | **fail** |
+| `a07-g1` | hold: tree → `forcing-attack(2)` → `pressing(2)` | PASS 10/10 (100) | PASS 10/10 | **FAIL** 7/10 = 70 % | PASS (4) | PASS | PASS 10/10 | **fail** |
+
+Diagnosis (reference runs inspected):
+- `a03-g1` (cap 4): the authored reference lines have 3 learner moves (written for F1, where the task ends at the
+  hand-over). In the main form the task goes on: the reference player's 4th move (forcing-attack → `pressing` for the
+  learner, `referenceLearner`) and `pressing`'s reply leave the R3 mobility objective (a9 ≥ 11, c7 ≥ 4) unmet at the
+  end, so R3 = 20 and the score is 44. A main form needs reference lines covering all 4 moves and an objective that
+  survives the partner's reply (content, not partner).
+- `a07-g1`: in the main form N2 gets more moves after the tree, and 3 of 10 safe shufflers create a threat at some move
+  (holding predicate `threat {created}`, `any-move`), so N2 passes 30 %.
+- `i08-g1`: the main form has the same partner depth as the level's h, and ruling D (D14) is scoped to F5/F2b.
+- `b09-g1` passes, but 03 §5.2 lists `b09-g1` as a drill with `safe-sparring(2)` "unchanged" in both regimes, while its
+  JSON `task` is `opening` (D13 remedy 2), so `partnerPlan` gives it `pressing` in the main regime. To be settled with
+  the decision (practical.ts is not in S2.18's files).
+
+### 6.3 Plausibility sample
+
+`docs/curriculum-upgrade/pressing-sample.md`, generated by the same self-play command: 60 `pressing` moves (≤ 4 per game
+from evenly spaced slices, duplicates of position + move dropped), each with the FEN, the move in traditional
+notation (en / vi, `formatMove`) and ICCS, its feature score, the runner-up, the material-best move, the principal
+variation and the weighted feature terms that chose it (terms at the end of the PV minus the current ones). The verdict
+column is for the independent `content-reviewer` (plausible / odd / blunder).
+
+### 6.4 Reachability (03 §5.2) and proposed verdict
+
+- `EXAM_SLOTS_UNDER_F` / `levelReachable` are unchanged; `src/assessment/practical.test.ts` "every level is
+  applied-reachable under F" passes, and no pilot task depends on `pressing` in its F form (F5, F1; F1c/F2/F2b unused by
+  the pilots). The four pilot tasks pass §5.7 in their F forms (`--regime fallback`, the S2.14–S2.17 records, rerun
+  for S2.18, see 6.5). Mastery never depends on `pressing`.
+- **Proposed verdict: not validated.** Reasons: (1) three of the four pilot tasks fail §5.7 in their main form
+  (`i08-g1` item 3, `a03-g1` items 1/3/6, `a07-g1` item 2); (2) the perpetual-check defect lets a learner win or hold
+  against `pressing` by the repetition rule; it needs a policy change, not weights; (3) safety-net voids in 0.13 % of
+  moves, and the per-move time tail exceeds the 5 s net at the 6× proxy. `PARTNER_REGIME` stays `fallback`; fallback F
+  applies; the content-reviewer's sample verdict is still required for the record.
+
+### 6.5 `verify-practical --regime fallback` (control, 10 seeds)
+
+Command: `npx tsx scripts/verify-practical.ts b09 i08 a03 a07 --regime fallback` (3 min 21 s): **all §5.7 checks pass.**
+`b09-g1` F5 (item 3 N/A ruling A; N2 fails 10/10), `i08-g1` F5 (N/A ruling D; N2 9/9, 1 void), `a03-g1` F1 (N/A ruling F;
+reference and second plan 10/10), `a07-g1` F1 (N2 fails 9/10 = 90 %, 3 narrow positions, resistance PASS). So the
+fallback regime keeps every pilot task usable as application evidence, and the 03 §5.2 reachability obligation is met
+for the pilot slots it covers.

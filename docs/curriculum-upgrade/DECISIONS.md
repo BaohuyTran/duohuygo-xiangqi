@@ -188,3 +188,16 @@ Source: `docs/curriculum-upgrade/measurements.md` §3 (headless Chromium throttl
 - Pool `decision` / `line` items carry no predicate objective (the field is the lesson id); pool lines may not hand over.
 - New-course units are validated per unit in parallel shards with a per-run memo of computed move classes (no check
   dropped; cross-unit id uniqueness and track order are tested separately).
+
+## D16 — 2026-11-11 — `pressing` not validated; partner regime stays `fallback` (S2.18)
+
+- **Decision:** `PARTNER_REGIME` stays `fallback`; fallback F of 03 §5.2 applies to every practical task and exam; the
+  reachability table holds (`levelReachable`, all pilot tasks pass §5.7 in their F form). Evidence: measurements.md §6,
+  docs/curriculum-upgrade/pressing-sample.md (content-reviewer: 48 / 10 / 2 of 60 plausible / dubious / implausible).
+- **Reasons (each sufficient):** 3 of 4 pilot tasks fail §5.7 in the main form; `pressing` loses by its own perpetual
+  check (`repetitionFilter` only checks third occurrences its own move creates), so a learner could hold for free;
+  node-limit safety nets would void runs; worst-case time per move exceeds the 5 s safety net at the 6× proxy.
+- **Re-validation checklist (future item):** fix the partner's perpetual-check handling (policy logic, not weights);
+  give `b09-g1` `safe-sparring` in both regimes (03 §5.2; its `task: 'opening'` maps to `pressing` in `main`); make
+  a03-g1's reference lines and objective survive the main form's 4th move; re-run i08-g1 item 3 and a07-g1 item 2;
+  measure phone cost; de-duplicate the sample and include positions where palace pressure decides the move.
