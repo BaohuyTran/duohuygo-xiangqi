@@ -201,3 +201,21 @@ Source: `docs/curriculum-upgrade/measurements.md` §3 (headless Chromium throttl
   give `b09-g1` `safe-sparring` in both regimes (03 §5.2; its `task: 'opening'` maps to `pressing` in `main`); make
   a03-g1's reference lines and objective survive the main form's 4th move; re-run i08-g1 item 3 and a07-g1 item 2;
   measure phone cost; de-duplicate the sample and include positions where palace pressure decides the move.
+
+## D17 — 2026-11-11 — Pilot review decisions (S2.20) and owner decisions O1, O2
+
+- Decisions with evidence in `docs/curriculum-upgrade/pilot/review.md` §2: UA1 (no "needs review" badge; a failed
+  warm-up only suggests lessons), UA2 (one J2 attempt per target per day), UA6 (§5.7 rates and narrow-position count
+  unchanged; rulings A/D/F written into 03 §5.7), UA7 (80 learner moves / 30 without a capture; games resume across
+  sessions), U3 (linear unlock), U5 (no ICCS setting for learners), U6 (task lengths per fallback form), U8 reduction (1)
+  adopted (5 non-learn items per lesson Basic–Advanced, 4 Expert/Master) and (2) not adopted (check pools stay 16),
+  MU1 ("More practice" on the unit panel). Tightenings: release §5.7 records use ≥ 20 seeds; N1 and N2 voids ≤ 1/5.
+- **O1 (owner, 2026-11-11):** placement pools ≥ 6 items per unit (pb 60, pi 66, pa 60, pe 54 = 240); J2 is assembled
+  from unexposed placement items first, then an unexposed check-pool top-up only as needed; exposed fill-ins only from
+  placement items; otherwise J2 is unavailable (a published level never falls back to the old jump test).
+  Consequences accepted: a failed J2 leaves 2 (then 1) unit-check attempts instead of 3; placement mastery partly rests
+  on check items (departure from 03 §12 decision 3). Code: new item S3.3a before REL-1. The owner was shown the
+  consequences; the "no old jump test fallback" last-resort rule follows from the independence requirement.
+- **O2 (owner, 2026-11-11):** sustained play above Basic stays short under fallback F (tree-bounded tasks of 4–8 learner
+  moves); accepted and disclosed (task disclosures, grant provenance, 03 §11, Step 4 S4.6/S4.7). No `pressing`
+  re-validation item in step 3.

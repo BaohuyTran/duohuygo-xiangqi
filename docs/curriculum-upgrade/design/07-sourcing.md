@@ -48,6 +48,11 @@ databases, engine test suites or other courses — including "lightly changed" c
 generated or authored position matches a published one, it is replaced (not cited), because the course cannot prove
 it is original.
 
+**Realism (ruling G, D15, S2.16).** For positions meant to come "from realistic play" (02 §6), relocating a piece onto a
+legal but unnatural point is not enough: the position must arise from plausible play in which the feature taught
+(for example a poorly placed piece) came about naturally. The pilot used seeded games of a taught opening (`a07l4`) and
+plausible move sequences (`a03`); all their items are recorded as `generated`.
+
 ### 2.2 Knowledge that may come from references
 
 | Material | Allowed use | Citation |
@@ -171,6 +176,13 @@ strand, colour, `tactic`/`quiet`, `critical`, misconception ids.
 - **Independence:** `reviews[].by` must differ from `author` for chess content and assessment logic (PLAN.md: an
   author's own review does not replace independent review); the test enforces it.
 - **No personal data:** role names, agent session ids or initials only; no email addresses.
+- **As implemented (S2.2, S2.16; `src/content/reviews/gate.ts`):** a file holds `{ "unit": "<unitId>", "records": [...] }`.
+  Record ids must belong to the file's unit (`<unit>l…`, `<unit>-p…`, `-c…`, `-g…`). **Placement pools** have their own
+  files, `reviews/<pool>.json` for `pb`, `pi`, `pa`, `pe` (ids `<pool>-NN`, `<pool>-gN`; the pilot has `reviews/pa.json`,
+  D15). Check-pool items go in their unit's file (`reviews/a03.json` holds `a03-cNN`). A record approves its item only
+  when its **latest** `content-reviewer` review is `approve` and covers `chess`, `en` and `vi`. `author` / `by` are role +
+  item ids (e.g. `implementer-S2.16`, `content-reviewer-S2.16`) and must not contain "@". `npx tsx scripts/review-hash.ts
+  <unit>` prints id, version and hash.
 
 ### 5.3 Course reference list
 
@@ -182,7 +194,11 @@ once, with the citation fields of §2.2; items refer to it by key.
 ## 6. Draft status and the release path — Proposal
 
 - **Statuses:** `draft` → `verified` (validators and proofs pass) → `reviewed` (independent approval recorded,
-  hash matches) → `published`; `retired` (id reserved, never served).
+  hash matches) → `published`; `retired` (id reserved, never served). **As implemented (S2.2, S2.14–S2.17):** pilot
+  items stayed `verified` until the independent review, then became `reviewed`. The course preview serves `reviewed`
+  items of levels not yet published, and only units whose items are all reviewed; the default build serves only
+  `published` items. A level not yet published may hold no `published` item, which is how T1 tells release states apart.
+  The loader does not filter by status: the release test fails the build instead.
 - **Drafts never reach learners:** draft items live in `src/content/drafts/` (not matched by the loaders' glob
   patterns), or carry `status` below `published`; a content test fails the build if any loaded item is not
   `published` or lacks a matching review record. Check, placement and exam pools additionally refuse anything
@@ -245,6 +261,11 @@ items; en and vi texts present with matching placeholders.
 **Before `reviewed`:** independent content reviewer approves chess accuracy, terminology and the explanation
 (both languages); citations opened and confirmed; no copied text; limits of any engine-based claim stated in the
 feedback where relevant; review record written with the current hash.
+
+**Lesson from the pilot (S2.19 W10).** Approved pilot texts still named the accepted moves in their common-error texts,
+against 02 §7.3, and the walkthrough found it after the review. From S2.20 on, a content test checks that no `.error`
+text names an accepted move (part A, `src/content/pilot-feedback.test.ts`). Reviewers also check the 02 §7 feedback
+rules explicitly. Any text change changes the content hash and needs a new review record.
 
 ---
 

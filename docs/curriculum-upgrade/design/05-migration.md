@@ -820,7 +820,7 @@ Status after the S1.4 reconciliation; owners are backlog items of [06-backlog.md
 
 | # | Question | Options | Status · owner |
 | --- | --- | --- | --- |
-| MU1 | Where `pool` items live | (a) per-unit extra-practice pool used by "more practice" and remediation (recommended; 03 §4.4 remediation may draw from it); (b) convert to puzzles (needs mate-in-3/4 puzzle goals); (c) retire them | **Decided** (S1.4): (a); format in S2.1, "more practice" entry in S2.13; LX confirms the entry point in S2.20 |
+| MU1 | Where `pool` items live | (a) per-unit extra-practice pool used by "more practice" and remediation (recommended; 03 §4.4 remediation may draw from it); (b) convert to puzzles (needs mate-in-3/4 puzzle goals); (c) retire them | **Decided** (S1.4): (a); format in S2.1, "more practice" entry in S2.13. **Entry point confirmed** (S2.20): "More practice" on the Home unit panel, only when the unit has a served `pool`, played like a lesson (hearts, no XP, no mastery); remediation uses lesson G1/G0 items, not the pool. Walked through in the first batch that ships a pool |
 | MU2 | Supabase upsert leaves `data_v2` untouched (T15) | — | Open · S2.11 (fake-backend tests, SQL file, T15 procedure); running T15 on a real project is an **owner action** before any deploy that writes `data_v2` (04 R5) |
 | MU3 | Whether Reset clears mastery and applied (proposed: yes, explicit user act) | yes / keep mastery | **Decided** (S1.4): yes, as proposed (§8.5); implemented in S2.10 |
 | MU4 | XP for the first real completion of a migration-completed lesson | 10 (proposed) / 5 | **Decided** (S1.4): 10, as proposed; wired in S2.13 |
@@ -848,3 +848,27 @@ authoritative (02 §9.4). The table is kept as the record of why.
 | DV6 | a02 / e01 Reuses list `u12l*` for both | `u12l*` → a02l3 / a06l3 (+ pools); e01 gets `u13`–`u15` | Calculation depth grows from a02 to e01; Expert pools are already large (21 items) |
 | DV7 | e02 Reuses: `u10l1` | Two items of `u10l1` as e02l1 guided warm-ups, no completion | `u10l1`'s successor is i04l2 (its learn card states decoying the General); Expert items must be harder |
 | DV8 | e01 Reuses: `u13l2` among calculation practice | `u13l2`'s successor is e01l3 ("Long forcing lines"); two items serve e01l1 without completion | Reviewer finding: e01l1 is about several defending branches, which u13l2's single-defence lines did not teach |
+
+## 12. As implemented in step 2 (S2.20)
+
+- **Records and sync** as §8.3–§8.6: `learning.records.v1` (completed / mastered / applied / exposed), local attempt log
+  `learning.attempts.v1` (newest 2,000), `data_v2` column with missing-column fallbacks (S2.10, S2.11). Practical games
+  in progress are a further local key, `play.inProgress.v1`, cleared by Reset (D11). T15 on a real project is still an
+  owner action.
+- **Release state REL-P** since S2.14 (`CURRENT_RELEASE`, `src/content/release.ts`): all 36 legacy lessons live,
+  `LEGACY_MAP` v1 = the 9 orphans, the four pilot units (`b09`, `i08`, `a03`, `a07`) only in the course preview. T1
+  covers REL-0 and REL-P.
+- **Review records for placement pools** live in `src/content/reviews/<pool>.json` (`pb`, `pi`, `pa`, `pe`; ids
+  `<pool>-NN`, `<pool>-gN`), as 06-backlog.md §5.2 names them (D15). The pilot has `reviews/pa.json`.
+- **Jump-ahead in new-course levels (S2.20, owner decision O1).** P5 holds: legacy tracks keep the old jump test. In a
+  new-course track, J2 is offered today only when the placement pool can build a form; otherwise the old jump test is
+  used (`jumpInfo`, `src/App.tsx`). With 40-item level pools a one-unit J2 could not be built (pilot/review.md §1.3).
+  Decided 2026-11-11:
+  - placement pools of ≥ 6 items per unit, plus a top-up from the skipped units' unexposed check-pool items
+    (03 §7.2);
+  - no old-jump-test fallback in a published new-course level (proposed item S3.3a, before REL-1).
+
+  Migration is not affected. Topped-up items join the synced `exposed` set like any other assessment item.
+- **Migrated completion** shows "Mastery: not assessed yet" (T16, S2.13). In REL-P no legacy lesson maps to a new-course
+  lesson yet (`LEGACY_MAP` has only the orphans), so the first real case is REL-1 (S3.4 walkthrough). New-course
+  completion never enters the v1 list.

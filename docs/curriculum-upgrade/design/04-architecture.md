@@ -183,6 +183,8 @@ record the factor (owner: backlog item S2.6, 06-backlog.md).
 
 ## 4. Proposed module layout — Proposal
 
+*Built in step 2 with the changes listed in §9 ("As implemented in step 2").*
+
 `src/engine` stays as is (rule: never change its behaviour; its tests stay untouched). New code depends on the
 engine's public API only.
 
@@ -566,12 +568,54 @@ backlog item of [06-backlog.md](./06-backlog.md) or the owner).
 | R3 | Whether any assessment counts results against `safe-sparring` or `pressing` opponents (only after `pressing` is validated, §5.5) | **Resolved** by 03-assessment.md §5.2: `safe-sparring` only as safety/development evidence (b08-g1, b09-g1, F2/F2b, F5 continuation), never a result; `pressing` only after validation (S2.18), fallback F (F1, F1c, F2/F2b, F3–F5) otherwise |
 | R4 | Licence of this repository; whether a GPL engine may ever ship in the app | Open · **owner decision** (same as 07 S07-U2). Not blocking: option A needs no GPL code |
 | R5 | Supabase: separate `data_v2` column behaviour with old clients; mastery revocation | Column behaviour: open · S2.11 implements and tests with a fake backend; test T15 on a real project is an **owner action** before any deploy that writes `data_v2`. Revocation: **resolved**, none (03 §4.5, 05 §8.6 item 8) |
-| R6 | Phone slowdown factor: run §A.1 and §A.4 (packaged as a page) on at least one Android and one iOS device; confirm `pressing(2)` / `forcing-attack(2)` / mate guard stay within the 300 ms-desktop-equivalent budget, else drop to d = 1 + quiescence on slow devices | Open · S2.6 (bench page and throttled-browser proxy runs; real-device runs need the owner's devices, requested there). A device fallback never counts as evidence (§5.5, 03 §5.6) |
-| R7 | Default thresholds per level: mate guard k (2 at runtime, more at authoring), material horizon d (2 at runtime, 3–4 at authoring), loss threshold T, policy tolerance (0.5 in the measurements), node cap (~20,000 proposed) | **Resolved as defaults** by 03-assessment.md §5.3 (safety-horizon table; T = 2) and §5.2 (τ, node cap); calibration: S2.20 |
+| R6 | Phone slowdown factor: run §A.1 and §A.4 (packaged as a page) on at least one Android and one iOS device; confirm `pressing(2)` / `forcing-attack(2)` / mate guard stay within the 300 ms-desktop-equivalent budget, else drop to d = 1 + quiescence on slow devices | Proxy measured in S2.6 (measurements.md, budgets D9); real-device runs: **owner action**, still open ("phones unmeasured"). A device fallback never counts as evidence (§5.5, 03 §5.6) |
+| R7 | Default thresholds per level: mate guard k (2 at runtime, more at authoring), material horizon d (2 at runtime, 3–4 at authoring), loss threshold T, policy tolerance (0.5 in the measurements), node cap (~20,000 proposed) | **Resolved as defaults** by 03-assessment.md §5.3 (safety-horizon table; T = 2) and §5.2 (τ, node cap). S2.20 kept them: *h* = 2 at runtime above Basic (D9; *h* = 3 needs phone data), node caps 20,000 per search / 50,000 per request, τ 1.0 Basic / 0.5 above; the §5.7 guard rates were calibrated in 03 §5.7 |
 | R8 | Reconcile with `03-assessment.md` §5.2 and A2 (not edited here). (a) Its A2.3 adjudicates a **simplified perpetual chase** (the chasing side loses); §5.7 here does not adjudicate chase. (b) Partner names: `script` ≈ `scripted`; `spar` (material d = 2 + quiescence, tolerance 1 point) ≈ `safe-sparring(2)` (fits the budget: ~77 ms); `defend` (material search at depth 4 for its move + short mate search) and `counter` (`defend` plus a preference for checks/attacks within 0.5) are **material-based at depth 4**: choosing a move at depth 4 means scoring every root move at depth 4, which exceeds the measured ~720 ms already needed at d = 3 on a full board, so they fit the 300 ms budget only in small endgame positions or after S2 improvements; and a material-only base gives the tie problem of §5.5, which `counter`'s preference partly addresses. Proposed: `defend` ≈ threat tree → `forcing-attack(2)` → `pressing(2)`; `counter` ≈ `pressing(2)` with its tie-break. (c) 03's UA5 (phone cost of partners) is answered by §5.5's desktop numbers + R6 | **Resolved** (re-checked in S1.4 against the revised 03): (a) 03 §5.5 and §8.3 no longer adjudicate chase, aligned with §5.7 here; (b) 03 §5.2 uses this document's policy names and chains and withdraws `spar`/`defend`/`counter` and `safe-sparring(4, 0)`; (c) 03 UA5 now points to R6 (S2.6) and `pressing` validation (S2.18) |
 | — | Phones not measured (§2.5) | Open · S2.6 (same as R6) |
 
 ---
+
+## 9. As implemented in step 2 (S2.20)
+
+What S2.1–S2.19 built, where it differs from §4–§7. Code is the reference; CLAUDE.md describes each module.
+
+- **Modules (§4).** `src/analysis/` = `search.ts`, `eval.ts`, `features.ts`, `judge.ts`, `requests.ts` (typed request
+  union: `move-signals`, `safety-guard`, `threat`, `threat-at-end`, `winning-captures`, `search`, `search-move`,
+  `score-moves`, `forced-wins`, `mate-distances`, `predicate`, `ping`; `executeRequest` never throws; `material` and
+  `features` are not request kinds but the two evaluator specs (`EvalSpec`) a `search` / `search-move` / `score-moves`
+  request may name), `worker.ts`,
+  `client.ts`. The worker protocol is this request union, not the `judge | reply | analyse` messages of §4.
+  `src/play/` = `policies.ts`, `record.ts`, `adjudicate.ts`, `rng.ts`. `src/assessment/` = rubrics, practical tasks
+  (`practical.ts`, loaded lazily), credit, forms, checks, placement, exams, `narrow-ruling.ts`, `regime.ts`.
+  `src/progress/` holds the learning records (§5.8). Each module has a purity test.
+- **Budgets (§7.5).** 20,000 nodes per search, 50,000 per request, `SYNC_BUDGET` 1,500, safety net 5 s
+  (`DEFAULT_TIMEOUT_MS`), clamped to 60 s; measured on a throttled-browser proxy, not on phones (measurements.md, D9).
+  Without a Worker the client runs a small synchronous budget. After a Worker failure it runs no mate search of depth
+  ≥ 2 on the main thread.
+- **Move tables (§5.3).** Complete tables with classes target / sound / dubious / error; computed rows are recomputed
+  by the validator (`TABLE_MAX_NODES` 200,000); accepted, capture and check rows must be authored. **Pool items** (check
+  / placement) carry no predicate objective: the field is the lesson id and every accepted row is authored; pool lines
+  may not hand over (D15).
+- **Branching (§5.2).** `line` trees with coverage-then-seed replies; an accepted move without `next` leaves the tree,
+  ending the item (F1) or handing over to a partner chain whose moves are judged by the default class in the Worker.
+- **Partners (§5.5).** All policies are built; `pressing` is **not validated** (S2.18, D16), so `PARTNER_REGIME` =
+  `fallback` and 03 §5.2 fallback F applies (F1, F1c, F2/F2b, F5; F3/F4 for exams). Known defect behind D16: the
+  repetition filter only checks third occurrences created by the partner's own move, so `pressing` can lose by
+  perpetual check.
+- **Practical tasks (§5.6).** `play` / `review` exercise types; a run is a JSON `TaskState` saved after every move
+  (`play.inProgress.v1`). Each learner move's signals are computed in the Worker during the game. §5.7 checks run in
+  `scripts/verify-practical.ts` with rulings A/D/F (`narrow-ruling.ts`, D13–D15).
+- **Assessment mode.** Checks, placement and exams run in `LessonPlayer`'s `assessment` mode: no hearts, hints or
+  retries, and none of the item's answer-revealing feedback (S2.19 W3).
+- **Validation at scale.** New-course units are validated in four parallel shards (`src/content/validate-shard.ts`,
+  `SHARD_COUNT` 4, `validate-shard-{0..3}.test.ts`), with a per-run memo of computed move classes (D15). Cross-unit id
+  uniqueness and track order are tested separately. `npm test` took ~190–230 s with the four pilot units (STATUS
+  S2.16–S2.19); S3.1 re-measures.
+- **Walkthrough.** `npm run ui:check -- --preview` (`scripts/ui-walkthrough/`) plays the course preview at five viewports,
+  desktop by keyboard (board: one roving tab stop, S2.19 W2), with Worker fault injection for voided runs
+  (pilot/walkthrough.md).
+- **Option B / external engines.** Not needed: the pilot ran on option A alone (§7 item 3). No external engine is used in
+  the repository, its scripts or the pilot review records (option D stays optional).
 
 ## Appendix A — Measurement scripts
 

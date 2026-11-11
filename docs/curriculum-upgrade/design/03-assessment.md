@@ -107,7 +107,7 @@ unexposed for that learner (§4.3).
 | Quiet items | Units with primary PA, OD or DE: ≥ 1/4 with no immediate tactical win |
 | Safety-critical items | Flagged `critical` (blunder check, escaping mate in one, not hanging a Chariot). From b08 on each check has ≥ 1, possibly interleaved |
 | Mastery | Score **≥ 80/100** (8 items: at most one miss; short form: at most one miss = 83.3) **and** every `critical` item correct |
-| Feedback | After each answer: right/wrong + position-specific explanation |
+| Feedback | After each answer: right/wrong + position-specific explanation. **As implemented (S2.19 W3, confirmed S2.20):** the played row's reason and, for a guard failure, the refutation; the item's authored purpose, key reply, common error, tempting-alternative text and each `choice` option's feedback are **not** shown in checks, placement or exams (they name the accepted moves of pool items), and a checked selection marks only the learner's picks |
 
 m09 has no check: its mastery is `xm` (§6).
 
@@ -139,6 +139,10 @@ m09 has no check: its mastery is `xm` (§6).
 - **Retake** after a failed check: once the remediation set is done (§4.4). If no unexposed form can be built, at
   most half the form may be exposed items; if even that is impossible, the check is unavailable until new items
   exist, and the learner is told why.
+- **Pool size confirmed (S2.20).** 16 items (short form 12) stay the minimum: 02 §10 reduction (2) ("1.5 forms") is not
+  adopted. A form takes exactly 6 own items (short form 4) and at most half the form exposed, so a 12-item pool builds
+  two attempts and then nothing; a 16-item pool builds three (measured on the pilot `a03-check` pool,
+  pilot/review.md §1.3).
 
 ### 4.4 Remediation (the default referenced by every unit)
 
@@ -150,8 +154,9 @@ m09 has no check: its mastery is `xm` (§6).
 ### 4.5 Long breaks
 
 Mastery is not revoked by time. After long inactivity (default 30 days) the app offers a warm-up of unexposed check
-items from mastered units; results only drive suggestions. **Unresolved (UA1):** whether a failed warm-up shows
-"needs review".
+items from mastered units; results only drive suggestions. **Decided (UA1, S2.20):** no "needs review" badge; a
+failed warm-up only suggests lessons (the warm-up has at most 5 items, one per mastered unit before any second —
+about one item per unit, too little evidence to relabel a unit).
 
 ---
 
@@ -188,7 +193,7 @@ tree → `forcing-attack(2)` → `pressing(2)` (in positions of ≤ ~12 pieces `
 
 | Task kind | Examples | Partner | Under fallback F (below) |
 | --- | --- | --- | --- |
-| Safety and development drills | `b08-g1`, `b09-g1` | `safe-sparring(2)` | unchanged |
+| Safety and development drills | `b08-g1`, `b09-g1` | `safe-sparring(2)` | unchanged (as built, `b09-g1` is an F5 opening task after remedy (2) below: Red only, scripted tree + `safe-sparring(2, 1.0)`, R6 50 + R1 50, *L* = 6, cap 8; D13) |
 | Opening (R6, R2) | `i08-g1`, `i09-g1`, `i11-g*`, `e08-g*`, `m06-g1`; opening tasks of `xi`, repertoire tasks of `xe`, the opening task of `xm`; `pi-g*` | `scripted` → `pressing(2)` | F5 |
 | Plan (R3) | `i01-g1`, `a03-g1`, `a06-g1`, `e03-g1`, `m02-g1` | `pressing(2)` | F1 |
 | Hold / defence (R5) | `i07-g1`, `a07-g1`, `a09-g2`, `e04-g1`, `e07-g1`, `m03-g1`, `m05-g2` | hold chain | F1 |
@@ -198,7 +203,11 @@ tree → `forcing-attack(2)` → `pressing(2)` (in positions of ≤ ~12 pieces `
 
 **Dependency on validating `pressing`.** `pressing` is used by the opening, plan, hold, convert and full-game rows above,
 and therefore by every `xb`, `xi`, `xa`, `xe` and `xm` task built from them; the drill and review rows do not use it.
-Until its step-2 validation (04 §5.5 item 4; backlog S2.18) `pressing` is a practice partner only. **Fallback F**
+Until its step-2 validation (04 §5.5 item 4; backlog S2.18) `pressing` is a practice partner only. **Status (S2.18,
+D16): not validated** — 3 of 4 pilot tasks failed §5.7 in their main form, `pressing` loses by its own perpetual check,
+and node-limit safety nets would void runs (measurements.md §6). `PARTNER_REGIME` = `fallback`
+(`src/assessment/regime.ts`): fallback F applies to every practical task and exam until a re-validation item passes the
+D16 checklist. **Fallback F**
 applies while `pressing` is not validated, if it fails validation, and for any single task that fails the §5.7 guard
 in its main form:
 
@@ -365,7 +374,10 @@ credited counted moves ÷ *L*. The window is the first *L* counted moves of the 
    which are played but not counted); off the tree the post-game analysis computes it in the Worker (one class per
    legal move, the same searches as the guard). If the task ends with fewer than *L* counted moves, the run is voided
    (§5.6); the §5.7 reference run must reach *L*. The pilot measures how often runs are voided this way (S2.12, S2.20);
-   if voids repeat for a task, its *L* is lowered (never below 6) or its tree lengthened.
+   if voids repeat for a task, its *L* is lowered (never below 6) or its tree lengthened. **Measured (S2.20,
+   pilot/review.md §1.2):** at 50 seeds `b09-g1` 3/200 runs voided and `i08-g1` 15/200, all among N1/N2 runs; 0 in the
+   reference and second-plan runs and 0/70 per task for learners who follow the tree for 0–6 moves and then shuffle.
+   Voids do not repeat for learners who attempt the task, so neither *L* nor the trees changed.
 4. *Gate.* Line share ≥ 2/3 is a pass condition of every R6 task and every F2b game.
 
 *Why a safe shuffler cannot pass through the line term* (the lower bound "at least one" in rule 3 does not change
@@ -432,20 +444,50 @@ script), otherwise it is practice only:
    validation seed.
 2. **Naive learners fail.** N1 = random legal moves; N2 = **safe shuffler**, random among moves passing the level's
    safety guard (*h*, *k*). N1 must fail ≥ 90 % of seeded runs of every task; N2 must fail ≥ 80 % of seeded runs of
-   every task, including R1-only, R2, R5 tasks and `xb` games (thresholds calibrated in the pilot).
+   every task, including R1-only, R2, R5 tasks and `xb` games. **Calibrated (S2.20, UA6): rates unchanged.** Rates
+   are taken over the non-voided runs (D11) of **≥ 20 seeds** for the release record. The voided runs of **each** naive
+   learner (N1 and N2) must be ≤ 1/5 of its runs, otherwise item 2 is not met (voided runs are not failure evidence;
+   `i08-g1` N1 is exactly at the cap, 10/50). Pilot results at 20 seeds: N1
+   fails 100 % on all four tasks, N2 fails 100 / 100 / 100 / 95 % (`b09-g1`, `i08-g1`, `a03-g1`, `a07-g1`); in the
+   main regime the 80 % rule rejected `a07-g1` (N2 failed 70 %), so it discriminates.
 3. **Pressure, so that N2 fails for the right reason (R1, R5, `xb`):** the reference run contains at least 3 **narrow
    positions** (≤ 3 legal moves, or ≤ 20 % of legal moves, pass the safety guard), and the opponent's moves include
    threats beyond the shuffler's horizon *h*: from the verified threat or counterplay tree, from `forcing-attack(2)`
    (an exhaustive mate search reaches further than the material horizon), or from a partner searching deeper than *h*
    (e.g. `safe-sparring(2)` against the Basic *h* = 1). For full games, where narrow positions cannot be authored, the
    N2 failure rate of item 2 over the validation seeds is the requirement. Relies on 04's chains and, for `pressing`,
-   its validation (§5.2, fallback F).
+   its validation (§5.2, fallback F). **The count stays 3 (S2.20).** Item 3 is replaced only by these
+   content-reviewer rulings (`src/assessment/narrow-ruling.ts`; `verify-practical` prints `N/A` with the ruling):
+   - *Ruling A (D13), R6-gated tasks:* the task scores line share, every counted tree node is selective
+     (0 < credited ≤ 1/3), N2 fails ≥ 80 %, the partner searches beyond *h*, and the reference run reaches *L*.
+   - *Ruling D (D14), R6-gated tasks under F5 or F2b:* as A without "beyond *h*" when the level's *h* ≥ the partner
+     depth, provided N2's voids are ≤ 1/5 of its runs and the task text discloses that the continuation partner adds
+     no pressure beyond the guard.
+   - *Ruling F (D15), R3/R4 tasks:* the objective is necessary to pass (maximum score without it below the pass mark),
+     the reference path has ≥ 3 learner tree nodes each crediting ≤ 1/3 of the guard-passing moves, and items 4 and 6
+     pass.
+   Any further exception, or any lower rate or gate, needs `content-reviewer` approval and a re-run on every pilot
+   and published task.
 4. **Objective content:** R5 needs its holding predicate (max 70 without it); R1 tasks are paired with R0 or another
    rubric, so pure caution does not pass a task whose objective is more than safety.
 5. **Real resistance:** where a task claims counterplay, the partner creates at least one threat in the reference run.
 6. **Alternatives tolerated:** a second reasonable plan (authored by the reviewer) also passes.
 
 Failed-run reports (local only, no network) help reviewers find false failures.
+
+**Calibrated task lengths (S2.20, 02 U6; regime `fallback`).** Learner moves per task:
+
+| Form | Cap | Requirement on the reference path | Pilot evidence |
+| --- | --- | --- | --- |
+| F5 opening (R6) | 8 (*L* = 6 counted moves) | reaches *L*; line-share gate | `b09-g1`, `i08-g1`: cap 8, pass §5.7 at 20 and 50 seeds |
+| F1 plan (R3) | 4–8, bounded by the tree | ≥ 3 selective learner nodes (ruling F) | `a03-g1`: cap 4, 3 selective nodes per path |
+| F1 hold (R5) | 4–8, bounded by the tree | ≥ 3 narrow positions | `a07-g1`: cap 4, 3 narrow positions |
+| F1c convert (R4) | set per task: the reference line's mate plus margin | mates within the cap for every seed | not piloted; first task `i10-g1` (S3.7) records it |
+| F2 / F2b full games | 80 learner moves / 30 without a capture (UA7) | N2 failure rate (item 2) | not piloted; confirmed in S3.3 |
+
+The 02 §6 lengths (10–30 learner moves above Basic) assume `pressing` and apply only to a validated main regime. A
+task's cap must cover its reference lines: a line written for F1 does not carry over to a main-form task with a
+longer cap (S2.18: `a03-g1` failed in the main form).
 
 ---
 
@@ -473,7 +515,8 @@ title, grade or rating.
 ## 7. Jump-ahead (placement and test-out)
 
 Replaces today's jump test. Items come from **placement pools** (`p<level>-NN`); practical tasks from **placement
-practical pools** (`p<level>-g<k>`). Both are separate from practice, check and exam pools.
+practical pools** (`p<level>-g<k>`). Both are separate from practice, check and exam pools, except that a J2 form
+may top up from check pools (§7.2, owner decision O1).
 
 ### 7.1 Kinds
 
@@ -495,13 +538,27 @@ practical pools** (`p<level>-g<k>`). Both are separate from practice, check and 
     unit before any second).
   - Practical task by target: into Intermediate → `pb-g*` (full game as b10, colour seeded); into Advanced → `pi-g*`
     (as i11-g1/g2); into Expert → `pa-g*` (as a07-g1 or a09-g1); into Master → `pe-g*` (as e06-g1/g2).
+- **J2 assembly (owner decision O1, 2026-11-11; pilot/review.md §6).** Placement pools hold **≥ 6 items per unit**.
+  A J2 form takes, in order:
+  1. unexposed placement items of the skipped units, one per unit before any second;
+  2. then, only as far as the size needs, **unexposed check-pool items of the skipped units** (the top-up);
+  3. if no fresh form exists, at most half the form may be exposed, and those must be **placement** items; check items
+     are never served exposed in J2;
+  4. if no form can be built, J2 is unavailable with an explanation; in a published new-course level it never falls
+     back to the old jump test.
+
+  On a first attempt only a single-unit J2 needs a top-up (4 items). Topped-up items become exposed like any other.
+  So a learner who fails a single-unit J2 has 2 unit-check attempts left instead of 3, and 1 after two failed J2
+  attempts (§4.3; table in pilot/review.md §6). Implemented by the proposed item S3.3a before REL-1.
 - **J2:** *n* = 4 × skipped units, clamped to 10–20 items, equal weight totalling 100. If the skipped range includes a
   **PP-primary** unit (b10, a10, e09, m07, m08, m09; i11's PP is secondary), items total 80 and a placement practical
   task for that unit (game, review or critical-moment task) adds 20.
 - **No J2 within Master.** Master units are unlabelled mixed practice whose only evidence is their own checks and
   `xm`; a test-out would bypass both. Learners reach Master by J1 (into Master, using the `pe` pools) or by working
   through Expert; within Master, lessons unlock in order. There is therefore no `pm` placement pool.
-- No hints, retries or lives; each item answered once. Right/wrong after each item; explanations on the result screen.
+- No hints, retries or lives; each item answered once. Right/wrong after each item, with the played row's reason and
+  any refutation (as implemented; the answer-revealing parts are hidden as in §4.1). The result screen shows the total,
+  the strands and the units mastered (decided at S2.20; it replaces "explanations on the result screen").
 - **Early stop** when passing has become impossible.
 
 ### 7.3 Pass rule (all must hold)
@@ -539,10 +596,15 @@ practical pools** (`p<level>-g<k>`). Both are separate from practice, check and 
     `pb-g1` ≡ `b10-g1`), because it is a practical task, not a placement item. Level "applied" still needs the level
     exam;
   - no XP (as today), no hearts used.
-- **Fail:** nothing changes; the result screen shows total, strands and explanations, and points to the first skipped
-  unit carrying the weakest strand.
-- **Retake:** a new form avoiding exposed items; one attempt per target per local day. **Unresolved (UA2):** relax the
-  daily limit for single-unit J2.
+- **Fail:** nothing changes; the result screen shows the total and the strands (explanations were given after each
+  item, §7.2), and points to the first skipped unit carrying the weakest strand.
+- **Retake:** a new form avoiding exposed items (at most half the form exposed if no fresh form exists, D12); one
+  attempt per target per local day, counted at Start, released by "could not be assessed". **Decided (UA2, S2.20):** the
+  daily limit stays for single-unit J2 too. Pool size is the binding limit, not the day: the pilot's `pa` pool has 10
+  items, all tagged a03, so the first J2 form uses all of them and no retake can be built. While no J2 form can be
+  built, the app falls back to the old jump test (practice items). Owner decision O1 (2026-11-11): placement pools of
+  ≥ 6 items per unit plus a check-pool top-up (§7.2), and no old-jump-test fallback in published levels. J2 retakes
+  use exposed placement items before any further check item.
 - Units already mastered are excluded from the form, which shrinks within the clamps.
 
 ---
@@ -630,7 +692,11 @@ when forced; results are labelled "training result".
 
 - Automated scoring shows that a learner answered items and passed tasks under stated conditions; it does not prove
   learning or playing strength (step 4 needs studies with real learners).
-- Thresholds (80, 75, partner margins, task lengths, guard rates) are uncalibrated defaults.
+- Thresholds 80 and 75 and the partner margins are uncalibrated defaults. The §5.7 guard rates and task lengths were
+  calibrated on four pilot tasks with simulated learners (S2.20), not with real learners.
+- The partner regime is `fallback` (D16): practical evidence above Basic is tree-bounded and short (§5.7 task lengths).
+  The owner accepted this on 2026-11-11 (O2). It is disclosed in the task screens, in the grants' fallback provenance
+  and portfolio, and in step 4's course descriptions, readiness report (S4.6) and release notes (S4.7).
 - Training partners are limited and material-only; a pass is evidence only to the extent §5.7 holds.
 - Positional judgement is assessed only through authored, reviewed items.
 - The training ruleset differs from official rules on perpetual chase and move limits (§8.3).
@@ -644,7 +710,10 @@ when forced; results are labelled "training result".
 2. Unit-check mastery ≥ 80/100 first attempt + all safety-critical items; jump-ahead ≥ 90/100 exact (display floored),
    per-strand ≥ 75 % (strands < 4 items perfect), all safety-critical items, practical evidence; placement mastery
    only for covered units.
-3. Separate pools: practice, unit check, placement, placement practical, exam; drafts never served.
+3. Separate pools: practice, unit check, placement, placement practical, exam; drafts never served. **Departure (owner
+   decision O1, 2026-11-11):** a J2 form may top up from the skipped units' unexposed check-pool items (§7.2). For a
+   unit tested out alone, placement mastery then rests partly (4 of 10 items) on check-pool items, and a failed J2
+   uses up unit-check attempts.
 4. AXF rules taught as the reference; training ruleset §5.5 (perpetual check adjudicated, chase not, learner may not
    create a third repetition, 30-move no-capture limit, 80-move cap with material adjudication).
 5. Partners: 04's policies and chains (§5.2): hold = threat tree → `forcing-attack(2)` → `pressing(2)`; convert =
@@ -666,10 +735,10 @@ traceability with a pointer.
 
 | # | Question | Status · owner |
 | --- | --- | --- |
-| UA1 | "Needs review" after a failed warm-up (§4.5) | Open · S2.20 (LX review of the pilot; default until then: suggestions only, no badge) |
-| UA2 | Daily retake limit for single-unit J2 (§7.4) | Open · S2.20 (LX; default: one attempt per target per local day, as §7.4) |
+| UA1 | "Needs review" after a failed warm-up (§4.5) | **Decided** (S2.20): no badge, suggestions only |
+| UA2 | Daily retake limit for single-unit J2 (§7.4) | **Decided** (S2.20): one attempt per target per local day; J2 capacity: owner decision O1 (≥ 6 placement items per unit + check-pool top-up, §7.2) |
 | UA3 | Rulebook edition; CXA differences (§8.1) | Open · S3.2 (content reviewer, before b05l3 is published; same as 07 S07-U3) |
 | UA4 | Storage/sync format for attempts and states (§3.1) | **Resolved** by 05-migration.md §8.3 (`learning.records.v1`, local attempt log) and §8.6 (`data_v2`) |
-| UA5 | Phone cost of *h* = 3 post-game signals and of `pressing(2)` (04 R6); whether `pressing` passes validation (04 §5.5 item 4), which decides between the main partners and fallback F | Open · cost: S2.6; validation: S2.18. Fallback F (§5.2) keeps every level reachable either way |
-| UA6 | N1/N2 failure-rate thresholds and the narrow-position count (§5.7) | Open · S2.20 (calibrated on the pilot tasks with the S2.12 guard script) |
-| UA7 | Whether the 80-move cap and 30-move no-capture limit make Basic full games too long on a phone | Open · S2.20 (LX, with S2.6 timings); full games are not in the pilot, so it is confirmed again in S3.3 |
+| UA5 | Phone cost of *h* = 3 post-game signals and of `pressing(2)` (04 R6); whether `pressing` passes validation (04 §5.5 item 4), which decides between the main partners and fallback F | Cost: S2.6 (D9; *h* = 2 kept; real phones are an owner action). Validation: **not validated** (S2.18, D16); fallback F applies |
+| UA6 | N1/N2 failure-rate thresholds and the narrow-position count (§5.7) | **Decided** (S2.20): rates and count unchanged; ≥ 20 seeds, N1 and N2 voids ≤ 1/5 each; rulings A/D/F written into §5.7 |
+| UA7 | Whether the 80-move cap and 30-move no-capture limit make Basic full games too long on a phone | **Decided** (S2.20): kept (games resume across sessions); confirmed again in S3.3 with the first full game |

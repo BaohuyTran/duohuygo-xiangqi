@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
-- **Active items:** S2.20 (pilot review, calibration, design correction; must close W10); then S2.gate
+- **Active items:** S2.gate; then step 3 (owner 2026-11-11: continue into step 3 after the step 2 merge)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,14 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-11 — **S2.20 done** (part A attempt 1 + part B attempt 2): part A closed W10 (39 `.error` texts rewritten,
+  `pilot-feedback.test.ts`, records renewed after an approving content review; commit 67c13e5). Part B:
+  `docs/curriculum-upgrade/pilot/review.md` + design 02/03/04/05/06 §5/07 updated to what was built; decisions UA1, UA2,
+  UA6, UA7, U3, U5, U6, U8 (1 adopted, 2 not), MU1 (D17); §5.7 re-run on all four pilot tasks at 20 seeds (all pass), R6
+  void rates at 50 seeds (b09 3/200, i08 15/200, only N1/N2 runs); thresholds unchanged, two tightenings (≥ 20 seeds;
+  N1 and N2 voids ≤ 1/5). Owner decisions O1 and O2 (D17). New item S3.3a. Reviewer APPROVE; content-reviewer
+  CHANGES_REQUESTED (O1 consequences incomplete) → APPROVE.
 
 - 2026-11-11 — **S2.19 done** (attempt 2): preview walkthrough `npm run ui:check -- --preview` (scripts/ui-walkthrough/,
   test-only fixture page `scripts/ui-fixtures/preview-fixture.*`) plays all four pilots at 320/360/414, landscape and
@@ -255,4 +263,4 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. S2.20 (close W10 first)–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
+1. S2.gate–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).

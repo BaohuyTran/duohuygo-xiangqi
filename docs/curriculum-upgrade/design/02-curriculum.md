@@ -211,6 +211,11 @@ Tượng/Elephant, Xe/Chariot, Mã/Horse, Pháo/Cannon, Tốt/Soldier.
 | Expert | G3 → G1 (1–2) → G0 (2–3) → TR (1) | 4–6 |
 | Master | G3 worked example (annotated, with the contrast case) → G0 (3–4, unlabelled, mixed) → TR (1, usually `play`) | 4–5 |
 
+**Sizes decided at S2.20 (06-backlog.md §5.1 reduction (1)):** lessons use the low end of the range — 5 non-`learn`
+items in Basic, Intermediate and Advanced, 4 in Expert and Master. A practical task counts in the lesson that holds it
+(as `a03l3`). The ladder minimums stay, and a unit may go higher where a reviewer records why. Pilot lessons: `b09l3` 7,
+`i08l3` 6, `a03l1`–`a03l3` 5 each, `a07l4` 6.
+
 Every unit has at least one TR task (listed in the unit). **Default unit shape:** lessons → unit check
 (03-assessment.md §4) → practical task(s) where listed.
 
@@ -244,7 +249,14 @@ Every unit has at least one TR task (listed in the unit). **Default unit shape:*
 | Sustained play (learner moves; pilot calibrates) | Short tasks 6–12; full games to an adjudicated result (cap 80) | 10–20 | 12–25 | 15–30 | Multi-game exam |
 
 Lengths are design targets; the architecture review confirms the partner's time per move on a phone (Needs
-architecture confirmation). 04 §5.5 measured, on desktop for the 37 moves of a full-board position, ~77 ms for the
+architecture confirmation). **Calibrated at S2.20 (U6):** with `pressing` not validated (D16), the sustained-play row
+above applies only to a validated main regime. Under fallback F the lengths are those of 03-assessment.md §5.7
+"Calibrated task lengths": F5 opening tasks 8 learner moves, F1 plan/hold tasks 4–8 (bounded by the tree), F1c set per
+task, full games 80 / 30.
+
+**Realistic positions (ruling G, D15).** "Full positions from realistic play" means positions reached by plausible
+play in which the feature taught arose naturally, for example from seeded games of a taught opening (as `a07l4`).
+Relocating a piece onto a legal but unnatural point does not qualify. 04 §5.5 measured, on desktop for the 37 moves of a full-board position, ~77 ms for the
 material search at d = 2 and ~721 ms at d = 3, against a budget of ≤ ~300 ms per request: partners therefore run at
 d = 2 (+ capture quiescence) on full boards, and d = 3 only in positions of ≤ ~12 pieces (03-assessment.md §5.2).
 
@@ -263,6 +275,12 @@ d = 2 (+ capture quiescence) on full boards, and d = 3 only in positions of ≤ 
    author implements for that position.
 6. **Assessment items** give feedback only after the answer; prompts never name the motif (03-assessment.md §4.2).
 7. **Both languages** carry the same content.
+8. **No move in a wrong-answer text (S2.19 W10):** a common-error or `dubious` text at G1/G0/TR never names an accepted
+   move, in either language. A content test checks the `.error` texts (S2.20 part A, `src/content/pilot-feedback.test.ts`).
+9. **Assessment items** (check, placement, exam) give every `dubious` row an authored reason, so no generic text is
+   shown (S2.20).
+10. **Remediation cards:** each misconception listed in a unit has at least one `learn` card carrying its tag, so 03
+    §4.4 remediation can add it (S2.20; the pilot a03 cards had none).
 
 ---
 
@@ -508,7 +526,9 @@ threat to the central Soldier as Black; play the first moves by principle as eit
 - **Guided:** `choice` (compare development) with the undeveloped pieces marked.
 - **Independent:** `decision` (predicate "develops a back-rank piece" + guard), `line` (both colours, deviations).
 - **Transfer:** `b09-g1`, `play` from the start position for the first moves vs `safe-sparring(2)`, rubric R2 + R1
-  (if it fails the 03 §5.7 guard: add R0, then a scripted first part with the line-share gate, 03 §5.2).
+  (if it fails the 03 §5.7 guard: add R0, then a scripted first part with the line-share gate, 03 §5.2). **As built
+  (S2.14, D13):** R2 + R1 and R2 + R0 + R1 failed §5.7, so remedy (2) applies: Red only, a scripted Central Cannon /
+  Horse-opening tree, then `safe-sparring(2, 1.0)`, R6 50 + R1 50, *L* = 6, cap 8. "Either colour" is b09l4's outcome.
 - **Misconceptions → feedback:** `b09.m1` openings are memorised sequences → explain the purpose of the move and an
   equally good alternative. `b09.m2` move one piece repeatedly to attack early → count developed pieces for both sides
   after the sequence. `b09.m3` the General should step out early → show the open line it creates. `b09.m4` grabbing a
@@ -738,6 +758,9 @@ reviewed); choose a middlegame aim at the end of the line.
 - **Guided:** `learn` + `line` with each move's purpose shown.
 - **Independent:** `line` with seeded deviations; `decision`; `choice` (which aim fits this position).
 - **Transfer:** `i08-g1`, `line` then `play` (`scripted` → `pressing(2)`; F5 under fallback, 03-assessment.md §5.2), rubrics R6 + R1.
+  **As built (S2.15):** F5 (D16), start position, C2=5 then three taught replies × two plan orders, 28 selective learner
+  nodes, R6 50 + R1 50, *L* = 6, cap 8; §5.7 item 3 by ruling D (D14). C8=7 and R2+6 are accepted `sound` wherever they
+  lose < 1 (D14).
 - **Misconceptions → feedback:** `i08.m1` the opening is a fixed sequence → show a deviation and the same plan
   continuing. `i08.m2` always take the central Soldier at once → play out the reviewed line where Black gains time.
   `i08.m3` the Cannon alone makes an attack → count attackers vs defenders on the central file.
@@ -888,6 +911,9 @@ guard refutes or the reviewed explanation shows to achieve nothing (pilot candid
 - **Guided:** `select-squares` (worst piece) with mobility shown.
 - **Independent:** `line` (re-route vs authored replies), `decision`.
 - **Transfer:** `a03-g1`, `play` vs `pressing(2)` (03-assessment.md §5.2, Plan row; F1 under fallback), rubric R3 + R1.
+  **As built (S2.16):** F1, Black: re-route the hemmed-in a9 Cannon, then free the c7 Horse; cap 4, R3 70 + R1 30, 3
+  selective learner nodes per path, two different routes (items 1 and 6); §5.7 item 3 by ruling F (D15). Unit check
+  `a03-check` (16) with interleaving from `i01-check` / `b08-check`; 10 `pa` placement items (J2 slice).
 - **Misconceptions → feedback:** `a03.m1` every move must threaten something → show the attack's refutation and the
   improvement's later benefit. `a03.m2` a piece is "placed" once it has moved → show its mobility is still low.
 - **Assessment:** unit check; `a03-g1`. **Remediation:** default.
@@ -982,6 +1008,9 @@ elsewhere; defend as Black under Central Cannon pressure.
 - **Guided:** `decision` with the opponent's plan shown as arrows.
 - **Independent:** `decision`, `move` (`defend`, depth 2).
 - **Transfer:** `a07-g1`, `play` vs the hold chain (03-assessment.md §5.2), rubric R5 (with counterplay predicate) + R1.
+  **As built (S2.17):** F1 hold, Black, verified starting threat; cap 4, R5 90 + R1 10, holding predicate
+  `threat {created: true}` on any move; 3 narrow positions in the reference run. `a07l4` uses positions from seeded
+  Central Cannon games (ruling G).
 - **Misconceptions → feedback:** `a07.m1` defence means passivity → show the passive move losing to the plan and the
   active one holding. `a07.m2` defend only when the threat is immediate → show the plan two moves later.
 - **Assessment:** unit check; `a07-g1`. **Remediation:** default.
@@ -1581,12 +1610,12 @@ Counts follow from §8 and 03-assessment.md; item counts per lesson use the §5.
 
 | Level | Units | Lessons | Practice items (range) | Of which reusable today | Check pool (2 forms) | Practical tasks (`-g`) | Exam / placement pools |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Basic | 10 | 33 | 165–265 | 26 | 8 × 16 + 2 × 12 = 152 | 4 | `xb`; `pb` 40 items + 2 tasks |
-| Intermediate | 11 | 42 | 210–340 | 58 | 176 | 7 | `xi`; `pi` 40 + 2 |
-| Advanced | 10 | 37 | 185–260 | 25 | 160 | 6 | `xa`; `pa` 40 + 2 |
-| Expert | 9 | 31 | 125–185 | 37 | 8 × 16 + 12 = 140 | 8 | `xe`; `pe` 40 + 2 |
+| Basic | 10 | 33 | 165–265 | 26 | 8 × 16 + 2 × 12 = 152 | 4 | `xb`; `pb` 60 items + 2 tasks |
+| Intermediate | 11 | 42 | 210–340 | 58 | 176 | 7 | `xi`; `pi` 66 + 2 |
+| Advanced | 10 | 37 | 185–260 | 25 | 160 | 6 | `xa`; `pa` 60 + 2 |
+| Expert | 9 | 31 | 125–185 | 37 | 8 × 16 + 12 = 140 | 8 | `xe`; `pe` 54 + 2 |
 | Master | 9 | 18 | 72–90 | 0 | 7 × 16 + 12 = 124 (m09: none) | 6 + `xm` | `xm` pool (no `pm`: no test-out within Master, 03-assessment.md §7.2) |
-| **Total** | **49** | **161** | **~760–1140** | **146** | **~750** | **31** | 4 placement pools (~160 items, 8 tasks) + 5 exam pools |
+| **Total** | **49** | **161** | **~760–1140** | **146** | **~750** | **31** | 4 placement pools (240 items, 8 tasks) + 5 exam pools |
 
 (The lesson count includes the new b01l4. "Of which reusable today" counts reused practice items by **target** level,
 `core` + `pool`, as in 05-migration.md §3.1; reconciled in S1.4.) This is a large authoring volume: roughly 600–1000 new practice items and ~750 new
@@ -1598,6 +1627,11 @@ of 1.5 forms for units with one primary strand, accepting partial item reuse on 
 Master), keeping later levels as the existing content until their batch is reviewed; (4) generate candidate positions with the existing seeded
 generator approach (`scripts/generate-puzzles.ts` style, original positions only) so authoring time goes into
 classification and explanation. No reduction may remove a unit's transfer task, Black coverage or quiet items.
+**Decided at S2.20** (pilot/review.md §2): (1) **adopted** (lesson sizes §5.2; practice items ≈ the low end of the
+table, ~760); (2) **not adopted**: a 12-item pool builds only two check attempts under 03 §4.3, so a third attempt would
+be unavailable rather than partly exposed. Check pools stay at 16 (short form 12), ~750 items.
+**Placement pools (owner decision O1, 2026-11-11):** ≥ 6 items per unit, so a single-unit J2 needs only a 4-item top-up
+from the unit's check pool (03-assessment.md §7.2): `pb` 60, `pi` 66, `pa` 60, `pe` 54 (240 instead of 160).
 
 ---
 
@@ -1610,9 +1644,9 @@ with a pointer.
 | --- | --- | --- | --- |
 | U1 | Source of annotated games (a10, m08) and opening lines | Author/tester games; historical games with attribution under S1.3; both, reviewed | **Resolved** by 07-sourcing.md §3.2: course games only (option A); historical games (B/C) only after the owner decision 07 S07-U1 |
 | U2 | Glossary location and final English names (§4) | Comment block in `messages.ts` or a design file | **Decided** (S1.4, §4): `docs/curriculum-upgrade/glossary.md`, created and confirmed by the content reviewer in S2.3 |
-| U3 | Unlock by prerequisite graph instead of linear order within a level | Keep linear; graph | **Decided for now:** linear (§9.1). Revisit: S2.20 (pilot review) |
+| U3 | Unlock by prerequisite graph instead of linear order within a level | Keep linear; graph | **Decided** (S2.20): linear for this phase; J2/J1 provide the skip routes (pilot/review.md §2) |
 | U4 | Built-in `decision` predicate set | 04 §5.4 list vs per-item code | **Resolved** by 04 §5.4 layer 2: a fixed built-in predicate list, no per-item code; implemented in S2.7 |
-| U5 | ~~Notation~~ — decided in §4 (S1.2). Remaining: a setting to also show ICCS | — | Open · S2.20 (LX) |
-| U6 | `play` lengths and partner time budget on a phone | §6 targets | Open · budget: S2.6 (measurement); lengths: S2.20 |
+| U5 | ~~Notation~~ — decided in §4 (S1.2). Remaining: a setting to also show ICCS | — | **Decided** (S2.20): no setting; ICCS only in board accessible names and the keyboard move picker |
+| U6 | `play` lengths and partner time budget on a phone | §6 targets | **Decided** (S2.20): budget D9 (S2.6); lengths per form in 03-assessment.md §5.7 (fallback regime) |
 | U7 | Optional decision timer (m07) | Omit; optional | **Decided** (S1.4): omitted in this phase; m07 teaches "where to think" without a timer |
-| U8 | Lessons/items per unit after the pilot; which §10 reductions to apply | — | Open · S2.20 (proposal to the driver; reductions beyond 06-backlog.md §5.1 need an owner decision) |
+| U8 | Lessons/items per unit after the pilot; which §10 reductions to apply | — | **Decided** (S2.20): reduction (1) adopted, (2) not; no reduction beyond 06-backlog.md §5.1 proposed |

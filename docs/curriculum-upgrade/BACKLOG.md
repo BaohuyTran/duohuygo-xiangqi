@@ -133,12 +133,13 @@ flags depth 3 "measured within budget" per task; S2.20 records each R6 task's vo
 | S2.17 | Pilot P4: `a07l4` + `a07-g1` | S2.16 | done (attempt 3, 2026-11-10) |
 | S2.18 | `pressing` validation | S2.6, S2.12, S2.15, S2.16, S2.17 | done (attempt 1, 2026-11-11; verdict not validated) |
 | S2.19 | Pilot integration and walkthrough | S2.13, S2.14–S2.18 | done (attempt 2, 2026-11-11) |
-| S2.20 | Pilot review, calibration and design correction | S2.19 | todo |
+| S2.20 | Pilot review, calibration and design correction | S2.19 | done (attempt 2, 2026-11-11) |
 | S2.gate | Step 2 gate | S2.1–S2.20 | todo |
 | S3.1 | Units b01–b04 | S2.gate | todo |
 | S3.2 | Units b05–b07 | S3.1 | todo |
 | S3.3 | Units b08, b09, b10 | S3.2 | todo |
-| S3.4 | Release REL-1 | S3.3 | todo |
+| S3.3a | J2 top-up and no legacy fallback in published levels (O1, D17; text in pilot/review.md §6) | S3.3 | todo |
+| S3.4 | Release REL-1 | S3.3, S3.3a | todo |
 | S3.5 | Units i01–i04 | S3.3 · after S3.4 | todo |
 | S3.6 | Units i05–i07 | S3.5 | todo |
 | S3.7 | Units i08, i09–i11 | S3.6 | todo |

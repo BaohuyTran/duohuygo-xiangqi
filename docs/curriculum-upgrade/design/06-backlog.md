@@ -95,7 +95,7 @@ Draft or unreviewed material is never counted as delivered (PLAN.md "Quality gat
 
 | # | Piece required by 02-foundation-and-pilot.md | Pilot content (02 ids) | Colour | What it validates |
 | --- | --- | --- | --- | --- |
-| P1 | Beginner safety/development lesson | `b09l3` "Meeting the central Cannon" (protect the central Soldier with a developing move) + `b09-g1` (`play` from the start position, R2 + R1, `safe-sparring(2)`) | Black (lesson), seeded colour (task) | Black orientation and per-side notation at Basic; `decision` with a develop predicate + Basic guard (*h* = 1) and complete move tables; `choice`; `play` vs `safe-sparring`; post-game signals; R2/R1; §5.7 guard with N1/N2 on a Basic task |
+| P1 | Beginner safety/development lesson | `b09l3` "Meeting the central Cannon" (protect the central Soldier with a developing move) + `b09-g1` (`play` from the start position; as built after 03 §5.2 remedy (2), D13: F5 — scripted tree → `safe-sparring(2, 1.0)`, R6 50 + R1 50, *L* = 6, cap 8) | Black (lesson), Red only (task, D13) | Black orientation and per-side notation at Basic; `decision` with a develop predicate + Basic guard (*h* = 1) and complete move tables; `choice`; `play` vs `safe-sparring`; post-game signals; R2/R1; §5.7 guard with N1/N2 on a Basic task |
 | P2 | Opening-plan lesson with plausible opponent deviations | `i08l3` "Against other replies" (Central Cannon vs Same-direction and Opposite-direction Cannons and other tries) + `i08-g1` (`line` → `play`, R6 + R1) | Red | `line` trees with authored, seeded, coverage-driven deviations; off-tree default class in the Worker; authored replies safety-guarded; `scripted` → `pressing(2)` hand-over, or F5 under the fallback; R6 |
 | P3 | Positional lesson where improving a piece beats forcing an attack | Unit `a03` "Improving poorly placed pieces": `a03l1`–`a03l3` (core: `a03l3` "Improve instead of attack") + `a03-g1` (`play`, R3 + R1) | Both (≥ 1/3 Black) | Strategic acceptance: several accepted improving moves (target/sound), the tempting attack refuted by the guard or shown to achieve nothing (reviewed); `select-squares` "worst piece"; objective predicates (mobility, route); R3; F1 tree-bounded scoring |
 | P4 | Defensive or endgame continuation | `a07l4` "Under pressure as Black" + `a07-g1` (`play`, hold chain, R5 + R1) | Black | Threat tree → `forcing-attack(2)` → `pressing(2)` (or F1), verified starting threat, holding predicate, repetition adjudication and the learner's third-repetition refusal, mid-game persistence, voided runs |
@@ -506,33 +506,43 @@ allows, because the pilot already exercises `play`, adjudication and partners; t
 
 | Level | Units | Lessons | Practice items | Reused (target level) | Check pool | Practical tasks | Level pools |
 | --- | ---: | ---: | --- | ---: | ---: | ---: | --- |
-| Basic | 10 | 33 | 165–265 | 26 | 152 | 4 | `pb` 40 + 2 tasks; `xb` |
-| Intermediate | 11 | 42 | 210–340 | 58 | 176 | 7 | `pi` 40 + 2; `xi` |
-| Advanced | 10 | 37 | 185–260 | 25 | 160 | 6 | `pa` 40 + 2; `xa` |
-| Expert | 9 | 31 | 125–185 | 37 | 140 | 8 | `pe` 40 + 2; `xe` |
+| Basic | 10 | 33 | 165–265 | 26 | 152 | 4 | `pb` 60 + 2 tasks; `xb` |
+| Intermediate | 11 | 42 | 210–340 | 58 | 176 | 7 | `pi` 66 + 2; `xi` |
+| Advanced | 10 | 37 | 185–260 | 25 | 160 | 6 | `pa` 60 + 2; `xa` |
+| Expert | 9 | 31 | 125–185 | 37 | 140 | 8 | `pe` 54 + 2; `xe` |
 | Master | 9 | 18 | 72–90 | 0 | 124 | 6 | `xm` |
-| **Total** | **49** | **161** | **~760–1,140** | **146** | **~750** | **31** | ~160 items + 8 tasks; 5 exams |
+| **Total** | **49** | **161** | **~760–1,140** | **146** | **~750** | **31** | 240 items + 8 tasks; 5 exams |
 
 Roughly 600–1,000 new practice items and ~750 new check items, plus placement and exam pools, each verified,
 independently reviewed and written in two languages (a reviewer in S1.2 estimated even more, 1,000–1,600 practice
 items). This is the dominant cost of the phase. Adopted reductions (02 §10): **(3)** publish level by level (05 §8.4.1)
 and **(4)** generate candidate positions with seeded generators (original positions only), so authoring time goes into
-classification, feedback and review. Not adopted yet, decided at S2.20 with pilot data (driver, within the 02 ranges):
-**(1)** lesson sizes at the low end of the ranges (about −30 % practice items; fewer guided steps for weak learners);
-**(2)** check pools of 1.5 forms for units with one primary strand (about −120 items; third attempts meet exposed
-items, 03 §4.3). Options that would cut scope need an **owner decision** and are **not recommended**: deferring the
+classification, feedback and review. Decided at S2.20 with pilot data (driver, within the 02 ranges; evidence in
+`docs/curriculum-upgrade/pilot/review.md` §2): **(1) adopted** — lesson sizes at the low end of the ranges (5 non-`learn`
+items per lesson in Basic–Advanced, 4 in Expert and Master; about −30 % practice items, ~760; fewer guided steps for
+weak learners, mitigated by remediation and unit pools); **(2) not adopted** — check pools of 1.5 forms (12 items)
+build only two check attempts under 03 §4.3 (a form needs 6 own items, at most half exposed), so a third attempt would
+be unavailable rather than partly exposed; check pools stay at 16 (short form 12). Options that would cut scope need an **owner decision** and are **not recommended**: deferring the
 Master level (graduation would become unreachable and the course would end at Expert; the legacy u15 content is
 retired into Expert in REL-4 either way) or single-form placement pools (retakes blocked until new items exist).
+Owner decisions of 2026-11-11 (pilot/review.md §6): **O1** placement pools of ≥ 6 items per unit (240 instead of 160,
++80) with a J2 top-up from the skipped units' unexposed check-pool items (03 §7.2); the code change is the proposed item
+**S3.3a** (J2 top-up, no old-jump-test fallback in published levels), to be added before S3.4. **O2** the short
+practical evidence above Basic under fallback F is accepted and disclosed (03 §11; S4.6, S4.7).
 
 ### 5.2 Batch plan
 
 Batches follow level order (each unit's prerequisites and interleaved check items come from earlier units) and the
-release order REL-1 Basic → REL-5 Master. A batch item may be split by the driver into per-unit sub-items (`S3.n.a`, …) with
-the same criteria; the batch is done when all its units are. Pilot content (S2.14–S2.17) is completed inside its
+release order REL-1 Basic → REL-5 Master. **Confirmed at S2.20** (units, lessons and check-item counts unchanged). A
+batch item runs as **per-unit sub-items by default** (`S3.n.a`, …: one unit's lessons, check pool, tasks and review
+record), with B1–B4 and B6 checked per sub-item and B5 once per batch; the batch is done when all its units are. Reason:
+each pilot unit needed 2–3 content-review attempts (S2.14–S2.17). Every sub-item also runs the `.error` leak check added
+in S2.20 part A (02 §7 item 8), and S3.1 records the `npm test` / `npx vitest run src/content` time after its first unit
+(split the validation shards further if content validation passes ~5 min). Pilot content (S2.14–S2.17) is completed inside its
 batch, not redone.
 
 Every batch has the same acceptance criteria, stated once here: **(B1)** every listed unit meets §2.3 criteria 1–5;
-**(B2)** check pool of 2 forms per unit (16; short form 12) or the reduction decided at S2.20; **(B3)** the listed
+**(B2)** check pool of 2 forms per unit (16; short form 12; S2.20 kept this size); **(B3)** the listed
 practical tasks pass the §5.7 guard in the active partner regime; **(B4)** reused items per 05-migration.md §4 with
 their change tags resolved, T2 passing; **(B5)** `docs/curriculum-upgrade/coverage.md` updated for the batch (items by
 type, strand, colour, quiet, ladder step, per unit); **(B6)** units stay `reviewed` and visible only in the preview
@@ -542,20 +552,20 @@ until the level's release item.
 | --- | --- | ---: | --- | ---: | --- | --- |
 | **S3.1** Basic A | b01, b02, b03, b04 | 13 | `u1l1`, `u1l2`, `u1l3`, `u2l1`, `u2l2`, `u3l1`, `u3l2` except `u2l1#3` and the mate items; `u4l1` learn cards in b02l2; BLK twins | 12 + 3 × 16 = 60 | — | Notation lesson b01l4 uses S2.3; creates `coverage.md` |
 | **S3.2** Basic B | b05, b06, b07 | 9 | `u4l1`, `u4l2`, mate items of `u3l*`, `u2l1#3` | 48 | — | Rules lesson b05l3: AXF edition (03 UA3 / 07 S07-U3) checked by the content reviewer; creates `references.md` |
-| **S3.3** Basic C | b08, b09, b10 | 11 (b09l3 from the pilot) | — | 16 + 16 + 12 = 44 | `b08-g1`, `b09-g1` (pilot), `b10-g1`, `b10-g2` | First full games: F2/F2b decision if `pressing` is not validated; 03 UA7 confirmed |
-| **S3.4** Basic release (REL-1) | — | — | — | `pb` 40 + `pb-g1`, `pb-g2` | `xb` (+ F3 hold tasks under F) | See release criteria below; retire `u1`–`u4`; MU5 notice |
+| **S3.3** Basic C | b08, b09, b10 | 11 (b09l3 from the pilot) | — | 16 + 16 + 12 = 44 | `b08-g1`, `b09-g1` (pilot), `b10-g1`, `b10-g2` | First full games: F2 (F2b if F2 fails §5.7), since `pressing` is not validated (D16); 03 UA7 confirmed |
+| **S3.4** Basic release (REL-1) | — | — | — | `pb` 60 + `pb-g1`, `pb-g2` | `xb` (+ F3 hold tasks under F) | See release criteria below; retire `u1`–`u4`; MU5 notice |
 | **S3.5** Intermediate A | i01, i02, i03, i04 | 13 | `u9l1`, `u9l2`, `u11l1`, `u11l2`, `u10l1` | 64 | `i01-g1` | Cannon forks of `u9l1` (MOTIF) |
 | **S3.6** Intermediate B | i05, i06, i07 | 13 | `u7`, `u8`, `u9l3`, `u11l3` | 48 | `i07-g1` | New defending-as-Black lessons i05l4, i06l5; `u8l1` NAME |
 | **S3.7** Intermediate C | i08, i09, i10, i11 | 16 (i08l3 from the pilot) | — | 64 | `i08-g1` (pilot), `i09-g1`, `i10-g1`, `i11-g1`, `i11-g2` | i08 Red only, i09 Black only; endgame wins proved for exact positions |
-| **S3.8** Intermediate release (REL-2) | — | — | — | `pi` 40 + 2 | `xi` | Retire `u7`–`u9`, `u10l1`, `u11`; re-track `u10` (P3); J1 into Intermediate |
+| **S3.8** Intermediate release (REL-2) | — | — | — | `pi` 66 + 2 | `xi` | Retire `u7`–`u9`, `u10l1`, `u11`; re-track `u10` (P3); J1 into Intermediate |
 | **S3.9** Advanced A | a01, a02, a03, a04 | 15 (a03 from the pilot) | `u10l3`, `u12l1`, `u12l2` | 64 (a03's 16 from the pilot) | `a03-g1` (pilot) | Assessment answer keys authored and reviewed (material-only engine) |
 | **S3.10** Advanced B | a05, a06, a07 | 12 (a07l4 from the pilot) | `u10l2`, `u12l3`; `u11l3` pool items | 48 | `a06-g1`, `a07-g1` (pilot) | ≥ half Black in a07 |
 | **S3.11** Advanced C | a08, a09, a10 | 10 | — | 48 | `a09-g1`, `a09-g2`, `a10-g1` | Course games for a10 (07 §3.2 option A); endgame claims exact-position or sourced |
-| **S3.12** Advanced release (REL-3) | — | — | — | `pa` 40 + 2 (incl. the pilot slice) | `xa` | Retire `u10l2`, `u10l3`, `u12` |
+| **S3.12** Advanced release (REL-3) | — | — | — | `pa` 60 + 2 (incl. the pilot slice) | `xa` | Retire `u10l2`, `u10l3`, `u12` |
 | **S3.13** Expert A | e01, e02, e03 | 11 | `u13l2`, `u13l3`, `u14`, `u15l1`, `u15l2`, `u15l3` pool items, two `u10l1` warm-ups | 48 | `e03-g1` | Varied defence (VAR); MOTIF fixes |
 | **S3.14** Expert B | e04, e05, e06 | 10 | `u13l1`, defend-3 item of `u15l3` | 48 | `e04-g1`, `e06-g1`, `e06-g2` | ≥ half Black in e04 |
 | **S3.15** Expert C | e07, e08, e09 | 10 | — | 16 + 16 + 12 = 44 | `e07-g1`, `e08-g1`, `e08-g2`, `e09-g1` | Rules lesson e07l3 (reference rulebook); "draw" claims only as 02 e07 allows |
-| **S3.16** Expert release (REL-4) | — | — | — | `pe` 40 + 2 | `xe` | Retire `u13`–`u15`; Master track hidden until REL-5 (P4) |
+| **S3.16** Expert release (REL-4) | — | — | — | `pe` 54 + 2 | `xe` | Retire `u13`–`u15`; Master track hidden until REL-5 (P4) |
 | **S3.17** Master A | m01, m02, m03, m04 | 8 | — | 64 | `m02-g1`, `m03-g1` | Unlabelled, mixed colours; decoys |
 | **S3.18** Master B | m05, m06, m07, m08, m09 | 10 | — | 16 + 16 + 12 + 16 = 60 (m09 none) | `m05-g1`, `m05-g2`, `m06-g1`, `m08-g1`; `xm` pool | Course game for m08; portfolio (03 §6.1) |
 | **S3.19** Master release (REL-5) and course integration | — | — | — | — | `xm` live | Whole course published; final `LEGACY_MAP`; T1 for REL-5 |
@@ -594,7 +604,7 @@ are extended in place.
 
 **Release items (S3.4, S3.8, S3.12, S3.16, S3.19) — acceptance criteria:**
 
-- [ ] Placement pool (`p<level>-NN`, 40 items, 4 strands × ≥ 8 incl. `full-board` RS items for Basic, 03 §7.2) and two
+- [ ] Placement pool (`p<level>-NN`, ≥ 6 items per unit — `pb` 60, `pi` 66, `pa` 60, `pe` 54, owner decision O1 — 4 strands × ≥ 8 incl. `full-board` RS items for Basic, 03 §7.2) and two
       placement practical tasks, reviewed and unseen; the level's exam tasks/pool reviewed and passing §5.7 in the
       active regime (S3.19: `xm` from S3.18).
 - [ ] Level-wide checks: ≥ 1/3 Black items, ≥ 1/4 quiet items in PA/OD/DE units, every strand of 02 §9.2 present; the
