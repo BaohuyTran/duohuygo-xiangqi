@@ -63,7 +63,7 @@ const HINT_ORDER: readonly HintStep[] = ['idea', 'piece', 'move'];
  * the main reply in tests). An accepted move without a continuation leaves the tree: the item ends (F1) or a training
  * partner takes over and the learner's moves get the default class from the analysis Worker (04 §5.4).
  */
-export function LineView({ exercise: ex, onDone, onMistake, onAnswer, onHint, onOutOfLives, allowHints, test, judge, seed, lineJudge, coverage }: LineViewProps) {
+export function LineView({ exercise: ex, onDone, onMistake, onAnswer, onHint, onOutOfLives, allowHints, test, assessment = false, judge, seed, lineJudge, coverage }: LineViewProps) {
   const { t, lang } = useI18n();
   const onwardKey = useOnwardKey();
   const { play } = useSound();
@@ -349,7 +349,8 @@ export function LineView({ exercise: ex, onDone, onMistake, onAnswer, onHint, on
   const notation = (move: Move, p: Position) => formatMove(move, p, 'traditional', lang);
 
   // ----- Feedback -----
-  const fb = ex.feedback;
+  // Assessments hide the authored feedback parts: they list the accepted moves (S2.19 W3).
+  const fb = assessment ? undefined : ex.feedback;
   // The tempting alternative names a move of the root position (02 §7); only there does its text apply.
   const atRoot = moves.length === 0;
   let panel: { tone: 'correct' | 'incorrect' | 'neutral'; title: string; lines: { label?: string; text: string }[] } | null = null;

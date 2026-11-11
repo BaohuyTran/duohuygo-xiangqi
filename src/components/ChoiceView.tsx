@@ -17,7 +17,7 @@ import { useElementHeight } from './useElementHeight';
  * (checkboxes, `multi`). Keyboard: Tab + Space/Enter on an option, or the digit keys 1–4; then "Check".
  * After checking, each picked option shows its own feedback; a wrong pick tags its misconception.
  */
-export function ChoiceView({ exercise: ex, onFinished, onMistake, onAnswer, onOutOfLives, seed }: ItemViewProps<ChoiceExercise>) {
+export function ChoiceView({ exercise: ex, onFinished, onMistake, onAnswer, onOutOfLives, seed, assessment = false }: ItemViewProps<ChoiceExercise>) {
   const { t, lang } = useI18n();
   const onwardKey = useOnwardKey();
   const { play } = useSound();
@@ -136,7 +136,8 @@ export function ChoiceView({ exercise: ex, onFinished, onMistake, onAnswer, onOu
                   </span>
                   <span>{label(o)}</span>
                 </button>
-                {state && (
+                {/* Assessments mark the pick right / wrong but hide the option's authored feedback (S2.19 W3). */}
+                {state && !assessment && (
                   <p
                     className={`mt-1 px-3 text-sm ${state === 'wrong' ? 'text-red-700' : 'text-green-800'}`}
                     data-testid={`option-feedback-${o.id}`}

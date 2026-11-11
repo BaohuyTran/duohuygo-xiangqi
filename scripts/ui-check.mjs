@@ -20,8 +20,9 @@
 //
 // Course preview walkthrough (S2.19): `npm run ui:check -- --preview [options]` does NOT run the checks above; it
 // starts scripts/ui-walkthrough/walkthrough.ts (with tsx, so it can use the content and the engine as its answer key),
-// which builds the course preview (VITE_COURSE_PREVIEW=1) into ui-check-output/preview-dist and the test-only J1
-// fixture page (scripts/ui-fixtures/j1.*), and plays the pilot end to end at 320/360/414, landscape and desktop
+// which builds the course preview (VITE_COURSE_PREVIEW=1) into ui-check-output/preview-dist and the test-only fixture
+// page (scripts/ui-fixtures/preview-fixture.*: `?stubs=b08,i01` stub units, `?pools=j1` fixture pools) into
+// ui-check-output/preview-fixture-dist, and plays the pilot end to end at 320/360/414, landscape and desktop
 // (keyboard): lessons → unit check fail → remediation → retake, practical tasks incl. a voided run by fault
 // injection, the J2 test-out of a03 and a J1 placement on the fixture pool. Options: --viewports, --flows, --port,
 // --fixture-port, --out, --no-build, --parallel (see that file). Record: docs/curriculum-upgrade/pilot/walkthrough.md.

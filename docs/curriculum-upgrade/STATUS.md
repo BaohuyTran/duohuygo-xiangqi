@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 2 — Foundation and pilot (step 1 gate passed 2026-10-23)
-- **Active items:** S2.19 (pilot integration and walkthrough); then S2.20, S2.gate
+- **Active items:** S2.20 (pilot review, calibration, design correction; must close W10); then S2.gate
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,18 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-11 — **S2.19 done** (attempt 2): preview walkthrough `npm run ui:check -- --preview` (scripts/ui-walkthrough/,
+  test-only fixture page `scripts/ui-fixtures/preview-fixture.*`) plays all four pilots at 320/360/414, landscape and
+  desktop keyboard, both colours: lessons, a03 check fail → remediation → retake → mastered in the real preview, tasks
+  incl. a voided run (fault injection), J2 test-out of a03, J1 on a fixture pool. Final run: 20 flow runs, 1,555 steps,
+  0 failures, no console errors. Routed fixes: W1 (`unitBefore` interleaving from earlier units outside the path), W2
+  (Board roving-tabIndex keyboard), W3 (assessment mode hides answer-revealing feedback incl. choice options), W4/W5/W7
+  wording. Default build: legacy path unchanged (new assertion), ui:check, offline:check, Supabase build pass. Report and
+  findings: docs/curriculum-upgrade/pilot/walkthrough.md. **Open: W10 (major)** — practice `.error` texts of a03 / a03-check
+  / pa / i01-c / b08-c items list the accepted moves (02 §7.3); owner S2.20, fix + fresh content review before S2.gate.
+  Driver: lint, build, 1,300 tests, ui:check PASS. Reviewer APPROVE; content-reviewer CHANGES_REQUESTED (W10 filed as
+  fixed; report described the first run) → APPROVE.
 
 - 2026-11-11 — **S2.18 done** (attempt 1), verdict **not validated** (D16): `scripts/self-play.ts` (seeded, deterministic per
   seed independent of `--jobs`) played 135 games from 15 pilot positions (pressing vs safe-sparring both colours, pressing
@@ -243,4 +255,4 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Next actions
 
-1. S2.19–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).
+1. S2.20 (close W10 first)–S2.17 (pilot), S2.18, S2.19, S2.20, S2.gate; then merge the phase branch into `main` and push (D7).

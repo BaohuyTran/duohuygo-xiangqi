@@ -132,7 +132,7 @@ flags depth 3 "measured within budget" per task; S2.20 records each R6 task's vo
 | S2.16 | Pilot P3 + P5: unit `a03`, `a03-g1`, the `a03` check pool and a placement slice | S2.13, S2.15 | done (attempt 3, 2026-11-10) |
 | S2.17 | Pilot P4: `a07l4` + `a07-g1` | S2.16 | done (attempt 3, 2026-11-10) |
 | S2.18 | `pressing` validation | S2.6, S2.12, S2.15, S2.16, S2.17 | done (attempt 1, 2026-11-11; verdict not validated) |
-| S2.19 | Pilot integration and walkthrough | S2.13, S2.14–S2.18 | todo |
+| S2.19 | Pilot integration and walkthrough | S2.13, S2.14–S2.18 | done (attempt 2, 2026-11-11) |
 | S2.20 | Pilot review, calibration and design correction | S2.19 | todo |
 | S2.gate | Step 2 gate | S2.1–S2.20 | todo |
 | S3.1 | Units b01–b04 | S2.gate | todo |

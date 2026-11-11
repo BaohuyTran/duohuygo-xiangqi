@@ -15,7 +15,7 @@ const press = (name: string | RegExp) => fireEvent.click(screen.getByRole('butto
 const NOW = new Date('2026-10-23T12:00:00.000Z');
 const SEED = 42;
 
-function renderChoice(exercises: Exercise[], lang: 'en' | 'vi' = 'en') {
+function renderChoice(exercises: Exercise[], lang: 'en' | 'vi' = 'en', assessment?: 'check' | 'placement') {
   const onMistake = vi.fn();
   const events: LessonEvent[] = [];
   render(
@@ -29,6 +29,7 @@ function renderChoice(exercises: Exercise[], lang: 'en' | 'vi' = 'en') {
         onEvent={(e) => events.push(e)}
         now={() => NOW}
         seed={SEED}
+        assessment={assessment}
       />
     </I18nProvider>,
   );
@@ -124,5 +125,22 @@ describe('ChoiceView (through LessonPlayer)', () => {
     expect(screen.getByText(translate('vi', 'lesson.type.choice'))).toBeTruthy();
     expect(screen.getByText(translate('vi', 'choice.pickOne'))).toBeTruthy();
     expect(option('a').textContent).toContain('M8.7');
+  });
+});
+
+describe('ChoiceView in an assessment (S2.19 W3)', () => {
+  it('marks the pick wrong but shows no option feedback; a right pick shows none either', () => {
+    renderChoice([choiceFixture(), choiceFixture()], 'en', 'placement');
+    fireEvent.click(option('b'));
+    press('Check');
+    expect(screen.getByRole('alert').textContent).toContain('Not quite');
+    expect(option('b').className).toContain('border-red-400');
+    expect(screen.queryByTestId('option-feedback-b')).toBeNull();
+    expect(document.body.textContent).not.toContain(en('u2l1.e2'));
+    press('Continue');
+    fireEvent.click(option('a'));
+    press('Check');
+    expect(screen.getByRole('alert').textContent).toContain('Correct!');
+    expect(screen.queryByTestId('option-feedback-a')).toBeNull();
   });
 });

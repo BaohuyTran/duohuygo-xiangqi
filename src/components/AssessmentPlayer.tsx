@@ -64,6 +64,8 @@ export function AssessmentPlayer({ run, onRecord, onExit, now, seed, judge, line
   const records = useRef<AttemptRecord[]>([]);
   const ended = useRef(false);
   const lesson: Lesson = useMemo(() => ({ id: `assessment-${run.id}`, title: run.title, exercises: run.items }), [run]);
+  /** Practical tasks of the run (play / review): counted apart from the questions in the intro. */
+  const tasks = run.items.filter((ex) => ex.type === 'play' || ex.type === 'review').length;
 
   const end = (stoppedEarly: boolean) => {
     if (ended.current) return;
@@ -113,7 +115,14 @@ export function AssessmentPlayer({ run, onRecord, onExit, now, seed, judge, line
         {phase === 'intro' ? (
           <>
             <h2 className="text-2xl font-extrabold text-stone-800">{t(run.title)}</h2>
-            <p className="text-lg text-stone-600">{t('assess.intro.body', { n: run.items.length })}</p>
+            <p className="text-lg text-stone-600">
+              {/* A practical task (game / review) is not counted as a question (S2.19 W7). */}
+              {tasks === 0
+                ? t('assess.intro.body', { n: run.items.length })
+                : tasks === run.items.length
+                  ? t('assess.intro.bodyOnlyTasks', { k: tasks })
+                  : t(tasks === 1 ? 'assess.intro.bodyOneTask' : 'assess.intro.bodyTasks', { n: run.items.length - tasks, k: tasks })}
+            </p>
             <button
               type="button"
               onClick={() => {

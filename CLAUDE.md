@@ -33,6 +33,7 @@ Must work in desktop and phone browsers and as an installable, offline-capable P
 | Type-check only | `npm run typecheck` |
 | Regenerate placeholder PWA icons | `npm run icons` |
 | Phone-width UI smoke check (after `npm run build`; needs Playwright installed globally; also builds + checks the Black fixture page, `-- --no-black` skips it) | `npm run ui:check [-- --width 320 --height 740]` |
+| S2.19 preview walkthrough (~6 min; builds the course preview + fixture page, plays every flow at 5 viewports, desktop by keyboard; ports 4199/4198; results in `ui-check-output/preview/results.json`) | `npm run ui:check -- --preview [--viewports …] [--flows course,check,j2,j1] [--parallel 3]` |
 | Review-record hashes of a unit (id, version, contentHash) | `npx tsx scripts/review-hash.ts <unitId or unit.json>` |
 | Offline PWA + installability check (builds first; `-- --no-build` to skip; Playwright global); also checks the analysis Worker chunk is precached, answers offline, restarts after terminate, main-thread ≤ 50 ms per request | `npm run offline:check` |
 | Phone-cost bench (proxy: throttled headless Chromium 1×/4×/6×, real Worker client + src/play partners; type-checks scripts/bench first; Playwright global; `-- --quick`, `-- --rates 1,4`, `-- --serve` for a real phone) | `npm run bench` |
@@ -70,7 +71,8 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
 │   ├── generate-icons.mjs  # Dependency-free placeholder icon generator
 │   ├── review-hash.ts      # Prints id / version / contentHash of a unit's items for review records
 │   ├── ui-check.mjs        # Phone-size Playwright smoke check of the built app (used by the tester)
-│   ├── ui-fixtures/        # Test-only Black-orientation page for ui:check (own vite.config.mjs; never in the app build)
+│   ├── ui-fixtures/        # Test-only Black-orientation page for ui:check + the S2.19 preview fixture page (own vite configs; never in the app build)
+│   ├── ui-walkthrough/     # S2.19 preview walkthrough (`ui:check -- --preview`): flows, content answer key, page hooks (seeded Math.random, Worker fault injection)
 │   ├── bench.mjs           # Phone-cost bench driver
 │   ├── bench/              # Dev-only bench page (own vite.config.mjs + tsconfig → ui-check-output/bench-dist; never in the app build)
 │   ├── verify-lines.ts     # Authoring-time check of `line` trees and varied-defence combinations
@@ -84,7 +86,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     ├── App.tsx             # Tabs (Lessons / Puzzles) and screen switching, wires storage + i18n
     ├── index.css           # Tailwind import + base styles
     ├── components/
-    │   ├── Board.tsx       # Responsive SVG 9x10 board (dots, marks, selection; `orientation`, `fileNumbers`)
+    │   ├── Board.tsx       # Responsive SVG 9x10 board (dots, marks, selection; `orientation`, `fileNumbers`; keyboard: roving tab stop)
     │   ├── Home.tsx        # Duolingo-style unit/lesson path
     │   ├── LessonPlayer.tsx# One exercise at a time, feedback, retry, completion screen; attempt/hint events (`onEvent`), `judge`
     │   ├── DecisionView.tsx# `decision` items: table verdict, refutation, hint ladder, keyboard `MovePicker`
@@ -362,6 +364,9 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - `Board` takes `orientation` (`'red'` default | `'black'`: turned 180°, a point is drawn at x = 8 − file,
   y = rank; river labels swapped; board name "…, Black at the bottom") and `fileNumbers` (opt-in: each side's
   numbers 1–9 along its own edge, counted from that side's right). Taps and accessible names stay on ICCS squares.
+  Keyboard (S2.19 W2): with `onSquareClick` the board is ONE tab stop (roving `tabIndex`: the selected point, else the
+  mover's General, then the last focused point); arrow keys move the focus in the SCREEN direction (turned for Black),
+  Enter / Space tap the point; the focus ring (`.board-focus-ring`, src/index.css) shows only for `:focus-visible`.
   The lesson player passes `orientation` from the exercise `side` (legacy content is Red, so unchanged); decision and
   choice boards also show `fileNumbers`. A Black combination uses the `.neutral` keys.
 - Learners read traditional notation; ICCS stays internal. `formatMove(move, positionBefore, 'traditional' |
@@ -457,6 +462,8 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   only their own disclosure.
 - `LessonPlayer` emits `{ type: 'applied', taskId, grant }` for a passed, non-voided practice task (grant records the
   fallback); the attempt record gets `score`, `fallback`, `path`, `runs`, `voidedRuns`. App persists it (S2.13).
+  The result panel never shows the fallback code (F1/F5…) to learners, and a voided run neither says "scored now"
+  (`play.end.over` instead) nor shows the fallback line (S2.19 W4/W5).
 - In any test (`test` or `assessment`) a practical task is ONE run: a failed run offers no new game; only a voided run may
   be replayed, once. In the legacy jump test a failed (not voided) run costs a test life. Run counts live in the screen
   only and reset on reload; no credit or grant depends on them (a reload abandons the whole assessment).
@@ -469,11 +476,17 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   `unit`, `primaryStrand`), `placement` (`pb`…`pe`, items `pb-NN`; no `pm`), `placement-practical` (`pb-g`, items
   `pb-gN` with `equivalentOf` = the unit task), `exam` (`xb`…, items `xb-gN` / `xb-rN` with a `slot` of exams.ts).
   Every item: all new-course metadata + `unit` + `objective` (lesson id); RS placement items only in `pb` (`fullBoard`
-  ones tagged b08). Interleaved check items live in their own unit's check pool. Served only `published` (`reviewed` in
+  ones tagged b08). Interleaved check items live in their own unit's check pool; a check interleaves (03 §4.1) from the
+  check pools of units earlier in the path AND of units not in the path that come earlier in course order (level rank,
+  then unit number: `unitBefore` in assessmentRuns.ts; e.g. b08 / i01 for the pilot a03 check). Served only `published` (`reviewed` in
   the preview) for levels the path shows; the release test needs an approving record per served item (placement ids
   `pa-NN` / `pa-gN` live in `reviews/<pool>.json`, e.g. `reviews/pa.json`; S2.16). `npx vitest run src/content` validates.
 - Assessments run in `LessonPlayer`'s `assessment` mode (no hearts/lives, no hints, no retries: a wrong first answer's
-  red button is "Continue"; records get that mode). No XP, no hearts, available at 0 hearts; `src/assessment` never
+  red button is "Continue"; records get that mode). The item's authored feedback parts (purpose, key reply, common
+  error, tempting alternative) and each choice option's feedback are NOT shown in assessments (S2.19 W3: they name
+  the accepted moves of pool items),
+  and a checked selection marks only the learner's picks, never the missed points; right / wrong, the played row's
+  reason and the refutation stay. The intro counts practical tasks apart from questions. No XP, no hearts, available at 0 hearts; `src/assessment` never
   imports gamification. Every answer is logged (annotated with `strand`, `unit`, `objective`, `formId`) and its item
   marked exposed. Summaries (`form: true` attempt-log entries: check outcome + failed items, placement `started` /
   end) drive the retake rules locally.

@@ -65,10 +65,14 @@ type Notice = { kind: 'refused' } | { kind: 'warn'; move: Move } | { kind: 'resu
 
 const appAnalyzer = (): Promise<Analyzer> => import('../analysis/client').then((m) => m.getAnalysisClient());
 
-/** The end-of-game sentence for the result panel (03 §5.5 outcome or the task's own end). */
-function endText(t: ReturnType<typeof useI18n>['t'], state: TaskState, side: 'red' | 'black'): string {
+/**
+ * The end-of-game sentence for the result panel (03 §5.5 outcome or the task's own end). A voided run is not scored,
+ * so the task ends that say "your position is scored now" read "The task is over." instead (S2.19 W5).
+ */
+function endText(t: ReturnType<typeof useI18n>['t'], state: TaskState, side: 'red' | 'black', voided = false): string {
   const end = state.end;
   if (!end) return '';
+  if (voided && (end.reason === 'tree-end' || end.reason === 'leaf' || end.outcome?.reason === 'task-cap')) return t('play.end.over');
   if (end.reason === 'tree-end') return t('play.end.treeEnd');
   if (end.reason === 'leaf') return t('play.end.leaf');
   if (end.reason === 'partner-none') return t('play.end.partnerNone');
@@ -263,7 +267,7 @@ export function PlayView({ exercise: ex, onDone, seed, test, store, regime = PAR
   let panel: { tone: 'correct' | 'incorrect' | 'neutral'; title: string; lines: { label?: string; text: string }[] } | null = null;
   if (phase === 'done' && result && task) {
     const s = result.result.score;
-    const lines: { label?: string; text: string }[] = [{ text: endText(t, task, side) }];
+    const lines: { label?: string; text: string }[] = [{ text: endText(t, task, side, s.voided) }];
     if (s.voided) {
       lines.push({ text: t(s.voids.length === 1 && s.voids[0] === 'line-share-window' ? 'play.run.voidedWindow' : 'play.run.voided') });
     } else {
@@ -275,7 +279,8 @@ export function PlayView({ exercise: ex, onDone, seed, test, store, regime = PAR
       for (const c of s.critical) lines.push({ text: t(`play.result.critical.${c}`) });
       if (s.gateFailed) lines.push({ text: t('play.result.gate') });
     }
-    if (result.result.fallback) lines.push({ text: t('play.result.fallback', { f: result.result.fallback }) });
+    // The fallback regime is named in the record (F1 / F5 …), never to the learner (S2.19 W4); a voided run is not scored.
+    if (result.result.fallback && !s.voided) lines.push({ text: t('play.result.fallback') });
     if (ex.explanation) lines.push({ text: t(ex.explanation) });
     panel = {
       tone: s.voided ? 'neutral' : s.pass ? 'correct' : 'incorrect',

@@ -117,6 +117,18 @@ export const messages = {
   'assess.exam.title': { en: 'Level exam', vi: 'Bài thi cấp độ' },
   'assess.warmup.title': { en: 'Warm-up', vi: 'Khởi động' },
   'assess.intro.body': { en: '{n} questions. No hints and no hearts: answer each question once.', vi: '{n} câu hỏi. Không gợi ý, không trừ tim: mỗi câu chỉ trả lời một lần.' },
+  'assess.intro.bodyOneTask': {
+    en: '{n} questions, then one practical task. No hints and no hearts: answer each question once and play the task once.',
+    vi: '{n} câu hỏi, sau đó là một nhiệm vụ thực hành. Không gợi ý, không trừ tim: mỗi câu chỉ trả lời một lần và nhiệm vụ chỉ làm một lần.',
+  },
+  'assess.intro.bodyTasks': {
+    en: '{n} questions, then {k} practical tasks. No hints and no hearts: answer each question once and play each task once.',
+    vi: '{n} câu hỏi, sau đó là {k} nhiệm vụ thực hành. Không gợi ý, không trừ tim: mỗi câu chỉ trả lời một lần và mỗi nhiệm vụ chỉ làm một lần.',
+  },
+  'assess.intro.bodyOnlyTasks': {
+    en: '{k} practical tasks. No hints and no hearts: play each task once.',
+    vi: '{k} nhiệm vụ thực hành. Không gợi ý, không trừ tim: mỗi nhiệm vụ chỉ làm một lần.',
+  },
   'assess.intro.start': { en: 'Start', vi: 'Bắt đầu' },
   'assess.result.score': { en: 'Score: {score} / 100', vi: 'Điểm: {score}/100' },
   'assess.result.mastered': { en: 'Unit mastered', vi: 'Đã thành thạo chương' },
@@ -410,6 +422,7 @@ export const messages = {
     vi: 'Phần chuẩn bị của bài đã hết và bạn tập không còn nước ép buộc: thế cờ của bạn được chấm ngay bây giờ.',
   },
   'play.end.leaf': { en: 'The prepared part of this task ends here: your position is scored now.', vi: 'Phần chuẩn bị của bài kết thúc tại đây: thế cờ của bạn được chấm ngay bây giờ.' },
+  'play.end.over': { en: 'The task is over.', vi: 'Bài đã kết thúc.' },
   'play.newGame': { en: 'New game', vi: 'Ván mới' },
   'play.end.partnerNone': { en: 'Your training partner has no move to play, so the task ends here.', vi: 'Bạn tập không còn nước để đi, nên bài kết thúc tại đây.' },
   'play.result.pass': { en: 'Task passed!', vi: 'Đạt yêu cầu!' },
@@ -437,8 +450,8 @@ export const messages = {
   },
   'play.result.critical.safety-gate': { en: 'You allowed a serious loss in a task that must be played safely.', vi: 'Bạn để mất quân nặng trong bài yêu cầu đi an toàn.' },
   'play.result.fallback': {
-    en: 'Scored with the cautious rules ({f}) while the stronger training partner is still being checked.',
-    vi: 'Được chấm theo quy tắc thận trọng ({f}) trong khi bạn tập mạnh hơn còn đang được kiểm tra.',
+    en: 'Scored with the cautious rules while the stronger training partner is still being checked.',
+    vi: 'Được chấm theo quy tắc thận trọng trong khi bạn tập mạnh hơn còn đang được kiểm tra.',
   },
   'play.run.voided': {
     en: 'This run could not be assessed on this device. Try again with a new game.',

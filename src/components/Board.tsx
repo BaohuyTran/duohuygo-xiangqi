@@ -1,5 +1,5 @@
-import type { CSSProperties } from 'react';
-import { fileOf, rankOf, squareName, type Piece, type Position, type Square } from '../engine';
+import { useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
+import { fileOf, findGeneral, rankOf, squareName, type Piece, type Position, type Square } from '../engine';
 import { useI18n } from '../i18n/I18nProvider';
 import { sideFileNumber } from '../notation/format';
 
@@ -93,6 +93,33 @@ export function Board({
   const top: BoardOrientation = flipped ? 'red' : 'black';
   const interactive = Boolean(onSquareClick);
 
+  // Keyboard (S2.19 W2): an interactive board is ONE tab stop with a roving tabIndex. Arrow keys move the focus point
+  // in the screen direction (so they follow the turned board for Black), Enter / Space tap it. A tap or click moves
+  // the tab stop to that point too. The stop starts on the selected point, else on the mover's General.
+  const [focusSq, setFocusSq] = useState<Square | null>(null);
+  const cells = useRef<(SVGGElement | null)[]>([]);
+  const general = findGeneral(position.board, position.turn);
+  const tabStop: Square = focusSq ?? selected ?? (general >= 0 ? general : 4);
+  const onCellKey = (sq: Square) => (e: KeyboardEvent<SVGGElement>) => {
+    if (!onSquareClick) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onSquareClick(sq);
+      return;
+    }
+    // Screen steps (column right, row down) -> board steps; turned 180° for Black.
+    const step: Record<string, [number, number]> = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+    const d = step[e.key];
+    if (!d) return;
+    e.preventDefault();
+    const file = fileOf(sq) + (flipped ? -d[0] : d[0]);
+    const rank = rankOf(sq) + (flipped ? d[1] : -d[1]);
+    if (file < 0 || file > 8 || rank < 0 || rank > 9) return;
+    const next = rank * 9 + file;
+    setFocusSq(next);
+    cells.current[next]?.focus();
+  };
+
   return (
     <svg
       viewBox={`0 0 ${WIDTH} ${height}`}
@@ -173,11 +200,17 @@ export function Board({
         return (
           <g
             key={sq}
+            ref={(el) => {
+              cells.current[sq] = el;
+            }}
             role="gridcell"
             aria-label={description}
             aria-selected={isSelected || tone === 'pick'}
             onClick={onSquareClick ? () => onSquareClick(sq) : undefined}
-            className={interactive ? 'cursor-pointer' : undefined}
+            tabIndex={interactive ? (sq === tabStop ? 0 : -1) : undefined}
+            onKeyDown={interactive ? onCellKey(sq) : undefined}
+            onFocus={interactive ? () => setFocusSq(sq) : undefined}
+            className={interactive ? 'board-point cursor-pointer' : undefined}
           >
             {/* Full-cell invisible hit area so taps land even between lines. */}
             <rect x={x - CELL / 2} y={y - CELL / 2} width={CELL} height={CELL} fill="transparent" />
@@ -253,6 +286,20 @@ export function Board({
                 <line x1={x - 2.4} y1={y - 2.4} x2={x + 2.4} y2={y + 2.4} />
                 <line x1={x - 2.4} y1={y + 2.4} x2={x + 2.4} y2={y - 2.4} />
               </g>
+            )}
+            {/* Keyboard focus ring: shown only for :focus-visible (src/index.css), never on a tap. */}
+            {interactive && (
+              <rect
+                className="board-focus-ring"
+                x={x - CELL / 2 + 0.6}
+                y={y - CELL / 2 + 0.6}
+                width={CELL - 1.2}
+                height={CELL - 1.2}
+                rx="1.5"
+                fill="none"
+                stroke="#7c3aed"
+                strokeWidth="0.9"
+              />
             )}
           </g>
         );

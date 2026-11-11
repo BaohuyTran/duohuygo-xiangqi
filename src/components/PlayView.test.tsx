@@ -62,7 +62,9 @@ describe('PlayView (practical tasks)', () => {
     const alert = screen.getByRole('alert').textContent ?? '';
     expect(alert).toContain(en('play.end.leaf'));
     expect(alert).toContain(en('play.result.score', { score: 100, pass: 75 }));
-    expect(alert).toContain(en('play.result.fallback', { f: 'F1' }));
+    expect(alert).toContain(en('play.result.fallback'));
+    // No internal regime codes for learners (S2.19 W4).
+    expect(alert).not.toMatch(/\bF\d\b/);
     expect(store.load('b10l9-01')).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: en('lesson.continue') }));
     const attempt = events.find((e) => e.type === 'attempt');
@@ -101,6 +103,10 @@ describe('PlayView: voided and failed runs', () => {
     play('c5-c6');
     await waitFor(() => expect(screen.getByRole('alert').textContent).toContain(en('play.result.voidedTitle')), { timeout: 10_000 });
     expect(screen.getByRole('alert').textContent).toContain(en('play.run.voided'));
+    // Not "your position is scored now" next to "could not be assessed" (S2.19 W5).
+    expect(screen.getByRole('alert').textContent).not.toContain('scored now');
+    expect(screen.getByRole('alert').textContent).toContain(en('play.end.over'));
+    expect(screen.getByRole('alert').textContent).not.toContain(en('play.result.fallback'));
     fireEvent.click(screen.getByRole('button', { name: en('play.newGame') }));
     await waitFor(() => expect(status()).toBe(en('play.status.yourMove', { side: 'Red', n: 1, cap: 6 })));
     expect((store.load('b10l9-01') as { seed: number }).seed).not.toBe(firstSeed);

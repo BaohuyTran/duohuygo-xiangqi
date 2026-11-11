@@ -12,7 +12,8 @@
 //
 // - course (real preview): Home → b09l3 (Black lesson, Red task b09-g1) → i08l3 (Red) → a03l1–a03l3 (both colours;
 //   three G1 items answered wrong first, then retried; a03-g1 Black task) → the a03 unit check must be offered (finding
-//   W1: it is not, see walkthrough.md; when it is, the check cycle below runs here too) → a07l4 (Black) whose hold
+//   W1, fixed: interleaving from b08 / i01, units outside the path but earlier in course order) → the check cycle
+//   below → a07l4 (Black) whose hold
 //   task a07-g1 is first played with fault injection (every analysis answer `not-checked`: the run must end "Not
 //   assessed"), then a new game played to the result.
 // - check (fixture page `?stubs=b08,i01`: stub units b08 / i01 in the path so the a03 check can be built): a03l1–a03l3
@@ -26,7 +27,8 @@
 //
 // Viewports: 320×740, 360×740, 414×896, landscape 740×360 (phone: touch, taps) and desktop 1280×800 (mouse, every
 // step by KEYBOARD where the app offers a keyboard way: buttons by Enter, choice options by digit keys, moves through
-// the "Enter the move with the keyboard" picker; steps with no keyboard way are recorded as findings and done with
+// the "Enter the move with the keyboard" picker, board points (select-squares, move items) through the board's roving
+// focus (arrow keys + Enter; W2 fix); steps with no keyboard way are recorded as findings and done with
 // the mouse so the flow can go on, and fail the run as finding W2). Every screen is audited with the ui:check rules (no horizontal scroll, controls
 // ≥ 44 px and not clipped, no fixed bar over the board's last row) and screenshotted; console errors, uncaught
 // exceptions and page reloads fail the run.
@@ -259,22 +261,45 @@ class Flow {
     keyboardGaps.get(kind)!.add(what);
   }
 
-  /** A board point (by ICCS name): taps only — the board has no keyboard focus (recorded as a gap in keyboard mode). */
+  /**
+   * A board point (by ICCS name). Keyboard: the board is one tab stop with a roving tabIndex (Board.tsx): focus the
+   * tab stop, walk to the point with the arrow keys (screen directions, so turned for Black), check the focused point's
+   * accessible name, then Enter. A board with no tab stop, or arrows that do not reach the point, is a keyboard gap.
+   */
   async point(sq: string, what: string) {
     const cell = this.page.getByRole('gridcell', { name: new RegExp(`^${sq},`) }).first();
     if (this.vp.keyboard) {
-      const focusable = await cell.evaluate((el) => (el as unknown as HTMLElement).tabIndex >= 0);
-      if (!focusable) this.keyboardGap('board points not keyboard-operable', what);
-      else {
-        await cell.focus();
-        await this.page.keyboard.press('Enter');
-        return;
-      }
+      if (await this.pointByKeyboard(sq)) return;
+      this.keyboardGap('board points not keyboard-operable', what);
       await cell.click();
       return;
     }
     if (this.vp.touch) await cell.tap();
     else await cell.click();
+  }
+  private async pointByKeyboard(sq: string): Promise<boolean> {
+    const board = this.page.locator('svg[role="grid"]').filter({ has: this.page.locator('[role="gridcell"][tabindex="0"]') }).first();
+    if ((await board.count()) === 0) return false;
+    const stop = board.locator('[role="gridcell"][tabindex="0"]').first();
+    await stop.focus();
+    const flipped = (await board.getAttribute('data-orientation')) === 'black';
+    const focused = async () => this.page.evaluate(() => (document.activeElement?.getAttribute('aria-label') ?? '').split(',')[0]);
+    const target = parseSquare(sq);
+    for (let guard = 0; guard < 20; guard++) {
+      const name = await focused();
+      if (name === sq) {
+        await this.page.keyboard.press('Enter');
+        return true;
+      }
+      if (!/^[a-i]\d$/.test(name)) return false;
+      const at = parseSquare(name);
+      const df = (target % 9) - (at % 9);
+      const dr = Math.floor(target / 9) - Math.floor(at / 9);
+      // Screen right = file up (Red at the bottom) / file down (Black); screen up = rank up (Red) / rank down (Black).
+      const key = df !== 0 ? (df > 0 !== flipped ? 'ArrowRight' : 'ArrowLeft') : dr > 0 !== flipped ? 'ArrowUp' : 'ArrowDown';
+      await this.page.keyboard.press(key);
+    }
+    return false;
   }
 
   /** Plays a move (`h2-e2`): the keyboard picker on desktop when the screen has one, else two taps. */
@@ -293,7 +318,7 @@ class Flow {
       await this.press(picker.getByRole('button', { name: en('picker.play') }), what);
       return;
     }
-    if (this.vp.keyboard) this.keyboardGap('no keyboard move entry on this screen', what);
+    // No picker (move items): the board's own keyboard (roving focus, arrows + Enter) enters the move.
     await this.point(from, what);
     await this.point(to, what);
   }

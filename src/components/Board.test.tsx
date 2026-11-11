@@ -129,3 +129,94 @@ describe('Board orientation (playing Black)', () => {
     expect(translate('vi', 'side.toMove', { side: translate('vi', 'color.black') })).toBe('Đen đi');
   });
 });
+
+describe('Board keyboard (roving tabIndex, S2.19 W2)', () => {
+  const pos = parseFen(START_FEN);
+  const cell = (name: string) => screen.getByRole('gridcell', { name: new RegExp(`^${name},`) });
+  const tabStops = (container: HTMLElement) => [...container.querySelectorAll('[role="gridcell"]')].filter((g) => g.getAttribute('tabindex') === '0');
+
+  it('a board without onSquareClick has no tab stop at all', () => {
+    const { container } = render(
+      <I18nProvider initial="en">
+        <Board position={pos} />
+      </I18nProvider>,
+    );
+    expect(container.querySelector('[role="gridcell"][tabindex]')).toBeNull();
+  });
+
+  it('an interactive board is one tab stop (the mover’s General first, else the selected point)', () => {
+    const { container, rerender } = render(
+      <I18nProvider initial="en">
+        <Board position={pos} onSquareClick={() => {}} />
+      </I18nProvider>,
+    );
+    expect(tabStops(container)).toHaveLength(1);
+    expect(tabStops(container)[0].getAttribute('aria-label')).toMatch(/^e0, Red General/);
+    expect(container.querySelectorAll('[role="gridcell"][tabindex="-1"]')).toHaveLength(89);
+    rerender(
+      <I18nProvider initial="en">
+        <Board position={pos} selected={parseSquare('h2')} onSquareClick={() => {}} />
+      </I18nProvider>,
+    );
+    expect(tabStops(container)[0].getAttribute('aria-label')).toMatch(/^h2,/);
+  });
+
+  it('arrow keys move the focus point in the screen direction and Enter / Space tap it (Red at the bottom)', () => {
+    const taps: string[] = [];
+    const { container } = render(
+      <I18nProvider initial="en">
+        <Board position={pos} onSquareClick={(sq) => taps.push(String(sq))} />
+      </I18nProvider>,
+    );
+    const e0 = cell('e0');
+    e0.focus();
+    expect(document.activeElement).toBe(e0);
+    fireEvent.keyDown(e0, { key: 'ArrowUp' });
+    expect(document.activeElement).toBe(cell('e1'));
+    fireEvent.keyDown(cell('e1'), { key: 'ArrowRight' });
+    expect(document.activeElement).toBe(cell('f1'));
+    fireEvent.keyDown(cell('f1'), { key: 'Enter' });
+    fireEvent.keyDown(cell('f1'), { key: ' ' });
+    expect(taps).toEqual([String(parseSquare('f1')), String(parseSquare('f1'))]);
+    // Still a single tab stop, now on the focused point.
+    expect(tabStops(container)).toEqual([cell('f1')]);
+    // The edge stops the focus.
+    fireEvent.keyDown(cell('f1'), { key: 'ArrowDown' });
+    fireEvent.keyDown(cell('f0'), { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(cell('f0'));
+  });
+
+  it('follows the screen for Black at the bottom (turned board)', () => {
+    render(
+      <I18nProvider initial="en">
+        <Board position={{ ...pos, turn: 'black' }} orientation="black" onSquareClick={() => {}} />
+      </I18nProvider>,
+    );
+    const e9 = cell('e9');
+    expect(e9.getAttribute('tabindex')).toBe('0');
+    e9.focus();
+    // Up on the screen = towards Red (rank down); right on the screen = file towards a.
+    fireEvent.keyDown(e9, { key: 'ArrowUp' });
+    expect(document.activeElement).toBe(cell('e8'));
+    fireEvent.keyDown(cell('e8'), { key: 'ArrowRight' });
+    expect(document.activeElement).toBe(cell('d8'));
+    fireEvent.keyDown(cell('d8'), { key: 'ArrowLeft' });
+    fireEvent.keyDown(cell('e8'), { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(cell('e9'));
+  });
+
+  it('keeps clicks and accessible names unchanged; a click moves the tab stop', () => {
+    const taps: number[] = [];
+    const { container } = render(
+      <I18nProvider initial="en">
+        <Board position={pos} onSquareClick={(sq) => taps.push(sq)} />
+      </I18nProvider>,
+    );
+    expect(cell('a0').getAttribute('aria-label')).toBe('a0, Red Chariot');
+    fireEvent.click(cell('a0'));
+    expect(taps).toEqual([parseSquare('a0')]);
+    fireEvent.focus(cell('a0'));
+    expect(tabStops(container)).toEqual([cell('a0')]);
+    expect(cell('a0').querySelector('.board-focus-ring')).not.toBeNull();
+  });
+});

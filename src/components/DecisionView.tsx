@@ -44,6 +44,12 @@ export interface ItemViewProps<E> {
   allowHints: boolean;
   /** A test (jump ahead): no hints and no free retries (03-assessment.md §3.2). */
   test: boolean;
+  /**
+   * An assessment run (check / placement / exam / warm-up, S2.19 W3): the item's authored feedback parts (purpose, key
+   * reply, common error, tempting alternative) are not shown, since they name the accepted moves of pool items that a
+   * later form may serve again (03 §4.2–§4.3). Right / wrong, the refutation and the played row's reason stay.
+   */
+  assessment?: boolean;
   judge: MoveJudge;
   /** Shuffle seed of this item (choice). */
   seed: number;
@@ -57,7 +63,7 @@ const HINT_ORDER: readonly HintStep[] = ['idea', 'piece', 'move'];
  * A `decision`: one move where several are reasonable (02-curriculum.md §5.1). The verdict is the committed
  * move table (instant); after an `error` move the refutation is fetched through `judge` and shown on the board.
  */
-export function DecisionView({ exercise: ex, onFinished, onMistake, onAnswer, onHint, onOutOfLives, allowHints, test, judge }: ItemViewProps<DecisionExercise>) {
+export function DecisionView({ exercise: ex, onFinished, onMistake, onAnswer, onHint, onOutOfLives, allowHints, test, assessment = false, judge }: ItemViewProps<DecisionExercise>) {
   const { t, lang } = useI18n();
   const onwardKey = useOnwardKey();
   const { play } = useSound();
@@ -172,7 +178,8 @@ export function DecisionView({ exercise: ex, onFinished, onMistake, onAnswer, on
   const checked = isInCheck(shown) ? findGeneral(shown.board, shown.turn) : null;
 
   // ----- Feedback -----
-  const fb = ex.feedback;
+  // Assessments hide the authored feedback parts: they list the accepted moves (S2.19 W3).
+  const fb = assessment ? undefined : ex.feedback;
   const tempted = fb && entry && fb.temptingAlternative.move === entry.move;
   const notation = (move: Move, pos: Position) => formatMove(move, pos, 'traditional', lang);
   let panel: { tone: 'correct' | 'incorrect' | 'neutral'; title: string; lines: { label?: string; text: string }[] } | null = null;

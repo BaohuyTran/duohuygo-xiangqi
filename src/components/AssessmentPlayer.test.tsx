@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { holdFixture } from '../assessment/play-fixtures';
 import { choiceItem } from '../assessment/test-fixtures';
 import { I18nProvider } from '../i18n/I18nProvider';
 import { translate } from '../i18n/messages';
@@ -97,5 +98,19 @@ describe('AssessmentPlayer', () => {
     press(en('jump.cancel'));
     expect(onStart).not.toHaveBeenCalled();
     expect(onExit).toHaveBeenCalledOnce();
+  });
+});
+
+describe('AssessmentPlayer intro count (S2.19 W7)', () => {
+  it('does not count a practical task as a question', () => {
+    const items = [choiceItem({ id: 'pb-01', unit: 'b09', point: 1 }), choiceItem({ id: 'pb-02', unit: 'b09', point: 2 }), holdFixture()];
+    setup({ items, mode: 'placement' });
+    expect(screen.getByText(en('assess.intro.bodyOneTask', { n: 2 }))).toBeTruthy();
+    expect(screen.queryByText(en('assess.intro.body', { n: 3 }))).toBeNull();
+  });
+
+  it('names a run of practical tasks only as tasks', () => {
+    setup({ items: [holdFixture(), holdFixture()], mode: 'exam' });
+    expect(screen.getByText(en('assess.intro.bodyOnlyTasks', { k: 2 }))).toBeTruthy();
   });
 });

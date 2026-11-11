@@ -23,7 +23,7 @@ const NOW = new Date('2026-10-23T12:00:00.000Z');
 const fullJudge = (): MoveJudge =>
   clientJudge(createAnalysisClient({ createWorker: null, syncBudget: DEFAULT_REQUEST_BUDGET, syncTimeoutMs: Infinity }));
 
-function renderLesson(exercises: Exercise[], props: { test?: boolean; judge?: MoveJudge } = {}) {
+function renderLesson(exercises: Exercise[], props: { test?: boolean; judge?: MoveJudge; assessment?: 'check' | 'placement' } = {}) {
   const lesson: Lesson = { id: 'b09l3', title: 'u1l1.title', exercises };
   const onMistake = vi.fn();
   const onComplete = vi.fn();
@@ -41,6 +41,7 @@ function renderLesson(exercises: Exercise[], props: { test?: boolean; judge?: Mo
         seed={1}
         judge={props.judge ?? fullJudge()}
         test={props.test}
+        assessment={props.assessment}
       />
     </I18nProvider>,
   );
@@ -392,5 +393,56 @@ describe('feedback parts on move and combination items (02 §7)', () => {
     } finally {
       vi.useRealTimers();
     }
+  });
+});
+
+describe('Assessment mode hides answer-revealing feedback (S2.19 W3)', () => {
+  it('a wrong decision answer shows no common error (the a03 / pa texts list the accepted moves); the refutation stays', async () => {
+    renderLesson([decisionFixture()], { assessment: 'check' });
+    tap('i0');
+    tap('i1');
+    expect(alertText()).toContain(en('feedback.incorrect'));
+    expect(alertText()).not.toContain(en('u2l1.e3')); // common error
+    await act(async () => {});
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeTruthy();
+  });
+
+  it('the tempting-alternative text and the key reply are hidden too; the played row\'s reason stays', () => {
+    renderLesson([decisionFixture()], { assessment: 'placement' });
+    tap('i0');
+    tap('i9');
+    expect(alertText()).toContain(en('u3l1.e3')); // the row's reason
+    expect(alertText()).not.toContain(en('u2l1.e4')); // tempting text
+  });
+
+  it('a correct decision answer shows no purpose / key reply parts', () => {
+    renderLesson([decisionFixture()], { assessment: 'check' });
+    tap('b0');
+    tap('c2');
+    expect(alertText()).toContain('Correct!');
+    expect(alertText()).not.toContain(en('feedback.label.keyReply'));
+    expect(alertText()).not.toContain(en('u2l1.e2'));
+  });
+
+  it('practice mode still shows the common error', () => {
+    renderLesson([decisionFixture()]);
+    tap('i0');
+    tap('i1');
+    expect(alertText()).toContain(en('u2l1.e3'));
+  });
+
+  it('a wrong select-squares answer does not mark the missed points in an assessment (it does in practice)', () => {
+    const horse = findLesson('u2l2')!.exercises.find((e) => e.type === 'select-squares' && e.square === 'h0')!;
+    const missed = (c: HTMLElement) => c.querySelectorAll('circle[stroke-dasharray="1.5 0.9"]').length;
+    renderLesson([horse], { assessment: 'check' });
+    tap('g2');
+    press(/Check/);
+    expect(alertText()).toContain(en('feedback.incorrect'));
+    expect(missed(document.body)).toBe(0);
+    cleanup();
+    renderLesson([horse]);
+    tap('g2');
+    press(/Check/);
+    expect(missed(document.body)).toBe(2);
   });
 });

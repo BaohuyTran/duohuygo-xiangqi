@@ -4,6 +4,7 @@
 
 import type { AssessmentItem, AssessmentPool, Lesson, PlayExercise, Track, Unit } from '../content/types';
 import { poolsOf } from '../content/pools';
+import { isNewCourseUnitId, levelOfId, trackRank } from '../content/release';
 import {
   answerFromRecord,
   assembleCheckForm,
@@ -100,13 +101,29 @@ export function checkOffer(ctx: RunContext, unit: Unit, attempts: readonly Attem
   return checkRun(ctx, unit.id) ? status : { kind: 'unavailable' };
 }
 
+/**
+ * `a` comes before `b` in course order: level rank (02 §3.2), then unit number. Only new-course unit ids (`b08`, `a03`)
+ * are ordered this way; any other id is never "before".
+ */
+export function unitBefore(a: string, b: string): boolean {
+  if (!isNewCourseUnitId(a) || !isNewCourseUnitId(b)) return false;
+  const ra = trackRank(levelOfId(a));
+  const rb = trackRank(levelOfId(b));
+  return ra < rb || (ra === rb && Number(a.slice(1)) < Number(b.slice(1)));
+}
+
 export function checkRun(ctx: RunContext, unitId: string): AssessmentRun | null {
   const unit = unitOf(ctx, unitId);
   const pool = poolsOf(ctx.pools, 'check', { unit: unitId })[0];
   if (!unit || !pool) return null;
   const index = ctx.units.indexOf(unit);
   const earlierUnits = new Set(ctx.units.slice(0, index).map((u) => u.id));
-  const earlier = itemsOf(poolsOf(ctx.pools, 'check').filter((p) => p.unit && earlierUnits.has(p.unit)));
+  const inPath = new Set(ctx.units.map((u) => u.id));
+  // Interleaving (03 §4.1, "2 items from earlier units"): check pools of units earlier in the path, and of units the
+  // path does not show (yet) that come earlier in course order (e.g. the pilot's b08 / i01 pools before a03).
+  const earlier = itemsOf(
+    poolsOf(ctx.pools, 'check').filter((p) => p.unit && (earlierUnits.has(p.unit) || (!inPath.has(p.unit) && unitBefore(p.unit, unitId)))),
+  );
   const built = assembleCheckForm({
     unit: unitId,
     objectives: unit.lessons.map((l) => l.id),

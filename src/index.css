@@ -24,6 +24,17 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Board keyboard focus (Board.tsx roving tabIndex): the drawn ring replaces the outline, keyboard focus only. */
+.board-point:focus {
+  outline: none;
+}
+.board-focus-ring {
+  opacity: 0;
+}
+.board-point:focus-visible .board-focus-ring {
+  opacity: 1;
+}
+
 /* A piece sliding from its previous point (Board animateMove); --dx/--dy are set inline. */
 @keyframes piece-slide {
   from {

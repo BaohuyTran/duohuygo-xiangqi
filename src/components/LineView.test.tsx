@@ -58,7 +58,7 @@ function fakeLineJudge(classes: DefaultClass[], replies: string[]): LineJudge & 
   } as LineJudge & { classify: ReturnType<typeof vi.fn> };
 }
 
-function renderLine(exercise: Exercise, props: { test?: boolean; lineJudge?: LineJudge; attempts?: AttemptRecord[] } = {}) {
+function renderLine(exercise: Exercise, props: { test?: boolean; lineJudge?: LineJudge; attempts?: AttemptRecord[]; assessment?: 'check' } = {}) {
   const lesson: Lesson = { id: 'e01l1', title: 'u1l1.title', exercises: [exercise] };
   const onMistake = vi.fn();
   const events: LessonEvent[] = [];
@@ -77,6 +77,7 @@ function renderLine(exercise: Exercise, props: { test?: boolean; lineJudge?: Lin
         lineJudge={props.lineJudge ?? fakeLineJudge([], [])}
         attempts={() => props.attempts ?? []}
         test={props.test}
+        assessment={props.assessment}
       />
     </I18nProvider>,
   );
@@ -244,5 +245,30 @@ describe('varied defence through the player', () => {
     press('Continue');
     expect(records(events)[0]).toMatchObject({ itemId: 'e01l1-03', mode: 'placement', credit: 1 });
     expect(records(events)[0].path).toBeUndefined();
+  });
+});
+
+describe('LineView: assessment mode (S2.19 W3)', () => {
+  // A root error row, so the wrong-answer panel would carry the item's common error in practice.
+  const withRootError = () => {
+    const ex = forcedLineFixture();
+    const row = ex.root.table.find((r) => r.move === 'e1-g1')!;
+    row.class = 'error';
+    return ex;
+  };
+
+  it('practice shows the common error after a root error', async () => {
+    renderLine(withRootError());
+    play('e1-g1');
+    await flush();
+    expect(alertText()).toContain(en('u2l1.e3'));
+  });
+
+  it('an assessment does not (the common error lists the accepted moves)', async () => {
+    renderLine(withRootError(), { assessment: 'check' });
+    play('e1-g1');
+    await flush();
+    expect(alertText()).toContain(en('feedback.incorrect'));
+    expect(alertText()).not.toContain(en('u2l1.e3'));
   });
 });

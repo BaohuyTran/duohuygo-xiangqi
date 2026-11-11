@@ -376,6 +376,7 @@ export function LessonPlayer({
               onOutOfLives: outOfLives,
               allowHints: !testLike,
               test: testLike,
+              assessment: assessment !== undefined,
               judge,
               seed: currentSeed,
             };
@@ -388,6 +389,7 @@ export function LessonPlayer({
                 onOutOfLives={outOfLives}
                 onHint={hinted}
                 noHints={testLike && (isNewCourseItem(ex) || assessment !== undefined)}
+                assessment={assessment !== undefined}
                 varied={ex.variedDefence === true && !testLike ? { seed: currentSeed, coverage, onPath: (path) => setExtra({ path }) } : undefined}
               />
             ) : ex.type === 'line' ? (
@@ -412,7 +414,16 @@ export function LessonPlayer({
             ) : ex.type === 'choice' ? (
               <ChoiceView key={index} exercise={ex} {...common} />
             ) : (
-              <ExerciseView key={index} exercise={ex} onFinished={finishExercise} onMistake={mistake} onOutOfLives={outOfLives} onVoid={voidAnswer} judge={judge} />
+              <ExerciseView
+                key={index}
+                exercise={ex}
+                onFinished={finishExercise}
+                onMistake={mistake}
+                onOutOfLives={outOfLives}
+                onVoid={voidAnswer}
+                judge={judge}
+                assessment={assessment !== undefined}
+              />
             );
           })()
         )}
@@ -430,6 +441,7 @@ function ExerciseView({
   onOutOfLives,
   onVoid,
   judge,
+  assessment = false,
 }: {
   exercise: Exclude<Exercise, CombinationExercise | DecisionExercise | ChoiceExercise | LineExercise | PlayExercise | ReviewExercise>;
   onFinished: (firstTry: boolean) => void;
@@ -439,6 +451,11 @@ function ExerciseView({
   /** The analysis could not check the answer (goal `safe`): void it, no credit and no penalty. */
   onVoid: () => void;
   judge: MoveJudge;
+  /**
+   * An assessment run (S2.19 W3): no authored feedback parts (they name the answers), and a checked selection marks
+   * only the learner's own picks (right / wrong), never the expected points it missed.
+   */
+  assessment?: boolean;
 }) {
   const { t } = useI18n();
   const onwardKey = useOnwardKey();
@@ -588,7 +605,8 @@ function ExerciseView({
     }
   } else if (ex.type === 'select-squares') {
     if (selection && status !== 'answering') {
-      for (const sq of expectedSelection(ex)) marks.set(sq, selection.missed.includes(sq) ? 'missed' : 'good');
+      if (assessment) for (const sq of picked) marks.set(sq, 'good');
+      else for (const sq of expectedSelection(ex)) marks.set(sq, selection.missed.includes(sq) ? 'missed' : 'good');
       for (const sq of selection.wrong) marks.set(sq, 'wrong');
     } else {
       for (const sq of picked) marks.set(sq, 'pick');
@@ -603,7 +621,7 @@ function ExerciseView({
   const promptKey = ex.type === 'learn' ? ex.text : ex.prompt;
   // The four feedback parts (02-curriculum.md §7) of a move item: purpose + key reply when correct; the
   // tempting-move text when exactly that move was tried, else the common error, when wrong.
-  const fb = ex.type === 'move' || ex.type === 'capture' ? ex.feedback : undefined;
+  const fb = !assessment && (ex.type === 'move' || ex.type === 'capture') ? ex.feedback : undefined;
   const temptedKey = fb && tried && fb.temptingAlternative.move === moveKey(tried);
   /** The analysis could not check the move: neutral feedback, no heart, no shake (04-architecture.md §5.4). */
   const neutral = verdict === 'not-checked';
@@ -751,6 +769,7 @@ function CombinationView({
   onHint,
   noHints,
   varied,
+  assessment = false,
 }: {
   exercise: CombinationExercise;
   onFinished: (firstTry: boolean) => void;
@@ -765,6 +784,8 @@ function CombinationView({
    * from the attempt log), then by the seed; the moves played are reported for the attempt record (`onPath`).
    */
   varied?: { seed: number; coverage: (prefix: readonly string[]) => ReadonlyMap<string, number>; onPath: (path: string[]) => void };
+  /** An assessment run (S2.19 W3): no authored feedback parts (they name the answers). */
+  assessment?: boolean;
 }) {
   const { t } = useI18n();
   const onwardKey = useOnwardKey();
@@ -962,7 +983,7 @@ function CombinationView({
                 </span>
               </p>
               {phase === 'wrong' && <p className="text-red-700">{wrongText}</p>}
-              {phase === 'wrong' && ex.feedback && (
+              {phase === 'wrong' && ex.feedback && !assessment && (
                 <p className="text-red-700" data-testid="feedback-wrong">
                   {rejected?.step === 0 && moveKey(rejected.move) === ex.feedback.temptingAlternative.move ? (
                     <>
@@ -981,7 +1002,7 @@ function CombinationView({
                 </p>
               )}
               {phase === 'done' && ex.explanation && <p className="text-green-800">{t(ex.explanation)}</p>}
-              {phase === 'done' && ex.feedback && (
+              {phase === 'done' && ex.feedback && !assessment && (
                 <div className="text-green-800" data-testid="feedback-right">
                   <p>
                     <span className="font-bold">{t('feedback.label.purpose')} </span>
