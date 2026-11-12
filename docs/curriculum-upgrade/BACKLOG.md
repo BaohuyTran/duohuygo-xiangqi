@@ -139,7 +139,8 @@ flags depth 3 "measured within budget" per task; S2.20 records each R6 task's vo
 | S3.2 | Units b05–b07 | S3.1 | todo |
 | S3.3 | Units b08, b09, b10 | S3.2 | todo |
 | S3.3a | J2 top-up and no legacy fallback in published levels (O1, D17; text in pilot/review.md §6) | S3.3 | todo |
-| S3.4 | Release REL-1 | S3.3, S3.3a | todo |
+| S3.3b | Lazy-load new-course units and pools per level (gate follow-up, STATUS 2026-11-12): the default build's main chunk contains no new-course lesson or pool JSON; preview/served levels load on demand, offline precache kept | S3.3 | todo |
+| S3.4 | Release REL-1 | S3.3, S3.3a, S3.3b | todo |
 | S3.5 | Units i01–i04 | S3.3 · after S3.4 | todo |
 | S3.6 | Units i05–i07 | S3.5 | todo |
 | S3.7 | Units i08, i09–i11 | S3.6 | todo |
