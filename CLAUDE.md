@@ -130,7 +130,7 @@ vite-plugin-pwa (manifest + Workbox service worker, `registerType: 'autoUpdate'`
     │   ├── decision-table.ts # Move tables at authoring time (computed-row rule, proposer, sync judge). Validator/scripts/tests ONLY
     │   ├── guard.ts        # guardFor(itemId, override): the item's safety guard (loaded lazily by screens)
     │   ├── choice.ts       # `choice`: seeded shuffle (fixed options stay), exact-set judging, misconception of a wrong pick
-    │   ├── test-fixtures.ts# TEST-ONLY decision / choice / safe fixtures (no real new-course units yet)
+    │   ├── test-fixtures.ts# TEST-ONLY decision / choice / safe fixtures (synthetic; independent of the pilot units)
     │   ├── line.ts         # `line` runtime: node lookup, coverage (`coverageCounts`, `chooseByCoverage`), credit, `LineJudge` (lazy Worker), S2.12 helpers
     │   ├── line-fixtures.ts# TEST-ONLY line trees + varied-defence combination (also `verify-lines.ts --fixtures`)
     │   ├── combination.ts  # Combination exercises: accepted moves, engine best-defence replies, `variedCombinationReply`

@@ -690,6 +690,9 @@ when forced; results are labelled "training result".
 
 ## 11. Limitations (honest statement)
 
+- **Phone cost unmeasured (D9).** Search budgets and the 5 s safety net were set from a throttled headless-browser
+  proxy; no real phone has been measured. Real-device runs are an owner action before release.
+
 - Automated scoring shows that a learner answered items and passed tasks under stated conditions; it does not prove
   learning or playing strength (step 4 needs studies with real learners).
 - Thresholds 80 and 75 and the partner margins are uncalibrated defaults. The §5.7 guard rates and task lengths were

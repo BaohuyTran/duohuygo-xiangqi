@@ -252,6 +252,14 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 
 ## Blockers and failed gates
 
+- **Owner decision on record (D7, 2026-10-23):** the step-2 merge to `main` does not wait for T15; signed-in testers
+  may see a sync error until the migration runs. T15 stays an owner action before real users.
+- **Phones unmeasured (D9):** budgets come from a throttled-browser proxy (measurements.md); real-device runs are an
+  owner action (`npm run bench -- --serve`).
+- **Bundle size (gate measurement, 2026-11-12):** the default build's main chunk is 976 KB (193 KB gzip); about
+  631 KB of it is the four pilots' and pools' JSON (complete move tables), bundled although the default path does not
+  show it. Step 3 multiplies new-course content, so lazy loading of new-course units / pools per level must land before
+  REL-1 (follow-up for S3.3a / S3.4 owners).
 - **Owner action (before any deploy that writes `data_v2`):** apply migration `20261023000000_progress_data_v2.sql`
   on the real Supabase project and pass T15 steps 3–5 (procedure in CLAUDE.md, "Account login and sync").
 - None blocking. Owner decisions needed before release (not before implementation): licence of code and content
