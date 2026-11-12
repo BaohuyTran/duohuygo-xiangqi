@@ -692,6 +692,8 @@ when forced; results are labelled "training result".
 
 - **Phone cost unmeasured (D9).** Search budgets and the 5 s safety net were set from a throttled headless-browser
   proxy; no real phone has been measured. Real-device runs are an owner action before release.
+- **T15 not yet run (owner action).** The real-Supabase check that older builds leave `data_v2` untouched (CLAUDE.md,
+  "Account login and sync") is open; the owner accepted the step-2 deploy before it (D7). It must pass before real users.
 
 - Automated scoring shows that a learner answered items and passed tasks under stated conditions; it does not prove
   learning or playing strength (step 4 needs studies with real learners).
