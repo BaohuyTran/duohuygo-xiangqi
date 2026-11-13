@@ -1,0 +1,1153 @@
+{
+  "unit": "b02",
+  "records": [
+    {
+      "id": "b02l1-01",
+      "version": 1,
+      "contentHash": "18792848ef84be8f0200bd908cb4d620e9cf40428eac88a9bb8d9966c3b8bb48",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l1-02",
+      "version": 1,
+      "contentHash": "2fc5c4b0af2a0af53ac17032923114199e2caa9df78506ec4a61ead4d4525d3e",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l1-03",
+      "version": 1,
+      "contentHash": "e0d919c1e79c51748f6441c843878ae94b6e58d21edb96b3d6882601db9bbe2c",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l1-04",
+      "version": 1,
+      "contentHash": "328c80d3253d109ca834f719b7f40402f8d7887a034f1cf843edfcab99fc1b91",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l1-05",
+      "version": 1,
+      "contentHash": "5405679543867b18e7ccbc0157fd74013d0ac9828360a58b22f54b161dbdbdc1",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l1-06",
+      "version": 1,
+      "contentHash": "4b88880a7a44206b04d819c46573527ca7685fce9c3a3601643f85db88ca2c44",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l1-07",
+      "version": 1,
+      "contentHash": "97ed0f0fcc1afb906fdd87e7003c231440243771e4b61851b07ecad45fd59dce",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l1-08",
+      "version": 1,
+      "contentHash": "ee9fe2a5d0206377a7171e0c3a45100c1de5a8dcdee6e2b291eedf2039173f31",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l2-01",
+      "version": 1,
+      "contentHash": "2ad8ffa041eaa3b2704b7808bccb454fc9cca73a1b30854824cbf24919b89037",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l2-02",
+      "version": 1,
+      "contentHash": "9454aee8590d2b631b93a803ad4a45a6ffd9a4fd9243089839e369705b4d2717",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l2-03",
+      "version": 1,
+      "contentHash": "d98b9bd07eda64bc59c088d6d8ff999ffcda2d6e05d919c28684e130f83b5bc9",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l2-04",
+      "version": 1,
+      "contentHash": "dc07d4d883fb5fa53e88e01b6d0af319af35afd1a59b8b531b8c5a24be3d069a",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l2-05",
+      "version": 1,
+      "contentHash": "e8e21ff65fbc68db54d423342d8080fc0771b3e7e73a2e37267cfd96566035ef",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l2-06",
+      "version": 1,
+      "contentHash": "3dffde0775c3efda6734b70ac4a7e66ec3b9e88d5928a6cc499c32323ba57f24",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l2-07",
+      "version": 1,
+      "contentHash": "c65f3e9b4c4df788388ef2c4a8f8c74c00f1b9a78f97aa41f69a0e733deb8c2e",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l2-08",
+      "version": 1,
+      "contentHash": "ed22e3ef8ad74e3f1bd3fe6be6213ad4e49f6f3ec45639dc47775941c62403de",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l3-01",
+      "version": 1,
+      "contentHash": "e1c5128fa706317bcb6be397bb4a6ce31a72b8ab64a0c6e8ef383dc6080a0f17",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l3-02",
+      "version": 1,
+      "contentHash": "3476ff508ec5df8c944602c5723ad46d55274d8799c3d9c268609da2d133d1dc",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l3-03",
+      "version": 1,
+      "contentHash": "2de505fdadef1dacb0267ae3e71613671443dff1e446f37c593ed8d684063b31",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l3-04",
+      "version": 1,
+      "contentHash": "e5d0462993cc700c117c8904a9d43801c43ff13452348a2c503a7122d3f2944f",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l3-05",
+      "version": 1,
+      "contentHash": "37b2eed9ee89c5f353b862caf23ca8a1a5ab8b65a9ccc569007a8aa97751336a",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l3-06",
+      "version": 1,
+      "contentHash": "a159cd353d05807a790314cbbc2f894f1fb066e35101415183e1869c35039e92",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l3-07",
+      "version": 1,
+      "contentHash": "5aa0c07a0458695e885ec4eb217889655a405dbcdbe24e0e340ba098daef5411",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l3-08",
+      "version": 1,
+      "contentHash": "f06cf9ae0c2c0f93e271276ac4a0f5c160d09cc376280de7473a627f6ea90f79",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02l3-09",
+      "version": 1,
+      "contentHash": "51a63d0e1aedab7f9c228ace53c08660f46b5743680ca563435fd53dff3dc992",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c01",
+      "version": 1,
+      "contentHash": "078fed78b5c3a095b04105178c7f436e05c99e4b783ddda9d85cc686539932a9",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c02",
+      "version": 1,
+      "contentHash": "201f55085e09893ae4f7d699b30d6c37cd819d7cb976e2ca3fdfdc8cc5272cb3",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c03",
+      "version": 1,
+      "contentHash": "74b0b2459d8422238d6c3d7640d537bc1ee611a516bdb46b172614a78b5e9e56",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c04",
+      "version": 1,
+      "contentHash": "f51991ff7113fa74a5c39962fb8860e9c06a79baf50332a87b533941957487b8",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c05",
+      "version": 1,
+      "contentHash": "c60ca2af60c5a07841e7e8cf48d48abe6b9eea4d68f4652f9be8f25967daf059",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c06",
+      "version": 1,
+      "contentHash": "b337d0e516ddbc3417467649fdfb46e373b1db15de86c8a3ed3db65a517a0575",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c07",
+      "version": 1,
+      "contentHash": "814531465d1f998489fbcdfe8df9f0d44cb92a1439349fe5dcca18ac3be856b1",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c08",
+      "version": 1,
+      "contentHash": "10a387c14cc25269f58e1c6ad72c8dbc2569ab3495355e941105cf10ceea5916",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c09",
+      "version": 1,
+      "contentHash": "ffa41e2a488ae0f5744b31673163dcefaf3cbf0b0b2af2cea5205cd6a0fcb54d",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c10",
+      "version": 1,
+      "contentHash": "b47cb1fd6deabcdd80e7dced40d0f35ee826351f67559d87b1b72e70e77c75d1",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c11",
+      "version": 1,
+      "contentHash": "d8893cd6e9b921238a82880e3f6c7b776b7c06a188b7ca23112257c55c65d9bd",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c12",
+      "version": 1,
+      "contentHash": "bec2eca4b63bcae6785117181245502441300c8ec2f9280c4e4746c2ba156c83",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c13",
+      "version": 1,
+      "contentHash": "2e2229031eaf4f4c9bebf51d29f902a5f06e476421faba2f04ec460f480532f9",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c14",
+      "version": 1,
+      "contentHash": "6f824d226e84da974abe615d372241d65e8f2642e56dd53f1c35fcbc701accba",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c15",
+      "version": 1,
+      "contentHash": "e6e58cc258fc12ab1864398acc4d3dde9e1b114f32ae72ca40b961e2a638705a",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    },
+    {
+      "id": "b02-c16",
+      "version": 1,
+      "contentHash": "bafb8d57b1c83dc3a7940eb48b702febb81fc7716505a949cbff4822daf32fc1",
+      "author": "implementer-S3.1.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b02",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.b",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: General / Advisor / Elephant moves, facing rule, eyes and river, decision tables, Black-board directions, check items unseen (near-duplicate check), keys exact; en/vi and glossary."
+        }
+      ]
+    }
+  ]
+}

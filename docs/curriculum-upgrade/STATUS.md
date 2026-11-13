@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 3 — Curriculum production (step 2 gate passed 2026-11-12; merged into `main`)
-- **Active items:** S3.1.b (unit b02), then b03, b04; then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
+- **Active items:** S3.1.c (unit b03), then b04; then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,13 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-13 — **S3.1.b done** (unit `b02`, attempt 2): `src/content/lessons/b02-general-advisors-elephants.json` (9
+  learn cards, 16 practice items; reuse u1l2, u1l3 incl. the u1l3#4 POS fix, u4l1 learn cards) + `assessment/b02-check.json`
+  (16; two attempts, since interleaving starts at b03 per checks.ts and 03 §4.1); record `reviews/b02.json` (41 items
+  `reviewed`). New near-duplicate check in pilot-b02.test.ts (mirror, colour swap, shift, ±1 piece) — use it for every
+  later unit. Content-reviewer CHANGES_REQUESTED (three check items repeated lesson positions) → APPROVE. Driver: lint,
+  build, 1,364 tests, ui:check PASS.
 
 - 2026-11-13 — **S3.1.a done** (unit `b01`, attempt 2): `src/content/lessons/b01-board-and-notation.json` (4 lessons, 12
   learn cards, 21 practice items, 9 Black) + `assessment/b01-check.json` (16 items, short form 6, three attempts); record

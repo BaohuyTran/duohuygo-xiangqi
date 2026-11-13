@@ -1,0 +1,579 @@
+{
+  "id": "b02-check",
+  "kind": "check",
+  "unit": "b02",
+  "primaryStrand": "RS",
+  "version": 1,
+  "items": [
+    {
+      "type": "select-squares",
+      "id": "b02-c01",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "f1": "K",
+        "e5": "r",
+        "d9": "k",
+        "a3": "P"
+      },
+      "prompt": "b02-c01.prompt",
+      "square": "f1",
+      "explanation": "b02-c01.expl",
+      "objective": "b02l1",
+      "unit": "b02"
+    },
+    {
+      "type": "select-squares",
+      "id": "b02-c02",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d7": "k",
+        "e3": "R",
+        "f0": "K",
+        "c0": "B"
+      },
+      "turn": "black",
+      "prompt": "b02-c02.prompt",
+      "square": "d7",
+      "explanation": "b02-c02.expl",
+      "objective": "b02l1",
+      "unit": "b02"
+    },
+    {
+      "type": "choice",
+      "id": "b02-c03",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b02.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d1": "K",
+        "f8": "k",
+        "b2": "C",
+        "h7": "c",
+        "c3": "P"
+      },
+      "prompt": "b02-c03.prompt",
+      "multi": true,
+      "options": [
+        {
+          "id": "a",
+          "text": "b02-c03.a.t",
+          "correct": true,
+          "feedback": "b02-c03.a"
+        },
+        {
+          "id": "b",
+          "text": "b02-c03.b.t",
+          "correct": false,
+          "feedback": "b02-c03.b",
+          "misconception": "b02.m1"
+        },
+        {
+          "id": "c",
+          "text": "b02-c03.c.t",
+          "correct": true,
+          "feedback": "b02-c03.c"
+        }
+      ],
+      "objective": "b02l1",
+      "unit": "b02"
+    },
+    {
+      "type": "select-squares",
+      "id": "b02-c04",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "DE",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "f8": "k",
+        "f3": "R",
+        "d0": "K",
+        "d9": "a"
+      },
+      "turn": "black",
+      "prompt": "b02-c04.prompt",
+      "square": "f8",
+      "explanation": "b02-c04.expl",
+      "objective": "b02l1",
+      "unit": "b02"
+    },
+    {
+      "type": "capture",
+      "id": "b02-c05",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e8": "k",
+        "d8": "N",
+        "f2": "K",
+        "i6": "p"
+      },
+      "turn": "black",
+      "prompt": "b02-c05.prompt",
+      "solution": {
+        "from": "e8",
+        "to": "d8"
+      },
+      "explanation": "b02-c05.expl",
+      "objective": "b02l1",
+      "unit": "b02",
+      "feedback": {
+        "purpose": "b02-c05.purpose",
+        "keyReply": "b02-c05.key",
+        "commonError": "b02-c05.error",
+        "temptingAlternative": {
+          "move": "e8-e9",
+          "text": "b02-c05.tempt"
+        }
+      }
+    },
+    {
+      "type": "select-squares",
+      "id": "b02-c06",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d2": "K",
+        "e8": "k",
+        "i3": "P"
+      },
+      "prompt": "b02-c06.prompt",
+      "square": "d2",
+      "explanation": "b02-c06.expl",
+      "objective": "b02l2",
+      "unit": "b02"
+    },
+    {
+      "type": "select-squares",
+      "id": "b02-c07",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d8": "k",
+        "d9": "a",
+        "e1": "K",
+        "g3": "P"
+      },
+      "turn": "black",
+      "prompt": "b02-c07.prompt",
+      "square": "d8",
+      "explanation": "b02-c07.expl",
+      "objective": "b02l2",
+      "unit": "b02"
+    },
+    {
+      "type": "choice",
+      "id": "b02-c08",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b02.m4"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "f0": "K",
+        "f6": "P",
+        "b2": "N",
+        "f8": "k",
+        "d9": "a",
+        "h7": "c",
+        "c6": "p"
+      },
+      "prompt": "b02-c08.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b02-c08.a.t",
+          "correct": true,
+          "feedback": "b02-c08.a"
+        },
+        {
+          "id": "b",
+          "text": "b02-c08.b.t",
+          "correct": false,
+          "feedback": "b02-c08.b",
+          "misconception": "b02.m4"
+        },
+        {
+          "id": "c",
+          "text": "b02-c08.c.t",
+          "correct": false,
+          "feedback": "b02-c08.c",
+          "misconception": "b02.m4"
+        }
+      ],
+      "objective": "b02l2",
+      "unit": "b02"
+    },
+    {
+      "type": "decision",
+      "id": "b02-c09",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "f7": "k",
+        "f9": "a",
+        "d0": "K",
+        "a6": "p"
+      },
+      "turn": "black",
+      "prompt": "b02-c09.prompt",
+      "alternatives": false,
+      "objective": "b02l2",
+      "unit": "b02",
+      "feedback": {
+        "purpose": "b02-c09.purpose",
+        "keyReply": "b02-c09.key",
+        "commonError": "b02-c09.error",
+        "temptingAlternative": {
+          "move": "f7-f8",
+          "text": "b02-c09.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "a6-a5",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b02.r.notgeneral"
+        },
+        {
+          "move": "f7-e7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b02-c09.r.target"
+        },
+        {
+          "move": "f7-f8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b02-c09.tempt"
+        },
+        {
+          "move": "f9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b02.r.notgeneral"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b02-c10",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d2": "K",
+        "a3": "P",
+        "f9": "k",
+        "c9": "b"
+      },
+      "prompt": "b02-c10.prompt",
+      "alternatives": false,
+      "objective": "b02l2",
+      "unit": "b02",
+      "feedback": {
+        "purpose": "b02-c10.purpose",
+        "keyReply": "b02-c10.key",
+        "commonError": "b02-c10.error",
+        "temptingAlternative": {
+          "move": "d2-d1",
+          "text": "b02-c10.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "d2-e2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b02-c10.r.target"
+        },
+        {
+          "move": "d2-d1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b02-c10.tempt"
+        },
+        {
+          "move": "a3-a4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b02.r.notgeneral"
+        }
+      ]
+    },
+    {
+      "type": "select-squares",
+      "id": "b02-c11",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "d2": "A",
+        "f9": "k",
+        "e5": "p"
+      },
+      "prompt": "b02-c11.prompt",
+      "square": "d2",
+      "explanation": "b02-c11.expl",
+      "objective": "b02l3",
+      "unit": "b02"
+    },
+    {
+      "type": "select-squares",
+      "id": "b02-c12",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e9": "k",
+        "d9": "a",
+        "f0": "K",
+        "c3": "P",
+        "h7": "c"
+      },
+      "turn": "black",
+      "prompt": "b02-c12.prompt",
+      "square": "d9",
+      "explanation": "b02-c12.expl",
+      "objective": "b02l3",
+      "unit": "b02"
+    },
+    {
+      "type": "select-squares",
+      "id": "b02-c13",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "f0": "K",
+        "a2": "B",
+        "b3": "C",
+        "d9": "k"
+      },
+      "prompt": "b02-c13.prompt",
+      "square": "a2",
+      "explanation": "b02-c13.expl",
+      "objective": "b02l3",
+      "unit": "b02"
+    },
+    {
+      "type": "select-squares",
+      "id": "b02-c14",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d9": "k",
+        "g9": "b",
+        "h8": "c",
+        "f0": "K"
+      },
+      "turn": "black",
+      "prompt": "b02-c14.prompt",
+      "square": "g9",
+      "explanation": "b02-c14.expl",
+      "objective": "b02l3",
+      "unit": "b02"
+    },
+    {
+      "type": "select-squares",
+      "id": "b02-c15",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d9": "k",
+        "g5": "b",
+        "h6": "n",
+        "f0": "K",
+        "e3": "P"
+      },
+      "turn": "black",
+      "prompt": "b02-c15.prompt",
+      "square": "g5",
+      "explanation": "b02-c15.expl",
+      "objective": "b02l3",
+      "unit": "b02"
+    },
+    {
+      "type": "choice",
+      "id": "b02-c16",
+      "version": 1,
+      "status": "reviewed",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b02.m3"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "g0": "B",
+        "f1": "N",
+        "e9": "k",
+        "e6": "p"
+      },
+      "prompt": "b02-c16.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b02-c16.a.t",
+          "correct": true,
+          "feedback": "b02-c16.a"
+        },
+        {
+          "id": "b",
+          "text": "b02-c16.b.t",
+          "correct": false,
+          "feedback": "b02-c16.b",
+          "misconception": "b02.m3"
+        },
+        {
+          "id": "c",
+          "text": "b02-c16.c.t",
+          "correct": false,
+          "feedback": "b02-c16.c",
+          "misconception": "b02.m3"
+        }
+      ],
+      "objective": "b02l3",
+      "unit": "b02"
+    }
+  ]
+}

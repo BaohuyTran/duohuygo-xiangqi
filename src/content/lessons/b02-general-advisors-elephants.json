@@ -1,0 +1,814 @@
+{
+  "id": "b02",
+  "track": "basics",
+  "title": "b02.title",
+  "description": "b02.desc",
+  "lessons": [
+    {
+      "id": "b02l1",
+      "title": "b02l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b02l1-01",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l2#0"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b02.m1"
+          ],
+          "pieces": {
+            "e1": "K",
+            "e9": "k",
+            "e6": "p"
+          },
+          "text": "b02l1-01.text",
+          "square": "e1"
+        },
+        {
+          "type": "learn",
+          "id": "b02l1-02",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l2#2"
+          },
+          "side": "red",
+          "pieces": {
+            "e1": "K",
+            "f1": "p",
+            "e9": "k",
+            "e6": "p"
+          },
+          "text": "b02l1-02.text",
+          "square": "e1"
+        },
+        {
+          "type": "learn",
+          "id": "b02l1-03",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l2#4"
+          },
+          "side": "red",
+          "pieces": {
+            "e1": "K",
+            "d7": "r",
+            "e9": "k",
+            "e6": "p"
+          },
+          "text": "b02l1-03.text",
+          "square": "e1"
+        },
+        {
+          "type": "select-squares",
+          "id": "b02l1-04",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l2#1"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "e2": "K",
+            "e9": "k",
+            "e6": "p"
+          },
+          "prompt": "b02l1-04.prompt",
+          "square": "e2",
+          "explanation": "b02l1-04.expl"
+        },
+        {
+          "type": "move",
+          "id": "b02l1-05",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l2#5"
+          },
+          "side": "red",
+          "strand": "DE",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "e1": "K",
+            "e4": "r",
+            "f7": "r",
+            "e9": "k",
+            "e6": "p"
+          },
+          "prompt": "b02l1-05.prompt",
+          "from": "e1",
+          "goal": {
+            "kind": "any"
+          },
+          "solution": {
+            "from": "e1",
+            "to": "d1"
+          },
+          "explanation": "b02l1-05.expl"
+        },
+        {
+          "type": "capture",
+          "id": "b02l1-06",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l2#3"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "pieces": {
+            "d2": "K",
+            "e2": "p",
+            "e9": "k",
+            "e6": "p"
+          },
+          "prompt": "b02l1-06.prompt",
+          "solution": {
+            "from": "d2",
+            "to": "e2"
+          },
+          "feedback": {
+            "purpose": "b02l1-06.purpose",
+            "keyReply": "b02l1-06.key",
+            "commonError": "b02l1-06.error",
+            "temptingAlternative": {
+              "move": "d2-d1",
+              "text": "b02l1-06.tempt"
+            }
+          },
+          "explanation": "b02l1-06.expl"
+        },
+        {
+          "type": "choice",
+          "id": "b02l1-07",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b02.m1"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "d9": "k",
+            "f9": "a",
+            "e0": "K",
+            "e3": "P",
+            "g0": "B"
+          },
+          "turn": "black",
+          "prompt": "b02l1-07.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b02l1-07.a.t",
+              "correct": true,
+              "feedback": "b02l1-07.a"
+            },
+            {
+              "id": "b",
+              "text": "b02l1-07.b.t",
+              "correct": false,
+              "feedback": "b02l1-07.b",
+              "misconception": "b02.m1"
+            },
+            {
+              "id": "c",
+              "text": "b02l1-07.c.t",
+              "correct": false,
+              "feedback": "b02l1-07.c",
+              "misconception": "b02.m1"
+            }
+          ]
+        },
+        {
+          "type": "select-squares",
+          "id": "b02l1-08",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G0",
+          "pieces": {
+            "e8": "k",
+            "f8": "n",
+            "e6": "p",
+            "f0": "K",
+            "e1": "A",
+            "g0": "B",
+            "d3": "R"
+          },
+          "turn": "black",
+          "prompt": "b02l1-08.prompt",
+          "square": "e8",
+          "explanation": "b02l1-08.expl"
+        }
+      ]
+    },
+    {
+      "id": "b02l2",
+      "title": "b02l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b02l2-01",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l1#0"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b02.m4"
+          ],
+          "pieces": {
+            "d0": "K",
+            "e9": "k",
+            "a6": "p"
+          },
+          "text": "b02l2-01.text",
+          "square": "d0",
+          "highlight": [
+            "e0"
+          ]
+        },
+        {
+          "type": "learn",
+          "id": "b02l2-02",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l1#1"
+          },
+          "side": "red",
+          "pieces": {
+            "e0": "K",
+            "e4": "N",
+            "e9": "k"
+          },
+          "text": "b02l2-02.text",
+          "square": "e4",
+          "allowNoMoves": true
+        },
+        {
+          "type": "learn",
+          "id": "b02l2-03",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "pieces": {
+            "f0": "K",
+            "e8": "k",
+            "a6": "p"
+          },
+          "turn": "black",
+          "text": "b02l2-03.text",
+          "square": "e8",
+          "highlight": [
+            "f8"
+          ]
+        },
+        {
+          "type": "select-squares",
+          "id": "b02l2-04",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "d1": "K",
+            "e9": "k",
+            "a6": "p"
+          },
+          "prompt": "b02l2-04.prompt",
+          "square": "d1",
+          "explanation": "b02l2-04.expl"
+        },
+        {
+          "type": "select-squares",
+          "id": "b02l2-05",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "f8": "k",
+            "e0": "K",
+            "c3": "P"
+          },
+          "turn": "black",
+          "prompt": "b02l2-05.prompt",
+          "square": "f8",
+          "explanation": "b02l2-05.expl"
+        },
+        {
+          "type": "choice",
+          "id": "b02l2-06",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b02.m4"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "e1": "K",
+            "e5": "C",
+            "e8": "k",
+            "a3": "P"
+          },
+          "prompt": "b02l2-06.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b02l2-06.a.t",
+              "correct": true,
+              "feedback": "b02l2-06.a"
+            },
+            {
+              "id": "b",
+              "text": "b02l2-06.b.t",
+              "correct": false,
+              "feedback": "b02l2-06.b",
+              "misconception": "b02.m4"
+            },
+            {
+              "id": "c",
+              "text": "b02l2-06.c.t",
+              "correct": false,
+              "feedback": "b02l2-06.c",
+              "misconception": "b02.m4"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b02l2-07",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "pieces": {
+            "f0": "K",
+            "i3": "P",
+            "d8": "k"
+          },
+          "prompt": "b02l2-07.prompt",
+          "alternatives": false,
+          "hints": {
+            "idea": "b02l2-07.hint",
+            "move": "f0-e0"
+          },
+          "feedback": {
+            "purpose": "b02l2-07.purpose",
+            "keyReply": "b02l2-07.key",
+            "commonError": "b02l2-07.error",
+            "temptingAlternative": {
+              "move": "f0-f1",
+              "text": "b02l2-07.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "f0-e0",
+              "class": "target",
+              "source": "authored",
+              "reason": "b02l2-07.r.target"
+            },
+            {
+              "move": "f0-f1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b02l2-07.tempt"
+            },
+            {
+              "move": "i3-i4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b02.r.notgeneral"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b02l2-08",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G0",
+          "pieces": {
+            "f9": "k",
+            "c6": "p",
+            "d1": "K"
+          },
+          "turn": "black",
+          "prompt": "b02l2-08.prompt",
+          "alternatives": false,
+          "hints": {
+            "idea": "b02l2-08.hint",
+            "move": "f9-e9"
+          },
+          "feedback": {
+            "purpose": "b02l2-08.purpose",
+            "keyReply": "b02l2-08.key",
+            "commonError": "b02l2-08.error",
+            "temptingAlternative": {
+              "move": "f9-f8",
+              "text": "b02l2-08.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "c6-c5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b02.r.notgeneral"
+            },
+            {
+              "move": "f9-e9",
+              "class": "target",
+              "source": "authored",
+              "reason": "b02l2-08.r.target"
+            },
+            {
+              "move": "f9-f8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b02l2-08.tempt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b02l3",
+      "title": "b02l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b02l3-01",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l3#0"
+          },
+          "side": "red",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e1": "A"
+          },
+          "text": "b02l3-01.text",
+          "square": "e1"
+        },
+        {
+          "type": "learn",
+          "id": "b02l3-02",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l3#2"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b02.m2"
+          ],
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B"
+          },
+          "text": "b02l3-02.text",
+          "square": "e2"
+        },
+        {
+          "type": "learn",
+          "id": "b02l3-03",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "derived",
+            "derivedFrom": "u1l3#4",
+            "transform": [
+              "edit-pieces"
+            ]
+          },
+          "side": "red",
+          "misconceptions": [
+            "b02.m3"
+          ],
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B",
+            "d3": "N"
+          },
+          "text": "b02l3-03.text",
+          "square": "e2",
+          "highlight": [
+            "d3"
+          ]
+        },
+        {
+          "type": "select-squares",
+          "id": "b02l3-04",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l3#1"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "f0": "K",
+            "d9": "k",
+            "e1": "A"
+          },
+          "prompt": "b02l3-04.prompt",
+          "square": "e1",
+          "explanation": "b02l3-04.expl"
+        },
+        {
+          "type": "select-squares",
+          "id": "b02l3-05",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l3#3"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "g0": "B"
+          },
+          "prompt": "b02l3-05.prompt",
+          "square": "g0",
+          "explanation": "b02l3-05.expl"
+        },
+        {
+          "type": "select-squares",
+          "id": "b02l3-06",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l3#5"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e2": "B",
+            "f3": "p",
+            "d1": "p"
+          },
+          "prompt": "b02l3-06.prompt",
+          "square": "e2",
+          "explanation": "b02l3-06.expl"
+        },
+        {
+          "type": "select-squares",
+          "id": "b02l3-07",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "derived",
+            "derivedFrom": "u1l3#5",
+            "transform": [
+              "colour-swap",
+              "edit-pieces"
+            ]
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "pieces": {
+            "f9": "k",
+            "d0": "K",
+            "e7": "b",
+            "f6": "P",
+            "d8": "P"
+          },
+          "turn": "black",
+          "prompt": "b02l3-07.prompt",
+          "square": "e7",
+          "explanation": "b02l3-07.expl"
+        },
+        {
+          "type": "choice",
+          "id": "b02l3-08",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b02.m2"
+          ],
+          "assist": "G0",
+          "pieces": {
+            "e9": "k",
+            "g5": "b",
+            "d0": "K",
+            "i3": "P"
+          },
+          "turn": "black",
+          "prompt": "b02l3-08.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b02l3-08.a.t",
+              "correct": true,
+              "feedback": "b02l3-08.a"
+            },
+            {
+              "id": "b",
+              "text": "b02l3-08.b.t",
+              "correct": false,
+              "feedback": "b02l3-08.b",
+              "misconception": "b02.m2"
+            },
+            {
+              "id": "c",
+              "text": "b02l3-08.c.t",
+              "correct": false,
+              "feedback": "b02l3-08.c",
+              "misconception": "b02.m2"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b02l3-09",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b02.m1",
+            "b02.m3"
+          ],
+          "assist": "TR",
+          "pieces": {
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "c9": "b",
+            "g9": "b",
+            "h8": "c",
+            "i9": "r",
+            "b9": "n",
+            "a6": "p",
+            "c6": "p",
+            "e6": "p",
+            "g6": "p",
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "c0": "B",
+            "g0": "B",
+            "e3": "P",
+            "i0": "R",
+            "b2": "C",
+            "g2": "N"
+          },
+          "turn": "black",
+          "prompt": "b02l3-09.prompt",
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "text": "b02l3-09.a.t",
+              "correct": true,
+              "feedback": "b02l3-09.a"
+            },
+            {
+              "id": "b",
+              "text": "b02l3-09.b.t",
+              "correct": false,
+              "feedback": "b02l3-09.b",
+              "misconception": "b02.m3"
+            },
+            {
+              "id": "c",
+              "text": "b02l3-09.c.t",
+              "correct": false,
+              "feedback": "b02l3-09.c",
+              "misconception": "b02.m1"
+            },
+            {
+              "id": "d",
+              "text": "b02l3-09.d.t",
+              "correct": true,
+              "feedback": "b02l3-09.d"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

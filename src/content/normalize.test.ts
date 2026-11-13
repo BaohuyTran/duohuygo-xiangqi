@@ -67,7 +67,7 @@ describe('normalize', () => {
   // New-course items (REL-P pilot b09, S2.14) against every loaded lesson position and puzzle. The only duplicate is
   // intended: the practical task b09-g1 starts from the initial position (02 b09: "play from the start position"),
   // which the legacy learn cards u1l1#0/#1 also show. The lesson positions themselves are all distinct.
-  it('new-course positions duplicate nothing except the initial position (b09-g1, i08-g1 and the b01 setup cards)', () => {
+  it('new-course positions duplicate nothing except the initial position (b09-g1, i08-g1, the b01 setup cards) and reused legacy items', () => {
     const entries = [
       ...allUnits.flatMap((u) => u.lessons.flatMap((l) => l.exercises.map((e, i) => ({ ref: e.id ?? `${l.id}#${i}`, position: positionOf(e) })))),
       ...puzzles.map((p) => ({ ref: p.id, position: startPosition(p) })),
@@ -76,14 +76,23 @@ describe('normalize', () => {
     // + the 18 lesson items of the a03 pilot (S2.16; its assessment pools are checked by the pool validator's corpus).
     // + the 7 items of the a07 pilot (S2.17: a07l4 and a07-g1; positions from distinct seeded games, no duplicates).
     // + the 33 items of unit b01 (S3.1.a: 4 lessons, 12 learn cards + 21 practice items).
-    expect(entries).toHaveLength(330);
+    // + the 25 items of unit b02 (S3.1.b: 3 lessons, 9 learn cards + 16 practice items).
+    expect(entries).toHaveLength(355);
     const isNew = (ref: string) => /^[biaem]\d\d/.test(ref);
     // i08-g1 (S2.15, `line` → `play` from the initial position) joins the same intended group.
     // b01 (S3.1.a) adds three intended learn cards of the initial position: b01l1-01 and b01l2-01 reuse u1l1#1 and
     // u1l1#0 (05 §4: the river and the setup), b01l2-02 shows the same setup from Black's side (02 b01: both colours).
     // b01l1-03 / b01l1-04 reuse the palace learn card and its exercise u1l1#2 / u1l1#3 (a learn card showing the next
     // item's position, as in the legacy lesson). Every other b01 position is its own.
-    expect(duplicateGroups(entries).filter((g) => g.some(isNew))).toEqual([
+    // b02 (S3.1.b) reuses 13 legacy positions unchanged (05 §4: u1l2, u1l3, u4l1#0/#1): each is a pair of the legacy item
+    // and the new item whose `source.legacyRef` names it, and nothing else (T2: the reused position is the legacy one).
+    const legacyRefs = new Map(allUnits.flatMap((u) => u.lessons.flatMap((l) => l.exercises)).filter((e) => e.id && e.source?.legacyRef).map((e) => [e.id!, e.source!.legacyRef!]));
+    const groups = duplicateGroups(entries).filter((g) => g.some(isNew));
+    const reusePair = (g: string[]) => g.length === 2 && /^b02/.test(g[1]) && legacyRefs.get(g[1]) === g[0];
+    expect(groups.filter(reusePair).map((g) => g[1])).toEqual(
+      ['b02l1-01', 'b02l1-04', 'b02l1-02', 'b02l1-06', 'b02l1-03', 'b02l1-05', 'b02l3-01', 'b02l3-04', 'b02l3-02', 'b02l3-05', 'b02l3-06', 'b02l2-01', 'b02l2-02'],
+    );
+    expect(groups.filter((g) => !reusePair(g))).toEqual([
       ['u1l1#0', 'u1l1#1', 'b01l1-01', 'b01l2-01', 'b01l2-02', 'b09-g1', 'i08-g1'],
       ['u1l1#2', 'u1l1#3', 'b01l1-03', 'b01l1-04'],
     ]);

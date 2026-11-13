@@ -1829,6 +1829,384 @@ export const messages = {
     vi: 'Quân Mã đó ở cột 2 của bạn: bạn đã đọc số theo phía bên Đỏ.',
   },
 
+  // ---------- New course: b02 "General, Advisors and Elephants" (S3.1.b; lessons b02l1–b02l3 + check pool b02-check) ----------
+  'b02.title': { en: 'General, Advisors and Elephants', vi: 'Tướng, Sĩ và Tượng' },
+  'b02.desc': {
+    en: 'How the palace pieces move, why the two Generals may never face each other, and the Elephant’s eye and river limit.',
+    vi: 'Cách các quân trong cung di chuyển, vì sao hai Tướng không bao giờ được đối mặt, mắt Tượng và giới hạn sông của Tượng.',
+  },
+  'b02l1.title': { en: 'The General in its palace', vi: 'Tướng trong cung' },
+  'b02l2.title': { en: 'Facing Generals', vi: 'Lộ mặt Tướng' },
+  'b02l3.title': { en: 'Advisors and Elephants', vi: 'Sĩ và Tượng' },
+  'b02.r.notgeneral': {
+    en: 'That move does not use your General, so it takes no point away from the other General.',
+    vi: 'Nước đó không dùng Tướng của bạn, nên không lấy đi điểm nào của Tướng bên kia.',
+  },
+  'b02l1-01.text': {
+    en: 'The General moves one point at a time along the lines: forward, back, left or right, never diagonally. The diagonal lines in the palace are for the Advisors. The General never leaves its palace. The dots show its four points here.',
+    vi: 'Tướng đi từng điểm một theo các đường kẻ: tiến, lùi, sang trái hoặc sang phải, không bao giờ đi chéo. Các đường chéo trong cung là đường của Sĩ. Tướng không bao giờ rời cung. Các chấm cho thấy bốn điểm của Tướng ở đây.',
+  },
+  'b02l1-02.text': {
+    en: 'A piece captures by moving onto an enemy piece. The General captures the same way it moves: here it could take the Soldier beside it.',
+    vi: 'Quân cờ ăn quân bằng cách đi vào điểm có quân đối phương. Tướng ăn quân giống như cách nó đi: ở đây Tướng có thể ăn quân Tốt bên cạnh.',
+  },
+  'b02l1-03.text': {
+    en: 'Never step onto a point the enemy attacks. Black’s Chariot controls its whole file, so the point on that file beside your General is missing from the dots.',
+    vi: 'Không bao giờ bước vào điểm bị đối phương tấn công. Xe Đen khống chế cả cột của nó, nên điểm trên cột đó cạnh Tướng của bạn không có chấm.',
+  },
+  'b02l1-04.prompt': {
+    en: 'Tap every point your General can move to. It may not leave the palace.',
+    vi: 'Chạm vào mọi điểm Tướng của bạn có thể đi tới. Tướng không được ra khỏi cung.',
+  },
+  'b02l1-04.expl': {
+    en: 'Forward would leave the palace, so your General has three points: back, left and right.',
+    vi: 'Tiến lên sẽ ra khỏi cung, nên Tướng của bạn có ba điểm: lùi, sang trái và sang phải.',
+  },
+  'b02l1-05.prompt': {
+    en: 'Your General is in check from a Chariot. Move it to the only safe point.',
+    vi: 'Tướng của bạn bị Xe chiếu. Hãy đưa Tướng tới điểm an toàn duy nhất.',
+  },
+  'b02l1-05.expl': {
+    en: 'The point to the left is safe. Forward and back stay on the Chariot’s file, and the point to the right is covered by the other Chariot.',
+    vi: 'Điểm bên trái là an toàn. Tiến hay lùi vẫn nằm trên cột của quân Xe, còn điểm bên phải bị quân Xe kia khống chế.',
+  },
+  'b02l1-06.prompt': { en: 'Capture the Soldier with your General.', vi: 'Dùng Tướng ăn quân Tốt.' },
+  'b02l1-06.expl': {
+    en: 'The General captures by stepping onto the enemy piece, one point along a line.',
+    vi: 'Tướng ăn quân bằng cách bước vào điểm có quân đối phương, một điểm theo đường kẻ.',
+  },
+  'b02l1-06.purpose': {
+    en: 'Your General takes the Soldier that has walked into your palace, and nothing protects it.',
+    vi: 'Tướng của bạn ăn quân Tốt đã vào cung, và không quân nào bảo vệ nó.',
+  },
+  'b02l1-06.key': {
+    en: 'Black has no piece that can take back, and the Soldier on the middle file still stands between the Generals.',
+    vi: 'Bên Đen không có quân nào ăn lại được, và quân Tốt trên cột giữa vẫn đứng giữa hai Tướng.',
+  },
+  'b02l1-06.error': {
+    en: 'Look for the enemy piece one point from your General along a line, with nothing protecting it.',
+    vi: 'Hãy tìm quân đối phương cách Tướng của bạn một điểm theo đường kẻ, không được quân nào bảo vệ.',
+  },
+  'b02l1-06.tempt': {
+    en: 'That only steps back: the free Soldier stays in your palace.',
+    vi: 'Nước đó chỉ lùi lại: quân Tốt không được bảo vệ vẫn nằm trong cung của bạn.',
+  },
+  'b02l1-07.prompt': {
+    en: 'Your General is in a corner of the palace. Can it step diagonally to the palace centre?',
+    vi: 'Tướng của bạn đang ở một góc cung. Tướng có thể đi chéo vào điểm giữa cung không?',
+  },
+  'b02l1-07.a.t': { en: 'No: the General moves only along the lines, never diagonally', vi: 'Không: Tướng chỉ đi theo đường kẻ, không bao giờ đi chéo' },
+  'b02l1-07.a': {
+    en: 'Right: from the corner your General can only step along the edges of the palace.',
+    vi: 'Đúng: từ góc cung, Tướng của bạn chỉ bước được dọc theo cạnh cung.',
+  },
+  'b02l1-07.b.t': { en: 'Yes: inside the palace it may follow the diagonal lines', vi: 'Có: trong cung Tướng được đi theo các đường chéo' },
+  'b02l1-07.b': {
+    en: 'No: the diagonal lines are for the Advisors. The General never moves diagonally.',
+    vi: 'Không: các đường chéo là đường của Sĩ. Tướng không bao giờ đi chéo.',
+  },
+  'b02l1-07.c.t': { en: 'Yes, as long as the centre point is empty', vi: 'Có, miễn là điểm giữa cung còn trống' },
+  'b02l1-07.c': {
+    en: 'No: an empty point does not help. A diagonal step is never a General move.',
+    vi: 'Không: điểm trống cũng không giúp được. Bước chéo không bao giờ là nước đi của Tướng.',
+  },
+  'b02l1-08.prompt': { en: 'Tap every point your General can move to.', vi: 'Chạm vào mọi điểm Tướng của bạn có thể đi tới.' },
+  'b02l1-08.expl': {
+    en: 'Your General can step forward or back along the middle file. Of the two points to the sides, one is covered by Red’s Chariot and the other holds your own Horse.',
+    vi: 'Tướng của bạn có thể tiến hoặc lùi theo cột giữa. Trong hai điểm hai bên, một điểm bị Xe Đỏ khống chế, điểm kia có quân Mã của bạn.',
+  },
+  'b02l2-01.text': {
+    en: 'The two Generals may never face each other on the same file with nothing between them. Stepping to the marked point would create that face-off, so the move is illegal. The rule forbids the move that opens the face-off, whichever General would then be attacked.',
+    vi: 'Hai Tướng không bao giờ được đối mặt trên cùng một cột mà không có quân nào ở giữa (lộ mặt Tướng). Bước tới điểm được đánh dấu sẽ gây ra điều đó, nên nước đi này không hợp lệ. Luật cấm chính nước đi làm lộ mặt Tướng, dù Tướng nào khi đó bị tấn công.',
+  },
+  'b02l2-02.text': {
+    en: 'A piece standing alone between the two Generals is stuck there: if it left the file, the Generals would face each other. This Horse has no legal move at all.',
+    vi: 'Quân duy nhất đứng giữa hai Tướng bị kẹt lại ở đó: nếu nó rời khỏi cột, hai Tướng sẽ đối mặt. Quân Mã này không đi được nước nào.',
+  },
+  'b02l2-03.text': {
+    en: 'You play Black. Red’s General stands on an open file, so the point on that file beside your General (highlighted) is forbidden: stepping there would face Red’s General. Your General can use the other three points. A General on an open file takes points away from the enemy General.',
+    vi: 'Bạn cầm quân Đen. Tướng Đỏ đứng trên một cột trống, nên điểm trên cột đó cạnh Tướng của bạn (được tô sáng) bị cấm: bước vào đó sẽ lộ mặt Tướng. Tướng của bạn dùng được ba điểm còn lại. Tướng đứng trên cột trống sẽ lấy đi các điểm của Tướng đối phương.',
+  },
+  'b02l2-04.prompt': {
+    en: 'Tap every point your General can move to. Remember: it may not face Black’s General.',
+    vi: 'Chạm vào mọi điểm Tướng của bạn có thể đi tới. Nhớ rằng: Tướng không được đối mặt với Tướng Đen.',
+  },
+  'b02l2-04.expl': {
+    en: 'Stepping onto the middle file would face Black’s General with nothing between, so only the two points along your own file are legal.',
+    vi: 'Bước vào cột giữa sẽ đối mặt với Tướng Đen mà không có quân nào ở giữa, nên chỉ hai điểm trên cột của bạn là hợp lệ.',
+  },
+  'b02l2-05.prompt': {
+    en: 'You play Black. Tap every point your General can move to. It may not face Red’s General.',
+    vi: 'Bạn cầm quân Đen. Chạm vào mọi điểm Tướng của bạn có thể đi tới. Tướng không được đối mặt với Tướng Đỏ.',
+  },
+  'b02l2-05.expl': {
+    en: 'Stepping onto the middle file would put your General face to face with Red’s General, so only the two points along your own file remain.',
+    vi: 'Bước vào cột giữa sẽ khiến Tướng của bạn đối mặt với Tướng Đỏ, nên chỉ còn hai điểm trên cột của bạn.',
+  },
+  'b02l2-06.prompt': {
+    en: 'Your Cannon is the only piece between the two Generals. Can it move off the middle file?',
+    vi: 'Quân Pháo của bạn là quân duy nhất đứng giữa hai Tướng. Pháo có thể rời khỏi cột giữa không?',
+  },
+  'b02l2-06.a.t': {
+    en: 'No: that would leave the Generals facing, and the move that opens the file is the illegal one',
+    vi: 'Không: như thế hai Tướng sẽ đối mặt, và nước làm mở cột chính là nước không hợp lệ',
+  },
+  'b02l2-06.a': {
+    en: 'Right: the Cannon may move up or down the middle file, but never off it.',
+    vi: 'Đúng: quân Pháo được đi lên hoặc xuống trên cột giữa, nhưng không được rời khỏi cột.',
+  },
+  'b02l2-06.b.t': { en: 'Yes: only Black’s General would be in danger, so Red may do it', vi: 'Có: chỉ Tướng Đen gặp nguy hiểm, nên bên Đỏ được đi' },
+  'b02l2-06.b': {
+    en: 'No: the rule is about the move. Whoever would open the face-off may not make that move.',
+    vi: 'Không: luật nói về nước đi. Bên nào làm lộ mặt Tướng thì không được đi nước đó.',
+  },
+  'b02l2-06.c.t': { en: 'Yes: Black would then simply have to move its General', vi: 'Có: khi đó bên Đen chỉ việc di chuyển Tướng của mình' },
+  'b02l2-06.c': {
+    en: 'No: the face-off is never allowed to happen, not even for one move.',
+    vi: 'Không: lộ mặt Tướng không bao giờ được phép xảy ra, dù chỉ trong một nước.',
+  },
+  'b02l2-07.prompt': {
+    en: 'Move your General so that it takes a point away from Black’s General.',
+    vi: 'Hãy đi Tướng của bạn sao cho nó lấy đi một điểm của Tướng Đen.',
+  },
+  'b02l2-07.hint': {
+    en: 'Black’s General could step onto the middle file. Put your General on that file first.',
+    vi: 'Tướng Đen có thể bước vào cột giữa. Hãy đưa Tướng của bạn vào cột đó trước.',
+  },
+  'b02l2-07.r.target': { en: 'Right: your General now watches the whole middle file.', vi: 'Đúng: Tướng của bạn giờ khống chế cả cột giữa.' },
+  'b02l2-07.purpose': {
+    en: 'On the open middle file your General forbids Black’s General to step onto it.',
+    vi: 'Trên cột giữa trống, Tướng của bạn cấm Tướng Đen bước vào cột đó.',
+  },
+  'b02l2-07.key': { en: 'Black’s General keeps only the two points along its own file.', vi: 'Tướng Đen chỉ còn hai điểm trên cột của nó.' },
+  'b02l2-07.error': {
+    en: 'Look at the points Black’s General can reach, and find one your General could watch along an open file.',
+    vi: 'Hãy xem các điểm Tướng Đen có thể đi tới, rồi tìm một điểm mà Tướng của bạn có thể khống chế theo một cột trống.',
+  },
+  'b02l2-07.tempt': {
+    en: 'Your General moves along its own file, which Black’s General cannot reach in one step: it takes nothing away.',
+    vi: 'Tướng của bạn đi trên cột của mình, nơi Tướng Đen không thể tới trong một bước: nó không lấy đi điểm nào.',
+  },
+  'b02l2-08.prompt': {
+    en: 'You play Black. Move your General so that it takes a point away from Red’s General.',
+    vi: 'Bạn cầm quân Đen. Hãy đi Tướng của bạn sao cho nó lấy đi một điểm của Tướng Đỏ.',
+  },
+  'b02l2-08.hint': {
+    en: 'Red’s General could step onto the middle file. Put your General on that file first.',
+    vi: 'Tướng Đỏ có thể bước vào cột giữa. Hãy đưa Tướng của bạn vào cột đó trước.',
+  },
+  'b02l2-08.r.target': { en: 'Right: your General now watches the whole middle file.', vi: 'Đúng: Tướng của bạn giờ khống chế cả cột giữa.' },
+  'b02l2-08.purpose': {
+    en: 'On the open middle file your General forbids Red’s General to step onto it.',
+    vi: 'Trên cột giữa trống, Tướng của bạn cấm Tướng Đỏ bước vào cột đó.',
+  },
+  'b02l2-08.key': { en: 'Red’s General is left with the two points along its own file.', vi: 'Tướng Đỏ chỉ còn hai điểm trên cột của nó.' },
+  'b02l2-08.error': {
+    en: 'Look at the points Red’s General can reach, and find one your General could watch along an open file.',
+    vi: 'Hãy xem các điểm Tướng Đỏ có thể đi tới, rồi tìm một điểm mà Tướng của bạn có thể khống chế theo một cột trống.',
+  },
+  'b02l2-08.tempt': {
+    en: 'Your General stays on its own file, which Red’s General cannot reach in one step: it takes nothing away.',
+    vi: 'Tướng của bạn vẫn ở trên cột của mình, nơi Tướng Đỏ không thể tới trong một bước: nó không lấy đi điểm nào.',
+  },
+  'b02l3-01.text': {
+    en: 'The Advisor moves one point diagonally along the palace’s diagonal lines, and never leaves the palace. From the centre it can reach all four corners.',
+    vi: 'Sĩ đi chéo một điểm theo các đường chéo của cung, và không bao giờ rời cung. Từ điểm giữa cung, Sĩ đi được tới cả bốn góc.',
+  },
+  'b02l3-02.text': {
+    en: 'The Elephant moves exactly two points diagonally, as if across the corner of a big square. It never crosses the river, so it has only seven points, all on its own side. From the middle point here it can reach four of them.',
+    vi: 'Tượng đi chéo đúng hai điểm, như đi qua góc của một ô vuông lớn. Tượng không bao giờ qua sông, nên chỉ có bảy điểm, tất cả đều ở phần sân bên mình. Từ điểm giữa ở đây, Tượng đi được tới bốn điểm trong số đó.',
+  },
+  'b02l3-03.text': {
+    en: 'The point in the middle of an Elephant move is its “eye”. If any piece stands on it (highlighted), the Elephant cannot move that way: it never jumps over a piece.',
+    vi: 'Điểm ở giữa đường đi của Tượng gọi là “mắt Tượng”. Nếu có quân nào đứng ở đó (được tô sáng), Tượng không đi được hướng đó: Tượng không bao giờ nhảy qua quân khác.',
+  },
+  'b02l3-04.prompt': { en: 'Tap every point the Advisor can move to.', vi: 'Chạm vào mọi điểm Sĩ có thể đi tới.' },
+  'b02l3-04.expl': {
+    en: 'Three corners of the palace are free; the fourth holds your own General.',
+    vi: 'Ba góc cung còn trống; góc thứ tư có Tướng của bạn.',
+  },
+  'b02l3-05.prompt': { en: 'Tap every point the Elephant can move to.', vi: 'Chạm vào mọi điểm Tượng có thể đi tới.' },
+  'b02l3-05.expl': {
+    en: 'From its starting point the Elephant can go two points diagonally forward, to either side.',
+    vi: 'Từ vị trí ban đầu, Tượng có thể tiến chéo hai điểm về một trong hai phía.',
+  },
+  'b02l3-06.prompt': {
+    en: 'Two of the Elephant’s eyes are blocked. Tap every point it can still reach.',
+    vi: 'Hai mắt Tượng bị cản. Chạm vào mọi điểm Tượng vẫn đi tới được.',
+  },
+  'b02l3-06.expl': {
+    en: 'Black’s Soldiers stand on two eyes, so only the other two moves remain.',
+    vi: 'Hai quân Tốt Đen đứng trên hai mắt Tượng, nên chỉ còn hai nước đi kia.',
+  },
+  'b02l3-07.prompt': {
+    en: 'You play Black. Watch the eyes, and tap every point your Elephant can reach.',
+    vi: 'Bạn cầm quân Đen. Hãy để ý mắt Tượng, rồi chạm vào mọi điểm Tượng của bạn đi tới được.',
+  },
+  'b02l3-07.expl': {
+    en: 'Red’s Soldiers block two eyes, so your Elephant has two moves left.',
+    vi: 'Hai quân Tốt Đỏ cản hai mắt Tượng, nên Tượng của bạn còn hai nước đi.',
+  },
+  'b02l3-08.prompt': {
+    en: 'Your Elephant stands at the river. Can it move two points diagonally forward, across the river?',
+    vi: 'Quân Tượng của bạn đứng sát sông. Tượng có thể tiến chéo hai điểm, qua sông không?',
+  },
+  'b02l3-08.a.t': { en: 'No: an Elephant never crosses the river', vi: 'Không: Tượng không bao giờ qua sông' },
+  'b02l3-08.a': { en: 'Right: your Elephant can only move back, to the two points behind it.', vi: 'Đúng: Tượng của bạn chỉ có thể lùi về hai điểm phía sau.' },
+  'b02l3-08.b.t': { en: 'Yes: its eye is free', vi: 'Có: mắt Tượng còn trống' },
+  'b02l3-08.b': {
+    en: 'No: a free eye does not matter here. The river stops the Elephant.',
+    vi: 'Không: mắt Tượng trống cũng không có tác dụng ở đây. Con sông chặn Tượng lại.',
+  },
+  'b02l3-08.c.t': { en: 'Yes, but only to capture the Soldier there', vi: 'Có, nhưng chỉ để ăn quân Tốt ở đó' },
+  'b02l3-08.c': {
+    en: 'No: not even to capture. The Elephant stays on its own side of the river.',
+    vi: 'Không: kể cả để ăn quân. Tượng luôn ở phần sân bên mình.',
+  },
+  'b02l3-09.prompt': { en: 'Which of these moves are legal here? Tick all of them.', vi: 'Những nước nào dưới đây hợp lệ trong thế cờ này? Hãy chọn tất cả.' },
+  'b02l3-09.a.t': { en: 'An Advisor steps from its corner to the palace centre', vi: 'Một quân Sĩ bước từ góc vào điểm giữa cung' },
+  'b02l3-09.a': {
+    en: 'Right: the Advisor moves one point diagonally inside the palace, and the centre is empty.',
+    vi: 'Đúng: Sĩ đi chéo một điểm trong cung, và điểm giữa cung đang trống.',
+  },
+  'b02l3-09.b.t': { en: 'The Elephant whose eye your Cannon blocks moves over the Cannon', vi: 'Quân Tượng bị Pháo của bạn cản mắt đi qua quân Pháo' },
+  'b02l3-09.b': {
+    en: 'No: the Cannon stands on that Elephant’s eye, and an Elephant never jumps.',
+    vi: 'Không: quân Pháo đứng trên mắt của Tượng đó, và Tượng không bao giờ nhảy qua quân khác.',
+  },
+  'b02l3-09.c.t': { en: 'Your General steps one point diagonally', vi: 'Tướng của bạn bước chéo một điểm' },
+  'b02l3-09.c': { en: 'No: the General moves only along the lines, never diagonally.', vi: 'Không: Tướng chỉ đi theo đường kẻ, không bao giờ đi chéo.' },
+  'b02l3-09.d.t': { en: 'The other Elephant moves two points diagonally toward the centre', vi: 'Quân Tượng còn lại đi chéo hai điểm về phía giữa' },
+  'b02l3-09.d': { en: 'Right: its eye is empty, so the Elephant can make that move.', vi: 'Đúng: mắt Tượng trống, nên Tượng đi được nước đó.' },
+  'b02-c01.prompt': { en: 'Tap every point your General can move to.', vi: 'Chạm vào mọi điểm Tướng của bạn có thể đi tới.' },
+  'b02-c01.expl': {
+    en: 'Forward and back along your file are free; the point to the left is covered by Black’s Chariot, and the point to the right is outside the palace.',
+    vi: 'Tiến và lùi trên cột của bạn đều trống; điểm bên trái bị Xe Đen khống chế, còn điểm bên phải nằm ngoài cung.',
+  },
+  'b02-c02.prompt': { en: 'Tap every point your General can move to.', vi: 'Chạm vào mọi điểm Tướng của bạn có thể đi tới.' },
+  'b02-c02.expl': {
+    en: 'Forward and one side are outside the palace, and the other side is covered by Red’s Chariot: only the point behind your General is left.',
+    vi: 'Phía trước và một bên nằm ngoài cung, bên còn lại bị Xe Đỏ khống chế: chỉ còn điểm phía sau Tướng của bạn.',
+  },
+  'b02-c04.prompt': {
+    en: 'Your General is in check. Tap every point it can move to.',
+    vi: 'Tướng của bạn đang bị chiếu. Chạm vào mọi điểm Tướng có thể đi tới.',
+  },
+  'b02-c04.expl': {
+    en: 'Along its file the Chariot still attacks, and one side is outside the palace: only the point toward the centre is safe.',
+    vi: 'Trên cột của Tướng, quân Xe vẫn tấn công, còn một bên nằm ngoài cung: chỉ điểm về phía giữa là an toàn.',
+  },
+  'b02-c05.prompt': { en: 'Find the best capture.', vi: 'Hãy tìm nước ăn quân tốt nhất.' },
+  'b02-c05.expl': { en: 'Your General takes the Horse beside it, which nothing protects.', vi: 'Tướng của bạn ăn quân Mã bên cạnh, quân không được bảo vệ.' },
+  'b02-c05.purpose': { en: 'Your General wins a Horse for free.', vi: 'Tướng của bạn ăn không một quân Mã.' },
+  'b02-c05.key': { en: 'Red has nothing that can take back.', vi: 'Bên Đỏ không có quân nào ăn lại được.' },
+  'b02-c05.error': {
+    en: 'Look for an enemy piece one point from your General, with nothing protecting it.',
+    vi: 'Hãy tìm quân đối phương cách Tướng của bạn một điểm, không được quân nào bảo vệ.',
+  },
+  'b02-c05.tempt': {
+    en: 'That steps away and leaves the free Horse in your palace.',
+    vi: 'Nước đó bước đi chỗ khác và để quân Mã không được bảo vệ ở lại trong cung của bạn.',
+  },
+  'b02-c06.prompt': { en: 'Tap every point your General can move to.', vi: 'Chạm vào mọi điểm Tướng của bạn có thể đi tới.' },
+  'b02-c06.expl': {
+    en: 'Stepping onto the middle file would face Black’s General, and the other points are outside the palace: your General can only step back.',
+    vi: 'Bước vào cột giữa sẽ lộ mặt Tướng Đen, các điểm khác nằm ngoài cung: Tướng của bạn chỉ có thể lùi.',
+  },
+  'b02-c07.prompt': { en: 'Tap every point your General can move to.', vi: 'Chạm vào mọi điểm Tướng của bạn có thể đi tới.' },
+  'b02-c07.expl': {
+    en: 'Your own Advisor holds the point behind, and the middle file would face Red’s General: only the point in front is left.',
+    vi: 'Quân Sĩ của bạn chiếm điểm phía sau, còn cột giữa sẽ lộ mặt Tướng Đỏ: chỉ còn điểm phía trước.',
+  },
+  'b02-c09.prompt': {
+    en: 'Move your General so that it takes a point away from Red’s General.',
+    vi: 'Hãy đi Tướng của bạn sao cho nó lấy đi một điểm của Tướng Đỏ.',
+  },
+  'b02-c09.r.target': { en: 'Right: your General now watches the open middle file.', vi: 'Đúng: Tướng của bạn giờ khống chế cột giữa trống.' },
+  'b02-c09.purpose': { en: 'Red’s General may no longer step onto the middle file.', vi: 'Tướng Đỏ không còn được bước vào cột giữa.' },
+  'b02-c09.key': { en: 'Red’s General can now only step forward along its own file.', vi: 'Giờ Tướng Đỏ chỉ có thể tiến trên cột của nó.' },
+  'b02-c09.error': {
+    en: 'Find a point Red’s General could reach that your General can watch along an open file.',
+    vi: 'Hãy tìm một điểm Tướng Đỏ có thể tới mà Tướng của bạn khống chế được theo một cột trống.',
+  },
+  'b02-c09.tempt': { en: 'That only steps back along your own file: it takes nothing away.', vi: 'Nước đó chỉ lùi trên cột của bạn: không lấy đi điểm nào.' },
+  'b02-c10.prompt': {
+    en: 'Move your General so that it takes a point away from Black’s General.',
+    vi: 'Hãy đi Tướng của bạn sao cho nó lấy đi một điểm của Tướng Đen.',
+  },
+  'b02-c10.r.target': { en: 'Right: your General now watches the open middle file.', vi: 'Đúng: Tướng của bạn giờ khống chế cột giữa trống.' },
+  'b02-c10.purpose': { en: 'Black’s General may no longer step onto the middle file.', vi: 'Tướng Đen không còn được bước vào cột giữa.' },
+  'b02-c10.key': { en: 'Black’s General can now only step forward along its own file.', vi: 'Giờ Tướng Đen chỉ có thể tiến trên cột của nó.' },
+  'b02-c10.error': {
+    en: 'Find a point Black’s General could reach that your General can watch along an open file.',
+    vi: 'Hãy tìm một điểm Tướng Đen có thể tới mà Tướng của bạn khống chế được theo một cột trống.',
+  },
+  'b02-c10.tempt': { en: 'That only steps back along your own file: it takes nothing away.', vi: 'Nước đó chỉ lùi trên cột của bạn: không lấy đi điểm nào.' },
+  'b02-c11.prompt': { en: 'Tap every point the Advisor can move to.', vi: 'Chạm vào mọi điểm Sĩ có thể đi tới.' },
+  'b02-c11.expl': {
+    en: 'From a front corner of the palace the Advisor has only one diagonal: back to the centre.',
+    vi: 'Từ một góc trước của cung, Sĩ chỉ có một đường chéo: lùi về điểm giữa cung.',
+  },
+  'b02-c13.prompt': { en: 'Tap every point the Elephant can move to.', vi: 'Chạm vào mọi điểm Tượng có thể đi tới.' },
+  'b02-c13.expl': {
+    en: 'Your Cannon stands on the eye of the forward move, so only the move back is left.',
+    vi: 'Quân Pháo của bạn đứng trên mắt của nước tiến, nên chỉ còn nước lùi.',
+  },
+  'b02-c14.prompt': { en: 'Tap every point your Elephant can move to.', vi: 'Chạm vào mọi điểm Tượng của bạn có thể đi tới.' },
+  'b02-c14.expl': {
+    en: 'Your Cannon stands on one eye, so only the other move is left.',
+    vi: 'Quân Pháo của bạn đứng trên một mắt Tượng, nên chỉ còn nước đi kia.',
+  },
+  'b02-c16.prompt': {
+    en: 'Can your Elephant move two points diagonally toward the middle of your side?',
+    vi: 'Tượng của bạn có thể đi chéo hai điểm về phía giữa phần sân của bạn không?',
+  },
+  'b02-c16.a.t': { en: 'No: a piece stands on its eye', vi: 'Không: có quân đứng trên mắt Tượng' },
+  'b02-c16.a': {
+    en: 'Right: your Horse blocks the eye, and the Elephant cannot jump.',
+    vi: 'Đúng: quân Mã của bạn cản mắt Tượng, và Tượng không nhảy qua được.',
+  },
+  'b02-c16.b.t': { en: 'Yes: an Elephant jumps over a piece in its way', vi: 'Có: Tượng nhảy qua quân cản đường' },
+  'b02-c16.b': {
+    en: 'No: an Elephant never jumps; a piece on the eye blocks that move.',
+    vi: 'Không: Tượng không bao giờ nhảy; quân trên mắt Tượng chặn nước đi đó.',
+  },
+  'b02-c16.c.t': { en: 'Yes: your own piece on the eye does not count', vi: 'Có: quân của mình trên mắt Tượng thì không tính' },
+  'b02-c16.c': { en: 'No: any piece on the eye blocks it, your own included.', vi: 'Không: quân nào đứng trên mắt Tượng cũng cản, kể cả quân của bạn.' },
+  'b02-c03.prompt': { en: 'Which statements about the General are true? Tick all of them.', vi: 'Những câu nào về quân Tướng là đúng? Hãy chọn tất cả.' },
+  'b02-c03.a.t': { en: 'It moves one point at a time along a line', vi: 'Tướng đi từng điểm một theo đường kẻ' },
+  'b02-c03.a': { en: 'Right: one point forward, back, left or right.', vi: 'Đúng: một điểm tiến, lùi, sang trái hoặc sang phải.' },
+  'b02-c03.b.t': { en: 'Inside the palace it may also move along the diagonal lines', vi: 'Trong cung Tướng cũng được đi theo các đường chéo' },
+  'b02-c03.b': {
+    en: 'No: the diagonal lines are for the Advisors; the General never moves diagonally.',
+    vi: 'Không: các đường chéo là của Sĩ; Tướng không bao giờ đi chéo.',
+  },
+  'b02-c03.c.t': { en: 'It may never leave its palace', vi: 'Tướng không bao giờ được rời cung' },
+  'b02-c03.c': { en: 'Right: every General move stays inside the palace.', vi: 'Đúng: mọi nước đi của Tướng đều ở trong cung.' },
+  'b02-c08.prompt': { en: 'Can your Soldier step sideways?', vi: 'Quân Tốt của bạn có thể đi ngang không?' },
+  'b02-c08.a.t': { en: 'No: leaving its file would leave the two Generals facing each other', vi: 'Không: rời khỏi cột sẽ khiến hai Tướng đối mặt nhau' },
+  'b02-c08.a': {
+    en: 'Right: the Soldier is the only piece between the Generals, so it may only step forward along its file.',
+    vi: 'Đúng: quân Tốt là quân duy nhất giữa hai Tướng, nên nó chỉ được tiến trên cột của mình.',
+  },
+  'b02-c08.b.t': { en: 'Yes: it would be Black’s General that is exposed', vi: 'Có: khi đó Tướng Đen mới là bên bị lộ' },
+  'b02-c08.b': {
+    en: 'No: the move that opens the face-off is illegal, whichever General it exposes.',
+    vi: 'Không: nước làm lộ mặt Tướng là không hợp lệ, dù nó để lộ Tướng nào.',
+  },
+  'b02-c08.c.t': { en: 'Yes: Black would then have to move its General aside', vi: 'Có: khi đó bên Đen phải đưa Tướng sang bên' },
+  'b02-c08.c': { en: 'No: the face-off may never happen, not even for one move.', vi: 'Không: lộ mặt Tướng không bao giờ được xảy ra, dù chỉ trong một nước.' },
+  'b02-c12.prompt': { en: 'Tap every point your Advisor can move to.', vi: 'Chạm vào mọi điểm Sĩ của bạn có thể đi tới.' },
+  'b02-c12.expl': {
+    en: 'From a back corner of the palace the Advisor has a single diagonal, to the centre.',
+    vi: 'Từ một góc sau của cung, Sĩ chỉ có một đường chéo, vào điểm giữa cung.',
+  },
+  'b02-c15.prompt': { en: 'Tap every point your Elephant can move to.', vi: 'Chạm vào mọi điểm Tượng của bạn có thể đi tới.' },
+  'b02-c15.expl': {
+    en: 'At the river the Elephant cannot go forward, and your Horse blocks one of the two moves back: one point is left.',
+    vi: 'Ở sát sông, Tượng không thể tiến, còn quân Mã của bạn cản một trong hai nước lùi: chỉ còn một điểm.',
+  },
+
   // ---------- New course: b09 "Opening development principles" (pilot lesson b09l3 + task b09-g1, S2.14) ----------
   'b09.title': { en: 'Opening development principles', vi: 'Nguyên tắc ra quân trong khai cuộc' },
   'b09.desc': {
