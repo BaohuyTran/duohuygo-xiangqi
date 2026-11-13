@@ -1,0 +1,1938 @@
+{
+  "id": "b01",
+  "track": "basics",
+  "title": "b01.title",
+  "description": "b01.desc",
+  "lessons": [
+    {
+      "id": "b01l1",
+      "title": "b01l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b01l1-01",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l1#1"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b01.m1"
+          ],
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w - - 0 1",
+          "text": "b01l1-01.text",
+          "highlight": "red-side"
+        },
+        {
+          "type": "learn",
+          "id": "b01l1-02",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b01.m2"
+          ],
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "b2": "R",
+            "g4": "B"
+          },
+          "text": "b01l1-02.text",
+          "square": "g4"
+        },
+        {
+          "type": "learn",
+          "id": "b01l1-03",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l1#2"
+          },
+          "side": "red",
+          "pieces": {
+            "e0": "K",
+            "f9": "k"
+          },
+          "text": "b01l1-03.text",
+          "highlight": "red-palace"
+        },
+        {
+          "type": "select-squares",
+          "id": "b01l1-04",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l1#3"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "e0": "K",
+            "f9": "k"
+          },
+          "prompt": "b01l1-04.prompt",
+          "region": "red-palace",
+          "explanation": "b01l1-04.expl"
+        },
+        {
+          "type": "select-squares",
+          "id": "b01l1-05",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "derived",
+            "derivedFrom": "u1l1#3",
+            "transform": [
+              "colour-swap",
+              "edit-pieces"
+            ]
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "d9": "k",
+            "f0": "K"
+          },
+          "turn": "black",
+          "prompt": "b01l1-05.prompt",
+          "region": "black-palace",
+          "explanation": "b01l1-05.expl"
+        },
+        {
+          "type": "choice",
+          "id": "b01l1-06",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b01.m1",
+            "b01.m2"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "d0": "K",
+            "a0": "R",
+            "g0": "B",
+            "e9": "k",
+            "i9": "r",
+            "c9": "b"
+          },
+          "prompt": "b01l1-06.prompt",
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "text": "b01l1-06.a.t",
+              "correct": true,
+              "feedback": "b01l1-06.a"
+            },
+            {
+              "id": "b",
+              "text": "b01l1-06.b.t",
+              "correct": true,
+              "feedback": "b01l1-06.b"
+            },
+            {
+              "id": "c",
+              "text": "b01l1-06.c.t",
+              "correct": false,
+              "feedback": "b01l1-06.c",
+              "misconception": "b01.m1"
+            },
+            {
+              "id": "d",
+              "text": "b01l1-06.d.t",
+              "correct": false,
+              "feedback": "b01l1-06.d",
+              "misconception": "b01.m2"
+            }
+          ]
+        },
+        {
+          "type": "select-squares",
+          "id": "b01l1-07",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "e3": "P",
+            "h2": "C",
+            "e9": "k",
+            "f9": "a",
+            "b7": "c"
+          },
+          "prompt": "b01l1-07.prompt",
+          "query": {
+            "kind": "point",
+            "square": "e8"
+          },
+          "explanation": "b01l1-07.expl"
+        },
+        {
+          "type": "select-squares",
+          "id": "b01l1-08",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G0",
+          "pieces": {
+            "f0": "K",
+            "c2": "N",
+            "i3": "P",
+            "d9": "k",
+            "e8": "a",
+            "g6": "p",
+            "a9": "r"
+          },
+          "turn": "black",
+          "prompt": "b01l1-08.prompt",
+          "query": {
+            "kind": "point",
+            "square": "e5"
+          },
+          "explanation": "b01l1-08.expl"
+        }
+      ]
+    },
+    {
+      "id": "b01l2",
+      "title": "b01l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b01l2-01",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u1l1#0"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b01.m6"
+          ],
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w - - 0 1",
+          "text": "b01l2-01.text"
+        },
+        {
+          "type": "learn",
+          "id": "b01l2-02",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR w - - 0 1",
+          "text": "b01l2-02.text"
+        },
+        {
+          "type": "learn",
+          "id": "b01l2-03",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1N5N1/9/RCBAKABCR w - - 0 1",
+          "text": "b01l2-03.text",
+          "highlight": [
+            "b0",
+            "h0",
+            "b2",
+            "h2"
+          ]
+        },
+        {
+          "type": "select-squares",
+          "id": "b01l2-04",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKAB1R w - - 0 1",
+          "prompt": "b01l2-04.prompt",
+          "query": {
+            "kind": "point",
+            "square": "h0"
+          },
+          "explanation": "b01l2-04.expl"
+        },
+        {
+          "type": "select-squares",
+          "id": "b01l2-05",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "fen": "rnbakabnr/9/7c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR b - - 0 1",
+          "prompt": "b01l2-05.prompt",
+          "query": {
+            "kind": "point",
+            "square": "b7"
+          },
+          "explanation": "b01l2-05.expl"
+        },
+        {
+          "type": "select-squares",
+          "id": "b01l2-06",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "fen": "rnbakab1r/9/1c4nc1/p1p1p1p1p/9/9/P1P1P1P1P/1C2B2C1/9/RNBAKA1NR w - - 2 2",
+          "prompt": "b01l2-06.prompt",
+          "query": {
+            "kind": "point",
+            "square": "e2"
+          },
+          "explanation": "b01l2-06.expl"
+        },
+        {
+          "type": "choice",
+          "id": "b01l2-07",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b01.m6"
+          ],
+          "assist": "G1",
+          "fen": "rnbakab1r/9/1c4nc1/p1p1p1p1p/9/9/P1P1P1P1P/1CN4C1/9/R1BAKABNR w - - 2 2",
+          "prompt": "b01l2-07.prompt",
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "text": "b01l2-07.a.t",
+              "correct": true,
+              "feedback": "b01l2-07.a"
+            },
+            {
+              "id": "b",
+              "text": "b01l2-07.b.t",
+              "correct": true,
+              "feedback": "b01l2-07.b"
+            },
+            {
+              "id": "c",
+              "text": "b01l2-07.c.t",
+              "correct": false,
+              "feedback": "b01l2-07.c",
+              "misconception": "b01.m6"
+            },
+            {
+              "id": "d",
+              "text": "b01l2-07.d.t",
+              "correct": false,
+              "feedback": "b01l2-07.d",
+              "misconception": "b01.m6"
+            }
+          ]
+        },
+        {
+          "type": "select-squares",
+          "id": "b01l2-08",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G0",
+          "fen": "r1bakabnr/9/1cn4c1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKAB1R b - - 3 2",
+          "prompt": "b01l2-08.prompt",
+          "query": {
+            "kind": "point",
+            "square": "b9"
+          },
+          "explanation": "b01l2-08.expl"
+        }
+      ]
+    },
+    {
+      "id": "b01l3",
+      "title": "b01l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b01l3-01",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b01.m3"
+          ],
+          "pieces": {
+            "d0": "K",
+            "a9": "R",
+            "d8": "R",
+            "e9": "k"
+          },
+          "turn": "black",
+          "text": "b01l3-01.text"
+        },
+        {
+          "type": "learn",
+          "id": "b01l3-02",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "pieces": {
+            "d0": "K",
+            "a9": "R",
+            "e9": "k"
+          },
+          "turn": "black",
+          "text": "b01l3-02.text",
+          "highlight": [
+            "e8"
+          ]
+        },
+        {
+          "type": "learn",
+          "id": "b01l3-03",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b01.m4"
+          ],
+          "pieces": {
+            "f0": "K",
+            "e5": "R",
+            "d7": "P",
+            "d9": "k"
+          },
+          "turn": "black",
+          "text": "b01l3-03.text"
+        },
+        {
+          "type": "choice",
+          "id": "b01l3-04",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [
+            "b01.m3"
+          ],
+          "assist": "G2",
+          "pieces": {
+            "d0": "K",
+            "a1": "R",
+            "d8": "R",
+            "e9": "k"
+          },
+          "prompt": "b01l3-04.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b01l3-04.a.t",
+              "correct": true,
+              "feedback": "b01l3-04.a"
+            },
+            {
+              "id": "b",
+              "text": "b01l3-04.b.t",
+              "correct": false,
+              "feedback": "b01l3-04.b",
+              "misconception": "b01.m3"
+            },
+            {
+              "id": "c",
+              "text": "b01l3-04.c.t",
+              "correct": false,
+              "feedback": "b01l3-04.c",
+              "misconception": "b01.m3"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b01l3-05",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b01.m3"
+          ],
+          "assist": "G2",
+          "pieces": {
+            "d0": "K",
+            "e3": "R",
+            "e8": "k",
+            "f9": "a"
+          },
+          "turn": "black",
+          "prompt": "b01l3-05.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b01l3-05.a.t",
+              "correct": true,
+              "feedback": "b01l3-05.a"
+            },
+            {
+              "id": "b",
+              "text": "b01l3-05.b.t",
+              "correct": false,
+              "feedback": "b01l3-05.b",
+              "misconception": "b01.m3"
+            },
+            {
+              "id": "c",
+              "text": "b01l3-05.c.t",
+              "correct": false,
+              "feedback": "b01l3-05.c",
+              "misconception": "b01.m3"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b01l3-06",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [
+            "b01.m4"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "f0": "K",
+            "a5": "R",
+            "c8": "P",
+            "d9": "k"
+          },
+          "prompt": "b01l3-06.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b01l3-06.a.t",
+              "correct": true,
+              "feedback": "b01l3-06.a"
+            },
+            {
+              "id": "b",
+              "text": "b01l3-06.b.t",
+              "correct": false,
+              "feedback": "b01l3-06.b",
+              "misconception": "b01.m4"
+            },
+            {
+              "id": "c",
+              "text": "b01l3-06.c.t",
+              "correct": false,
+              "feedback": "b01l3-06.c",
+              "misconception": "b01.m4"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b01l3-07",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [
+            "b01.m3"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "f0": "K",
+            "f8": "R",
+            "i1": "R",
+            "d9": "k"
+          },
+          "prompt": "b01l3-07.prompt",
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "text": "b01l3-07.a.t",
+              "move": "i1-i9",
+              "correct": true,
+              "feedback": "b01l3-07.a"
+            },
+            {
+              "id": "b",
+              "text": "b01l3-07.b.t",
+              "move": "i1-e1",
+              "correct": true,
+              "feedback": "b01l3-07.b"
+            },
+            {
+              "id": "c",
+              "text": "b01l3-07.c.t",
+              "move": "f8-d8",
+              "correct": false,
+              "feedback": "b01l3-07.c",
+              "misconception": "b01.m3"
+            },
+            {
+              "id": "d",
+              "text": "b01l3-07.d.t",
+              "move": "i1-d1",
+              "correct": false,
+              "feedback": "b01l3-07.d",
+              "misconception": "b01.m3"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b01l3-08",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [
+            "b01.m3"
+          ],
+          "assist": "G0",
+          "pieces": {
+            "d0": "K",
+            "d1": "N",
+            "f9": "k",
+            "d7": "r",
+            "i5": "r",
+            "c3": "n"
+          },
+          "turn": "black",
+          "prompt": "b01l3-08.prompt",
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "text": "b01l3-08.a.t",
+              "move": "i5-e5",
+              "correct": true,
+              "feedback": "b01l3-08.a"
+            },
+            {
+              "id": "b",
+              "text": "b01l3-08.b.t",
+              "move": "i5-i0",
+              "correct": true,
+              "feedback": "b01l3-08.b"
+            },
+            {
+              "id": "c",
+              "text": "b01l3-08.c.t",
+              "move": "c3-d1",
+              "correct": false,
+              "feedback": "b01l3-08.c",
+              "misconception": "b01.m3"
+            },
+            {
+              "id": "d",
+              "text": "b01l3-08.d.t",
+              "move": "c3-e2",
+              "correct": false,
+              "feedback": "b01l3-08.d",
+              "misconception": "b01.m3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b01l4",
+      "title": "b01l4.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b01l4-01",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b01.m5"
+          ],
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/4P4/P1P3P1P/1C5C1/9/RNBAKABNR b - - 1 1",
+          "text": "b01l4-01.text",
+          "highlight": [
+            "h0",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "h7",
+            "h8",
+            "h9"
+          ]
+        },
+        {
+          "type": "learn",
+          "id": "b01l4-02",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "misconceptions": [
+            "b01.m5"
+          ],
+          "fen": "r1bakabnr/9/1cn4c1/p1p1p1p1p/9/4P4/P1P3P1P/1C4NC1/9/RNBAKAB1R b - - 3 2",
+          "text": "b01l4-02.text",
+          "square": "h7"
+        },
+        {
+          "type": "learn",
+          "id": "b01l4-03",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "fen": "rnbakabnr/9/1c5c1/p3p1p1p/2p6/2P6/P3P1P1P/1C5C1/9/RNBAKABNR w - - 2 2",
+          "text": "b01l4-03.text",
+          "square": "h2"
+        },
+        {
+          "type": "move",
+          "id": "b01l4-04",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "fen": "rnbakabnr/9/1c5c1/p3p1p1p/2p6/6P2/P1P1P3P/1C5C1/9/RNBAKABNR w - - 2 2",
+          "prompt": "b01l4-04.prompt",
+          "from": "h2",
+          "goal": {
+            "kind": "reach",
+            "squares": [
+              "e2"
+            ]
+          },
+          "solution": {
+            "from": "h2",
+            "to": "e2"
+          },
+          "explanation": "b01l4-04.expl"
+        },
+        {
+          "type": "move",
+          "id": "b01l4-05",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C4NC1/9/RNBAKAB1R b - - 1 1",
+          "prompt": "b01l4-05.prompt",
+          "from": "b9",
+          "goal": {
+            "kind": "reach",
+            "squares": [
+              "c7"
+            ]
+          },
+          "solution": {
+            "from": "b9",
+            "to": "c7"
+          },
+          "explanation": "b01l4-05.expl"
+        },
+        {
+          "type": "decision",
+          "id": "b01l4-06",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "fen": "rnbakab1r/9/1c4nc1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C4/9/RNBAKABNR w - - 2 2",
+          "prompt": "b01l4-06.prompt",
+          "alternatives": false,
+          "hints": {
+            "idea": "b01l4-06.hint",
+            "move": "h0-g2"
+          },
+          "feedback": {
+            "purpose": "b01l4-06.purpose",
+            "keyReply": "b01l4-06.key",
+            "commonError": "b01l4-06.error",
+            "temptingAlternative": {
+              "move": "b0-c2",
+              "text": "b01l4-06.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "a0-a1",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "a0-a2",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "b0-c2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01l4-06.tempt"
+            },
+            {
+              "move": "b0-a2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "c0-a2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "d0-e1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e0-e1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "f0-e1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "g0-i2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "h0-i2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "h0-g2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b01l4-06.r.target"
+            },
+            {
+              "move": "i0-i1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "i0-i2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-c2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-d2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-a2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b9",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e2-f2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e2-g2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e2-h2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e2-i2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e2-d2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e2-c2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e2-e6",
+              "class": "error",
+              "source": "authored",
+              "reason": "b01.r.loses"
+            },
+            {
+              "move": "e2-e1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "a3-a4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "c3-c4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e3-e4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "g3-g4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "i3-i4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b01l4-07",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b01.m5"
+          ],
+          "assist": "G1",
+          "fen": "rnbakabnr/9/1c5c1/p1p1p1p1p/9/6P2/P1P1P3P/1C5C1/9/RNBAKABNR b - - 1 1",
+          "prompt": "b01l4-07.prompt",
+          "alternatives": false,
+          "hints": {
+            "idea": "b01l4-07.hint",
+            "move": "h7-e7"
+          },
+          "feedback": {
+            "purpose": "b01l4-07.purpose",
+            "keyReply": "b01l4-07.key",
+            "commonError": "b01l4-07.error",
+            "temptingAlternative": {
+              "move": "b7-e7",
+              "text": "b01l4-07.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "a6-a5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "c6-c5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "e6-e5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "g6-g5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "i6-i5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-c7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-d7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-e7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01l4-07.tempt",
+              "misconception": "b01.m5"
+            },
+            {
+              "move": "b7-f7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-g7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-a7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b0",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-i7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-g7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-f7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-e7",
+              "class": "target",
+              "source": "authored",
+              "reason": "b01l4-07.r.target"
+            },
+            {
+              "move": "h7-d7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-c7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h0",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "a9-a8",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "a9-a7",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "b9-c7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b9-a7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "c9-e7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "c9-a7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "d9-e8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "e9-e8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "f9-e8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "g9-i7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "g9-e7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h9-i7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h9-g7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "i9-i8",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "i9-i7",
+              "class": "error",
+              "source": "computed"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b01l4-08",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G0",
+          "fen": "rnbakab1r/9/1c4nc1/p3p1p1p/2p6/6P2/P1P1P3P/1C4NC1/9/RNBAKAB1R w - - 4 3",
+          "prompt": "b01l4-08.prompt",
+          "alternatives": false,
+          "hints": {
+            "idea": "b01l4-08.hint",
+            "move": "g0-e2"
+          },
+          "feedback": {
+            "purpose": "b01l4-08.purpose",
+            "keyReply": "b01l4-08.key",
+            "commonError": "b01l4-08.error",
+            "temptingAlternative": {
+              "move": "c0-e2",
+              "text": "b01l4-08.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "a0-a1",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "a0-a2",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "b0-c2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b0-a2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "c0-e2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01l4-08.tempt"
+            },
+            {
+              "move": "c0-a2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "d0-e1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e0-e1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "f0-e1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "g0-i2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "g0-e2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b01l4-08.r.target"
+            },
+            {
+              "move": "i0-h0",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "i0-i1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "i0-i2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-c2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-d2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-e2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-f2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-a2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b9",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "b2-b1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "g2-h4",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "g2-f4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "g2-h0",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "g2-e1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "h2-i2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "h2-h3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "h2-h4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "h2-h5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "h2-h6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "h2-h1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "h2-h0",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "a3-a4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "c3-c4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "e3-e4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "i3-i4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            },
+            {
+              "move": "g4-g5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b01l4-09",
+          "version": 1,
+          "status": "reviewed",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b01.m5"
+          ],
+          "assist": "TR",
+          "fen": "rnbakabr1/9/1c4nc1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1 b - - 5 3",
+          "prompt": "b01l4-09.prompt",
+          "alternatives": false,
+          "feedback": {
+            "purpose": "b01l4-09.purpose",
+            "keyReply": "b01l4-09.key",
+            "commonError": "b01l4-09.error",
+            "temptingAlternative": {
+              "move": "c6-c5",
+              "text": "b01l4-09.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "a6-a5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "c6-c5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01l4-09.tempt",
+              "misconception": "b01.m5"
+            },
+            {
+              "move": "e6-e5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "g6-g5",
+              "class": "target",
+              "source": "authored",
+              "reason": "b01l4-09.r.target"
+            },
+            {
+              "move": "i6-i5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-c7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-d7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-e7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-f7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-a7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b7-b0",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "g7-e8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-i7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h7-h2",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "h7-h1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "a9-a8",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "a9-a7",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "b9-c7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "b9-a7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "c9-e7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "c9-a7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "d9-e8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "e9-e8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "f9-e8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "g9-i7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "g9-e7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h9-i9",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            },
+            {
+              "move": "h9-h8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b01.r.other.black"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

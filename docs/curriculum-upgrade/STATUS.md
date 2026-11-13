@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 3 — Curriculum production (step 2 gate passed 2026-11-12; merged into `main`)
-- **Active items:** S3.1 (units b01–b04); then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
+- **Active items:** S3.1.b (unit b02), then b03, b04; then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,14 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-13 — **S3.1.a done** (unit `b01`, attempt 2): `src/content/lessons/b01-board-and-notation.json` (4 lessons, 12
+  learn cards, 21 practice items, 9 Black) + `assessment/b01-check.json` (16 items, short form 6, three attempts); record
+  `reviews/b01.json` (49 items `reviewed`); preview now shows b01. LessonPlayer shows file numbers on new-course
+  learn/select/move/capture boards. New misconception b01.m6 (who moves first / turns alternate), documented in
+  coverage.md (created, B5). Runtime: `npx vitest run src/content` ~1 m 45 s – 2 m 15 s, `npm test` ~2 m 15 s – 3 m (well
+  under the split threshold). Reviewer APPROVE; content-reviewer CHANGES_REQUESTED (three text errors) → APPROVE.
+  Driver: lint, build, 1,336 tests, ui:check, preview walkthrough PASS.
 
 - 2026-11-12 — **S2.gate passed.** Driver: `src/engine` unchanged since f20ea5b; lint; plain and Supabase builds; 1,301
   tests (84 files); ui:check at 360, 320, 414 and 740×360; preview walkthrough (20 flows, 1,555 steps, 0 failures);

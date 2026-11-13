@@ -368,7 +368,8 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   mover's General, then the last focused point); arrow keys move the focus in the SCREEN direction (turned for Black),
   Enter / Space tap the point; the focus ring (`.board-focus-ring`, src/index.css) shows only for `:focus-visible`.
   The lesson player passes `orientation` from the exercise `side` (legacy content is Red, so unchanged); decision and
-  choice boards also show `fileNumbers`. A Black combination uses the `.neutral` keys.
+  choice boards also show `fileNumbers`, and so do the learn / select-squares / move / capture boards of new-course items
+  (id + version; b01 teaches the numbers there), never legacy ones. A Black combination uses the `.neutral` keys.
 - Learners read traditional notation; ICCS stays internal. `formatMove(move, positionBefore, 'traditional' |
   'iccs', lang)` in `src/notation/format.ts`; names, letters, symbols and front/rear markers are in
   `docs/curriculum-upgrade/glossary.md` (the source; change both together).
@@ -429,6 +430,10 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   a scoring leaf for every accepted tree move, leaves only at selective nodes, and each leaf's rubric score ≥ pass mark;
   F5 R3 objectives may not use `threat`. A unit's task sits in a lesson with its unit-level id `<unit>-g<k>` (only
   `play` / `review` items may; `unitTasks`).
+- Unit `b01` (S3.1.a, first Basic production unit; `reviewed`, record `reviews/b01.json`) is `src/content/lessons/b01-board-and-notation.json`
+  with its check pool `assessment/b01-check.json` (16 items, short form 6); `src/content/pilot-b01.test.ts` pins the ladder,
+  colours, misconception cards, T2 reuse of `u1l1#0`–`#3`, the game-end claims and the notation tables. Coverage counts per
+  unit: `docs/curriculum-upgrade/coverage.md`.
 - Pilot `b09` (S2.14: `b09l3` + `b09-g1`) is `src/content/lessons/b09-opening-development.json`; with it the content is in
   REL-P (`CURRENT_RELEASE`): the default path stays legacy-only, the preview shows `b09` once every item is `reviewed`
   with an approving record (items are `verified` until the independent review). `src/content/pilot-b09.test.ts`.

@@ -646,6 +646,8 @@ function ExerciseView({
             checkedGeneral={checked}
             onSquareClick={ex.type === 'learn' ? undefined : onSquareClick}
             orientation={ex.side ?? 'red'}
+            // New-course items show each side's file numbers (02 §4; b01 teaches them on learn cards and reach moves).
+            fileNumbers={isNewCourseItem(ex)}
           />
         </div>
         {(ex.type === 'move' || ex.type === 'capture') && status === 'answering' && (

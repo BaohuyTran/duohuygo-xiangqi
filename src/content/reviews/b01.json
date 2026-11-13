@@ -1,0 +1,1377 @@
+{
+  "unit": "b01",
+  "records": [
+    {
+      "id": "b01l1-01",
+      "version": 1,
+      "contentHash": "2f7ed15bce3815dcb0ea2efe8e0685e9164af397dcccc0c37b3dbab0e50395e6",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l1-02",
+      "version": 1,
+      "contentHash": "5af6c9b574eb8d950033adba455e7930cde4db5890f9b7cd8feebdb678768035",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l1-03",
+      "version": 1,
+      "contentHash": "f99c7a17e844f285dfb171f9657c07139e5df818aeac6419dbb92fa48ed1a5cd",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l1-04",
+      "version": 1,
+      "contentHash": "0d4cb8ac437a4f284f93d3b6416b99ad0de2107e1304911ce200481efd927b29",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l1-05",
+      "version": 1,
+      "contentHash": "d2db613a15d2edd275b7259ceffc692d5a3db1502b88e8df2d7ecf806304756b",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l1-06",
+      "version": 1,
+      "contentHash": "6d524bb15bcaa6cb82b093a8fe633dcb2f16d99a5df7fa0ccb4e6f627661cf01",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l1-07",
+      "version": 1,
+      "contentHash": "e53438b2c91e976f9ed3d800d88be100cd01e3a38b76868b8d74e1b6a3abc1ea",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l1-08",
+      "version": 1,
+      "contentHash": "b87cd74596b7b09acbc84b0f5705f015646b869db36fe7f5d85b035fea949964",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l2-01",
+      "version": 1,
+      "contentHash": "1df7e519e2ea86535b257ba6235f94f12275a843f6186fd85d8d2f506eea53a0",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l2-02",
+      "version": 1,
+      "contentHash": "a484be0fa471c8a71f60829dd8a23ff1cda14fd02f9944acd531607da0da45aa",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l2-03",
+      "version": 1,
+      "contentHash": "b1b84646fe1b6338a197779516b13c2060f4e60672f0c470269d0bfd73a4647e",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l2-04",
+      "version": 1,
+      "contentHash": "f24dffc7e8797a07755322f6381e17adf3336654819bb2b66f5b9a875476b175",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l2-05",
+      "version": 1,
+      "contentHash": "3367d6c7aa0f218b28bd671e0178966239e42433723239380a1f53fc7b6308e3",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l2-06",
+      "version": 1,
+      "contentHash": "bf2177a9a65f63a91bd53793dda15ea788d5cafb69f151d79b01163091203c11",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l2-07",
+      "version": 1,
+      "contentHash": "7c77c3a45f6551b1940b3fca3d62cce047b349c48f8ac329d21790f93279f4c3",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l2-08",
+      "version": 1,
+      "contentHash": "fbef711d371412ff4587b21d7779cc434b1eb9f246356177aad88a18ca47dcd2",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l3-01",
+      "version": 1,
+      "contentHash": "5ade1526c4e197f49f6dffdfa8a96fe4efb515218ca7d6abd0bb1647d8b0a176",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l3-02",
+      "version": 1,
+      "contentHash": "f1a56e199e7e98329e6f77cac05015e16c9e0df58dae4844dbabb7c88f7379db",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l3-03",
+      "version": 1,
+      "contentHash": "912c82f7a071958db6071613bc85b339d25f486dc539710ee0dd3f3ac29fbac3",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l3-04",
+      "version": 1,
+      "contentHash": "be2984bdccacc6a03cd745ac8d47ad3a2f18c85f92950a534f09d1fcffdad590",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l3-05",
+      "version": 1,
+      "contentHash": "525d3bf3d580283855a0637cccf2f0080cb565e9928c46f4330bbb56f4910b92",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l3-06",
+      "version": 1,
+      "contentHash": "a11360d585740f451749ddbdf0e7abe0401206ec0057bb27e72e1098b22990c5",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l3-07",
+      "version": 1,
+      "contentHash": "f4da51d244322d6ed2482d14631dbbce6ec1a06f1c98eb8550ffba176c120879",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l3-08",
+      "version": 1,
+      "contentHash": "ba164f82bca3a5c243eb5b1436e02356f47cda397f49c0b41218762bca3926df",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l4-01",
+      "version": 1,
+      "contentHash": "e421800511e008cd875df747c9d0b5396b9744f71202d7e7d3fbf77e7c5e00e6",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l4-02",
+      "version": 1,
+      "contentHash": "9eaa7fde15b50ab632f72401ce2095a1b3f000385c799e1e967d4b90ff38d34b",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l4-03",
+      "version": 1,
+      "contentHash": "951b0dd64ada94c5ff4b925dea12c9351d09e83d66062170e52487264a0a4cc6",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l4-04",
+      "version": 1,
+      "contentHash": "3ea21c5096f9dc7b432804797da993947aa7c937abc916883681e3deeef6b85b",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l4-05",
+      "version": 1,
+      "contentHash": "a34c7bc7769b10d5819b6e577bb8bc8f72433c883fb1860fc5575a0055f61d40",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l4-06",
+      "version": 1,
+      "contentHash": "ed1c56bd6fe37d9ae7e0d07a67fddccff33436d552e4c68eed65a24a68934deb",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l4-07",
+      "version": 1,
+      "contentHash": "f0b94af2869b8c42b1489d88cffacf719af1087a9416ae83a43a6a545ab3f6b6",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l4-08",
+      "version": 1,
+      "contentHash": "713ee0735f1d60971ee61e54884171fa037cebfdd316118e974f00c0ef0c7c52",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01l4-09",
+      "version": 1,
+      "contentHash": "5023bddd06f0a76193024ab7a62e98c4915da88138e5b0f7d46aebf475f3c6ed",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c01",
+      "version": 1,
+      "contentHash": "38424ee20094bdfd5712807af37df19bdd3bec0fa4b6168cf3892792d829eb23",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c02",
+      "version": 1,
+      "contentHash": "236285c2c4858bdcc086a5b7cda2c532cac789da81190f594ec19d1eae28116d",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c03",
+      "version": 1,
+      "contentHash": "9800f9be5fbe6be754d70a6f473a5bc0527ecf65db81ca3ee41252850b74f014",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c04",
+      "version": 1,
+      "contentHash": "6a4c6cd8b428675d4cc9fe34f7d699553cf63f3d9b1bfdd83750272c70d32a98",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c05",
+      "version": 1,
+      "contentHash": "2dcf1f707a6416e0b097592b0214f40189ed969bdef7214d09eccfd39c2e2733",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c06",
+      "version": 1,
+      "contentHash": "8439f7d18c0e02005f962a2422a333ba604125b8abcff0112e1fa307f6489a76",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c07",
+      "version": 1,
+      "contentHash": "2aef1a6f8b1e6f12c65826ca0c8dfc26cf8f026ef5d7ab6e88d1961c164d1889",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c08",
+      "version": 1,
+      "contentHash": "eda2abbc8fe805337cc22741c27e5e8d7293bb1fc6e6eab5eee684cd7d5dc106",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c09",
+      "version": 1,
+      "contentHash": "fc2ecc41fd72096b1a1c4f65681f6a70de4cef1b83a7053e36f7ded2ad0fd1d0",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c10",
+      "version": 1,
+      "contentHash": "0cc3be7a4fb5bf02290ad498fb552536929305cdbee851d28a84500484fdd8f5",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c11",
+      "version": 1,
+      "contentHash": "d2e8675c941547fbd15d1af821b4370052d7c91452a4fb2b604210986e846740",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c12",
+      "version": 1,
+      "contentHash": "7c707995f3f705d187dcce127cee8839c28b8976f9a81c03ace42cdd756e8fa9",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c13",
+      "version": 1,
+      "contentHash": "3164d14b0a4475a9e2e96fb8ad8e1aed010bb637046f2e44c09d2b1bca559463",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c14",
+      "version": 1,
+      "contentHash": "20dfae5729ea37aa79d0e53b86bf1d4f73f6042cb52dfd43573d173a06d169d1",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c15",
+      "version": 1,
+      "contentHash": "d75e555e22be00f786600636ca006579a1fd8a20a3441a37b69639a140d3498e",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    },
+    {
+      "id": "b01-c16",
+      "version": 1,
+      "contentHash": "72a1f0ac42ea4ebd62960d00e2d3572ec788d02d83d064bcc7c72363dc719f04",
+      "author": "implementer-S3.1.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b01",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-13"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.a",
+          "at": "2026-11-13",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, mate/stalemate/check claims, notation en/vi, complete tables, setup and point items, u1l1 reuse, check-pool independence, glossary terms."
+        }
+      ]
+    }
+  ]
+}

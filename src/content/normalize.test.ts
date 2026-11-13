@@ -67,7 +67,7 @@ describe('normalize', () => {
   // New-course items (REL-P pilot b09, S2.14) against every loaded lesson position and puzzle. The only duplicate is
   // intended: the practical task b09-g1 starts from the initial position (02 b09: "play from the start position"),
   // which the legacy learn cards u1l1#0/#1 also show. The lesson positions themselves are all distinct.
-  it('new-course positions duplicate nothing except the practical tasks b09-g1 and i08-g1 = the initial position', () => {
+  it('new-course positions duplicate nothing except the initial position (b09-g1, i08-g1 and the b01 setup cards)', () => {
     const entries = [
       ...allUnits.flatMap((u) => u.lessons.flatMap((l) => l.exercises.map((e, i) => ({ ref: e.id ?? `${l.id}#${i}`, position: positionOf(e) })))),
       ...puzzles.map((p) => ({ ref: p.id, position: startPosition(p) })),
@@ -75,9 +75,17 @@ describe('normalize', () => {
     // 264 + the 8 items of the i08 pilot (S2.15).
     // + the 18 lesson items of the a03 pilot (S2.16; its assessment pools are checked by the pool validator's corpus).
     // + the 7 items of the a07 pilot (S2.17: a07l4 and a07-g1; positions from distinct seeded games, no duplicates).
-    expect(entries).toHaveLength(297);
+    // + the 33 items of unit b01 (S3.1.a: 4 lessons, 12 learn cards + 21 practice items).
+    expect(entries).toHaveLength(330);
     const isNew = (ref: string) => /^[biaem]\d\d/.test(ref);
     // i08-g1 (S2.15, `line` → `play` from the initial position) joins the same intended group.
-    expect(duplicateGroups(entries).filter((g) => g.some(isNew))).toEqual([['u1l1#0', 'u1l1#1', 'b09-g1', 'i08-g1']]);
+    // b01 (S3.1.a) adds three intended learn cards of the initial position: b01l1-01 and b01l2-01 reuse u1l1#1 and
+    // u1l1#0 (05 §4: the river and the setup), b01l2-02 shows the same setup from Black's side (02 b01: both colours).
+    // b01l1-03 / b01l1-04 reuse the palace learn card and its exercise u1l1#2 / u1l1#3 (a learn card showing the next
+    // item's position, as in the legacy lesson). Every other b01 position is its own.
+    expect(duplicateGroups(entries).filter((g) => g.some(isNew))).toEqual([
+      ['u1l1#0', 'u1l1#1', 'b01l1-01', 'b01l2-01', 'b01l2-02', 'b09-g1', 'i08-g1'],
+      ['u1l1#2', 'u1l1#3', 'b01l1-03', 'b01l1-04'],
+    ]);
   });
 });

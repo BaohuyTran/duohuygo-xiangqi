@@ -2,7 +2,7 @@
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { findLesson } from '../content';
+import { allLessons, findLesson } from '../content';
 import { I18nProvider } from '../i18n/I18nProvider';
 import { COMBINATION_REPLY_MS, LessonPlayer } from './LessonPlayer';
 
@@ -72,6 +72,24 @@ describe('LessonPlayer', () => {
     expect(screen.getByText('4 of 6 exercises right on the first try')).toBeTruthy();
     press('Continue');
     expect(onComplete).toHaveBeenCalledOnce();
+  });
+
+  it('shows file numbers on new-course boards (learn cards turn with the side), never on legacy lessons', () => {
+    const edge = (side: string) => document.querySelector(`[data-edge="${side}"]`)?.getAttribute('data-side');
+    renderLesson('u1l2');
+    expect(document.querySelector('[data-edge]')).toBeNull();
+    cleanup();
+    // b01l4 (S3.1.a, preview-only) teaches each side's file numbers: card 1 is seen from Red, card 2 from Black.
+    render(
+      <I18nProvider initial="en">
+        <LessonPlayer lesson={allLessons.find((l) => l.id === 'b01l4')!} onComplete={vi.fn()} onExit={vi.fn()} />
+      </I18nProvider>,
+    );
+    expect(edge('bottom')).toBe('red');
+    expect(edge('top')).toBe('black');
+    press('Continue');
+    expect(edge('bottom')).toBe('black');
+    expect(edge('top')).toBe('red');
   });
 
   it('explains why a move is rejected and lets the learner retry', () => {

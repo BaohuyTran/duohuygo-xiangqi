@@ -1288,6 +1288,547 @@ export const messages = {
     vi: 'Hoàn thành thử thách kiện tướng. Tính toán đến tận cùng!',
   },
 
+  // ---------- New course: b01 "Board, notation and the goal" (S3.1.a; lessons b01l1–b01l4 + check pool b01-check) ----------
+  'b01.title': { en: 'Board, notation and the goal', vi: 'Bàn cờ, ký hiệu và mục tiêu' },
+  'b01.desc': {
+    en: 'Points, river and palaces, the starting armies, how a game is won, and how to read a written move.',
+    vi: 'Giao điểm, sông và cung, thế bày quân ban đầu, cách thắng một ván cờ và cách đọc một nước đi được ghi lại.',
+  },
+  'b01l1.title': { en: 'Points, files and ranks', vi: 'Giao điểm, cột và hàng' },
+  'b01l2.title': { en: 'Setting up both armies', vi: 'Bày quân cho cả hai bên' },
+  'b01l3.title': { en: 'How a game ends', vi: 'Ván cờ kết thúc thế nào' },
+  'b01l4.title': { en: 'Reading moves', vi: 'Đọc nước đi' },
+  'b01.r.other': {
+    en: 'That is not the written move. Read it again: the piece letter, the file it stands on, the sign (+ forward, - back, = across) and the number.',
+    vi: 'Đó không phải nước được ghi. Hãy đọc lại: chữ cái của quân, cột quân đó đang đứng, dấu (. tiến, / thoái, - bình) và con số.',
+  },
+  'b01.r.other.black': {
+    en: 'That is not the written move. As Black, count the files from your own right, along the bottom edge of the turned board, then read the sign and the number.',
+    vi: 'Đó không phải nước được ghi. Khi cầm quân Đen, hãy đếm cột từ bên tay phải của bạn, dọc mép dưới của bàn cờ đã xoay, rồi đọc dấu và con số.',
+  },
+  'b01.r.loses': {
+    en: 'That is not the written move, and it would also leave a piece to be taken.',
+    vi: 'Đó không phải nước được ghi, và nó còn để một quân bị bắt.',
+  },
+  'b01l1-01.text': {
+    en: 'Xiangqi pieces stand on the points where the lines cross, not inside the squares: 9 files run up the board and 10 ranks run across it. The river in the middle splits the board in half. The highlighted half is Red’s side; the other half is Black’s side.',
+    vi: 'Quân cờ tướng đặt trên các giao điểm, nơi các đường cắt nhau, chứ không nằm trong ô vuông: có 9 cột chạy dọc và 10 hàng chạy ngang. Con sông ở giữa chia đôi bàn cờ. Nửa được tô sáng là phần sân của bên Đỏ; nửa còn lại là phần sân của bên Đen.',
+  },
+  'b01l1-02.text': {
+    en: 'The river is not a wall. This Chariot can run straight up its file, across the river, to the far edge. Only the Elephant is stopped: the dots show that this Elephant, standing at the river, can only go back. (Soldiers cross too, and move differently once across: you will learn that later.)',
+    vi: 'Con sông không phải bức tường. Quân Xe này có thể đi thẳng theo cột của nó, qua sông, tới tận mép bên kia. Chỉ có Tượng bị chặn lại: các chấm cho thấy quân Tượng đứng sát sông này chỉ có thể lùi về. (Tốt cũng qua sông được, và sau khi qua sông thì đi khác đi: bạn sẽ học sau.)',
+  },
+  'b01l1-03.text': {
+    en: 'Each side has a palace: the 3 × 3 points marked with an X, on its own back three ranks. The General and its two Advisors never leave it. The highlighted points are Red’s palace; Black’s palace is at the top.',
+    vi: 'Mỗi bên có một cung: 3 × 3 giao điểm có đường chéo hình chữ X, nằm ở ba hàng cuối của bên mình. Tướng và hai quân Sĩ không bao giờ rời cung. Các điểm được tô sáng là cung của bên Đỏ; cung của bên Đen ở phía trên.',
+  },
+  'b01l1-04.prompt': {
+    en: 'Tap all 9 points of your palace (the box with the X, around your General).',
+    vi: 'Chạm vào cả 9 điểm trong cung của bạn (khung có chữ X, quanh Tướng của bạn).',
+  },
+  'b01l1-04.expl': {
+    en: 'Your palace is 3 files wide and 3 ranks deep: 9 points in all, corners included.',
+    vi: 'Cung của bạn rộng 3 cột, sâu 3 hàng: tổng cộng 9 điểm, kể cả các góc.',
+  },
+  'b01l1-05.prompt': {
+    en: 'You play Black, so your army is at the bottom. Tap all 9 points of your palace.',
+    vi: 'Bạn cầm quân Đen nên quân của bạn ở phía dưới. Chạm vào cả 9 điểm trong cung của bạn.',
+  },
+  'b01l1-05.expl': {
+    en: 'Black’s palace has the same shape as Red’s: 9 points around your General, on your back three ranks.',
+    vi: 'Cung của bên Đen có cùng hình dạng với cung bên Đỏ: 9 điểm quanh Tướng của bạn, ở ba hàng cuối của bạn.',
+  },
+  'b01l1-06.prompt': { en: 'Which statements are true? Tick all of them.', vi: 'Những câu nào đúng? Hãy chọn tất cả.' },
+  'b01l1-06.a.t': { en: 'Pieces stand on the points where lines cross', vi: 'Quân cờ đặt trên giao điểm của các đường' },
+  'b01l1-06.a': {
+    en: 'Right: every piece stands on a point, like the pieces in this position.',
+    vi: 'Đúng: mọi quân cờ đều đứng trên giao điểm, như các quân trong thế cờ này.',
+  },
+  'b01l1-06.b.t': { en: 'Elephants can never cross the river', vi: 'Tượng không bao giờ được qua sông' },
+  'b01l1-06.b': {
+    en: 'Right: like the Elephants here, an Elephant stays on its own side of the river.',
+    vi: 'Đúng: giống các quân Tượng ở đây, Tượng luôn ở phần sân bên mình.',
+  },
+  'b01l1-06.c.t': { en: 'Pieces stand inside the squares, as in chess', vi: 'Quân cờ đặt trong các ô vuông, như cờ vua' },
+  'b01l1-06.c': {
+    en: 'No: look at the board. The pieces sit on the crossing points, never inside a square.',
+    vi: 'Không: hãy nhìn bàn cờ. Các quân nằm trên giao điểm, không bao giờ nằm trong ô vuông.',
+  },
+  'b01l1-06.d.t': { en: 'No piece can cross the river', vi: 'Không quân nào được qua sông' },
+  'b01l1-06.d': {
+    en: 'No: the Chariot here could cross at once. The river itself stops only the Elephants; the General and Advisors never reach it, because they stay in their palace.',
+    vi: 'Không: quân Xe ở đây có thể qua sông ngay. Bản thân con sông chỉ chặn Tượng; Tướng và Sĩ không bao giờ tới sông, vì chúng ở yên trong cung.',
+  },
+  'b01l1-07.prompt': { en: 'Tap the centre point of your opponent’s palace.', vi: 'Chạm vào điểm chính giữa cung của đối phương.' },
+  'b01l1-07.expl': {
+    en: 'The centre of a palace is where the two diagonals of the X cross: here, right in front of Black’s General.',
+    vi: 'Điểm giữa cung là nơi hai đường chéo của chữ X cắt nhau: ở đây là ngay trước mặt Tướng Đen.',
+  },
+  'b01l1-08.prompt': {
+    en: 'Tap the point on the middle file at the edge of the river on your side.',
+    vi: 'Chạm vào điểm trên cột giữa, sát mép sông ở phần sân của bạn.',
+  },
+  'b01l1-08.expl': {
+    en: 'Your side ends at the river: this point is on its last rank, on the middle file. One step further and a piece is on Red’s side.',
+    vi: 'Phần sân của bạn kết thúc ở bờ sông: điểm này nằm ở hàng cuối cùng trước sông, trên cột giữa. Tiến thêm một bước là quân đã sang phần sân bên Đỏ.',
+  },
+  'b01l2-01.text': {
+    en: 'The starting position. Each army has 16 pieces: on its back rank a Chariot, a Horse, an Elephant and an Advisor on each side of the General; two Cannons on the third rank; five Soldiers on the fourth. Red’s army is at the bottom here; when you play Black the board turns, so your army is at the bottom. Red always moves first, then the sides take turns, one move each.',
+    vi: 'Thế bày quân ban đầu. Mỗi bên có 16 quân: ở hàng cuối là Xe, Mã, Tượng và Sĩ ở mỗi bên Tướng; hai Pháo ở hàng thứ ba; năm Tốt ở hàng thứ tư. Ở đây quân Đỏ ở phía dưới; khi bạn cầm quân Đen, bàn cờ xoay lại để quân của bạn ở phía dưới. Bên Đỏ luôn đi trước, sau đó hai bên lần lượt đi, mỗi lần một nước.',
+  },
+  'b01l2-02.text': {
+    en: 'The same position seen from Black’s side. Black’s army stands exactly like Red’s: Chariots in the corners, then Horses, Elephants, Advisors and the General in the middle; Cannons on the third rank, Soldiers on the fourth. Black still waits for Red’s first move.',
+    vi: 'Cùng thế cờ đó nhìn từ phía bên Đen. Quân Đen được bày giống hệt quân Đỏ: Xe ở hai góc, rồi đến Mã, Tượng, Sĩ và Tướng ở giữa; Pháo ở hàng thứ ba, Tốt ở hàng thứ tư. Bên Đen vẫn chờ nước đi đầu tiên của bên Đỏ.',
+  },
+  'b01l2-03.text': {
+    en: 'Careful: this is not the starting position. Red’s Horses and Cannons (highlighted) have swapped places. Horses start on the back rank next to the Chariots; Cannons start two ranks in front of them.',
+    vi: 'Cẩn thận: đây không phải thế bày quân ban đầu. Mã và Pháo của bên Đỏ (được tô sáng) đã đổi chỗ cho nhau. Mã đứng ở hàng cuối, cạnh Xe; Pháo đứng phía trước Mã hai hàng.',
+  },
+  'b01l2-04.prompt': {
+    en: 'One of your Horses is missing. Tap the point where it starts: on your back rank, between the Chariot and the Elephant on your right.',
+    vi: 'Một quân Mã của bạn bị thiếu. Chạm vào điểm Mã đứng lúc đầu: ở hàng cuối của bạn, giữa Xe và Tượng bên tay phải.',
+  },
+  'b01l2-04.expl': {
+    en: 'Each Horse starts next to a Chariot in a corner: the second point from the edge on your back rank.',
+    vi: 'Mỗi quân Mã bắt đầu cạnh quân Xe ở góc: điểm thứ hai tính từ mép, ở hàng cuối của bạn.',
+  },
+  'b01l2-05.prompt': {
+    en: 'You play Black. Your Cannon on the right is missing. Tap the point where it starts: on your third rank, in front of the Horse on your right.',
+    vi: 'Bạn cầm quân Đen. Quân Pháo bên tay phải của bạn bị thiếu. Chạm vào điểm Pháo đứng lúc đầu: ở hàng thứ ba của bạn, phía trước quân Mã bên tay phải.',
+  },
+  'b01l2-05.expl': {
+    en: 'Cannons start on the third rank, on the same files as the Horses, with one empty point between them.',
+    vi: 'Pháo bắt đầu ở hàng thứ ba, cùng cột với Mã, giữa chúng có một điểm trống.',
+  },
+  'b01l2-06.prompt': {
+    en: 'One piece of your army is not on its starting point. Tap that piece.',
+    vi: 'Một quân của bạn không đứng ở vị trí ban đầu. Chạm vào quân đó.',
+  },
+  'b01l2-06.expl': {
+    en: 'The Elephant on the middle file has left its starting point: Elephants start on the back rank, between the Horse and the Advisor.',
+    vi: 'Quân Tượng ở cột giữa đã rời vị trí ban đầu: Tượng bắt đầu ở hàng cuối, giữa Mã và Sĩ.',
+  },
+  'b01l2-07.prompt': {
+    en: 'Each side has made one move. Which statements are true? Tick all of them.',
+    vi: 'Mỗi bên đã đi một nước. Những câu nào đúng? Hãy chọn tất cả.',
+  },
+  'b01l2-07.a.t': { en: 'Red made the first move of this game', vi: 'Bên Đỏ đi nước đầu tiên của ván này' },
+  'b01l2-07.a': { en: 'Right: Red always moves first.', vi: 'Đúng: bên Đỏ luôn đi trước.' },
+  'b01l2-07.b.t': { en: 'It is Red’s turn again, because the sides take turns', vi: 'Lại đến lượt bên Đỏ, vì hai bên lần lượt đi' },
+  'b01l2-07.b': { en: 'Right: Red, then Black, then Red again: one move each.', vi: 'Đúng: Đỏ, rồi Đen, rồi lại Đỏ: mỗi bên một nước.' },
+  'b01l2-07.c.t': { en: 'Black moved first, because Black’s army is at the top', vi: 'Bên Đen đi trước, vì quân Đen ở phía trên' },
+  'b01l2-07.c': {
+    en: 'No: where the armies are drawn does not matter. Red moves first in every game.',
+    vi: 'Không: quân nào được vẽ ở đâu không quan trọng. Bên Đỏ đi trước trong mọi ván.',
+  },
+  'b01l2-07.d.t': { en: 'Red may now make two moves in a row', vi: 'Bây giờ bên Đỏ được đi hai nước liền' },
+  'b01l2-07.d': {
+    en: 'No: nobody ever moves twice in a row. After Red’s move, Black moves.',
+    vi: 'Không: không ai được đi hai nước liền. Sau nước của Đỏ là đến lượt Đen.',
+  },
+  'b01l2-08.prompt': {
+    en: 'One piece of your army is not on its starting point. Tap the point where it should stand.',
+    vi: 'Một quân của bạn không đứng ở vị trí ban đầu. Chạm vào điểm mà quân đó phải đứng.',
+  },
+  'b01l2-08.expl': {
+    en: 'The Horse has jumped out onto your third rank. It starts on your back rank, next to the Chariot in the corner.',
+    vi: 'Quân Mã đã nhảy ra hàng thứ ba của bạn. Mã bắt đầu ở hàng cuối của bạn, cạnh quân Xe ở góc.',
+  },
+  'b01l3-01.text': {
+    en: 'Checkmate. Black’s General is in check from the Chariot on the top edge, and every point it could step to is covered by a Chariot. Nothing can block or take the attacker. The game ends here, with Red the winner: the General is never actually captured.',
+    vi: 'Chiếu bí. Tướng Đen bị quân Xe ở mép trên chiếu, và mọi điểm Tướng có thể bước tới đều bị quân Xe khống chế. Không quân nào cản hay bắt được quân đang chiếu. Ván cờ kết thúc tại đây, bên Đỏ thắng: Tướng không bao giờ thật sự bị bắt.',
+  },
+  'b01l3-02.text': {
+    en: 'Only check: the Chariot attacks Black’s General, but without the second Chariot the General can step down to a free point (highlighted). A General in check must get out of it at once, and then the game goes on.',
+    vi: 'Chỉ là chiếu: quân Xe chiếu Tướng Đen, nhưng khi không có quân Xe thứ hai, Tướng có thể bước xuống một điểm trống (được tô sáng). Tướng bị chiếu phải thoát ngay, rồi ván cờ tiếp tục.',
+  },
+  'b01l3-03.text': {
+    en: 'Stalemate. Black is to move and is not in check, but has no legal move: both points the General could step to are covered, one by the Chariot and the other by the Soldier. In Xiangqi a side with no legal move loses, so Red wins (in Western chess this would be a draw). Games can still be drawn in other ways, for example by agreement; you will meet those rules later.',
+    vi: 'Hết nước đi. Đến lượt Đen, Đen không bị chiếu nhưng không còn nước đi hợp lệ nào: cả hai điểm Tướng có thể bước tới đều bị khống chế, một điểm bởi quân Xe, điểm kia bởi quân Tốt. Trong cờ tướng, bên hết nước đi sẽ thua, nên bên Đỏ thắng (trong cờ vua đây sẽ là hòa). Ván cờ vẫn có thể hòa theo những cách khác, chẳng hạn khi hai bên đồng ý hòa; bạn sẽ học các luật đó sau.',
+  },
+  'b01l3-04.prompt': {
+    en: 'Red moves the Chariot from the bottom left corner all the way up to the top edge, giving check. Black’s General then has no free point, and nothing can block or take the Chariot. What happens?',
+    vi: 'Bên Đỏ đưa quân Xe từ góc dưới bên trái lên tận mép trên, chiếu Tướng. Khi đó Tướng Đen không còn điểm trống nào để thoát, và không quân nào cản hay bắt được quân Xe. Điều gì xảy ra?',
+  },
+  'b01l3-04.a.t': { en: 'Checkmate: Red wins at once', vi: 'Chiếu bí: bên Đỏ thắng ngay' },
+  'b01l3-04.a': {
+    en: 'Right: checkmate ends the game on the spot. Nobody captures the General.',
+    vi: 'Đúng: chiếu bí kết thúc ván cờ ngay lập tức. Không ai bắt Tướng cả.',
+  },
+  'b01l3-04.b.t': { en: 'Red must still capture the General on the next move', vi: 'Bên Đỏ vẫn phải bắt Tướng ở nước tiếp theo' },
+  'b01l3-04.b': {
+    en: 'No: the game is already over. The General is never captured; checkmate is the win.',
+    vi: 'Không: ván cờ đã kết thúc. Tướng không bao giờ bị bắt; chiếu bí chính là chiến thắng.',
+  },
+  'b01l3-04.c.t': { en: 'The game goes on until Black’s General is taken', vi: 'Ván cờ tiếp tục cho tới khi Tướng Đen bị bắt' },
+  'b01l3-04.c': {
+    en: 'No: a game is never played until the General is taken. Once it cannot escape check, the game ends.',
+    vi: 'Không: ván cờ không bao giờ kéo dài tới lúc bắt Tướng. Khi Tướng không thoát được chiếu, ván cờ kết thúc.',
+  },
+  'b01l3-05.prompt': {
+    en: 'Red’s Chariot is giving check to your General. What does that mean for you?',
+    vi: 'Quân Xe của Đỏ đang chiếu Tướng của bạn. Điều đó có nghĩa gì với bạn?',
+  },
+  'b01l3-05.a.t': { en: 'I must get out of check with this move; then the game goes on', vi: 'Tôi phải thoát chiếu ngay ở nước này; sau đó ván cờ tiếp tục' },
+  'b01l3-05.a': {
+    en: 'Right: your General can step aside to a free point, so this is check, not checkmate.',
+    vi: 'Đúng: Tướng của bạn có thể bước sang một điểm trống, nên đây là chiếu chứ không phải chiếu bí.',
+  },
+  'b01l3-05.b.t': { en: 'I have lost: Red will capture my General next', vi: 'Tôi đã thua: Đỏ sẽ bắt Tướng của tôi ở nước sau' },
+  'b01l3-05.b': {
+    en: 'No: a check is not the end, and the General is never captured. Here your General can escape.',
+    vi: 'Không: bị chiếu chưa phải là kết thúc, và Tướng không bao giờ bị bắt. Ở đây Tướng của bạn thoát được.',
+  },
+  'b01l3-05.c.t': { en: 'The game is over: an attacked General has lost', vi: 'Ván cờ đã kết thúc: Tướng bị tấn công là thua' },
+  'b01l3-05.c': {
+    en: 'No: the game ends only when the General cannot get out of check. Here it can.',
+    vi: 'Không: ván cờ chỉ kết thúc khi Tướng không thể thoát chiếu. Ở đây Tướng thoát được.',
+  },
+  'b01l3-06.prompt': {
+    en: 'Red moves the Chariot across to the middle file. Black is then not in check, but has no legal move. What is the result?',
+    vi: 'Bên Đỏ đưa quân Xe sang cột giữa. Khi đó bên Đen không bị chiếu nhưng không còn nước đi hợp lệ nào. Kết quả là gì?',
+  },
+  'b01l3-06.a.t': { en: 'Red wins: a side with no legal move loses', vi: 'Bên Đỏ thắng: bên hết nước đi thì thua' },
+  'b01l3-06.a': {
+    en: 'Right: Black’s General has no free point and Black has no other piece, so Black loses.',
+    vi: 'Đúng: Tướng Đen không còn điểm trống nào và bên Đen không có quân nào khác, nên bên Đen thua.',
+  },
+  'b01l3-06.b.t': { en: 'A draw, because nobody can win', vi: 'Hòa, vì không bên nào thắng được' },
+  'b01l3-06.b': {
+    en: 'No: that is the Western chess rule. In Xiangqi the side that cannot move loses.',
+    vi: 'Không: đó là luật cờ vua. Trong cờ tướng, bên không còn nước đi sẽ thua.',
+  },
+  'b01l3-06.c.t': { en: 'Black passes, and Red moves again', vi: 'Bên Đen bỏ lượt, và bên Đỏ đi tiếp' },
+  'b01l3-06.c': {
+    en: 'No: there is no passing. A side that has no legal move on its turn has lost.',
+    vi: 'Không: không có chuyện bỏ lượt. Bên nào đến lượt mà không còn nước đi hợp lệ là thua.',
+  },
+  'b01l3-07.prompt': {
+    en: 'Which of these Red moves win the game at once? Tick all of them.',
+    vi: 'Những nước nào dưới đây của bên Đỏ thắng ván cờ ngay lập tức? Hãy chọn tất cả.',
+  },
+  'b01l3-07.a.t': { en: 'Chariot up to the top edge, giving check', vi: 'Xe lên mép trên, chiếu Tướng' },
+  'b01l3-07.a': {
+    en: 'Right: checkmate. The General is in check along the top edge, and every point it could step to is covered.',
+    vi: 'Đúng: chiếu bí. Tướng bị chiếu theo mép trên, và mọi điểm Tướng có thể bước tới đều bị khống chế.',
+  },
+  'b01l3-07.b.t': { en: 'Chariot across to the middle file, no check', vi: 'Xe sang cột giữa, không chiếu' },
+  'b01l3-07.b': {
+    en: 'Right: Black is not in check but has no legal move, and that loses in Xiangqi.',
+    vi: 'Đúng: bên Đen không bị chiếu nhưng hết nước đi, và trong cờ tướng như thế là thua.',
+  },
+  'b01l3-07.c.t': { en: 'Chariot next to the General, giving check', vi: 'Xe đến sát Tướng, chiếu Tướng' },
+  'b01l3-07.c': {
+    en: 'No: the General simply takes the unprotected Chariot. Giving check is not winning.',
+    vi: 'Không: Tướng chỉ việc bắt quân Xe không được bảo vệ. Chiếu Tướng chưa phải là thắng.',
+  },
+  'b01l3-07.d.t': { en: 'Chariot to the General’s file, giving check', vi: 'Xe sang cột của Tướng, chiếu Tướng' },
+  'b01l3-07.d': {
+    en: 'No: the General steps aside to a free point and the game goes on. A check only wins if there is no escape.',
+    vi: 'Không: Tướng bước sang một điểm trống và ván cờ tiếp tục. Chiếu chỉ thắng khi Tướng không còn đường thoát.',
+  },
+  'b01l3-08.prompt': {
+    en: 'Which of these moves win the game at once? Tick all of them.',
+    vi: 'Những nước nào dưới đây thắng ván cờ ngay lập tức? Hãy chọn tất cả.',
+  },
+  'b01l3-08.a.t': { en: 'Chariot across to the middle file', vi: 'Xe sang cột giữa' },
+  'b01l3-08.a': {
+    en: 'Right: Red is not in check but has no legal move. The General’s free point is covered, and the Horse cannot move without leaving its General in check. Red loses.',
+    vi: 'Đúng: bên Đỏ không bị chiếu nhưng hết nước đi. Điểm trống của Tướng bị khống chế, còn quân Mã không thể đi vì sẽ để Tướng bị chiếu. Bên Đỏ thua.',
+  },
+  'b01l3-08.b.t': { en: 'Chariot forward to the far edge, giving check', vi: 'Xe tiến tới mép bên kia, chiếu Tướng' },
+  'b01l3-08.b': {
+    en: 'Right: checkmate. The Chariot checks along Red’s back edge; the General cannot step along that edge, and its own Horse fills the only other point and cannot leave it.',
+    vi: 'Đúng: chiếu bí. Quân Xe chiếu theo mép cuối của bên Đỏ; Tướng không bước dọc mép đó được, còn quân Mã của nó chiếm điểm còn lại và không thể rời đi.',
+  },
+  'b01l3-08.c.t': { en: 'Horse takes Red’s Horse', vi: 'Mã bắt Mã của Đỏ' },
+  'b01l3-08.c': {
+    en: 'No: you win a piece, but Red’s General can still move, so the game goes on. Taking pieces is not the goal.',
+    vi: 'Không: bạn được một quân, nhưng Tướng Đỏ vẫn còn nước đi nên ván cờ tiếp tục. Bắt quân không phải là mục tiêu.',
+  },
+  'b01l3-08.d.t': { en: 'Horse jumps forward, giving check', vi: 'Mã nhảy lên, chiếu Tướng' },
+  'b01l3-08.d': {
+    en: 'No: the General steps aside and the game goes on. Check alone does not win.',
+    vi: 'Không: Tướng bước sang bên và ván cờ tiếp tục. Chỉ chiếu thôi thì chưa thắng.',
+  },
+  'b01l4-01.text': {
+    en: 'Each side numbers the files 1 to 9 from its own right. Red’s numbers run along the bottom edge, Black’s along the top. The highlighted file is Red’s file 2, but for Black the same file is file 8. Red’s file 1 is Black’s file 9.',
+    vi: 'Mỗi bên đánh số các cột từ 1 đến 9, tính từ bên tay phải của mình. Số của bên Đỏ chạy dọc mép dưới, số của bên Đen chạy dọc mép trên. Cột được tô sáng là cột 2 của bên Đỏ, nhưng với bên Đen thì chính cột đó là cột 8. Cột 1 của bên Đỏ là cột 9 của bên Đen.',
+  },
+  'b01l4-02.text': {
+    en: 'Now you sit on Black’s side. Your file numbers run along the bottom edge, counted from your right. The Cannon with the dots stands on your file 8, and Black’s C8=5 moves it across to your file 5. Reading the move with Red’s numbers would point at your other Cannon.',
+    vi: 'Bây giờ bạn ngồi phía bên Đen. Số cột của bạn chạy dọc mép dưới, tính từ bên tay phải của bạn. Quân Pháo có các chấm đứng ở cột 8 của bạn, và nước P8-5 của bên Đen đưa nó sang cột 5 của bạn. Nếu đọc nước đi theo số của bên Đỏ, bạn sẽ nhầm sang quân Pháo còn lại.',
+  },
+  'b01l4-03.text': {
+    en: 'How to read a move: piece letter, its file, a sign, a number. C2=5 means the Cannon on file 2 moves across (=) to file 5; the dots show where this Cannon can go. + means forward and - means back. For the General, Chariot, Cannon and Soldier the number after + or - counts ranks: C2+3 goes 3 points forward. For the Horse, Elephant and Advisor it is the file they land on: H2+3 lands on file 3.',
+    vi: 'Cách đọc một nước đi: chữ cái của quân, cột của quân đó, một dấu, một con số. P2-5 nghĩa là quân Pháo ở cột 2 đi ngang (bình, dấu -) sang cột 5; các chấm cho thấy quân Pháo này đi được tới đâu. Dấu . là tiến (tấn), dấu / là thoái. Với Tướng, Xe, Pháo và Tốt, con số sau dấu tiến hoặc thoái là số hàng đi được: P2.3 tiến 3 điểm. Với Mã, Tượng và Sĩ, đó là cột mà quân đi tới: M2.3 đến cột 3.',
+  },
+  'b01l4-04.prompt': {
+    en: 'Play C2=5: the Cannon on your file 2 moves across to file 5. The target point is marked.',
+    vi: 'Hãy đi P2-5: quân Pháo ở cột 2 của bạn đi ngang sang cột 5. Điểm đến đã được đánh dấu.',
+  },
+  'b01l4-04.expl': {
+    en: 'C2=5, the Central Cannon: your Cannon now aims down the middle file at the opponent’s central Soldier.',
+    vi: 'P2-5, Pháo đầu: quân Pháo của bạn giờ nhắm thẳng theo cột giữa vào Tốt đầu của đối phương.',
+  },
+  'b01l4-05.prompt': {
+    en: 'You play Black. Play H2+3: the Horse on your file 2 moves forward and lands on your file 3. The target point is marked.',
+    vi: 'Bạn cầm quân Đen. Hãy đi M2.3: quân Mã ở cột 2 của bạn tiến lên và đến cột 3 của bạn. Điểm đến đã được đánh dấu.',
+  },
+  'b01l4-05.expl': {
+    en: 'Your file 2 is counted from your own right, at the bottom of the turned board. For a Horse, the number after + is the file it lands on, not a count of steps.',
+    vi: 'Cột 2 của bạn được tính từ bên tay phải của bạn, ở mép dưới của bàn cờ đã xoay. Với quân Mã, con số sau dấu tiến là cột mà nó đi tới, không phải số bước.',
+  },
+  'b01l4-06.prompt': { en: 'Read the move and play it: H2+3.', vi: 'Đọc nước đi rồi đi đúng nước đó: M2.3.' },
+  'b01l4-06.hint': {
+    en: 'Find file 2 among your numbers at the bottom edge. The Horse there moves forward and lands on file 3.',
+    vi: 'Tìm cột 2 trong dãy số của bạn ở mép dưới. Quân Mã ở đó tiến lên và đến cột 3.',
+  },
+  'b01l4-06.r.target': { en: 'Right: the Horse on file 2 jumped forward to file 3.', vi: 'Đúng: quân Mã ở cột 2 đã nhảy lên cột 3.' },
+  'b01l4-06.purpose': {
+    en: 'H2+3 develops the Horse beside your Central Cannon, where it protects your central Soldier.',
+    vi: 'M2.3 đưa quân Mã ra cạnh Pháo đầu của bạn, nơi nó bảo vệ Tốt đầu.',
+  },
+  'b01l4-06.key': {
+    en: 'Black often answers with a Horse move of its own, H2+3, counted from Black’s side.',
+    vi: 'Bên Đen thường đáp lại bằng một nước Mã, M2.3, tính theo phía bên Đen.',
+  },
+  'b01l4-06.error': {
+    en: 'That is a different move. Count the files from your own right, not from the left.',
+    vi: 'Đó là một nước khác. Hãy đếm cột từ bên tay phải của bạn, không phải từ bên trái.',
+  },
+  'b01l4-06.tempt': {
+    en: 'That Horse stands on your file 8: you counted from the left. File 2 is the second file from your right.',
+    vi: 'Quân Mã đó đứng ở cột 8 của bạn: bạn đã đếm từ bên trái. Cột 2 là cột thứ hai tính từ bên phải.',
+  },
+  'b01l4-07.prompt': { en: 'You play Black. Read the move and play it: C8=5.', vi: 'Bạn cầm quân Đen. Đọc nước đi rồi đi đúng nước đó: P8-5.' },
+  'b01l4-07.hint': {
+    en: 'Use your own numbers, along the bottom edge: file 8 is the second file from your left.',
+    vi: 'Dùng số của chính bạn, dọc mép dưới: cột 8 là cột thứ hai tính từ bên trái của bạn.',
+  },
+  'b01l4-07.r.target': {
+    en: 'Right: your Cannon on file 8 moved across to the middle file.',
+    vi: 'Đúng: quân Pháo ở cột 8 của bạn đã đi ngang sang cột giữa.',
+  },
+  'b01l4-07.purpose': {
+    en: 'C8=5 puts your Cannon on the middle file, aiming at Red’s central Soldier.',
+    vi: 'P8-5 đưa quân Pháo của bạn vào cột giữa, nhắm vào Tốt đầu của bên Đỏ.',
+  },
+  'b01l4-07.key': {
+    en: 'Red usually answers with H2+3, guarding the central Soldier with a Horse.',
+    vi: 'Bên Đỏ thường đáp lại bằng M2.3, dùng Mã bảo vệ Tốt đầu.',
+  },
+  'b01l4-07.error': {
+    en: 'Read the file number from your own side: as Black, your files are counted from your right, not from Red’s.',
+    vi: 'Đọc số cột từ phía của bạn: khi cầm quân Đen, cột được tính từ bên tay phải của bạn, không phải của bên Đỏ.',
+  },
+  'b01l4-07.tempt': {
+    en: 'That Cannon is on your file 2. You read the number from Red’s side: Red’s file 8 is your file 2.',
+    vi: 'Quân Pháo đó ở cột 2 của bạn. Bạn đã đọc số theo phía bên Đỏ: cột 8 của bên Đỏ là cột 2 của bạn.',
+  },
+  'b01l4-08.prompt': { en: 'Play E3+5.', vi: 'Hãy đi T3.5.' },
+  'b01l4-08.hint': { en: 'The Elephant on your file 3 moves forward to file 5.', vi: 'Quân Tượng ở cột 3 của bạn tiến lên cột 5.' },
+  'b01l4-08.r.target': {
+    en: 'Right: the Elephant on file 3 stepped up to the middle of your side.',
+    vi: 'Đúng: quân Tượng ở cột 3 đã tiến lên điểm giữa phần sân của bạn.',
+  },
+  'b01l4-08.purpose': {
+    en: 'E3+5 brings the Elephant to the middle, where it guards the front of your General.',
+    vi: 'T3.5 đưa quân Tượng vào giữa, nơi nó che chắn phía trước Tướng của bạn.',
+  },
+  'b01l4-08.key': { en: 'Black can now bring out a Chariot along its back rank with R9=8.', vi: 'Bây giờ bên Đen có thể đưa Xe ra theo hàng cuối bằng X9-8.' },
+  'b01l4-08.error': {
+    en: 'Both Elephants can reach the same point: check which file the written move starts from, counted from your right.',
+    vi: 'Cả hai quân Tượng đều đến được cùng một điểm: hãy xem nước được ghi bắt đầu từ cột nào, tính từ bên tay phải của bạn.',
+  },
+  'b01l4-08.tempt': {
+    en: 'That is the Elephant on your file 7. The written move starts from file 3, counted from your right.',
+    vi: 'Đó là quân Tượng ở cột 7 của bạn. Nước được ghi bắt đầu từ cột 3, tính từ bên tay phải của bạn.',
+  },
+  'b01l4-09.prompt': { en: 'Play P7+1.', vi: 'Hãy đi B7.1.' },
+  'b01l4-09.r.target': { en: 'Right: the Soldier on your file 7 stepped forward.', vi: 'Đúng: quân Tốt ở cột 7 của bạn đã tiến một bước.' },
+  'b01l4-09.purpose': {
+    en: 'P7+1 clears the point in front of your Horse, so it has a way forward later.',
+    vi: 'B7.1 dọn điểm phía trước quân Mã của bạn, để sau này nó có lối tiến lên.',
+  },
+  'b01l4-09.key': {
+    en: 'Red often answers by bringing out its other Horse with H8+7.',
+    vi: 'Bên Đỏ thường đáp lại bằng cách đưa quân Mã còn lại ra với M8.7.',
+  },
+  'b01l4-09.error': {
+    en: 'As Black, count the files from your own right, then find the Soldier on that file.',
+    vi: 'Khi cầm quân Đen, hãy đếm cột từ bên tay phải của bạn, rồi tìm quân Tốt trên cột đó.',
+  },
+  'b01l4-09.tempt': {
+    en: 'That Soldier is on your file 3. You counted with Red’s numbers: Red’s file 7 is your file 3.',
+    vi: 'Quân Tốt đó ở cột 3 của bạn. Bạn đã đếm theo số của bên Đỏ: cột 7 của bên Đỏ là cột 3 của bạn.',
+  },
+  'b01-c01.prompt': { en: 'Tap the centre point of your palace.', vi: 'Chạm vào điểm chính giữa cung của bạn.' },
+  'b01-c01.expl': {
+    en: 'The centre of your palace is where the diagonals of the X cross, just in front of your General.',
+    vi: 'Điểm giữa cung của bạn là nơi hai đường chéo chữ X cắt nhau, ngay trước mặt Tướng của bạn.',
+  },
+  'b01-c02.prompt': { en: 'Tap all 9 points of your palace.', vi: 'Chạm vào cả 9 điểm trong cung của bạn.' },
+  'b01-c02.expl': {
+    en: 'Your palace: the 3 × 3 points around your General, on your back three ranks.',
+    vi: 'Cung của bạn: 3 × 3 điểm quanh Tướng của bạn, ở ba hàng cuối của bạn.',
+  },
+  'b01-c03.prompt': { en: 'Which pieces are stopped by the river?', vi: 'Những quân nào bị con sông chặn lại?' },
+  'b01-c03.a.t': { en: 'The Elephants', vi: 'Tượng' },
+  'b01-c03.a': {
+    en: 'Right: the river stops only the Elephants. (The General and Advisors never reach it either, but that is because they must stay in their palace.)',
+    vi: 'Đúng: con sông chỉ chặn Tượng. (Tướng và Sĩ cũng không bao giờ tới sông, nhưng đó là vì chúng phải ở trong cung.)',
+  },
+  'b01-c03.b.t': { en: 'The Soldiers', vi: 'Tốt' },
+  'b01-c03.b': {
+    en: 'No: Soldiers do cross, and gain a sideways move once they have.',
+    vi: 'Không: Tốt được qua sông, và sau khi qua sông còn được đi ngang.',
+  },
+  'b01-c03.c.t': { en: 'The Chariots and Horses', vi: 'Xe và Mã' },
+  'b01-c03.c': { en: 'No: Chariots and Horses cross the river freely.', vi: 'Không: Xe và Mã qua sông tự do.' },
+  'b01-c03.d.t': { en: 'Every piece: the river is a wall', vi: 'Mọi quân: con sông là bức tường' },
+  'b01-c03.d': {
+    en: 'No: the river stops only the Elephants; Chariots, Horses, Cannons and Soldiers all cross it.',
+    vi: 'Không: con sông chỉ chặn Tượng; Xe, Mã, Pháo và Tốt đều qua sông được.',
+  },
+  'b01-c04.prompt': {
+    en: 'Tap the front left corner of your palace (the corner nearer the river, on your left).',
+    vi: 'Chạm vào góc trước bên trái của cung bạn (góc gần sông hơn, ở bên tay trái của bạn).',
+  },
+  'b01-c04.expl': {
+    en: 'The front corners of a palace are on its rank nearest the river; your left one is this point.',
+    vi: 'Hai góc trước của cung nằm ở hàng gần sông nhất; góc bên trái của bạn là điểm này.',
+  },
+  'b01-c05.prompt': {
+    en: 'One piece is missing from your army. Tap the point where it starts.',
+    vi: 'Quân của bạn thiếu một quân. Chạm vào điểm mà quân đó đứng lúc đầu.',
+  },
+  'b01-c05.expl': { en: 'A Chariot is missing: Chariots start in the corners of the back rank.', vi: 'Thiếu một quân Xe: Xe bắt đầu ở hai góc của hàng cuối.' },
+  'b01-c06.prompt': {
+    en: 'One piece of your army is not on its starting point. Tap that piece.',
+    vi: 'Một quân của bạn không đứng ở vị trí ban đầu. Chạm vào quân đó.',
+  },
+  'b01-c06.expl': {
+    en: 'The Advisor in the centre of your palace has moved: Advisors start on the back rank, either side of the General.',
+    vi: 'Quân Sĩ ở giữa cung của bạn đã di chuyển: Sĩ bắt đầu ở hàng cuối, hai bên Tướng.',
+  },
+  'b01-c07.prompt': { en: 'Which statements are true? Tick all of them.', vi: 'Những câu nào đúng? Hãy chọn tất cả.' },
+  'b01-c07.a.t': { en: 'Red always makes the first move of a game', vi: 'Bên Đỏ luôn đi nước đầu tiên của ván cờ' },
+  'b01-c07.a': { en: 'Right: every game starts with a Red move.', vi: 'Đúng: mọi ván cờ đều bắt đầu bằng một nước của bên Đỏ.' },
+  'b01-c07.b.t': { en: 'After each Red move, Black makes exactly one move', vi: 'Sau mỗi nước của Đỏ, Đen đi đúng một nước' },
+  'b01-c07.b': { en: 'Right: the sides take turns, one move each.', vi: 'Đúng: hai bên lần lượt đi, mỗi bên một nước.' },
+  'b01-c07.c.t': { en: 'Black moves first if the players agree', vi: 'Bên Đen đi trước nếu hai người đồng ý' },
+  'b01-c07.c': { en: 'No: in Xiangqi Red always moves first.', vi: 'Không: trong cờ tướng bên Đỏ luôn đi trước.' },
+  'b01-c07.d.t': { en: 'A side that is behind may make two moves in a row', vi: 'Bên đang bị kém thế được đi hai nước liền' },
+  'b01-c07.d': { en: 'No: nobody ever moves twice in a row.', vi: 'Không: không ai được đi hai nước liền.' },
+  'b01-c08.prompt': {
+    en: 'One piece is missing from your army. Tap the point where it starts.',
+    vi: 'Quân của bạn thiếu một quân. Chạm vào điểm mà quân đó đứng lúc đầu.',
+  },
+  'b01-c08.expl': {
+    en: 'An Elephant is missing: Elephants start on the back rank, between the Horse and the Advisor.',
+    vi: 'Thiếu một quân Tượng: Tượng bắt đầu ở hàng cuối, giữa Mã và Sĩ.',
+  },
+  'b01-c09.prompt': {
+    en: 'Red moves the Chariot along the bottom edge to the file of Black’s General, giving check. Black’s General then has no free point, and nothing can block or take the Chariot. What happens?',
+    vi: 'Bên Đỏ đưa quân Xe theo mép dưới sang cột của Tướng Đen, chiếu Tướng. Khi đó Tướng Đen không còn điểm trống nào, và không quân nào cản hay bắt được quân Xe. Điều gì xảy ra?',
+  },
+  'b01-c09.a.t': { en: 'Checkmate: Red wins at once', vi: 'Chiếu bí: bên Đỏ thắng ngay' },
+  'b01-c09.a': { en: 'Right: the General cannot escape the check, so the game is over.', vi: 'Đúng: Tướng không thoát được chiếu, nên ván cờ kết thúc.' },
+  'b01-c09.b.t': { en: 'The game goes on until Red captures the General', vi: 'Ván cờ tiếp tục cho tới khi Đỏ bắt được Tướng' },
+  'b01-c09.b': { en: 'No: the General is never captured. The game ends at checkmate.', vi: 'Không: Tướng không bao giờ bị bắt. Ván cờ kết thúc khi chiếu bí.' },
+  'b01-c09.c.t': { en: 'Black must give up the General, then the game ends', vi: 'Bên Đen phải nộp Tướng, rồi ván cờ mới kết thúc' },
+  'b01-c09.c': {
+    en: 'No: nothing is given up or captured. Checkmate itself ends the game.',
+    vi: 'Không: không có quân nào bị nộp hay bị bắt. Chính chiếu bí kết thúc ván cờ.',
+  },
+  'b01-c10.prompt': {
+    en: 'Red moves the Chariot one point towards the middle. Black is then not in check, but has no legal move. What is the result?',
+    vi: 'Bên Đỏ đưa quân Xe một điểm về phía giữa. Khi đó bên Đen không bị chiếu nhưng không còn nước đi hợp lệ nào. Kết quả là gì?',
+  },
+  'b01-c10.a.t': { en: 'Red wins', vi: 'Bên Đỏ thắng' },
+  'b01-c10.a': { en: 'Right: a side that has no legal move on its turn loses.', vi: 'Đúng: bên nào đến lượt mà hết nước đi hợp lệ thì thua.' },
+  'b01-c10.b.t': { en: 'A draw', vi: 'Hòa' },
+  'b01-c10.b': {
+    en: 'No: in Xiangqi, unlike Western chess, having no legal move is a loss.',
+    vi: 'Không: khác với cờ vua, trong cờ tướng hết nước đi là thua.',
+  },
+  'b01-c10.c.t': { en: 'Nobody wins yet: Black passes and the game goes on', vi: 'Chưa ai thắng: bên Đen bỏ lượt và ván cờ tiếp tục' },
+  'b01-c10.c': {
+    en: 'No: there is no passing. Having no legal move on your turn is a loss, not a pause.',
+    vi: 'Không: không có chuyện bỏ lượt. Đến lượt mà hết nước đi hợp lệ là thua, không phải tạm dừng.',
+  },
+  'b01-c11.prompt': { en: 'What is the situation for your General?', vi: 'Tướng của bạn đang ở tình thế nào?' },
+  'b01-c11.a.t': { en: 'Check: I must answer it, and the game goes on', vi: 'Bị chiếu: tôi phải thoát chiếu, rồi ván cờ tiếp tục' },
+  'b01-c11.a': { en: 'Right: your General has one free point to step to.', vi: 'Đúng: Tướng của bạn còn một điểm trống để bước tới.' },
+  'b01-c11.b.t': { en: 'Checkmate: Red will capture my General next', vi: 'Chiếu bí: Đỏ sẽ bắt Tướng của tôi ở nước sau' },
+  'b01-c11.b': {
+    en: 'No: the General can still escape, and in any case it is never captured.',
+    vi: 'Không: Tướng vẫn thoát được, và dù sao Tướng cũng không bao giờ bị bắt.',
+  },
+  'b01-c11.c.t': { en: 'The game is over: Red wins because my General is attacked', vi: 'Ván cờ đã kết thúc: Đỏ thắng vì Tướng của tôi bị tấn công' },
+  'b01-c11.c': {
+    en: 'No: an attacked General only has to get out of check, and yours can.',
+    vi: 'Không: Tướng bị tấn công chỉ cần thoát chiếu, và Tướng của bạn thoát được.',
+  },
+  'b01-c12.prompt': { en: 'Which statements are true? Tick all of them.', vi: 'Những câu nào đúng? Hãy chọn tất cả.' },
+  'b01-c12.a.t': { en: 'Checkmating the opponent’s General wins the game', vi: 'Chiếu bí Tướng đối phương là thắng ván cờ' },
+  'b01-c12.a': { en: 'Right: checkmate ends the game.', vi: 'Đúng: chiếu bí kết thúc ván cờ.' },
+  'b01-c12.b.t': { en: 'A side that has no legal move on its turn loses', vi: 'Bên nào đến lượt mà hết nước đi hợp lệ thì thua' },
+  'b01-c12.b': { en: 'Right: even when it is not in check.', vi: 'Đúng: kể cả khi không bị chiếu.' },
+  'b01-c12.c.t': { en: 'The game is won by capturing the General', vi: 'Thắng ván cờ bằng cách bắt Tướng' },
+  'b01-c12.c': {
+    en: 'No: the game ends at checkmate, before the General could ever be captured.',
+    vi: 'Không: ván cờ kết thúc khi chiếu bí, trước khi Tướng có thể bị bắt.',
+  },
+  'b01-c12.d.t': { en: 'A side with no legal move that is not in check gets a draw', vi: 'Bên hết nước đi mà không bị chiếu thì được hòa' },
+  'b01-c12.d': { en: 'No: that is the Western chess rule; in Xiangqi it loses.', vi: 'Không: đó là luật cờ vua; trong cờ tướng như thế là thua.' },
+  'b01-c13.prompt': { en: 'Play H8+7.', vi: 'Hãy đi M8.7.' },
+  'b01-c13.r.target': { en: 'Right: the Horse on file 8 jumped to file 7.', vi: 'Đúng: quân Mã ở cột 8 đã nhảy sang cột 7.' },
+  'b01-c13.purpose': { en: 'H8+7 develops the Horse on your left towards the centre.', vi: 'M8.7 đưa quân Mã bên trái của bạn ra phía trung tâm.' },
+  'b01-c13.key': { en: 'Black can answer with H2+3, developing a Horse of its own.', vi: 'Bên Đen có thể đáp lại bằng M2.3, đưa quân Mã của mình ra.' },
+  'b01-c13.error': { en: 'Count the files from your own right before you choose the piece.', vi: 'Hãy đếm cột từ bên tay phải của bạn trước khi chọn quân.' },
+  'b01-c13.tempt': { en: 'That Horse is on your file 2: you counted from the left.', vi: 'Quân Mã đó ở cột 2 của bạn: bạn đã đếm từ bên trái.' },
+  'b01-c14.prompt': { en: 'Play C2=5.', vi: 'Hãy đi P2-5.' },
+  'b01-c14.r.target': { en: 'Right: your Cannon on file 2 moved across to file 5.', vi: 'Đúng: quân Pháo ở cột 2 của bạn đã đi ngang sang cột 5.' },
+  'b01-c14.purpose': {
+    en: 'C2=5 puts your Cannon on the middle file, facing Red’s central Soldier.',
+    vi: 'P2-5 đưa quân Pháo của bạn vào cột giữa, đối diện Tốt đầu của bên Đỏ.',
+  },
+  'b01-c14.key': {
+    en: 'Red can answer with H8+7, guarding the centre with its other Horse.',
+    vi: 'Bên Đỏ có thể đáp lại bằng M8.7, dùng quân Mã còn lại giữ trung tâm.',
+  },
+  'b01-c14.error': {
+    en: 'As Black, count the files from your own right, along the bottom edge.',
+    vi: 'Khi cầm quân Đen, hãy đếm cột từ bên tay phải của bạn, dọc mép dưới.',
+  },
+  'b01-c14.tempt': { en: 'That Cannon is on your file 8: you used Red’s numbers.', vi: 'Quân Pháo đó ở cột 8 của bạn: bạn đã dùng số của bên Đỏ.' },
+  'b01-c15.prompt': { en: 'Play R9+1.', vi: 'Hãy đi X9.1.' },
+  'b01-c15.r.target': { en: 'Right: the Chariot on file 9 moved one point forward.', vi: 'Đúng: quân Xe ở cột 9 đã tiến một điểm.' },
+  'b01-c15.purpose': {
+    en: 'R9+1 lifts the Chariot out of the corner, so it can swing across your second rank.',
+    vi: 'X9.1 đưa quân Xe ra khỏi góc để nó có thể chạy ngang theo hàng thứ hai của bạn.',
+  },
+  'b01-c15.key': { en: 'Black can lift a Chariot the same way with R1+1.', vi: 'Bên Đen có thể đưa Xe ra theo cách tương tự với X1.1.' },
+  'b01-c15.error': {
+    en: 'File 9 is the one furthest to your left; count from your right.',
+    vi: 'Cột 9 là cột xa nhất về bên trái của bạn; hãy đếm từ bên phải.',
+  },
+  'b01-c15.tempt': { en: 'That is your file 1, the right-hand corner.', vi: 'Đó là cột 1 của bạn, ở góc bên phải.' },
+  'b01-c16.prompt': { en: 'Play H8+7.', vi: 'Hãy đi M8.7.' },
+  'b01-c16.r.target': { en: 'Right: your Horse on file 8 jumped forward to file 7.', vi: 'Đúng: quân Mã ở cột 8 của bạn đã nhảy lên cột 7.' },
+  'b01-c16.purpose': { en: 'H8+7 develops your Horse towards the centre.', vi: 'M8.7 đưa quân Mã của bạn ra phía trung tâm.' },
+  'b01-c16.key': { en: 'Red can develop a Horse too, for example with H8+7.', vi: 'Bên Đỏ cũng có thể đưa Mã ra, chẳng hạn M8.7.' },
+  'b01-c16.error': {
+    en: 'As Black, your file numbers run along the bottom edge, counted from your right.',
+    vi: 'Khi cầm quân Đen, số cột của bạn chạy dọc mép dưới, tính từ bên phải.',
+  },
+  'b01-c16.tempt': {
+    en: 'That Horse is on your file 2: you read the numbers from Red’s side.',
+    vi: 'Quân Mã đó ở cột 2 của bạn: bạn đã đọc số theo phía bên Đỏ.',
+  },
+
   // ---------- New course: b09 "Opening development principles" (pilot lesson b09l3 + task b09-g1, S2.14) ----------
   'b09.title': { en: 'Opening development principles', vi: 'Nguyên tắc ra quân trong khai cuộc' },
   'b09.desc': {
