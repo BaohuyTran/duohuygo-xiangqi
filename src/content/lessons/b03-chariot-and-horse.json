@@ -12,7 +12,7 @@
           "type": "learn",
           "id": "b03l1-01",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "legacy",
             "legacyRef": "u2l1#0"
@@ -30,7 +30,7 @@
           "type": "learn",
           "id": "b03l1-02",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -53,7 +53,7 @@
           "type": "select-squares",
           "id": "b03l1-03",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "legacy",
             "legacyRef": "u2l1#1"
@@ -78,7 +78,7 @@
           "type": "select-squares",
           "id": "b03l1-04",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "derived",
             "derivedFrom": "u2l1#1",
@@ -108,7 +108,7 @@
           "type": "capture",
           "id": "b03l1-05",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "legacy",
             "legacyRef": "u2l1#2"
@@ -145,7 +145,7 @@
           "type": "choice",
           "id": "b03l1-06",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -193,7 +193,7 @@
           "type": "capture",
           "id": "b03l1-07",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -237,7 +237,7 @@
           "type": "learn",
           "id": "b03l2-01",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "legacy",
             "legacyRef": "u2l2#0"
@@ -255,7 +255,7 @@
           "type": "learn",
           "id": "b03l2-02",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "legacy",
             "legacyRef": "u2l2#2"
@@ -280,7 +280,7 @@
           "type": "learn",
           "id": "b03l2-03",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -302,7 +302,7 @@
           "type": "select-squares",
           "id": "b03l2-04",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "legacy",
             "legacyRef": "u2l2#1"
@@ -326,7 +326,7 @@
           "type": "select-squares",
           "id": "b03l2-05",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "derived",
             "derivedFrom": "u2l2#1",
@@ -355,7 +355,7 @@
           "type": "select-squares",
           "id": "b03l2-06",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "legacy",
             "legacyRef": "u2l2#3"
@@ -381,7 +381,7 @@
           "type": "choice",
           "id": "b03l2-07",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -437,7 +437,7 @@
           "type": "select-squares",
           "id": "b03l2-08",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -468,7 +468,7 @@
           "type": "learn",
           "id": "b03l3-01",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -494,7 +494,7 @@
           "type": "capture",
           "id": "b03l3-02",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "legacy",
             "legacyRef": "u2l2#4"
@@ -524,7 +524,7 @@
           "type": "select-squares",
           "id": "b03l3-03",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -555,7 +555,7 @@
           "type": "select-squares",
           "id": "b03l3-04",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -587,7 +587,7 @@
           "type": "capture",
           "id": "b03l3-05",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -626,7 +626,7 @@
           "type": "select-squares",
           "id": "b03l3-06",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },
@@ -658,7 +658,7 @@
           "type": "select-squares",
           "id": "b03l3-07",
           "version": 1,
-          "status": "verified",
+          "status": "reviewed",
           "source": {
             "kind": "authored"
           },

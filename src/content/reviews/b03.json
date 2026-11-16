@@ -1,0 +1,1069 @@
+{
+  "unit": "b03",
+  "records": [
+    {
+      "id": "b03l1-01",
+      "version": 1,
+      "contentHash": "b0fa7974d9b5855bd4cd26d70a84ef593958e64ecdd006faa6262eaa922706ea",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l1-02",
+      "version": 1,
+      "contentHash": "bd59786f2203d2f8735292df0ccbed92f22955e95907a7d3acc3feab1396b7cc",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l1-03",
+      "version": 1,
+      "contentHash": "f7a6ee9954ec3cf44a07287abbba077909ce6da0b3bd9d7ffac95b01e1caee12",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l1-04",
+      "version": 1,
+      "contentHash": "466a97d306d7179fda574bc2c2154ae5c4ef4170af3f600faab545640073de0e",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l1-05",
+      "version": 1,
+      "contentHash": "0278db9f77ad51c813fcf9dad6c572b2104de4fe6a6b6ef9b6616d13ff6114fd",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l1-06",
+      "version": 1,
+      "contentHash": "6d457d7c2a251ff45bb1aa7443625f083cd514793393de29e1364b9f4450d7ab",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l1-07",
+      "version": 1,
+      "contentHash": "764c1cb798182c93b4d3b4fbc96c37be03a5f0d9aa645ef22b0d2c7b9e63042e",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l2-01",
+      "version": 1,
+      "contentHash": "1ab097f435208e80d718b08f09c9ec21dbc2e8f12bbbca4ff8b3de48add7383a",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l2-02",
+      "version": 1,
+      "contentHash": "db60c8feac38018c6a2852912e66bab70cf0bb82418b0bf85c0686a3dae55939",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l2-03",
+      "version": 1,
+      "contentHash": "fa20d397d74c8db0231df323d28f1d4e8bcba4f8f3055554f3677fd05157cdd8",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l2-04",
+      "version": 1,
+      "contentHash": "85b40c322029f6b2b158469fc0d65a98c3715e82313393227abc8e441f36f9cc",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l2-05",
+      "version": 1,
+      "contentHash": "49b5faba0b21faaf981103636d9c4fb82e759dc7e94dd025f6940bf9e745a1ae",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l2-06",
+      "version": 1,
+      "contentHash": "868000c985f88f794b648189cf6deb8cdfcb3fa64739f74b59bccc222e8e83bb",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l2-07",
+      "version": 1,
+      "contentHash": "107ef724e87467685861eacd13e7673c5342b03ce6be47564ace57f67ff4bb20",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l2-08",
+      "version": 1,
+      "contentHash": "7c2d87245fd7af644ce1e4ef5075b75be765581b784a5f208dbe5bd7945a26b2",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l3-01",
+      "version": 1,
+      "contentHash": "55d61399bda85701da75dc66374a4a63843df94c779226073e264cab4934cd27",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l3-02",
+      "version": 1,
+      "contentHash": "c4016eef79b4151b71b061a9cc434f9e2100b8fa3bdfe8f97f08ab33070a4a93",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l3-03",
+      "version": 1,
+      "contentHash": "19deb6c341f757d0bc34bfa5ae376d8551c8e4720803ab1cdb4d4708cd04472b",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l3-04",
+      "version": 1,
+      "contentHash": "bb2d85c8e3004e12ec7d9b5a618c8234327ed344e022fe4f46cde118f66b37d0",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l3-05",
+      "version": 1,
+      "contentHash": "4f45d52503dc1e0dbe7939ee6283329af4bfc9641b7800085c935b1bbe5100c9",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l3-06",
+      "version": 1,
+      "contentHash": "1b686709ab56ac32514e32346745f6d53be77846d754d3fc46819c0a36da5532",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03l3-07",
+      "version": 1,
+      "contentHash": "4d3bd547b86c89bb783ebc1cd2f5d18226cdd1600e6429d405fa08400d45c29b",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c01",
+      "version": 1,
+      "contentHash": "67cbd91afb9f1163b5137be48775c197d56387fa40476a718d4f2647a8c6ed01",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c02",
+      "version": 1,
+      "contentHash": "6d2416cf47f839bd94312f001a588133704654e2841785e593e8fc05f6fdab0d",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c03",
+      "version": 1,
+      "contentHash": "a8e922ac7e612d35722abe1f2a4d30ba5cd339c6392dabe3ad067af470bd72ac",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c04",
+      "version": 1,
+      "contentHash": "8293b69b855e6fda8b3c88a31947996e48d38a3f250f83693012739aa3e3fc01",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c05",
+      "version": 1,
+      "contentHash": "1f7d9eebb6a30a1ba3dd0036016391846e4e7bda3b9528177572e79836e5daca",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c06",
+      "version": 1,
+      "contentHash": "097fb4bc2200de9452e7aeb7c9288e2a72e73cb6233363db729789ecbb4b83c8",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c07",
+      "version": 1,
+      "contentHash": "60b17e1073f1943e328a21b6a6d60c00175f2a0284689658d4dff7d04b6d089b",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c08",
+      "version": 1,
+      "contentHash": "aa9b2d661507cd9a0fee52da87928e0c3944e8a1182f8d191cef528395592f81",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c09",
+      "version": 1,
+      "contentHash": "be230ebe104e8f91f64ecdedc646dfc8b8765ba4faf7a68e83bc6cb19bdd8357",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c10",
+      "version": 1,
+      "contentHash": "25ccf3454166459c8456b2b91dbc005ceda748d18b6bd1d933d485fa3d9a91cc",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c11",
+      "version": 1,
+      "contentHash": "44e9030a15b2b97dd7c15590b301828559ebccb905d3de0b829e5270edefa9f6",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c12",
+      "version": 1,
+      "contentHash": "bc5ae8b7f1a654aacf7ab5cfb41044910b45db4162420bfa70a3953008dcdb6c",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c13",
+      "version": 1,
+      "contentHash": "db542c0c613a9026950ba453f733f5fa6341522ad3b96eb843db555a4ed8c920",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c14",
+      "version": 1,
+      "contentHash": "93367feefa0970332201d4aaf18404b864a73af45e8ecb9bc7827aaaae0be7a4",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c15",
+      "version": 1,
+      "contentHash": "46015711bd559f3415f87b7392666105e4080928e7c458da45ac215a44f8882f",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    },
+    {
+      "id": "b03-c16",
+      "version": 1,
+      "contentHash": "bf907b732e50a9f83e0280bc44c19489853a7ac77d632de80e50f38c790a8be6",
+      "author": "implementer-S3.1.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b03",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.c",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: positions, claims, attacked sets, Black directions, reuse and check pool verified; full-board items use Horse attacks only."
+        }
+      ]
+    }
+  ]
+}

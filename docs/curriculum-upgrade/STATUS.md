@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 3 — Curriculum production (step 2 gate passed 2026-11-12; merged into `main`)
-- **Active items:** S3.1.c (unit b03), then b04; then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
+- **Active items:** S3.1.d (unit b04); then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,13 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-16 — **S3.1.c done** (unit `b03`, attempt 2): `src/content/lessons/b03-chariot-and-horse.json` (6 learn
+  cards, 16 practice items; reuse u2l1, u2l2) + `assessment/b03-check.json` (16; 6 own + 2 interleaved b01/b02 per form,
+  three attempts); record `reviews/b03.json` (38 items `reviewed`). Near-duplicate check moved to the TEST-ONLY
+  `src/content/near-duplicate.ts`. Content-reviewer CHANGES_REQUESTED (two full-board attack items needed the Cannon
+  capture rule, taught in b04) → Horse-only positions; pilot-b03 now asserts Chariot/Horse-only attackers → APPROVE.
+  Driver: lint, build, 1,392 tests PASS.
 
 - 2026-11-13 — **S3.1.b done** (unit `b02`, attempt 2): `src/content/lessons/b02-general-advisors-elephants.json` (9
   learn cards, 16 practice items; reuse u1l2, u1l3 incl. the u1l3#4 POS fix, u4l1 learn cards) + `assessment/b02-check.json`
