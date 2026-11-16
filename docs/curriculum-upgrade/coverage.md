@@ -50,6 +50,11 @@ BLK tag of `u3l1#4` (own piece as screen) has no derived twin: it is practised a
 b04l3-03 (Black Cannon over a Red screen); `u3l1#3` and `u3l2#2` have twins (b04l1-05, b04l2-05). The mate items
 `u3l1#5` and `u3l2#4` go to b05 (05 §4).
 
+TR b04l3-07 reverses 02 b04's wording ("tap every Red piece that can capture your Horse"): Black to move just after Red's
+Horse took the central Soldier, the learner taps every Black piece that can capture that Horse (all seven Black piece types
+on the board; answer two Horses and a Cannon). Accepted by the S3.1.d content review: a Black-to-move position in which
+Black has just captured would have Red ignoring a free piece.
+
 b01l4, b02l3, b03l3 and b04l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
 minimums G2 2 · G1 2 · G0 1.
 

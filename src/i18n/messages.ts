@@ -2813,10 +2813,10 @@ export const messages = {
     en: 'The Soldier in front of it, the Elephant and the Cannon over the Soldier on its rank can all take it.',
     vi: 'Quân Tốt trước mặt, quân Tượng và quân Pháo qua quân Tốt trên cùng hàng đều ăn được nó.',
   },
-  'b04-c14.prompt': { en: 'Tap every Red piece that can capture your Soldier.', vi: 'Chạm vào mọi quân Đỏ có thể ăn quân Tốt của bạn.' },
+  'b04-c14.prompt': { en: 'Tap every Red piece that can capture your central Soldier.', vi: 'Chạm vào mọi quân Đỏ có thể ăn Tốt đầu của bạn.' },
   'b04-c14.expl': {
-    en: 'The Soldier in front of it, the Elephant and the Cannon over the Soldier on its rank can all take it.',
-    vi: 'Quân Tốt trước mặt, quân Tượng và quân Pháo qua quân Tốt trên cùng hàng đều ăn được nó.',
+    en: 'Red’s Horse reaches it through a free leg, and Red’s central Cannon reaches it up the file over Red’s own Soldier. Red’s other Soldiers have not crossed the river, so they cannot reach it.',
+    vi: 'Mã Đỏ với tới nó qua một chân Mã trống, và Pháo đầu của bên Đỏ với tới nó theo cột, qua quân Tốt của chính bên Đỏ. Các quân Tốt Đỏ khác chưa qua sông nên không với tới được.',
   },
   'b04-c15.prompt': { en: 'Find the best capture.', vi: 'Hãy tìm nước ăn quân tốt nhất.' },
   'b04-c15.expl': {

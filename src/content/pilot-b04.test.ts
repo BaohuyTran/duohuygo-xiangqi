@@ -146,17 +146,21 @@ describe('unit b04 (S3.1.d)', () => {
       'b04-c11': ['c4', 'e6'],
       'b04-c12': ['e3', 'g4'],
       'b04-c13': ['b5', 'e7', 'g6'],
-      'b04-c14': ['c3', 'e2', 'h4'],
+      'b04-c14': ['e2', 'f4'],
       'b04-c16': ['a2'],
     };
     for (const [id, want] of Object.entries(expected)) expect(names(expectedSelection(byId(id) as SelectSquaresExercise)), id).toEqual(want);
     const tr = positionOf(byId('b04l3-07'));
     expect(new Set(tr.board.filter((p) => p?.color === 'black').map((p) => p!.type)).size).toBe(7);
     expect(new Set(expectedSelection(byId('b04l3-07') as SelectSquaresExercise).map((s) => tr.board[s]!.type))).toEqual(new Set(['horse', 'cannon']));
-    for (const id of ['b04-c13', 'b04-c14']) {
+    // The two can-capture check items have different attacker sets (c13: Soldier, Elephant, Cannon on a rank; c14: Horse,
+    // Cannon on a file).
+    const types = (id: string) => {
       const pos = positionOf(byId(id));
-      expect(new Set(expectedSelection(byId(id) as SelectSquaresExercise).map((s) => pos.board[s]!.type)), id).toEqual(new Set(['cannon', 'soldier', 'elephant']));
-    }
+      return new Set(expectedSelection(byId(id) as SelectSquaresExercise).map((s) => pos.board[s]!.type));
+    };
+    expect(types('b04-c13')).toEqual(new Set(['cannon', 'soldier', 'elephant']));
+    expect(types('b04-c14')).toEqual(new Set(['cannon', 'horse']));
   });
 
   it('captures: the solution is the single best capture; the tempting move is a worse capture or a non-capture', () => {

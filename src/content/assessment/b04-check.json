@@ -468,11 +468,11 @@
       "critical": false,
       "misconceptions": [],
       "assist": "G0",
-      "fen": "rnbaka1nr/9/4b2c1/p3p1p1p/1c7/2p3PC1/P1P1P3P/1CN1B4/R8/3AKABNR b - - 9 5",
+      "fen": "rn1akabnr/9/3cb2c1/p3p3p/2p3p2/2P2NP2/P3P3P/1C2C4/9/RNBAKAB1R b - - 9 5",
       "prompt": "b04-c14.prompt",
       "query": {
         "kind": "can-capture",
-        "target": "c4"
+        "target": "e6"
       },
       "explanation": "b04-c14.expl",
       "objective": "b04l3",
