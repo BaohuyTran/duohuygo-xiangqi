@@ -16,7 +16,8 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | Unit | Status | Lessons | Learn cards | Practice | select-squares | choice | move | capture | decision | line | play / review | Black | Quiet | G2 | G1 | G0 | TR | Strands |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | b01 | reviewed | 4 | 12 | 21 | 8 | 7 | 2 | 0 | 4 | 0 | 0 | 9 (43 %) | 17 (81 %) | 8 | 8 | 4 | 1 | RS 21 |
-| b02 | verified | 3 | 9 | 16 | 8 | 4 | 1 | 1 | 2 | 0 | 0 | 7 (44 %) | 15 (94 %) | 6 | 6 | 3 | 1 | RS 15, DE 1 |
+| b02 | reviewed | 3 | 9 | 16 | 8 | 4 | 1 | 1 | 2 | 0 | 0 | 7 (44 %) | 15 (94 %) | 6 | 6 | 3 | 1 | RS 15, DE 1 |
+| b03 | verified | 3 | 6 | 16 | 10 | 2 | 0 | 4 | 0 | 0 | 0 | 6 (38 %) | 12 (75 %) | 6 | 6 | 3 | 1 | RS 16 |
 
 ### Per lesson
 
@@ -29,12 +30,15 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b02l1 | 3 | 5 | select-squares 2, move 1, capture 1, choice 1 | G2 G2 G1 G1 G0 | 2 | 4 | `u1l2#0`, `#2`, `#4` (learn, revise: new text), `u1l2#1`, `#5`, `#3` (core, revise: FB) |
 | b02l2 | 3 | 5 | select-squares 2, choice 1, decision 2 | G2 G2 G1 G1 G0 | 2 | 5 | `u4l1#0`, `#1` (learn, move: new text, 05 DV4) |
 | b02l3 | 3 | 6 | select-squares 4, choice 2 | G2 G2 G1 G1 G0 TR | 3 | 6 | `u1l3#0`, `#2` (learn, revise: new text), `u1l3#4` (learn, POS: Soldier on d3 → Horse, derived), `u1l3#1`, `#3`, `#5` (core, revise: FB) + BLK twin `b02l3-07` (derived from `#5`) |
+| b03l1 | 2 | 5 | select-squares 2, capture 2, choice 1 | G2 G2 G1 G1 G0 | 2 | 3 | `u2l1#0` (learn, keep: new text key), `u2l1#1`, `#2` (core, revise: FB) + BLK twin `b03l1-04` (derived from `#1`) |
+| b03l2 | 3 | 5 | select-squares 4, choice 1 | G2 G2 G1 G1 G0 | 2 | 5 | `u2l2#0`, `#2` (learn, keep: new text key), `u2l2#1`, `#3` (core, revise: FB) + BLK twin `b03l2-05` (derived from `#1`) |
+| b03l3 | 1 | 6 | capture 2, select-squares 4 | G2 G2 G1 G1 G0 TR | 2 | 4 | `u2l2#4` (core, revise: FB) |
 
 BLK tags (05 §4) of `u1l2#1`, `#3`, `#5` and `u1l3#1`, `#3` are resolved by authored Black items with the same skill
 (b02l1-07/-08 for the General, b02l2-05/-08 for facing, b02l3-08/-09 for the Advisor and Elephant) instead of
 colour-swapped twins; `u1l3#5` has its twin (b02l3-07).
 
-b01l4 and b02l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
+b01l4, b02l3 and b03l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
 minimums G2 2 · G1 2 · G0 1.
 
 ### Misconceptions
@@ -52,22 +56,28 @@ minimums G2 2 · G1 2 · G0 1.
 | b02.m2 | Elephants cross the river | b02l3-02 | b02l3-08, b02-c15 |
 | b02.m3 | An Elephant jumps a blocked eye | b02l3-03 | b02l3-09, b02-c16 |
 | b02.m4 | Facing only matters for the side to move | b02l2-01 | b02l2-06, b02-c08 |
+| b03.m1 | The Horse jumps like a chess knight | b03l2-02 | b03l2-07, b03-c09 |
+| b03.m2 | The block is on the landing point | b03l2-03 | b03l2-07, b03-c09 |
+| b03.m3 | The Chariot jumps a piece | b03l1-02 | b03l1-06, b03-c05 |
 
 ### Check pools
 
 | Pool | Status | Items | Form | By objective | select-squares | choice | capture | decision | Black | Quiet | Critical |
 | --- | --- | ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | b01-check | reviewed | 16 | short, 6 | b01l1 4 · b01l2 4 · b01l3 4 · b01l4 4 | 6 | 6 | 0 | 4 | 7 | 14 | 0 |
-| b02-check | verified | 16 | 8 (2 disjoint forms) | b02l1 5 · b02l2 5 · b02l3 6 | 10 | 3 | 1 | 2 | 8 | 15 | 0 |
+| b02-check | reviewed | 16 | 8 (2 disjoint forms) | b02l1 5 · b02l2 5 · b02l3 6 | 10 | 3 | 1 | 2 | 8 | 15 | 0 |
+| b03-check | verified | 16 | 6 own + 2 interleaved (3 attempts) | b03l1 5 · b03l2 5 · b03l3 6 | 10 | 2 | 4 | 0 | 7 | 12 | 0 |
 
-b02-check is also checked against near duplicates (pilot-b02.test.ts `nearDuplicate`: file mirror, colour swap, a shift of
+b02-check and b03-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
 the whole pattern and one non-General piece added, removed or moved, against every loaded lesson item and the other pool
 items). The S3.1.b review replaced b02-c03, c08, c12, c15 and, after the check, c05 (one extra piece over b02l2-03),
 c13 and c14; no allowed-reuse exception is left in the pool.
 
 Before b03 a check has no interleaved items, so an 8-item form takes 8 own items and a 16-item pool builds two
-attempts (b01's 6-item short form builds three); a third b02 attempt waits for new items (03 §4.3).
+attempts (b01's 6-item short form builds three); a third b02 attempt waits for new items (03 §4.3). From b03 on a form
+is 6 own + 2 interleaved items, so b03's 16 items build three attempts (checked with the real assembler and the b01 /
+b02 pools in pilot-b03.test.ts).
 
 ### Practical tasks
 
-None in b01 or b02 (02: "Practical task —").
+None in b01–b03 (02: "Practical task —").
