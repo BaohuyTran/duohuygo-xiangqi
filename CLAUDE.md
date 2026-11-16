@@ -441,6 +441,9 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   (16 items; 6 own + 2 interleaved b01/b02 items per form, three attempts); `src/content/pilot-b03.test.ts`. Check items of
   b02/b03 are tested against near duplicates with the TEST-ONLY `src/content/near-duplicate.ts` (mirror, colour swap,
   shift, one non-General piece added / removed / moved).
+- Unit `b04` (S3.1.d; `verified` until review) is `src/content/lessons/b04-cannon-and-soldier.json` + `assessment/b04-check.json`
+  (16 items, 6 own + 2 interleaved per form, three attempts); `src/content/pilot-b04.test.ts` (also pins that no b04 item
+  depends on check or pins: nobody in check, legal attackers = plain movement rule).
 - Pilot `b09` (S2.14: `b09l3` + `b09-g1`) is `src/content/lessons/b09-opening-development.json`; with it the content is in
   REL-P (`CURRENT_RELEASE`): the default path stays legacy-only, the preview shows `b09` once every item is `reviewed`
   with an approving record (items are `verified` until the independent review). `src/content/pilot-b09.test.ts`.

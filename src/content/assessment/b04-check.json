@@ -1,0 +1,536 @@
+{
+  "id": "b04-check",
+  "kind": "check",
+  "unit": "b04",
+  "primaryStrand": "RS",
+  "version": 1,
+  "items": [
+    {
+      "type": "select-squares",
+      "id": "b04-c01",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "f9": "k",
+        "c3": "C",
+        "c6": "p",
+        "c8": "r",
+        "a3": "N",
+        "g3": "n"
+      },
+      "prompt": "b04-c01.prompt",
+      "square": "c3",
+      "explanation": "b04-c01.expl",
+      "objective": "b04l1",
+      "unit": "b04"
+    },
+    {
+      "type": "select-squares",
+      "id": "b04-c02",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d9": "k",
+        "h7": "c",
+        "h4": "N",
+        "h0": "R",
+        "g7": "n",
+        "f0": "K"
+      },
+      "turn": "black",
+      "prompt": "b04-c02.prompt",
+      "square": "h7",
+      "explanation": "b04-c02.expl",
+      "objective": "b04l1",
+      "unit": "b04"
+    },
+    {
+      "type": "capture",
+      "id": "b04-c03",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "d9": "k",
+        "a2": "C",
+        "a5": "P",
+        "a8": "r",
+        "c2": "n",
+        "f2": "c"
+      },
+      "prompt": "b04-c03.prompt",
+      "solution": {
+        "from": "a2",
+        "to": "a8"
+      },
+      "explanation": "b04-c03.expl",
+      "objective": "b04l1",
+      "unit": "b04",
+      "feedback": {
+        "purpose": "b04-c03.purpose",
+        "keyReply": "b04-c03.key",
+        "commonError": "b04-c03.error",
+        "temptingAlternative": {
+          "move": "a2-f2",
+          "text": "b04-c03.tempt"
+        }
+      }
+    },
+    {
+      "type": "capture",
+      "id": "b04-c04",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "f9": "k",
+        "d7": "c",
+        "d4": "N",
+        "d2": "A",
+        "g7": "C",
+        "h7": "R",
+        "e0": "K"
+      },
+      "turn": "black",
+      "prompt": "b04-c04.prompt",
+      "solution": {
+        "from": "d7",
+        "to": "h7"
+      },
+      "explanation": "b04-c04.expl",
+      "objective": "b04l1",
+      "unit": "b04",
+      "feedback": {
+        "purpose": "b04-c04.purpose",
+        "keyReply": "b04-c04.key",
+        "commonError": "b04-c04.error",
+        "temptingAlternative": {
+          "move": "d7-d2",
+          "text": "b04-c04.tempt"
+        }
+      }
+    },
+    {
+      "type": "choice",
+      "id": "b04-c05",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b04.m1",
+        "b04.m2"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "d9": "k",
+        "h2": "C",
+        "h3": "n",
+        "h6": "r",
+        "h8": "c"
+      },
+      "prompt": "b04-c05.prompt",
+      "multi": true,
+      "options": [
+        {
+          "id": "a",
+          "text": "b04-c05.a.t",
+          "correct": true,
+          "feedback": "b04-c05.a"
+        },
+        {
+          "id": "b",
+          "text": "b04-c05.b.t",
+          "correct": true,
+          "feedback": "b04-c05.b"
+        },
+        {
+          "id": "c",
+          "text": "b04-c05.c.t",
+          "correct": false,
+          "feedback": "b04-c05.c",
+          "misconception": "b04.m1"
+        },
+        {
+          "id": "d",
+          "text": "b04-c05.d.t",
+          "correct": false,
+          "feedback": "b04-c05.d",
+          "misconception": "b04.m2"
+        }
+      ],
+      "objective": "b04l1",
+      "unit": "b04"
+    },
+    {
+      "type": "select-squares",
+      "id": "b04-c06",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "f9": "k",
+        "g6": "P",
+        "g7": "n",
+        "f6": "N"
+      },
+      "prompt": "b04-c06.prompt",
+      "square": "g6",
+      "explanation": "b04-c06.expl",
+      "objective": "b04l2",
+      "unit": "b04"
+    },
+    {
+      "type": "select-squares",
+      "id": "b04-c07",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e9": "k",
+        "c6": "p",
+        "c5": "N",
+        "f0": "K",
+        "a3": "P"
+      },
+      "turn": "black",
+      "prompt": "b04-c07.prompt",
+      "square": "c6",
+      "explanation": "b04-c07.expl",
+      "objective": "b04l2",
+      "unit": "b04"
+    },
+    {
+      "type": "select-squares",
+      "id": "b04-c08",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "e9": "k",
+        "f9": "a",
+        "g9": "P"
+      },
+      "prompt": "b04-c08.prompt",
+      "square": "g9",
+      "explanation": "b04-c08.expl",
+      "objective": "b04l2",
+      "unit": "b04"
+    },
+    {
+      "type": "choice",
+      "id": "b04-c09",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b04.m3",
+        "b04.m4"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e9": "k",
+        "c0": "p",
+        "f0": "K",
+        "b2": "C"
+      },
+      "turn": "black",
+      "prompt": "b04-c09.prompt",
+      "multi": true,
+      "options": [
+        {
+          "id": "a",
+          "text": "b04-c09.a.t",
+          "correct": true,
+          "feedback": "b04-c09.a"
+        },
+        {
+          "id": "b",
+          "text": "b04-c09.b.t",
+          "correct": true,
+          "feedback": "b04-c09.b"
+        },
+        {
+          "id": "c",
+          "text": "b04-c09.c.t",
+          "correct": false,
+          "feedback": "b04-c09.c",
+          "misconception": "b04.m4"
+        },
+        {
+          "id": "d",
+          "text": "b04-c09.d.t",
+          "correct": false,
+          "feedback": "b04-c09.d",
+          "misconception": "b04.m3"
+        }
+      ],
+      "objective": "b04l2",
+      "unit": "b04"
+    },
+    {
+      "type": "capture",
+      "id": "b04-c10",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "d9": "k",
+        "f6": "P",
+        "f7": "c",
+        "e6": "p",
+        "g6": "n"
+      },
+      "prompt": "b04-c10.prompt",
+      "solution": {
+        "from": "f6",
+        "to": "f7"
+      },
+      "explanation": "b04-c10.expl",
+      "objective": "b04l2",
+      "unit": "b04",
+      "feedback": {
+        "purpose": "b04-c10.purpose",
+        "keyReply": "b04-c10.key",
+        "commonError": "b04-c10.error",
+        "temptingAlternative": {
+          "move": "f6-g6",
+          "text": "b04-c10.tempt"
+        }
+      }
+    },
+    {
+      "type": "select-squares",
+      "id": "b04-c11",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "fen": "r1bakabnr/9/1cn4c1/p3p1p1p/9/2p3P2/P1P1P3P/1C2C1N2/9/RNBAKAB1R w - - 6 4",
+      "prompt": "b04-c11.prompt",
+      "query": {
+        "kind": "attacked-pieces",
+        "side": "black"
+      },
+      "explanation": "b04-c11.expl",
+      "objective": "b04l3",
+      "unit": "b04"
+    },
+    {
+      "type": "select-squares",
+      "id": "b04-c12",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "fen": "rnbakab1r/9/1c5c1/p1p1p3p/5np2/6P2/P1P1P3P/1CN1C1N2/9/R1BAKAB1R b - - 7 4",
+      "prompt": "b04-c12.prompt",
+      "query": {
+        "kind": "attacked-pieces",
+        "side": "red"
+      },
+      "explanation": "b04-c12.expl",
+      "objective": "b04l3",
+      "unit": "b04"
+    },
+    {
+      "type": "select-squares",
+      "id": "b04-c13",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "fen": "rnbaka2r/9/4b1n2/p3p1p1p/1cp3Pc1/7C1/P1P1P3P/1CN6/9/1RBAKABNR w - - 10 6",
+      "prompt": "b04-c13.prompt",
+      "query": {
+        "kind": "can-capture",
+        "target": "g5"
+      },
+      "explanation": "b04-c13.expl",
+      "objective": "b04l3",
+      "unit": "b04"
+    },
+    {
+      "type": "select-squares",
+      "id": "b04-c14",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "fen": "rnbaka1nr/9/4b2c1/p3p1p1p/1c7/2p3PC1/P1P1P3P/1CN1B4/R8/3AKABNR b - - 9 5",
+      "prompt": "b04-c14.prompt",
+      "query": {
+        "kind": "can-capture",
+        "target": "c4"
+      },
+      "explanation": "b04-c14.expl",
+      "objective": "b04l3",
+      "unit": "b04"
+    },
+    {
+      "type": "capture",
+      "id": "b04-c15",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "fen": "rnbakabnr/9/4c2c1/p1p1p3p/6p2/9/P1P1P1P1P/3C2NC1/9/RNBAKABR1 b - - 5 3",
+      "prompt": "b04-c15.prompt",
+      "solution": {
+        "from": "h7",
+        "to": "h0"
+      },
+      "explanation": "b04-c15.expl",
+      "objective": "b04l3",
+      "unit": "b04",
+      "feedback": {
+        "purpose": "b04-c15.purpose",
+        "keyReply": "b04-c15.key",
+        "commonError": "b04-c15.error",
+        "temptingAlternative": {
+          "move": "e7-e3",
+          "text": "b04-c15.tempt"
+        }
+      }
+    },
+    {
+      "type": "select-squares",
+      "id": "b04-c16",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "fen": "r1bakabnr/9/1cn1c4/p1p1p1p1p/9/9/P1P1P1P1P/1CN1C4/9/R1BAKABNR w - - 4 3",
+      "prompt": "b04-c16.prompt",
+      "square": "c0",
+      "explanation": "b04-c16.expl",
+      "objective": "b04l3",
+      "unit": "b04"
+    }
+  ]
+}

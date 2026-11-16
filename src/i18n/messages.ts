@@ -2513,6 +2513,329 @@ export const messages = {
     vi: 'Mã của bạn đã nhảy lên sát bờ sông; qua các chân Mã còn trống, nó tấn công hai quân Tốt. Chưa quân nào khác của bạn ăn được quân nào.',
   },
 
+  // ---------- New course: b04 "Cannon and Soldier" (S3.1.d; lessons b04l1–b04l3 + check pool b04-check) ----------
+  'b04.title': { en: 'Cannon and Soldier', vi: 'Pháo và Tốt' },
+  'b04.desc': {
+    en: 'How the Cannon moves and captures over a screen, how the Soldier changes after the river, and reading every piece on a full board.',
+    vi: 'Cách Pháo đi và ăn quân qua ngòi, Tốt thay đổi thế nào sau khi qua sông, và đọc nước đi của mọi quân trên bàn cờ đầy đủ.',
+  },
+  'b04l1.title': { en: 'The Cannon and its screen', vi: 'Pháo và ngòi Pháo' },
+  'b04l2.title': { en: 'The Soldier before and after the river', vi: 'Tốt trước và sau khi qua sông' },
+  'b04l3.title': { en: 'Every piece on a full board', vi: 'Mọi quân trên bàn cờ đầy đủ' },
+  'b04l1-01.text': {
+    en: 'When it is not capturing, the Cannon moves exactly like a Chariot: any number of points along a file or a rank, as long as the line is empty.',
+    vi: 'Khi không ăn quân, Pháo đi giống hệt Xe: bao nhiêu điểm cũng được theo cột hoặc theo hàng, miễn là đường đi trống.',
+  },
+  'b04l1-02.text': {
+    en: 'The Cannon cannot capture a piece directly in its line with nothing in between. Here Black’s Chariot is safe from it: the Cannon’s line simply stops one point before the Chariot.',
+    vi: 'Pháo không ăn được quân đứng trên đường đi của nó mà ở giữa không có quân nào. Ở đây Xe Đen an toàn trước Pháo: đường đi của Pháo dừng ngay trước Xe.',
+  },
+  'b04l1-03.text': {
+    en: 'To capture, the Cannon jumps over exactly one piece, the “screen” (highlighted), and lands on the enemy piece behind it. The screen is only for capturing: the Cannon can never jump over it to an empty point.',
+    vi: 'Để ăn quân, Pháo nhảy qua đúng một quân, gọi là “ngòi” (được tô sáng), và ăn quân đối phương phía sau. Ngòi chỉ dùng để ăn quân: Pháo không bao giờ nhảy qua ngòi tới một điểm trống.',
+  },
+  'b04l1-04.prompt': { en: 'Capture with the Cannon. Remember: it needs a screen.', vi: 'Dùng Pháo ăn quân. Nhớ rằng Pháo cần có ngòi.' },
+  'b04l1-04.expl': {
+    en: 'Black’s own Cannon is the screen: your Cannon jumps over it and takes the Horse.',
+    vi: 'Chính quân Pháo Đen làm ngòi: Pháo của bạn nhảy qua nó và ăn quân Mã.',
+  },
+  'b04l1-05.prompt': {
+    en: 'You play Black. Capture with your Cannon. Remember: it needs a screen.',
+    vi: 'Bạn cầm quân Đen. Dùng Pháo ăn quân. Nhớ rằng Pháo cần có ngòi.',
+  },
+  'b04l1-05.expl': {
+    en: 'Red’s Cannon is the screen: your Cannon jumps over it and takes the Horse.',
+    vi: 'Quân Pháo Đỏ làm ngòi: Pháo của bạn nhảy qua nó và ăn quân Mã.',
+  },
+  'b04l1-06.prompt': { en: 'Your own piece can be the screen too. Win Black’s Chariot.', vi: 'Quân của mình cũng làm ngòi được. Hãy ăn Xe Đen.' },
+  'b04l1-06.expl': {
+    en: 'Your Soldier is the only piece between the Cannon and the Chariot, so it serves as the screen.',
+    vi: 'Quân Tốt của bạn là quân duy nhất giữa Pháo và Xe, nên nó làm ngòi.',
+  },
+  'b04l1-06.purpose': {
+    en: 'Your Cannon wins a Chariot, using your own Soldier as the screen.',
+    vi: 'Pháo của bạn ăn được quân Xe, dùng chính quân Tốt của bạn làm ngòi.',
+  },
+  'b04l1-06.key': { en: 'Black has nothing that can take back.', vi: 'Bên Đen không có quân nào ăn lại được.' },
+  'b04l1-06.error': {
+    en: 'Count the pieces between your Cannon and the target: it needs exactly one.',
+    vi: 'Hãy đếm số quân giữa Pháo và quân muốn ăn: phải có đúng một quân.',
+  },
+  'b04l1-06.tempt': {
+    en: 'That only moves the Cannon closer: without a capture the Chariot stays on the board.',
+    vi: 'Nước đó chỉ đưa Pháo lại gần: không ăn quân thì quân Xe vẫn còn trên bàn cờ.',
+  },
+  'b04l1-07.prompt': {
+    en: 'You play Black. Tap every point your Cannon can move to or capture on.',
+    vi: 'Bạn cầm quân Đen. Chạm vào mọi điểm Pháo của bạn có thể đi tới hoặc ăn quân.',
+  },
+  'b04l1-07.expl': {
+    en: 'Along empty lines it moves like a Chariot. Forward it stops before the Red Horse, but over that Horse it can capture Red’s Chariot.',
+    vi: 'Trên đường trống, Pháo đi như Xe. Phía trước, Pháo dừng trước quân Mã Đỏ, nhưng qua quân Mã đó Pháo ăn được Xe Đỏ.',
+  },
+  'b04l1-08.prompt': { en: 'Which piece can your Cannon capture?', vi: 'Pháo của bạn ăn được quân nào?' },
+  'b04l1-08.a.t': { en: 'The Cannon ahead, behind your Soldier', vi: 'Quân Pháo phía trước, sau quân Tốt của bạn' },
+  'b04l1-08.a': {
+    en: 'Right: your Soldier is the only piece in between, so it is the screen.',
+    vi: 'Đúng: quân Tốt của bạn là quân duy nhất ở giữa, nên nó là ngòi.',
+  },
+  'b04l1-08.b.t': { en: 'The Soldier behind that Cannon', vi: 'Quân Tốt phía sau quân Pháo đó' },
+  'b04l1-08.b': {
+    en: 'No: there are two pieces in between. A Cannon jumps over exactly one.',
+    vi: 'Không: ở giữa có hai quân. Pháo chỉ nhảy qua đúng một quân.',
+  },
+  'b04l1-08.c.t': { en: 'The Horse right next to it', vi: 'Quân Mã ngay bên cạnh' },
+  'b04l1-08.c': {
+    en: 'No: with nothing in between there is no screen, so the Cannon cannot capture it.',
+    vi: 'Không: ở giữa không có quân nào nên không có ngòi, Pháo không ăn được nó.',
+  },
+  'b04l1-08.d.t': {
+    en: 'None: but it can jump over your Soldier to the empty point behind it',
+    vi: 'Không quân nào: nhưng Pháo nhảy được qua quân Tốt của bạn tới điểm trống phía sau',
+  },
+  'b04l1-08.d': {
+    en: 'No: a Cannon jumps only to capture. It can never land on an empty point beyond a screen.',
+    vi: 'Không: Pháo chỉ nhảy để ăn quân. Pháo không bao giờ đáp xuống điểm trống phía sau ngòi.',
+  },
+  'b04l2-01.text': {
+    en: 'The Soldier moves one point forward. Before it crosses the river, that is its only move: no sideways steps and never backward.',
+    vi: 'Tốt đi tiến một điểm. Khi chưa qua sông, đó là nước đi duy nhất: không đi ngang và không bao giờ lùi.',
+  },
+  'b04l2-02.text': {
+    en: 'Once across the river, the Soldier may also step one point left or right. It still never moves backward, and it captures the same way it moves.',
+    vi: 'Khi đã qua sông, Tốt được đi ngang một điểm sang trái hoặc phải. Tốt vẫn không bao giờ đi lùi, và ăn quân giống như cách nó đi.',
+  },
+  'b04l2-03.text': {
+    en: 'A Soldier that reaches the last rank does not become a stronger piece: Xiangqi has no promotion. With nowhere forward to go, it can only step sideways.',
+    vi: 'Tốt đi tới hàng cuối cùng không biến thành quân mạnh hơn: cờ tướng không có phong cấp. Không còn đường tiến, Tốt chỉ có thể đi ngang.',
+  },
+  'b04l2-04.prompt': {
+    en: 'Your Soldier has crossed the river. Tap every point it can move to.',
+    vi: 'Quân Tốt của bạn đã qua sông. Chạm vào mọi điểm nó có thể đi tới.',
+  },
+  'b04l2-04.expl': {
+    en: 'Forward one point, or sideways towards the middle; the edge of the board is on its other side.',
+    vi: 'Tiến một điểm, hoặc đi ngang vào phía giữa; phía bên kia là mép bàn cờ.',
+  },
+  'b04l2-05.prompt': {
+    en: 'You play Black. Your Soldier has crossed the river. Tap every point it can move to.',
+    vi: 'Bạn cầm quân Đen. Quân Tốt của bạn đã qua sông. Chạm vào mọi điểm nó có thể đi tới.',
+  },
+  'b04l2-05.expl': {
+    en: 'Forward one point, or sideways towards the middle; the edge of the board is on its other side.',
+    vi: 'Tiến một điểm, hoặc đi ngang vào phía giữa; phía bên kia là mép bàn cờ.',
+  },
+  'b04l2-06.prompt': {
+    en: 'Your Soldier can capture forward or sideways. Win the most valuable piece.',
+    vi: 'Tốt có thể ăn tiến hoặc ăn ngang. Hãy ăn quân giá trị nhất.',
+  },
+  'b04l2-06.expl': {
+    en: 'Across the river your Soldier captures sideways too, so it can take the Chariot.',
+    vi: 'Đã qua sông nên Tốt của bạn ăn ngang được, và có thể ăn quân Xe.',
+  },
+  'b04l2-06.purpose': { en: 'Your Soldier wins a Chariot with a sideways capture.', vi: 'Quân Tốt của bạn ăn được quân Xe bằng một nước ăn ngang.' },
+  'b04l2-06.key': { en: 'Black has nothing that can take back.', vi: 'Bên Đen không có quân nào ăn lại được.' },
+  'b04l2-06.error': {
+    en: 'A Soldier across the river captures forward or sideways: compare the pieces it can reach.',
+    vi: 'Tốt đã qua sông ăn tiến hoặc ăn ngang: hãy so sánh các quân nó với tới.',
+  },
+  'b04l2-06.tempt': {
+    en: 'That wins only a Horse; the Chariot beside your Soldier is worth more.',
+    vi: 'Nước đó chỉ ăn được quân Mã; quân Xe bên cạnh Tốt của bạn giá trị hơn.',
+  },
+  'b04l2-07.prompt': {
+    en: 'Which statements about your Soldiers are true? Tick all of them.',
+    vi: 'Những câu nào về các quân Tốt của bạn là đúng? Hãy chọn tất cả.',
+  },
+  'b04l2-07.a.t': { en: 'The Soldier still on your side of the river can only move forward', vi: 'Quân Tốt còn ở phần sân của bạn chỉ có thể tiến' },
+  'b04l2-07.a': { en: 'Right: before the river a Soldier has no sideways step.', vi: 'Đúng: trước khi qua sông, Tốt không đi ngang được.' },
+  'b04l2-07.b.t': { en: 'The Soldier across the river may step sideways', vi: 'Quân Tốt đã qua sông được đi ngang' },
+  'b04l2-07.b': {
+    en: 'Right: across the river it may step left or right as well as forward.',
+    vi: 'Đúng: đã qua sông, Tốt được đi sang trái, sang phải và tiến.',
+  },
+  'b04l2-07.c.t': { en: 'The Soldier on the last rank becomes a stronger piece', vi: 'Quân Tốt ở hàng cuối biến thành quân mạnh hơn' },
+  'b04l2-07.c': {
+    en: 'No: a Soldier never promotes. On the last rank it can only step sideways.',
+    vi: 'Không: Tốt không bao giờ được phong cấp. Ở hàng cuối, Tốt chỉ có thể đi ngang.',
+  },
+  'b04l2-07.d.t': { en: 'Any Soldier may step back towards your own side', vi: 'Quân Tốt nào cũng được lùi về phần sân của bạn' },
+  'b04l2-07.d': { en: 'No: Soldiers never move backward.', vi: 'Không: Tốt không bao giờ đi lùi.' },
+  'b04l2-08.prompt': { en: 'Tap every point your Soldier can move to.', vi: 'Chạm vào mọi điểm Tốt của bạn có thể đi tới.' },
+  'b04l2-08.expl': {
+    en: 'Across the river your Soldier can take the Advisor ahead of it or the Horse beside it, or step to the empty point on its other side.',
+    vi: 'Đã qua sông, Tốt của bạn có thể ăn quân Sĩ phía trước hoặc quân Mã bên cạnh, hoặc đi tới điểm trống ở phía còn lại.',
+  },
+  'b04l3-01.text': {
+    en: 'On a full board each piece still follows its own rule. Your central Cannon moves to the empty points along its lines, and over your own Soldier it can capture Black’s central Soldier.',
+    vi: 'Trên bàn cờ đầy đủ, mỗi quân vẫn đi theo luật của nó. Pháo đầu của bạn đi tới các điểm trống trên đường đi, và qua quân Tốt của bạn, nó ăn được Tốt đầu của bên Đen.',
+  },
+  'b04l3-02.prompt': { en: 'Tap every point your Horse on file 7 can move to.', vi: 'Chạm vào mọi điểm Mã ở cột 7 của bạn có thể đi tới.' },
+  'b04l3-02.expl': {
+    en: 'Your Cannon blocks one of its legs, and two landing points hold your own pieces: four moves are left.',
+    vi: 'Pháo của bạn cản một chân Mã, và hai điểm đến có quân của bạn: còn bốn nước đi.',
+  },
+  'b04l3-03.prompt': {
+    en: 'You play Black. Tap every point your Cannon on file 2 can move to or capture on.',
+    vi: 'Bạn cầm quân Đen. Chạm vào mọi điểm Pháo ở cột 2 của bạn có thể đi tới hoặc ăn quân.',
+  },
+  'b04l3-03.expl': {
+    en: 'It moves along the empty points of its file and rank; over Red’s Cannon it can capture the Horse behind it.',
+    vi: 'Pháo đi theo các điểm trống trên cột và trên hàng; qua quân Pháo Đỏ, nó ăn được quân Mã phía sau.',
+  },
+  'b04l3-04.prompt': { en: 'Tap every Black piece you can capture now.', vi: 'Chạm vào mọi quân Đen mà bạn ăn được ngay bây giờ.' },
+  'b04l3-04.expl': {
+    en: 'Both your Cannons can capture: the central one over your own Soldier, the other one over Black’s Horse.',
+    vi: 'Cả hai Pháo của bạn đều ăn được quân: Pháo đầu qua quân Tốt của bạn, Pháo kia qua quân Mã Đen.',
+  },
+  'b04l3-05.prompt': {
+    en: 'You play Black. Tap every Red piece you can capture now.',
+    vi: 'Bạn cầm quân Đen. Chạm vào mọi quân Đỏ mà bạn ăn được ngay bây giờ.',
+  },
+  'b04l3-05.expl': {
+    en: 'Your Cannon can take the Horse over Red’s Cannon, and your Soldier can take the Red Soldier in front of it.',
+    vi: 'Pháo của bạn ăn được quân Mã qua quân Pháo Đỏ, và Tốt của bạn ăn được quân Tốt Đỏ trước mặt.',
+  },
+  'b04l3-06.prompt': { en: 'Find the best capture.', vi: 'Hãy tìm nước ăn quân tốt nhất.' },
+  'b04l3-06.expl': {
+    en: 'Over Black’s Horse your Cannon takes a Cannon that nothing protects.',
+    vi: 'Qua quân Mã Đen, Pháo của bạn ăn quân Pháo không được bảo vệ.',
+  },
+  'b04l3-06.purpose': { en: 'Your Cannon wins a Cannon for nothing.', vi: 'Pháo của bạn ăn không một quân Pháo.' },
+  'b04l3-06.key': { en: 'Black cannot take back on that point.', vi: 'Bên Đen không ăn lại được ở điểm đó.' },
+  'b04l3-06.error': { en: 'Before you capture, check whether the target is protected.', vi: 'Trước khi ăn quân, hãy xem quân đó có được bảo vệ không.' },
+  'b04l3-06.tempt': {
+    en: 'Black’s Chariot takes back on that point, and you lose your Cannon for a Horse.',
+    vi: 'Xe Đen ăn lại ở điểm đó, và bạn mất Pháo để đổi lấy quân Mã.',
+  },
+  'b04l3-07.prompt': {
+    en: 'Red’s Horse has just taken your central Soldier. Tap every one of your pieces that can capture it.',
+    vi: 'Mã Đỏ vừa ăn Tốt đầu của bạn. Chạm vào mọi quân của bạn có thể ăn nó.',
+  },
+  'b04l3-07.expl': {
+    en: 'Both your Horses reach it through free legs, and your Cannon reaches it over the Soldier beside it. Your other Soldiers cannot capture sideways before the river, and the General, Advisors, Elephants and Chariots are out of reach.',
+    vi: 'Cả hai quân Mã của bạn với tới nó qua các chân Mã trống, và Pháo của bạn với tới nó qua quân Tốt bên cạnh. Các quân Tốt khác chưa qua sông nên không ăn ngang được, còn Tướng, Sĩ, Tượng và Xe nằm ngoài tầm.',
+  },
+  'b04-c01.prompt': { en: 'Tap every point your Cannon can move to or capture on.', vi: 'Chạm vào mọi điểm Pháo của bạn có thể đi tới hoặc ăn quân.' },
+  'b04-c01.expl': {
+    en: 'It moves along empty lines; along the rank it stops before your Horse and before Black’s Horse, and over Black’s Soldier it can capture the Chariot.',
+    vi: 'Pháo đi theo đường trống; trên hàng ngang, nó dừng trước quân Mã của bạn và trước quân Mã Đen, còn qua quân Tốt Đen, nó ăn được quân Xe.',
+  },
+  'b04-c02.prompt': { en: 'Tap every point your Cannon can move to or capture on.', vi: 'Chạm vào mọi điểm Pháo của bạn có thể đi tới hoặc ăn quân.' },
+  'b04-c02.expl': {
+    en: 'Forward it stops before Red’s Horse, but over that Horse it can capture Red’s Chariot. Your own Horse beside it blocks one side.',
+    vi: 'Phía trước, Pháo dừng trước quân Mã Đỏ, nhưng qua quân Mã đó nó ăn được Xe Đỏ. Quân Mã của bạn bên cạnh chặn một phía.',
+  },
+  'b04-c03.prompt': { en: 'Find the best capture.', vi: 'Hãy tìm nước ăn quân tốt nhất.' },
+  'b04-c03.expl': {
+    en: 'Over your own Soldier the Cannon can take the Chariot; over Black’s Horse it can only take a Cannon.',
+    vi: 'Qua quân Tốt của bạn, Pháo ăn được quân Xe; qua quân Mã Đen, nó chỉ ăn được quân Pháo.',
+  },
+  'b04-c03.purpose': { en: 'Your Cannon wins a Chariot, the biggest piece on offer.', vi: 'Pháo của bạn ăn được quân Xe, quân lớn nhất có thể ăn.' },
+  'b04-c03.key': { en: 'Black has nothing that can take back.', vi: 'Bên Đen không có quân nào ăn lại được.' },
+  'b04-c03.error': { en: 'Compare what each capture wins.', vi: 'Hãy so sánh mỗi nước ăn quân được gì.' },
+  'b04-c03.tempt': { en: 'That wins a Cannon, but a Chariot was also within reach.', vi: 'Nước đó ăn được quân Pháo, nhưng quân Xe cũng nằm trong tầm.' },
+  'b04-c04.prompt': { en: 'Find the best capture.', vi: 'Hãy tìm nước ăn quân tốt nhất.' },
+  'b04-c04.expl': {
+    en: 'Over Red’s Cannon on the same rank your Cannon can take the Chariot; over the Horse ahead it can only take an Advisor.',
+    vi: 'Qua quân Pháo Đỏ trên cùng hàng, Pháo của bạn ăn được quân Xe; qua quân Mã phía trước, nó chỉ ăn được quân Sĩ.',
+  },
+  'b04-c04.purpose': { en: 'Your Cannon wins a Chariot, the biggest piece on offer.', vi: 'Pháo của bạn ăn được quân Xe, quân lớn nhất có thể ăn.' },
+  'b04-c04.key': { en: 'Red has nothing that can take back.', vi: 'Bên Đỏ không có quân nào ăn lại được.' },
+  'b04-c04.error': { en: 'Compare what each capture wins.', vi: 'Hãy so sánh mỗi nước ăn quân được gì.' },
+  'b04-c04.tempt': {
+    en: 'That wins only an Advisor, but a Chariot was also within reach.',
+    vi: 'Nước đó chỉ ăn được quân Sĩ, nhưng quân Xe cũng nằm trong tầm.',
+  },
+  'b04-c05.prompt': {
+    en: 'Which statements about your Cannon are true here? Tick all of them.',
+    vi: 'Những câu nào về quân Pháo của bạn là đúng ở đây? Hãy chọn tất cả.',
+  },
+  'b04-c05.a.t': { en: 'It cannot capture the Horse right in front of it', vi: 'Pháo không ăn được quân Mã ngay trước mặt' },
+  'b04-c05.a': { en: 'Right: with nothing in between, there is no screen.', vi: 'Đúng: ở giữa không có quân nào nên không có ngòi.' },
+  'b04-c05.b.t': { en: 'It can capture the Chariot behind that Horse', vi: 'Pháo ăn được quân Xe phía sau quân Mã đó' },
+  'b04-c05.b': { en: 'Right: the Horse is the only piece in between, so it is the screen.', vi: 'Đúng: quân Mã là quân duy nhất ở giữa, nên nó là ngòi.' },
+  'b04-c05.c.t': { en: 'It can capture the Cannon at the far end of its file', vi: 'Pháo ăn được quân Pháo ở cuối cột' },
+  'b04-c05.c': { en: 'No: two pieces stand in between. A Cannon jumps over exactly one.', vi: 'Không: ở giữa có hai quân. Pháo chỉ nhảy qua đúng một quân.' },
+  'b04-c05.d.t': { en: 'It can jump over the Horse to the empty point behind it', vi: 'Pháo nhảy được qua quân Mã tới điểm trống phía sau' },
+  'b04-c05.d': { en: 'No: a Cannon jumps only to capture, never to an empty point.', vi: 'Không: Pháo chỉ nhảy để ăn quân, không bao giờ tới điểm trống.' },
+  'b04-c06.prompt': { en: 'Tap every point your Soldier can move to.', vi: 'Chạm vào mọi điểm Tốt của bạn có thể đi tới.' },
+  'b04-c06.expl': {
+    en: 'Across the river it can take the Horse ahead or step sideways to the free point; your own Horse holds the other side.',
+    vi: 'Đã qua sông, Tốt có thể ăn quân Mã phía trước hoặc đi ngang tới điểm trống; quân Mã của bạn chiếm phía còn lại.',
+  },
+  'b04-c07.prompt': { en: 'Tap every point your Soldier can move to.', vi: 'Chạm vào mọi điểm Tốt của bạn có thể đi tới.' },
+  'b04-c07.expl': {
+    en: 'Before the river your Soldier moves only forward, so its one move is to take the Horse ahead.',
+    vi: 'Chưa qua sông, Tốt của bạn chỉ đi tiến, nên nước duy nhất là ăn quân Mã phía trước.',
+  },
+  'b04-c08.prompt': { en: 'Tap every point your Soldier can move to.', vi: 'Chạm vào mọi điểm Tốt của bạn có thể đi tới.' },
+  'b04-c08.expl': {
+    en: 'On the last rank there is no forward move and no promotion: the Soldier can only step sideways, taking the Advisor or moving to the empty point.',
+    vi: 'Ở hàng cuối không còn nước tiến và không có phong cấp: Tốt chỉ đi ngang, ăn quân Sĩ hoặc đi tới điểm trống.',
+  },
+  'b04-c09.prompt': {
+    en: 'Your Soldier has reached Red’s back rank. Which statements are true? Tick all of them.',
+    vi: 'Quân Tốt của bạn đã tới hàng cuối của bên Đỏ. Những câu nào đúng? Hãy chọn tất cả.',
+  },
+  'b04-c09.a.t': { en: 'It can still step sideways', vi: 'Tốt vẫn đi ngang được' },
+  'b04-c09.a': { en: 'Right: sideways steps are all it has left.', vi: 'Đúng: đi ngang là tất cả những gì Tốt còn lại.' },
+  'b04-c09.b.t': { en: 'It can never move back towards your side', vi: 'Tốt không bao giờ đi lùi về phần sân của bạn' },
+  'b04-c09.b': { en: 'Right: Soldiers never move backward.', vi: 'Đúng: Tốt không bao giờ đi lùi.' },
+  'b04-c09.c.t': { en: 'It now moves like a Chariot', vi: 'Bây giờ Tốt đi như Xe' },
+  'b04-c09.c': { en: 'No: a Soldier never promotes; it stays a Soldier.', vi: 'Không: Tốt không bao giờ được phong cấp; nó vẫn là Tốt.' },
+  'b04-c09.d.t': { en: 'It may step back one point to escape', vi: 'Tốt được lùi một điểm để thoát' },
+  'b04-c09.d': { en: 'No: a Soldier never steps back, wherever it stands.', vi: 'Không: Tốt không bao giờ lùi, dù đứng ở đâu.' },
+  'b04-c10.prompt': { en: 'Find the best capture.', vi: 'Hãy tìm nước ăn quân tốt nhất.' },
+  'b04-c10.expl': {
+    en: 'Across the river your Soldier can capture forward and sideways; the Cannon ahead is the most valuable piece it can reach.',
+    vi: 'Đã qua sông, Tốt ăn được quân phía trước và hai bên; quân Pháo phía trước là quân giá trị nhất nó với tới.',
+  },
+  'b04-c10.purpose': { en: 'Your Soldier wins a Cannon for nothing.', vi: 'Quân Tốt của bạn ăn không một quân Pháo.' },
+  'b04-c10.key': { en: 'Black cannot take back on that point.', vi: 'Bên Đen không ăn lại được ở điểm đó.' },
+  'b04-c10.error': { en: 'Compare the pieces your Soldier can reach.', vi: 'Hãy so sánh các quân mà Tốt của bạn với tới.' },
+  'b04-c10.tempt': {
+    en: 'That wins a Horse, but the Cannon ahead is worth a little more.',
+    vi: 'Nước đó ăn được quân Mã, nhưng quân Pháo phía trước giá trị hơn một chút.',
+  },
+  'b04-c11.prompt': { en: 'Tap every Black piece you can capture now.', vi: 'Chạm vào mọi quân Đen mà bạn ăn được ngay bây giờ.' },
+  'b04-c11.expl': {
+    en: 'Your Soldier can take the Soldier in front of it, and over your own Soldier your central Cannon can take Black’s central Soldier.',
+    vi: 'Tốt của bạn ăn được quân Tốt trước mặt, và qua quân Tốt của bạn, Pháo đầu ăn được Tốt đầu của bên Đen.',
+  },
+  'b04-c12.prompt': { en: 'Tap every Red piece you can capture now.', vi: 'Chạm vào mọi quân Đỏ mà bạn ăn được ngay bây giờ.' },
+  'b04-c12.expl': {
+    en: 'Your Horse reaches Red’s central Soldier, and your Soldier can take the Soldier in front of it.',
+    vi: 'Mã của bạn với tới Tốt đầu của bên Đỏ, và Tốt của bạn ăn được quân Tốt trước mặt.',
+  },
+  'b04-c13.prompt': { en: 'Tap every Black piece that can capture your Soldier.', vi: 'Chạm vào mọi quân Đen có thể ăn quân Tốt của bạn.' },
+  'b04-c13.expl': {
+    en: 'The Soldier in front of it, the Elephant and the Cannon over the Soldier on its rank can all take it.',
+    vi: 'Quân Tốt trước mặt, quân Tượng và quân Pháo qua quân Tốt trên cùng hàng đều ăn được nó.',
+  },
+  'b04-c14.prompt': { en: 'Tap every Red piece that can capture your Soldier.', vi: 'Chạm vào mọi quân Đỏ có thể ăn quân Tốt của bạn.' },
+  'b04-c14.expl': {
+    en: 'The Soldier in front of it, the Elephant and the Cannon over the Soldier on its rank can all take it.',
+    vi: 'Quân Tốt trước mặt, quân Tượng và quân Pháo qua quân Tốt trên cùng hàng đều ăn được nó.',
+  },
+  'b04-c15.prompt': { en: 'Find the best capture.', vi: 'Hãy tìm nước ăn quân tốt nhất.' },
+  'b04-c15.expl': {
+    en: 'Over Red’s Cannon your Cannon takes the Chariot; Red’s Horse takes back, but you have won a Chariot for a Cannon.',
+    vi: 'Qua quân Pháo Đỏ, Pháo của bạn ăn quân Xe; Mã Đỏ ăn lại, nhưng bạn đã đổi Pháo lấy Xe.',
+  },
+  'b04-c15.purpose': { en: 'Your Cannon wins a Chariot for a Cannon.', vi: 'Pháo của bạn đổi được một quân Xe.' },
+  'b04-c15.key': { en: 'Red’s Horse takes your Cannon back, and you are still well ahead.', vi: 'Mã Đỏ ăn lại Pháo của bạn, nhưng bạn vẫn lợi nhiều.' },
+  'b04-c15.error': { en: 'Before you capture, check what can take back.', vi: 'Trước khi ăn quân, hãy xem quân nào có thể ăn lại.' },
+  'b04-c15.tempt': {
+    en: 'Red’s Horse takes back on that point: you give a Cannon for a Soldier.',
+    vi: 'Mã Đỏ ăn lại ở điểm đó: bạn mất Pháo để đổi lấy một quân Tốt.',
+  },
+  'b04-c16.prompt': { en: 'Tap every point your Elephant on file 7 can move to.', vi: 'Chạm vào mọi điểm Tượng ở cột 7 của bạn có thể đi tới.' },
+  'b04-c16.expl': {
+    en: 'Both eyes are free, but one of its two landing points holds your own Cannon, so only the other move remains.',
+    vi: 'Cả hai mắt Tượng đều trống, nhưng một trong hai điểm đến có quân Pháo của bạn, nên chỉ còn nước đi kia.',
+  },
+
   // ---------- New course: b09 "Opening development principles" (pilot lesson b09l3 + task b09-g1, S2.14) ----------
   'b09.title': { en: 'Opening development principles', vi: 'Nguyên tắc ra quân trong khai cuộc' },
   'b09.desc': {
