@@ -668,7 +668,7 @@
           "critical": false,
           "misconceptions": [],
           "assist": "TR",
-          "fen": "r1bakabr1/9/1cn3nc1/p1p1p1pRp/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKAB2 b - - 7 4",
+          "fen": "r1bakab1r/9/1cn3nc1/p1p1p1p1p/9/5NP2/P1P1P3P/1C5C1/9/RNBAKAB1R b - - 5 3",
           "prompt": "b03l3-07.prompt",
           "query": {
             "kind": "attacked-pieces",

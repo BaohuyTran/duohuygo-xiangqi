@@ -38,6 +38,10 @@ BLK tags (05 §4) of `u1l2#1`, `#3`, `#5` and `u1l3#1`, `#3` are resolved by aut
 (b02l1-07/-08 for the General, b02l2-05/-08 for facing, b02l3-08/-09 for the Advisor and Elephant) instead of
 colour-swapped twins; `u1l3#5` has its twin (b02l3-07).
 
+BLK tags of `u2l1#2` and `u2l2#3` have no derived twins: their skills are practised as Black by authored items
+(b03l1-06 and b03l3-04 for the Chariot's line and captures, b03l2-07 for blocked legs); `u2l1#1` and `u2l2#1` have twins
+(b03l1-04, b03l2-05).
+
 b01l4, b02l3 and b03l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
 minimums G2 2 · G1 2 · G0 1.
 

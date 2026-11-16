@@ -125,9 +125,11 @@ describe('unit b03 (S3.1.c)', () => {
     }
   });
 
-  it('“Chariot or Horse” prompts: every attacked piece is attacked by a Chariot or Horse only; each answer is non-empty and leaves something out', () => {
-    for (const id of ['b03l3-03', 'b03l3-04']) {
-      const ex = byId(id) as SelectSquaresExercise;
+  // Cannon and Soldier captures are taught in b04: in every b03 attacked-pieces item (incl. the full-board TR item and
+  // b03-c16) each attacked piece is attacked by Chariots or Horses only.
+  it('attacked-pieces items: every attacked piece is attacked by a Chariot or Horse only; each answer is non-empty and leaves something out', () => {
+    for (const ex of [...items, ...check].filter((e): e is SelectSquaresExercise => e.type === 'select-squares' && !!e.query)) {
+      const id = ex.id!;
       const pos = positionOf(ex);
       for (const sq of expectedSelection(ex)) {
         const types = captureFacts(pos.board, sq).attackers.map((a) => pos.board[a]!.type);
@@ -142,8 +144,8 @@ describe('unit b03 (S3.1.c)', () => {
       expect(n, ex.id).toBeGreaterThan(0);
       expect(n, ex.id).toBeLessThan(all);
     }
-    expect(names(expectedSelection(byId('b03l3-07') as SelectSquaresExercise))).toEqual(['e6', 'g6', 'h7', 'i6']);
-    expect(names(expectedSelection(byId('b03-c16') as SelectSquaresExercise))).toEqual(['e6', 'h3']);
+    expect(names(expectedSelection(byId('b03l3-07') as SelectSquaresExercise))).toEqual(['e6', 'g6']);
+    expect(names(expectedSelection(byId('b03-c16') as SelectSquaresExercise))).toEqual(['c6', 'e6']);
   });
 
   it('captures: the solution is the single best capture; the tempting move is a worse capture (or a non-capture)', () => {

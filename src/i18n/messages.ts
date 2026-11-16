@@ -2383,8 +2383,8 @@ export const messages = {
   },
   'b03l3-07.prompt': { en: 'Tap every one of your pieces that Red can capture now.', vi: 'Chạm vào mọi quân của bạn mà bên Đỏ ăn được ngay bây giờ.' },
   'b03l3-07.expl': {
-    en: 'Red’s Chariot has come forward to the rank of your Soldiers: it attacks the two Soldiers beside it and the Cannon next to it on its file. Red’s central Cannon attacks your central Soldier over its own Soldier.',
-    vi: 'Xe Đỏ đã tiến lên hàng Tốt của bạn: nó tấn công hai quân Tốt bên cạnh và quân Pháo sát bên trên cùng cột. Pháo đầu của bên Đỏ tấn công Tốt đầu của bạn qua quân Tốt của chính nó.',
+    en: 'Red’s Horse has come forward to the edge of the river on Red’s side. Through its free leg it attacks two of your Soldiers; no other Red piece can capture anything yet.',
+    vi: 'Mã Đỏ đã tiến lên sát bờ sông bên phía Đỏ. Qua chân Mã còn trống, nó tấn công hai quân Tốt của bạn; chưa quân Đỏ nào khác ăn được quân nào.',
   },
   'b03-c01.prompt': { en: 'Tap every point your Chariot can move to.', vi: 'Chạm vào mọi điểm Xe của bạn có thể đi tới.' },
   'b03-c01.expl': {
@@ -2509,8 +2509,8 @@ export const messages = {
   },
   'b03-c16.prompt': { en: 'Tap every Black piece you can capture now.', vi: 'Chạm vào mọi quân Đen mà bạn ăn được ngay bây giờ.' },
   'b03-c16.expl': {
-    en: 'Your Chariot reaches the Cannon that has come down its file, and your central Cannon reaches the central Soldier over your own Soldier.',
-    vi: 'Xe của bạn với tới quân Pháo đã xuống cột của nó, và Pháo đầu của bạn với tới Tốt đầu qua quân Tốt của chính bạn.',
+    en: 'Your Horse has jumped forward to the edge of the river; through its free legs it attacks two Soldiers. Nothing else of yours can capture yet.',
+    vi: 'Mã của bạn đã nhảy lên sát bờ sông; qua các chân Mã còn trống, nó tấn công hai quân Tốt. Chưa quân nào khác của bạn ăn được quân nào.',
   },
 
   // ---------- New course: b09 "Opening development principles" (pilot lesson b09l3 + task b09-g1, S2.14) ----------
