@@ -1,0 +1,1097 @@
+{
+  "unit": "b04",
+  "records": [
+    {
+      "id": "b04l1-01",
+      "version": 1,
+      "contentHash": "1dde3b1d474295c8807cbef3bbddc09c7e832d717012b1d44a67bc6f67c5c172",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l1-02",
+      "version": 1,
+      "contentHash": "39b93ae531141172e9c3f21c028c471caf76d9c8b77510996eab79b6379810da",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l1-03",
+      "version": 1,
+      "contentHash": "7f48111159e20c525104bcdcd0714ebf4f2caf404df4d8f1ca1119d9a2886034",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l1-04",
+      "version": 1,
+      "contentHash": "a416028e2db7c2a7cba2e22dd8f1408152f78b1f58ee8c8e1f23018c19ebe52c",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l1-05",
+      "version": 1,
+      "contentHash": "e0d1142b463416b9bf17d8fd3a67ef7091684d27e24af1861ce75f395c111ad7",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l1-06",
+      "version": 1,
+      "contentHash": "311d31604e7c88d222af5e345c7d3d3e72a7c5d11be8e3da528224000de405af",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l1-07",
+      "version": 1,
+      "contentHash": "45581e96e9074a8d2016153ec185900fe7df5ba6ca17638662a0de9700f93660",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l1-08",
+      "version": 1,
+      "contentHash": "1630d1a36d28f08e7b0610ffbd3e2e865c36d5e39a3214d0b9d4e11f1e43acce",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l2-01",
+      "version": 1,
+      "contentHash": "ae9c1bd1fee1a7c0c31569d61b55662c6b502983fbdc7ded4faba93b5b0f22b7",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l2-02",
+      "version": 1,
+      "contentHash": "c3a0cbf001f53d07b7ffd5a96398fa0d3a787145e98699e596407d8ed87a2617",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l2-03",
+      "version": 1,
+      "contentHash": "e0a1618b36743b84505c6f3bb1be1232d24392c543fb476a2d7134c951d1f685",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l2-04",
+      "version": 1,
+      "contentHash": "f869d78f34eb0decb4667e4fe5d9d725b1d89f943df2a560ee9167d59913d7bc",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l2-05",
+      "version": 1,
+      "contentHash": "df3f1bc589213dc685e14d2f930ed6be462f8c6921be5ebeab5701ed54d35f75",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l2-06",
+      "version": 1,
+      "contentHash": "8351a225840a08546d695977e0e9e63a043c210d5c6cc6d99234a58f59ad0d93",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l2-07",
+      "version": 1,
+      "contentHash": "a6c28523f54a8afa2ab43f3452fb0696183920757792fb9c7974b13b98e99987",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l2-08",
+      "version": 1,
+      "contentHash": "a0f7695dbc06f7dc403148fb3be00cca592539f1f3c5f2be4c0a548ba73a02e9",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l3-01",
+      "version": 1,
+      "contentHash": "afa8746d07b9cf86127f2667577a9dfc20480cda71ff03a349d846244f89b744",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l3-02",
+      "version": 1,
+      "contentHash": "6fbe401675f33f5d8898a64d1af17af4f3c0552c42eb7d71da073303eb45ac7d",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l3-03",
+      "version": 1,
+      "contentHash": "c124c00c9adeee021a62bb6423a553a6f4b6e7be17d25d6a5f94c5935fd96fcc",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l3-04",
+      "version": 1,
+      "contentHash": "164b360462d753a41fc7dede0b995c37cdeb5595caa2373d261f5a88abbb63dd",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l3-05",
+      "version": 1,
+      "contentHash": "85e6b9b2f07aeaeadea3aa660c32321a35b3c4236f8a4560e6f1f7331969e4bc",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l3-06",
+      "version": 1,
+      "contentHash": "b8171060cb858b23d75732570af9ddf8cfd04074de502bcaf420fd7975e0507e",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04l3-07",
+      "version": 1,
+      "contentHash": "ecbb63e03c3112b3736e43dd2cfacabcbb00a754516bcdd4ed992e46c546e142",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c01",
+      "version": 1,
+      "contentHash": "37cc489d2fd6bfe8aba6f425906fbc3c42dddb72c292a75c1225abf5a8830a83",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c02",
+      "version": 1,
+      "contentHash": "69d03df03d477818d19cda3305358c37489121f70f0db53bd3d75f4bb1c8b536",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c03",
+      "version": 1,
+      "contentHash": "ced2b11bef19865415c2de4719519df8d912d261cd946cb794277cbc499c97b2",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c04",
+      "version": 1,
+      "contentHash": "494995fb345008758dd741d955553b20e55a3a2b29bf89567bd0e318237db45d",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c05",
+      "version": 1,
+      "contentHash": "fcf4c3a00c5693344a4d145cb0b3778f88790a0ad73f907d14c884829f3d2451",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c06",
+      "version": 1,
+      "contentHash": "d851a981c062de520cfc5510a122a6430b1b470a6e6e3399dfc8316b8ee56184",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c07",
+      "version": 1,
+      "contentHash": "f5766845c84de05264879dbceb9e4745e29e4e863a6d43bcc20d48087b335631",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c08",
+      "version": 1,
+      "contentHash": "fdb4a34928350fc698a967a63735bcdea09d318289bdc4855924adb63baa9d76",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c09",
+      "version": 1,
+      "contentHash": "df469cbdcccc86b4f67dd4c5c5b1e26db823a85f07649fcd4cfb793c796f4fa9",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c10",
+      "version": 1,
+      "contentHash": "82b0a91d6d25dc86101b9c5301bf84b2fa0e8d2f0e8d1181766559b3f60e07dd",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c11",
+      "version": 1,
+      "contentHash": "f72deada588c3d9630bb1005f52d8063c869b71fddf376a3961c0b0995c30955",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c12",
+      "version": 1,
+      "contentHash": "06e5f4758870fc74dc7488242d2aa908396078d74def5fd63935522d52893ac7",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c13",
+      "version": 1,
+      "contentHash": "15d312d2889c6be2431cab7ea368224a4f9de3bdf8a68d5ddcd2affe650dbfa9",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c14",
+      "version": 1,
+      "contentHash": "a1e4842154f50be37039d49905442d43a75829accadc48a82f921115dfa4f670",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c15",
+      "version": 1,
+      "contentHash": "a887047841e8578d3fb059adbc27833971aba35ccca35174185ccf28049b289e",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    },
+    {
+      "id": "b04-c16",
+      "version": 1,
+      "contentHash": "58d035deb35b9bc849b4547cb10a94c2f10c76f86b922d90b89ef839f37ab5d4",
+      "author": "implementer-S3.1.d",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b04",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-16"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.1.d",
+          "at": "2026-11-16",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: Cannon screens, Soldier steps, expected sets, best captures, reuse and check pool verified; b04-c14 replaced (no mirror of c13)."
+        }
+      ]
+    }
+  ]
+}

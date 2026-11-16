@@ -1,5 +1,5 @@
 // Content checks of unit b04 "Cannon and Soldier" (S3.1.d: lessons b04l1–b04l3, check pool b04-check), loaded in release
-// state REL-P (`verified`, so neither served nor in the preview until the independent review). The validator and the
+// state REL-P (`reviewed` with an approving record: in the preview, not served by default). The validator and the
 // pool validator run on it with everything else (validate-shard-*.test.ts, pools.test.ts); the `.error` leak check is
 // global (pilot-feedback.test.ts). This file pins what the unit must show (02 b04, 03 §4.1–§4.3, 05 §4).
 import { describe, expect, it } from 'vitest';
@@ -44,7 +44,7 @@ describe('unit b04 (S3.1.d)', () => {
       expect(lesson.exercises.slice(first).every((e) => e.type !== 'learn'), lesson.id).toBe(true);
     }
     expect(practice.every((e) => e.strand === 'RS' && e.critical === false)).toBe(true);
-    expect(unitItems(b04).every(({ item }) => item.status === 'verified')).toBe(true);
+    expect(unitItems(b04).every(({ item }) => item.status === 'reviewed')).toBe(true);
   });
 
   it('both colours: 7 of 16 practice items as Black, including the full-board TR item', () => {
@@ -182,7 +182,7 @@ describe('b04 check pool (03 §4.1–§4.3)', () => {
     expect(check).toHaveLength(16);
     expect(poolFiles['b04-check']).toMatchObject({ id: 'b04-check', kind: 'check', unit: 'b04', primaryStrand: 'RS' });
     expect(['b04l1', 'b04l2', 'b04l3'].map((l) => check.filter((i) => i.objective === l).length)).toEqual([5, 5, 6]);
-    expect(check.every((i) => i.unit === 'b04' && i.assist === 'G0' && i.status === 'verified')).toBe(true);
+    expect(check.every((i) => i.unit === 'b04' && i.assist === 'G0' && i.status === 'reviewed')).toBe(true);
     expect(check.filter((i) => i.side === 'black')).toHaveLength(7);
     for (const i of check as (AssessmentItem & { hints?: unknown; highlight?: unknown })[]) {
       expect(i.hints, i.id).toBeUndefined();

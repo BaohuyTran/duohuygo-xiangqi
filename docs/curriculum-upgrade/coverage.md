@@ -18,7 +18,7 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b01 | reviewed | 4 | 12 | 21 | 8 | 7 | 2 | 0 | 4 | 0 | 0 | 9 (43 %) | 17 (81 %) | 8 | 8 | 4 | 1 | RS 21 |
 | b02 | reviewed | 3 | 9 | 16 | 8 | 4 | 1 | 1 | 2 | 0 | 0 | 7 (44 %) | 15 (94 %) | 6 | 6 | 3 | 1 | RS 15, DE 1 |
 | b03 | reviewed | 3 | 6 | 16 | 10 | 2 | 0 | 4 | 0 | 0 | 0 | 6 (38 %) | 12 (75 %) | 6 | 6 | 3 | 1 | RS 16 |
-| b04 | verified | 3 | 7 | 16 | 9 | 2 | 0 | 5 | 0 | 0 | 0 | 7 (44 %) | 11 (69 %) | 6 | 6 | 3 | 1 | RS 16 |
+| b04 | reviewed | 3 | 7 | 16 | 9 | 2 | 0 | 5 | 0 | 0 | 0 | 7 (44 %) | 11 (69 %) | 6 | 6 | 3 | 1 | RS 16 |
 
 ### Per lesson
 
@@ -88,7 +88,7 @@ minimums G2 2 · G1 2 · G0 1.
 | b01-check | reviewed | 16 | short, 6 | b01l1 4 · b01l2 4 · b01l3 4 · b01l4 4 | 6 | 6 | 0 | 4 | 7 | 14 | 0 |
 | b02-check | reviewed | 16 | 8 (2 disjoint forms) | b02l1 5 · b02l2 5 · b02l3 6 | 10 | 3 | 1 | 2 | 8 | 15 | 0 |
 | b03-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b03l1 5 · b03l2 5 · b03l3 6 | 10 | 2 | 4 | 0 | 7 | 12 | 0 |
-| b04-check | verified | 16 | 6 own + 2 interleaved (3 attempts) | b04l1 5 · b04l2 5 · b04l3 6 | 10 | 2 | 4 | 0 | 7 | 12 | 0 |
+| b04-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b04l1 5 · b04l2 5 · b04l3 6 | 10 | 2 | 4 | 0 | 7 | 12 | 0 |
 
 b02-check, b03-check and b04-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
 the whole pattern and one non-General piece added, removed or moved, against every loaded lesson item and the other pool
