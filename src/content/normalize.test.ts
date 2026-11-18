@@ -80,7 +80,8 @@ describe('normalize', () => {
     // + the 22 items of unit b03 (S3.1.c: 3 lessons, 6 learn cards + 16 practice items).
     // + the 23 items of unit b04 (S3.1.d: 3 lessons, 7 learn cards + 16 practice items).
     // + the 26 items of unit b05 (S3.2.a: 3 lessons, 8 learn cards + 18 practice items).
-    expect(entries).toHaveLength(426);
+    // + the 24 items of unit b06 (S3.2.b: 3 lessons, 8 learn cards + 16 practice items).
+    expect(entries).toHaveLength(450);
     const isNew = (ref: string) => /^[biaem]\d\d/.test(ref);
     // i08-g1 (S2.15, `line` → `play` from the initial position) joins the same intended group.
     // b01 (S3.1.a) adds three intended learn cards of the initial position: b01l1-01 and b01l2-01 reuse u1l1#1 and
@@ -88,18 +89,19 @@ describe('normalize', () => {
     // b01l1-03 / b01l1-04 reuse the palace learn card and its exercise u1l1#2 / u1l1#3 (a learn card showing the next
     // item's position, as in the legacy lesson). Every other b01 position is its own.
     // b02 (S3.1.b: u1l2, u1l3, u4l1#0/#1), b03 (S3.1.c: u2l1#0–#2, u2l2), b04 (S3.1.d: u3l1, u3l2 without the POS
-    // and mate items) and b05 (S3.2.a: u4l1#2–#5, u4l2, u3l1#5, u3l2#4) reuse 13 + 8 + 7 + 12 legacy positions unchanged
+    // and mate items), b05 (S3.2.a: u4l1#2–#5, u4l2, u3l1#5, u3l2#4) and b06 (S3.2.b: u2l1#3, 05 DV2) reuse 13 + 8 + 7 +
+    // 12 + 1 legacy positions unchanged
     // (05 §4): each is a pair of the legacy item and the new item whose `source.legacyRef` names it, and nothing else
     // (T2: the reused position is the legacy one).
     const legacyRefs = new Map(allUnits.flatMap((u) => u.lessons.flatMap((l) => l.exercises)).filter((e) => e.id && e.source?.legacyRef).map((e) => [e.id!, e.source!.legacyRef!]));
     const groups = duplicateGroups(entries).filter((g) => g.some(isNew));
-    const reusePair = (g: string[]) => g.length === 2 && /^b0[2-5]/.test(g[1]) && legacyRefs.get(g[1]) === g[0];
+    const reusePair = (g: string[]) => g.length === 2 && /^b0[2-6]/.test(g[1]) && legacyRefs.get(g[1]) === g[0];
     expect(groups.filter(reusePair).map((g) => g[1]).sort()).toEqual([
       'b02l1-01', 'b02l1-02', 'b02l1-03', 'b02l1-04', 'b02l1-05', 'b02l1-06', 'b02l2-01', 'b02l2-02', 'b02l3-01',
       'b02l3-02', 'b02l3-04', 'b02l3-05', 'b02l3-06', 'b03l1-01', 'b03l1-03', 'b03l1-05', 'b03l2-01', 'b03l2-02',
       'b03l2-04', 'b03l2-06', 'b03l3-02', 'b04l1-01', 'b04l1-02', 'b04l1-04', 'b04l1-06', 'b04l2-01', 'b04l2-02',
       'b04l2-04', 'b05l1-01', 'b05l1-04', 'b05l1-05', 'b05l1-06', 'b05l2-01', 'b05l2-03', 'b05l2-04', 'b05l2-05',
-      'b05l2-06', 'b05l2-07', 'b05l2-08', 'b05l3-01',
+      'b05l2-06', 'b05l2-07', 'b05l2-08', 'b05l3-01', 'b06l2-06',
     ]);
     expect(groups.filter((g) => !reusePair(g))).toEqual([
       ['u1l1#0', 'u1l1#1', 'b01l1-01', 'b01l2-01', 'b01l2-02', 'b09-g1', 'i08-g1'],

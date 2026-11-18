@@ -1,0 +1,704 @@
+{
+  "id": "b06-check",
+  "kind": "check",
+  "unit": "b06",
+  "primaryStrand": "RS",
+  "version": 1,
+  "items": [
+    {
+      "type": "select-squares",
+      "id": "b06-c01",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "d4": "R",
+        "e4": "N",
+        "g4": "P",
+        "c5": "P",
+        "h1": "C",
+        "f9": "k",
+        "i4": "c",
+        "c6": "n",
+        "h8": "r"
+      },
+      "prompt": "b06-c01.prompt",
+      "query": {
+        "kind": "attacked-pieces",
+        "side": "red"
+      },
+      "explanation": "b06-c01.expl",
+      "objective": "b06l1",
+      "unit": "b06"
+    },
+    {
+      "type": "select-squares",
+      "id": "b06-c02",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "e2": "N",
+        "a1": "R",
+        "i0": "C",
+        "d9": "k",
+        "e7": "r",
+        "f4": "c",
+        "a7": "n",
+        "i5": "p",
+        "i8": "r"
+      },
+      "turn": "black",
+      "prompt": "b06-c02.prompt",
+      "query": {
+        "kind": "attacked-pieces",
+        "side": "black"
+      },
+      "explanation": "b06-c02.expl",
+      "objective": "b06l1",
+      "unit": "b06"
+    },
+    {
+      "type": "select-squares",
+      "id": "b06-c03",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "f5": "R",
+        "f7": "P",
+        "d9": "k",
+        "g7": "n",
+        "f8": "c",
+        "d6": "n",
+        "e6": "p"
+      },
+      "prompt": "b06-c03.prompt",
+      "query": {
+        "kind": "can-capture",
+        "target": "f5"
+      },
+      "explanation": "b06-c03.expl",
+      "objective": "b06l1",
+      "unit": "b06"
+    },
+    {
+      "type": "choice",
+      "id": "b06-c04",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b06.m3",
+        "b06.m4"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "h2": "C",
+        "h5": "P",
+        "d4": "N",
+        "d5": "P",
+        "e2": "N",
+        "e3": "P",
+        "d9": "k",
+        "h8": "r",
+        "c6": "n",
+        "e7": "c",
+        "g3": "p"
+      },
+      "turn": "black",
+      "prompt": "b06-c04.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b06-c04.a.t",
+          "correct": true,
+          "feedback": "b06-c04.a"
+        },
+        {
+          "id": "b",
+          "text": "b06-c04.b.t",
+          "correct": false,
+          "feedback": "b06-c04.b",
+          "misconception": "b06.m3"
+        },
+        {
+          "id": "c",
+          "text": "b06-c04.c.t",
+          "correct": false,
+          "feedback": "b06-c04.c",
+          "misconception": "b06.m4"
+        }
+      ],
+      "objective": "b06l1",
+      "unit": "b06"
+    },
+    {
+      "type": "select-squares",
+      "id": "b06-c05",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "e1": "C",
+        "e3": "P",
+        "a5": "R",
+        "g4": "N",
+        "d3": "N",
+        "e9": "k",
+        "e5": "n",
+        "f4": "p",
+        "d8": "r"
+      },
+      "turn": "black",
+      "prompt": "b06-c05.prompt",
+      "query": {
+        "kind": "can-capture",
+        "target": "e5"
+      },
+      "explanation": "b06-c05.expl",
+      "objective": "b06l1",
+      "unit": "b06"
+    },
+    {
+      "type": "select-squares",
+      "id": "b06-c06",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "e3": "R",
+        "c2": "R",
+        "h3": "N",
+        "e9": "k",
+        "e8": "n",
+        "c7": "c",
+        "g5": "p",
+        "i7": "b"
+      },
+      "prompt": "b06-c06.prompt",
+      "query": {
+        "kind": "hanging",
+        "side": "black"
+      },
+      "explanation": "b06-c06.expl",
+      "objective": "b06l2",
+      "unit": "b06"
+    },
+    {
+      "type": "select-squares",
+      "id": "b06-c07",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "b2": "C",
+        "d3": "N",
+        "c3": "P",
+        "e4": "P",
+        "e1": "R",
+        "f9": "k",
+        "b6": "r",
+        "f6": "n"
+      },
+      "turn": "black",
+      "prompt": "b06-c07.prompt",
+      "query": {
+        "kind": "hanging",
+        "side": "red"
+      },
+      "explanation": "b06-c07.expl",
+      "objective": "b06l2",
+      "unit": "b06"
+    },
+    {
+      "type": "capture",
+      "id": "b06-c08",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [
+        "b06.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "g5": "N",
+        "b2": "R",
+        "e9": "k",
+        "e8": "a",
+        "f7": "r",
+        "b7": "n"
+      },
+      "prompt": "b06-c08.prompt",
+      "solution": {
+        "from": "g5",
+        "to": "f7"
+      },
+      "explanation": "b06-c08.expl",
+      "objective": "b06l2",
+      "unit": "b06",
+      "feedback": {
+        "purpose": "b06-c08.purpose",
+        "keyReply": "b06-c08.key",
+        "commonError": "b06-c08.error",
+        "temptingAlternative": {
+          "move": "b2-b7",
+          "text": "b06-c08.tempt"
+        }
+      }
+    },
+    {
+      "type": "choice",
+      "id": "b06-c09",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [
+        "b06.m2",
+        "b06.m4"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "e1": "A",
+        "d2": "N",
+        "c5": "N",
+        "c3": "P",
+        "c1": "C",
+        "d9": "k",
+        "d8": "r",
+        "e5": "r"
+      },
+      "turn": "black",
+      "prompt": "b06-c09.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b06-c09.a.t",
+          "move": "d8-d2",
+          "correct": true,
+          "feedback": "b06-c09.a"
+        },
+        {
+          "id": "b",
+          "text": "b06-c09.b.t",
+          "move": "e5-c5",
+          "correct": false,
+          "feedback": "b06-c09.b",
+          "misconception": "b06.m2"
+        },
+        {
+          "id": "c",
+          "text": "b06-c09.c.t",
+          "correct": false,
+          "feedback": "b06-c09.c",
+          "misconception": "b06.m4"
+        }
+      ],
+      "objective": "b06l2",
+      "unit": "b06"
+    },
+    {
+      "type": "choice",
+      "id": "b06-c10",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b06.m2",
+        "b06.m3"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "f0": "K",
+        "a7": "R",
+        "b4": "N",
+        "b5": "P",
+        "e9": "k",
+        "d7": "n",
+        "e7": "b",
+        "g7": "c",
+        "c6": "r"
+      },
+      "prompt": "b06-c10.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b06-c10.a.t",
+          "correct": true,
+          "feedback": "b06-c10.a"
+        },
+        {
+          "id": "b",
+          "text": "b06-c10.b.t",
+          "correct": false,
+          "feedback": "b06-c10.b",
+          "misconception": "b06.m2"
+        },
+        {
+          "id": "c",
+          "text": "b06-c10.c.t",
+          "correct": false,
+          "feedback": "b06-c10.c",
+          "misconception": "b06.m3"
+        }
+      ],
+      "objective": "b06l2",
+      "unit": "b06"
+    },
+    {
+      "type": "move",
+      "id": "b06-c11",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b06.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "g6": "R",
+        "g1": "C",
+        "g3": "P",
+        "e9": "k",
+        "h8": "n"
+      },
+      "prompt": "b06-c11.prompt",
+      "goal": {
+        "kind": "safe"
+      },
+      "solution": {
+        "from": "g6",
+        "to": "c6"
+      },
+      "explanation": "b06-c11.expl",
+      "objective": "b06l3",
+      "unit": "b06",
+      "feedback": {
+        "purpose": "b06-c11.purpose",
+        "keyReply": "b06-c11.key",
+        "commonError": "b06-c11.error",
+        "temptingAlternative": {
+          "move": "d0-d1",
+          "text": "b06-c11.tempt"
+        }
+      }
+    },
+    {
+      "type": "move",
+      "id": "b06-c12",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "f9": "k",
+        "d6": "n",
+        "a9": "r",
+        "d0": "K",
+        "d2": "R",
+        "g3": "N"
+      },
+      "turn": "black",
+      "prompt": "b06-c12.prompt",
+      "goal": {
+        "kind": "safe"
+      },
+      "solution": {
+        "from": "d6",
+        "to": "c8"
+      },
+      "explanation": "b06-c12.expl",
+      "objective": "b06l3",
+      "unit": "b06",
+      "feedback": {
+        "purpose": "b06-c12.purpose",
+        "keyReply": "b06-c12.key",
+        "commonError": "b06-c12.error",
+        "temptingAlternative": {
+          "move": "d6-e4",
+          "text": "b06-c12.tempt"
+        }
+      }
+    },
+    {
+      "type": "move",
+      "id": "b06-c13",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "c5": "N",
+        "d9": "k",
+        "i5": "c",
+        "g5": "p",
+        "b9": "r"
+      },
+      "prompt": "b06-c13.prompt",
+      "goal": {
+        "kind": "safe"
+      },
+      "solution": {
+        "from": "c5",
+        "to": "e4"
+      },
+      "explanation": "b06-c13.expl",
+      "objective": "b06l3",
+      "unit": "b06",
+      "feedback": {
+        "purpose": "b06-c13.purpose",
+        "keyReply": "b06-c13.key",
+        "commonError": "b06-c13.error",
+        "temptingAlternative": {
+          "move": "c5-b7",
+          "text": "b06-c13.tempt"
+        }
+      }
+    },
+    {
+      "type": "move",
+      "id": "b06-c14",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e9": "k",
+        "g6": "c",
+        "h8": "n",
+        "a6": "r",
+        "d0": "K",
+        "f6": "P",
+        "e4": "N"
+      },
+      "turn": "black",
+      "prompt": "b06-c14.prompt",
+      "goal": {
+        "kind": "safe"
+      },
+      "solution": {
+        "from": "g6",
+        "to": "g9"
+      },
+      "explanation": "b06-c14.expl",
+      "objective": "b06l3",
+      "unit": "b06",
+      "feedback": {
+        "purpose": "b06-c14.purpose",
+        "keyReply": "b06-c14.key",
+        "commonError": "b06-c14.error",
+        "temptingAlternative": {
+          "move": "a6-f6",
+          "text": "b06-c14.tempt"
+        }
+      }
+    },
+    {
+      "type": "choice",
+      "id": "b06-c15",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b06.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "e5": "R",
+        "g6": "P",
+        "i0": "R",
+        "d9": "k",
+        "f7": "n"
+      },
+      "prompt": "b06-c15.prompt",
+      "multi": true,
+      "options": [
+        {
+          "id": "a",
+          "text": "b06-c15.a.t",
+          "move": "e5-e4",
+          "correct": true,
+          "feedback": "b06-c15.a"
+        },
+        {
+          "id": "b",
+          "text": "b06-c15.b.t",
+          "move": "g6-f6",
+          "correct": true,
+          "feedback": "b06-c15.b"
+        },
+        {
+          "id": "c",
+          "text": "b06-c15.c.t",
+          "move": "i0-i5",
+          "correct": false,
+          "feedback": "b06-c15.c",
+          "misconception": "b06.m1"
+        }
+      ],
+      "objective": "b06l3",
+      "unit": "b06"
+    },
+    {
+      "type": "move",
+      "id": "b06-c16",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "f9": "k",
+        "c8": "r",
+        "c6": "n",
+        "e0": "K",
+        "c1": "C",
+        "g2": "R"
+      },
+      "turn": "black",
+      "prompt": "b06-c16.prompt",
+      "goal": {
+        "kind": "safe"
+      },
+      "solution": {
+        "from": "c8",
+        "to": "d8"
+      },
+      "explanation": "b06-c16.expl",
+      "objective": "b06l3",
+      "unit": "b06",
+      "feedback": {
+        "purpose": "b06-c16.purpose",
+        "keyReply": "b06-c16.key",
+        "commonError": "b06-c16.error",
+        "temptingAlternative": {
+          "move": "c8-c7",
+          "text": "b06-c16.tempt"
+        }
+      }
+    }
+  ]
+}

@@ -3335,6 +3335,429 @@ export const messages = {
     vi: 'Không: một nước chiếu mà Tướng chỉ việc bước tránh có thể làm phí một nước.',
   },
 
+  // ---------- New course: b06 "Threatened, undefended and defended pieces" (S3.2.b; lessons b06l1–b06l3 + check pool b06-check) ----------
+  'b06.title': { en: 'Threatened, undefended and defended pieces', vi: 'Quân bị tấn công, quân không được bảo vệ và quân được bảo vệ' },
+  'b06.desc': {
+    en: 'See every piece that is attacked, tell a free piece from a defended one, and save a threatened piece without losing anything.',
+    vi: 'Nhìn ra mọi quân đang bị tấn công, phân biệt quân ăn không mất gì với quân được bảo vệ, và cứu một quân bị đe dọa mà không mất gì.',
+  },
+  'b06l1.title': { en: 'What is attacked?', vi: 'Quân nào bị tấn công?' },
+  'b06l2.title': { en: 'Defended or hanging?', vi: 'Được bảo vệ hay bỏ ngỏ?' },
+  'b06l3.title': { en: 'Saving a threatened piece', vi: 'Cứu một quân bị đe dọa' },
+  'b06l1-01.text': {
+    en: 'A piece is attacked when the other side could capture it on its next move. Black’s Chariot attacks your Horse along the file and your Cannon along the rank (highlighted). Your Chariot is not attacked: no Black piece can reach it.',
+    vi: 'Một quân bị tấn công khi bên kia có thể ăn nó ở nước đi tới. Xe Đen tấn công Mã của bạn theo cột và Pháo của bạn theo hàng ngang (được tô sáng). Xe của bạn không bị tấn công: không quân Đen nào với tới nó.',
+  },
+  'b06l1-02.text': {
+    en: 'Look behind the screen. Your Soldier stands in front of Black’s Cannon, and that Soldier is exactly the screen a Cannon needs: the Cannon attacks your Chariot behind it (highlighted). A Cannon with one piece in front of it is dangerous, not blocked.',
+    vi: 'Hãy nhìn ra sau ngòi. Quân Tốt của bạn đứng trước Pháo Đen, và quân Tốt đó chính là ngòi mà Pháo cần: Pháo tấn công Xe của bạn ở phía sau (được tô sáng). Pháo có đúng một quân đứng trước là nguy hiểm, không phải bị chặn.',
+  },
+  'b06l1-03.text': {
+    en: 'A hobbled Horse does nothing in that direction. Black’s Horse attacks your Cannon, but not your Chariot: its own Soldier stands on the leg point it would jump past (highlighted). A blocked leg point means the Horse neither attacks nor defends that way.',
+    vi: 'Mã bị cản thì không làm được gì theo hướng đó. Mã Đen tấn công Pháo của bạn, nhưng không tấn công Xe: quân Tốt của chính nó đứng ở điểm chân Mã mà nó phải đi qua (được tô sáng). Chân Mã bị chặn nghĩa là Mã không tấn công cũng không bảo vệ theo hướng ấy.',
+  },
+  'b06l1-04.prompt': { en: 'Tap every one of your pieces that Black can capture now.', vi: 'Chạm vào mọi quân của bạn mà bên Đen ăn được ngay bây giờ.' },
+  'b06l1-04.expl': {
+    en: 'Black’s Chariot attacks your Horse down the file and your Soldier along the rank; Black’s Horse attacks that Soldier too. Your Chariot and your Cannon are out of reach.',
+    vi: 'Xe Đen tấn công Mã của bạn theo cột và quân Tốt của bạn theo hàng ngang; Mã Đen cũng tấn công quân Tốt đó. Xe và Pháo của bạn nằm ngoài tầm.',
+  },
+  'b06l1-05.prompt': { en: 'Tap every one of your pieces that Red can capture now.', vi: 'Chạm vào mọi quân của bạn mà bên Đỏ ăn được ngay bây giờ.' },
+  'b06l1-05.expl': {
+    en: 'Red’s Chariot attacks your Horse along the file, and Red’s Cannon attacks your Chariot over Red’s own Soldier, its screen. Your Cannon is out of reach.',
+    vi: 'Xe Đỏ tấn công Mã của bạn theo cột, và Pháo Đỏ tấn công Xe của bạn qua quân Tốt của chính bên Đỏ, là ngòi của nó. Pháo của bạn nằm ngoài tầm.',
+  },
+  'b06l1-06.prompt': { en: 'Tap every one of your pieces that Black can capture now.', vi: 'Chạm vào mọi quân của bạn mà bên Đen ăn được ngay bây giờ.' },
+  'b06l1-06.expl': {
+    en: 'Black’s Cannon attacks your Horse over your Soldier, and Black’s Chariot and Horse both attack your Soldier on the edge. Your Chariot is safe: Black’s own Soldier blocks the Horse’s leg point.',
+    vi: 'Pháo Đen tấn công Mã của bạn qua quân Tốt của bạn, còn Xe Đen và Mã Đen cùng tấn công quân Tốt ở biên của bạn. Xe của bạn an toàn: quân Tốt của chính bên Đen chặn điểm chân Mã.',
+  },
+  'b06l1-07.prompt': { en: 'How many of your pieces can Red capture now?', vi: 'Bên Đỏ ăn được bao nhiêu quân của bạn ngay bây giờ?' },
+  'b06l1-07.a.t': { en: 'Two', vi: 'Hai' },
+  'b06l1-07.a': {
+    en: 'Right: Red’s Chariot attacks your Cannon, and Red’s Cannon attacks your Horse over Red’s Soldier.',
+    vi: 'Đúng: Xe Đỏ tấn công Pháo của bạn, và Pháo Đỏ tấn công Mã của bạn qua quân Tốt Đỏ.',
+  },
+  'b06l1-07.b.t': { en: 'One', vi: 'Một' },
+  'b06l1-07.b': {
+    en: 'No: you missed Red’s Cannon. The Soldier in front of it is its screen, so it attacks your Horse behind.',
+    vi: 'Không: bạn bỏ sót Pháo Đỏ. Quân Tốt trước mặt nó là ngòi, nên nó tấn công Mã của bạn ở phía sau.',
+  },
+  'b06l1-07.c.t': { en: 'Three', vi: 'Ba' },
+  'b06l1-07.c': {
+    en: 'No: Red’s Horse cannot reach your Chariot. Red’s own Soldier stands on its leg point.',
+    vi: 'Không: Mã Đỏ không với tới Xe của bạn. Quân Tốt của chính bên Đỏ đứng ở điểm chân Mã.',
+  },
+  'b06l1-08.prompt': { en: 'Tap every one of your pieces that Red can capture now.', vi: 'Chạm vào mọi quân của bạn mà bên Đỏ ăn được ngay bây giờ.' },
+  'b06l1-08.expl': {
+    en: 'Red’s Cannon attacks your Horse over Red’s Soldier, and Red’s Chariot attacks your Soldier on the edge file. Red’s Horse cannot reach your Elephant: your Cannon stands on its leg point.',
+    vi: 'Pháo Đỏ tấn công Mã của bạn qua quân Tốt Đỏ, và Xe Đỏ tấn công quân Tốt của bạn ở cột biên. Mã Đỏ không với tới Tượng của bạn: Pháo của bạn đứng ở điểm chân Mã.',
+  },
+  'b06l2-01.text': {
+    en: 'Attacked is not the whole story: count who can take back. Your Chariot attacks two pieces. The Horse is defended: if you take it, Black’s Chariot takes back, and you have given a Chariot for a Horse. The Soldier on the edge has no defender at all. A piece like that is hanging: you can take it for free.',
+    vi: 'Bị tấn công chưa phải là tất cả: hãy đếm xem ai ăn lại được. Xe của bạn tấn công hai quân. Quân Mã được bảo vệ: nếu bạn ăn nó, Xe Đen ăn lại, và bạn đã đổi Xe lấy Mã. Quân Tốt ở biên không có quân nào bảo vệ. Quân như vậy là quân bỏ ngỏ: bạn ăn được mà không mất gì.',
+  },
+  'b06l2-02.text': {
+    en: 'Defended does not mean safe. Your Horse attacks Black’s Chariot, and Black’s Advisor defends it. Take it anyway: the Advisor takes your Horse back, but you have won a Chariot for a Horse. When the attacker is worth less than the target, a defender does not save it.',
+    vi: 'Được bảo vệ không có nghĩa là an toàn. Mã của bạn tấn công Xe Đen, và Sĩ Đen bảo vệ nó. Cứ ăn đi: Sĩ ăn lại Mã của bạn, nhưng bạn đã được Xe mà chỉ mất Mã. Khi quân tấn công rẻ hơn quân bị tấn công, quân bảo vệ không cứu được nó.',
+  },
+  'b06l2-03.text': {
+    en: 'A pinned piece does not defend. Black’s Advisor seems to protect the Horse, but your Chariot on the middle file pins it: if the Advisor left that file, your Chariot would attack Black’s General, so the recapture is illegal. Your other Chariot can take the Horse for free.',
+    vi: 'Quân bị ghim thì không bảo vệ được. Sĩ Đen có vẻ bảo vệ quân Mã, nhưng Xe của bạn ở cột giữa ghim nó: nếu Sĩ rời cột đó, Xe của bạn sẽ tấn công Tướng Đen, nên nước ăn lại là không hợp lệ. Xe còn lại của bạn ăn được quân Mã mà không mất gì.',
+  },
+  'b06l2-04.prompt': {
+    en: 'Tap every Black piece you can capture for free (nothing can take back).',
+    vi: 'Chạm vào mọi quân Đen mà bạn ăn được không mất gì (không quân nào ăn lại được).',
+  },
+  'b06l2-04.expl': {
+    en: 'Your Chariot attacks the Horse and the Cannon. Nothing defends the Horse, but Black’s Chariot defends the Cannon along the file.',
+    vi: 'Xe của bạn tấn công quân Mã và quân Pháo. Không quân nào bảo vệ quân Mã, nhưng Xe Đen bảo vệ quân Pháo theo cột.',
+  },
+  'b06l2-05.prompt': {
+    en: 'Tap every Red piece you can capture for free (nothing can take back).',
+    vi: 'Chạm vào mọi quân Đỏ mà bạn ăn được không mất gì (không quân nào ăn lại được).',
+  },
+  'b06l2-05.expl': {
+    en: 'Your Chariot attacks the Cannon and a Soldier. Nothing defends the Cannon; the Soldier beside it defends that Soldier, because a Soldier across the river also moves sideways.',
+    vi: 'Xe của bạn tấn công quân Pháo và một quân Tốt. Không quân nào bảo vệ quân Pháo; quân Tốt đứng cạnh bảo vệ quân Tốt kia, vì Tốt đã qua sông đi ngang được.',
+  },
+  'b06l2-06.prompt': {
+    en: 'Black’s Horse is defended by Black’s Chariot. Find the capture that wins material.',
+    vi: 'Mã Đen được Xe Đen bảo vệ. Hãy tìm nước ăn quân được lợi.',
+  },
+  'b06l2-06.purpose': { en: 'The Cannon has no defender, so you win it for nothing.', vi: 'Quân Pháo không có quân bảo vệ, nên bạn được nó mà không mất gì.' },
+  'b06l2-06.key': { en: 'No Black piece can take back on that point.', vi: 'Không quân Đen nào ăn lại được ở điểm đó.' },
+  'b06l2-06.error': {
+    en: 'Before you capture, count the defenders: take the piece nobody can take back.',
+    vi: 'Trước khi ăn, hãy đếm quân bảo vệ: ăn quân mà không ai ăn lại được.',
+  },
+  'b06l2-06.tempt': { en: 'Black’s Chariot takes back: you give your Chariot for a Horse.', vi: 'Xe Đen ăn lại: bạn mất Xe để đổi lấy một quân Mã.' },
+  'b06l2-06.expl': {
+    en: 'Your Chariot takes the undefended Cannon. Taking the Horse would lose your Chariot to Black’s Chariot.',
+    vi: 'Xe của bạn ăn quân Pháo không được bảo vệ. Nếu ăn quân Mã, bạn sẽ mất Xe vào tay Xe Đen.',
+  },
+  'b06l2-07.prompt': {
+    en: 'Your Horse attacks Red’s Chariot, which Red’s Advisor defends. What should you do?',
+    vi: 'Mã của bạn tấn công Xe Đỏ, quân được Sĩ Đỏ bảo vệ. Bạn nên làm gì?',
+  },
+  'b06l2-07.a.t': { en: 'Take the Chariot', vi: 'Ăn quân Xe' },
+  'b06l2-07.a': { en: 'Right: the Advisor takes back, but you have given a Horse for a Chariot.', vi: 'Đúng: Sĩ ăn lại, nhưng bạn chỉ mất Mã mà được Xe.' },
+  'b06l2-07.b.t': { en: 'Leave it: a defended piece cannot be won', vi: 'Để yên: quân được bảo vệ thì không ăn được' },
+  'b06l2-07.b': {
+    en: 'No: the defender only takes your Horse back. A Horse for a Chariot is still a big gain.',
+    vi: 'Không: quân bảo vệ chỉ ăn lại được Mã của bạn. Mất Mã được Xe vẫn là lợi lớn.',
+  },
+  'b06l2-07.c.t': { en: 'Take the Soldier instead', vi: 'Ăn quân Tốt thay vào đó' },
+  'b06l2-07.c': {
+    en: 'No: Red’s Cannon takes back over its other Soldier, and you lose your Horse for a Soldier.',
+    vi: 'Không: Pháo Đỏ ăn lại qua quân Tốt còn lại, và bạn mất Mã chỉ để được một quân Tốt.',
+  },
+  'b06l2-08.prompt': { en: 'Which Black piece can you capture for free?', vi: 'Bạn ăn được quân Đen nào mà không mất gì?' },
+  'b06l2-08.a.t': { en: 'None of them', vi: 'Không quân nào' },
+  'b06l2-08.a': {
+    en: 'Right: Black’s Cannon defends the Elephant over the Horse, and your Horse cannot move: it is pinned to your General.',
+    vi: 'Đúng: Pháo Đen bảo vệ quân Tượng qua quân Mã, còn Mã của bạn không đi được: nó bị ghim vào Tướng của bạn.',
+  },
+  'b06l2-08.b.t': { en: 'Black’s Elephant', vi: 'Tượng Đen' },
+  'b06l2-08.b': {
+    en: 'No: Black’s Cannon takes back, jumping over its own Horse, which is its screen. You would lose your Chariot for an Elephant.',
+    vi: 'Không: Pháo Đen ăn lại bằng cách nhảy qua quân Mã của chính nó, là ngòi của nó. Bạn sẽ mất Xe để đổi lấy Tượng.',
+  },
+  'b06l2-08.c.t': { en: 'Black’s Soldier', vi: 'Tốt Đen' },
+  'b06l2-08.c': {
+    en: 'No: only your Horse could reach it, and your Horse is pinned. If it moved, Black’s Chariot would attack your General, so the capture is illegal.',
+    vi: 'Không: chỉ Mã của bạn với tới được, mà Mã đang bị ghim. Nếu nó đi, Xe Đen sẽ tấn công Tướng của bạn, nên nước ăn đó không hợp lệ.',
+  },
+  'b06l3-01.text': {
+    en: 'When one of your pieces is attacked, you have four answers: move it away (the dots show your Horse’s moves), defend it, block the line of attack, or make a bigger threat of your own. Whichever you choose, check that nothing is left hanging afterwards.',
+    vi: 'Khi một quân của bạn bị tấn công, bạn có bốn cách đáp: đưa nó đi chỗ khác (các chấm là nước đi của Mã), bảo vệ nó, chặn đường tấn công, hoặc tạo một đe dọa lớn hơn. Chọn cách nào thì cũng hãy kiểm tra xem sau đó có quân nào bị bỏ ngỏ không.',
+  },
+  'b06l3-02.text': {
+    en: 'Defending is not always enough. Black’s Horse attacks your Chariot. Your Advisor defends it, but losing a Chariot for a Horse is still a bad trade. Against a cheaper attacker, move the piece away (the dots).',
+    vi: 'Bảo vệ không phải lúc nào cũng đủ. Mã Đen tấn công Xe của bạn. Sĩ của bạn bảo vệ nó, nhưng mất Xe để được Mã vẫn là đổi thiệt. Khi quân tấn công rẻ hơn, hãy đưa quân của bạn đi chỗ khác (các chấm).',
+  },
+  'b06l3-03.prompt': {
+    en: 'Black’s Chariot attacks your Cannon. Move the Cannon to a safe point.',
+    vi: 'Xe Đen tấn công Pháo của bạn. Hãy đưa Pháo tới một điểm an toàn.',
+  },
+  'b06l3-03.expl': {
+    en: 'Off the file, your Cannon is out of the Chariot’s reach, and no other Black piece attacks it.',
+    vi: 'Ra khỏi cột đó, Pháo của bạn nằm ngoài tầm của Xe, và không quân Đen nào khác tấn công nó.',
+  },
+  'b06l3-04.prompt': {
+    en: 'Red’s Chariot attacks your Horse. Save it: move it or defend it.',
+    vi: 'Xe Đỏ tấn công Mã của bạn. Hãy cứu nó: đưa nó đi hoặc bảo vệ nó.',
+  },
+  'b06l3-04.expl': {
+    en: 'A Horse off the Chariot’s file is safe, and so is a Horse your Chariot defends: Red would give a Chariot for a Horse.',
+    vi: 'Mã ra khỏi cột của Xe thì an toàn, và Mã được Xe của bạn bảo vệ cũng vậy: bên Đỏ sẽ phải đổi Xe lấy Mã.',
+  },
+  'b06l3-05.prompt': {
+    en: 'Black’s Cannon attacks your Chariot. Save it without losing anything.',
+    vi: 'Pháo Đen tấn công Xe của bạn. Hãy cứu nó mà không mất gì.',
+  },
+  'b06l3-05.purpose': {
+    en: 'After your move, Black’s Cannon can no longer take your Chariot.',
+    vi: 'Sau nước đi của bạn, Pháo Đen không còn ăn được Xe của bạn.',
+  },
+  'b06l3-05.key': { en: 'Black has no capture that wins material.', vi: 'Bên Đen không có nước ăn quân nào được lợi.' },
+  'b06l3-05.error': {
+    en: 'Your Horse defends the Chariot, but a Cannon for a Chariot still wins for Black. Move the Chariot off the file, or take the screen away.',
+    vi: 'Mã của bạn bảo vệ Xe, nhưng đổi Pháo lấy Xe thì bên Đen vẫn lợi. Hãy đưa Xe ra khỏi cột, hoặc đưa ngòi đi.',
+  },
+  'b06l3-05.tempt': {
+    en: 'Your Chariot is still on the file behind your Soldier: the Cannon jumps over the Soldier and takes it.',
+    vi: 'Xe của bạn vẫn ở trên cột, phía sau quân Tốt: Pháo nhảy qua quân Tốt và ăn nó.',
+  },
+  'b06l3-05.expl': {
+    en: 'Moving the Chariot sideways ends the attack, and so does moving the Soldier that is the Cannon’s screen.',
+    vi: 'Đưa Xe sang ngang là hết bị tấn công, và đưa quân Tốt đang làm ngòi cho Pháo đi chỗ khác cũng vậy.',
+  },
+  'b06l3-06.prompt': {
+    en: 'Red’s Cannon attacks your Chariot over your Horse. Which moves save the Chariot? Tick all of them.',
+    vi: 'Pháo Đỏ tấn công Xe của bạn qua quân Mã của bạn. Những nước nào cứu được Xe? Hãy chọn tất cả.',
+  },
+  'b06l3-06.a.t': { en: 'Move the Chariot along the rank', vi: 'Đưa Xe đi theo hàng ngang' },
+  'b06l3-06.a': { en: 'Right: off the file, the Chariot is out of the Cannon’s reach.', vi: 'Đúng: ra khỏi cột, Xe nằm ngoài tầm của Pháo.' },
+  'b06l3-06.b.t': { en: 'Put your other Horse in front of the Chariot', vi: 'Đặt quân Mã kia trước mặt Xe' },
+  'b06l3-06.b': {
+    en: 'Right: now there are two pieces between the Cannon and your Chariot, so it cannot capture.',
+    vi: 'Đúng: giờ giữa Pháo và Xe của bạn có hai quân, nên Pháo không ăn được.',
+  },
+  'b06l3-06.c.t': { en: 'Defend the Chariot with your other Chariot', vi: 'Dùng Xe kia bảo vệ Xe này' },
+  'b06l3-06.c': {
+    en: 'No: the Cannon takes your Chariot anyway, and taking back wins only a Cannon.',
+    vi: 'Không: Pháo vẫn ăn Xe của bạn, và ăn lại thì bạn chỉ được một quân Pháo.',
+  },
+  'b06l3-07.prompt': {
+    en: 'Black’s Soldier attacks your Chariot. Save it without losing anything.',
+    vi: 'Tốt Đen tấn công Xe của bạn. Hãy cứu nó mà không mất gì.',
+  },
+  'b06l3-07.purpose': {
+    en: 'After your move, Black has no way to win your Chariot.',
+    vi: 'Sau nước đi của bạn, bên Đen không có cách nào ăn được Xe của bạn.',
+  },
+  'b06l3-07.key': { en: 'Black has no capture that wins material.', vi: 'Bên Đen không có nước ăn quân nào được lợi.' },
+  'b06l3-07.error': {
+    en: 'Your Horse defends the Chariot, but a Soldier for a Chariot is a terrible trade. Move the Chariot to a point nothing attacks.',
+    vi: 'Mã của bạn bảo vệ Xe, nhưng mất Xe để được Tốt là đổi rất thiệt. Hãy đưa Xe tới một điểm không quân nào tấn công.',
+  },
+  'b06l3-07.tempt': { en: 'Black’s Horse takes back: you win a Soldier and lose your Chariot.', vi: 'Mã Đen ăn lại: bạn được một quân Tốt và mất Xe.' },
+  'b06l3-07.expl': {
+    en: 'A cheap attacker wins even a defended piece, so the Chariot has to get out of reach. Watch the points Black’s Horse covers.',
+    vi: 'Quân tấn công rẻ vẫn ăn được cả quân được bảo vệ, nên Xe phải ra khỏi tầm. Hãy để ý các điểm Mã Đen kiểm soát.',
+  },
+  'b06l3-08.prompt': {
+    en: 'Red has just moved a Cannon to the edge file. One of your pieces is now attacked: save it without losing anything.',
+    vi: 'Bên Đỏ vừa đưa một quân Pháo sang cột biên. Một quân của bạn đang bị tấn công: hãy cứu nó mà không mất gì.',
+  },
+  'b06l3-08.purpose': {
+    en: 'A Cannon needs exactly one screen. A second piece between it and your Chariot ends the attack.',
+    vi: 'Pháo cần đúng một ngòi. Thêm một quân nữa vào giữa nó và Xe của bạn là hết bị tấn công.',
+  },
+  'b06l3-08.key': { en: 'Red has no capture that wins material.', vi: 'Bên Đỏ không có nước ăn quân nào được lợi.' },
+  'b06l3-08.error': {
+    en: 'Look along the edge file: Red’s Cannon attacks your Chariot over your own Soldier.',
+    vi: 'Hãy nhìn dọc cột biên: Pháo Đỏ tấn công Xe của bạn qua quân Tốt của chính bạn.',
+  },
+  'b06l3-08.tempt': {
+    en: 'Your Chariot is still on the Cannon’s file: the Cannon jumps over your Soldier and takes it.',
+    vi: 'Xe của bạn vẫn ở trên cột của Pháo: Pháo nhảy qua quân Tốt của bạn và ăn nó.',
+  },
+  'b06l3-08.expl': {
+    en: 'Your Chariot cannot step aside, because your Horse is in the way, so block: put your Horse, your Elephant or your Cannon between Red’s Cannon and your Chariot. With two pieces to jump, the Cannon cannot capture.',
+    vi: 'Xe của bạn không bước sang bên được vì quân Mã đứng chắn, nên hãy chặn: đưa Mã, Tượng hoặc Pháo của bạn vào giữa Pháo Đỏ và Xe của bạn. Phải nhảy qua hai quân thì Pháo không ăn được.',
+  },
+  'b06-c01.prompt': { en: 'Tap every one of your pieces that Black can capture now.', vi: 'Chạm vào mọi quân của bạn mà bên Đen ăn được ngay bây giờ.' },
+  'b06-c01.expl': {
+    en: 'Black’s Chariot attacks your Cannon down the file, and Black’s Cannon attacks your Horse over your Soldier. Black’s Horse cannot reach your Chariot: your other Soldier stands on its leg point.',
+    vi: 'Xe Đen tấn công Pháo của bạn theo cột, và Pháo Đen tấn công Mã của bạn qua quân Tốt của bạn. Mã Đen không với tới Xe của bạn: quân Tốt còn lại của bạn đứng ở điểm chân Mã.',
+  },
+  'b06-c02.prompt': { en: 'Tap every one of your pieces that Red can capture now.', vi: 'Chạm vào mọi quân của bạn mà bên Đỏ ăn được ngay bây giờ.' },
+  'b06-c02.expl': {
+    en: 'Red’s Chariot attacks your Horse up the edge file, and Red’s Cannon attacks your Chariot over your Soldier. Red’s Horse cannot take your Cannon: it is pinned, because your other Chariot would then attack Red’s General.',
+    vi: 'Xe Đỏ tấn công Mã của bạn theo cột biên, và Pháo Đỏ tấn công Xe của bạn qua quân Tốt của bạn. Mã Đỏ không ăn được Pháo của bạn: nó bị ghim, vì khi đó Xe còn lại của bạn sẽ tấn công Tướng Đỏ.',
+  },
+  'b06-c03.prompt': { en: 'Tap every Black piece that can capture your Chariot.', vi: 'Chạm vào mọi quân Đen có thể ăn Xe của bạn.' },
+  'b06-c03.expl': {
+    en: 'One Black Horse reaches it through a free leg point, and Black’s Cannon reaches it over your Soldier. The other Horse is hobbled: Black’s own Soldier stands on its leg point.',
+    vi: 'Một quân Mã Đen với tới nó qua điểm chân Mã trống, và Pháo Đen với tới nó qua quân Tốt của bạn. Quân Mã kia bị cản: quân Tốt của chính bên Đen đứng ở điểm chân Mã.',
+  },
+  'b06-c04.prompt': { en: 'Which of your pieces can Red capture now?', vi: 'Bên Đỏ ăn được quân nào của bạn ngay bây giờ?' },
+  'b06-c04.a.t': { en: 'Your Chariot', vi: 'Xe của bạn' },
+  'b06-c04.a': { en: 'Right: Red’s Cannon attacks it over Red’s Soldier.', vi: 'Đúng: Pháo Đỏ tấn công nó qua quân Tốt Đỏ.' },
+  'b06-c04.b.t': { en: 'Your Horse', vi: 'Mã của bạn' },
+  'b06-c04.b': {
+    en: 'No: Red’s Horse cannot reach it. Red’s own Soldier stands on that Horse’s leg point.',
+    vi: 'Không: Mã Đỏ không với tới nó. Quân Tốt của chính bên Đỏ đứng ở điểm chân của quân Mã đó.',
+  },
+  'b06-c04.c.t': { en: 'Your Soldier', vi: 'Tốt của bạn' },
+  'b06-c04.c': {
+    en: 'No: the Red Horse beside it is pinned. If it moved, your Cannon would check Red’s General over the Soldier in front of it, so it cannot take.',
+    vi: 'Không: quân Mã Đỏ gần đó bị ghim. Nếu nó đi, Pháo của bạn sẽ chiếu Tướng Đỏ qua quân Tốt đứng trước, nên nó không ăn được.',
+  },
+  'b06-c05.prompt': { en: 'Tap every Red piece that can capture your Horse.', vi: 'Chạm vào mọi quân Đỏ có thể ăn Mã của bạn.' },
+  'b06-c05.expl': {
+    en: 'Red’s Chariot reaches it along the rank, and Red’s Cannon over Red’s Soldier. One Red Horse is hobbled by your Soldier on its leg point, and the other is pinned: if it moved, your Chariot would attack Red’s General.',
+    vi: 'Xe Đỏ với tới nó theo hàng ngang, và Pháo Đỏ với tới qua quân Tốt Đỏ. Một quân Mã Đỏ bị quân Tốt của bạn cản ở điểm chân Mã, còn quân kia bị ghim: nếu nó đi, Xe của bạn sẽ tấn công Tướng Đỏ.',
+  },
+  'b06-c06.prompt': {
+    en: 'Tap every Black piece you can capture for free (nothing can take back).',
+    vi: 'Chạm vào mọi quân Đen mà bạn ăn được không mất gì (không quân nào ăn lại được).',
+  },
+  'b06-c06.expl': {
+    en: 'Your Chariot attacks the Cannon, and the Horse that seems to defend it is pinned by your other Chariot: it cannot leave the General’s file. The Soldier your Horse attacks is defended by the Elephant.',
+    vi: 'Xe của bạn tấn công quân Pháo, và quân Mã có vẻ bảo vệ nó lại bị Xe còn lại của bạn ghim: nó không rời được cột của Tướng. Quân Tốt mà Mã của bạn tấn công được Tượng bảo vệ.',
+  },
+  'b06-c07.prompt': {
+    en: 'Tap every Red piece you can capture for free (nothing can take back).',
+    vi: 'Chạm vào mọi quân Đỏ mà bạn ăn được không mất gì (không quân nào ăn lại được).',
+  },
+  'b06-c07.expl': {
+    en: 'Your Chariot attacks the Cannon, and Red’s Horse cannot defend it: Red’s own Soldier blocks its leg point. The Soldier your Horse attacks is defended by Red’s Chariot.',
+    vi: 'Xe của bạn tấn công quân Pháo, và Mã Đỏ không bảo vệ được nó: quân Tốt của chính bên Đỏ chặn điểm chân Mã. Quân Tốt mà Mã của bạn tấn công được Xe Đỏ bảo vệ.',
+  },
+  'b06-c08.prompt': { en: 'Win material with a capture.', vi: 'Hãy ăn một quân để được lợi.' },
+  'b06-c08.purpose': {
+    en: 'Your Horse is worth much less than the Chariot, so the trade wins material even though the Advisor takes back.',
+    vi: 'Mã của bạn kém giá trị hơn Xe nhiều, nên cuộc đổi này vẫn được lợi dù Sĩ ăn lại.',
+  },
+  'b06-c08.key': { en: 'After the Advisor takes your Horse, you are still well ahead.', vi: 'Sau khi Sĩ ăn Mã của bạn, bạn vẫn hơn nhiều.' },
+  'b06-c08.error': {
+    en: 'A defended piece can still be won: capture it with a cheaper piece.',
+    vi: 'Quân được bảo vệ vẫn có thể ăn được: hãy ăn nó bằng một quân rẻ hơn.',
+  },
+  'b06-c08.tempt': {
+    en: 'Black’s Chariot takes back along the rank: you lose your Chariot for a Horse.',
+    vi: 'Xe Đen ăn lại theo hàng ngang: bạn mất Xe để được một quân Mã.',
+  },
+  'b06-c08.expl': { en: 'Horse takes Chariot, Advisor takes Horse: you gave a Horse for a Chariot.', vi: 'Mã ăn Xe, Sĩ ăn Mã: bạn mất Mã mà được Xe.' },
+  'b06-c09.prompt': { en: 'Which capture wins a Red piece for free?', vi: 'Nước ăn nào được một quân Đỏ mà không mất gì?' },
+  'b06-c09.a.t': { en: 'Take the Horse next to the Advisor', vi: 'Ăn quân Mã cạnh Sĩ' },
+  'b06-c09.a': {
+    en: 'Right: only the Advisor defends that Horse, and the Advisor is pinned. If it left its file, your other Chariot would attack Red’s General.',
+    vi: 'Đúng: chỉ có Sĩ bảo vệ quân Mã đó, mà Sĩ đang bị ghim. Nếu nó rời cột, Xe còn lại của bạn sẽ tấn công Tướng Đỏ.',
+  },
+  'b06-c09.b.t': { en: 'Take the Horse in front of the Soldier', vi: 'Ăn quân Mã trước quân Tốt' },
+  'b06-c09.b': {
+    en: 'No: Red’s Cannon takes back over its Soldier, and you lose your Chariot for a Horse.',
+    vi: 'Không: Pháo Đỏ ăn lại qua quân Tốt, và bạn mất Xe để được một quân Mã.',
+  },
+  'b06-c09.c.t': { en: 'None: every Red piece is defended', vi: 'Không nước nào: quân Đỏ nào cũng được bảo vệ' },
+  'b06-c09.c': {
+    en: 'No: Red’s Advisor seems to defend the Horse beside it, but it is pinned to its General, so that Horse is free.',
+    vi: 'Không: Sĩ Đỏ có vẻ bảo vệ quân Mã bên cạnh, nhưng nó bị ghim vào Tướng, nên quân Mã đó ăn không mất gì.',
+  },
+  'b06-c10.prompt': { en: 'Which Black piece can you capture for free?', vi: 'Bạn ăn được quân Đen nào mà không mất gì?' },
+  'b06-c10.a.t': { en: 'None of them', vi: 'Không quân nào' },
+  'b06-c10.a': {
+    en: 'Right: Black’s Cannon defends the Horse over the Elephant, and your Horse cannot reach the Chariot: your Soldier blocks its leg point.',
+    vi: 'Đúng: Pháo Đen bảo vệ quân Mã qua quân Tượng, còn Mã của bạn không với tới quân Xe: quân Tốt của bạn chặn điểm chân Mã.',
+  },
+  'b06-c10.b.t': { en: 'Black’s Horse', vi: 'Mã Đen' },
+  'b06-c10.b': {
+    en: 'No: Black’s Cannon takes back over its Elephant, and you lose your Chariot for a Horse.',
+    vi: 'Không: Pháo Đen ăn lại qua quân Tượng, và bạn mất Xe để được một quân Mã.',
+  },
+  'b06-c10.c.t': { en: 'Black’s Chariot', vi: 'Xe Đen' },
+  'b06-c10.c': {
+    en: 'No: your Horse cannot get there. Your own Soldier stands on its leg point.',
+    vi: 'Không: Mã của bạn không tới đó được. Quân Tốt của chính bạn đứng ở điểm chân Mã.',
+  },
+  'b06-c11.prompt': {
+    en: 'Black’s Horse attacks your Chariot. Save it without losing anything.',
+    vi: 'Mã Đen tấn công Xe của bạn. Hãy cứu nó mà không mất gì.',
+  },
+  'b06-c11.purpose': {
+    en: 'Your Chariot leaves the Horse’s reach, and nothing else attacks it.',
+    vi: 'Xe của bạn ra khỏi tầm của Mã, và không quân nào khác tấn công nó.',
+  },
+  'b06-c11.key': { en: 'Black has no capture that wins material.', vi: 'Bên Đen không có nước ăn quân nào được lợi.' },
+  'b06-c11.error': {
+    en: 'Your Cannon defends the Chariot, but a Horse for a Chariot still wins for Black. Move the Chariot.',
+    vi: 'Pháo của bạn bảo vệ Xe, nhưng đổi Mã lấy Xe thì bên Đen vẫn lợi. Hãy đưa Xe đi.',
+  },
+  'b06-c11.tempt': {
+    en: 'Your Chariot stays where it is: Black’s Horse takes it, and taking back with the Cannon wins only a Horse.',
+    vi: 'Xe của bạn vẫn đứng yên: Mã Đen ăn nó, và Pháo ăn lại thì bạn chỉ được một quân Mã.',
+  },
+  'b06-c11.expl': {
+    en: 'Against a cheaper attacker, defending is not enough: the Chariot moves to a point nothing attacks.',
+    vi: 'Khi quân tấn công rẻ hơn, bảo vệ là chưa đủ: Xe phải tới một điểm không quân nào tấn công.',
+  },
+  'b06-c12.prompt': { en: 'Red’s Chariot attacks your Horse. Save it without losing anything.', vi: 'Xe Đỏ tấn công Mã của bạn. Hãy cứu nó mà không mất gì.' },
+  'b06-c12.purpose': { en: 'After your move, Red cannot win your Horse.', vi: 'Sau nước đi của bạn, bên Đỏ không ăn được Mã của bạn.' },
+  'b06-c12.key': { en: 'Red has no capture that wins material.', vi: 'Bên Đỏ không có nước ăn quân nào được lợi.' },
+  'b06-c12.error': {
+    en: 'Before you move the Horse, check its new point: Red’s Horse covers some of them.',
+    vi: 'Trước khi đi Mã, hãy kiểm tra điểm mới của nó: Mã Đỏ kiểm soát một số điểm.',
+  },
+  'b06-c12.tempt': { en: 'Red’s Horse takes it on that point.', vi: 'Mã Đỏ ăn nó ở điểm đó.' },
+  'b06-c12.expl': {
+    en: 'Move the Horse to a point that neither Red’s Chariot nor Red’s Horse reaches, or defend it with your Chariot.',
+    vi: 'Hãy đưa Mã tới điểm mà cả Xe Đỏ lẫn Mã Đỏ đều không với tới, hoặc dùng Xe của bạn bảo vệ nó.',
+  },
+  'b06-c13.prompt': {
+    en: 'Black’s Cannon attacks your Horse. Save it without losing anything.',
+    vi: 'Pháo Đen tấn công Mã của bạn. Hãy cứu nó mà không mất gì.',
+  },
+  'b06-c13.purpose': { en: 'After your move, Black’s Cannon cannot take your Horse.', vi: 'Sau nước đi của bạn, Pháo Đen không ăn được Mã của bạn.' },
+  'b06-c13.key': { en: 'Black has no capture that wins material.', vi: 'Bên Đen không có nước ăn quân nào được lợi.' },
+  'b06-c13.error': {
+    en: 'Check every point your Horse can go to: Black’s Chariot covers some of them.',
+    vi: 'Hãy kiểm tra mọi điểm Mã của bạn có thể tới: Xe Đen kiểm soát một số điểm.',
+  },
+  'b06-c13.tempt': { en: 'Black’s Chariot takes it there.', vi: 'Xe Đen ăn nó ở đó.' },
+  'b06-c13.expl': {
+    en: 'The Cannon attacks along the rank over Black’s Soldier; your Horse escapes to a point no Black piece reaches.',
+    vi: 'Pháo tấn công theo hàng ngang qua quân Tốt Đen; Mã của bạn thoát tới một điểm mà không quân Đen nào với tới.',
+  },
+  'b06-c14.prompt': {
+    en: 'Red’s Soldier attacks your Cannon. Save it without losing anything.',
+    vi: 'Tốt Đỏ tấn công Pháo của bạn. Hãy cứu nó mà không mất gì.',
+  },
+  'b06-c14.purpose': { en: 'After your move, Red cannot win your Cannon.', vi: 'Sau nước đi của bạn, bên Đỏ không ăn được Pháo của bạn.' },
+  'b06-c14.key': { en: 'Red has no capture that wins material.', vi: 'Bên Đỏ không có nước ăn quân nào được lợi.' },
+  'b06-c14.error': {
+    en: 'Your Horse defends the Cannon, but a Soldier for a Cannon is a bad trade for you: move the Cannon.',
+    vi: 'Mã của bạn bảo vệ Pháo, nhưng mất Pháo để được Tốt là đổi thiệt: hãy đưa Pháo đi.',
+  },
+  'b06-c14.tempt': { en: 'Red’s Horse takes back: you win a Soldier and lose your Chariot.', vi: 'Mã Đỏ ăn lại: bạn được một quân Tốt và mất Xe.' },
+  'b06-c14.expl': {
+    en: 'A cheap attacker wins even a defended piece, so the Cannon moves to a point nothing attacks.',
+    vi: 'Quân tấn công rẻ vẫn ăn được cả quân được bảo vệ, nên Pháo phải tới một điểm không quân nào tấn công.',
+  },
+  'b06-c15.prompt': {
+    en: 'Black’s Horse attacks your Chariot. Which moves save it? Tick all of them.',
+    vi: 'Mã Đen tấn công Xe của bạn. Những nước nào cứu được nó? Hãy chọn tất cả.',
+  },
+  'b06-c15.a.t': { en: 'Move the Chariot one step back', vi: 'Lùi Xe một bước' },
+  'b06-c15.a': { en: 'Right: one step back, the Chariot is out of the Horse’s reach.', vi: 'Đúng: lùi một bước là Xe ra khỏi tầm của Mã.' },
+  'b06-c15.b.t': { en: 'Put your Soldier on the Horse’s leg point', vi: 'Đưa quân Tốt vào điểm chân Mã' },
+  'b06-c15.b': { en: 'Right: with its leg point blocked, the Horse cannot take.', vi: 'Đúng: chân Mã bị chặn thì Mã không ăn được.' },
+  'b06-c15.c.t': { en: 'Defend the Chariot with your other Chariot', vi: 'Dùng Xe kia bảo vệ Xe này' },
+  'b06-c15.c': {
+    en: 'No: the Horse takes your Chariot anyway, and taking back wins only a Horse.',
+    vi: 'Không: Mã vẫn ăn Xe của bạn, và ăn lại thì bạn chỉ được một quân Mã.',
+  },
+  'b06-c16.prompt': {
+    en: 'Red’s Cannon attacks your Chariot. Save it without losing anything.',
+    vi: 'Pháo Đỏ tấn công Xe của bạn. Hãy cứu nó mà không mất gì.',
+  },
+  'b06-c16.purpose': { en: 'After your move, Red cannot win your Chariot.', vi: 'Sau nước đi của bạn, bên Đỏ không ăn được Xe của bạn.' },
+  'b06-c16.key': { en: 'Red has no capture that wins material.', vi: 'Bên Đỏ không có nước ăn quân nào được lợi.' },
+  'b06-c16.error': {
+    en: 'Your Horse in front is the Cannon’s screen, so the Chariot behind it is attacked. Leave the file, but not for a point Red’s Chariot reaches.',
+    vi: 'Quân Mã phía trước là ngòi của Pháo, nên Xe phía sau bị tấn công. Hãy rời cột đó, nhưng đừng tới điểm mà Xe Đỏ với tới.',
+  },
+  'b06-c16.tempt': {
+    en: 'Still on the file: the Cannon jumps over your Horse and takes the Chariot.',
+    vi: 'Vẫn ở trên cột: Pháo nhảy qua quân Mã của bạn và ăn Xe.',
+  },
+  'b06-c16.expl': {
+    en: 'Leave the Cannon’s file, and keep away from the file Red’s Chariot controls.',
+    vi: 'Hãy rời khỏi cột của Pháo, và tránh cột mà Xe Đỏ kiểm soát.',
+  },
+
   // ---------- New course: b09 "Opening development principles" (pilot lesson b09l3 + task b09-g1, S2.14) ----------
   'b09.title': { en: 'Opening development principles', vi: 'Nguyên tắc ra quân trong khai cuộc' },
   'b09.desc': {
