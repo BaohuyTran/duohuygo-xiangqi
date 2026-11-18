@@ -2878,8 +2878,11 @@ export const messages = {
     en: 'Your Chariot now attacks Black’s General, so Black must answer the check on the next move.',
     vi: 'Xe của bạn giờ tấn công Tướng Đen, nên ở nước sau bên Đen phải giải chiếu.',
   },
-  'b05l1-05.prompt': { en: 'Black’s Horse gives check. Move your General to safety.', vi: 'Mã Đen đang chiếu. Hãy đưa Tướng của bạn tới chỗ an toàn.' },
-  'b05l1-05.expl': { en: 'Your General steps out of the Horse’s reach, and the check is over.', vi: 'Tướng của bạn bước ra khỏi tầm của Mã, và hết bị chiếu.' },
+  'b05l1-05.prompt': { en: 'Black’s Horse gives check. Get your General out of check.', vi: 'Mã Đen đang chiếu. Hãy đưa Tướng của bạn thoát chiếu.' },
+  'b05l1-05.expl': {
+    en: 'Either step takes your General out of the Horse’s reach, so the check is over.',
+    vi: 'Bước nào cũng đưa Tướng ra khỏi tầm của Mã, nên hết bị chiếu.',
+  },
   'b05l1-06.prompt': { en: 'You are in check. Capture the piece that gives check.', vi: 'Bạn đang bị chiếu. Hãy ăn quân đang chiếu.' },
   'b05l1-06.expl': {
     en: 'Your Horse takes the checking Chariot: the check ends and you win a Chariot.',
@@ -3163,8 +3166,8 @@ export const messages = {
   'b05-c03.key': { en: 'Black cannot take back on that point.', vi: 'Bên Đen không ăn lại được ở điểm đó.' },
   'b05-c03.error': { en: 'Look for a piece of yours that can take the checking piece.', vi: 'Hãy tìm quân của bạn có thể ăn quân đang chiếu.' },
   'b05-c03.tempt': {
-    en: 'That blocks the check, but the Chariot then wins your Horse. Capture the checker instead.',
-    vi: 'Nước đó cản được chiếu, nhưng sau đó Xe sẽ ăn Mã của bạn. Hãy ăn quân đang chiếu.',
+    en: 'That blocks the check, but the Chariot then wins a piece. Capture the checker instead.',
+    vi: 'Nước đó cản được chiếu, nhưng sau đó Xe sẽ ăn được một quân. Hãy ăn quân đang chiếu.',
   },
   'b05-c04.prompt': {
     en: 'Which of these are legal ways out of check? Tick all of them.',
@@ -3197,10 +3200,13 @@ export const messages = {
   },
   'b05-c06.prompt': { en: 'Checkmate in one move.', vi: 'Chiếu bí trong một nước.' },
   'b05-c06.expl': {
-    en: 'The Chariot checks along the General’s file, protected by your Horse; the General’s own Advisors and your pieces leave it no way out.',
-    vi: 'Xe chiếu theo cột của Tướng, được Mã của bạn bảo vệ; chính hai quân Sĩ và các quân của bạn khiến Tướng không còn đường thoát.',
+    en: 'The Chariot checks along the General’s file; your own General covers the open file beside it, and the General cannot reach the Chariot to take it.',
+    vi: 'Xe chiếu theo cột của Tướng; Tướng của bạn khống chế cột trống bên cạnh, và Tướng Đen không với tới Xe để ăn nó.',
   },
-  'b05-c06.purpose': { en: 'The General can neither take the Chariot nor step away.', vi: 'Tướng không ăn được Xe và cũng không bước đi đâu được.' },
+  'b05-c06.purpose': {
+    en: 'The General has no free point to step to and cannot take the Chariot.',
+    vi: 'Tướng không còn điểm trống nào để bước tới và không ăn được Xe.',
+  },
   'b05-c06.key': { en: 'Black has no legal move: the game is over.', vi: 'Bên Đen không còn nước đi hợp lệ: ván cờ kết thúc.' },
   'b05-c06.error': {
     en: 'A mate must leave the General no move at all; check every point and every capture.',

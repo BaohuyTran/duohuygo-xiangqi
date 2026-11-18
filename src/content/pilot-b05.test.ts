@@ -3,7 +3,8 @@
 // review). The validator and the pool validator run on it with everything else; the `.error` leak check is global
 // (pilot-feedback.test.ts). This file pins what the unit must show (02 b05, 03 §4.1–§4.3 and §8, 05 §4).
 import { describe, expect, it } from 'vitest';
-import { gameStatus, isInCheck, legalMoves, makeMove, pseudoLegalTargets, squareName, type Position } from '../engine';
+import { gameStatus, isInCheck, legalMoves, makeMove, materialBalance, pseudoLegalTargets, squareName, type Position } from '../engine';
+import { search } from '../analysis';
 import { assembleCheckForm } from '../assessment/checks';
 import { positionOf } from '../lessons/answers';
 import { isAccepted, moveKey } from '../lessons/decision';
@@ -141,6 +142,15 @@ describe('unit b05 (S3.2.a)', () => {
       const verdict = (k: string) => safe(pos, legalMoves(pos).find((m) => moveKey(m) === k)!, { itemId: id });
       expect(verdict(`${e.solution.from}-${e.solution.to}`), id).toMatchObject({ status: 'checked', safe: true });
       expect(verdict(e.feedback!.temptingAlternative.move), id).toMatchObject({ status: 'checked', safe: false });
+    }
+    // "Without losing anything" is true: after the solution the opponent's best 3-ply line wins no material.
+    for (const id of ['b05l1-08', 'b05l1-09', 'b05-c01', 'b05-c02']) {
+      const e = byId(id) as MoveExercise;
+      const pos = positionOf(e);
+      const after = makeMove(pos, legalMoves(pos).find((m) => moveKey(m) === `${e.solution.from}-${e.solution.to}`)!);
+      const r = search(after, { depth: 3, maxNodes: 1e6 });
+      expect(r.complete, id).toBe(true);
+      expect(-r.score, id).toBeGreaterThanOrEqual(materialBalance(pos.board, pos.turn));
     }
     // b05l1-08 and b05-c02 are Horse checks answered by blocking the leg point.
     for (const [id, leg] of [['b05l1-08', 'f1'], ['b05-c02', 'd8']] as const) expect((byId(id) as MoveExercise).solution.to, id).toBe(leg);
