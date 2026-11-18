@@ -1,0 +1,1181 @@
+{
+  "unit": "b05",
+  "records": [
+    {
+      "id": "b05l1-01",
+      "version": 1,
+      "contentHash": "291e1f84c6c001b8cbfa9daad96abbed90c11a9bd3a29cdbd41fd64dfbd05194",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l1-02",
+      "version": 1,
+      "contentHash": "e34898b6dfec516d2c510d8872d759be51424760f91ee5872ab169455e8636bf",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l1-03",
+      "version": 1,
+      "contentHash": "8973b64a8dac724c20c43cab57b30f10b583383e5da53a9eb0a7b17210d127ee",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l1-04",
+      "version": 1,
+      "contentHash": "6ada98b6246507de22e304cec3def67088ead65a0034915f42d00ea273ed63df",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l1-05",
+      "version": 1,
+      "contentHash": "4e96b466eda8b7735bb82baadd2c1124c6fe3891db5c93db6e2061e8ea5ecad9",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l1-06",
+      "version": 1,
+      "contentHash": "342610743b76e5963915da26ac2ab9596f6a6e315e2865715bc24c100bc03a48",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l1-07",
+      "version": 1,
+      "contentHash": "2f8e7f75e85a7ffb5f43dfc5b99f77fe5a79d9ddc941bed0785bbbdb5b285cbe",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l1-08",
+      "version": 1,
+      "contentHash": "906ac6750949226e3aa6c71a2d941402bdd5a3390a69f8def3c2d1997ea3fddc",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l1-09",
+      "version": 1,
+      "contentHash": "2ac1b458dc5d8d1b8b5c4c3a10c31e9c22cdbcad247ce061b91c735461c079dc",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l2-01",
+      "version": 1,
+      "contentHash": "acdf73cd79c94a265d962966917e44385cd4793c0ece5fb172deb82d9f9b402c",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l2-02",
+      "version": 1,
+      "contentHash": "f8626a56505e44f59c8b3f159da51270b4a7d0739b85906cceb5e7ddc87d76b6",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l2-03",
+      "version": 1,
+      "contentHash": "67a572cff4a0cdb2c223a3cec5bab6f43d83d331330147d62b2b15d27592a7db",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l2-04",
+      "version": 1,
+      "contentHash": "990a2cf237f959843440434e91d44dc8787f4b1fde5d9540aec227dca8d003f6",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l2-05",
+      "version": 1,
+      "contentHash": "2ee05fc3618440cac50a2f3c3b8ea1db654e65233393c9c755b28ab6aef2db56",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l2-06",
+      "version": 1,
+      "contentHash": "052688cf49b3832392054958d19440e713c9618a1fd0a66c09ab3b5774c80031",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l2-07",
+      "version": 1,
+      "contentHash": "6248b60b10d88ea8610172fc174b4e68d9ef619d69a3c88cf0fad2625af962fa",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l2-08",
+      "version": 1,
+      "contentHash": "487e02861db6a3e375caf21564035c4d9ef130c04fab6210c04f8caed9de5b36",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l2-09",
+      "version": 1,
+      "contentHash": "7d37250b723d4ca274d2c2fe9381e11d1a39463a309a0f030cf5a78d8ce6fc07",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l3-01",
+      "version": 1,
+      "contentHash": "ca58e1b810b38c91a21fdd4052e48f213080bbb66932300ace4318571501a778",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l3-02",
+      "version": 1,
+      "contentHash": "e544f3aa44ea494f324410ce5fc1f0a649fcfb012b1e176acfdfffdb2c4ef536",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l3-03",
+      "version": 1,
+      "contentHash": "54a5a4ce1877806632e4541b93743be06ca145d9dd69a1fc4ddee20f402d81c9",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l3-04",
+      "version": 1,
+      "contentHash": "dea0761dc34c0544396a1aa3f35a51db65ae116d9485993fb7d71803a19e85a6",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l3-05",
+      "version": 1,
+      "contentHash": "2cec9be1452758fc6d4770c862745c4ee7f8c509470877f50f6d2303954959fc",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l3-06",
+      "version": 1,
+      "contentHash": "efce452e857822bf49699de362cbb1497f2a9fd2aec2a160054d514c3e69bab6",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l3-07",
+      "version": 1,
+      "contentHash": "88d0703eaf8bf5912b40be6d75bb87fc706b4649330b991d78d43ca8a4a71281",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05l3-08",
+      "version": 1,
+      "contentHash": "514ebb3c686293aeb8e07b5dba7141c066497ae33eb126fbe3a957f69a255dfd",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c01",
+      "version": 1,
+      "contentHash": "68729329fd9b241339697e9f119cec4343f8080996b4f003af90c1fd968d82a8",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c02",
+      "version": 1,
+      "contentHash": "b4291e88bf20e7d1f019d576ab7ab9a93921b99686088125a89e89b618defdcf",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c03",
+      "version": 1,
+      "contentHash": "712b633f2293e7395a17db999d6ab4db8a60c6de9e23cd8246d5c11d8fdac536",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c04",
+      "version": 1,
+      "contentHash": "b4ffa1c497b5f95ee81464f97daffe6efe9a735740f3cb8d9cede80efc4b3965",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c05",
+      "version": 1,
+      "contentHash": "90a01904213f19cc6b0704639aeaf1a6570eabc60d55a4204c17c750ea7b69fd",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c06",
+      "version": 1,
+      "contentHash": "1a8e35b7e4a07971cb89b273799b6ed444ea7f80a720cda737860cf3911eaee2",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c07",
+      "version": 1,
+      "contentHash": "3293678d9bb0bc25696302f48d81e5dbeae854a2d3fb926fde257c67c2ea3235",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c08",
+      "version": 1,
+      "contentHash": "837107bcea734ede7a77c7db9227413051d2e8a0148b43dda3169dbf461e8247",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c09",
+      "version": 1,
+      "contentHash": "c6d3235fb9f6b1cf06c56d23c1cb4e60992bf0cd69f67c4db3a9c4be8e5517cf",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c10",
+      "version": 1,
+      "contentHash": "e3b53327ae18420ea39e7f3755869114023dd504c5f87c8a67000a4ae88e42de",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c11",
+      "version": 1,
+      "contentHash": "37273a0649368413696c5ba622de86df11c8dc4f0a5fb57c4e19502c73bd6594",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c12",
+      "version": 1,
+      "contentHash": "a8fbf03ebff04b1466e89d4e16204bdc4a0c94a0d3cf199500e986b32436562e",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c13",
+      "version": 1,
+      "contentHash": "0f3b7052316fc591101d1b9a44265e285053ed77b6429e8164fcc89f1d63793b",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c14",
+      "version": 1,
+      "contentHash": "9f1ea62e34584923719a9f0212e937d71cac14a8887b8cc3a06cc84e9d1a679e",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c15",
+      "version": 1,
+      "contentHash": "4997b79846d0b4576ce760e110df34f3a6d7689a20c4d6d5bf495fa8fb4c888d",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    },
+    {
+      "id": "b05-c16",
+      "version": 1,
+      "contentHash": "d3821c29e47552127c40fbb4104e9b40734fae316efd962d1799ffcc2a78cb3a",
+      "author": "implementer-S3.2.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b05",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.a",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: escapes, mate / not-mate / stalemate claims, win-in-one tables, ruleset texts, reuse and check pool verified; c01, c06, b05l1-05 fixed."
+        }
+      ]
+    }
+  ]
+}

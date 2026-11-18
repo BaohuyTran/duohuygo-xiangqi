@@ -132,7 +132,7 @@ function laterState(id: 'REL-4' | 'REL-5', extra: Record<string, Unit> = {}): { 
 describe('unit order', () => {
   it('orders units by track rank, then file name; the pilot b09 lands inside the basics block', () => {
     // Pilots b09 (S2.14), i08 (S2.15), a03 (S2.16) and a07 (S2.17) land at the end of their track's block (file names sort after the legacy NN-…).
-    // b01–b05 (S3.1.a–d reviewed and in the preview; S3.2.a b05 `verified` until review) sort before b09 in the basics block.
+    // b01–b05 (all `reviewed`, in the preview) sort before b09 in the basics block.
     expect(ids(allUnits)).toEqual(['u1', 'u2', 'u3', 'u4', 'b01', 'b02', 'b03', 'b04', 'b05', 'b09', 'u7', 'u8', 'u9', 'u10', 'i08', 'u11', 'u12', 'a03', 'a07', 'u13', 'u14', 'u15']);
     expect(trackOrderProblems(allUnits)).toEqual([]);
     expect([...new Set(allUnits.map(trackOf))]).toEqual(TRACK_ORDER);
@@ -543,7 +543,7 @@ describe('course preview', () => {
     const content = await import('./index');
     expect(content.COURSE_PREVIEW).toBe(true);
     // b01, b02 and the four pilots are fully reviewed: the preview shows exactly these units, in level order.
-    expect(content.units.map((u) => u.id)).toEqual(['b01', 'b02', 'b03', 'b04', 'b09', 'i08', 'a03', 'a07']);
+    expect(content.units.map((u) => u.id)).toEqual(['b01', 'b02', 'b03', 'b04', 'b05', 'b09', 'i08', 'a03', 'a07']);
     expect(content.findLesson('u1l1')).toBeUndefined();
   });
 

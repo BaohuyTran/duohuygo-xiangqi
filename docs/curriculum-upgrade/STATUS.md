@@ -72,6 +72,13 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
 
+- 2026-11-18 — **S3.2.a done** (unit `b05`, attempt 2): `src/content/lessons/b05-check-and-results.json` (8 learn
+  cards, 18 practice items; reuse u4l1, u4l2, mate items u3l1#5, u3l2#4) + `assessment/b05-check.json` (16; three
+  attempts); record `reviews/b05.json` (42 items `reviewed`). First goal `safe` items (content.test.ts now judges them
+  with `syncSafety()`); win-in-one items are decisions accepting mate + stalemate; new pattern-mirror test for check items.
+  Content-reviewer CHANGES_REQUESTED (c01 lost a Soldier, c06 text, b05l1-05 prompt) → APPROVE. Driver: lint, build,
+  1,453 tests PASS.
+
 - 2026-11-16 — **S3.1.d done, S3.1 batch done** (unit `b04`, attempt 2): `src/content/lessons/b04-cannon-and-soldier.json`
   (7 learn cards, 16 practice items; reuse u3l1, u3l2 with two POS fixes; mate items u3l1#5, u3l2#4 left for b05) +
   `assessment/b04-check.json` (16; three attempts); record `reviews/b04.json` (39 items `reviewed`). TR b04l3-07 reverses

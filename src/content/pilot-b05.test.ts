@@ -1,6 +1,6 @@
 // Content checks of unit b05 "Check, checkmate, stalemate and results" (S3.2.a: lessons b05l1–b05l3, check pool
-// b05-check), loaded in release state REL-P (`verified`, so neither served nor in the preview until the independent
-// review). The validator and the pool validator run on it with everything else; the `.error` leak check is global
+// b05-check), loaded in release state REL-P (`reviewed` with an approving record: in the preview, not served by default;
+// S3.2.a review). The validator and the pool validator run on it with everything else; the `.error` leak check is global
 // (pilot-feedback.test.ts). This file pins what the unit must show (02 b05, 03 §4.1–§4.3 and §8, 05 §4).
 import { describe, expect, it } from 'vitest';
 import { gameStatus, isInCheck, legalMoves, makeMove, materialBalance, pseudoLegalTargets, squareName, type Position } from '../engine';
@@ -49,7 +49,7 @@ describe('unit b05 (S3.2.a)', () => {
       expect(lesson.exercises.slice(first).every((e) => e.type !== 'learn'), lesson.id).toBe(true);
     }
     expect(practice.every((e) => (e.strand === 'RS' || e.strand === 'DE') && e.critical === false)).toBe(true);
-    expect(unitItems(b05).every(({ item }) => item.status === 'verified')).toBe(true);
+    expect(unitItems(b05).every(({ item }) => item.status === 'reviewed')).toBe(true);
   });
 
   it('both colours: 6 of 18 practice items as Black, including the TR escape', () => {
@@ -188,7 +188,7 @@ describe('b05 check pool (03 §4.1–§4.3)', () => {
     expect(check).toHaveLength(16);
     expect(poolFiles['b05-check']).toMatchObject({ id: 'b05-check', kind: 'check', unit: 'b05', primaryStrand: 'RS' });
     expect(['b05l1', 'b05l2', 'b05l3'].map((l) => check.filter((i) => i.objective === l).length)).toEqual([5, 5, 6]);
-    expect(check.every((i) => i.unit === 'b05' && i.assist === 'G0' && i.status === 'verified')).toBe(true);
+    expect(check.every((i) => i.unit === 'b05' && i.assist === 'G0' && i.status === 'reviewed')).toBe(true);
     expect(check.filter((i) => i.side === 'black')).toHaveLength(7);
     for (const i of check as (AssessmentItem & { hints?: unknown; highlight?: unknown; from?: unknown })[]) {
       expect(i.hints, i.id).toBeUndefined();

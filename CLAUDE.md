@@ -444,7 +444,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Unit `b04` (S3.1.d; `reviewed`, record `reviews/b04.json`) is `src/content/lessons/b04-cannon-and-soldier.json` + `assessment/b04-check.json`
   (16 items, 6 own + 2 interleaved per form, three attempts); `src/content/pilot-b04.test.ts` (also pins that no b04 item
   depends on check or pins: nobody in check, legal attackers = plain movement rule).
-- Unit `b05` (S3.2.a; `verified` until review) is `src/content/lessons/b05-check-and-results.json` + `assessment/b05-check.json`
+- Unit `b05` (S3.2.a; `reviewed`, record `reviews/b05.json`) is `src/content/lessons/b05-check-and-results.json` + `assessment/b05-check.json`
   (16 items, three attempts); `src/content/pilot-b05.test.ts` (mate items allow no stalemate instead, since goal
   `checkmate` rejects stalemate; win-in-one `decision` tables accept every mating and stalemating move; escape items use
   goal `safe`; check items differ in task + learner-relative material, not only in position).

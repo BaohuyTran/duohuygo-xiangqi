@@ -9,7 +9,7 @@
       "type": "move",
       "id": "b05-c01",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -53,7 +53,7 @@
       "type": "move",
       "id": "b05-c02",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -98,7 +98,7 @@
       "type": "capture",
       "id": "b05-c03",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -138,7 +138,7 @@
       "type": "choice",
       "id": "b05-c04",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -189,7 +189,7 @@
       "type": "choice",
       "id": "b05-c05",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -239,7 +239,7 @@
       "type": "move",
       "id": "b05-c06",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -275,7 +275,7 @@
       "type": "move",
       "id": "b05-c07",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -311,7 +311,7 @@
       "type": "move",
       "id": "b05-c08",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -347,7 +347,7 @@
       "type": "choice",
       "id": "b05-c09",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -400,7 +400,7 @@
       "type": "decision",
       "id": "b05-c10",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -548,7 +548,7 @@
       "type": "decision",
       "id": "b05-c11",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -672,7 +672,7 @@
       "type": "decision",
       "id": "b05-c12",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -850,7 +850,7 @@
       "type": "choice",
       "id": "b05-c13",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -899,7 +899,7 @@
       "type": "choice",
       "id": "b05-c14",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -949,7 +949,7 @@
       "type": "choice",
       "id": "b05-c15",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -1000,7 +1000,7 @@
       "type": "choice",
       "id": "b05-c16",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
