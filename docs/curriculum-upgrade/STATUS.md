@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 3 — Curriculum production (step 2 gate passed 2026-11-12; merged into `main`)
-- **Active items:** S3.2 (units b05–b07); then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
+- **Active items:** S3.2.c (unit b07); then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,12 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-18 — **S3.2.b done** (unit `b06`, attempt 2): `src/content/lessons/b06-threatened-and-defended.json` (8 learn
+  cards, 16 practice items; reuse u2l1#3 as DV2 contrast) + `assessment/b06-check.json` (16; three attempts); record
+  `reviews/b06.json` (40 items `reviewed`). Rule: every accepted move of a "save it without losing anything" item is ≥ 0
+  at depth 4 (pilot-b06 test; `goal.guard {h: 2}` on c12, c13). Content-reviewer CHANGES_REQUESTED (c12, c13, c16
+  accepted losing saves) → APPROVE. Driver: lint, build, 1,484 tests PASS.
 
 - 2026-11-18 — **S3.2.a done** (unit `b05`, attempt 2): `src/content/lessons/b05-check-and-results.json` (8 learn
   cards, 18 practice items; reuse u4l1, u4l2, mate items u3l1#5, u3l2#4) + `assessment/b05-check.json` (16; three

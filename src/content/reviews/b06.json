@@ -1,0 +1,1125 @@
+{
+  "unit": "b06",
+  "records": [
+    {
+      "id": "b06l1-01",
+      "version": 1,
+      "contentHash": "5083d9e6253dcea36611026eda80f688e86bd716735bd4d960883c54f7835bdb",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l1-02",
+      "version": 1,
+      "contentHash": "edf1e17d3a590ffb188709aca470b728190fcec9681937d7cd961d406889b85e",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l1-03",
+      "version": 1,
+      "contentHash": "c9aa9cb2b625f8f4c14068e6379edb49785eff1d214edf220f87a2de58497595",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l1-04",
+      "version": 1,
+      "contentHash": "d0636428d0eac846bf8d9430bef73c37b7f5d648f0ba56650b6e8c3bd85c7d2c",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l1-05",
+      "version": 1,
+      "contentHash": "5e3200d344ff8c707fd641cb0f508e81f588bbcea968bbc0a4b392ccccb394cb",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l1-06",
+      "version": 1,
+      "contentHash": "757169ea306b6732489f826fc88a93258a0f563f53f74092f56b796111d23dd4",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l1-07",
+      "version": 1,
+      "contentHash": "e7b628981ac81ebb9779f411d16806862df9af4e254399e6782ffac4b4c802be",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l1-08",
+      "version": 1,
+      "contentHash": "71905faf1f1d9a684d5c8411cc7882f07ea3a48e059b9d38d29c596c4f9fb096",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l2-01",
+      "version": 1,
+      "contentHash": "af21bb81214ad85f3aa5f1e1462c595f389e1701f058de3068c97e9f8ed40a49",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l2-02",
+      "version": 1,
+      "contentHash": "6a75d7384eadf9f69c50d094d949436cfc19a094f30ebe6b7ac1c5078a20dc0e",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l2-03",
+      "version": 1,
+      "contentHash": "c63af7ba7d97fb36e38a9f50e46626cb3d8fa3b307239cea9eec3bfaac387b2c",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l2-04",
+      "version": 1,
+      "contentHash": "f60e3fabb19006a81080ee2ada39588b4e3217afa802c7be1f751e6f27ecc13b",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l2-05",
+      "version": 1,
+      "contentHash": "97bd2b6a7f3bfd49e198eba51b84056cb30c2faca598983bc493dbe578b325cc",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l2-06",
+      "version": 1,
+      "contentHash": "6f31f23986a518782857b93ab37015d99db8010706b70cb88851af26a251b25b",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l2-07",
+      "version": 1,
+      "contentHash": "559958ce0c8243ff08cdc3afb418c79eb69ece01666f65f5e5bf68dca215cb3b",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l2-08",
+      "version": 1,
+      "contentHash": "6bbc186bf2d29feb507453b4b1caab2b3b82993ae4737f2d26c3555eecf4c96b",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l3-01",
+      "version": 1,
+      "contentHash": "0121567cb847637af519a3680c00fc2b72a020970a12c46366ec21f42481113b",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l3-02",
+      "version": 1,
+      "contentHash": "bdba17ad8128b802575ba464615735bc3c2f49f35b97f693672bbac99a3b5e4e",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l3-03",
+      "version": 1,
+      "contentHash": "0a6d912ef6d4b513fb6cfd9de07bae4896f71da57e92e9480410b083eddd3b74",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l3-04",
+      "version": 1,
+      "contentHash": "956bdbfd6b85fd31d399786c4810f5bf34ae58e2b24a519292d45d5996518dd5",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l3-05",
+      "version": 1,
+      "contentHash": "9586b73f3600aacf781c21dffa291904861c88e4e6ccbf902ed621cae481299f",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l3-06",
+      "version": 1,
+      "contentHash": "992f8b0baa02dd5ade3bd03efe9c409a5235cef247e0dcdba196e3fcbe5cb4c5",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l3-07",
+      "version": 1,
+      "contentHash": "745f310a88ad8c21aab411c09d0f23a0965d719a36181f2c3d156eeb407714ea",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06l3-08",
+      "version": 1,
+      "contentHash": "c4e2b2f69898257f6abe9948dc1b490b6c22b02a7317ff18d8272e380d5bb11f",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c01",
+      "version": 1,
+      "contentHash": "15c0379e86461a4178208a81f6bb1841a68521461d49494f435bec213c7f4824",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c02",
+      "version": 1,
+      "contentHash": "7d62e390546520edcb6c518a4677f39b833fb8737cafbe628f4b4502ebd8e68b",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c03",
+      "version": 1,
+      "contentHash": "1d08f66a21951149cd134af35d52222ac748d6d4653857e25e525df942263950",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c04",
+      "version": 1,
+      "contentHash": "4ba8d4cc2a10dacecd0ef5f17f2b2f5f39020f12b3d04a2cd3f2eb93f44077b1",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c05",
+      "version": 1,
+      "contentHash": "ef1e852d13897b606770403f1414c6af0c23acb3fb13197d9a241042b4a7a73a",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c06",
+      "version": 1,
+      "contentHash": "df41b7d7739b68f1606721d53a8c0755198ad53909fd1dd8c590ad50f215e7fb",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c07",
+      "version": 1,
+      "contentHash": "9e838cb4d358a073edd43052e852bfba46b4a20e857b71e2d295378e38cb39fd",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c08",
+      "version": 1,
+      "contentHash": "914042f7917a8c5e1c1b19d9a5ae9dba8d024756a2cff24f7740c28cf5c4ae8b",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c09",
+      "version": 1,
+      "contentHash": "6cbc645411e531865088fb73fab1cce366334157aec8b30a3c11ca71b712875e",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c10",
+      "version": 1,
+      "contentHash": "318bb254c58d633665180330eb71b27b30079b4285fab0d72515dd55fcb9f644",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c11",
+      "version": 1,
+      "contentHash": "57c25a65e3d74bf0318b0ad1abaa122007d7d1b6330ea4757a22745223d264a1",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c12",
+      "version": 1,
+      "contentHash": "300ac5805243a26b73200f6f44b73ccdadd8ecab258189d6189b95adbad3fb52",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c13",
+      "version": 1,
+      "contentHash": "9a9b650739804dcda026913df0b39b1738dd3047763dd2bd8460f804ca4e2f69",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c14",
+      "version": 1,
+      "contentHash": "8022ba03866b15e1c3167896062dcb60261c445f8e45fed9f57c028e999d0c1e",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c15",
+      "version": 1,
+      "contentHash": "a7c4f6d672d0cb028731a06436ea9df93778f9ad24e661dfdb7ce4ba4ffed8d1",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    },
+    {
+      "id": "b06-c16",
+      "version": 1,
+      "contentHash": "b4097215f75b1234b17da5fa740387bcdbcb1af50b6d8097e7248060265e451b",
+      "author": "implementer-S3.2.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b06",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-18"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.b",
+          "at": "2026-11-18",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: attacked / hanging / can-capture sets, none-answers, saves (every accepted move >= 0 at depth 4), TR and check pool verified."
+        }
+      ]
+    }
+  ]
+}

@@ -448,7 +448,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   (16 items, three attempts); `src/content/pilot-b05.test.ts` (mate items allow no stalemate instead, since goal
   `checkmate` rejects stalemate; win-in-one `decision` tables accept every mating and stalemating move; escape items use
   goal `safe`; check items differ in task + learner-relative material, not only in position).
-- Unit `b06` (S3.2.b; `verified` until review) is `src/content/lessons/b06-threatened-and-defended.json` + `assessment/b06-check.json`
+- Unit `b06` (S3.2.b; `reviewed`, record `reviews/b06.json`) is `src/content/lessons/b06-threatened-and-defended.json` + `assessment/b06-check.json`
   (16 items, three attempts); `src/content/pilot-b06.test.ts` (attacked / hanging / can-capture answers are the legal facts:
   Cannon screens count, hobbled Horses and pinned pieces neither attack nor defend; every `safe` solution and save-it option
   keeps everything against the best 3-ply reply; TR = full board as Black after Red's Cannon move, exactly three blocks safe).

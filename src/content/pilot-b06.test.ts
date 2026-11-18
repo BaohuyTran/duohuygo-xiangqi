@@ -1,5 +1,5 @@
 // Content checks of unit b06 "Threatened, undefended and defended pieces" (S3.2.b: lessons b06l1–b06l3, check pool
-// b06-check), loaded in release state REL-P (`verified` until the content review: not in the preview, not served by
+// b06-check), loaded in release state REL-P (`reviewed` with an approving record: in the preview, not served by
 // default). The validator and the pool validator run on it with everything else; the `.error` leak check is global
 // (pilot-feedback.test.ts). This file pins what the unit must show (02 b06, 03 §4.1–§4.3 and §8, 05 §4 / DV2).
 import { describe, expect, it } from 'vitest';
@@ -75,7 +75,7 @@ describe('unit b06 (S3.2.b)', () => {
       expect(lesson.exercises.slice(first).every((e) => e.type !== 'learn'), lesson.id).toBe(true);
     }
     expect(practice.every((e) => e.strand === 'RS' && e.critical === false)).toBe(true);
-    expect(unitItems(b06).every(({ item }) => item.status === 'verified')).toBe(true);
+    expect(unitItems(b06).every(({ item }) => item.status === 'reviewed')).toBe(true);
     // Guided: attacked-pieces queries; independent: hanging queries, `choice` with a "none" option, `move` goal `safe`.
     expect(b06.lessons[0].exercises.filter((e) => e.type === 'select-squares').every((e) => e.type === 'select-squares' && e.query?.kind === 'attacked-pieces')).toBe(true);
     expect(b06.lessons[1].exercises.filter((e) => e.type === 'select-squares').every((e) => e.type === 'select-squares' && e.query?.kind === 'hanging')).toBe(true);
@@ -250,7 +250,7 @@ describe('b06 check pool (03 §4.1–§4.3)', () => {
     expect(check).toHaveLength(16);
     expect(poolFiles['b06-check']).toMatchObject({ id: 'b06-check', kind: 'check', unit: 'b06', primaryStrand: 'RS' });
     expect(['b06l1', 'b06l2', 'b06l3'].map((l) => check.filter((i) => i.objective === l).length)).toEqual([5, 5, 6]);
-    expect(check.every((i) => i.unit === 'b06' && i.assist === 'G0' && i.status === 'verified')).toBe(true);
+    expect(check.every((i) => i.unit === 'b06' && i.assist === 'G0' && i.status === 'reviewed')).toBe(true);
     expect(check.filter((i) => i.side === 'black')).toHaveLength(8);
     for (const i of check as (AssessmentItem & { hints?: unknown; highlight?: unknown; from?: unknown })[]) {
       expect(i.hints, i.id).toBeUndefined();
