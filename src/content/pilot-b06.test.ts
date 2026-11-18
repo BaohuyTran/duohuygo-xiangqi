@@ -43,7 +43,18 @@ const pinned = (p: Position, key: string) => {
   return pseudoLegalTargets(p.board, from).includes(to) && !keysOf(p).includes(key);
 };
 const safe = syncSafety();
-const verdict = (id: string, p: Position, key: string) => safe(p, moveOf(p, key), { itemId: id });
+const goalGuard = (id: string) => {
+  const e = byId(id);
+  return e.type === 'move' && e.goal.kind === 'safe' ? e.goal.guard : undefined;
+};
+/** The item's own guard verdict (level guard from the id, with the item's `goal.guard` override). */
+const verdict = (id: string, p: Position, key: string) => safe(p, moveOf(p, key), { itemId: id, override: goalGuard(id) });
+/** Material after `key` against the opponent's best line of 4 plies, relative to now (≥ 0: nothing lost). */
+const depth4 = (p: Position, key: string) => {
+  const r = search(after(p, key), { depth: 4, maxNodes: 3e6 });
+  expect(r.complete, key).toBe(true);
+  return -r.score - materialBalance(p.board, p.turn);
+};
 /** After `key`, the opponent's best 3-ply line wins no material (the "without losing anything" claim). */
 const keepsEverything = (p: Position, key: string) => {
   const r = search(after(p, key), { depth: 3, maxNodes: 1e6 });
@@ -183,6 +194,28 @@ describe('unit b06 (S3.2.b)', () => {
       expect(c.options.find((o) => !o.correct)!.misconception, id).toBe('b06.m1');
     }
   });
+
+  // Content review (S3.2.b attempt 2): a guard-passing move must not lose the piece a move later. Every move the item
+  // accepts (b06-c12 and b06-c13 use a 2-ply guard) and every correct save option keeps the material for 4 plies.
+  it('"without losing anything": every accepted move of every safe item (lesson + pool) keeps the material at depth 4', () => {
+    const saves = all.filter((e): e is MoveExercise => e.type === 'move' && e.goal.kind === 'safe');
+    expect(saves).toHaveLength(10);
+    expect(saves.filter((e) => e.goal.kind === 'safe' && e.goal.guard).map((e) => e.id)).toEqual(['b06-c12', 'b06-c13']);
+    for (const e of saves) {
+      const p = positionOf(e);
+      const accepted = keysOf(p).filter((k) => verdict(e.id!, p, k).safe);
+      expect(accepted.length, e.id).toBeGreaterThan(0);
+      for (const k of accepted) expect(depth4(p, k), `${e.id} ${k}`).toBeGreaterThanOrEqual(0);
+    }
+    for (const id of ['b06l3-06', 'b06-c15']) {
+      const p = pos(id);
+      for (const o of (byId(id) as ChoiceExercise).options.filter((x) => x.correct)) expect(depth4(p, o.move!), `${id} ${o.id}`).toBeGreaterThanOrEqual(0);
+    }
+    // The moves the review found: now rejected by the item's guard.
+    const rejected = (id: string, keys: string[]) => keys.forEach((k) => expect(verdict(id, pos(id), k).safe, `${id} ${k}`).toBe(false));
+    rejected('b06-c12', ['a9-d9']);
+    rejected('b06-c13', ['c5-a6', 'c5-a4']);
+  }, 120_000);
 
   it('TR b06l3-08: full board as Black right after Red’s Cannon move; exactly the three blocks are safe', () => {
     const seq = ['h2-h4', 'b7-d7', 'd0-e1', 'c6-c5', 'g3-g4', 'e6-e5', 'h4-i4'];

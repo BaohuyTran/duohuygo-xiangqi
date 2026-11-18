@@ -3525,8 +3525,8 @@ export const messages = {
   },
   'b06l3-06.c.t': { en: 'Defend the Chariot with your other Chariot', vi: 'Dùng Xe kia bảo vệ Xe này' },
   'b06l3-06.c': {
-    en: 'No: the Cannon takes your Chariot anyway, and taking back wins only a Cannon.',
-    vi: 'Không: Pháo vẫn ăn Xe của bạn, và ăn lại thì bạn chỉ được một quân Pháo.',
+    en: 'No: the Cannon can still take your Chariot, and taking back wins only a Cannon.',
+    vi: 'Không: Pháo vẫn ăn được Xe của bạn, và ăn lại thì bạn chỉ được một quân Pháo.',
   },
   'b06l3-07.prompt': {
     en: 'Black’s Soldier attacks your Chariot. Save it without losing anything.',
@@ -3693,8 +3693,8 @@ export const messages = {
   },
   'b06-c12.tempt': { en: 'Red’s Horse takes it on that point.', vi: 'Mã Đỏ ăn nó ở điểm đó.' },
   'b06-c12.expl': {
-    en: 'Move the Horse to a point that neither Red’s Chariot nor Red’s Horse reaches, or defend it with your Chariot.',
-    vi: 'Hãy đưa Mã tới điểm mà cả Xe Đỏ lẫn Mã Đỏ đều không với tới, hoặc dùng Xe của bạn bảo vệ nó.',
+    en: 'Move the Horse to a point that neither Red’s Chariot nor Red’s Horse reaches, or defend it with your Chariot from the side, along the rank. Defending it from behind is not enough: Red’s Horse joins the attack.',
+    vi: 'Hãy đưa Mã tới điểm mà cả Xe Đỏ lẫn Mã Đỏ đều không với tới, hoặc dùng Xe của bạn bảo vệ nó từ bên cạnh, theo hàng ngang. Bảo vệ từ phía sau là chưa đủ: Mã Đỏ sẽ cùng tấn công.',
   },
   'b06-c13.prompt': {
     en: 'Black’s Cannon attacks your Horse. Save it without losing anything.',
@@ -3746,16 +3746,16 @@ export const messages = {
   'b06-c16.purpose': { en: 'After your move, Red cannot win your Chariot.', vi: 'Sau nước đi của bạn, bên Đỏ không ăn được Xe của bạn.' },
   'b06-c16.key': { en: 'Red has no capture that wins material.', vi: 'Bên Đỏ không có nước ăn quân nào được lợi.' },
   'b06-c16.error': {
-    en: 'Your Horse in front is the Cannon’s screen, so the Chariot behind it is attacked. Leave the file, but not for a point Red’s Chariot reaches.',
-    vi: 'Quân Mã phía trước là ngòi của Pháo, nên Xe phía sau bị tấn công. Hãy rời cột đó, nhưng đừng tới điểm mà Xe Đỏ với tới.',
+    en: 'Your Horse in front is the Cannon’s screen, so the Chariot behind it is attacked. Leave the file, but not for a point Red’s Horse reaches.',
+    vi: 'Quân Mã phía trước là ngòi của Pháo, nên Xe phía sau bị tấn công. Hãy rời cột đó, nhưng đừng tới điểm mà Mã Đỏ với tới.',
   },
   'b06-c16.tempt': {
     en: 'Still on the file: the Cannon jumps over your Horse and takes the Chariot.',
     vi: 'Vẫn ở trên cột: Pháo nhảy qua quân Mã của bạn và ăn Xe.',
   },
   'b06-c16.expl': {
-    en: 'Leave the Cannon’s file, and keep away from the file Red’s Chariot controls.',
-    vi: 'Hãy rời khỏi cột của Pháo, và tránh cột mà Xe Đỏ kiểm soát.',
+    en: 'Leave the Cannon’s file, or move your Horse so that the Cannon has no screen, and keep away from the points Red’s Horse covers.',
+    vi: 'Hãy rời khỏi cột của Pháo, hoặc đưa quân Mã đi để Pháo không còn ngòi, và tránh các điểm Mã Đỏ kiểm soát.',
   },
 
   // ---------- New course: b09 "Opening development principles" (pilot lesson b09l3 + task b09-g1, S2.14) ----------

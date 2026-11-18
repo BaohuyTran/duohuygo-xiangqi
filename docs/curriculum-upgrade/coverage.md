@@ -72,7 +72,8 @@ b06 (S3.2.b) uses only the LEGAL capture facts (`attacked-pieces`, `hanging`, `c
 screen, a hobbled Horse and a piece pinned to its General neither attack nor defend (b06.m2–m4). The `choice` items with a
 "none" option have it right in b06l2-08 and b06-c10 and wrong in b06-c09 (the only defender is pinned). Every `move`
 goal `safe` item (and every correct option of the save-it choices b06l3-06, b06-c15) is pinned in pilot-b06.test.ts: it
-passes the Basic guard and the opponent's best 3-ply reply wins no material. TR b06l3-08 is the full board as Black right
+passes the item's guard and the opponent's best 3-ply reply wins no material; after the content review every move such an
+item accepts keeps the material at depth 4 (b06-c12 and b06-c13 use `goal.guard { h: 2 }`; b06l3-03 and b06-c16 were rebuilt). TR b06l3-08 is the full board as Black right
 after Red's Cannon move to the edge file (the app has no move animation; the prompt names the move); exactly three
 blocks are safe.
 
