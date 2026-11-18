@@ -1,0 +1,1245 @@
+{
+  "id": "b05",
+  "track": "basics",
+  "title": "b05.title",
+  "description": "b05.desc",
+  "lessons": [
+    {
+      "id": "b05l1",
+      "title": "b05l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b05l1-01",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l1#2"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b05.m2"
+          ],
+          "pieces": {
+            "e1": "K",
+            "e4": "r",
+            "e9": "k"
+          },
+          "text": "b05l1-01.text",
+          "square": "e1"
+        },
+        {
+          "type": "learn",
+          "id": "b05l1-02",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b05.m1"
+          ],
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "g1": "n",
+            "f6": "R"
+          },
+          "text": "b05l1-02.text",
+          "square": "f6",
+          "highlight": [
+            "f1"
+          ]
+        },
+        {
+          "type": "learn",
+          "id": "b05l1-03",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e7": "c",
+            "e3": "N",
+            "b2": "C",
+            "f0": "A"
+          },
+          "text": "b05l1-03.text",
+          "square": "e3"
+        },
+        {
+          "type": "move",
+          "id": "b05l1-04",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l1#3"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "a1": "R"
+          },
+          "prompt": "b05l1-04.prompt",
+          "from": "a1",
+          "goal": {
+            "kind": "check"
+          },
+          "solution": {
+            "from": "a1",
+            "to": "a9"
+          },
+          "explanation": "b05l1-04.expl"
+        },
+        {
+          "type": "move",
+          "id": "b05l1-05",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l1#4"
+          },
+          "side": "red",
+          "strand": "DE",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "f2": "n"
+          },
+          "prompt": "b05l1-05.prompt",
+          "goal": {
+            "kind": "any"
+          },
+          "solution": {
+            "from": "e0",
+            "to": "e1"
+          },
+          "explanation": "b05l1-05.expl"
+        },
+        {
+          "type": "capture",
+          "id": "b05l1-06",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l1#5"
+          },
+          "side": "red",
+          "strand": "DE",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "e3": "r",
+            "c2": "N"
+          },
+          "prompt": "b05l1-06.prompt",
+          "solution": {
+            "from": "c2",
+            "to": "e3"
+          },
+          "feedback": {
+            "purpose": "b05l1-06.purpose",
+            "keyReply": "b05l1-06.key",
+            "commonError": "b05l1-06.error",
+            "temptingAlternative": {
+              "move": "e0-f0",
+              "text": "b05l1-06.tempt"
+            }
+          },
+          "explanation": "b05l1-06.expl"
+        },
+        {
+          "type": "choice",
+          "id": "b05l1-07",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "DE",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b05.m2"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "e9": "k",
+            "e6": "p",
+            "g7": "n",
+            "a9": "r",
+            "a2": "R",
+            "e2": "C",
+            "d0": "K"
+          },
+          "turn": "black",
+          "prompt": "b05l1-07.prompt",
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "text": "b05l1-07.a.t",
+              "correct": true,
+              "feedback": "b05l1-07.a"
+            },
+            {
+              "id": "b",
+              "text": "b05l1-07.b.t",
+              "correct": true,
+              "feedback": "b05l1-07.b"
+            },
+            {
+              "id": "c",
+              "text": "b05l1-07.c.t",
+              "correct": false,
+              "feedback": "b05l1-07.c",
+              "misconception": "b05.m2"
+            }
+          ]
+        },
+        {
+          "type": "move",
+          "id": "b05l1-08",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "DE",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G0",
+          "pieces": {
+            "e0": "K",
+            "e1": "A",
+            "e2": "C",
+            "f5": "R",
+            "d9": "k",
+            "g1": "n",
+            "a6": "p"
+          },
+          "prompt": "b05l1-08.prompt",
+          "goal": {
+            "kind": "safe"
+          },
+          "solution": {
+            "from": "f5",
+            "to": "f1"
+          },
+          "feedback": {
+            "purpose": "b05l1-08.purpose",
+            "keyReply": "b05l1-08.key",
+            "commonError": "b05l1-08.error",
+            "temptingAlternative": {
+              "move": "e0-f0",
+              "text": "b05l1-08.tempt"
+            }
+          },
+          "explanation": "b05l1-08.expl"
+        },
+        {
+          "type": "move",
+          "id": "b05l1-09",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "DE",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "TR",
+          "pieces": {
+            "e9": "k",
+            "a4": "r",
+            "c7": "n",
+            "a9": "R",
+            "e0": "K",
+            "e3": "P",
+            "g6": "p",
+            "h0": "N"
+          },
+          "turn": "black",
+          "prompt": "b05l1-09.prompt",
+          "goal": {
+            "kind": "safe"
+          },
+          "solution": {
+            "from": "a4",
+            "to": "a9"
+          },
+          "feedback": {
+            "purpose": "b05l1-09.purpose",
+            "keyReply": "b05l1-09.key",
+            "commonError": "b05l1-09.error",
+            "temptingAlternative": {
+              "move": "e9-e8",
+              "text": "b05l1-09.tempt"
+            }
+          },
+          "explanation": "b05l1-09.expl"
+        }
+      ]
+    },
+    {
+      "id": "b05l2",
+      "title": "b05l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b05l2-01",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l2#0"
+          },
+          "side": "red",
+          "pieces": {
+            "d0": "K",
+            "a9": "R",
+            "a8": "R",
+            "e9": "k"
+          },
+          "turn": "black",
+          "text": "b05l2-01.text"
+        },
+        {
+          "type": "learn",
+          "id": "b05l2-02",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b05.m4"
+          ],
+          "pieces": {
+            "d0": "K",
+            "e5": "R",
+            "e9": "k",
+            "i6": "p"
+          },
+          "turn": "black",
+          "text": "b05l2-02.text",
+          "highlight": [
+            "f9"
+          ]
+        },
+        {
+          "type": "move",
+          "id": "b05l2-03",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l2#2"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "d0": "K",
+            "a8": "R",
+            "b1": "R",
+            "e9": "k",
+            "i6": "p"
+          },
+          "prompt": "b05l2-03.prompt",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "b1",
+            "to": "b9"
+          },
+          "explanation": "b05l2-03.expl"
+        },
+        {
+          "type": "move",
+          "id": "b05l2-04",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l2#1"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "d0": "K",
+            "a8": "R",
+            "h1": "R",
+            "e9": "k",
+            "i6": "p"
+          },
+          "prompt": "b05l2-04.prompt",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "h1",
+            "to": "h9"
+          },
+          "explanation": "b05l2-04.expl"
+        },
+        {
+          "type": "move",
+          "id": "b05l2-05",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u3l2#4"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "d0": "K",
+            "e7": "P",
+            "f8": "P",
+            "e9": "k",
+            "a6": "p"
+          },
+          "prompt": "b05l2-05.prompt",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "e7",
+            "to": "e8"
+          },
+          "explanation": "b05l2-05.expl"
+        },
+        {
+          "type": "move",
+          "id": "b05l2-06",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l2#5"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "pieces": {
+            "d0": "K",
+            "f1": "R",
+            "e7": "P",
+            "d8": "P",
+            "e9": "k",
+            "i6": "p"
+          },
+          "prompt": "b05l2-06.prompt",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "d8",
+            "to": "e8"
+          },
+          "feedback": {
+            "purpose": "b05l2-06.purpose",
+            "keyReply": "b05l2-06.key",
+            "commonError": "b05l2-06.error",
+            "temptingAlternative": {
+              "move": "f1-f9",
+              "text": "b05l2-06.tempt"
+            }
+          },
+          "explanation": "b05l2-06.expl"
+        },
+        {
+          "type": "move",
+          "id": "b05l2-07",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l2#3"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "pieces": {
+            "e0": "K",
+            "h2": "C",
+            "e7": "N",
+            "e9": "k",
+            "a6": "p"
+          },
+          "prompt": "b05l2-07.prompt",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "h2",
+            "to": "e2"
+          },
+          "feedback": {
+            "purpose": "b05l2-07.purpose",
+            "keyReply": "b05l2-07.key",
+            "commonError": "b05l2-07.error",
+            "temptingAlternative": {
+              "move": "h2-h9",
+              "text": "b05l2-07.tempt"
+            }
+          },
+          "explanation": "b05l2-07.expl"
+        },
+        {
+          "type": "move",
+          "id": "b05l2-08",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u3l1#5"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "pieces": {
+            "e0": "K",
+            "e5": "C",
+            "h7": "C",
+            "d9": "a",
+            "f9": "a",
+            "e9": "k",
+            "a6": "p"
+          },
+          "prompt": "b05l2-08.prompt",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "h7",
+            "to": "e7"
+          },
+          "feedback": {
+            "purpose": "b05l2-08.purpose",
+            "keyReply": "b05l2-08.key",
+            "commonError": "b05l2-08.error",
+            "temptingAlternative": {
+              "move": "h7-h9",
+              "text": "b05l2-08.tempt"
+            }
+          },
+          "explanation": "b05l2-08.expl"
+        },
+        {
+          "type": "move",
+          "id": "b05l2-09",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "derived",
+            "derivedFrom": "u4l2#3",
+            "transform": [
+              "colour-swap",
+              "edit-pieces"
+            ]
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G0",
+          "pieces": {
+            "e9": "k",
+            "h7": "c",
+            "e2": "n",
+            "e0": "K",
+            "i3": "P"
+          },
+          "turn": "black",
+          "prompt": "b05l2-09.prompt",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "h7",
+            "to": "e7"
+          },
+          "feedback": {
+            "purpose": "b05l2-09.purpose",
+            "keyReply": "b05l2-09.key",
+            "commonError": "b05l2-09.error",
+            "temptingAlternative": {
+              "move": "h7-h0",
+              "text": "b05l2-09.tempt"
+            }
+          },
+          "explanation": "b05l2-09.expl"
+        }
+      ]
+    },
+    {
+      "id": "b05l3",
+      "title": "b05l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b05l3-01",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "legacy",
+            "legacyRef": "u4l2#4"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b05.m3"
+          ],
+          "pieces": {
+            "d0": "K",
+            "a8": "R",
+            "f1": "R",
+            "e9": "k"
+          },
+          "turn": "black",
+          "text": "b05l3-01.text"
+        },
+        {
+          "type": "learn",
+          "id": "b05l3-02",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "pieces": {
+            "d0": "K",
+            "f9": "k",
+            "a9": "R"
+          },
+          "turn": "black",
+          "text": "b05l3-02.text"
+        },
+        {
+          "type": "learn",
+          "id": "b05l3-03",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "c3": "P",
+            "g6": "p"
+          },
+          "text": "b05l3-03.text"
+        },
+        {
+          "type": "choice",
+          "id": "b05l3-04",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b05.m1",
+            "b05.m2",
+            "b05.m3"
+          ],
+          "assist": "G2",
+          "pieces": {
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "f4": "r",
+            "g8": "N",
+            "a8": "R",
+            "d0": "K"
+          },
+          "turn": "black",
+          "prompt": "b05l3-04.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b05l3-04.a.t",
+              "correct": true,
+              "feedback": "b05l3-04.a"
+            },
+            {
+              "id": "b",
+              "text": "b05l3-04.b.t",
+              "correct": false,
+              "feedback": "b05l3-04.b",
+              "misconception": "b05.m1"
+            },
+            {
+              "id": "c",
+              "text": "b05l3-04.c.t",
+              "correct": false,
+              "feedback": "b05l3-04.c",
+              "misconception": "b05.m3"
+            },
+            {
+              "id": "d",
+              "text": "b05l3-04.d.t",
+              "correct": false,
+              "feedback": "b05l3-04.d",
+              "misconception": "b05.m2"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b05l3-05",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [
+            "b05.m4"
+          ],
+          "assist": "G2",
+          "fen": "9/3k5/9/9/8r/4n4/9/4K4/9/9 b - - 0 1",
+          "prompt": "b05l3-05.prompt",
+          "alternatives": false,
+          "feedback": {
+            "purpose": "b05l3-05.purpose",
+            "keyReply": "b05l3-05.key",
+            "commonError": "b05l3-05.error",
+            "temptingAlternative": {
+              "move": "i5-i2",
+              "text": "b05l3-05.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "e4-f6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "e4-d6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "e4-f2",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "e4-d2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "e4-g5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "e4-g3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.checkonly"
+            },
+            {
+              "move": "e4-c5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "e4-c3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.checkonly"
+            },
+            {
+              "move": "i5-h5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-g5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-f5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-e5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-d5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-c5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-b5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-a5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-i6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-i7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-i8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-i9",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-i4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-i3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "i5-i2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05l3-05.tempt",
+              "misconception": "b05.m4"
+            },
+            {
+              "move": "i5-i1",
+              "class": "target",
+              "source": "authored",
+              "reason": "b05.r.stalemate"
+            },
+            {
+              "move": "i5-i0",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "d8-e8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "d8-d9",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "d8-d7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b05l3-06",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b05.m3",
+            "b05.m4"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "e0": "K",
+            "d9": "k",
+            "b2": "C",
+            "h7": "c",
+            "c3": "P"
+          },
+          "prompt": "b05l3-06.prompt",
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "text": "b05l3-06.a.t",
+              "correct": true,
+              "feedback": "b05l3-06.a"
+            },
+            {
+              "id": "b",
+              "text": "b05l3-06.b.t",
+              "correct": true,
+              "feedback": "b05l3-06.b"
+            },
+            {
+              "id": "c",
+              "text": "b05l3-06.c.t",
+              "correct": false,
+              "feedback": "b05l3-06.c",
+              "misconception": "b05.m3"
+            },
+            {
+              "id": "d",
+              "text": "b05l3-06.d.t",
+              "correct": false,
+              "feedback": "b05l3-06.d",
+              "misconception": "b05.m4"
+            }
+          ]
+        },
+        {
+          "type": "move",
+          "id": "b05l3-07",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G1",
+          "fen": "9/4k2n1/9/8r/9/9/9/3A5/5K3/3A5 b - - 0 1",
+          "prompt": "b05l3-07.prompt",
+          "goal": {
+            "kind": "checkmate"
+          },
+          "solution": {
+            "from": "i6",
+            "to": "f6"
+          },
+          "feedback": {
+            "purpose": "b05l3-07.purpose",
+            "keyReply": "b05l3-07.key",
+            "commonError": "b05l3-07.error",
+            "temptingAlternative": {
+              "move": "i6-i1",
+              "text": "b05l3-07.tempt"
+            }
+          },
+          "explanation": "b05l3-07.expl"
+        },
+        {
+          "type": "decision",
+          "id": "b05l3-08",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "tactic",
+          "critical": false,
+          "misconceptions": [
+            "b05.m4"
+          ],
+          "assist": "G0",
+          "fen": "5k3/9/5N3/9/2R6/9/9/9/4K4/9 w",
+          "prompt": "b05l3-08.prompt",
+          "alternatives": false,
+          "feedback": {
+            "purpose": "b05l3-08.purpose",
+            "keyReply": "b05l3-08.key",
+            "commonError": "b05l3-08.error",
+            "temptingAlternative": {
+              "move": "c5-c9",
+              "text": "b05l3-08.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "e1-f1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "e1-d1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "e1-e2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "e1-e0",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-d5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-e5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-f5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-g5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-h5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-i5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-b5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-a5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-c6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-c7",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-c8",
+              "class": "target",
+              "source": "authored",
+              "reason": "b05.r.stalemate"
+            },
+            {
+              "move": "c5-c9",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05l3-08.tempt",
+              "misconception": "b05.m4"
+            },
+            {
+              "move": "c5-c4",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-c3",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-c2",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-c1",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "c5-c0",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "f7-g9",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "f7-e9",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "f7-g5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "f7-e5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "f7-h8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.checkonly"
+            },
+            {
+              "move": "f7-h6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            },
+            {
+              "move": "f7-d8",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.checkonly"
+            },
+            {
+              "move": "f7-d6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b05.r.nowin"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import {
 import { checkChoice } from '../lessons/choice';
 import { checkCombinationMove, combinationDone, combinationReply } from '../lessons/combination';
 import { isAccepted, judgeDecision, parseMoveKey } from '../lessons/decision';
+import { syncSafety } from '../lessons/decision-table';
 import { toMove } from '../puzzles/logic';
 import { allLessons, allUnits, units } from './index';
 import { hasMessage } from '../i18n/messages';
@@ -163,7 +164,8 @@ describe('shipped lesson content', () => {
           const solution = { from: parseSquare(ex.solution.from), to: parseSquare(ex.solution.to) };
           expect(legalMoves(pos)).toContainEqual(solution);
           expect(() => makeMove(pos, solution)).not.toThrow();
-          const check = ex.type === 'move' ? (m: typeof solution) => checkMove(ex, m) : (m: typeof solution) => checkCapture(ex, m);
+          // Goal `safe` (first used by b05) is judged with the synchronous safety guard, as the validator does.
+          const check = ex.type === 'move' ? (m: typeof solution) => checkMove(ex, m, syncSafety()) : (m: typeof solution) => checkCapture(ex, m);
           expect(check(solution)).toBe('correct');
           const wrong = legalMoves(pos).filter((m) => check(m) !== 'correct');
           if (!(ex.type === 'move' && ex.goal.kind === 'any')) expect(wrong.length).toBeGreaterThan(0);

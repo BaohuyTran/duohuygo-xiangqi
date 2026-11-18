@@ -444,6 +444,10 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Unit `b04` (S3.1.d; `reviewed`, record `reviews/b04.json`) is `src/content/lessons/b04-cannon-and-soldier.json` + `assessment/b04-check.json`
   (16 items, 6 own + 2 interleaved per form, three attempts); `src/content/pilot-b04.test.ts` (also pins that no b04 item
   depends on check or pins: nobody in check, legal attackers = plain movement rule).
+- Unit `b05` (S3.2.a; `verified` until review) is `src/content/lessons/b05-check-and-results.json` + `assessment/b05-check.json`
+  (16 items, three attempts); `src/content/pilot-b05.test.ts` (mate items allow no stalemate instead, since goal
+  `checkmate` rejects stalemate; win-in-one `decision` tables accept every mating and stalemating move; escape items use
+  goal `safe`; check items differ in task + learner-relative material, not only in position).
 - Pilot `b09` (S2.14: `b09l3` + `b09-g1`) is `src/content/lessons/b09-opening-development.json`; with it the content is in
   REL-P (`CURRENT_RELEASE`): the default path stays legacy-only, the preview shows `b09` once every item is `reviewed`
   with an approving record (items are `verified` until the independent review). `src/content/pilot-b09.test.ts`.

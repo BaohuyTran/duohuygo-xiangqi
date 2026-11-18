@@ -1,0 +1,1059 @@
+{
+  "id": "b05-check",
+  "kind": "check",
+  "unit": "b05",
+  "primaryStrand": "RS",
+  "version": 1,
+  "items": [
+    {
+      "type": "move",
+      "id": "b05-c01",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "DE",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e1": "K",
+        "e4": "P",
+        "e7": "c",
+        "e9": "k",
+        "c2": "R",
+        "g3": "n",
+        "i6": "p"
+      },
+      "prompt": "b05-c01.prompt",
+      "goal": {
+        "kind": "safe"
+      },
+      "solution": {
+        "from": "e1",
+        "to": "d1"
+      },
+      "explanation": "b05-c01.expl",
+      "objective": "b05l1",
+      "unit": "b05",
+      "feedback": {
+        "purpose": "b05-c01.purpose",
+        "keyReply": "b05-c01.key",
+        "commonError": "b05-c01.error",
+        "temptingAlternative": {
+          "move": "c2-e2",
+          "text": "b05-c01.tempt"
+        }
+      }
+    },
+    {
+      "type": "move",
+      "id": "b05-c02",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "DE",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e9": "k",
+        "f9": "a",
+        "c8": "N",
+        "d2": "r",
+        "e6": "p",
+        "e0": "K",
+        "a2": "R"
+      },
+      "turn": "black",
+      "prompt": "b05-c02.prompt",
+      "goal": {
+        "kind": "safe"
+      },
+      "solution": {
+        "from": "d2",
+        "to": "d8"
+      },
+      "explanation": "b05-c02.expl",
+      "objective": "b05l1",
+      "unit": "b05",
+      "feedback": {
+        "purpose": "b05-c02.purpose",
+        "keyReply": "b05-c02.key",
+        "commonError": "b05-c02.error",
+        "temptingAlternative": {
+          "move": "e9-e8",
+          "text": "b05-c02.tempt"
+        }
+      }
+    },
+    {
+      "type": "capture",
+      "id": "b05-c03",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "DE",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "d5": "r",
+        "f4": "N",
+        "e9": "k",
+        "b3": "C",
+        "h6": "n"
+      },
+      "prompt": "b05-c03.prompt",
+      "solution": {
+        "from": "f4",
+        "to": "d5"
+      },
+      "explanation": "b05-c03.expl",
+      "objective": "b05l1",
+      "unit": "b05",
+      "feedback": {
+        "purpose": "b05-c03.purpose",
+        "keyReply": "b05-c03.key",
+        "commonError": "b05-c03.error",
+        "temptingAlternative": {
+          "move": "b3-d3",
+          "text": "b05-c03.tempt"
+        }
+      }
+    },
+    {
+      "type": "choice",
+      "id": "b05-c04",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "DE",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b05.m2"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e9": "k",
+        "a9": "R",
+        "c7": "n",
+        "h4": "r",
+        "h0": "N",
+        "d0": "K"
+      },
+      "turn": "black",
+      "prompt": "b05-c04.prompt",
+      "multi": true,
+      "options": [
+        {
+          "id": "a",
+          "text": "b05-c04.a.t",
+          "correct": true,
+          "feedback": "b05-c04.a"
+        },
+        {
+          "id": "b",
+          "text": "b05-c04.b.t",
+          "correct": true,
+          "feedback": "b05-c04.b"
+        },
+        {
+          "id": "c",
+          "text": "b05-c04.c.t",
+          "correct": false,
+          "feedback": "b05-c04.c",
+          "misconception": "b05.m2"
+        }
+      ],
+      "objective": "b05l1",
+      "unit": "b05"
+    },
+    {
+      "type": "choice",
+      "id": "b05-c05",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b05.m2"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "d6": "r",
+        "h4": "R",
+        "h9": "r",
+        "f9": "k",
+        "b2": "N"
+      },
+      "prompt": "b05-c05.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b05-c05.a.t",
+          "correct": true,
+          "feedback": "b05-c05.a"
+        },
+        {
+          "id": "b",
+          "text": "b05-c05.b.t",
+          "correct": false,
+          "feedback": "b05-c05.b",
+          "misconception": "b05.m2"
+        },
+        {
+          "id": "c",
+          "text": "b05-c05.c.t",
+          "correct": false,
+          "feedback": "b05-c05.c",
+          "misconception": "b05.m2"
+        }
+      ],
+      "objective": "b05l1",
+      "unit": "b05"
+    },
+    {
+      "type": "move",
+      "id": "b05-c06",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "fen": "5a3/3k5/5a3/4R4/3N5/9/9/9/9/4K4 w",
+      "prompt": "b05-c06.prompt",
+      "goal": {
+        "kind": "checkmate"
+      },
+      "solution": {
+        "from": "e6",
+        "to": "d6"
+      },
+      "explanation": "b05-c06.expl",
+      "objective": "b05l2",
+      "unit": "b05",
+      "feedback": {
+        "purpose": "b05-c06.purpose",
+        "keyReply": "b05-c06.key",
+        "commonError": "b05-c06.error",
+        "temptingAlternative": {
+          "move": "e6-e8",
+          "text": "b05-c06.tempt"
+        }
+      }
+    },
+    {
+      "type": "move",
+      "id": "b05-c07",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "fen": "5k3/9/9/9/9/9/2r6/3AKAp2/9/9 b - - 0 1",
+      "prompt": "b05-c07.prompt",
+      "goal": {
+        "kind": "checkmate"
+      },
+      "solution": {
+        "from": "c3",
+        "to": "e3"
+      },
+      "explanation": "b05-c07.expl",
+      "objective": "b05l2",
+      "unit": "b05",
+      "feedback": {
+        "purpose": "b05-c07.purpose",
+        "keyReply": "b05-c07.key",
+        "commonError": "b05-c07.error",
+        "temptingAlternative": {
+          "move": "g2-f2",
+          "text": "b05-c07.tempt"
+        }
+      }
+    },
+    {
+      "type": "move",
+      "id": "b05-c08",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "fen": "1N1k5/C8/3a1a3/9/9/9/9/4K4/9/9 w",
+      "prompt": "b05-c08.prompt",
+      "goal": {
+        "kind": "checkmate"
+      },
+      "solution": {
+        "from": "a8",
+        "to": "a9"
+      },
+      "explanation": "b05-c08.expl",
+      "objective": "b05l2",
+      "unit": "b05",
+      "feedback": {
+        "purpose": "b05-c08.purpose",
+        "keyReply": "b05-c08.key",
+        "commonError": "b05-c08.error",
+        "temptingAlternative": {
+          "move": "b9-c7",
+          "text": "b05-c08.tempt"
+        }
+      }
+    },
+    {
+      "type": "choice",
+      "id": "b05-c09",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b05.m1",
+        "b05.m2"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d8": "k",
+        "d9": "a",
+        "d7": "a",
+        "b7": "N",
+        "c3": "c",
+        "e2": "R",
+        "f0": "K"
+      },
+      "turn": "black",
+      "prompt": "b05-c09.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b05-c09.a.t",
+          "correct": true,
+          "feedback": "b05-c09.a"
+        },
+        {
+          "id": "b",
+          "text": "b05-c09.b.t",
+          "correct": false,
+          "feedback": "b05-c09.b",
+          "misconception": "b05.m1"
+        },
+        {
+          "id": "c",
+          "text": "b05-c09.c.t",
+          "correct": false,
+          "feedback": "b05-c09.c",
+          "misconception": "b05.m2"
+        }
+      ],
+      "objective": "b05l2",
+      "unit": "b05"
+    },
+    {
+      "type": "decision",
+      "id": "b05-c10",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [
+        "b05.m4"
+      ],
+      "assist": "G0",
+      "fen": "5a3/9/3ak4/9/2P6/9/9/3R5/9/5K3 w",
+      "prompt": "b05-c10.prompt",
+      "alternatives": false,
+      "objective": "b05l2",
+      "unit": "b05",
+      "feedback": {
+        "purpose": "b05-c10.purpose",
+        "keyReply": "b05-c10.key",
+        "commonError": "b05-c10.error",
+        "temptingAlternative": {
+          "move": "d2-d7",
+          "text": "b05-c10.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "f0-f1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-e2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b05.r.mate"
+        },
+        {
+          "move": "d2-f2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-g2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-h2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-i2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-c2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-b2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-a2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-d3",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-d4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-d5",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-d6",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-d7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b05-c10.tempt",
+          "misconception": "b05.m4"
+        },
+        {
+          "move": "d2-d1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d2-d0",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "c5-c6",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "c5-b5",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "c5-d5",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b05-c11",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [
+        "b05.m4"
+      ],
+      "assist": "G0",
+      "fen": "5k3/9/9/9/9/9/8P/9/9/3KR4 w",
+      "prompt": "b05-c11.prompt",
+      "alternatives": false,
+      "objective": "b05l3",
+      "unit": "b05",
+      "feedback": {
+        "purpose": "b05-c11.purpose",
+        "keyReply": "b05-c11.key",
+        "commonError": "b05-c11.error",
+        "temptingAlternative": {
+          "move": "e0-e9",
+          "text": "b05-c11.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "d0-d1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-f0",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.checkonly"
+        },
+        {
+          "move": "e0-g0",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-h0",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-i0",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-e2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-e3",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-e4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-e5",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-e6",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-e7",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "e0-e8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b05.r.stalemate"
+        },
+        {
+          "move": "e0-e9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b05-c11.tempt",
+          "misconception": "b05.m4"
+        },
+        {
+          "move": "i3-i4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b05-c12",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [
+        "b05.m4"
+      ],
+      "assist": "G0",
+      "fen": "9/9/5k3/9/7n1/3r5/9/9/9/4K4 b - - 0 1",
+      "prompt": "b05-c12.prompt",
+      "alternatives": false,
+      "objective": "b05l3",
+      "unit": "b05",
+      "feedback": {
+        "purpose": "b05-c12.purpose",
+        "keyReply": "b05-c12.key",
+        "commonError": "b05-c12.error",
+        "temptingAlternative": {
+          "move": "d4-d0",
+          "text": "b05-c12.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "d4-e4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.checkonly"
+        },
+        {
+          "move": "d4-f4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-g4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-h4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-i4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-c4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-b4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-a4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-d5",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-d6",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-d7",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-d8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-d9",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-d3",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-d2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "d4-d1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b05.r.stalemate"
+        },
+        {
+          "move": "d4-d0",
+          "class": "error",
+          "source": "authored",
+          "reason": "b05-c12.tempt",
+          "misconception": "b05.m4"
+        },
+        {
+          "move": "h5-i7",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "h5-g7",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "h5-i3",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "h5-g3",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "h5-f6",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "h5-f4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        },
+        {
+          "move": "f7-f8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b05.r.nowin"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "id": "b05-c13",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b05.m3"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "f9": "k",
+        "g2": "N",
+        "c7": "n",
+        "e3": "P"
+      },
+      "prompt": "b05-c13.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b05-c13.a.t",
+          "correct": true,
+          "feedback": "b05-c13.a"
+        },
+        {
+          "id": "b",
+          "text": "b05-c13.b.t",
+          "correct": false,
+          "feedback": "b05-c13.b",
+          "misconception": "b05.m3"
+        },
+        {
+          "id": "c",
+          "text": "b05-c13.c.t",
+          "correct": false,
+          "feedback": "b05-c13.c",
+          "misconception": "b05.m3"
+        }
+      ],
+      "objective": "b05l3",
+      "unit": "b05"
+    },
+    {
+      "type": "choice",
+      "id": "b05-c14",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b05.m4"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "f8": "k",
+        "e1": "K",
+        "b8": "r",
+        "g3": "R",
+        "a6": "p"
+      },
+      "turn": "black",
+      "prompt": "b05-c14.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b05-c14.a.t",
+          "correct": true,
+          "feedback": "b05-c14.a"
+        },
+        {
+          "id": "b",
+          "text": "b05-c14.b.t",
+          "correct": false,
+          "feedback": "b05-c14.b",
+          "misconception": "b05.m4"
+        },
+        {
+          "id": "c",
+          "text": "b05-c14.c.t",
+          "correct": false,
+          "feedback": "b05-c14.c",
+          "misconception": "b05.m4"
+        }
+      ],
+      "objective": "b05l3",
+      "unit": "b05"
+    },
+    {
+      "type": "choice",
+      "id": "b05-c15",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b05.m2",
+        "b05.m3"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "e3": "N",
+        "e8": "c",
+        "d9": "k",
+        "a2": "R",
+        "a7": "r"
+      },
+      "prompt": "b05-c15.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b05-c15.a.t",
+          "correct": true,
+          "feedback": "b05-c15.a"
+        },
+        {
+          "id": "b",
+          "text": "b05-c15.b.t",
+          "correct": false,
+          "feedback": "b05-c15.b",
+          "misconception": "b05.m2"
+        },
+        {
+          "id": "c",
+          "text": "b05-c15.c.t",
+          "correct": false,
+          "feedback": "b05-c15.c",
+          "misconception": "b05.m3"
+        }
+      ],
+      "objective": "b05l3",
+      "unit": "b05"
+    },
+    {
+      "type": "choice",
+      "id": "b05-c16",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b05.m3",
+        "b05.m4"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d8": "k",
+        "f1": "K",
+        "b7": "c",
+        "g3": "R",
+        "e6": "p",
+        "c3": "P"
+      },
+      "turn": "black",
+      "prompt": "b05-c16.prompt",
+      "multi": true,
+      "options": [
+        {
+          "id": "a",
+          "text": "b05-c16.a.t",
+          "correct": true,
+          "feedback": "b05-c16.a"
+        },
+        {
+          "id": "b",
+          "text": "b05-c16.b.t",
+          "correct": true,
+          "feedback": "b05-c16.b"
+        },
+        {
+          "id": "c",
+          "text": "b05-c16.c.t",
+          "correct": false,
+          "feedback": "b05-c16.c",
+          "misconception": "b05.m3"
+        },
+        {
+          "id": "d",
+          "text": "b05-c16.d.t",
+          "correct": false,
+          "feedback": "b05-c16.d",
+          "misconception": "b05.m4"
+        }
+      ],
+      "objective": "b05l3",
+      "unit": "b05"
+    }
+  ]
+}
