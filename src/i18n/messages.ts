@@ -3758,6 +3758,494 @@ export const messages = {
     vi: 'Hãy rời khỏi cột của Pháo, hoặc đưa quân Mã đi để Pháo không còn ngòi, và tránh các điểm Mã Đỏ kiểm soát.',
   },
 
+  // ---------- New course: b07 "Exchanges and relative material value" (S3.2.c; lessons b07l1–b07l3 + check pool b07-check) ----------
+  'b07.title': { en: 'Exchanges and relative material value', vi: 'Đổi quân và giá trị tương đối của quân cờ' },
+  'b07.desc': {
+    en: 'What the pieces are worth, how to count captures and recaptures, which captures to refuse, and when a trade helps you.',
+    vi: 'Giá trị của các quân, cách đếm các nước ăn và ăn lại, nước ăn nào nên từ chối, và khi nào đổi quân có lợi cho bạn.',
+  },
+  'b07l1.title': { en: 'What pieces are worth', vi: 'Các quân đáng giá bao nhiêu' },
+  'b07l2.title': { en: 'Counting an exchange', vi: 'Đếm một cuộc đổi quân' },
+  'b07l3.title': { en: 'Should I trade?', vi: 'Có nên đổi quân không?' },
+  'b07.r.keep': { en: 'Good: after the best replies you still have all your material.', vi: 'Tốt: sau các nước đáp hay nhất, bạn vẫn còn đủ quân.' },
+  'b07.r.even': { en: 'Good: an even trade, and you lose nothing.', vi: 'Tốt: một cuộc đổi ngang, và bạn không mất gì.' },
+  'b07.r.loses': { en: 'After the best replies and recaptures you are down material.', vi: 'Sau các nước đáp và ăn lại hay nhất, bạn bị thiệt quân.' },
+  'b07l1-01.text': {
+    en: 'This course counts material with the usual beginner values, the same ones its engine uses: Chariot 9, Cannon 4½, Horse 4, Advisor 2, Elephant 2, Soldier 1. The General is never traded: losing it loses the game. Add up the pieces on each side to see who is ahead.',
+    vi: 'Khóa học đếm quân theo giá trị quen thuộc cho người mới, giống như máy của ứng dụng: Xe 9, Pháo 4,5, Mã 4, Sĩ 2, Tượng 2, Tốt 1. Tướng không bao giờ được đem đổi: mất Tướng là thua. Cộng giá trị các quân mỗi bên để biết ai hơn.',
+  },
+  'b07l1-02.text': {
+    en: 'Values are a guide, not a law. Your Soldier near Black’s palace has crossed the river: it can move sideways as well as forward, and many players count it as about 2. This app’s engine still counts every Soldier as 1, so its count may undervalue a crossed Soldier like this one. The Soldier still at home is the ordinary 1.',
+    vi: 'Giá trị chỉ là hướng dẫn, không phải luật. Quân Tốt của bạn gần cung Đen đã qua sông: nó đi ngang được và đi thẳng được, nên nhiều người tính nó khoảng 2. Máy của ứng dụng vẫn tính mọi quân Tốt là 1, nên cách đếm của máy có thể đánh giá thấp một quân Tốt đã qua sông như thế. Quân Tốt còn ở nhà thì vẫn là 1 bình thường.',
+  },
+  'b07l1-03.text': {
+    en: 'The position changes what a piece is worth. With only a few pieces left, your Cannon has almost nothing to jump over, so it attacks little; a Horse is often the stronger piece then, although 4½ is more than 4. A piece that is trapped and cannot move is also worth less than its number.',
+    vi: 'Thế cờ làm thay đổi giá trị của một quân. Khi chỉ còn ít quân, Pháo của bạn hầu như không có ngòi để nhảy qua, nên nó ít tấn công được; lúc đó Mã thường mạnh hơn, dù 4,5 lớn hơn 4. Một quân bị kẹt không đi được cũng kém giá trị hơn con số của nó.',
+  },
+  'b07l1-04.prompt': {
+    en: 'Two Black pieces are free to take. Win the more valuable one.',
+    vi: 'Có hai quân Đen ăn được mà không mất gì. Hãy ăn quân giá trị hơn.',
+  },
+  'b07l1-04.expl': {
+    en: 'The Cannon is worth 4½ and the Soldier 1, and nothing can take back on either point. Take the Cannon.',
+    vi: 'Pháo đáng 4,5 còn Tốt đáng 1, và không quân nào ăn lại được ở hai điểm đó. Hãy ăn quân Pháo.',
+  },
+  'b07l1-05.prompt': {
+    en: 'Two Red pieces are free to take. Win the more valuable one.',
+    vi: 'Có hai quân Đỏ ăn được mà không mất gì. Hãy ăn quân giá trị hơn.',
+  },
+  'b07l1-05.expl': {
+    en: 'The Horse is worth 4 and the Soldier 1, and nothing can take back. Take the Horse.',
+    vi: 'Mã đáng 4 còn Tốt đáng 1, và không quân nào ăn lại được. Hãy ăn quân Mã.',
+  },
+  'b07l1-06.prompt': { en: 'Win the most material with a capture.', vi: 'Hãy ăn quân để được lợi nhiều nhất.' },
+  'b07l1-06.purpose': {
+    en: 'The Cannon (4½) has no defender, so you win it for nothing.',
+    vi: 'Quân Pháo (4,5) không có quân bảo vệ, nên bạn được nó mà không mất gì.',
+  },
+  'b07l1-06.key': { en: 'Nothing can take back on that point.', vi: 'Không quân nào ăn lại được ở điểm đó.' },
+  'b07l1-06.error': {
+    en: 'Compare what you win with what you can lose: look for a free piece of the highest value.',
+    vi: 'Hãy so cái được với cái có thể mất: tìm quân không được bảo vệ có giá trị cao nhất.',
+  },
+  'b07l1-06.tempt': {
+    en: 'Black’s Elephant takes back: you win a Horse (4) and lose your Chariot (9).',
+    vi: 'Tượng Đen ăn lại: bạn được Mã (4) nhưng mất Xe (9).',
+  },
+  'b07l1-06.expl': {
+    en: 'Chariot takes the free Cannon: +4½. Taking the Horse would cost the Chariot: +4 − 9.',
+    vi: 'Xe ăn quân Pháo không được bảo vệ: +4,5. Ăn quân Mã sẽ mất Xe: +4 − 9.',
+  },
+  'b07l1-07.prompt': {
+    en: 'Only a few pieces are left: your Horse against Red’s Cannon. Which is likely to be the more useful piece here?',
+    vi: 'Chỉ còn ít quân: Mã của bạn đấu với Pháo Đỏ. Ở đây quân nào nhiều khả năng hữu ích hơn?',
+  },
+  'b07l1-07.a.t': { en: 'Your Horse: the Cannon has little to jump over', vi: 'Mã của bạn: Pháo có ít ngòi để nhảy qua' },
+  'b07l1-07.a': {
+    en: 'Right: a Cannon needs screens to attack, and with few pieces left it rarely has one. The numbers are only a guide.',
+    vi: 'Đúng: Pháo cần ngòi để tấn công, mà khi còn ít quân thì hiếm khi có ngòi. Các con số chỉ là hướng dẫn.',
+  },
+  'b07l1-07.b.t': { en: 'Red’s Cannon: 4½ is always more than 4', vi: 'Pháo Đỏ: 4,5 lúc nào cũng hơn 4' },
+  'b07l1-07.b': {
+    en: 'No: values change with the position. With few screens left, the Cannon is usually the weaker piece.',
+    vi: 'Không: giá trị thay đổi theo thế cờ. Khi còn ít ngòi, Pháo thường là quân yếu hơn.',
+  },
+  'b07l1-07.c.t': { en: 'Neither: their values never change', vi: 'Không quân nào: giá trị của chúng không bao giờ thay đổi' },
+  'b07l1-07.c': {
+    en: 'No: the values are a starting point. Here the lack of screens makes the Cannon weaker.',
+    vi: 'Không: giá trị chỉ là điểm xuất phát. Ở đây vì thiếu ngòi nên Pháo yếu hơn.',
+  },
+  'b07l1-08.prompt': { en: 'Win the most material with a capture.', vi: 'Hãy ăn quân để được lợi nhiều nhất.' },
+  'b07l1-08.purpose': {
+    en: 'The Cannon (4½) is free and worth more than the free Horse (4).',
+    vi: 'Quân Pháo (4,5) không được bảo vệ và đáng giá hơn quân Mã (4) cũng không được bảo vệ.',
+  },
+  'b07l1-08.key': { en: 'Nothing can take back on that point.', vi: 'Không quân nào ăn lại được ở điểm đó.' },
+  'b07l1-08.error': {
+    en: 'Count before you capture: a free 4½ beats a free 4, and both beat a capture that costs your Chariot.',
+    vi: 'Hãy đếm trước khi ăn: được 4,5 không mất gì thì hơn được 4, và cả hai đều hơn một nước ăn làm mất Xe.',
+  },
+  'b07l1-08.tempt': {
+    en: 'Red’s General takes back: you win an Advisor (2) and lose your Chariot (9).',
+    vi: 'Tướng Đỏ ăn lại: bạn được Sĩ (2) nhưng mất Xe (9).',
+  },
+  'b07l1-08.expl': {
+    en: 'Chariot takes the free Cannon: +4½. The Horse would give +4, and the Advisor +2 − 9.',
+    vi: 'Xe ăn quân Pháo không được bảo vệ: +4,5. Ăn Mã được +4, còn ăn Sĩ thì +2 − 9.',
+  },
+  'b07l2-01.text': {
+    en: 'Count an exchange step by step. Your Chariot can take the Cannon: +4½. Then Black’s Horse takes your Chariot: −9. Total: −4½. A capture is only good if the count after every recapture is in your favour.',
+    vi: 'Hãy đếm một cuộc đổi quân từng bước. Xe của bạn ăn được quân Pháo: +4,5. Rồi Mã Đen ăn Xe của bạn: −9. Tổng cộng: −4,5. Một nước ăn chỉ tốt khi sau mọi nước ăn lại, phần đếm vẫn có lợi cho bạn.',
+  },
+  'b07l2-02.text': {
+    en: 'A cheaper attacker can still win a defended piece. Your Horse takes the Chariot: +9. Black’s Elephant takes your Horse: −4. Total: +5. Count the same way every time: what you take, minus what you lose.',
+    vi: 'Quân tấn công rẻ hơn vẫn có thể ăn được quân được bảo vệ. Mã của bạn ăn Xe: +9. Tượng Đen ăn Mã của bạn: −4. Tổng cộng: +5. Lần nào cũng đếm như vậy: cái bạn ăn được trừ đi cái bạn mất.',
+  },
+  'b07l2-03.prompt': { en: 'Win material with a capture. Count the recapture.', vi: 'Hãy ăn quân để được lợi. Nhớ đếm nước ăn lại.' },
+  'b07l2-03.expl': {
+    en: 'Soldier takes Horse: +4. Black’s Chariot takes your Soldier: −1. Total: +3.',
+    vi: 'Tốt ăn Mã: +4. Xe Đen ăn Tốt của bạn: −1. Tổng cộng: +3.',
+  },
+  'b07l2-04.prompt': { en: 'Win material with a capture. Count the recapture.', vi: 'Hãy ăn quân để được lợi. Nhớ đếm nước ăn lại.' },
+  'b07l2-04.expl': {
+    en: 'Soldier takes Horse: +4. Red’s Elephant takes your Soldier: −1. Total: +3.',
+    vi: 'Tốt ăn Mã: +4. Tượng Đỏ ăn Tốt của bạn: −1. Tổng cộng: +3.',
+  },
+  'b07l2-05.prompt': { en: 'Choose a move that keeps all your material.', vi: 'Hãy chọn một nước đi giữ được đủ quân của bạn.' },
+  'b07l2-05.purpose': {
+    en: 'You keep all your material and do not fall for the defended Soldier.',
+    vi: 'Bạn giữ đủ quân và không mắc bẫy quân Tốt được bảo vệ.',
+  },
+  'b07l2-05.key': { en: 'Your opponent has no way to win material back.', vi: 'Đối phương không có cách nào ăn lại quân.' },
+  'b07l2-05.error': {
+    en: 'Not every capture is good: count the recapture before you take.',
+    vi: 'Không phải nước ăn nào cũng tốt: hãy đếm nước ăn lại trước khi ăn.',
+  },
+  'b07l2-05.tempt': {
+    en: 'Chariot takes Soldier: +1. Black’s Horse takes your Chariot: −9. Total: −8.',
+    vi: 'Xe ăn Tốt: +1. Mã Đen ăn Xe của bạn: −9. Tổng cộng: −8.',
+  },
+  'b07l2-06.prompt': {
+    en: 'Your Chariot can take Red’s Cannon, but Red’s Horse defends it. Should you take?',
+    vi: 'Xe của bạn ăn được Pháo Đỏ, nhưng Mã Đỏ bảo vệ nó. Bạn có nên ăn không?',
+  },
+  'b07l2-06.a.t': { en: 'No: after the Horse takes back you are 4½ down', vi: 'Không: sau khi Mã ăn lại, bạn thiệt 4,5' },
+  'b07l2-06.a': { en: 'Right: +4½ for the Cannon, −9 for your Chariot. Total: −4½.', vi: 'Đúng: +4,5 vì ăn Pháo, −9 vì mất Xe. Tổng cộng: −4,5.' },
+  'b07l2-06.b.t': { en: 'Yes: every capture wins something', vi: 'Có: nước ăn nào cũng được lợi' },
+  'b07l2-06.b': { en: 'No: count the recapture too. You take 4½ and lose 9.', vi: 'Không: hãy đếm cả nước ăn lại. Bạn được 4,5 và mất 9.' },
+  'b07l2-06.c.t': { en: 'Yes: you capture first, so you come out ahead', vi: 'Có: bạn ăn trước, nên bạn được lợi' },
+  'b07l2-06.c': {
+    en: 'No: who captures first does not matter, the total does: +4½ − 9 = −4½.',
+    vi: 'Không: ai ăn trước không quan trọng, quan trọng là tổng: +4,5 − 9 = −4,5.',
+  },
+  'b07l2-07.prompt': { en: 'Win material with a capture.', vi: 'Hãy ăn quân để được lợi.' },
+  'b07l2-07.purpose': {
+    en: 'Your Cannon is worth half a Chariot: even after the Horse takes back you are 4½ up.',
+    vi: 'Pháo của bạn chỉ đáng nửa quân Xe: dù Mã ăn lại, bạn vẫn hơn 4,5.',
+  },
+  'b07l2-07.key': { en: 'Black’s Horse takes your Cannon, and nothing more is lost.', vi: 'Mã Đen ăn Pháo của bạn, và bạn không mất thêm gì.' },
+  'b07l2-07.error': {
+    en: 'Use the cheaper piece to capture a defended piece, and count: +9 − 4½.',
+    vi: 'Hãy dùng quân rẻ hơn để ăn quân được bảo vệ, và đếm: +9 − 4,5.',
+  },
+  'b07l2-07.tempt': { en: 'Black’s Elephant takes back: +4 for the Horse, −9 for your Chariot.', vi: 'Tượng Đen ăn lại: +4 vì ăn Mã, −9 vì mất Xe.' },
+  'b07l2-07.expl': {
+    en: 'Cannon takes Chariot over your Soldier: +9. Horse takes Cannon: −4½. Total: +4½.',
+    vi: 'Pháo nhảy qua Tốt của bạn ăn Xe: +9. Mã ăn Pháo: −4,5. Tổng cộng: +4,5.',
+  },
+  'b07l3-01.text': {
+    en: 'When you are ahead, trades help you. You have two Chariots against one. If the Chariots are traded, you are left with a Chariot against none, and your extra piece is much easier to use. When you are behind, avoid trades for the same reason.',
+    vi: 'Khi bạn đang hơn quân, đổi quân có lợi cho bạn. Bạn có hai Xe đấu một Xe. Nếu đổi Xe, bạn còn một Xe đấu không Xe nào, và quân hơn của bạn dễ phát huy hơn nhiều. Khi bạn đang thua quân, hãy tránh đổi vì cùng lý do đó.',
+  },
+  'b07l3-02.text': {
+    en: 'An equal trade can matter a lot. Black’s Horse attacks your Chariot and your Cannon at once. Take it with your Horse: Black’s Chariot takes back, Horse for Horse, but the piece that attacked two of yours is gone, and you lose nothing.',
+    vi: 'Một cuộc đổi ngang có thể rất quan trọng. Mã Đen tấn công cùng lúc Xe và Pháo của bạn. Hãy dùng Mã của bạn ăn nó: Xe Đen ăn lại, Mã đổi Mã, nhưng quân đang tấn công hai quân của bạn đã biến mất, và bạn không mất gì.',
+  },
+  'b07l3-03.prompt': {
+    en: 'You are ahead: two Chariots against a Chariot and a Horse. Black’s Chariot attacks yours. What do you do?',
+    vi: 'Bạn đang hơn: hai Xe đấu một Xe và một Mã. Xe Đen tấn công Xe của bạn. Bạn làm gì?',
+  },
+  'b07l3-03.a.t': { en: 'Trade the Chariots', vi: 'Đổi Xe' },
+  'b07l3-03.a': {
+    en: 'Right: after the Horse takes back you still have a Chariot against a Horse, and with fewer pieces your extra material is easier to use.',
+    vi: 'Đúng: sau khi Mã ăn lại, bạn vẫn còn Xe đấu Mã, và khi ít quân hơn thì phần hơn của bạn dễ phát huy hơn.',
+  },
+  'b07l3-03.b.t': { en: 'Retreat: trading or not makes no difference', vi: 'Lùi lại: đổi hay không cũng chẳng khác gì' },
+  'b07l3-03.b': {
+    en: 'No: retreating keeps your material, but the trade helps you. When you are ahead, every trade makes your extra piece count more.',
+    vi: 'Không: lùi lại thì giữ được quân, nhưng đổi quân có lợi cho bạn hơn. Khi đang hơn, mỗi lần đổi quân làm quân hơn của bạn có giá trị hơn.',
+  },
+  'b07l3-03.c.t': { en: 'Keep both Chariots: a Chariot is worth 9 whatever is left', vi: 'Giữ cả hai Xe: Xe lúc nào cũng đáng 9, dù còn lại những gì' },
+  'b07l3-03.c': {
+    en: 'No: values depend on the position. With fewer pieces left, your extra Chariot decides the game more easily.',
+    vi: 'Không: giá trị phụ thuộc vào thế cờ. Khi còn ít quân, Xe hơn của bạn dễ quyết định ván cờ hơn.',
+  },
+  'b07l3-04.prompt': {
+    en: 'Red’s Horse attacks your Chariot and your Cannon at once. What do you play?',
+    vi: 'Mã Đỏ tấn công cùng lúc Xe và Pháo của bạn. Bạn đi nước nào?',
+  },
+  'b07l3-04.a.t': { en: 'Take the Horse with your Horse', vi: 'Dùng Mã của bạn ăn quân Mã đó' },
+  'b07l3-04.a': {
+    en: 'Right: Red’s Chariot takes back, Horse for Horse, and the piece that attacked two of yours is gone.',
+    vi: 'Đúng: Xe Đỏ ăn lại, Mã đổi Mã, và quân đang tấn công hai quân của bạn đã biến mất.',
+  },
+  'b07l3-04.b.t': { en: 'Save the Chariot', vi: 'Cứu quân Xe' },
+  'b07l3-04.b': {
+    en: 'No: the Horse then takes another of your pieces. The equal trade was the way to save everything.',
+    vi: 'Không: khi đó Mã sẽ ăn một quân khác của bạn. Đổi ngang mới là cách cứu được tất cả.',
+  },
+  'b07l3-04.c.t': { en: 'Save the Cannon', vi: 'Cứu quân Pháo' },
+  'b07l3-04.c': {
+    en: 'No: the Horse then takes your Chariot. The equal trade was the way to save everything.',
+    vi: 'Không: khi đó Mã sẽ ăn Xe của bạn. Đổi ngang mới là cách cứu được tất cả.',
+  },
+  'b07l3-05.prompt': {
+    en: 'Black’s Horse attacks your Chariot and your Cannon. Keep all your material.',
+    vi: 'Mã Đen tấn công Xe và Pháo của bạn. Hãy giữ đủ quân.',
+  },
+  'b07l3-05.purpose': {
+    en: 'Your move answers the double attack, and you lose nothing.',
+    vi: 'Nước đi của bạn hóa giải được đòn tấn công kép, và bạn không mất gì.',
+  },
+  'b07l3-05.key': { en: 'Your opponent has no way to win material back.', vi: 'Đối phương không có cách nào ăn lại quân.' },
+  'b07l3-05.error': {
+    en: 'Saving one piece leaves the other to the Horse. Trade the Horse off: an equal trade that removes the attacker.',
+    vi: 'Cứu một quân thì quân kia bị Mã ăn. Hãy đổi quân Mã đó: một cuộc đổi ngang loại bỏ quân tấn công.',
+  },
+  'b07l3-05.tempt': { en: 'Your Chariot is safe, but the Horse takes your Cannon.', vi: 'Xe của bạn an toàn, nhưng Mã ăn Pháo của bạn.' },
+  'b07l3-06.prompt': {
+    en: 'You are well ahead in material. Red’s Chariot faces yours, and both are defended. What do you do?',
+    vi: 'Bạn đang hơn nhiều quân. Xe Đỏ đối mặt Xe của bạn, và cả hai đều được bảo vệ. Bạn làm gì?',
+  },
+  'b07l3-06.a.t': { en: 'Trade the Chariots', vi: 'Đổi Xe' },
+  'b07l3-06.a': {
+    en: 'Right: the trade is even, and it leaves Red very little to fight your extra pieces with.',
+    vi: 'Đúng: cuộc đổi là ngang, và nó khiến bên Đỏ còn rất ít quân để chống lại các quân hơn của bạn.',
+  },
+  'b07l3-06.b.t': { en: 'It makes no difference whether you trade', vi: 'Đổi hay không cũng chẳng khác gì' },
+  'b07l3-06.b': {
+    en: 'No: when you are ahead, an even trade helps you, because your extra pieces count for more.',
+    vi: 'Không: khi bạn đang hơn, một cuộc đổi ngang có lợi cho bạn, vì các quân hơn của bạn có giá trị hơn.',
+  },
+  'b07l3-06.c.t': { en: 'Never trade: your Chariot is worth more than Red’s', vi: 'Không bao giờ đổi: Xe của bạn đáng giá hơn Xe Đỏ' },
+  'b07l3-06.c': {
+    en: 'No: both Chariots count 9. What matters is that after the trade your extra pieces face almost nothing.',
+    vi: 'Không: cả hai Xe đều tính 9. Điều quan trọng là sau khi đổi, các quân hơn của bạn gần như không còn gặp sự chống cự nào.',
+  },
+  'b07l3-07.prompt': { en: 'Choose a move that keeps all your material.', vi: 'Hãy chọn một nước đi giữ được đủ quân của bạn.' },
+  'b07l3-07.purpose': {
+    en: 'After your move both Horses are safe: one guards the other.',
+    vi: 'Sau nước đi của bạn, cả hai quân Mã đều an toàn: quân này bảo vệ quân kia.',
+  },
+  'b07l3-07.key': { en: 'Your opponent has no way to win material back.', vi: 'Đối phương không có cách nào ăn lại quân.' },
+  'b07l3-07.error': {
+    en: 'Red’s Chariot looks along the file at both your Horses. Before taking anything, make sure neither can be lost.',
+    vi: 'Xe Đỏ nhìn dọc cột vào cả hai quân Mã của bạn. Trước khi ăn quân nào, hãy chắc rằng không quân nào bị mất.',
+  },
+  'b07l3-07.tempt': {
+    en: 'You win a Soldier, but the file opens: Red’s Chariot takes your other Horse. +1 − 4.',
+    vi: 'Bạn được một quân Tốt, nhưng cột bị mở: Xe Đỏ ăn quân Mã còn lại của bạn. +1 − 4.',
+  },
+  'b07l3-08.prompt': {
+    en: 'Red has just moved a Horse to the edge. Your Cannon can take the Soldier on Red’s third file, and nothing can take back at once. Should you take it?',
+    vi: 'Bên Đỏ vừa đưa một quân Mã ra biên. Pháo của bạn ăn được quân Tốt ở cột 3 của bên Đỏ, và chưa quân nào ăn lại được ngay. Bạn có nên ăn không?',
+  },
+  'b07l3-08.a.t': { en: 'No: two moves later Red wins the Cannon back', vi: 'Không: hai nước sau bên Đỏ ăn lại được Pháo' },
+  'b07l3-08.a': {
+    en: 'Right: Red’s Cannon takes your Horse, and when your Chariot takes back, Red’s Horse can take your Cannon, because the Cannon no longer blocks its leg point. You win a Soldier (+1), lose a Horse (−4), win a Cannon (+4½) and lose your Cannon (−4½): 3 points down.',
+    vi: 'Đúng: Pháo Đỏ ăn Mã của bạn, và khi Xe của bạn ăn lại, Mã Đỏ ăn được Pháo của bạn, vì quân Pháo Đỏ không còn chặn chân Mã nữa. Bạn được Tốt (+1), mất Mã (−4), được Pháo (+4,5) rồi mất Pháo (−4,5): thiệt 3 điểm.',
+  },
+  'b07l3-08.b.t': { en: 'Yes: nothing can take back, so the Soldier is free', vi: 'Có: không quân nào ăn lại được, nên quân Tốt là của không' },
+  'b07l3-08.b': {
+    en: 'No: look two moves ahead. Red’s Cannon takes your Horse first, and then Red’s Horse can take your Cannon.',
+    vi: 'Không: hãy nhìn trước hai nước. Pháo Đỏ ăn Mã của bạn trước, rồi Mã Đỏ ăn được Pháo của bạn.',
+  },
+  'b07l3-08.c.t': { en: 'Yes: Red’s Horse cannot reach it, because its leg point is blocked', vi: 'Có: Mã Đỏ không với tới được, vì chân Mã bị chặn' },
+  'b07l3-08.c': {
+    en: 'No: the leg point is blocked by Red’s own Cannon, and that Cannon moves away with a capture. Then the Horse takes back.',
+    vi: 'Không: chân Mã bị chính Pháo Đỏ chặn, và quân Pháo đó sẽ đi ăn quân. Khi đó Mã ăn lại.',
+  },
+  'b07-c01.prompt': { en: 'Win the most material with a capture.', vi: 'Hãy ăn quân để được lợi nhiều nhất.' },
+  'b07-c01.purpose': { en: 'The Horse (4) is free.', vi: 'Quân Mã (4) không được bảo vệ.' },
+  'b07-c01.key': { en: 'Nothing can take back on that point.', vi: 'Không quân nào ăn lại được ở điểm đó.' },
+  'b07-c01.error': { en: 'Count before you capture: look for the free piece.', vi: 'Hãy đếm trước khi ăn: tìm quân không được bảo vệ.' },
+  'b07-c01.tempt': { en: 'Black’s Advisor takes back: +4½ for the Cannon, −9 for your Chariot.', vi: 'Sĩ Đen ăn lại: +4,5 vì ăn Pháo, −9 vì mất Xe.' },
+  'b07-c01.expl': {
+    en: 'Chariot takes the free Horse: +4. The Cannon is defended: +4½ − 9.',
+    vi: 'Xe ăn quân Mã không được bảo vệ: +4. Quân Pháo được bảo vệ: +4,5 − 9.',
+  },
+  'b07-c02.prompt': { en: 'Win the most material with a capture.', vi: 'Hãy ăn quân để được lợi nhiều nhất.' },
+  'b07-c02.purpose': { en: 'The Cannon (4½) is free and worth more than the Soldier.', vi: 'Quân Pháo (4,5) không được bảo vệ và đáng giá hơn quân Tốt.' },
+  'b07-c02.key': { en: 'Nothing can take back on that point.', vi: 'Không quân nào ăn lại được ở điểm đó.' },
+  'b07-c02.error': { en: 'Both pieces are free: take the one worth more.', vi: 'Cả hai quân đều không được bảo vệ: hãy ăn quân đáng giá hơn.' },
+  'b07-c02.tempt': {
+    en: 'That wins only a Soldier (1); the Cannon (4½) was free too.',
+    vi: 'Nước đó chỉ được một quân Tốt (1); quân Pháo (4,5) cũng không được bảo vệ.',
+  },
+  'b07-c02.expl': {
+    en: 'Horse takes the free Cannon: +4½, rather than the Soldier: +1.',
+    vi: 'Mã ăn quân Pháo không được bảo vệ: +4,5, thay vì quân Tốt: +1.',
+  },
+  'b07-c03.prompt': { en: 'Which statement about piece values is true?', vi: 'Câu nào về giá trị quân cờ là đúng?' },
+  'b07-c03.a.t': {
+    en: 'They are a guide: a piece that cannot move, or a Cannon with little to jump over, is worth less',
+    vi: 'Chúng chỉ là hướng dẫn: quân không đi được, hoặc Pháo có ít ngòi, thì kém giá trị hơn',
+  },
+  'b07-c03.a': {
+    en: 'Right: the numbers are a starting point, and the position can change them.',
+    vi: 'Đúng: các con số là điểm xuất phát, và thế cờ có thể làm chúng thay đổi.',
+  },
+  'b07-c03.b.t': { en: 'A Cannon is always worth more than a Horse', vi: 'Pháo lúc nào cũng đáng giá hơn Mã' },
+  'b07-c03.b': { en: 'No: with few screens left, a Horse is often the stronger piece.', vi: 'Không: khi còn ít ngòi, Mã thường là quân mạnh hơn.' },
+  'b07-c03.c.t': { en: 'A piece’s value never depends on the position', vi: 'Giá trị của một quân không bao giờ phụ thuộc vào thế cờ' },
+  'b07-c03.c': {
+    en: 'No: a trapped piece or a Cannon without screens is worth less than its number.',
+    vi: 'Không: quân bị kẹt hoặc Pháo không có ngòi thì kém giá trị hơn con số của nó.',
+  },
+  'b07-c04.prompt': {
+    en: 'This app’s engine counts your Soldier near Black’s palace as 1 point. What should you keep in mind?',
+    vi: 'Máy của ứng dụng tính quân Tốt gần cung Đen của bạn là 1 điểm. Bạn nên lưu ý điều gì?',
+  },
+  'b07-c04.a.t': {
+    en: 'Across the river it also moves sideways; many players count it as about 2',
+    vi: 'Qua sông nó còn đi ngang được; nhiều người tính nó khoảng 2',
+  },
+  'b07-c04.a': {
+    en: 'Right: the engine keeps every Soldier at 1, so its count may undervalue a crossed Soldier.',
+    vi: 'Đúng: máy giữ mọi quân Tốt ở mức 1, nên cách đếm của máy có thể đánh giá thấp một quân Tốt đã qua sông.',
+  },
+  'b07-c04.b.t': { en: 'Nothing: a Soldier is worth exactly 1 everywhere', vi: 'Không có gì: ở đâu quân Tốt cũng đáng đúng 1' },
+  'b07-c04.b': {
+    en: 'No: a crossed Soldier can move sideways and is often worth more; the engine’s 1 is a simplification.',
+    vi: 'Không: Tốt đã qua sông đi ngang được và thường đáng giá hơn; con số 1 của máy chỉ là cách đơn giản hóa.',
+  },
+  'b07-c04.c.t': { en: 'It is now worth as much as a Chariot', vi: 'Bây giờ nó đáng giá bằng một quân Xe' },
+  'b07-c04.c': {
+    en: 'No: it is stronger than a Soldier at home, but nowhere near a Chariot.',
+    vi: 'Không: nó mạnh hơn quân Tốt còn ở nhà, nhưng còn kém xa quân Xe.',
+  },
+  'b07-c05.prompt': { en: 'Win the most material with a capture.', vi: 'Hãy ăn quân để được lợi nhiều nhất.' },
+  'b07-c05.purpose': { en: 'The Cannon (4½) is free and worth more than the Soldier.', vi: 'Quân Pháo (4,5) không được bảo vệ và đáng giá hơn quân Tốt.' },
+  'b07-c05.key': { en: 'Nothing can take back on that point.', vi: 'Không quân nào ăn lại được ở điểm đó.' },
+  'b07-c05.error': { en: 'Both pieces are free: take the one worth more.', vi: 'Cả hai quân đều không được bảo vệ: hãy ăn quân đáng giá hơn.' },
+  'b07-c05.tempt': {
+    en: 'That wins only a Soldier (1); the Cannon (4½) was free too.',
+    vi: 'Nước đó chỉ được một quân Tốt (1); quân Pháo (4,5) cũng không được bảo vệ.',
+  },
+  'b07-c05.expl': {
+    en: 'Chariot takes the free Cannon: +4½, rather than the Soldier: +1.',
+    vi: 'Xe ăn quân Pháo không được bảo vệ: +4,5, thay vì quân Tốt: +1.',
+  },
+  'b07-c06.prompt': { en: 'Win material with a capture. Count the recapture.', vi: 'Hãy ăn quân để được lợi. Nhớ đếm nước ăn lại.' },
+  'b07-c06.purpose': {
+    en: 'Your Soldier is worth far less than the Horse, so the trade wins material.',
+    vi: 'Quân Tốt của bạn kém giá trị hơn quân Mã nhiều, nên cuộc đổi này được lợi.',
+  },
+  'b07-c06.key': { en: 'Black’s Chariot takes your Soldier, and nothing more is lost.', vi: 'Xe Đen ăn Tốt của bạn, và bạn không mất thêm gì.' },
+  'b07-c06.error': { en: 'A defended piece can still be won with a cheaper piece.', vi: 'Quân được bảo vệ vẫn có thể ăn được bằng một quân rẻ hơn.' },
+  'b07-c06.tempt': { en: 'That wins nothing: the Horse is still there.', vi: 'Nước đó không được gì: quân Mã vẫn còn đó.' },
+  'b07-c06.expl': { en: 'Soldier takes Horse: +4. Chariot takes Soldier: −1. Total: +3.', vi: 'Tốt ăn Mã: +4. Xe ăn Tốt: −1. Tổng cộng: +3.' },
+  'b07-c07.prompt': { en: 'Win material with a capture. Count the recapture.', vi: 'Hãy ăn quân để được lợi. Nhớ đếm nước ăn lại.' },
+  'b07-c07.purpose': {
+    en: 'Your Cannon is worth half a Chariot: even after the Horse takes back you are 4½ up.',
+    vi: 'Pháo của bạn chỉ đáng nửa quân Xe: dù Mã ăn lại, bạn vẫn hơn 4,5.',
+  },
+  'b07-c07.key': { en: 'Red’s Horse takes your Cannon, and nothing more is lost.', vi: 'Mã Đỏ ăn Pháo của bạn, và bạn không mất thêm gì.' },
+  'b07-c07.error': {
+    en: 'A defended piece can still be won with a cheaper piece. Count: +9 − 4½.',
+    vi: 'Quân được bảo vệ vẫn có thể ăn được bằng một quân rẻ hơn. Đếm: +9 − 4,5.',
+  },
+  'b07-c07.tempt': { en: 'That wins nothing: Red’s Chariot is still there to take.', vi: 'Nước đó không được gì: Xe Đỏ vẫn đứng đó chờ bị ăn.' },
+  'b07-c07.expl': {
+    en: 'Cannon takes Chariot over Red’s Soldier: +9. Horse takes Cannon: −4½. Total: +4½.',
+    vi: 'Pháo nhảy qua Tốt Đỏ ăn Xe: +9. Mã ăn Pháo: −4,5. Tổng cộng: +4,5.',
+  },
+  'b07-c08.prompt': { en: 'Choose a move that keeps all your material.', vi: 'Hãy chọn một nước đi giữ được đủ quân của bạn.' },
+  'b07-c08.purpose': { en: 'You keep all your material and do not fall for the tempting capture.', vi: 'Bạn giữ đủ quân và không mắc bẫy nước ăn hấp dẫn.' },
+  'b07-c08.key': { en: 'Your opponent has no way to win material back.', vi: 'Đối phương không có cách nào ăn lại quân.' },
+  'b07-c08.error': {
+    en: 'Not every capture is good: count the recapture before you take.',
+    vi: 'Không phải nước ăn nào cũng tốt: hãy đếm nước ăn lại trước khi ăn.',
+  },
+  'b07-c08.tempt': {
+    en: 'Chariot takes Horse: +4. Black’s Elephant takes your Chariot: −9. Total: −5.',
+    vi: 'Xe ăn Mã: +4. Tượng Đen ăn Xe của bạn: −9. Tổng cộng: −5.',
+  },
+  'b07-c09.prompt': { en: 'Choose a move that keeps all your material.', vi: 'Hãy chọn một nước đi giữ được đủ quân của bạn.' },
+  'b07-c09.purpose': { en: 'You keep all your material and do not fall for the tempting capture.', vi: 'Bạn giữ đủ quân và không mắc bẫy nước ăn hấp dẫn.' },
+  'b07-c09.key': { en: 'Your opponent has no way to win material back.', vi: 'Đối phương không có cách nào ăn lại quân.' },
+  'b07-c09.error': {
+    en: 'Look at what your capture uncovers: a piece that moves can open a line for the opponent.',
+    vi: 'Hãy xem nước ăn của bạn để lộ ra điều gì: quân đi khỏi chỗ có thể mở đường cho đối phương.',
+  },
+  'b07-c09.tempt': {
+    en: 'You win a Soldier, but the file opens: Red’s Chariot takes your other Horse. +1 − 4.',
+    vi: 'Bạn được một quân Tốt, nhưng cột bị mở: Xe Đỏ ăn quân Mã còn lại của bạn. +1 − 4.',
+  },
+  'b07-c14.prompt': { en: 'Choose a move that keeps all your material.', vi: 'Hãy chọn một nước đi giữ được đủ quân của bạn.' },
+  'b07-c14.purpose': { en: 'You keep all your material and do not fall for the tempting capture.', vi: 'Bạn giữ đủ quân và không mắc bẫy nước ăn hấp dẫn.' },
+  'b07-c14.key': { en: 'Your opponent has no way to win material back.', vi: 'Đối phương không có cách nào ăn lại quân.' },
+  'b07-c14.error': {
+    en: 'Not every capture is good: the Soldier is defended by a Cannon over a screen.',
+    vi: 'Không phải nước ăn nào cũng tốt: quân Tốt được Pháo bảo vệ qua một ngòi.',
+  },
+  'b07-c14.tempt': {
+    en: 'Chariot takes Soldier: +1. Red’s Cannon takes your Chariot over its Horse: −9. Total: −8.',
+    vi: 'Xe ăn Tốt: +1. Pháo Đỏ nhảy qua quân Mã ăn Xe của bạn: −9. Tổng cộng: −8.',
+  },
+  'b07-c16.prompt': { en: 'Choose a move that keeps all your material.', vi: 'Hãy chọn một nước đi giữ được đủ quân của bạn.' },
+  'b07-c16.purpose': { en: 'You keep all your material and do not fall for the tempting capture.', vi: 'Bạn giữ đủ quân và không mắc bẫy nước ăn hấp dẫn.' },
+  'b07-c16.key': { en: 'Your opponent has no way to win material back.', vi: 'Đối phương không có cách nào ăn lại quân.' },
+  'b07-c16.error': {
+    en: 'Look at what your capture uncovers: a piece that moves can open a line for the opponent.',
+    vi: 'Hãy xem nước ăn của bạn để lộ ra điều gì: quân đi khỏi chỗ có thể mở đường cho đối phương.',
+  },
+  'b07-c16.tempt': {
+    en: 'You win a Soldier, but the file opens: Black’s Chariot takes your other Horse. +1 − 4.',
+    vi: 'Bạn được một quân Tốt, nhưng cột bị mở: Xe Đen ăn quân Mã còn lại của bạn. +1 − 4.',
+  },
+  'b07-c10.prompt': {
+    en: 'Your Chariot takes Black’s Cannon, and Black’s Horse takes back. What is the count?',
+    vi: 'Xe của bạn ăn Pháo Đen, và Mã Đen ăn lại. Kết quả đếm là bao nhiêu?',
+  },
+  'b07-c10.a.t': { en: 'You are 4½ down', vi: 'Bạn thiệt 4,5' },
+  'b07-c10.a': { en: 'Right: +4½ for the Cannon, −9 for the Chariot.', vi: 'Đúng: +4,5 vì ăn Pháo, −9 vì mất Xe.' },
+  'b07-c10.b.t': { en: 'You are 4½ up: you captured first', vi: 'Bạn hơn 4,5: bạn ăn trước' },
+  'b07-c10.b': { en: 'No: count the recapture too. +4½ − 9 = −4½.', vi: 'Không: hãy đếm cả nước ăn lại. +4,5 − 9 = −4,5.' },
+  'b07-c10.c.t': { en: 'It is even: one piece each', vi: 'Ngang nhau: mỗi bên mất một quân' },
+  'b07-c10.c': {
+    en: 'No: count values, not pieces. A Chariot (9) for a Cannon (4½) loses 4½.',
+    vi: 'Không: hãy đếm giá trị, không đếm số quân. Mất Xe (9) để được Pháo (4,5) là thiệt 4,5.',
+  },
+  'b07-c11.prompt': {
+    en: 'You are a Horse ahead. Black’s Chariot attacks yours, and both are defended. What do you do?',
+    vi: 'Bạn đang hơn một quân Mã. Xe Đen tấn công Xe của bạn, và cả hai đều được bảo vệ. Bạn làm gì?',
+  },
+  'b07-c11.a.t': { en: 'Trade the Chariots', vi: 'Đổi Xe' },
+  'b07-c11.a': {
+    en: 'Right: after the Advisor takes back, your extra Horse faces no Chariot, and it counts for much more.',
+    vi: 'Đúng: sau khi Sĩ ăn lại, quân Mã hơn của bạn không còn phải đối đầu với Xe, và nó có giá trị hơn nhiều.',
+  },
+  'b07-c11.b.t': { en: 'Avoid the trade: equal trades never matter', vi: 'Tránh đổi: đổi ngang chẳng bao giờ quan trọng' },
+  'b07-c11.b': {
+    en: 'No: when you are ahead, an even trade helps you by leaving your opponent less to fight with.',
+    vi: 'Không: khi bạn đang hơn, một cuộc đổi ngang có lợi vì đối phương còn ít quân để chống cự.',
+  },
+  'b07-c11.c.t': { en: 'Avoid the trade: your Chariot is worth 9 whatever happens', vi: 'Tránh đổi: Xe của bạn đáng 9 dù chuyện gì xảy ra' },
+  'b07-c11.c': {
+    en: 'No: values depend on the position. Without Chariots, your extra Horse decides the game more easily.',
+    vi: 'Không: giá trị phụ thuộc vào thế cờ. Khi không còn Xe, quân Mã hơn của bạn dễ quyết định ván cờ hơn.',
+  },
+  'b07-c12.prompt': {
+    en: 'You are a Horse behind. Red’s Chariot attacks yours, and both are defended. What do you do?',
+    vi: 'Bạn đang thua một quân Mã. Xe Đỏ tấn công Xe của bạn, và cả hai đều được bảo vệ. Bạn làm gì?',
+  },
+  'b07-c12.a.t': { en: 'Move your Chariot away and keep it', vi: 'Đưa Xe đi chỗ khác và giữ nó lại' },
+  'b07-c12.a': {
+    en: 'Right: when you are behind, avoid trades; each one makes Red’s extra Horse count for more.',
+    vi: 'Đúng: khi đang thua quân, hãy tránh đổi; mỗi lần đổi làm quân Mã hơn của bên Đỏ có giá trị hơn.',
+  },
+  'b07-c12.b.t': { en: 'Trade Chariots: equal trades never matter', vi: 'Đổi Xe: đổi ngang chẳng bao giờ quan trọng' },
+  'b07-c12.b': {
+    en: 'No: the trade is even, but it leaves you with nothing against Red’s extra Horse.',
+    vi: 'Không: cuộc đổi là ngang, nhưng nó khiến bạn không còn gì để chống lại quân Mã hơn của bên Đỏ.',
+  },
+  'b07-c12.c.t': { en: 'Trade: a Chariot is a Chariot, so nothing changes', vi: 'Đổi: Xe nào cũng là Xe, nên chẳng có gì thay đổi' },
+  'b07-c12.c': {
+    en: 'No: values depend on what is left. After the trade, Red’s extra Horse decides the game more easily.',
+    vi: 'Không: giá trị phụ thuộc vào những quân còn lại. Sau khi đổi, quân Mã hơn của bên Đỏ dễ quyết định ván cờ hơn.',
+  },
+  'b07-c13.prompt': {
+    en: 'Black’s Chariot attacks your Horse and your Cannon. Keep all your material.',
+    vi: 'Xe Đen tấn công Mã và Pháo của bạn. Hãy giữ đủ quân.',
+  },
+  'b07-c13.purpose': {
+    en: 'Your move answers the double attack, and you lose nothing.',
+    vi: 'Nước đi của bạn hóa giải được đòn tấn công kép, và bạn không mất gì.',
+  },
+  'b07-c13.key': { en: 'Your opponent has no way to win material back.', vi: 'Đối phương không có cách nào ăn lại quân.' },
+  'b07-c13.error': {
+    en: 'Saving one piece and leaving the other loses material. An equal trade of Chariots removes the attacker.',
+    vi: 'Cứu một quân mà bỏ quân kia là thiệt quân. Đổi Xe ngang nhau sẽ loại bỏ quân tấn công.',
+  },
+  'b07-c13.tempt': { en: 'Black’s Chariot still attacks two pieces and wins one of them.', vi: 'Xe Đen vẫn tấn công hai quân và ăn được một trong số đó.' },
+  'b07-c15.prompt': {
+    en: 'You are a Horse ahead. Red’s Chariot faces yours, and both are defended. What do you do?',
+    vi: 'Bạn đang hơn một quân Mã. Xe Đỏ đối mặt Xe của bạn, và cả hai đều được bảo vệ. Bạn làm gì?',
+  },
+  'b07-c15.a.t': { en: 'Trade the Chariots', vi: 'Đổi Xe' },
+  'b07-c15.a': {
+    en: 'Right: after the Horse takes back, your extra Horse counts for much more with the Chariots gone.',
+    vi: 'Đúng: sau khi Mã ăn lại, quân Mã hơn của bạn có giá trị hơn nhiều khi không còn Xe.',
+  },
+  'b07-c15.b.t': { en: 'It makes no difference whether you trade', vi: 'Đổi hay không cũng chẳng khác gì' },
+  'b07-c15.b': { en: 'No: when you are ahead, an even trade helps you.', vi: 'Không: khi bạn đang hơn, một cuộc đổi ngang có lợi cho bạn.' },
+  'b07-c15.c.t': { en: 'Never trade: a Chariot is always worth 9', vi: 'Không bao giờ đổi: Xe lúc nào cũng đáng 9' },
+  'b07-c15.c': {
+    en: 'No: both Chariots count 9, so the trade is even, and with fewer pieces your extra Horse matters more.',
+    vi: 'Không: cả hai Xe đều tính 9, nên cuộc đổi là ngang, và khi ít quân hơn thì quân Mã hơn của bạn quan trọng hơn.',
+  },
+
   // ---------- New course: b09 "Opening development principles" (pilot lesson b09l3 + task b09-g1, S2.14) ----------
   'b09.title': { en: 'Opening development principles', vi: 'Nguyên tắc ra quân trong khai cuộc' },
   'b09.desc': {

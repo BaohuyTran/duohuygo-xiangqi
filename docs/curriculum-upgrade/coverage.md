@@ -21,6 +21,7 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b04 | reviewed | 3 | 7 | 16 | 9 | 2 | 0 | 5 | 0 | 0 | 0 | 7 (44 %) | 11 (69 %) | 6 | 6 | 3 | 1 | RS 16 |
 | b05 | reviewed | 3 | 8 | 18 | 0 | 3 | 12 | 1 | 2 | 0 | 0 | 6 (33 %) | 5 (28 %) | 7 | 7 | 3 | 1 | RS 13, DE 5 |
 | b06 | reviewed | 3 | 8 | 16 | 6 | 4 | 5 | 1 | 0 | 0 | 0 | 8 (50 %) | 14 (88 %) | 6 | 6 | 3 | 1 | RS 16 |
+| b07 | verified | 3 | 7 | 16 | 0 | 6 | 0 | 7 | 3 | 0 | 0 | 9 (56 %) | 9 (56 %) | 6 | 6 | 3 | 1 | TC 10, RS 3, PA 3 |
 
 ### Per lesson
 
@@ -45,6 +46,9 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b06l1 | 3 | 5 | select-squares 4, choice 1 | G2 G2 G1 G1 G0 | 3 | 5 | — |
 | b06l2 | 3 | 5 | select-squares 2, choice 2, capture 1 | G2 G2 G1 G1 G0 | 2 | 3 | `u2l1#3` (core, revise: FB; the defended-piece contrast, 05 DV2) |
 | b06l3 | 2 | 6 | move 5, choice 1 | G2 G2 G1 G1 G0 TR | 3 | 6 | — |
+| b07l1 | 3 | 5 | capture 4, choice 1 | G2 G2 G1 G1 G0 | 3 | 1 | — (new, 05 DV3) |
+| b07l2 | 2 | 5 | capture 3, decision 1, choice 1 | G2 G2 G1 G1 G0 | 2 | 2 | — |
+| b07l3 | 2 | 6 | choice 4, decision 2 | G2 G2 G1 G1 G0 TR | 4 | 6 | — |
 
 BLK tags (05 §4) of `u1l2#1`, `#3`, `#5` and `u1l3#1`, `#3` are resolved by authored Black items with the same skill
 (b02l1-07/-08 for the General, b02l2-05/-08 for facing, b02l3-08/-09 for the Advisor and Elephant) instead of
@@ -77,7 +81,19 @@ item accepts keeps the material at depth 4 (b06-c12 and b06-c13 use `goal.guard 
 after Red's Cannon move to the edge file (the app has no move animation; the prompt names the move); exactly three
 blocks are safe.
 
-b01l4, b02l3, b03l3, b04l3, b05l1 and b06l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
+b07 (S3.2.c) counts with the engine's beginner values (`PIECE_VALUES`, solver.ts) and discloses that the engine keeps a
+crossed Soldier at 1 (b07l1-02, b07-c04). `capture` items are judged by the 1-ply exchange estimate (`captureGain`), so
+every b07 capture is built where that estimate and the 4-ply search agree; pilot-b07.test.ts checks that every accepted
+capture wins at least the stated count at depth 4. The `decision` items are "keep all your material" tables: target =
+passes the Basic guard and ≥ 0 at depth 4, every other row is an `error` that loses at depth 4 (rows the guard misses are
+authored errors beyond its horizon); in six of them every capture loses (the best move is not a capture), three by a
+capture that looks free (+1 at once) and loses 3 when it uncovers a file. TR b07l3-08 is a full-board `choice` as Black:
+the Cannon's free-looking Soldier capture is lost back two moves later (Red's Cannon takes the Horse, and the Red Horse
+whose leg point that Cannon blocked recaptures); it is a `choice` because a full-board decision table would need a 4-ply
+search of every legal move. The trade advice (trade when ahead, avoid trades when behind, trade off an attacker) is the
+conventional heuristic of 02 b07, for the content reviewer to confirm.
+
+b01l4, b02l3, b03l3, b04l3, b05l1, b06l3 and b07l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
 minimums G2 2 · G1 2 · G0 1.
 
 ### Misconceptions
@@ -110,6 +126,9 @@ minimums G2 2 · G1 2 · G0 1.
 | b06.m2 | A Cannon behind a piece does not attack | b06l1-02 | b06l1-07, b06l2-07, b06l2-08, b06-c09, b06-c10 (items tagged: b06l3-05, b06l3-08) |
 | b06.m3 | A hobbled Horse still defends (or attacks) | b06l1-03 | b06l1-07, b06-c04, b06-c10 |
 | b06.m4 | A piece pinned to its General still defends (or attacks) | b06l2-03 | b06l2-08, b06-c04, b06-c09 |
+| b07.m1 | Every capture is good | b07l2-01 | b07l2-06, b07l3-08, b07-c10, decision rows of b07l2-05, b07l3-05, b07l3-07, b07-c08, b07-c09, b07-c13, b07-c14, b07-c16 (items tagged: b07l1-08, b07l2-07, b07-c01) |
+| b07.m2 | Equal trades never matter | b07l3-02 | b07l3-03, b07l3-04, b07l3-06, b07-c11, b07-c12, b07-c15 |
+| b07.m3 | Values are fixed | b07l1-02, b07l1-03 | b07l1-07, b07l3-03, b07l3-06, b07-c03, b07-c04, b07-c11, b07-c12, b07-c15 |
 
 ### Check pools
 
@@ -121,8 +140,9 @@ minimums G2 2 · G1 2 · G0 1.
 | b04-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b04l1 5 · b04l2 5 · b04l3 6 | 10 | 2 | 4 | 0 | 0 | 7 | 12 | 0 |
 | b05-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b05l1 5 · b05l2 5 · b05l3 6 | 0 | 7 | 1 | 3 | 5 | 7 | 9 | 0 |
 | b06-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b06l1 5 · b06l2 5 · b06l3 6 | 6 | 4 | 1 | 0 | 5 | 8 | 14 | 0 |
+| b07-check | verified | 16 | 6 own + 2 interleaved (3 attempts) | b07l1 5 · b07l2 5 · b07l3 6 | 0 | 6 | 5 | 5 | 0 | 8 | 11 | 0 |
 
-b02-check to b06-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
+b02-check to b07-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
 the whole pattern and one non-General piece added, removed or moved, against every loaded lesson item and the other pool
 items). The S3.1.b review replaced b02-c03, c08, c12, c15 and, after the check, c05 (one extra piece over b02l2-03),
 c13 and c14; no allowed-reuse exception is left in the pool. From b05 on, pilot tests also check that no two items of the pool share the same task and the same learner-relative material (a colour-swapped pattern mirror that the near-duplicate test misses, as found in the b04 review).
@@ -134,4 +154,4 @@ b02 pools in pilot-b03.test.ts).
 
 ### Practical tasks
 
-None in b01–b06 (02: "Practical task —").
+None in b01–b07 (02: "Practical task —").

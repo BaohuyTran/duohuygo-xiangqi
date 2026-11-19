@@ -1,0 +1,1476 @@
+{
+  "id": "b07-check",
+  "kind": "check",
+  "unit": "b07",
+  "primaryStrand": "TC",
+  "version": 1,
+  "items": [
+    {
+      "type": "capture",
+      "id": "b07-c01",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "TC",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [
+        "b07.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "d0": "A",
+        "e1": "A",
+        "g0": "B",
+        "e9": "k",
+        "e8": "a",
+        "f9": "a",
+        "c9": "b",
+        "f5": "R",
+        "f7": "c",
+        "b5": "n"
+      },
+      "prompt": "b07-c01.prompt",
+      "solution": {
+        "from": "f5",
+        "to": "b5"
+      },
+      "explanation": "b07-c01.expl",
+      "objective": "b07l1",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c01.purpose",
+        "keyReply": "b07-c01.key",
+        "commonError": "b07-c01.error",
+        "temptingAlternative": {
+          "move": "f5-f7",
+          "text": "b07-c01.tempt"
+        }
+      }
+    },
+    {
+      "type": "capture",
+      "id": "b07-c02",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "TC",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "e1": "A",
+        "f0": "A",
+        "c0": "B",
+        "e9": "k",
+        "d9": "a",
+        "e8": "a",
+        "g9": "b",
+        "h6": "n",
+        "g4": "C",
+        "i4": "P"
+      },
+      "turn": "black",
+      "prompt": "b07-c02.prompt",
+      "solution": {
+        "from": "h6",
+        "to": "g4"
+      },
+      "explanation": "b07-c02.expl",
+      "objective": "b07l1",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c02.purpose",
+        "keyReply": "b07-c02.key",
+        "commonError": "b07-c02.error",
+        "temptingAlternative": {
+          "move": "h6-i4",
+          "text": "b07-c02.tempt"
+        }
+      }
+    },
+    {
+      "type": "choice",
+      "id": "b07-c03",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "TC",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m3"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "e1": "A",
+        "c4": "C",
+        "g3": "P",
+        "f9": "k",
+        "e8": "a",
+        "d7": "n",
+        "g6": "p"
+      },
+      "turn": "black",
+      "prompt": "b07-c03.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b07-c03.a.t",
+          "correct": true,
+          "feedback": "b07-c03.a"
+        },
+        {
+          "id": "b",
+          "text": "b07-c03.b.t",
+          "correct": false,
+          "feedback": "b07-c03.b",
+          "misconception": "b07.m3"
+        },
+        {
+          "id": "c",
+          "text": "b07-c03.c.t",
+          "correct": false,
+          "feedback": "b07-c03.c",
+          "misconception": "b07.m3"
+        }
+      ],
+      "objective": "b07l1",
+      "unit": "b07"
+    },
+    {
+      "type": "choice",
+      "id": "b07-c04",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "TC",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m3"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "f0": "A",
+        "d7": "P",
+        "h2": "C",
+        "f9": "k",
+        "e8": "a",
+        "b7": "n"
+      },
+      "prompt": "b07-c04.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b07-c04.a.t",
+          "correct": true,
+          "feedback": "b07-c04.a"
+        },
+        {
+          "id": "b",
+          "text": "b07-c04.b.t",
+          "correct": false,
+          "feedback": "b07-c04.b",
+          "misconception": "b07.m3"
+        },
+        {
+          "id": "c",
+          "text": "b07-c04.c.t",
+          "correct": false,
+          "feedback": "b07-c04.c",
+          "misconception": "b07.m3"
+        }
+      ],
+      "objective": "b07l1",
+      "unit": "b07"
+    },
+    {
+      "type": "capture",
+      "id": "b07-c05",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "TC",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e1": "K",
+        "d0": "A",
+        "f0": "A",
+        "a2": "B",
+        "f9": "k",
+        "e8": "a",
+        "d9": "a",
+        "g9": "b",
+        "b3": "r",
+        "g3": "C",
+        "b7": "P"
+      },
+      "turn": "black",
+      "prompt": "b07-c05.prompt",
+      "solution": {
+        "from": "b3",
+        "to": "g3"
+      },
+      "explanation": "b07-c05.expl",
+      "objective": "b07l1",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c05.purpose",
+        "keyReply": "b07-c05.key",
+        "commonError": "b07-c05.error",
+        "temptingAlternative": {
+          "move": "b3-b7",
+          "text": "b07-c05.tempt"
+        }
+      }
+    },
+    {
+      "type": "capture",
+      "id": "b07-c06",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "TC",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "e1": "A",
+        "f0": "A",
+        "c0": "B",
+        "e9": "k",
+        "d9": "a",
+        "e8": "a",
+        "g9": "b",
+        "c6": "P",
+        "c7": "n",
+        "c9": "r"
+      },
+      "prompt": "b07-c06.prompt",
+      "solution": {
+        "from": "c6",
+        "to": "c7"
+      },
+      "explanation": "b07-c06.expl",
+      "objective": "b07l2",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c06.purpose",
+        "keyReply": "b07-c06.key",
+        "commonError": "b07-c06.error",
+        "temptingAlternative": {
+          "move": "c6-d6",
+          "text": "b07-c06.tempt"
+        }
+      }
+    },
+    {
+      "type": "capture",
+      "id": "b07-c07",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "TC",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "d0": "A",
+        "e1": "A",
+        "g0": "B",
+        "e9": "k",
+        "e8": "a",
+        "f9": "a",
+        "c9": "b",
+        "h7": "c",
+        "h5": "P",
+        "h2": "R",
+        "g4": "N"
+      },
+      "turn": "black",
+      "prompt": "b07-c07.prompt",
+      "solution": {
+        "from": "h7",
+        "to": "h2"
+      },
+      "explanation": "b07-c07.expl",
+      "objective": "b07l2",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c07.purpose",
+        "keyReply": "b07-c07.key",
+        "commonError": "b07-c07.error",
+        "temptingAlternative": {
+          "move": "h7-h6",
+          "text": "b07-c07.tempt"
+        }
+      }
+    },
+    {
+      "type": "decision",
+      "id": "b07-c08",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e1": "K",
+        "d0": "A",
+        "f0": "A",
+        "a2": "B",
+        "f9": "k",
+        "e8": "a",
+        "d9": "a",
+        "g9": "b",
+        "i2": "R",
+        "i7": "n"
+      },
+      "prompt": "b07-c08.prompt",
+      "objective": "b07l2",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c08.purpose",
+        "keyReply": "b07-c08.key",
+        "commonError": "b07-c08.error",
+        "temptingAlternative": {
+          "move": "i2-i7",
+          "text": "b07-c08.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "e1-d1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "e1-e2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "e1-e0",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "a2-c4",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "a2-c0",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-h2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-g2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-f2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-e2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-d2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-c2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-b2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-i3",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-i4",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-i5",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-i6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b07-c08.tempt",
+          "misconception": "b07.m1"
+        },
+        {
+          "move": "i2-i1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "i2-i0",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b07-c09",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "d0": "A",
+        "e1": "A",
+        "g0": "B",
+        "e9": "k",
+        "e8": "a",
+        "f9": "a",
+        "c9": "b",
+        "g6": "n",
+        "g8": "n",
+        "a6": "r",
+        "g2": "R",
+        "e5": "P"
+      },
+      "turn": "black",
+      "prompt": "b07-c09.prompt",
+      "objective": "b07l2",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c09.purpose",
+        "keyReply": "b07-c09.key",
+        "commonError": "b07-c09.error",
+        "temptingAlternative": {
+          "move": "g6-e5",
+          "text": "b07-c09.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "a6-b6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "a6-c6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "a6-d6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "a6-e6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-f6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "a6-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-a8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-a9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-a5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-a4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-a3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-a2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-a1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-a0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-h8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-f8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-h4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-f4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-i7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "g6-i5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-e7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "g6-e5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b07-c09.tempt",
+          "misconception": "b07.m1"
+        },
+        {
+          "move": "e8-f7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "e8-d9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "e8-d7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "g8-h6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "g8-f6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g8-i9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "g8-i7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "g8-e7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "c9-e7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "c9-a7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "e9-d9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "id": "b07-c10",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "TC",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "e1": "A",
+        "f0": "A",
+        "c0": "B",
+        "e9": "k",
+        "d9": "a",
+        "e8": "a",
+        "g9": "b",
+        "b2": "R",
+        "b7": "c",
+        "c9": "n"
+      },
+      "prompt": "b07-c10.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b07-c10.a.t",
+          "correct": true,
+          "feedback": "b07-c10.a"
+        },
+        {
+          "id": "b",
+          "text": "b07-c10.b.t",
+          "correct": false,
+          "feedback": "b07-c10.b",
+          "misconception": "b07.m1"
+        },
+        {
+          "id": "c",
+          "text": "b07-c10.c.t",
+          "correct": false,
+          "feedback": "b07-c10.c",
+          "misconception": "b07.m1"
+        }
+      ],
+      "objective": "b07l2",
+      "unit": "b07"
+    },
+    {
+      "type": "choice",
+      "id": "b07-c11",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "PA",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m2",
+        "b07.m3"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e1": "K",
+        "d0": "A",
+        "f0": "A",
+        "a2": "B",
+        "f9": "k",
+        "e8": "a",
+        "d9": "a",
+        "g9": "b",
+        "d4": "R",
+        "c2": "N",
+        "d7": "r"
+      },
+      "prompt": "b07-c11.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b07-c11.a.t",
+          "move": "d4-d7",
+          "correct": true,
+          "feedback": "b07-c11.a"
+        },
+        {
+          "id": "b",
+          "text": "b07-c11.b.t",
+          "correct": false,
+          "feedback": "b07-c11.b",
+          "misconception": "b07.m2"
+        },
+        {
+          "id": "c",
+          "text": "b07-c11.c.t",
+          "correct": false,
+          "feedback": "b07-c11.c",
+          "misconception": "b07.m3"
+        }
+      ],
+      "objective": "b07l3",
+      "unit": "b07"
+    },
+    {
+      "type": "choice",
+      "id": "b07-c12",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "PA",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m2",
+        "b07.m3"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "e1": "A",
+        "f0": "A",
+        "c0": "B",
+        "e9": "k",
+        "d9": "a",
+        "e8": "a",
+        "g9": "b",
+        "d4": "R",
+        "c2": "N",
+        "d7": "r"
+      },
+      "turn": "black",
+      "prompt": "b07-c12.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b07-c12.a.t",
+          "correct": true,
+          "feedback": "b07-c12.a"
+        },
+        {
+          "id": "b",
+          "text": "b07-c12.b.t",
+          "move": "d7-d4",
+          "correct": false,
+          "feedback": "b07-c12.b",
+          "misconception": "b07.m2"
+        },
+        {
+          "id": "c",
+          "text": "b07-c12.c.t",
+          "correct": false,
+          "feedback": "b07-c12.c",
+          "misconception": "b07.m3"
+        }
+      ],
+      "objective": "b07l3",
+      "unit": "b07"
+    },
+    {
+      "type": "decision",
+      "id": "b07-c13",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "d0": "A",
+        "e1": "A",
+        "g0": "B",
+        "e9": "k",
+        "e8": "a",
+        "f9": "a",
+        "c9": "b",
+        "d5": "r",
+        "c7": "n",
+        "d2": "N",
+        "a5": "C",
+        "g5": "R"
+      },
+      "prompt": "b07-c13.prompt",
+      "objective": "b07l3",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c13.purpose",
+        "keyReply": "b07-c13.key",
+        "commonError": "b07-c13.error",
+        "temptingAlternative": {
+          "move": "g5-g6",
+          "text": "b07-c13.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "e0-f0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g0-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g0-e2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e1-f2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e1-f0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d2-e4",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "d2-c4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d2-c0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d2-f3",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "d2-f1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d2-b3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d2-b1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-b5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-c5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-a6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-a8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-a9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "a5-a4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-a3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-a2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-a1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a5-a0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-h5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-i5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-f5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-e5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-d5",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.even"
+        },
+        {
+          "move": "g5-g6",
+          "class": "error",
+          "source": "authored",
+          "reason": "b07-c13.tempt",
+          "misconception": "b07.m1"
+        },
+        {
+          "move": "g5-g7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b07.r.loses"
+        },
+        {
+          "move": "g5-g8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-g9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-g4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-g3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-g2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-g1",
+          "class": "error",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b07-c14",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e1": "K",
+        "d0": "A",
+        "f0": "A",
+        "a2": "B",
+        "f9": "k",
+        "e8": "a",
+        "d9": "a",
+        "g9": "b",
+        "b8": "r",
+        "b5": "P",
+        "b3": "N",
+        "b1": "C"
+      },
+      "turn": "black",
+      "prompt": "b07-c14.prompt",
+      "objective": "b07l3",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c14.purpose",
+        "keyReply": "b07-c14.key",
+        "commonError": "b07-c14.error",
+        "temptingAlternative": {
+          "move": "b8-b5",
+          "text": "b07-c14.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "b8-c8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "b8-d8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "b8-a8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "b8-b9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "b8-b7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "b8-b6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b8-b5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b07-c14.tempt",
+          "misconception": "b07.m1"
+        },
+        {
+          "move": "e8-f7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "e8-d7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "f9-e9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "f9-f8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "g9-i7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "g9-e7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "id": "b07-c15",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "PA",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m2",
+        "b07.m3"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "e0": "K",
+        "d0": "A",
+        "e1": "A",
+        "g0": "B",
+        "e9": "k",
+        "e8": "a",
+        "f9": "a",
+        "c9": "b",
+        "f6": "r",
+        "h7": "n",
+        "a7": "n",
+        "f3": "R",
+        "g1": "N"
+      },
+      "turn": "black",
+      "prompt": "b07-c15.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b07-c15.a.t",
+          "move": "f6-f3",
+          "correct": true,
+          "feedback": "b07-c15.a"
+        },
+        {
+          "id": "b",
+          "text": "b07-c15.b.t",
+          "correct": false,
+          "feedback": "b07-c15.b",
+          "misconception": "b07.m2"
+        },
+        {
+          "id": "c",
+          "text": "b07-c15.c.t",
+          "correct": false,
+          "feedback": "b07-c15.c",
+          "misconception": "b07.m3"
+        }
+      ],
+      "objective": "b07l3",
+      "unit": "b07"
+    },
+    {
+      "type": "decision",
+      "id": "b07-c16",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b07.m1"
+      ],
+      "assist": "G0",
+      "pieces": {
+        "d0": "K",
+        "e1": "A",
+        "f0": "A",
+        "c0": "B",
+        "e9": "k",
+        "d9": "a",
+        "e8": "a",
+        "g9": "b",
+        "e2": "B",
+        "c4": "N",
+        "c1": "N",
+        "c8": "r",
+        "e5": "p"
+      },
+      "prompt": "b07-c16.prompt",
+      "objective": "b07l3",
+      "unit": "b07",
+      "feedback": {
+        "purpose": "b07-c16.purpose",
+        "keyReply": "b07-c16.key",
+        "commonError": "b07-c16.error",
+        "temptingAlternative": {
+          "move": "c4-e5",
+          "text": "b07-c16.tempt"
+        }
+      },
+      "table": [
+        {
+          "move": "c0-a2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "d0-e0",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "d0-d1",
+          "class": "error",
+          "source": "authored",
+          "reason": "b07.r.loses"
+        },
+        {
+          "move": "c1-d3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c1-b3",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "c1-e0",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "c1-a2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "c1-a0",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "e1-f2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "e1-d2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b07.r.keep"
+        },
+        {
+          "move": "e2-g4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e2-g0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c4-d6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c4-b6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c4-d2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c4-b2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c4-e5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b07-c16.tempt",
+          "misconception": "b07.m1"
+        },
+        {
+          "move": "c4-e3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c4-a5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c4-a3",
+          "class": "error",
+          "source": "computed"
+        }
+      ]
+    }
+  ]
+}

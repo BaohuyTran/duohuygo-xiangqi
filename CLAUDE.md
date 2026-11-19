@@ -452,6 +452,10 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   (16 items, three attempts); `src/content/pilot-b06.test.ts` (attacked / hanging / can-capture answers are the legal facts:
   Cannon screens count, hobbled Horses and pinned pieces neither attack nor defend; every `safe` solution and save-it option
   keeps everything against the best 3-ply reply; TR = full board as Black after Red's Cannon move, exactly three blocks safe).
+- Unit `b07` (S3.2.c; `verified` until review) is `src/content/lessons/b07-exchanges-and-values.json` + `assessment/b07-check.json`
+  (16 items, three attempts); `src/content/pilot-b07.test.ts` (engine values incl. the crossed-Soldier limitation; every
+  accepted capture wins at least its stated count and every "keep your material" decision row is ≥ 0 / < 0 at depth 4;
+  TR = full-board choice as Black, a free-looking capture lost back two moves later).
 - Pilot `b09` (S2.14: `b09l3` + `b09-g1`) is `src/content/lessons/b09-opening-development.json`; with it the content is in
   REL-P (`CURRENT_RELEASE`): the default path stays legacy-only, the preview shows `b09` once every item is `reviewed`
   with an approving record (items are `verified` until the independent review). `src/content/pilot-b09.test.ts`.

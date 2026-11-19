@@ -81,7 +81,8 @@ describe('normalize', () => {
     // + the 23 items of unit b04 (S3.1.d: 3 lessons, 7 learn cards + 16 practice items).
     // + the 26 items of unit b05 (S3.2.a: 3 lessons, 8 learn cards + 18 practice items).
     // + the 24 items of unit b06 (S3.2.b: 3 lessons, 8 learn cards + 16 practice items).
-    expect(entries).toHaveLength(450);
+    // + the 23 items of unit b07 (S3.2.c: 3 lessons, 7 learn cards + 16 practice items; no legacy reuse, 05 DV3).
+    expect(entries).toHaveLength(473);
     const isNew = (ref: string) => /^[biaem]\d\d/.test(ref);
     // i08-g1 (S2.15, `line` → `play` from the initial position) joins the same intended group.
     // b01 (S3.1.a) adds three intended learn cards of the initial position: b01l1-01 and b01l2-01 reuse u1l1#1 and
