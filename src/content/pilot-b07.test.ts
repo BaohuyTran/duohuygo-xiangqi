@@ -1,5 +1,5 @@
 // Content checks of unit b07 "Exchanges and relative material value" (S3.2.c: lessons b07l1–b07l3, check pool
-// b07-check), loaded in release state REL-P (`verified` until the content review: not in the preview, not served by
+// b07-check), loaded in release state REL-P (`reviewed` with an approving record: in the preview, not served by
 // default). The validator and the pool validator run on it with everything else. This file pins what the unit must show
 // (02 b07, 03 §4.1–§4.3, 05 DV3) and that every claim holds for EVERY accepted move (b05 / b06 review lessons): counts
 // and "keeps all your material" are checked against the best line of 4 plies.
@@ -54,7 +54,7 @@ describe('unit b07 (S3.2.c)', () => {
       expect(first, lesson.id).toBeGreaterThan(0);
       expect(lesson.exercises.slice(first).every((e) => e.type !== 'learn'), lesson.id).toBe(true);
     }
-    expect(unitItems(b07).every(({ item }) => item.status === 'verified')).toBe(true);
+    expect(unitItems(b07).every(({ item }) => item.status === 'reviewed')).toBe(true);
     expect([...new Set(practice.map((e) => e.strand))].sort()).toEqual(['PA', 'RS', 'TC']);
     expect(practice.every((e) => e.critical === false)).toBe(true);
     // New content only (05 DV3): no legacy reuse.
@@ -220,7 +220,7 @@ describe('b07 check pool (03 §4.1–§4.3)', () => {
     expect(check).toHaveLength(16);
     expect(poolFiles['b07-check']).toMatchObject({ id: 'b07-check', kind: 'check', unit: 'b07', primaryStrand: 'TC' });
     expect(['b07l1', 'b07l2', 'b07l3'].map((l) => check.filter((i) => i.objective === l).length)).toEqual([5, 5, 6]);
-    expect(check.every((i) => i.unit === 'b07' && i.assist === 'G0' && i.status === 'verified')).toBe(true);
+    expect(check.every((i) => i.unit === 'b07' && i.assist === 'G0' && i.status === 'reviewed')).toBe(true);
     expect(check.filter((i) => i.side === 'black')).toHaveLength(8);
     for (const i of check as (AssessmentItem & { hints?: unknown; highlight?: unknown; from?: unknown })[]) {
       expect(i.hints, i.id).toBeUndefined();

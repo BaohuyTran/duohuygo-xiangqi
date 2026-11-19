@@ -1,0 +1,1097 @@
+{
+  "unit": "b07",
+  "records": [
+    {
+      "id": "b07l1-01",
+      "version": 1,
+      "contentHash": "4a52a66978469a1d6b62524c02a2286a94490186d5f14ed02f3e0d220760fb40",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l1-02",
+      "version": 1,
+      "contentHash": "c1f702f7a9fc7dc70dde3690937d3f96926d977d34967c0a4abf06f8f5535c90",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l1-03",
+      "version": 1,
+      "contentHash": "2c81c019d399a6be19111f68d0ad8a9f3dc8018d151bd50884b4f9c3ee2e6da7",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l1-04",
+      "version": 1,
+      "contentHash": "4a3dcd7e20ba11aac2d74076c90a3586d0a72f4e971ed9a134a9cbccedb1c06d",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l1-05",
+      "version": 1,
+      "contentHash": "10db640a1308aeedcec2a74aa59bb25a4b74fc0cc1d74badf7120e801563c777",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l1-06",
+      "version": 1,
+      "contentHash": "cd2324ca89911b1636fcabdcf86a3b601d88393e560b262b7d93bd7239478a54",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l1-07",
+      "version": 1,
+      "contentHash": "cb296e86d818c6c3b45ffe7af3dbf5f7701e8943afa0f638387547375853bb3e",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l1-08",
+      "version": 1,
+      "contentHash": "312df216c7e8f49da96580c204a39ef604d7c0e17827d5846092a5500c2eaefb",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l2-01",
+      "version": 1,
+      "contentHash": "f4be3e4f517ce3550b020e8206bb1a26d36f7c574ca2239ac4e5fb6cb733e744",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l2-02",
+      "version": 1,
+      "contentHash": "7ea712aebc533ace55e4b345d451c8aa2ebc226b2ebc1572097ad8ef9b3def18",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l2-03",
+      "version": 1,
+      "contentHash": "57254fd4b9f15d116ff96f419ff8403288fec41493d45909723dc9370ab74735",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l2-04",
+      "version": 1,
+      "contentHash": "6b1f45f34caa67262a32ce9a0710a6a46d8a7d9aaea839201ca0d56e13c3d157",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l2-05",
+      "version": 1,
+      "contentHash": "de62363b36132b330260b3e6902e4b4377c75d87ea47f39e4c71764478f9c064",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l2-06",
+      "version": 1,
+      "contentHash": "2f8a298ceebf9d38cd1aadfab4eec93a28f2e4042749e27638441b2442996bbf",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l2-07",
+      "version": 1,
+      "contentHash": "6a591b68efe4f13cfb2d73436f0096de6e53c22f41244c788c7439941d030b78",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l3-01",
+      "version": 1,
+      "contentHash": "40b38eefbb7375c9126b3ccb2762e5ccfd542ca89cbb16b7402f0ab6268d62d3",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l3-02",
+      "version": 1,
+      "contentHash": "a560999847e882bc60746ee8629893e11fb4f7139adc718eb283ef8c2e897b0b",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l3-03",
+      "version": 1,
+      "contentHash": "22ac70435b3253e4f716bb0dd98a4c78ad1e436b1a4214acb63e95acd1a7d231",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l3-04",
+      "version": 1,
+      "contentHash": "e63f6dbd8f75c9879727e26e450a0b75db9aa8d7955bf932e8ce084520bbd14a",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l3-05",
+      "version": 1,
+      "contentHash": "f76f0ab08b83fad14cc6f575cf5edf1024198dbcaf48ae77d62c737ae8a421f3",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l3-06",
+      "version": 1,
+      "contentHash": "17aacf022ecb62b24710149a797b90560c4c97c8d4f085631af13336bef1aeef",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l3-07",
+      "version": 1,
+      "contentHash": "e9c78c6766846b42982dc2a1705325f3d76bd74da4649f26a21848d9a69b15f1",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07l3-08",
+      "version": 1,
+      "contentHash": "b866a7c10bee437270a864fdab3c0d18123b500d06f40874e3ce0a4e4e9cc4ca",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c01",
+      "version": 1,
+      "contentHash": "8662b8a10672e99ff2d0002ad178f79b35a67ff0d6920dd36281453ae6bee8b6",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c02",
+      "version": 1,
+      "contentHash": "f99dcd85b43bd5bf1a3026db67cf5189570a039810784c6eda5aa3ea90f6ef1a",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c03",
+      "version": 1,
+      "contentHash": "4c785522592d8b7735526d59fe15be5103d41f0bd7f126b44b2a5cc04ed8d41f",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c04",
+      "version": 1,
+      "contentHash": "c64e76ee4a582a125148873e998a1c43b9919d94986beb2c41e649f4df291056",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c05",
+      "version": 1,
+      "contentHash": "1390903c4105b7506e5ffcbb363505c7734201113c02d7c50f9c6a8a0caab6c6",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c06",
+      "version": 1,
+      "contentHash": "b44d106c58b63e85ccd6c6c8f3e9ec65a6750180c9ad53ee88f289112fbeac72",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c07",
+      "version": 1,
+      "contentHash": "b4a4e4909f17ea9b43e4eccf5ccca1ce3859f4071e14a160f40f68fdf784a693",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c08",
+      "version": 1,
+      "contentHash": "32ba826b54f5eae6518bcb249dbc60bb9f84235c650769369228a069ceef27e5",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c09",
+      "version": 1,
+      "contentHash": "e139ef5673dd104f8e4460875842c8539c2a713ab31be7294b339e50b96f3524",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c10",
+      "version": 1,
+      "contentHash": "0813a68f4d817fa3c7d62fd0af71a2d556ae5c1d8cb44a3e5e492bd35e1d08e6",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c11",
+      "version": 1,
+      "contentHash": "089814aa6899b348f3dcdf86ff19b822f500b33c78aa86ef2ddebfba83e66d2b",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c12",
+      "version": 1,
+      "contentHash": "8a7acf64715a6ead068cee7dc48ee78b267eb23e56a633158c9b527e307ca1c5",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c13",
+      "version": 1,
+      "contentHash": "0212ae11b2183a30e7a85de3008d49a7bc5af222071a8a8b32bfe4dda3423da5",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c14",
+      "version": 1,
+      "contentHash": "56cc6d0c0792186ddd17c39f8cf4b1b9756dfe57dd6bf346a5a75223e7f3ff13",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c15",
+      "version": 1,
+      "contentHash": "8ae28beb1c0852dd8260399ebc347f15acb7cd726942d6e5c71399c116781334",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    },
+    {
+      "id": "b07-c16",
+      "version": 1,
+      "contentHash": "aa94b5cd41e885177424857e3ba3b1bf54ae5270959e9774042571e28b48e69b",
+      "author": "implementer-S3.2.c",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b07",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.2.c",
+          "at": "2026-11-19",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 2: values + crossed-Soldier disclosure, capture gains, decision rows at depth 4/5, trade choices, heuristic wording, TR and check pool verified; b07l3-01 is a real trade."
+        }
+      ]
+    }
+  ]
+}

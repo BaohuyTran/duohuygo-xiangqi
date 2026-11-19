@@ -44,7 +44,7 @@ describe('checkRun with the shipped preview pools (S2.19 W1)', () => {
     expect(ids).not.toContain('i01');
   });
 
-  it('builds an a03 check form with 2 interleaved items from earlier units not in the path', () => {
+  it('builds an a03 check form with 2 interleaved items from units earlier in course order (path or not)', () => {
     const ctx = previewContext();
     const run = checkRun(ctx, 'a03');
     expect(run).not.toBeNull();
@@ -52,7 +52,8 @@ describe('checkRun with the shipped preview pools (S2.19 W1)', () => {
     expect(items).toHaveLength(8);
     const interleaved = items.filter((i) => i.unit !== 'a03');
     expect(interleaved).toHaveLength(2);
-    for (const i of interleaved) expect(['b08', 'i01']).toContain(i.unit);
+    // Since S3.2 the reviewed b01–b07 check pools are eligible too; any earlier unit qualifies (03 §4.1).
+    for (const i of interleaved) expect(unitBefore(i.unit!, 'a03')).toBe(true);
     expect(items.filter((i) => i.unit === 'a03')).toHaveLength(6);
   });
 

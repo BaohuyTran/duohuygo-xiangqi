@@ -136,7 +136,7 @@ flags depth 3 "measured within budget" per task; S2.20 records each R6 task's vo
 | S2.20 | Pilot review, calibration and design correction | S2.19 | done (attempt 2, 2026-11-11) |
 | S2.gate | Step 2 gate | S2.1–S2.20 | passed (2026-11-12) |
 | S3.1 | Units b01–b04 | S2.gate | done (2026-11-16; b01–b04 `reviewed`) |
-| S3.2 | Units b05–b07 | S3.1 | todo |
+| S3.2 | Units b05–b07 | S3.1 | done (2026-11-19; b05–b07 `reviewed`) |
 | S3.3 | Units b08, b09, b10 | S3.2 | todo |
 | S3.3a | J2 top-up and no legacy fallback in published levels (O1, D17; text in pilot/review.md §6) | S3.3 | todo |
 | S3.3b | Lazy-load new-course units and pools per level (gate follow-up, STATUS 2026-11-12): the default build's main chunk contains no new-course lesson or pool JSON; preview/served levels load on demand, offline precache kept | S3.3 | todo |

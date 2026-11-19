@@ -3771,7 +3771,7 @@ export const messages = {
   'b07.r.even': { en: 'Good: an even trade, and you lose nothing.', vi: 'Tốt: một cuộc đổi ngang, và bạn không mất gì.' },
   'b07.r.loses': { en: 'After the best replies and recaptures you are down material.', vi: 'Sau các nước đáp và ăn lại hay nhất, bạn bị thiệt quân.' },
   'b07l1-01.text': {
-    en: 'This course counts material with the usual beginner values, the same ones its engine uses: Chariot 9, Cannon 4½, Horse 4, Advisor 2, Elephant 2, Soldier 1. The General has no value: it cannot be traded, and the game is lost when it is checkmated. Add up the pieces on each side to see who is ahead.',
+    en: 'This course counts material with the usual beginner values, the same ones its engine uses: Chariot 9, Cannon 4½, Horse 4, Advisor 2, Elephant 2, Soldier 1. The General has no point value: it cannot be traded, and the game is lost when it is checkmated. Add up the pieces on each side to see who is ahead.',
     vi: 'Khóa học đếm quân theo giá trị quen thuộc cho người mới, giống như máy của ứng dụng: Xe 9, Pháo 4,5, Mã 4, Sĩ 2, Tượng 2, Tốt 1. Tướng không có giá trị điểm: không thể đem đổi, và bị chiếu bí là thua. Cộng giá trị các quân mỗi bên để biết ai hơn.',
   },
   'b07l1-02.text': {

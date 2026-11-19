@@ -452,7 +452,7 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   (16 items, three attempts); `src/content/pilot-b06.test.ts` (attacked / hanging / can-capture answers are the legal facts:
   Cannon screens count, hobbled Horses and pinned pieces neither attack nor defend; every `safe` solution and save-it option
   keeps everything against the best 3-ply reply; TR = full board as Black after Red's Cannon move, exactly three blocks safe).
-- Unit `b07` (S3.2.c; `verified` until review) is `src/content/lessons/b07-exchanges-and-values.json` + `assessment/b07-check.json`
+- Unit `b07` (S3.2.c; `reviewed`, record `reviews/b07.json`) is `src/content/lessons/b07-exchanges-and-values.json` + `assessment/b07-check.json`
   (16 items, three attempts); `src/content/pilot-b07.test.ts` (engine values incl. the crossed-Soldier limitation; every
   accepted capture wins at least its stated count and every "keep your material" decision row is ≥ 0 / < 0 at depth 4;
   TR = full-board choice as Black, a free-looking capture lost back two moves later).
