@@ -93,7 +93,8 @@ describe('pilot unit a03', () => {
   });
 
   it('selective decisions: 2–4 accepted moves (≤ 1/3 of the guard-passing ones)', () => {
-    const all = [...items, ...pool('a03-check'), ...pool('pa'), ...pool('i01-check'), ...pool('b08-check')];
+    // b08-check: only the two S2.16 items follow the a03 selectivity rule (S3.3.a's own items are pinned by pilot-b08.test.ts).
+    const all = [...items, ...pool('a03-check'), ...pool('pa'), ...pool('i01-check'), ...pool('b08-check').filter((i) => i.id === 'b08-c01' || i.id === 'b08-c02')];
     for (const d of all.filter((e): e is DecisionExercise => e.type === 'decision')) {
       const acc = d.table.filter((r) => isAccepted(r.class));
       expect(acc.length, d.id).toBeGreaterThanOrEqual(2);
@@ -157,7 +158,9 @@ describe('a03 assessment pools', () => {
     expect(pool('pa').length).toBeGreaterThanOrEqual(10);
     expect(pool('pa').every((i) => i.unit === 'a03' && /^pa-\d\d$/.test(i.id!))).toBe(true);
     expect(pool('i01-check').every((i) => i.unit === 'i01')).toBe(true);
-    expect(pool('b08-check').every((i) => i.unit === 'b08' && i.critical)).toBe(true);
+    // b08-check was extended to the full unit check by S3.3.a (b08-c03–c16); the two S2.16 interleaving items stay critical.
+    expect(pool('b08-check').every((i) => i.unit === 'b08')).toBe(true);
+    expect(pool('b08-check').filter((i) => i.id === 'b08-c01' || i.id === 'b08-c02').every((i) => i.critical)).toBe(true);
   });
 
   it('every move gaining ≥ T (2) at depth 2 or 4 is accepted, in every pool table (a03-check, pa, i01-check, b08-check)', () => {
@@ -166,7 +169,8 @@ describe('a03 assessment pools', () => {
 
   it('neutral: no hints, no highlights, prompts that name only the side to move and the kind of answer (03 §4.2 rules 1, 3)', () => {
     for (const id of ['a03-check', 'pa', 'i01-check', 'b08-check']) {
-      for (const i of pool(id) as (Exercise & { hints?: unknown; highlight?: unknown; prompt?: string })[]) {
+      // From b08-c03 on, b08-check holds the S3.3.a unit check (own prompts, pinned by pilot-b08.test.ts).
+      for (const i of (pool(id) as (Exercise & { hints?: unknown; highlight?: unknown; prompt?: string })[]).filter((x) => id !== 'b08-check' || x.id === 'b08-c01' || x.id === 'b08-c02')) {
         expect(i.hints, i.id).toBeUndefined();
         expect(i.highlight, i.id).toBeUndefined();
         expect(i.prompt, i.id).toMatch(/^a03\.n\./);

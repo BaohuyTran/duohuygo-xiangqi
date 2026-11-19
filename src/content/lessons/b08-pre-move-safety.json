@@ -1,0 +1,1916 @@
+{
+  "id": "b08",
+  "track": "basics",
+  "title": "b08.title",
+  "description": "b08.desc",
+  "lessons": [
+    {
+      "id": "b08l1",
+      "title": "b08l1.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b08l1-01",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b08.m1"
+          ],
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "a1": "R",
+            "c2": "N",
+            "h2": "C",
+            "i9": "r",
+            "g7": "n",
+            "b7": "c"
+          },
+          "text": "b08l1-01.text"
+        },
+        {
+          "type": "learn",
+          "id": "b08l1-02",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b08.m2"
+          ],
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "c3": "R",
+            "e3": "N",
+            "d5": "n"
+          },
+          "text": "b08l1-02.text",
+          "highlight": [
+            "d5"
+          ]
+        },
+        {
+          "type": "select-squares",
+          "id": "b08l1-03",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "DE",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "d6": "R",
+            "b6": "n",
+            "g6": "p",
+            "h9": "c"
+          },
+          "turn": "black",
+          "prompt": "b08l1-03.prompt",
+          "query": {
+            "kind": "attacked-pieces",
+            "side": "black"
+          },
+          "explanation": "b08l1-03.expl"
+        },
+        {
+          "type": "select-squares",
+          "id": "b08l1-04",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "DE",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [],
+          "assist": "G2",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "d4": "n",
+            "c2": "R",
+            "b5": "C",
+            "h3": "N"
+          },
+          "prompt": "b08l1-04.prompt",
+          "query": {
+            "kind": "attacked-pieces",
+            "side": "red"
+          },
+          "explanation": "b08l1-04.expl"
+        },
+        {
+          "type": "choice",
+          "id": "b08l1-05",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "DE",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m1",
+            "b08.m2"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "g5": "n",
+            "f3": "R",
+            "b0": "N",
+            "c6": "p"
+          },
+          "prompt": "b08l1-05.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b08l1-05.a.t",
+              "correct": true,
+              "feedback": "b08l1-05.a"
+            },
+            {
+              "id": "b",
+              "text": "b08l1-05.b.t",
+              "correct": false,
+              "feedback": "b08l1-05.b",
+              "misconception": "b08.m2"
+            },
+            {
+              "id": "c",
+              "text": "b08l1-05.c.t",
+              "correct": false,
+              "feedback": "b08l1-05.c",
+              "misconception": "b08.m1"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b08l1-06",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "DE",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m2",
+            "b08.m3"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "e5": "N",
+            "h6": "r",
+            "b9": "c"
+          },
+          "turn": "black",
+          "prompt": "b08l1-06.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b08l1-06.a.t",
+              "correct": true,
+              "feedback": "b08l1-06.a"
+            },
+            {
+              "id": "b",
+              "text": "b08l1-06.b.t",
+              "correct": false,
+              "feedback": "b08l1-06.b",
+              "misconception": "b08.m3"
+            },
+            {
+              "id": "c",
+              "text": "b08l1-06.c.t",
+              "correct": false,
+              "feedback": "b08l1-06.c",
+              "misconception": "b08.m2"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b08l1-07",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "DE",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b07.m1"
+          ],
+          "assist": "G0",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "d6": "r",
+            "d3": "N",
+            "a3": "R",
+            "b6": "C",
+            "c4": "N"
+          },
+          "prompt": "b08l1-07.prompt",
+          "options": [
+            {
+              "id": "a",
+              "text": "b08l1-07.a.t",
+              "correct": true,
+              "feedback": "b08l1-07.a"
+            },
+            {
+              "id": "b",
+              "text": "b08l1-07.b.t",
+              "correct": false,
+              "feedback": "b08l1-07.b",
+              "misconception": "b07.m1"
+            },
+            {
+              "id": "c",
+              "text": "b08l1-07.c.t",
+              "correct": false,
+              "feedback": "b08l1-07.c",
+              "misconception": "b07.m1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b08l2",
+      "title": "b08l2.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b08l2-01",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b08.m3"
+          ],
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "b5": "R",
+            "e4": "n",
+            "g6": "p",
+            "c9": "b"
+          },
+          "text": "b08l2-01.text",
+          "highlight": [
+            "b3",
+            "d2"
+          ]
+        },
+        {
+          "type": "learn",
+          "id": "b08l2-02",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "b4": "C",
+            "c2": "N",
+            "b8": "r"
+          },
+          "text": "b08l2-02.text",
+          "highlight": [
+            "c2",
+            "b4"
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b08l2-03",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m1",
+            "b08.m3"
+          ],
+          "assist": "G2",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "b5": "R",
+            "e4": "n",
+            "g6": "p",
+            "h0": "N",
+            "c9": "b"
+          },
+          "prompt": "b08l2-03.prompt",
+          "options": [
+            {
+              "id": "a",
+              "move": "b5-b8",
+              "correct": true,
+              "feedback": "b08l2-03.a"
+            },
+            {
+              "id": "b",
+              "move": "b5-c5",
+              "correct": false,
+              "feedback": "b08l2-03.b",
+              "misconception": "b08.m1"
+            },
+            {
+              "id": "c",
+              "move": "b5-b3",
+              "correct": false,
+              "feedback": "b08l2-03.c",
+              "misconception": "b08.m3"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b08l2-04",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m1",
+            "b08.m3"
+          ],
+          "assist": "G2",
+          "pieces": {
+            "e1": "K",
+            "d0": "A",
+            "f0": "A",
+            "a2": "B",
+            "f9": "k",
+            "e8": "a",
+            "d9": "a",
+            "g9": "b",
+            "a6": "c",
+            "g6": "n",
+            "h5": "N"
+          },
+          "turn": "black",
+          "prompt": "b08l2-04.prompt",
+          "options": [
+            {
+              "id": "a",
+              "move": "a6-a8",
+              "correct": true,
+              "feedback": "b08l2-04.a"
+            },
+            {
+              "id": "b",
+              "move": "a6-f6",
+              "correct": false,
+              "feedback": "b08l2-04.b",
+              "misconception": "b08.m1"
+            },
+            {
+              "id": "c",
+              "move": "a6-e6",
+              "correct": false,
+              "feedback": "b08l2-04.c",
+              "misconception": "b08.m3"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b08l2-05",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m1"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "d0": "K",
+            "e1": "A",
+            "f0": "A",
+            "c0": "B",
+            "e9": "k",
+            "d9": "a",
+            "e8": "a",
+            "g9": "b",
+            "c7": "C",
+            "c4": "C",
+            "g3": "P",
+            "g2": "c"
+          },
+          "prompt": "b08l2-05.prompt",
+          "multi": true,
+          "options": [
+            {
+              "id": "a",
+              "move": "c7-c8",
+              "correct": true,
+              "feedback": "b08l2-05.a"
+            },
+            {
+              "id": "b",
+              "move": "c7-c5",
+              "correct": true,
+              "feedback": "b08l2-05.b"
+            },
+            {
+              "id": "c",
+              "move": "c7-d7",
+              "correct": false,
+              "feedback": "b08l2-05.c",
+              "misconception": "b08.m1"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b08l2-06",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m1"
+          ],
+          "assist": "G1",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "c5": "n",
+            "b8": "c",
+            "h2": "n",
+            "b6": "N",
+            "f8": "C",
+            "d1": "N"
+          },
+          "turn": "black",
+          "prompt": "b08l2-06.prompt",
+          "options": [
+            {
+              "id": "a",
+              "move": "c5-e6",
+              "correct": true,
+              "feedback": "b08l2-06.a"
+            },
+            {
+              "id": "b",
+              "move": "c5-a4",
+              "correct": false,
+              "feedback": "b08l2-06.b",
+              "misconception": "b08.m1"
+            },
+            {
+              "id": "c",
+              "move": "c5-d7",
+              "correct": false,
+              "feedback": "b08l2-06.c",
+              "misconception": "b08.m1"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b08l2-07",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "generated",
+            "generator": "safe-sparring-selfplay",
+            "generatorVersion": "1",
+            "seed": 380
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m3"
+          ],
+          "assist": "G0",
+          "fen": "rnbakab1r/9/1c7/p3p1n1p/2p3pc1/9/P1P1P1P1P/1C2B1NC1/4A4/RNB1KA2R w",
+          "prompt": "b08l2-07.prompt",
+          "feedback": {
+            "purpose": "b08l2-07.purpose",
+            "keyReply": "b08l2-07.key",
+            "commonError": "b08l2-07.error",
+            "temptingAlternative": {
+              "move": "a0-a1",
+              "text": "b08l2-07.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "a0-a1",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08l2-07.tempt",
+              "misconception": "b08.m3"
+            },
+            {
+              "move": "a0-a2",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "b0-c2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "b0-a2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "c0-a2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "e0-d0",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "i0-h0",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "i0-g0",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "i0-i1",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "i0-i2",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "e1-f2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "e1-d2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "e1-d0",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "b2-c2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "b2-d2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "b2-a2",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "b2-b3",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "b2-b4",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "b2-b5",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "b2-b6",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "b2-b9",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "b2-b1",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "e2-g4",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "e2-g0",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "e2-c4",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "g2-h0",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "h2-i2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "h2-h3",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "h2-h4",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "h2-h1",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "h2-h0",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "a3-a4",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "c3-c4",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "e3-e4",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "g3-g4",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            },
+            {
+              "move": "i3-i4",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.keep"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b08l3",
+      "title": "b08l3.title",
+      "exercises": [
+        {
+          "type": "learn",
+          "id": "b08l3-01",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "misconceptions": [
+            "b08.m4"
+          ],
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "b0": "N",
+            "a0": "R",
+            "h3": "C",
+            "c6": "p",
+            "g7": "n",
+            "h9": "r"
+          },
+          "text": "b08l3-01.text",
+          "square": "b0"
+        },
+        {
+          "type": "learn",
+          "id": "b08l3-02",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "authored"
+          },
+          "side": "red",
+          "pieces": {
+            "e0": "K",
+            "d0": "A",
+            "f0": "A",
+            "e2": "B",
+            "e9": "k",
+            "d9": "a",
+            "f9": "a",
+            "e7": "b",
+            "i0": "R",
+            "h0": "N",
+            "b3": "C",
+            "c7": "n",
+            "a9": "r"
+          },
+          "text": "b08l3-02.text",
+          "highlight": [
+            "i0"
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b08l3-03",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "generated",
+            "generator": "safe-sparring-selfplay",
+            "generatorVersion": "1",
+            "seed": 204
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m1"
+          ],
+          "assist": "G2",
+          "fen": "r1ba1kbr1/4a4/2n6/p1p1p1pc1/8p/1c4P2/PCP1P3P/2N6/4A1N2/R1BAK1B1R w",
+          "prompt": "b08l3-03.prompt",
+          "objective": {
+            "kind": "development",
+            "increaseBy": 1
+          },
+          "feedback": {
+            "purpose": "b08l3-03.purpose",
+            "keyReply": "b08l3-03.key",
+            "commonError": "b08l3-03.error",
+            "temptingAlternative": {
+              "move": "a0-b0",
+              "text": "b08l3-03.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "a0-b0",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08l3-03.tempt",
+              "misconception": "b08.m1"
+            },
+            {
+              "move": "a0-a1",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "a0-a2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "c0-e2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "c0-a2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g0-i2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g0-e2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i0-h0",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "i0-i1",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "i0-i2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "e1-f2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e1-f0",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e1-d2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g1-h3",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g1-f3",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g1-i2",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "g1-e2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "c2-b0",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "c2-a1",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "a3-a4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "b3-b2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "b3-b1",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "b3-b0",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "c3-c4",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "e3-e4",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "i3-i4",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "g4-g5",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b08l3-04",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "generated",
+            "generator": "safe-sparring-selfplay",
+            "generatorVersion": "1",
+            "seed": 83
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m3"
+          ],
+          "assist": "G2",
+          "fen": "2bakabnr/9/3r1c3/p3p1p1p/2p6/7C1/P1P1P1P1P/4B4/9/RNBAKA1R1 b",
+          "prompt": "b08l3-04.prompt",
+          "objective": {
+            "kind": "development",
+            "increaseBy": 1
+          },
+          "feedback": {
+            "purpose": "b08l3-04.purpose",
+            "keyReply": "b08l3-04.key",
+            "commonError": "b08l3-04.error",
+            "temptingAlternative": {
+              "move": "i9-i8",
+              "text": "b08l3-04.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "c5-c4",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "a6-a5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e6-e5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g6-g5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i6-i5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-e7",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "d7-c7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-b7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-a7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-d8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-d6",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-d5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-d4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-d3",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-d2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-d1",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d7-d0",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.loses"
+            },
+            {
+              "move": "f7-g7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f7-h7",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "f7-i7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f7-e7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f7-f8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f7-f6",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f7-f5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f7-f4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f7-f3",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f7-f2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f7-f1",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "c9-e7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "c9-a7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "d9-e8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e9-e8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f9-e8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g9-i7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g9-e7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "h9-i7",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "h9-g7",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "i9-i8",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08l3-04.tempt",
+              "misconception": "b08.m3"
+            },
+            {
+              "move": "i9-i7",
+              "class": "error",
+              "source": "computed"
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "id": "b08l3-05",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "generated",
+            "generator": "safe-sparring-selfplay",
+            "generatorVersion": "1",
+            "seed": 272
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m1",
+            "b08.m4"
+          ],
+          "assist": "G1",
+          "fen": "rnbaka1nr/c8/8b/p3p3p/2p3pC1/6P2/PcP1P3P/4C3B/5N3/RNBAKAR2 w",
+          "prompt": "b08l3-05.prompt",
+          "options": [
+            {
+              "id": "a",
+              "move": "b0-c2",
+              "correct": true,
+              "feedback": "b08l3-05.a"
+            },
+            {
+              "id": "b",
+              "move": "d0-e1",
+              "correct": false,
+              "feedback": "b08l3-05.b",
+              "misconception": "b08.m4"
+            },
+            {
+              "id": "c",
+              "move": "h5-i5",
+              "correct": false,
+              "feedback": "b08l3-05.c",
+              "misconception": "b08.m1"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b08l3-06",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "generated",
+            "generator": "safe-sparring-selfplay",
+            "generatorVersion": "1",
+            "seed": 260
+          },
+          "side": "red",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m3"
+          ],
+          "assist": "G1",
+          "fen": "1nbakabnr/r8/7c1/2p3p1p/p3p2C1/Pc7/2P1P1P1P/2C1B3B/9/RN1AKA1NR w",
+          "prompt": "b08l3-06.prompt",
+          "objective": {
+            "kind": "development",
+            "increaseBy": 1
+          },
+          "feedback": {
+            "purpose": "b08l3-06.purpose",
+            "keyReply": "b08l3-06.key",
+            "commonError": "b08l3-06.error",
+            "temptingAlternative": {
+              "move": "i0-i1",
+              "text": "b08l3-06.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "a0-a1",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "a0-a2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "a0-a3",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "b0-a2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "b0-d1",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "d0-e1",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e0-e1",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f0-e1",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "h0-g2",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "h0-f1",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "i0-i1",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08l3-06.tempt",
+              "misconception": "b08.m3"
+            },
+            {
+              "move": "c2-d2",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "c2-b2",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "c2-a2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "c2-c6",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b08.r.nothing"
+            },
+            {
+              "move": "c2-c1",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "c2-c0",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e2-g4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e2-g0",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e2-c4",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "e2-c0",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i2-g4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i2-g0",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "c3-c4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e3-e4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g3-g4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i3-i4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "a4-a5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b08.r.nothing"
+            },
+            {
+              "move": "h5-i5",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "h5-g5",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "h5-f5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "h5-a5",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b08.r.nothing"
+            },
+            {
+              "move": "h5-h6",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "h5-h9",
+              "class": "dubious",
+              "source": "authored",
+              "reason": "b08.r.nothing"
+            },
+            {
+              "move": "h5-h4",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "h5-h3",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "h5-h2",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "h5-h1",
+              "class": "dubious",
+              "source": "computed"
+            }
+          ]
+        },
+        {
+          "type": "decision",
+          "id": "b08l3-07",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "generated",
+            "generator": "safe-sparring-selfplay",
+            "generatorVersion": "1",
+            "seed": 205
+          },
+          "side": "black",
+          "strand": "RS",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m1"
+          ],
+          "assist": "G0",
+          "fen": "rn1akabnr/8c/b8/p1p1p1p1p/1C3c3/P5P2/2P1P3P/3CN4/4A4/RNBAK1B1R b",
+          "prompt": "b08l3-07.prompt",
+          "objective": {
+            "kind": "development",
+            "increaseBy": 1
+          },
+          "feedback": {
+            "purpose": "b08l3-07.purpose",
+            "keyReply": "b08l3-07.key",
+            "commonError": "b08l3-07.error",
+            "temptingAlternative": {
+              "move": "f5-g5",
+              "text": "b08l3-07.tempt"
+            }
+          },
+          "table": [
+            {
+              "move": "f5-g5",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08l3-07.tempt",
+              "misconception": "b08.m1"
+            },
+            {
+              "move": "f5-h5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f5-i5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f5-e5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f5-d5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f5-c5",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f5-f6",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f5-f7",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "f5-f8",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "f5-f4",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "f5-f3",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "f5-f2",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "f5-f1",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "f5-f0",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "a6-a5",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "c6-c5",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "e6-e5",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "g6-g5",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "i6-i5",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.later"
+            },
+            {
+              "move": "a7-c9",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "a7-c5",
+              "class": "error",
+              "source": "computed"
+            },
+            {
+              "move": "i8-h8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i8-g8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i8-f8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i8-e8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i8-d8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i8-c8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i8-b8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i8-a8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i8-i7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "i8-i3",
+              "class": "error",
+              "source": "authored",
+              "reason": "b08.r.loses"
+            },
+            {
+              "move": "a9-a8",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "b9-c7",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "b9-d8",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "d9-e8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "e9-e8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "f9-e8",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g9-i7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "g9-e7",
+              "class": "dubious",
+              "source": "computed"
+            },
+            {
+              "move": "h9-i7",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            },
+            {
+              "move": "h9-g7",
+              "class": "target",
+              "source": "authored",
+              "reason": "b08.r.improves"
+            }
+          ]
+        },
+        {
+          "type": "play",
+          "id": "b08-g1",
+          "version": 1,
+          "status": "verified",
+          "source": {
+            "kind": "generated",
+            "generator": "safe-sparring-selfplay",
+            "generatorVersion": "1",
+            "seed": 22180
+          },
+          "side": "black",
+          "strand": "PP",
+          "nature": "quiet",
+          "critical": false,
+          "misconceptions": [
+            "b08.m1",
+            "b08.m3"
+          ],
+          "fen": "1nb1ka1r1/9/5a3/2p1n1p1p/2b6/r1B1P1P2/p1P1N3P/1C2B3R/C3A4/1R1AK2c1 b",
+          "prompt": "b08-g1.p",
+          "task": "drill",
+          "cap": 11,
+          "rubrics": [
+            {
+              "rubric": "R1",
+              "weight": 70
+            },
+            {
+              "rubric": "R0",
+              "weight": 30
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

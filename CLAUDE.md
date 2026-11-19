@@ -456,6 +456,10 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   (16 items, three attempts); `src/content/pilot-b07.test.ts` (engine values incl. the crossed-Soldier limitation; every
   accepted capture wins at least its stated count and every "keep your material" decision row is ≥ 0 / < 0 at depth 4;
   TR = full-board choice as Black, a free-looking capture lost back two moves later).
+- Unit `b08` (S3.3.a; `verified` until review) is `src/content/lessons/b08-pre-move-safety.json` + `assessment/b08-check.json`
+  (the S2.16 items b08-c01/c02 kept, c03–c16 added; 16 items, three attempts) + the drill `b08-g1` (Black, cap 11, R1 70 +
+  R0 30; passes §5.7 at 20 seeds); `src/content/pilot-b08.test.ts` (every accepted move of the "safe" / "safe and useful"
+  tables passes the guard and is ≥ 0 at depth 4, refused authored rows lose; m1 / m3 / m4 answers checked by the best reply).
 - Pilot `b09` (S2.14: `b09l3` + `b09-g1`) is `src/content/lessons/b09-opening-development.json`; with it the content is in
   REL-P (`CURRENT_RELEASE`): the default path stays legacy-only, the preview shows `b09` once every item is `reviewed`
   with an approving record (items are `verified` until the independent review). `src/content/pilot-b09.test.ts`.

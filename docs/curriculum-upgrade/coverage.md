@@ -22,6 +22,7 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b05 | reviewed | 3 | 8 | 18 | 0 | 3 | 12 | 1 | 2 | 0 | 0 | 6 (33 %) | 5 (28 %) | 7 | 7 | 3 | 1 | RS 13, DE 5 |
 | b06 | reviewed | 3 | 8 | 16 | 6 | 4 | 5 | 1 | 0 | 0 | 0 | 8 (50 %) | 14 (88 %) | 6 | 6 | 3 | 1 | RS 16 |
 | b07 | reviewed | 3 | 7 | 16 | 0 | 6 | 0 | 7 | 3 | 0 | 0 | 9 (56 %) | 9 (56 %) | 6 | 6 | 3 | 1 | TC 10, RS 3, PA 3 |
+| b08 | verified | 3 | 6 | 16 | 2 | 8 | 0 | 0 | 5 | 0 | 1 | 7 (44 %) | 16 (100 %) | 6 | 6 | 3 | 0 (task `b08-g1`) | RS 10, DE 5, PP 1 |
 
 ### Per lesson
 
@@ -49,6 +50,9 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b07l1 | 3 | 5 | capture 4, choice 1 | G2 G2 G1 G1 G0 | 3 | 1 | — (new, 05 DV3) |
 | b07l2 | 2 | 5 | capture 3, decision 1, choice 1 | G2 G2 G1 G1 G0 | 2 | 2 | — |
 | b07l3 | 2 | 6 | choice 4, decision 2 | G2 G2 G1 G1 G0 TR | 4 | 6 | — |
+| b08l1 | 2 | 5 | select-squares 2, choice 3 | G2 G2 G1 G1 G0 | 2 | 5 | — (new) |
+| b08l2 | 2 | 5 | choice 4, decision 1 | G2 G2 G1 G1 G0 | 2 | 5 | — |
+| b08l3 | 2 | 6 | decision 4, choice 1, play 1 | G2 G2 G1 G1 G0 + `b08-g1` | 3 | 6 | — |
 
 BLK tags (05 §4) of `u1l2#1`, `#3`, `#5` and `u1l3#1`, `#3` are resolved by authored Black items with the same skill
 (b02l1-07/-08 for the General, b02l2-05/-08 for facing, b02l3-08/-09 for the Advisor and Elephant) instead of
@@ -93,7 +97,19 @@ whose leg point that Cannon blocked recaptures); it is a `choice` because a full
 search of every legal move. The trade advice (trade when ahead, avoid trades when behind, trade off an attacker) is the
 conventional heuristic of 02 b07, for the content reviewer to confirm.
 
-b01l4, b02l3, b03l3, b04l3, b05l1, b06l3 and b07l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
+b08 (S3.3.a) states the routine of 02 b08 in b08l1-01 (wording for the content reviewer). Its decisions are
+"safe" tables (b08l2-07, b08-c11, b08-c12: target = passes the Basic guard and ≥ 0 at depth 4) and "safe and useful"
+tables (b08l3, b08-c13/c14/c16: target = also `development {increaseBy: 1}`); every refused authored row loses at depth 4
+and no move of any b08 table gains ≥ 2 (quiet positions, pilot-a03's rule for b08-check). Their positions are self-play
+positions (`safe-sparring(1, 1.0)` for both sides from the start; the seed is the item's `source.seed`). pilot-b08.test.ts
+checks every accepted move and every authored refusal at depth 4, the m1 / m3 / m4 answers by what the best reply does
+(takes / checks / nothing developed), and the "what does that move threaten" items by the side-not-to-move's 3-ply gain.
+b08-check keeps the S2.16 items b08-c01, c02 unchanged (ids, content, review records) and adds c03–c16; the
+pattern-mirror check covers only its composed positions (≤ 20 pieces), the self-play boards are kept apart by the
+near-duplicate test. The a03 check's interleaving and pilot-a03.test.ts keep working (its a03-only rules now apply to
+b08-c01, c02 only).
+
+b01l4, b02l3, b03l3, b04l3, b05l1, b06l3, b07l3 and b08l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
 minimums G2 2 · G1 2 · G0 1.
 
 ### Misconceptions
@@ -129,6 +145,10 @@ minimums G2 2 · G1 2 · G0 1.
 | b07.m1 | Every capture is good | b07l2-01 | b07l2-06, b07l3-08, b07-c10, decision rows of b07l2-05, b07l3-05, b07l3-07, b07-c08, b07-c09, b07-c13, b07-c14, b07-c16 (items tagged: b07l1-08, b07l2-07, b07-c01) |
 | b07.m2 | Equal trades never matter | b07l3-02 | b07l3-03, b07l3-04, b07l3-06, b07-c11, b07-c12, b07-c15 |
 | b07.m3 | Values are fixed | b07l1-02, b07l1-03 | b07l1-07, b07l3-03, b07l3-06, b07-c03, b07-c04, b07-c11, b07-c12, b07-c15 |
+| b08.m1 | Only my plan matters | b08l1-01 | b08l1-05, b08l2-03, b08l2-04, b08l2-05, b08l2-06, b08l3-05, b08-c05, b08-c08, b08-c09, b08-c10, b08-c15; tempting rows of b08l3-03, b08l3-07, b08-c12, b08-c13, b08-c14, b08-c16 |
+| b08.m2 | The opponent's move was random | b08l1-02 | b08l1-05, b08l1-06, b08-c05, b08-c06 |
+| b08.m3 | Checking captures but not checks | b08l2-01 | b08l1-06, b08l2-03, b08l2-04, b08-c06, b08-c08, b08-c09, b08-c10; tempting rows of b08l2-07, b08l3-04, b08l3-06, b08-c11 |
+| b08.m4 | "Safe" means "do nothing" | b08l3-01 | b08l3-05, b08-c15 (and every computed `dubious` row of the b08l3 tables: safe, develops nothing) |
 
 ### Check pools
 
@@ -141,8 +161,9 @@ minimums G2 2 · G1 2 · G0 1.
 | b05-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b05l1 5 · b05l2 5 · b05l3 6 | 0 | 7 | 1 | 3 | 5 | 7 | 9 | 0 |
 | b06-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b06l1 5 · b06l2 5 · b06l3 6 | 6 | 4 | 1 | 0 | 5 | 8 | 14 | 0 |
 | b07-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b07l1 5 · b07l2 5 · b07l3 6 | 0 | 6 | 5 | 5 | 0 | 8 | 11 | 0 |
+| b08-check | verified (b08-c01, c02 `reviewed`, S2.16) | 16 | 6 own + 2 interleaved (3 attempts) | b08l1 5 · b08l2 5 · b08l3 6 | 2 | 7 | 0 | 7 | 0 | 8 | 16 | 5 |
 
-b02-check to b07-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
+b02-check to b08-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
 the whole pattern and one non-General piece added, removed or moved, against every loaded lesson item and the other pool
 items). The S3.1.b review replaced b02-c03, c08, c12, c15 and, after the check, c05 (one extra piece over b02l2-03),
 c13 and c14; no allowed-reuse exception is left in the pool. From b05 on, pilot tests also check that no two items of the pool share the same task and the same learner-relative material (a colour-swapped pattern mirror that the near-duplicate test misses, as found in the b04 review).
@@ -155,3 +176,11 @@ b02 pools in pilot-b03.test.ts).
 ### Practical tasks
 
 None in b01–b07 (02: "Practical task —").
+
+`b08-g1` (S3.3.a): `play`, task `drill` (safe-sparring(2, 1.0) in both regimes), Black, cap 11, R1 70 + R0 30, pass mark 75,
+from a self-play middlegame of 28 pieces (seed 22180; 14 a side, each a Horse or a Cannon and some Soldiers down — less
+"simplified" than 02 b08 suggests; the screened self-play positions where the safe shuffler N2 fails ≥ 80 % were all
+middlegames like this one; for the content reviewer). §5.7 at 20 seeds (`npx tsx scripts/verify-practical.ts b08 --runs 20`,
+2026-11-19): reference run 20/20 (scores 82.5–100), N1 fails 20/20, N2 fails 20/20, voided 0, 3 narrow positions in the
+reference run: all checks passed. Caps 6, 8, 9, 10 and 12 were measured too (reference 13, 16, 18, 18 and 19 of 20; N2 ≥ 95 % failing at
+every cap); 11 is the only measured cap in 02's 6–12 range where every check passes.
