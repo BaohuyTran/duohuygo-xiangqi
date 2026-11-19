@@ -3771,8 +3771,8 @@ export const messages = {
   'b07.r.even': { en: 'Good: an even trade, and you lose nothing.', vi: 'Tốt: một cuộc đổi ngang, và bạn không mất gì.' },
   'b07.r.loses': { en: 'After the best replies and recaptures you are down material.', vi: 'Sau các nước đáp và ăn lại hay nhất, bạn bị thiệt quân.' },
   'b07l1-01.text': {
-    en: 'This course counts material with the usual beginner values, the same ones its engine uses: Chariot 9, Cannon 4½, Horse 4, Advisor 2, Elephant 2, Soldier 1. The General is never traded: losing it loses the game. Add up the pieces on each side to see who is ahead.',
-    vi: 'Khóa học đếm quân theo giá trị quen thuộc cho người mới, giống như máy của ứng dụng: Xe 9, Pháo 4,5, Mã 4, Sĩ 2, Tượng 2, Tốt 1. Tướng không bao giờ được đem đổi: mất Tướng là thua. Cộng giá trị các quân mỗi bên để biết ai hơn.',
+    en: 'This course counts material with the usual beginner values, the same ones its engine uses: Chariot 9, Cannon 4½, Horse 4, Advisor 2, Elephant 2, Soldier 1. The General has no value: it cannot be traded, and the game is lost when it is checkmated. Add up the pieces on each side to see who is ahead.',
+    vi: 'Khóa học đếm quân theo giá trị quen thuộc cho người mới, giống như máy của ứng dụng: Xe 9, Pháo 4,5, Mã 4, Sĩ 2, Tượng 2, Tốt 1. Tướng không có giá trị điểm: không thể đem đổi, và bị chiếu bí là thua. Cộng giá trị các quân mỗi bên để biết ai hơn.',
   },
   'b07l1-02.text': {
     en: 'Values are a guide, not a law. Your Soldier near Black’s palace has crossed the river: it can move sideways as well as forward, and many players count it as about 2. This app’s engine still counts every Soldier as 1, so its count may undervalue a crossed Soldier like this one. The Soldier still at home is the ordinary 1.',
@@ -3914,8 +3914,8 @@ export const messages = {
     vi: 'Pháo nhảy qua Tốt của bạn ăn Xe: +9. Mã ăn Pháo: −4,5. Tổng cộng: +4,5.',
   },
   'b07l3-01.text': {
-    en: 'When you are ahead, trades help you. You have two Chariots against one. If the Chariots are traded, you are left with a Chariot against none, and your extra piece is much easier to use. When you are behind, avoid trades for the same reason.',
-    vi: 'Khi bạn đang hơn quân, đổi quân có lợi cho bạn. Bạn có hai Xe đấu một Xe. Nếu đổi Xe, bạn còn một Xe đấu không Xe nào, và quân hơn của bạn dễ phát huy hơn nhiều. Khi bạn đang thua quân, hãy tránh đổi vì cùng lý do đó.',
+    en: 'When you are ahead, trades help you. You have two Chariots against a Chariot and a Horse. If you take Black’s Chariot, the Horse takes back: an even trade, Chariot for Chariot. Then your Chariot faces only a Horse, and your extra material is much easier to use. When you are behind, avoid trades for the same reason.',
+    vi: 'Khi bạn đang hơn quân, đổi quân có lợi cho bạn. Bạn có hai Xe đấu một Xe và một Mã. Nếu bạn ăn Xe Đen, Mã ăn lại: một cuộc đổi ngang, Xe đổi Xe. Khi đó Xe của bạn chỉ còn phải đấu với một quân Mã, và phần hơn của bạn dễ phát huy hơn nhiều. Khi bạn đang thua quân, hãy tránh đổi vì cùng lý do đó.',
   },
   'b07l3-02.text': {
     en: 'An equal trade can matter a lot. Black’s Horse attacks your Chariot and your Cannon at once. Take it with your Horse: Black’s Chariot takes back, Horse for Horse, but the piece that attacked two of yours is gone, and you lose nothing.',

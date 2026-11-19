@@ -170,6 +170,11 @@ describe('b07 claims hold for every accepted move (depth 4)', () => {
       expect(d4(p, trade), id).toBeGreaterThanOrEqual(0);
       expect(correct(id), id).toEqual(['a']);
     }
+    // Learn card b07l3-01 (content review): a real Chariot-for-Chariot trade, not a free capture.
+    const l31 = pos('b07l3-01');
+    expect(gain(l31, 'c4-c7')).toBe(0);
+    expect(d4(l31, 'c4-c7')).toBe(0);
+    expect(materialBalance(l31.board, l31.turn)).toBeGreaterThan(0);
     // b07l3-03.b: retreating keeps the material too (the feedback says so); the trade is simply better.
     expect(d4(pos('b07l3-03'), option('b07l3-03', 'b').move!)).toBeGreaterThanOrEqual(0);
     // b07-c12: behind; the trade is even, and moving the Chariot away keeps the material.
