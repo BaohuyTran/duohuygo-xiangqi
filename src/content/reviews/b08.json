@@ -104,6 +104,1014 @@
           "notes": "W10: rewritten common-error text points to the idea without naming an accepted move (02 §7.3); true for the item; en/vi consistent."
         }
       ]
+    },
+    {
+      "id": "b08l1-01",
+      "version": 1,
+      "contentHash": "66022601c322203ad6647e9a5e093c9551e1131d287113c54ba107608b2944ab",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l1-02",
+      "version": 1,
+      "contentHash": "34243e818b2798f8f95537a2225f12b17d440b44e1d3d0ca5f26f024c247e4cb",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l1-03",
+      "version": 1,
+      "contentHash": "9d074efd4dab0002186d6cbc2fb1c28adc18ebe1da5768b24b4cfc2b1e5a222f",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l1-04",
+      "version": 1,
+      "contentHash": "af89d4aab65624e91959db60a040f911f8b753e720e02f2422450509fbaca090",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l1-05",
+      "version": 1,
+      "contentHash": "280a0354a72ce844598514806d3973d303ae155f6185be148a69d2ce634a4951",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l1-06",
+      "version": 1,
+      "contentHash": "4ca49713432b3c627bb616f77846b9bb6e04f1834790ffe093314555da515f4d",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l1-07",
+      "version": 1,
+      "contentHash": "60afd65618006022105186301571858f32e3b051cfc90988d9f9d5e3264719ae",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l2-01",
+      "version": 1,
+      "contentHash": "63d256d8fb5cc8d8ac53c51013e37311c0af75ba9dca3fc9c118d18dadae95a9",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l2-02",
+      "version": 1,
+      "contentHash": "ca926f86318835379f7588c7bf1d93485e9d0515f646d7d68e0da5a77ade592a",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l2-03",
+      "version": 1,
+      "contentHash": "1e22939e903f93ee03b6a3b198ea76511b4dfdf266c8c976dab01305d04ae060",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l2-04",
+      "version": 1,
+      "contentHash": "a947aeb455f1678ce3d7c1f0de7143094fd7a1dae5dcfb817e754463cad2a4a0",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l2-05",
+      "version": 1,
+      "contentHash": "de32a56b66ede876b912dd3133e07dc495664e1a7d37821efca57c8c8a4bab3d",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l2-06",
+      "version": 1,
+      "contentHash": "ee07cf175c4b41754eeb2b0c986036c317257e0427d80cd0592c53a87cd56f0d",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l2-07",
+      "version": 1,
+      "contentHash": "7f129798df21cfc6ae704f79812175dd3fb7375967a0e981e56f9a514e8c0c91",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l3-01",
+      "version": 1,
+      "contentHash": "1e8ca184e22f9dda5e84ae068f358ac604eae27dd1cc4470ead128d3cda711ea",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l3-02",
+      "version": 1,
+      "contentHash": "814410441985c02de5c56c5d1e76b466560b82475631a2d837609a975e07985e",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l3-03",
+      "version": 1,
+      "contentHash": "e54800fa602a3343075304ee6a7c130c2b133fd724601b1476c15e1a1deba7ff",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l3-04",
+      "version": 1,
+      "contentHash": "e8990f3a5c3020a2fb06d9fcc71c4ec38bf3b0667a594a07d5c1a4c68bb4a99a",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l3-05",
+      "version": 1,
+      "contentHash": "f4b3c33c18a4c476634ee6c4293718f3deaf5ae21e9e3221c6c75be450ae0f2a",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l3-06",
+      "version": 1,
+      "contentHash": "421e23848ae08d79e1aebb1c0a0d1759657cfb78ee6070fd29eba02ae6a2fc7d",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08l3-07",
+      "version": 1,
+      "contentHash": "d17dfc477be1cf5e47ade9669c25fa1edc3238750c3a97eeae83a4c1b6fe411f",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-g1",
+      "version": 1,
+      "contentHash": "5928bddcaa1d74978c6e75c6c267394b5641e26ae97fbd53675b3c8d729c9793",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c03",
+      "version": 1,
+      "contentHash": "18d297060324900bbbab3d05ad96faecc77169140720ad75ed3653bb11ae5e1a",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c04",
+      "version": 1,
+      "contentHash": "6b19794bfca1f0545fcbab70df90279478d62b7cb3e7723756423006af3c2233",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c05",
+      "version": 1,
+      "contentHash": "9a846a070cbce926ac9cf593f2b4dccd2b5524dc0ff6e5397fb7ec420fd80208",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c06",
+      "version": 1,
+      "contentHash": "591299cdd67f9670895f4923324eb8cb1c2f6365c01d6e0c5fd15d239a97047a",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c07",
+      "version": 1,
+      "contentHash": "7fdc7bbb79134327dcda77a097da0abfac7ea2e9b4ad05cc033af1c5d542dd46",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c08",
+      "version": 1,
+      "contentHash": "2352d2e38d08280c8f65eedd023120ab1c8f0c8240cc9ad6f99aeaaaecb37667",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c09",
+      "version": 1,
+      "contentHash": "6d8d42744e69f3f1dfcfa0b395e0f0deb98300d879f2e748044bbe4a39d1422f",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c10",
+      "version": 1,
+      "contentHash": "374783aa62d4ab83f6368d3c7a844b9783d9f88394bc80be5571619d5418a795",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c11",
+      "version": 1,
+      "contentHash": "8434c47214c7a5e958250e23fc6bdab388bbfcbe1ea2395669dc2b7512eddc05",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c12",
+      "version": 1,
+      "contentHash": "beb8b6261b6afdd89eb1508466f5d411f3e8024b71a27de323c279664b629893",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c13",
+      "version": 1,
+      "contentHash": "691fca04845db57ce0c152571e451c7bed1a095447ad5ed4b18f64b6aba9e12f",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c14",
+      "version": 1,
+      "contentHash": "35550a4dc39b673fdc79c626cbd536282487772b8634d379013faa148ccf8983",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c15",
+      "version": 1,
+      "contentHash": "5fdd2ff018df7d0af1cf5be1a7c8e462de71519361bdb99a6272083d8ff66586",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
+    },
+    {
+      "id": "b08-c16",
+      "version": 1,
+      "contentHash": "cbca11d5579f5e2ce8d12aceb5141c8bfd7813e1e08739361d96d34809c02e1e",
+      "author": "implementer-S3.3.a",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b08; verify-practical b08 --runs 20",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-19"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.a",
+          "at": "2026-11-23",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1: threat sets, blunder-check options, safe / safe-and-useful tables (guard + depth 4-5), routine wording, m1-m4, b08-g1 section 5.7 re-run."
+        }
+      ]
     }
   ]
 }

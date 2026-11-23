@@ -37,10 +37,10 @@ describe('unitBefore (course order: level rank, then unit number)', () => {
 });
 
 describe('checkRun with the shipped preview pools (S2.19 W1)', () => {
-  it('the preview path does not contain the interleaving units b08 / i01', () => {
+  it('the preview path does not contain the interleaving unit i01 (b08 joined it when reviewed in S3.3.a)', () => {
     const ids = previewContext().units.map((u) => u.id);
     expect(ids).toContain('a03');
-    expect(ids).not.toContain('b08');
+    expect(ids).toContain('b08');
     expect(ids).not.toContain('i01');
   });
 

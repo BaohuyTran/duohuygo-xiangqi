@@ -22,7 +22,7 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b05 | reviewed | 3 | 8 | 18 | 0 | 3 | 12 | 1 | 2 | 0 | 0 | 6 (33 %) | 5 (28 %) | 7 | 7 | 3 | 1 | RS 13, DE 5 |
 | b06 | reviewed | 3 | 8 | 16 | 6 | 4 | 5 | 1 | 0 | 0 | 0 | 8 (50 %) | 14 (88 %) | 6 | 6 | 3 | 1 | RS 16 |
 | b07 | reviewed | 3 | 7 | 16 | 0 | 6 | 0 | 7 | 3 | 0 | 0 | 9 (56 %) | 9 (56 %) | 6 | 6 | 3 | 1 | TC 10, RS 3, PA 3 |
-| b08 | verified | 3 | 6 | 16 | 2 | 8 | 0 | 0 | 5 | 0 | 1 | 7 (44 %) | 16 (100 %) | 6 | 6 | 3 | 0 (task `b08-g1`) | RS 10, DE 5, PP 1 |
+| b08 | reviewed | 3 | 6 | 16 | 2 | 8 | 0 | 0 | 5 | 0 | 1 | 7 (44 %) | 16 (100 %) | 6 | 6 | 3 | 0 (task `b08-g1`) | RS 10, DE 5, PP 1 |
 
 ### Per lesson
 
@@ -161,7 +161,7 @@ minimums G2 2 · G1 2 · G0 1.
 | b05-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b05l1 5 · b05l2 5 · b05l3 6 | 0 | 7 | 1 | 3 | 5 | 7 | 9 | 0 |
 | b06-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b06l1 5 · b06l2 5 · b06l3 6 | 6 | 4 | 1 | 0 | 5 | 8 | 14 | 0 |
 | b07-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b07l1 5 · b07l2 5 · b07l3 6 | 0 | 6 | 5 | 5 | 0 | 8 | 11 | 0 |
-| b08-check | verified (b08-c01, c02 `reviewed`, S2.16) | 16 | 6 own + 2 interleaved (3 attempts) | b08l1 5 · b08l2 5 · b08l3 6 | 2 | 7 | 0 | 7 | 0 | 8 | 16 | 5 |
+| b08-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b08l1 5 · b08l2 5 · b08l3 6 | 2 | 7 | 0 | 7 | 0 | 8 | 16 | 5 |
 
 b02-check to b08-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
 the whole pattern and one non-General piece added, removed or moved, against every loaded lesson item and the other pool
@@ -180,7 +180,8 @@ None in b01–b07 (02: "Practical task —").
 `b08-g1` (S3.3.a): `play`, task `drill` (safe-sparring(2, 1.0) in both regimes), Black, cap 11, R1 70 + R0 30, pass mark 75,
 from a self-play middlegame of 28 pieces (seed 22180; 14 a side, each a Horse or a Cannon and some Soldiers down — less
 "simplified" than 02 b08 suggests; the screened self-play positions where the safe shuffler N2 fails ≥ 80 % were all
-middlegames like this one; for the content reviewer). §5.7 at 20 seeds (`npx tsx scripts/verify-practical.ts b08 --runs 20`,
+middlegames like this one; the S3.3.a content review accepted this deviation from 02: a full board is the realistic
+setting for the safety routine and §5.7 passes). §5.7 at 20 seeds (`npx tsx scripts/verify-practical.ts b08 --runs 20`,
 2026-11-19): reference run 20/20 (scores 82.5–100), N1 fails 20/20, N2 fails 20/20, voided 0, 3 narrow positions in the
 reference run: all checks passed. Caps 6, 8, 9, 10 and 12 were measured too (reference 13, 16, 18, 18 and 19 of 20; N2 ≥ 95 % failing at
 every cap); 11 is the only measured cap in 02's 6–12 range where every check passes.

@@ -492,7 +492,7 @@
       "type": "select-squares",
       "id": "b08-c03",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -529,7 +529,7 @@
       "type": "select-squares",
       "id": "b08-c04",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -567,7 +567,7 @@
       "type": "choice",
       "id": "b08-c05",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -624,7 +624,7 @@
       "type": "choice",
       "id": "b08-c06",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -681,7 +681,7 @@
       "type": "choice",
       "id": "b08-c07",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -738,7 +738,7 @@
       "type": "choice",
       "id": "b08-c08",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -798,7 +798,7 @@
       "type": "choice",
       "id": "b08-c09",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -857,7 +857,7 @@
       "type": "choice",
       "id": "b08-c10",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "authored"
       },
@@ -924,7 +924,7 @@
       "type": "decision",
       "id": "b08-c11",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "generated",
         "generator": "safe-sparring-selfplay",
@@ -1164,7 +1164,7 @@
       "type": "decision",
       "id": "b08-c12",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "generated",
         "generator": "safe-sparring-selfplay",
@@ -1505,7 +1505,7 @@
       "type": "decision",
       "id": "b08-c13",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "generated",
         "generator": "safe-sparring-selfplay",
@@ -1812,7 +1812,7 @@
       "type": "decision",
       "id": "b08-c14",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "generated",
         "generator": "safe-sparring-selfplay",
@@ -2087,7 +2087,7 @@
       "type": "choice",
       "id": "b08-c15",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "generated",
         "generator": "safe-sparring-selfplay",
@@ -2134,7 +2134,7 @@
       "type": "decision",
       "id": "b08-c16",
       "version": 1,
-      "status": "verified",
+      "status": "reviewed",
       "source": {
         "kind": "generated",
         "generator": "safe-sparring-selfplay",

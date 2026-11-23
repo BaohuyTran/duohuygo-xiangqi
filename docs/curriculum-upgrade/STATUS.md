@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 3 — Curriculum production (step 2 gate passed 2026-11-12; merged into `main`)
-- **Active items:** S3.3 (units b08, b09, b10); then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
+- **Active items:** S3.3 (units b09, b10); then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -71,6 +71,13 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   colour-swapped twins of shipped exercises validate as Black). Open: content-reviewer found a 13th impossible
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
+
+- 2026-11-23 — **S3.3.a done** (unit `b08`, attempt 1): `src/content/lessons/b08-pre-move-safety.json` (6 learn cards,
+  16 practice items) + task `b08-g1` (Black drill vs safe-sparring(2, 1.0), cap 11, R1 70 + R0 30; §5.7 at 20 seeds all
+  pass) + `assessment/b08-check.json` (S2.16 c01/c02 kept, c03–c16 added; three attempts); record `reviews/b08.json`
+  (38 records). Content-reviewer APPROVE first time (28-piece task start accepted as a deviation from 02). Open
+  non-blocking notes: b08-c01/c02 accept −0.5 trades (pre-rule items; pin the exemption), b08l3-03 error c3-c4 is 0 at
+  depth 6 (consider dubious), b08-c10 option b feedback could mention the mating attack. Driver: lint, build, tests PASS.
 
 - 2026-11-19 — **S3.2.c done, S3.2 batch done** (unit `b07`, attempt 2): `src/content/lessons/b07-exchanges-and-values.json`
   (7 learn cards, 16 practice items; all new, 05 DV3) + `assessment/b07-check.json` (16; three attempts); record
