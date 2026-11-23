@@ -543,7 +543,8 @@ describe('course preview', () => {
     const content = await import('./index');
     expect(content.COURSE_PREVIEW).toBe(true);
     // b01, b02 and the four pilots are fully reviewed: the preview shows exactly these units, in level order.
-    expect(content.units.map((u) => u.id)).toEqual(['b01', 'b02', 'b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b09', 'i08', 'a03', 'a07']);
+    // b09 left the preview with S3.3.b (its new lessons b09l1, b09l2, b09l4 are `verified` until the content review).
+    expect(content.units.map((u) => u.id)).toEqual(['b01', 'b02', 'b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'i08', 'a03', 'a07']);
     expect(content.findLesson('u1l1')).toBeUndefined();
   });
 

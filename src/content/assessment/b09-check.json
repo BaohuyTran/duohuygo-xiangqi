@@ -1,0 +1,3304 @@
+{
+  "id": "b09-check",
+  "kind": "check",
+  "unit": "b09",
+  "primaryStrand": "OD",
+  "version": 1,
+  "items": [
+    {
+      "type": "decision",
+      "id": "b09-c01",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "r1bakab1r/9/1cn3nc1/p1p1p1p1p/9/9/P1P1P1P1P/1CN2C3/9/R1BAKABNR w - - 4 3",
+      "prompt": "b09.p.back",
+      "objective": "b09l1",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.back.purpose",
+        "keyReply": "b09.fb.back.key",
+        "commonError": "b09.fb.back.error",
+        "temptingAlternative": {
+          "move": "e0-e1",
+          "text": "b09.t.m3"
+        }
+      },
+      "table": [
+        {
+          "move": "a0-b0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a0-a1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "a0-a2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "c0-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c0-a2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "e0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.t.m3",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "g0-i2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g0-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h0-i2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.edge"
+        },
+        {
+          "move": "h0-g2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "i0-i1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "i0-i2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "b2-a2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c2-b0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c2-e1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-g2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-h2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-i2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-d2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-f3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-f4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-f5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-f6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-f7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "f2-f8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "f2-f1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "a3-a4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c3-c4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e3-e4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g3-g4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i3-i4",
+          "class": "dubious",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b09-c02",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m1",
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "rnbakab1r/9/1c4nc1/p1p1p1p1p/9/9/P1P1P1P1P/3C2NC1/9/RNBAKAB1R b - - 3 2",
+      "prompt": "b09.p.back",
+      "objective": "b09l1",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.back.purpose",
+        "keyReply": "b09.fb.back.key",
+        "commonError": "b09.fb.back.error",
+        "temptingAlternative": {
+          "move": "i9-h9",
+          "text": "b09.t.m1"
+        }
+      },
+      "table": [
+        {
+          "move": "a6-a5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c6-c5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e6-e5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g6-g5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i6-i5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-d7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-f7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-a7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g7-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g7-e8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-i7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "a9-a7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "b9-c7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "b9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c9-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "d9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "e9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "g9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i9-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.t.m1",
+          "misconception": "b09.m1"
+        },
+        {
+          "move": "i9-i8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "i9-i7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "id": "b09-c03",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m2",
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "1rbakab1r/9/1cn3nc1/p1p1p1p1p/9/P7P/2P1P1P2/1C5C1/4K4/RNBA1ABNR w - - 6 4",
+      "prompt": "b09-c03.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b09-c03.a.t",
+          "correct": true,
+          "feedback": "b09-c03.a"
+        },
+        {
+          "id": "b",
+          "text": "b09-c03.b.t",
+          "correct": false,
+          "feedback": "b09-c03.b",
+          "misconception": "b09.m3"
+        },
+        {
+          "id": "c",
+          "text": "b09-c03.c.t",
+          "correct": false,
+          "feedback": "b09-c03.c",
+          "misconception": "b09.m2"
+        }
+      ],
+      "objective": "b09l1",
+      "unit": "b09"
+    },
+    {
+      "type": "choice",
+      "id": "b09-c04",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m1",
+        "b09.m2"
+      ],
+      "assist": "G0",
+      "fen": "rnbakabnr/9/1c5c1/2p1p1p2/p7p/9/P1P1P1P1P/1CN3NC1/9/1RBAKAB1R b - - 5 3",
+      "prompt": "b09-c04.prompt",
+      "options": [
+        {
+          "id": "a",
+          "text": "b09-c04.a.t",
+          "correct": true,
+          "feedback": "b09-c04.a"
+        },
+        {
+          "id": "b",
+          "text": "b09-c04.b.t",
+          "correct": false,
+          "feedback": "b09-c04.b",
+          "misconception": "b09.m2"
+        },
+        {
+          "id": "c",
+          "text": "b09-c04.c.t",
+          "correct": false,
+          "feedback": "b09-c04.c",
+          "misconception": "b09.m1"
+        }
+      ],
+      "objective": "b09l1",
+      "unit": "b09"
+    },
+    {
+      "type": "decision",
+      "id": "b09-c05",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m1",
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "r1bakabnr/9/1cn4c1/p3p1p1p/2p6/9/P1P1P1P1P/1CN3NC1/9/R1BAKAB1R w - - 4 3",
+      "prompt": "b09.p.char",
+      "objective": "b09l2",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.char.purpose",
+        "keyReply": "b09.fb.char.key",
+        "commonError": "b09.fb.char.error",
+        "temptingAlternative": {
+          "move": "i0-h0",
+          "text": "b09.t.m1"
+        }
+      },
+      "table": [
+        {
+          "move": "a0-b0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a0-a1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.chariot"
+        },
+        {
+          "move": "a0-a2",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c0-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c0-a2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "e0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "g0-i2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g0-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i0-h0",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.t.m1",
+          "misconception": "b09.m1"
+        },
+        {
+          "move": "i0-i1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.chariot"
+        },
+        {
+          "move": "i0-i2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.chariot"
+        },
+        {
+          "move": "b2-a2",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b2-b3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c2-b0",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c2-e1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g2-h0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g2-e1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-i2",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h2-h3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h2-h1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "a3-a4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c3-c4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "e3-e4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g3-g4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i3-i4",
+          "class": "dubious",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b09-c06",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "rnbakab1r/9/1c4nc1/p1p1p1p1p/9/9/P1P1P1P1P/2NC3C1/9/R1BAKABNR b - - 3 2",
+      "prompt": "b09.p.char",
+      "objective": "b09l2",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.char.purpose",
+        "keyReply": "b09.fb.char.key",
+        "commonError": "b09.fb.char.error",
+        "temptingAlternative": {
+          "move": "e9-e8",
+          "text": "b09.t.m3"
+        }
+      },
+      "table": [
+        {
+          "move": "a6-a5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c6-c5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e6-e5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g6-g5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i6-i5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-d7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-f7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-a7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b3",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g7-h9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g7-e8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-i7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h0",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "a9-a8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.chariot"
+        },
+        {
+          "move": "a9-a7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.chariot"
+        },
+        {
+          "move": "b9-c7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c9-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "d9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "e9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.t.m3",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "g9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i9-h9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i9-i8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "i9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b09-c07",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m1",
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "r1bakab1r/9/1cn3nc1/p1p1p1p1p/9/6P2/P1P1P3P/1CN4C1/9/R1BAKABNR w - - 4 3",
+      "prompt": "b09.p.char",
+      "objective": "b09l2",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.char.purpose",
+        "keyReply": "b09.fb.char.key",
+        "commonError": "b09.fb.char.error",
+        "temptingAlternative": {
+          "move": "a0-b0",
+          "text": "b09.t.m1"
+        }
+      },
+      "table": [
+        {
+          "move": "a0-b0",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.t.m1",
+          "misconception": "b09.m1"
+        },
+        {
+          "move": "a0-a1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.chariot"
+        },
+        {
+          "move": "a0-a2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.chariot"
+        },
+        {
+          "move": "c0-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c0-a2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "e0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "g0-i2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g0-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h0-i2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h0-g2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i0-i1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i0-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b2-a2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c2-b0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c2-e1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-i2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-g2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-f2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-d2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "a3-a4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c3-c4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e3-e4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i3-i4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g4-g5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b09-c08",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m1",
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "rnbakab1r/9/1c4nc1/p1p1p1p1p/9/P8/2P1P1P1P/1C4NC1/9/RNBAKAB1R b - - 3 2",
+      "prompt": "b09.p.char",
+      "objective": "b09l2",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.char.purpose",
+        "keyReply": "b09.fb.char.key",
+        "commonError": "b09.fb.char.error",
+        "temptingAlternative": {
+          "move": "i9-h9",
+          "text": "b09.t.m1"
+        }
+      },
+      "table": [
+        {
+          "move": "a6-a5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c6-c5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e6-e5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g6-g5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i6-i5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-d7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-f7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-a7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b0",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g7-h9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g7-e8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-i7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b9-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b9-a7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c9-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c9-a7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "e9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f9-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "g9-i7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g9-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i9-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.t.m1",
+          "misconception": "b09.m1"
+        },
+        {
+          "move": "i9-i8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.chariot"
+        },
+        {
+          "move": "i9-i7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.chariot"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b09-c09",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "rnbakabnr/9/1c5c1/p3p1p1p/2p6/9/P1P1P1P1P/1C2C1N2/9/RNBAKAB1R b - - 3 2",
+      "prompt": "b09.p.cc",
+      "objective": "b09l3",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.cc.purpose",
+        "keyReply": "b09.fb.cc.key",
+        "commonError": "b09.fb.cc.error",
+        "temptingAlternative": {
+          "move": "e9-e8",
+          "text": "b09.t.m3"
+        }
+      },
+      "table": [
+        {
+          "move": "c5-c4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "a6-a5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "e6-e5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g6-g5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "i6-i5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-d7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-f7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-g7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b6",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b3",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b0",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-g7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-f7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-d7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h6",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h3",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h1",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b9-c7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "b9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c9-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "d9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "e9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.t.m3",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h9-g7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "i9-i8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "i9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b09-c10",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b09.m1"
+      ],
+      "assist": "G0",
+      "fen": "rnbakabnr/9/7c1/p1p1p1p1p/1c7/9/P1P1P1P1P/1C2C1N2/9/RNBAKAB1R b - - 3 2",
+      "prompt": "b09.p.cc",
+      "objective": "b09l3",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.cc.purpose",
+        "keyReply": "b09.fb.cc.key",
+        "commonError": "b09.fb.cc.error",
+        "temptingAlternative": {
+          "move": "i9-i8",
+          "text": "b09.t.m1"
+        }
+      },
+      "table": [
+        {
+          "move": "b5-c5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b5-d5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b5-e5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b5-f5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b5-g5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b5-h5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b5-i5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b5-a5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b5-b6",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b5-b7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b5-b8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b5-b4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b5-b3",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b5-b0",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "a6-a5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c6-c5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "e6-e5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g6-g5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "i6-i5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-g7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-f7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-d7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-b7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "h7-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h6",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h3",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h1",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b9-c7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "b9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c9-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "d9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "e9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "f9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h9-g7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "i9-i8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.t.m1",
+          "misconception": "b09.m1"
+        },
+        {
+          "move": "i9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b09-c11",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "rnbakabnr/9/1c5c1/2p1p1p1p/p8/9/P1P1P1P1P/2N1C2C1/9/R1BAKABNR b - - 3 2",
+      "prompt": "b09.p.cc",
+      "alternatives": false,
+      "objective": "b09l3",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.cc.purpose",
+        "keyReply": "b09.fb.cc.key",
+        "commonError": "b09.fb.cc.error",
+        "temptingAlternative": {
+          "move": "d9-e8",
+          "text": "b09.t.m3"
+        }
+      },
+      "table": [
+        {
+          "move": "a5-a4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c6-c5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "e6-e5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g6-g5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "i6-i5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-c7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-d7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-f7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-g7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b3",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b1",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "h7-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-g7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-f7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-d7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h6",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h3",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h0",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "a9-a8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "a9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "a9-a6",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b9-c7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c9-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "c9-a7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "d9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.t.m3",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "e9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "f9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h9-g7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "i9-i8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i9-i7",
+          "class": "error",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "id": "b09-c12",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b09.m1",
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "rnbakabnr/9/1c5c1/p1p1p3p/6p2/9/P1P1P1P1P/1C2C1N2/9/RNBAKAB1R b - - 3 2",
+      "prompt": "b09-c12.prompt",
+      "options": [
+        {
+          "id": "a",
+          "move": "h9-g7",
+          "text": "b09-c12.a.t",
+          "correct": true,
+          "feedback": "b09-c12.a"
+        },
+        {
+          "id": "b",
+          "move": "i9-i8",
+          "text": "b09-c12.b.t",
+          "correct": false,
+          "feedback": "b09-c12.b",
+          "misconception": "b09.m1"
+        },
+        {
+          "id": "c",
+          "move": "e9-e8",
+          "text": "b09-c12.c.t",
+          "correct": false,
+          "feedback": "b09-c12.c",
+          "misconception": "b09.m3"
+        }
+      ],
+      "objective": "b09l3",
+      "unit": "b09"
+    },
+    {
+      "type": "decision",
+      "id": "b09-c13",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "r1bakabnr/9/1cn4c1/p3p1p1p/2p6/9/P1P1P1P1P/2N1C2C1/9/R1BAKABNR w - - 4 3",
+      "prompt": "b09.p.back",
+      "objective": "b09l4",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.back.purpose",
+        "keyReply": "b09.fb.back.key",
+        "commonError": "b09.fb.back.error",
+        "temptingAlternative": {
+          "move": "e0-e1",
+          "text": "b09.t.m3"
+        }
+      },
+      "table": [
+        {
+          "move": "a0-b0",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "a0-a1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "a0-a2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "c0-a2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "e0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.t.m3",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "g0-i2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h0-i2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.edge"
+        },
+        {
+          "move": "h0-g2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "i0-i1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i0-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c2-b0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c2-e1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c2-a1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e2-f2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e2-g2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e2-d2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e2-e6",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.loses"
+        },
+        {
+          "move": "e2-e1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-i2",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h2-g2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-f2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h2-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h2-h1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "a3-a4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c3-c4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "e3-e4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g3-g4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i3-i4",
+          "class": "dubious",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b09-c14",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "rnbakab1r/9/1c4nc1/p1p1p1p1p/9/9/P1P1P1P1P/1CN2C3/9/R1BAKABNR b - - 3 2",
+      "prompt": "b09.p.back",
+      "alternatives": false,
+      "objective": "b09l4",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.back.purpose",
+        "keyReply": "b09.fb.back.key",
+        "commonError": "b09.fb.back.error",
+        "temptingAlternative": {
+          "move": "e9-e8",
+          "text": "b09.t.m3"
+        }
+      },
+      "table": [
+        {
+          "move": "a6-a5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c6-c5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e6-e5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g6-g5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i6-i5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-d7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-f7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-a7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b6",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "b7-b3",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g7-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g7-e8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h4",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "h7-h3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "h7-h1",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "a9-a8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b9-c7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "b9-a7",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.edge"
+        },
+        {
+          "move": "c9-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c9-a7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "e9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.t.m3",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f9-e8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "g9-e7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "i9-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "i9-i8",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        },
+        {
+          "move": "i9-i7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b09.r.later"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b09-c15",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "rnbakabr1/9/1c4nc1/p1p1p1p1p/9/9/P1P1P1P1P/1C1C2N2/9/RNBAKAB1R w - - 4 3",
+      "prompt": "b09.p.back",
+      "objective": "b09l4",
+      "unit": "b09",
+      "feedback": {
+        "purpose": "b09.fb.back.purpose",
+        "keyReply": "b09.fb.back.key",
+        "commonError": "b09.fb.back.error",
+        "temptingAlternative": {
+          "move": "f0-e1",
+          "text": "b09.t.m3"
+        }
+      },
+      "table": [
+        {
+          "move": "a0-a1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a0-a2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-c2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "b0-a2",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.edge"
+        },
+        {
+          "move": "c0-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c0-a2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "e0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.general",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "f0-e1",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.t.m3",
+          "misconception": "b09.m3"
+        },
+        {
+          "move": "g0-i2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g0-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i0-h0",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "i0-i1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "i0-i2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b09.r.develops"
+        },
+        {
+          "move": "b2-c2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-a2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b2-b9",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b09.r.nodev"
+        },
+        {
+          "move": "b2-b1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d2-e2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d2-f2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d2-c2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d2-d3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d2-d4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d2-d5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d2-d6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d2-d7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d2-d8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d2-d1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g2-h0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g2-i1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g2-e1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "a3-a4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "c3-c4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e3-e4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g3-g4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i3-i4",
+          "class": "dubious",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "id": "b09-c16",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "OD",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b09.m3"
+      ],
+      "assist": "G0",
+      "fen": "r1bakab1r/9/1cn3nc1/p1p1p1p1p/9/4P4/P1P3P1P/1CN4C1/9/R1BAKABNR w - - 4 3",
+      "prompt": "b09-c16.prompt",
+      "multi": true,
+      "options": [
+        {
+          "id": "a",
+          "move": "h0-g2",
+          "text": "b09-c16.a.t",
+          "correct": true,
+          "feedback": "b09-c16.a"
+        },
+        {
+          "id": "b",
+          "move": "a0-a2",
+          "text": "b09-c16.b.t",
+          "correct": true,
+          "feedback": "b09-c16.b"
+        },
+        {
+          "id": "c",
+          "move": "e0-e1",
+          "text": "b09-c16.c.t",
+          "correct": false,
+          "feedback": "b09-c16.c",
+          "misconception": "b09.m3"
+        }
+      ],
+      "objective": "b09l4",
+      "unit": "b09"
+    }
+  ]
+}

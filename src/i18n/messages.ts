@@ -4810,6 +4810,261 @@ export const messages = {
     vi: 'Cùng một quân lại đi tiếp trong khi các quân khác vẫn chưa ra. Hãy đưa quân mới ra trước.',
   },
 
+  // ---------- New course: b09 lessons b09l1, b09l2, b09l4 + check pool b09-check (S3.3.b; b09l3 + b09-g1 above, S2.14) ----------
+  'b09l1.title': { en: 'Why develop?', vi: 'Vì sao phải ra quân?' },
+  'b09l2.title': { en: 'Get the Chariots out', vi: 'Đưa Xe ra trận' },
+  'b09l4.title': { en: 'First moves by principle, both colours', vi: 'Những nước đầu theo nguyên tắc, với cả hai bên' },
+  'b09.p.back': {
+    en: 'Find a safe move that brings a back-rank piece, a Horse or a Chariot, into play.',
+    vi: 'Hãy tìm một nước an toàn đưa một quân ở hàng cuối, Mã hoặc Xe, vào cuộc.',
+  },
+  'b09.p.char': { en: 'Bring a Chariot into play safely.', vi: 'Hãy đưa một quân Xe vào cuộc một cách an toàn.' },
+  'b09.p.cc': {
+    en: 'Red’s central Cannon attacks your central Soldier. Develop a piece that protects it.',
+    vi: 'Pháo đầu của Đỏ đang tấn công Tốt đầu của bạn. Hãy ra một quân bảo vệ nó.',
+  },
+  'b09.p.line': {
+    en: 'Play the first moves by principle: each move, bring a Horse or a Chariot into play and leave nothing hanging.',
+    vi: 'Hãy đi những nước đầu theo nguyên tắc: mỗi nước, đưa một quân Mã hoặc Xe vào cuộc và không để quân nào bị bỏ ngỏ.',
+  },
+  'b09.r.develops': {
+    en: 'Good: a Horse or a Chariot comes into play, and nothing is left hanging.',
+    vi: 'Tốt: một quân Mã hoặc Xe vào cuộc, và không quân nào bị bỏ ngỏ.',
+  },
+  'b09.r.chariot': { en: 'Good: a Chariot comes into play, and nothing is left hanging.', vi: 'Tốt: một quân Xe vào cuộc, và không quân nào bị bỏ ngỏ.' },
+  'b09.r.loses': { en: 'That loses material at once.', vi: 'Nước đó mất quân ngay.' },
+  'b09.r.later': {
+    en: 'Nothing is lost at once, but after the best replies you are down material.',
+    vi: 'Chưa mất gì ngay, nhưng sau các nước đáp hay nhất, bạn bị thiệt quân.',
+  },
+  'b09.r.edge': {
+    en: 'It develops, but a Horse on the edge reaches fewer points: toward the centre is better.',
+    vi: 'Nước đó có ra quân, nhưng Mã ở biên kiểm soát ít điểm hơn: nhảy vào phía giữa thì tốt hơn.',
+  },
+  'b09.r.general': { en: 'Moving the General or an Advisor now brings no piece into play.', vi: 'Đi Tướng hoặc Sĩ lúc này không đưa thêm quân nào vào cuộc.' },
+  'b09.r.nodev': { en: 'Safe, but it brings no Horse or Chariot into play.', vi: 'An toàn, nhưng không đưa thêm Mã hay Xe nào vào cuộc.' },
+  'b09.t.m1': {
+    en: 'This is a usual move in other positions, but here it loses material: check what your opponent can capture after it.',
+    vi: 'Nước này quen thuộc ở những thế cờ khác, nhưng ở đây nó làm mất quân: hãy xem đối phương ăn được gì sau nước đó.',
+  },
+  'b09.t.m3': {
+    en: 'Moving the General or an Advisor now brings no piece into play, while your opponent keeps developing.',
+    vi: 'Đi Tướng hoặc Sĩ lúc này không đưa thêm quân nào vào cuộc, trong khi đối phương tiếp tục ra quân.',
+  },
+  'b09.fb.back.purpose': {
+    en: 'Your move brings a Horse or a Chariot into play, and nothing is left hanging.',
+    vi: 'Nước đi của bạn đưa một quân Mã hoặc Xe vào cuộc, và không quân nào bị bỏ ngỏ.',
+  },
+  'b09.fb.back.key': { en: 'Your opponent cannot win material after it.', vi: 'Sau nước đó, đối phương không ăn được quân nào có lợi.' },
+  'b09.fb.back.error': {
+    en: 'Look for a Horse or a Chariot that has not moved yet, and check that the move leaves nothing undefended.',
+    vi: 'Hãy tìm quân Mã hoặc Xe chưa đi, và kiểm tra rằng nước đó không để quân nào không được bảo vệ.',
+  },
+  'b09.fb.char.purpose': { en: 'A Chariot comes into play, and nothing is left hanging.', vi: 'Một quân Xe vào cuộc, và không quân nào bị bỏ ngỏ.' },
+  'b09.fb.char.key': { en: 'Your opponent cannot win material after it.', vi: 'Sau nước đó, đối phương không ăn được quân nào có lợi.' },
+  'b09.fb.char.error': {
+    en: 'Bring out a Chariot that has not moved yet, but first check which files the opponent’s Cannons can use.',
+    vi: 'Hãy đưa ra quân Xe chưa đi, nhưng trước hết hãy xem Pháo của đối phương dùng được những cột nào.',
+  },
+  'b09.fb.cc.purpose': {
+    en: 'Your Horse comes out and protects the central Soldier against the central Cannon.',
+    vi: 'Mã của bạn ra quân và bảo vệ Tốt đầu trước Pháo đầu.',
+  },
+  'b09.fb.cc.key': { en: 'Your opponent cannot win material after it.', vi: 'Sau nước đó, đối phương không ăn được quân nào có lợi.' },
+  'b09.fb.cc.error': {
+    en: 'The central Cannon attacks your central Soldier: develop a piece that also protects it.',
+    vi: 'Pháo đầu đang tấn công Tốt đầu của bạn: hãy ra một quân đồng thời bảo vệ nó.',
+  },
+  'b09.fb.line.purpose': {
+    en: 'You developed by principle, and nothing was left hanging.',
+    vi: 'Bạn đã ra quân theo nguyên tắc, và không quân nào bị bỏ ngỏ.',
+  },
+  'b09.fb.line.key': {
+    en: 'Whatever your opponent answered, another developing move was ready.',
+    vi: 'Dù đối phương đáp thế nào, bạn vẫn có sẵn một nước ra quân khác.',
+  },
+  'b09.fb.line.error': {
+    en: 'Each move, bring out a Horse or a Chariot that has not moved yet, and leave nothing undefended.',
+    vi: 'Mỗi nước, hãy đưa ra một quân Mã hoặc Xe chưa đi, và không để quân nào không được bảo vệ.',
+  },
+  'b09.l.done': { en: 'Good: your pieces are coming into play.', vi: 'Tốt: các quân của bạn đang vào cuộc.' },
+  'b09.l.hint': { en: 'Which Horse or Chariot has not moved yet?', vi: 'Quân Mã hoặc Xe nào chưa đi?' },
+  'b09l1-01.text': {
+    en: 'Count the developed pieces: Horses, Chariots and Cannons that have left their starting points. Red has four in play, a Cannon, two Horses and a Chariot. Black has moved only Soldiers and the General, so none of its fighting pieces can join the game yet. Undeveloped pieces do not fight.',
+    vi: 'Hãy đếm số quân đã ra: Mã, Xe và Pháo đã rời điểm xuất phát. Đỏ có bốn quân trong cuộc: một Pháo, hai Mã và một Xe. Đen mới chỉ đi Tốt và Tướng, nên chưa quân chiến đấu nào của Đen tham gia được. Quân chưa ra thì không chiến đấu.',
+  },
+  'b09l1-02.text': {
+    en: 'Moving one piece again and again does not develop the others. Red has made three moves with the same Cannon and still has one piece in play, while Black has brought out both Horses. Count the developed pieces of both sides after a few moves.',
+    vi: 'Đi một quân hết lần này đến lần khác không giúp các quân khác ra trận. Đỏ đã đi cùng một quân Pháo ba lần và vẫn chỉ có một quân trong cuộc, trong khi Đen đã đưa ra cả hai Mã. Sau vài nước, hãy đếm số quân đã ra của cả hai bên.',
+  },
+  'b09l1-03.text': {
+    en: 'Grabbing a Soldier is not always good. Red’s Cannon spent three moves to take a Soldier, and Black’s Horse now attacks it (highlighted), so Red must spend yet another move on the same piece while Black keeps developing.',
+    vi: 'Ăn một quân Tốt không phải lúc nào cũng tốt. Pháo Đỏ mất ba nước để ăn một Tốt, và giờ Mã Đen tấn công nó (được tô sáng), nên Đỏ lại phải tốn thêm một nước cho cùng quân đó trong khi Đen tiếp tục ra quân.',
+  },
+  'b09l1-04.prompt': { en: 'Which side is better developed?', vi: 'Bên nào ra quân tốt hơn?' },
+  'b09l1-04.a.t': { en: 'Black: two Horses and two Chariots are in play, and Red has none', vi: 'Đen: hai Mã và hai Xe đã vào cuộc, còn Đỏ chưa có quân nào' },
+  'b09l1-04.a': {
+    en: 'Right: count the Horses, Chariots and Cannons off their starting points. Black has four, Red none.',
+    vi: 'Đúng: hãy đếm Mã, Xe và Pháo đã rời điểm xuất phát. Đen có bốn, Đỏ không có quân nào.',
+  },
+  'b09l1-04.b.t': { en: 'Red: its Soldiers and its General have moved forward', vi: 'Đỏ: Tốt và Tướng của Đỏ đã tiến lên' },
+  'b09l1-04.b': {
+    en: 'No: Soldier and General moves bring no Horse, Chariot or Cannon into play.',
+    vi: 'Không: đi Tốt và Tướng không đưa Mã, Xe hay Pháo nào vào cuộc.',
+  },
+  'b09l1-04.c.t': { en: 'Neither: both sides have made four moves', vi: 'Không bên nào: cả hai bên đều đã đi bốn nước' },
+  'b09l1-04.c': {
+    en: 'No: the number of moves is the same, but only Black’s moves brought pieces into play.',
+    vi: 'Không: số nước đi bằng nhau, nhưng chỉ các nước của Đen mới đưa quân vào cuộc.',
+  },
+  'b09l1-05.prompt': { en: 'Which side is better developed?', vi: 'Bên nào ra quân tốt hơn?' },
+  'b09l1-05.a.t': {
+    en: 'Red: a Cannon, a Horse and a Chariot are in play, and you have none',
+    vi: 'Đỏ: một Pháo, một Mã và một Xe đã vào cuộc, còn bạn chưa có quân nào',
+  },
+  'b09l1-05.a': {
+    en: 'Right: Red has three pieces in play; your two Soldier moves brought none.',
+    vi: 'Đúng: Đỏ có ba quân trong cuộc; hai nước đi Tốt của bạn chưa đưa quân nào ra.',
+  },
+  'b09l1-05.b.t': { en: 'You: two of your Soldiers have already advanced', vi: 'Bạn: hai quân Tốt của bạn đã tiến lên' },
+  'b09l1-05.b': {
+    en: 'No: advancing Soldiers does not count as development; count Horses, Chariots and Cannons.',
+    vi: 'Không: tiến Tốt không được tính là ra quân; hãy đếm Mã, Xe và Pháo.',
+  },
+  'b09l1-05.c.t': {
+    en: 'It does not matter yet: the opening is a memorised sequence anyway',
+    vi: 'Chưa quan trọng: dù sao khai cuộc cũng chỉ là một chuỗi nước học thuộc',
+  },
+  'b09l1-05.c': {
+    en: 'No: openings are played by purpose, not by memory, and Red is already three pieces ahead in development.',
+    vi: 'Không: khai cuộc được chơi theo mục đích chứ không theo trí nhớ, và Đỏ đã ra trước ba quân.',
+  },
+  'b09l2-01.text': {
+    en: 'Chariots are the strongest pieces, but in the corner they do nothing. Here Red’s Chariot has come out to the point its Horse left, and Black’s Chariot has come out the same way (both highlighted). Bring a Chariot into play early, once the Horse has made room.',
+    vi: 'Xe là quân mạnh nhất, nhưng nằm ở góc thì chẳng làm được gì. Ở đây Xe Đỏ đã ra điểm mà quân Mã của nó vừa rời đi, và Xe Đen cũng ra theo cách đó (cả hai được tô sáng). Hãy sớm đưa Xe vào cuộc, khi Mã đã nhường chỗ.',
+  },
+  'b09l2-02.text': {
+    en: 'Moving the General early brings no piece into play. Red has spent two moves on the General and has nothing developed, while Black has brought out a Horse and a Chariot. The General is safest at home behind its Advisors.',
+    vi: 'Đi Tướng sớm không đưa quân nào vào cuộc. Đỏ đã tốn hai nước cho quân Tướng và chưa ra quân nào, trong khi Đen đã đưa ra một Mã và một Xe. Tướng an toàn nhất khi ở nhà, sau các quân Sĩ.',
+  },
+  'b09l2-03.prompt': { en: 'Which move brings a Chariot into play safely?', vi: 'Nước nào đưa một quân Xe vào cuộc an toàn?' },
+  'b09l2-03.a.t': { en: 'Bring the Chariot out to the point the Horse left', vi: 'Đưa Xe ra điểm mà quân Mã đã rời đi' },
+  'b09l2-03.a': { en: 'Right: the Chariot comes into play, and nothing is left hanging.', vi: 'Đúng: Xe vào cuộc, và không quân nào bị bỏ ngỏ.' },
+  'b09l2-03.b.t': { en: 'Step the General up', vi: 'Đưa Tướng lên' },
+  'b09l2-03.b': { en: 'No: the General move brings no piece into play.', vi: 'Không: nước đi Tướng không đưa quân nào vào cuộc.' },
+  'b09l2-03.c.t': { en: 'Move the Horse again, to the edge', vi: 'Đi quân Mã thêm lần nữa, ra biên' },
+  'b09l2-03.c': {
+    en: 'No: the Horse has already moved; moving it again brings nothing new into play, and on the edge it reaches fewer points.',
+    vi: 'Không: quân Mã đã đi rồi; đi nó thêm lần nữa không đưa quân mới nào vào cuộc, và ở biên nó kiểm soát ít điểm hơn.',
+  },
+  'b09l2-04.prompt': { en: 'Which move brings a Chariot into play safely?', vi: 'Nước nào đưa một quân Xe vào cuộc an toàn?' },
+  'b09l2-04.a.t': { en: 'Lift the Chariot one point forward', vi: 'Tiến Xe lên một điểm' },
+  'b09l2-04.a': { en: 'Right: the Chariot comes into play, and nothing is left hanging.', vi: 'Đúng: Xe vào cuộc, và không quân nào bị bỏ ngỏ.' },
+  'b09l2-04.b.t': { en: 'Move the Chariot to the point the Horse left', vi: 'Đưa Xe sang điểm mà quân Mã đã rời đi' },
+  'b09l2-04.b': {
+    en: 'No: on that file Red’s Cannon takes the Chariot, jumping over your Cannon.',
+    vi: 'Không: trên cột đó Pháo Đỏ ăn Xe của bạn, nhảy qua quân Pháo của bạn.',
+  },
+  'b09l2-04.c.t': { en: 'Step the General up', vi: 'Đưa Tướng lên' },
+  'b09l2-04.c': { en: 'No: the General move brings no piece into play.', vi: 'Không: nước đi Tướng không đưa quân nào vào cuộc.' },
+  'b09l4-01.text': {
+    en: 'An opening is not a list to memorise. Red began with a Cannon move and Black answered with a Horse, but the other Horse, or a different first move, can serve the same purpose. Ask what each move does: it brings a piece into play, protects what is attacked and keeps the General safe.',
+    vi: 'Khai cuộc không phải một danh sách để học thuộc. Đỏ mở đầu bằng một nước Pháo và Đen đáp bằng một quân Mã, nhưng quân Mã kia, hay một nước đầu khác, cũng có thể phục vụ cùng mục đích. Hãy hỏi mỗi nước làm được gì: đưa một quân vào cuộc, bảo vệ quân bị tấn công và giữ Tướng an toàn.',
+  },
+  'b09l4-02.prompt': {
+    en: 'Red opened with a Cannon move. Which answers follow the principles? Tick all of them.',
+    vi: 'Đỏ mở đầu bằng một nước Pháo. Những nước đáp nào theo đúng nguyên tắc? Hãy chọn tất cả.',
+  },
+  'b09l4-02.a.t': { en: 'Bring the right-hand Horse toward the centre', vi: 'Nhảy Mã bên phải vào phía giữa' },
+  'b09l4-02.a': {
+    en: 'Right: a Horse comes out toward the centre, and nothing is left hanging.',
+    vi: 'Đúng: một quân Mã ra phía giữa, và không quân nào bị bỏ ngỏ.',
+  },
+  'b09l4-02.b.t': { en: 'Lift the left-hand Chariot one point forward', vi: 'Tiến Xe bên trái lên một điểm' },
+  'b09l4-02.b': {
+    en: 'Right: the Chariot comes into play, and nothing is left hanging; there is more than one good first move.',
+    vi: 'Đúng: Xe vào cuộc, và không quân nào bị bỏ ngỏ; có nhiều hơn một nước đầu tốt.',
+  },
+  'b09l4-02.c.t': { en: 'Step the General up', vi: 'Đưa Tướng lên' },
+  'b09l4-02.c': { en: 'No: the General move brings no piece into play.', vi: 'Không: nước đi Tướng không đưa quân nào vào cuộc.' },
+  'b09l4-03.prompt': {
+    en: 'Black answered with a Horse. Which moves follow the principles? Tick all of them.',
+    vi: 'Đen đáp bằng một quân Mã. Những nước nào theo đúng nguyên tắc? Hãy chọn tất cả.',
+  },
+  'b09l4-03.a.t': { en: 'Bring the right-hand Horse toward the centre', vi: 'Nhảy Mã bên phải vào phía giữa' },
+  'b09l4-03.a': {
+    en: 'Right: a Horse comes out toward the centre, and nothing is left hanging.',
+    vi: 'Đúng: một quân Mã ra phía giữa, và không quân nào bị bỏ ngỏ.',
+  },
+  'b09l4-03.b.t': { en: 'Bring the left-hand Horse toward the centre', vi: 'Nhảy Mã bên trái vào phía giữa' },
+  'b09l4-03.b': {
+    en: 'Right: the other Horse does the same job; there is more than one good move.',
+    vi: 'Đúng: quân Mã kia cũng làm được việc đó; có nhiều hơn một nước tốt.',
+  },
+  'b09l4-03.c.t': { en: 'Step the General up', vi: 'Đưa Tướng lên' },
+  'b09l4-03.c': { en: 'No: the General move brings no piece into play.', vi: 'Không: nước đi Tướng không đưa quân nào vào cuộc.' },
+  'b09-c03.prompt': { en: 'Which side is better developed?', vi: 'Bên nào ra quân tốt hơn?' },
+  'b09-c03.a.t': { en: 'Black: two Horses and a Chariot are in play, and Red has none', vi: 'Đen: hai Mã và một Xe đã vào cuộc, còn Đỏ chưa có quân nào' },
+  'b09-c03.a': { en: 'Right: Black has three pieces in play, Red none.', vi: 'Đúng: Đen có ba quân trong cuộc, Đỏ không có quân nào.' },
+  'b09-c03.b.t': { en: 'Red: its General and Soldiers have moved forward', vi: 'Đỏ: Tướng và Tốt của Đỏ đã tiến lên' },
+  'b09-c03.b': {
+    en: 'No: General and Soldier moves bring no Horse, Chariot or Cannon into play.',
+    vi: 'Không: đi Tướng và Tốt không đưa Mã, Xe hay Pháo nào vào cuộc.',
+  },
+  'b09-c03.c.t': { en: 'Neither: both sides have made three moves', vi: 'Không bên nào: cả hai bên đều đã đi ba nước' },
+  'b09-c03.c': {
+    en: 'No: the number of moves is the same, but only Black’s moves brought pieces into play.',
+    vi: 'Không: số nước đi bằng nhau, nhưng chỉ các nước của Đen mới đưa quân vào cuộc.',
+  },
+  'b09-c04.prompt': { en: 'Which side is better developed?', vi: 'Bên nào ra quân tốt hơn?' },
+  'b09-c04.a.t': { en: 'Red: two Horses and a Chariot are in play, and you have none', vi: 'Đỏ: hai Mã và một Xe đã vào cuộc, còn bạn chưa có quân nào' },
+  'b09-c04.a': {
+    en: 'Right: Red has three pieces in play; your Soldier moves brought none.',
+    vi: 'Đúng: Đỏ có ba quân trong cuộc; các nước đi Tốt của bạn chưa đưa quân nào ra.',
+  },
+  'b09-c04.b.t': { en: 'You: two of your Soldiers have already advanced', vi: 'Bạn: hai quân Tốt của bạn đã tiến lên' },
+  'b09-c04.b': {
+    en: 'No: advancing Soldiers does not count as development; count Horses, Chariots and Cannons.',
+    vi: 'Không: tiến Tốt không được tính là ra quân; hãy đếm Mã, Xe và Pháo.',
+  },
+  'b09-c04.c.t': {
+    en: 'It does not matter yet: the opening is a memorised sequence anyway',
+    vi: 'Chưa quan trọng: dù sao khai cuộc cũng chỉ là một chuỗi nước học thuộc',
+  },
+  'b09-c04.c': {
+    en: 'No: openings are played by purpose, not by memory, and Red is already three pieces ahead in development.',
+    vi: 'Không: khai cuộc được chơi theo mục đích chứ không theo trí nhớ, và Đỏ đã ra trước ba quân.',
+  },
+  'b09-c12.prompt': {
+    en: 'Red’s central Cannon attacks your central Soldier. Which move answers it by principle?',
+    vi: 'Pháo đầu của Đỏ đang tấn công Tốt đầu của bạn. Nước nào đáp lại đúng nguyên tắc?',
+  },
+  'b09-c12.a.t': { en: 'Bring out the Horse that protects the central Soldier', vi: 'Ra quân Mã bảo vệ Tốt đầu' },
+  'b09-c12.a': { en: 'Right: the Horse comes out and defends the central Soldier.', vi: 'Đúng: Mã ra quân và bảo vệ Tốt đầu.' },
+  'b09-c12.b.t': { en: 'Lift the Chariot one point forward', vi: 'Tiến Xe lên một điểm' },
+  'b09-c12.b': {
+    en: 'No: the Chariot move leaves the central Soldier undefended, and the Cannon takes it.',
+    vi: 'Không: nước đi Xe để Tốt đầu không được bảo vệ, và Pháo ăn nó.',
+  },
+  'b09-c12.c.t': { en: 'Step the General up', vi: 'Đưa Tướng lên' },
+  'b09-c12.c': {
+    en: 'No: the General move brings nothing into play and leaves the central Soldier undefended.',
+    vi: 'Không: nước đi Tướng không đưa quân nào vào cuộc và để Tốt đầu không được bảo vệ.',
+  },
+  'b09-c16.prompt': {
+    en: 'Which moves follow the opening principles? Tick all of them.',
+    vi: 'Những nước nào theo đúng nguyên tắc khai cuộc? Hãy chọn tất cả.',
+  },
+  'b09-c16.a.t': { en: 'Bring the right-hand Horse toward the centre', vi: 'Nhảy Mã bên phải vào phía giữa' },
+  'b09-c16.a': {
+    en: 'Right: a Horse comes out toward the centre, and nothing is left hanging.',
+    vi: 'Đúng: một quân Mã ra phía giữa, và không quân nào bị bỏ ngỏ.',
+  },
+  'b09-c16.b.t': { en: 'Lift the left-hand Chariot two points forward', vi: 'Tiến Xe bên trái lên hai điểm' },
+  'b09-c16.b': { en: 'Right: the Chariot comes into play, and nothing is left hanging.', vi: 'Đúng: Xe vào cuộc, và không quân nào bị bỏ ngỏ.' },
+  'b09-c16.c.t': { en: 'Step the General up', vi: 'Đưa Tướng lên' },
+  'b09-c16.c': { en: 'No: the General move brings no piece into play.', vi: 'Không: nước đi Tướng không đưa quân nào vào cuộc.' },
+
   // ---------- New course: i08 "Central Cannon plans as Red" (pilot lesson i08l3 + task i08-g1, S2.15) ----------
   'i08.title': {
     en: 'Central Cannon plans as Red',

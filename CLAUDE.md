@@ -463,6 +463,10 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
 - Pilot `b09` (S2.14: `b09l3` + `b09-g1`) is `src/content/lessons/b09-opening-development.json`; with it the content is in
   REL-P (`CURRENT_RELEASE`): the default path stays legacy-only, the preview shows `b09` once every item is `reviewed`
   with an approving record (items are `verified` until the independent review). `src/content/pilot-b09.test.ts`.
+  Unit `b09` (S3.3.b; new items `verified` until review) adds `b09l1`, `b09l2`, `b09l4` (three short `line`s, both colours)
+  around the reviewed pilot and the pool `assessment/b09-check.json` (16 items, four critical central-Cannon items, three
+  attempts); pilot-b09.test.ts pins the move sequences of every position, accepted moves = guard + predicate + ≥ 0 at depth
+  4, authored errors < 0. b09 leaves the preview until the new items are reviewed.
 - Pilot `i08` (S2.15: `i08l3` + `i08-g1`, Red) is `src/content/lessons/i08-central-cannon.json` (`verified` until review);
   `src/content/pilot-i08.test.ts` pins its ladder, deviations, contrasts and the material safety of accepted moves / replies.
 - Pilot `a03` (S2.16: `a03l1`–`a03l3` + `a03-g1`, both colours) is `src/content/lessons/a03-improving-pieces.json`, with the

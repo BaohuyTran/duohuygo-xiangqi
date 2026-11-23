@@ -23,6 +23,7 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b06 | reviewed | 3 | 8 | 16 | 6 | 4 | 5 | 1 | 0 | 0 | 0 | 8 (50 %) | 14 (88 %) | 6 | 6 | 3 | 1 | RS 16 |
 | b07 | reviewed | 3 | 7 | 16 | 0 | 6 | 0 | 7 | 3 | 0 | 0 | 9 (56 %) | 9 (56 %) | 6 | 6 | 3 | 1 | TC 10, RS 3, PA 3 |
 | b08 | reviewed | 3 | 6 | 16 | 2 | 8 | 0 | 0 | 5 | 0 | 1 | 7 (44 %) | 16 (100 %) | 6 | 6 | 3 | 0 (task `b08-g1`) | RS 10, DE 5, PP 1 |
+| b09 | verified (b09l3, `b09-g1` reviewed, S2.14) | 4 | 8 | 22 | 0 | 8 | 0 | 0 | 8 | 4 | 1 | 13 (59 %) | 22 (100 %) | 8 | 8 | 5 | 0 (task `b09-g1`) | OD 22 |
 
 ### Per lesson
 
@@ -53,6 +54,10 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b08l1 | 2 | 5 | select-squares 2, choice 3 | G2 G2 G1 G1 G0 | 2 | 5 | — (new) |
 | b08l2 | 2 | 5 | choice 4, decision 1 | G2 G2 G1 G1 G0 | 2 | 5 | — |
 | b08l3 | 2 | 6 | decision 4, choice 1, play 1 | G2 G2 G1 G1 G0 + `b08-g1` | 3 | 6 | — |
+| b09l1 | 3 | 5 | choice 2, decision 3 | G2 G2 G1 G1 G0 | 3 | 5 | — (new) |
+| b09l2 | 2 | 5 | choice 2, decision 3 | G2 G2 G1 G1 G0 | 2 | 5 | — |
+| b09l3 | 2 | 7 | choice 2, decision 3, line 1, play 1 | G2 G2 G1 G1 G0 G0 + `b09-g1` | 6 | 7 | — (pilot S2.14, unchanged) |
+| b09l4 | 1 | 5 | choice 2, line 3 | G2 G2 G1 G1 G0 | 2 | 5 | — |
 
 BLK tags (05 §4) of `u1l2#1`, `#3`, `#5` and `u1l3#1`, `#3` are resolved by authored Black items with the same skill
 (b02l1-07/-08 for the General, b02l2-05/-08 for facing, b02l3-08/-09 for the Advisor and Elephant) instead of
@@ -109,6 +114,23 @@ pattern-mirror check covers only its composed positions (≤ 20 pieces), the sel
 near-duplicate test. The a03 check's interleaving and pilot-a03.test.ts keep working (its a03-only rules now apply to
 b08-c01, c02 only).
 
+b09 (S3.3.b) completes the S2.14 pilot (b09l3 + `b09-g1` unchanged, still `reviewed`) with b09l1, b09l2, b09l4 and the
+pool b09-check. The principles of 02 b09 are worded in the learn cards and reasons (for the content reviewer). Every
+position is an opening position reached by a legal move sequence from the start (pinned in pilot-b09.test.ts). Tables:
+target = passes the Basic guard, meets the item's predicate ("develops a back-rank piece": a Horse or a Chariot out, nothing
+hanging; b09l2: a Chariot out) and keeps the material against the best 4-ply line; an edge Horse move is an authored
+`dubious` (toward the centre is better); every refused authored row loses at depth 4 (positions where the natural
+developing moves lost to a horizon artefact were not used). b09l4 has three short `line`s (Red, Black, Red; root, two
+authored deviations after each accepted root move, a second learner node, leaves `end`); `npx tsx scripts/verify-lines.ts
+b09` passes. The guided "compare development" choices cannot mark the undeveloped pieces (a `choice` has no highlight);
+the options name the counts instead. Check-pool items carry no predicate (pool rule); the four central-Cannon items
+(objective b09l3) are `critical`. Pattern mirrors are not checked in b09-check (all 16 positions have the full 32 pieces), and the one-piece
+near-duplicate rule is applied inside the pool only (between items of the same side): an opening position is one moved piece from many lesson positions
+of b01, b04, i08 and b09 itself, so against lessons and other pools the rule is the exact normal form (pool validator
+corpus; earlier b09 candidates that repeated b01-check, b04l3-02 or i08l3-07 positions were replaced).
+While b09l1, b09l2, b09l4 are `verified`, b09 is not in the course preview (the S2.19 walkthrough's b09l3 step comes
+back after the review).
+
 b01l4, b02l3, b03l3, b04l3, b05l1, b06l3, b07l3 and b08l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
 minimums G2 2 · G1 2 · G0 1.
 
@@ -149,6 +171,10 @@ minimums G2 2 · G1 2 · G0 1.
 | b08.m2 | The opponent's move was random | b08l1-02 | b08l1-05, b08l1-06, b08-c05, b08-c06 |
 | b08.m3 | Checking captures but not checks | b08l2-01 | b08l1-06, b08l2-03, b08l2-04, b08-c06, b08-c08, b08-c09, b08-c10; tempting rows of b08l2-07, b08l3-04, b08l3-06, b08-c11 |
 | b08.m4 | "Safe" means "do nothing" | b08l3-01 | b08l3-05, b08-c15 (and every computed `dubious` row of the b08l3 tables: safe, develops nothing) |
+| b09.m1 | Openings are memorised sequences | b09l4-01 | b09l1-05, b09l2-04, b09-c04, b09-c12; tempting rows of b09l1-07, b09l2-05, b09l2-06, b09l2-07, b09-c02, b09-c05, b09-c08, b09-c10 (and b09l3, S2.14) |
+| b09.m2 | Move one piece repeatedly / count moves, not pieces | b09l1-02 | b09l1-04, b09l1-05, b09l2-03, b09-c03, b09-c04 |
+| b09.m3 | The General should step out early | b09l2-02 | b09l1-04, b09l2-03, b09l2-04, b09l4-02, b09l4-03, b09-c03, b09-c12, b09-c16; General / Advisor rows of every new table (and b09l3) |
+| b09.m4 | Grabbing a Soldier is always good | b09l1-03 | b09-g1 (S2.14; no new wrong answer: a free Soldier grab is never refused by these tables) |
 
 ### Check pools
 
@@ -162,6 +188,7 @@ minimums G2 2 · G1 2 · G0 1.
 | b06-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b06l1 5 · b06l2 5 · b06l3 6 | 6 | 4 | 1 | 0 | 5 | 8 | 14 | 0 |
 | b07-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b07l1 5 · b07l2 5 · b07l3 6 | 0 | 6 | 5 | 5 | 0 | 8 | 11 | 0 |
 | b08-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b08l1 5 · b08l2 5 · b08l3 6 | 2 | 7 | 0 | 7 | 0 | 8 | 16 | 5 |
+| b09-check | verified | 16 | 6 own + 2 interleaved (3 attempts) | b09l1 4 · b09l2 4 · b09l3 4 · b09l4 4 | 0 | 4 | 0 | 12 | 0 | 9 | 16 | 4 |
 
 b02-check to b08-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
 the whole pattern and one non-General piece added, removed or moved, against every loaded lesson item and the other pool
