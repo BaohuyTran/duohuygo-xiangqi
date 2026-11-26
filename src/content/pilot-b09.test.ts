@@ -245,7 +245,7 @@ function checkTable(id: string, p: Position, rows: readonly MoveTableEntry[], pr
 }
 
 describe('unit b09 complete (S3.3.b)', () => {
-  it('four lessons in 02 order, learn cards first, ladders G2 G2 G1 G1 G0, new items verified, the pilot unchanged', () => {
+  it('four lessons in 02 order, learn cards first, ladders G2 G2 G1 G1 G0, new items reviewed, the pilot unchanged', () => {
     expect(b09.lessons.map((l) => l.id)).toEqual(['b09l1', 'b09l2', 'b09l3', 'b09l4']);
     for (const l of newLessons) {
       const first = l.exercises.findIndex((e) => e.type !== 'learn');
@@ -253,7 +253,7 @@ describe('unit b09 complete (S3.3.b)', () => {
       expect(l.exercises.slice(first).every((e) => e.type !== 'learn'), l.id).toBe(true);
       expect(l.exercises.filter((e) => e.type !== 'learn').map((e) => e.assist), l.id).toEqual(['G2', 'G2', 'G1', 'G1', 'G0']);
     }
-    expect(newItems.every((e) => e.status === 'verified' && e.source?.kind === 'authored')).toBe(true);
+    expect(newItems.every((e) => e.status === 'reviewed' && e.source?.kind === 'authored')).toBe(true);
     expect(newItems.filter((e) => e.type !== 'learn').every((e) => e.strand === 'OD' && e.nature === 'quiet' && e.critical === false)).toBe(true);
     // Both colours: the new practice items alternate; b09l4 has lines for Red and Black.
     expect(newItems.filter((e) => e.type !== 'learn' && e.side === 'black').map((e) => e.id)).toEqual(['b09l1-05', 'b09l1-07', 'b09l1-08', 'b09l2-04', 'b09l2-06', 'b09l4-02', 'b09l4-05']);
@@ -354,11 +354,11 @@ describe('unit b09 complete (S3.3.b)', () => {
 });
 
 describe('b09 check pool (03 §4.1–§4.3)', () => {
-  it('16 items: 4 per lesson objective, all G0, verified, neutral (no hints, no highlights)', () => {
+  it('16 items: 4 per lesson objective, all G0, reviewed, neutral (no hints, no highlights)', () => {
     expect(pool).toHaveLength(16);
     expect(poolFiles['b09-check']).toMatchObject({ id: 'b09-check', kind: 'check', unit: 'b09', primaryStrand: 'OD' });
     expect(['b09l1', 'b09l2', 'b09l3', 'b09l4'].map((l) => pool.filter((i) => i.objective === l).length)).toEqual([4, 4, 4, 4]);
-    expect(pool.every((i) => i.unit === 'b09' && i.assist === 'G0' && i.status === 'verified')).toBe(true);
+    expect(pool.every((i) => i.unit === 'b09' && i.assist === 'G0' && i.status === 'reviewed')).toBe(true);
     expect(pool.filter((i) => i.side === 'black').length).toBe(9);
     // Safety-critical (03 §4.1, from b08 on): the central-Cannon items, where a wrong answer drops the central Soldier.
     expect(pool.filter((i) => i.critical).map((i) => i.id)).toEqual(['b09-c09', 'b09-c10', 'b09-c11', 'b09-c12']);

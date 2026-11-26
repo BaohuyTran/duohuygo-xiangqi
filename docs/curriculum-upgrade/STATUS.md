@@ -5,7 +5,7 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
 ## Current position
 
 - **Step:** 3 — Curriculum production (step 2 gate passed 2026-11-12; merged into `main`)
-- **Active items:** S3.3 (units b09, b10); then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
+- **Active items:** S3.3 (unit b10); then the step 3 batches in BACKLOG order (S3.3a, S3.3b before REL-1)
 - **Branch:** `claude/pensive-albattani-i4h0ji` (base `main` @ `f20ea5b`); not merged, not deployed.
 
 ## Agent ownership
@@ -72,6 +72,12 @@ Procedure: [DRIVER.md](./DRIVER.md) · Work items: [BACKLOG.md](./BACKLOG.md) ·
   placement not covered by 07 §4.1 — two unpromoted Black Soldiers on file a in `u13l2#4` — rule
   "one own Soldier per file before the river" proposed (decision D5).
 
+- 2026-11-26 — **S3.3.b done** (unit `b09`, fix round 1): b09l1, b09l2, b09l4 (3 short `line`s) around the reviewed
+  pilot b09l3 + `b09-g1`, and `assessment/b09-check.json` (16 items, 4 critical central-Cannon items). Attempt 1:
+  content-reviewer CHANGES_REQUESTED (error rows on half-point Cannon-for-Horse losses; c11 refused b9-c7). Fix: `error`
+  only when the move fails the guard or loses ≥ 1 at depth 6; ½ losses are authored `dubious` (`b09.r.trade`); c11, c12,
+  c14 rebuilt. Fix round 1 APPROVE; records `reviews/b09.json` (37 new). Non-blocking: accepted rows tested at depth 4
+  only; `b09l4-05` h9-g7 is −½ at 6 plies after i9-i8/i9-i7 h0-g2 (follow-up: depth-6 check on accepted rows).
 - 2026-11-23 — **S3.3.a done** (unit `b08`, attempt 1): `src/content/lessons/b08-pre-move-safety.json` (6 learn cards,
   16 practice items) + task `b08-g1` (Black drill vs safe-sparring(2, 1.0), cap 11, R1 70 + R0 30; §5.7 at 20 seeds all
   pass) + `assessment/b08-check.json` (S2.16 c01/c02 kept, c03–c16 added; three attempts); record `reviews/b08.json`

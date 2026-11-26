@@ -318,6 +318,1042 @@
           "notes": "Attempt 2 recheck: positions, complete tables, accepted/error moves at d2/d4, b09-g1 tree (33 nodes), notation and en/vi verified; rulings A (item 3 via the R6 gate) and B (fixed Red colour for the pilot)."
         }
       ]
+    },
+    {
+      "id": "b09l1-01",
+      "version": 1,
+      "contentHash": "0b84efe62d67c3e7e77ed37bad060f37915252ada1fab3ac898cafcc5fab41db",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l1-02",
+      "version": 1,
+      "contentHash": "5d3d5119e66f0f7342aa0abb872954df85748525045b7f53d7198312eea28436",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l1-03",
+      "version": 1,
+      "contentHash": "a6ea8b76a2b434333a968b2af3dee0f3524aa2f232a1b0bef65dabe445bb9124",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l1-04",
+      "version": 1,
+      "contentHash": "557e10929b9cd2b360f6b7ff5061961d0e2249875aa2bc0ac4c8595aa3b705dd",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l1-05",
+      "version": 1,
+      "contentHash": "16cf8924764969ec5f1b007d7f8e63a977d5398e7933150af9bbc50824469ea5",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l1-06",
+      "version": 1,
+      "contentHash": "ce53ff8079ba4dea075395c68d478f0dd80f08e9cac662ec2e371c1121972c40",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l1-07",
+      "version": 1,
+      "contentHash": "a92a64342bebdbb8fe029d9466137afbbbb6d8b58c1eed7d2e86ad06c306921b",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l1-08",
+      "version": 1,
+      "contentHash": "0ab720e3657e71b0b0b6c36eaf3a87cc946d8021d1bfad599f1e8daa8621ac0d",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l2-01",
+      "version": 1,
+      "contentHash": "689001c31d6ba82d2794d3f52e149ab1c337e54d2bf1f79d64cfbf8ae853202b",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l2-02",
+      "version": 1,
+      "contentHash": "371ae42c2ad81f87530cc3dc41551b9074473270c948aed8fa5305bb2c0d624a",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l2-03",
+      "version": 1,
+      "contentHash": "ffca14597aa67aac11d4277e0edb54bd45654e700957096a345d49a123fe4aba",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l2-04",
+      "version": 1,
+      "contentHash": "b6960d48560ce0a80c15bf7c76eeda1cee52bff6ba12084ffa3697398e149e92",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l2-05",
+      "version": 1,
+      "contentHash": "58eb2e15bb75393bfbec04605859873437e1900b4c63d80652d320eb6e9fb733",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l2-06",
+      "version": 1,
+      "contentHash": "158459994b9f2d4591ed3380ce3a0d4abb8d476241f92255566b05f11a37e83d",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l2-07",
+      "version": 1,
+      "contentHash": "b7dc3a1d9b7ea6e90fdf6555c69c821091260c2cdc383d407634366c9dac3544",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l4-01",
+      "version": 1,
+      "contentHash": "a167831a74798c4616cb5628c821e6051d5a28532816296fb622a045c66d981b",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l4-02",
+      "version": 1,
+      "contentHash": "99a97d4f415ee6c1be8c3b0098090d430363d91d1b0ce8a76a332080ddbc99bc",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l4-03",
+      "version": 1,
+      "contentHash": "e3bc79aafd172d43e9e67e6b145ba83695895ea2af3a6908a56059a915bb10a4",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l4-04",
+      "version": 1,
+      "contentHash": "b738bcc6c343ff309bc98d36e6cc74addf2d7ba9d4906b93dfb20407efac6872",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l4-05",
+      "version": 1,
+      "contentHash": "804a1f3301a70a67c85862dc4986a6570549d96b7466aa4eed52613473c5eb09",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09l4-06",
+      "version": 1,
+      "contentHash": "97eb1ec3e77cf199e572b2e839256026f3bacfc51820d691d0d3e64570175347",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c01",
+      "version": 1,
+      "contentHash": "09644e3c51b7b70440961bbce74ff1a0e13e6bbe50c874f9f608892e1f724e31",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c02",
+      "version": 1,
+      "contentHash": "331a5e8f7fe6d706673779b502b0ffbd311b01b5d71365494ad7c358ca0fd285",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c03",
+      "version": 1,
+      "contentHash": "b557207814963c910ca739d1611d60acaa42223c658ebe48fc3e67d9bdb8b540",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c04",
+      "version": 1,
+      "contentHash": "2db51c84767c0a41cfecd876c65fafaa7e56905834f17b4faa22529f5d35c527",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c05",
+      "version": 1,
+      "contentHash": "1b52634d7c4819e8450f8ed7d053d9a3a300b27cf7e1a80c28d427215c5a2fe5",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c06",
+      "version": 1,
+      "contentHash": "bc08bd78eb657c3b87f91dab2d17007395b84b53a4016f91a383d4ee16f2609f",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c07",
+      "version": 1,
+      "contentHash": "cb2dfc50bfbc5d0c60aa447863191a620d238df189ddbc2b2badf2099da31701",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c08",
+      "version": 1,
+      "contentHash": "aabdc85706cd3a8590ab0a0a8d564abcfa475cba32bc0c82ed641e6fe357e0fa",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c09",
+      "version": 1,
+      "contentHash": "2cb70c45f1bf3ccfaa9df56983279f9ccd214933326d56ad1efc2b484d729359",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c10",
+      "version": 1,
+      "contentHash": "4be6e5d0ead1bf0df26b8a9cab84e0596cd3acb64a025178224a9c62de3c77ba",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c11",
+      "version": 1,
+      "contentHash": "86c4fd55ff764c47c7c6451068b373d90372e098b573c0fa18149537da9bdfbe",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c12",
+      "version": 1,
+      "contentHash": "14c10b5993d32db6326e12d9821e333e55e98227acfacfa98560d1429def6809",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c13",
+      "version": 1,
+      "contentHash": "df2640986762aed39848405644b78ca5e9e2cd1316d2ef3e24a392a0ab3a92d1",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c14",
+      "version": 1,
+      "contentHash": "41c8c684df9dd86006f058021a9e0a2e4bb8529c00f3b60a9ae499942160f8fe",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c15",
+      "version": 1,
+      "contentHash": "7c66414a6603d218169dd904c6315a3f99edf7400c31e83c5640b121e6d90f7c",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
+    },
+    {
+      "id": "b09-c16",
+      "version": 1,
+      "contentHash": "fb10ae1069e9d3159e415e766aa65e710b9d86c93ca0e2e3ed40e3ab499cecfd",
+      "author": "implementer-S3.3.b",
+      "checks": [
+        {
+          "name": "content validator + pool validator + release test + pilot-b09; verify-lines b09",
+          "tool": "npx vitest run src/content",
+          "result": "pass",
+          "at": "2026-11-26"
+        }
+      ],
+      "reviews": [
+        {
+          "role": "content-reviewer",
+          "by": "content-reviewer-S3.3.b",
+          "at": "2026-11-26",
+          "verdict": "approve",
+          "scope": [
+            "chess",
+            "en",
+            "vi"
+          ],
+          "notes": "Attempt 1 changes requested (error rows on half-point losses, c11 refused b9-c7); fix round 1 approved: errors fail the guard or lose >= 1 at 6 plies, trade rows exactly -1/2, accepted rows >= 0, counts, wording, central-Cannon criticals."
+        }
+      ]
     }
   ]
 }

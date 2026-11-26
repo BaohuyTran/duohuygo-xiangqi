@@ -23,7 +23,7 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b06 | reviewed | 3 | 8 | 16 | 6 | 4 | 5 | 1 | 0 | 0 | 0 | 8 (50 %) | 14 (88 %) | 6 | 6 | 3 | 1 | RS 16 |
 | b07 | reviewed | 3 | 7 | 16 | 0 | 6 | 0 | 7 | 3 | 0 | 0 | 9 (56 %) | 9 (56 %) | 6 | 6 | 3 | 1 | TC 10, RS 3, PA 3 |
 | b08 | reviewed | 3 | 6 | 16 | 2 | 8 | 0 | 0 | 5 | 0 | 1 | 7 (44 %) | 16 (100 %) | 6 | 6 | 3 | 0 (task `b08-g1`) | RS 10, DE 5, PP 1 |
-| b09 | verified (b09l3, `b09-g1` reviewed, S2.14) | 4 | 8 | 22 | 0 | 8 | 0 | 0 | 8 | 4 | 1 | 13 (59 %) | 22 (100 %) | 8 | 8 | 5 | 0 (task `b09-g1`) | OD 22 |
+| b09 | reviewed (S2.14 pilot + S3.3.b) | 4 | 8 | 22 | 0 | 8 | 0 | 0 | 8 | 4 | 1 | 13 (59 %) | 22 (100 %) | 8 | 8 | 5 | 0 (task `b09-g1`) | OD 22 |
 
 ### Per lesson
 
@@ -131,8 +131,7 @@ the options name the counts instead. Check-pool items carry no predicate (pool r
 near-duplicate rule is applied inside the pool only (between items of the same side): an opening position is one moved piece from many lesson positions
 of b01, b04, i08 and b09 itself, so against lessons and other pools the rule is the exact normal form (pool validator
 corpus; earlier b09 candidates that repeated b01-check, b04l3-02 or i08l3-07 positions were replaced).
-While b09l1, b09l2, b09l4 are `verified`, b09 is not in the course preview (the S2.19 walkthrough's b09l3 step comes
-back after the review).
+b09 is `reviewed` (S3.3.b, record `reviews/b09.json`) and back in the course preview.
 
 b01l4, b02l3, b03l3, b04l3, b05l1, b06l3, b07l3 and b08l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
 minimums G2 2 · G1 2 · G0 1.
@@ -191,7 +190,7 @@ minimums G2 2 · G1 2 · G0 1.
 | b06-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b06l1 5 · b06l2 5 · b06l3 6 | 6 | 4 | 1 | 0 | 5 | 8 | 14 | 0 |
 | b07-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b07l1 5 · b07l2 5 · b07l3 6 | 0 | 6 | 5 | 5 | 0 | 8 | 11 | 0 |
 | b08-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b08l1 5 · b08l2 5 · b08l3 6 | 2 | 7 | 0 | 7 | 0 | 8 | 16 | 5 |
-| b09-check | verified | 16 | 6 own + 2 interleaved (3 attempts) | b09l1 4 · b09l2 4 · b09l3 4 · b09l4 4 | 0 | 4 | 0 | 12 | 0 | 9 | 16 | 4 |
+| b09-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b09l1 4 · b09l2 4 · b09l3 4 · b09l4 4 | 0 | 4 | 0 | 12 | 0 | 9 | 16 | 4 |
 
 b02-check to b08-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
 the whole pattern and one non-General piece added, removed or moved, against every loaded lesson item and the other pool
