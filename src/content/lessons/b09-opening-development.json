@@ -472,9 +472,8 @@
             },
             {
               "move": "e6-e5",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             },
             {
               "move": "g6-g5",
@@ -718,9 +717,8 @@
           "table": [
             {
               "move": "c5-c4",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             },
             {
               "move": "a6-a5",
@@ -834,9 +832,8 @@
             },
             {
               "move": "h7-h6",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             },
             {
               "move": "h7-h5",
@@ -871,9 +868,9 @@
             },
             {
               "move": "b9-a7",
-              "class": "error",
+              "class": "dubious",
               "source": "authored",
-              "reason": "b09.r.later"
+              "reason": "b09.r.edge"
             },
             {
               "move": "c9-e7",
@@ -882,9 +879,8 @@
             },
             {
               "move": "c9-a7",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             },
             {
               "move": "d9-e8",
@@ -1358,9 +1354,8 @@
             },
             {
               "move": "e6-e5",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             },
             {
               "move": "g6-g5",
@@ -1394,9 +1389,8 @@
             },
             {
               "move": "b7-a7",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             },
             {
               "move": "b7-b8",
@@ -1425,15 +1419,14 @@
             },
             {
               "move": "b7-b0",
-              "class": "error",
+              "class": "dubious",
               "source": "authored",
-              "reason": "b09.r.later"
+              "reason": "b09.r.trade"
             },
             {
               "move": "g7-h9",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             },
             {
               "move": "g7-e8",
@@ -1625,9 +1618,8 @@
             },
             {
               "move": "c0-a2",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             },
             {
               "move": "d0-e1",
@@ -1762,9 +1754,8 @@
             },
             {
               "move": "h2-h3",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             },
             {
               "move": "h2-h4",
@@ -1808,9 +1799,8 @@
             },
             {
               "move": "c4-c5",
-              "class": "error",
-              "source": "authored",
-              "reason": "b09.r.later"
+              "class": "dubious",
+              "source": "computed"
             }
           ]
         }
@@ -8374,21 +8364,20 @@
               },
               {
                 "move": "c0-e2",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "c0-a2",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "d0-e1",
-                "class": "error",
+                "class": "dubious",
                 "source": "authored",
-                "reason": "b09.r.later"
+                "reason": "b09.r.general",
+                "misconception": "b09.m3"
               },
               {
                 "move": "e0-e1",
@@ -8399,27 +8388,26 @@
               },
               {
                 "move": "f0-e1",
-                "class": "error",
+                "class": "dubious",
                 "source": "authored",
-                "reason": "b09.r.later"
+                "reason": "b09.r.general",
+                "misconception": "b09.m3"
               },
               {
                 "move": "g0-i2",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "g0-e2",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "h0-i2",
-                "class": "error",
+                "class": "dubious",
                 "source": "authored",
-                "reason": "b09.r.later"
+                "reason": "b09.r.edge"
               },
               {
                 "move": "h0-g2",
@@ -8619,9 +8607,8 @@
                         },
                         {
                           "move": "c0-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "c0-a2",
@@ -8630,9 +8617,10 @@
                         },
                         {
                           "move": "d0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "e0-e1",
@@ -8643,9 +8631,10 @@
                         },
                         {
                           "move": "f0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "g0-i2",
@@ -8654,9 +8643,8 @@
                         },
                         {
                           "move": "g0-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h0-i2",
@@ -8762,9 +8750,8 @@
                         },
                         {
                           "move": "d2-d3",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d4",
@@ -8828,9 +8815,8 @@
                         },
                         {
                           "move": "h2-h5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h6",
@@ -8916,63 +8902,59 @@
                       "table": [
                         {
                           "move": "b0-c2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b0-a2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "c0-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "c0-a2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "e0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "f0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "g0-i2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g0-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h0-i2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h0-g2",
@@ -8992,21 +8974,18 @@
                         },
                         {
                           "move": "a1-b1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a1-c1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a1-d1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a1-e1",
@@ -9015,15 +8994,13 @@
                         },
                         {
                           "move": "a1-f1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a1-g1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a1-h1",
@@ -9032,81 +9009,68 @@
                         },
                         {
                           "move": "a1-i1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a1-a2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a1-a0",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-f2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-g2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-c2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-b2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-a2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d3",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d7",
@@ -9115,21 +9079,18 @@
                         },
                         {
                           "move": "d2-d8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-i2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-g2",
@@ -9138,15 +9099,13 @@
                         },
                         {
                           "move": "h2-f2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h3",
@@ -9155,57 +9114,48 @@
                         },
                         {
                           "move": "h2-h4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a3-a4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "c3-c4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "e3-e4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g3-g4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "i3-i4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         }
                       ],
                       "objective": {
@@ -9261,15 +9211,15 @@
                         },
                         {
                           "move": "c0-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "e0-e1",
@@ -9280,9 +9230,10 @@
                         },
                         {
                           "move": "f0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "g0-i2",
@@ -9291,15 +9242,14 @@
                         },
                         {
                           "move": "g0-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h0-i2",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.edge"
                         },
                         {
                           "move": "h0-g2",
@@ -9364,9 +9314,8 @@
                         },
                         {
                           "move": "d2-d3",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d4",
@@ -9517,51 +9466,49 @@
                       "table": [
                         {
                           "move": "b0-c2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "c0-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "e0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "f0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "g0-i2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g0-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h0-i2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h0-g2",
@@ -9581,81 +9528,68 @@
                         },
                         {
                           "move": "a2-b2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a2-c2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a2-a1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a2-a0",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-f2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-g2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-c2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-b2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d3",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d7",
@@ -9664,21 +9598,18 @@
                         },
                         {
                           "move": "d2-d8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-i2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-g2",
@@ -9687,15 +9618,13 @@
                         },
                         {
                           "move": "h2-f2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h3",
@@ -9704,57 +9633,48 @@
                         },
                         {
                           "move": "h2-h4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a3-a4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "c3-c4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "e3-e4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g3-g4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "i3-i4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         }
                       ],
                       "objective": {
@@ -9960,9 +9880,8 @@
                         },
                         {
                           "move": "h2-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h3",
@@ -10105,27 +10024,29 @@
                         },
                         {
                           "move": "d0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "e0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "f0-e1",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "g0-i2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g0-e2",
@@ -10134,9 +10055,9 @@
                         },
                         {
                           "move": "h0-i2",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.edge"
                         },
                         {
                           "move": "h0-g2",
@@ -10161,15 +10082,13 @@
                         },
                         {
                           "move": "c2-a1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-f2",
@@ -10193,15 +10112,13 @@
                         },
                         {
                           "move": "d2-d5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d7",
@@ -10210,9 +10127,8 @@
                         },
                         {
                           "move": "d2-d8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d2-d1",
@@ -10221,9 +10137,8 @@
                         },
                         {
                           "move": "h2-i2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-g2",
@@ -10237,9 +10152,8 @@
                         },
                         {
                           "move": "h2-e2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h3",
@@ -10278,21 +10192,18 @@
                         },
                         {
                           "move": "e3-e4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g3-g4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "i3-i4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         }
                       ],
                       "objective": {
@@ -11019,9 +10930,8 @@
               },
               {
                 "move": "b7-b6",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "b7-b5",
@@ -11030,9 +10940,8 @@
               },
               {
                 "move": "b7-b4",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "b7-b3",
@@ -11041,15 +10950,14 @@
               },
               {
                 "move": "b7-b0",
-                "class": "error",
+                "class": "dubious",
                 "source": "authored",
-                "reason": "b09.r.later"
+                "reason": "b09.r.trade"
               },
               {
                 "move": "h7-i7",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "h7-g7",
@@ -11129,9 +11037,9 @@
               },
               {
                 "move": "b9-a7",
-                "class": "error",
+                "class": "dubious",
                 "source": "authored",
-                "reason": "b09.r.later"
+                "reason": "b09.r.edge"
               },
               {
                 "move": "c9-e7",
@@ -11166,9 +11074,8 @@
               },
               {
                 "move": "g9-i7",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "g9-e7",
@@ -11177,15 +11084,15 @@
               },
               {
                 "move": "h9-i7",
-                "class": "error",
+                "class": "dubious",
                 "source": "authored",
-                "reason": "b09.r.later"
+                "reason": "b09.r.edge"
               },
               {
                 "move": "h9-g7",
-                "class": "error",
+                "class": "dubious",
                 "source": "authored",
-                "reason": "b09.r.later"
+                "reason": "b09.r.trade"
               },
               {
                 "move": "i9-i8",
@@ -11269,9 +11176,8 @@
                         },
                         {
                           "move": "b7-b9",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b6",
@@ -11295,9 +11201,9 @@
                         },
                         {
                           "move": "b7-b0",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.trade"
                         },
                         {
                           "move": "c7-b9",
@@ -11326,9 +11232,8 @@
                         },
                         {
                           "move": "h7-e7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-d7",
@@ -11352,15 +11257,13 @@
                         },
                         {
                           "move": "h7-h4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-h3",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-h2",
@@ -11401,9 +11304,8 @@
                         },
                         {
                           "move": "c9-a7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d9-e8",
@@ -11428,9 +11330,8 @@
                         },
                         {
                           "move": "g9-i7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g9-e7",
@@ -11439,9 +11340,9 @@
                         },
                         {
                           "move": "h9-i7",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.edge"
                         },
                         {
                           "move": "h9-g7",
@@ -11570,9 +11471,8 @@
                         },
                         {
                           "move": "c7-b9",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "c7-e8",
@@ -11596,9 +11496,8 @@
                         },
                         {
                           "move": "h7-e7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-d7",
@@ -11664,9 +11563,8 @@
                         },
                         {
                           "move": "c9-a7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d9-e8",
@@ -11691,9 +11589,8 @@
                         },
                         {
                           "move": "g9-i7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g9-e7",
@@ -11702,9 +11599,9 @@
                         },
                         {
                           "move": "h9-i7",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.edge"
                         },
                         {
                           "move": "h9-g7",
@@ -11854,15 +11751,13 @@
                         },
                         {
                           "move": "b7-b8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b5",
@@ -11871,27 +11766,24 @@
                         },
                         {
                           "move": "b7-b4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b3",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b0",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.trade"
                         },
                         {
                           "move": "h7-i7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-g7",
@@ -11900,9 +11792,8 @@
                         },
                         {
                           "move": "h7-f7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-e7",
@@ -11926,9 +11817,8 @@
                         },
                         {
                           "move": "h7-h6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-h5",
@@ -12028,9 +11918,9 @@
                         },
                         {
                           "move": "b9-a7",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.edge"
                         },
                         {
                           "move": "c9-e7",
@@ -12065,9 +11955,8 @@
                         },
                         {
                           "move": "g9-i7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g9-e7",
@@ -12076,9 +11965,9 @@
                         },
                         {
                           "move": "h9-i7",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.edge"
                         },
                         {
                           "move": "h9-g7",
@@ -12190,15 +12079,13 @@
                         },
                         {
                           "move": "b7-b8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b5",
@@ -12207,9 +12094,8 @@
                         },
                         {
                           "move": "b7-b4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b3",
@@ -12218,9 +12104,8 @@
                         },
                         {
                           "move": "h7-i7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-g7",
@@ -12229,21 +12114,18 @@
                         },
                         {
                           "move": "h7-f7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-e7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-d7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-c7",
@@ -12252,9 +12134,8 @@
                         },
                         {
                           "move": "h7-h8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-h6",
@@ -12268,9 +12149,8 @@
                         },
                         {
                           "move": "h7-h4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-h3",
@@ -12284,9 +12164,8 @@
                         },
                         {
                           "move": "h7-h1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "i8-h8",
@@ -12295,9 +12174,8 @@
                         },
                         {
                           "move": "i8-g8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "i8-f8",
@@ -12306,9 +12184,8 @@
                         },
                         {
                           "move": "i8-e8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "i8-d8",
@@ -12332,15 +12209,13 @@
                         },
                         {
                           "move": "i8-i9",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "i8-i7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a9-a8",
@@ -12376,45 +12251,46 @@
                         },
                         {
                           "move": "d9-e8",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "e9-e8",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "f9-e8",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "g9-i7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g9-e7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h9-i7",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.edge"
                         },
                         {
                           "move": "h9-g7",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.trade"
                         }
                       ],
                       "objective": {
@@ -12524,9 +12400,8 @@
                         },
                         {
                           "move": "b7-b6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b5",
@@ -12535,9 +12410,8 @@
                         },
                         {
                           "move": "b7-b4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b3",
@@ -12546,9 +12420,9 @@
                         },
                         {
                           "move": "b7-b0",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.trade"
                         },
                         {
                           "move": "h7-g7",
@@ -12582,9 +12456,8 @@
                         },
                         {
                           "move": "h7-h6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-h5",
@@ -12644,9 +12517,9 @@
                         },
                         {
                           "move": "b9-a7",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.edge"
                         },
                         {
                           "move": "c9-e7",
@@ -12759,9 +12632,8 @@
                         },
                         {
                           "move": "i6-i5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-c7",
@@ -12795,15 +12667,13 @@
                         },
                         {
                           "move": "b7-b8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b6",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b5",
@@ -12812,9 +12682,8 @@
                         },
                         {
                           "move": "b7-b4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b7-b3",
@@ -12828,21 +12697,18 @@
                         },
                         {
                           "move": "h7-f7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-e7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-d7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-c7",
@@ -12866,9 +12732,8 @@
                         },
                         {
                           "move": "h7-h4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h7-h3",
@@ -12882,21 +12747,18 @@
                         },
                         {
                           "move": "h7-h1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "i7-i8",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "i7-i9",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "a9-a8",
@@ -12932,33 +12794,35 @@
                         },
                         {
                           "move": "d9-e8",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "e9-e8",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "f9-e8",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.general",
+                          "misconception": "b09.m3"
                         },
                         {
                           "move": "g9-e7",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h9-g7",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.trade"
                         }
                       ],
                       "objective": {
@@ -13076,9 +12940,9 @@
               },
               {
                 "move": "b0-a2",
-                "class": "error",
+                "class": "dubious",
                 "source": "authored",
-                "reason": "b09.r.later"
+                "reason": "b09.r.edge"
               },
               {
                 "move": "c0-e2",
@@ -13087,9 +12951,8 @@
               },
               {
                 "move": "c0-a2",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "d0-e1",
@@ -13231,9 +13094,8 @@
               },
               {
                 "move": "h2-h3",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               },
               {
                 "move": "h2-h4",
@@ -13283,9 +13145,8 @@
               },
               {
                 "move": "c4-c5",
-                "class": "error",
-                "source": "authored",
-                "reason": "b09.r.later"
+                "class": "dubious",
+                "source": "computed"
               }
             ],
             "objective": {
@@ -13344,9 +13205,8 @@
                         },
                         {
                           "move": "c0-a2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d0-e1",
@@ -13483,9 +13343,8 @@
                         },
                         {
                           "move": "h2-h3",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h4",
@@ -13529,9 +13388,8 @@
                         },
                         {
                           "move": "c4-c5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         }
                       ],
                       "objective": {
@@ -13611,9 +13469,8 @@
                         },
                         {
                           "move": "c0-a2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "d0-e1",
@@ -13750,9 +13607,8 @@
                         },
                         {
                           "move": "h2-h3",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-h4",
@@ -13771,9 +13627,9 @@
                         },
                         {
                           "move": "h2-h9",
-                          "class": "error",
+                          "class": "dubious",
                           "source": "authored",
-                          "reason": "b09.r.later"
+                          "reason": "b09.r.trade"
                         },
                         {
                           "move": "h2-h1",
@@ -13802,9 +13658,8 @@
                         },
                         {
                           "move": "c4-c5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         }
                       ],
                       "objective": {
@@ -14062,9 +13917,8 @@
                         },
                         {
                           "move": "c4-c5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         }
                       ],
                       "objective": {
@@ -14218,9 +14072,8 @@
                         },
                         {
                           "move": "b2-f2",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "b2-a2",
@@ -14254,15 +14107,13 @@
                         },
                         {
                           "move": "g2-h0",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g2-e1",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "h2-i2",
@@ -14316,9 +14167,8 @@
                         },
                         {
                           "move": "e3-e4",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         },
                         {
                           "move": "g3-g4",
@@ -14332,9 +14182,8 @@
                         },
                         {
                           "move": "c4-c5",
-                          "class": "error",
-                          "source": "authored",
-                          "reason": "b09.r.later"
+                          "class": "dubious",
+                          "source": "computed"
                         }
                       ],
                       "objective": {

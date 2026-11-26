@@ -119,8 +119,11 @@ pool b09-check. The principles of 02 b09 are worded in the learn cards and reaso
 position is an opening position reached by a legal move sequence from the start (pinned in pilot-b09.test.ts). Tables:
 target = passes the Basic guard, meets the item's predicate ("develops a back-rank piece": a Horse or a Chariot out, nothing
 hanging; b09l2: a Chariot out) and keeps the material against the best 4-ply line; an edge Horse move is an authored
-`dubious` (toward the centre is better); every refused authored row loses at depth 4 (positions where the natural
-developing moves lost to a horizon artefact were not used). b09l4 has three short `line`s (Red, Black, Red; root, two
+`dubious` (toward the centre is better). Fix round 1 (content review): an authored `error` only when the move fails
+the guard or loses ≥ 1 at depth 6; a move that only allows a Cannon-for-Horse trade (−½ at depth 6) is an authored
+`dubious` with that reason; other refusals follow the pilot b09l3 pattern (General / Advisor moves authored `dubious`
+b09.m3, everything else a computed `dubious`). b09-c11, b09-c12 and b09-c14 were rebuilt so that both protecting
+Horse moves are accepted (b09-c11) and no standard move is refused for a horizon artefact. b09l4 has three short `line`s (Red, Black, Red; root, two
 authored deviations after each accepted root move, a second learner node, leaves `end`); `npx tsx scripts/verify-lines.ts
 b09` passes. The guided "compare development" choices cannot mark the undeveloped pieces (a `choice` has no highlight);
 the options name the counts instead. Check-pool items carry no predicate (pool rule); the four central-Cannon items

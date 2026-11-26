@@ -4837,6 +4837,10 @@ export const messages = {
     en: 'Nothing is lost at once, but after the best replies you are down material.',
     vi: 'Chưa mất gì ngay, nhưng sau các nước đáp hay nhất, bạn bị thiệt quân.',
   },
+  'b09.r.trade': {
+    en: 'Nothing is lost at once, but your opponent can then trade a Horse for your Cannon, a small loss.',
+    vi: 'Chưa mất gì ngay, nhưng sau đó đối phương có thể đổi Mã lấy Pháo của bạn, thiệt một chút.',
+  },
   'b09.r.edge': {
     en: 'It develops, but a Horse on the edge reaches fewer points: toward the centre is better.',
     vi: 'Nước đó có ra quân, nhưng Mã ở biên kiểm soát ít điểm hơn: nhảy vào phía giữa thì tốt hơn.',

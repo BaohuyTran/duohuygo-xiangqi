@@ -5,6 +5,7 @@
 import { describe, expect, it } from 'vitest';
 import { legalMoves, makeMove, materialBalance, moveScore, parseFen, squareName, START_FEN, toFen, type Move, type Position } from '../engine';
 import { search } from '../analysis';
+import { searchAtLeast } from '../analysis/search';
 import { development } from '../analysis/features';
 import { evaluatePredicate, type Predicate } from '../analysis/judge';
 import { assembleCheckForm } from '../assessment/checks';
@@ -158,10 +159,10 @@ const SEQ: Record<string, string> = {
   'b09-c08': 'a3-a4 h9-g7 h0-g2',
   'b09-c09': 'h2-e2 c6-c5 h0-g2',
   'b09-c10': 'h2-e2 b7-b5 h0-g2',
-  'b09-c11': 'b2-e2 a6-a5 b0-c2',
-  'b09-c12': 'h2-e2 g6-g5 h0-g2',
+  'b09-c11': 'h2-e2 c6-c5 b0-c2',
+  'b09-c12': 'h2-e2 a6-a5 h0-g2',
   'b09-c13': 'b2-e2 c6-c5 b0-c2 b9-c7',
-  'b09-c14': 'h2-f2 h9-g7 b0-c2',
+  'b09-c14': 'c3-c4 h9-g7 b0-c2',
   'b09-c15': 'h2-d2 h9-g7 h0-g2 i9-h9',
   'b09-c16': 'e3-e4 b9-c7 b0-c2 h9-g7',
 };
@@ -192,23 +193,53 @@ const dev = (p: Position, side: 'red' | 'black') => development(p.board, side).d
 const centralSoldierHanging = (p: Position) => captureFacts(p.board, p.board.findIndex((x, s) => squareName(s) === 'e6' && x?.type === 'soldier' && x.color === 'black')).hanging;
 const options = (id: string) => (anyItem(id) as ChoiceExercise).options;
 
-/** Checks one table (decision or line node): accepted / refused rows against the guard, depth 4 and the predicate. */
+/** Depth-6 null-window facts after `key` for the mover: loses ≥ 1, or keeps the material (≥ 0). */
+const d6 = (p: Position, key: string) => {
+  const a = makeMove(p, mv(p, key));
+  const bal = materialBalance(p.board, p.turn);
+  const lose = searchAtLeast(a, -bal + 1, { depth: 6, maxNodes: 5e8 });
+  expect(lose.complete, key).toBe(true);
+  if (lose.value) return 'lose1';
+  const small = searchAtLeast(a, -bal + 1e-6, { depth: 6, maxNodes: 5e8 });
+  expect(small.complete, key).toBe(true);
+  return small.value ? 'small' : 'keep';
+};
+
+/**
+ * Checks one table (decision or line node), fix round 1: accepted rows pass the guard, keep the material at depth 4 and
+ * meet the predicate; an authored `error` that passes the guard loses ≥ 1 at depth 6; authored `dubious` reasons say
+ * what is true (a Cannon-for-Horse trade at depth 6, a developing move that loses at depth 4 but not 1 at depth 6, no
+ * development, an edge Horse, a General / Advisor move).
+ */
 function checkTable(id: string, p: Position, rows: readonly MoveTableEntry[], pred: Predicate | undefined, tempt?: { move: string }) {
+  const objective = pred ?? (BACK as unknown as Predicate);
   expect(rows.map((r) => r.move).sort(), id).toEqual(legalMoves(p).map(keyOf).sort());
+  expect(rows.some((r) => !isAccepted(r.class)), id).toBe(true);
   for (const row of rows) {
     const tag = `${id} ${row.move}`;
+    const piece = p.board[mv(p, row.move).from]!;
     if (isAccepted(row.class)) {
       expect(guardOk(id, p, row.move), tag).toBe(true);
       expect(d4(p, row.move), tag).toBeGreaterThanOrEqual(0);
-      expect(meets(pred ?? (BACK as unknown as Predicate), p, row.move), tag).toBe(true);
-    } else if (row.class === 'error' && row.source === 'authored') expect(d4(p, row.move), tag).toBeLessThan(0);
-    else if (row.class === 'error') expect(guardOk(id, p, row.move), tag).toBe(false);
-    if (row.misconception === 'b09.m3') expect(['general', 'advisor'], tag).toContain(p.board[mv(p, row.move).from]!.type);
+      expect(meets(objective, p, row.move), tag).toBe(true);
+    } else if (row.class === 'error') {
+      if (row.source === 'computed' || !guardOk(id, p, row.move)) expect(guardOk(id, p, row.move), tag).toBe(false);
+      else expect(d6(p, row.move), tag).toBe('lose1');
+    } else if (row.source === 'authored') {
+      if (row.reason === 'b09.r.trade') expect(d6(p, row.move), tag).toBe('small');
+      else if (row.reason === 'b09.r.risky') {
+        expect(meets(objective, p, row.move), tag).toBe(true);
+        expect(d4(p, row.move), tag).toBeLessThan(0);
+        expect(d6(p, row.move), tag).not.toBe('lose1');
+      } else if (row.reason === 'b09.r.nodev') expect(meets(objective, p, row.move), tag).toBe(false);
+      else if (row.reason === 'b09.r.edge') expect([piece.type, ['a', 'i'].includes(row.move[3])], tag).toEqual(['horse', true]);
+      else if (row.reason === 'b09.r.general' || row.misconception === 'b09.m3') expect(['general', 'advisor'], tag).toContain(piece.type);
+    }
   }
   if (tempt) {
     const row = rows.find((r) => r.move === tempt.move)!;
     expect(isAccepted(row.class), id).toBe(false);
-    if (row.misconception === 'b09.m1') expect(d4(p, row.move), id).toBeLessThan(0);
+    if (row.misconception === 'b09.m1') expect(row.class === 'error' && (!guardOk(id, p, row.move) || d6(p, row.move) === 'lose1'), id).toBe(true);
     else expect(['general', 'advisor'], id).toContain(p.board[mv(p, row.move).from]!.type);
   }
 }
@@ -269,7 +300,7 @@ describe('unit b09 complete (S3.3.b)', () => {
         expect(centralSoldierHanging(p), d.id).toBe(true);
       }
     }
-  }, 900_000);
+  }, 2_400_000);
 
   it('lines (both colours): every node’s accepted moves pass the guard, keep the material and develop; replies pass the guard', () => {
     const lines = newItems.filter((e): e is LineExercise => e.type === 'line');
@@ -291,7 +322,7 @@ describe('unit b09 complete (S3.3.b)', () => {
       // Deviations: at least one root move meets two different authored replies.
       expect(Object.values(l.root.next ?? {}).some((c) => c.kind === 'opponent' && c.replies.length >= 2), l.id).toBe(true);
     }
-  }, 900_000);
+  }, 2_400_000);
 
   it('move choices: correct answers develop safely; General moves develop nothing; m1 answers lose material', () => {
     for (const id of ['b09l2-03', 'b09l2-04', 'b09l4-02', 'b09l4-03', 'b09-c12', 'b09-c16']) {
