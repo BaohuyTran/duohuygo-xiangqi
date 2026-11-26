@@ -132,8 +132,8 @@ function laterState(id: 'REL-4' | 'REL-5', extra: Record<string, Unit> = {}): { 
 describe('unit order', () => {
   it('orders units by track rank, then file name; the pilot b09 lands inside the basics block', () => {
     // Pilots b09 (S2.14), i08 (S2.15), a03 (S2.16) and a07 (S2.17) land at the end of their track's block (file names sort after the legacy NN-…).
-    // b01–b09 (all `reviewed`, in the preview) sort in the basics block.
-    expect(ids(allUnits)).toEqual(['u1', 'u2', 'u3', 'u4', 'b01', 'b02', 'b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b09', 'u7', 'u8', 'u9', 'u10', 'i08', 'u11', 'u12', 'a03', 'a07', 'u13', 'u14', 'u15']);
+    // b01–b09 (all `reviewed`, in the preview) and b10 (S3.3.c, `verified`) sort in the basics block.
+    expect(ids(allUnits)).toEqual(['u1', 'u2', 'u3', 'u4', 'b01', 'b02', 'b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b09', 'b10', 'u7', 'u8', 'u9', 'u10', 'i08', 'u11', 'u12', 'a03', 'a07', 'u13', 'u14', 'u15']);
     expect(trackOrderProblems(allUnits)).toEqual([]);
     expect([...new Set(allUnits.map(trackOf))]).toEqual(TRACK_ORDER);
   });
@@ -209,11 +209,11 @@ describe('release states', () => {
 // ---------- T1 (05 §8.10) ----------
 
 describe('T1: content matches exactly one release state', () => {
-  it('today: REL-P (pilots b09, i08, a03, a07 and the S3.1–S3.3 units b01–b09 loaded, nothing published) and nothing else, and it is CURRENT_RELEASE', () => {
+  it('today: REL-P (pilots b09, i08, a03, a07 and the S3.1–S3.3 units b01–b10 loaded, nothing published) and nothing else, and it is CURRENT_RELEASE', () => {
     expect(releaseProblems(allUnits, RELEASE_STATES['REL-P'], legacy)).toEqual([]);
     expect(matchingStates(allUnits, legacy)).toEqual([CURRENT_RELEASE]);
     expect(CURRENT_RELEASE).toBe('REL-P');
-    expect(releaseProblems(allUnits, RELEASE_STATES['REL-0'], legacy).join('\n')).toMatch(/no new-course unit may be loaded \(found b01, b02, b03, b04, b05, b06, b07, b08, b09, i08, a03, a07\)/);
+    expect(releaseProblems(allUnits, RELEASE_STATES['REL-0'], legacy).join('\n')).toMatch(/no new-course unit may be loaded \(found b01, b02, b03, b04, b05, b06, b07, b08, b09, b10, i08, a03, a07\)/);
     // Without the pilot the legacy content is exactly REL-0 (the state before S2.14).
     expect(matchingStates(legacyUnits, legacy)).toEqual(['REL-0']);
   });
@@ -543,7 +543,7 @@ describe('course preview', () => {
     const content = await import('./index');
     expect(content.COURSE_PREVIEW).toBe(true);
     // b01, b02 and the four pilots are fully reviewed: the preview shows exactly these units, in level order.
-    // b09 left the preview with S3.3.b (its new lessons b09l1, b09l2, b09l4 are `verified` until the content review).
+    // b10 (S3.3.c) is not in the preview: its items are `verified` until the content review.
     expect(content.units.map((u) => u.id)).toEqual(['b01', 'b02', 'b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b09', 'i08', 'a03', 'a07']);
     expect(content.findLesson('u1l1')).toBeUndefined();
   });

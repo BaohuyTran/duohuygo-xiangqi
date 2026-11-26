@@ -84,11 +84,14 @@ describe('normalize', () => {
     // + the 23 items of unit b07 (S3.2.c: 3 lessons, 7 learn cards + 16 practice items; no legacy reuse, 05 DV3).
     // + the 22 items of unit b08 (S3.3.a: 3 lessons, 6 learn cards + 15 practice items + the task b08-g1).
     // + the 21 new items of unit b09 (S3.3.b: b09l1, b09l2, b09l4: 6 learn cards + 15 practice items; b09l3 + b09-g1 are the pilot).
-    expect(entries).toHaveLength(516);
+    // + the 29 items of unit b10 (S3.3.c: 4 lessons, 5 learn cards + 20 practice items + the tasks b10-g1–g4).
+    expect(entries).toHaveLength(545);
     const isNew = (ref: string) => /^[biaem]\d\d/.test(ref);
     // i08-g1 (S2.15, `line` → `play` from the initial position) joins the same intended group.
     // b01 (S3.1.a) adds three intended learn cards of the initial position: b01l1-01 and b01l2-01 reuse u1l1#1 and
     // u1l1#0 (05 §4: the river and the setup), b01l2-02 shows the same setup from Black's side (02 b01: both colours).
+    // b10 (S3.3.c) adds three more: the training-result card b10l1-01, the full game b10-g1 and the review b10-g4 (an
+    // authored game from the start); its card b10l2-01 shows the position of the guided game b10l2-03 that follows it.
     // b01l1-03 / b01l1-04 reuse the palace learn card and its exercise u1l1#2 / u1l1#3 (a learn card showing the next
     // item's position, as in the legacy lesson). Every other b01 position is its own.
     // b02 (S3.1.b: u1l2, u1l3, u4l1#0/#1), b03 (S3.1.c: u2l1#0–#2, u2l2), b04 (S3.1.d: u3l1, u3l2 without the POS
@@ -107,8 +110,9 @@ describe('normalize', () => {
       'b05l2-06', 'b05l2-07', 'b05l2-08', 'b05l3-01', 'b06l2-06',
     ]);
     expect(groups.filter((g) => !reusePair(g))).toEqual([
-      ['u1l1#0', 'u1l1#1', 'b01l1-01', 'b01l2-01', 'b01l2-02', 'b09-g1', 'i08-g1'],
+      ['u1l1#0', 'u1l1#1', 'b01l1-01', 'b01l2-01', 'b01l2-02', 'b09-g1', 'b10l1-01', 'b10-g1', 'b10-g4', 'i08-g1'],
       ['u1l1#2', 'u1l1#3', 'b01l1-03', 'b01l1-04'],
+      ['b10l2-01', 'b10l2-03'],
     ]);
   });
 });

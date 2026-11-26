@@ -24,6 +24,7 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b07 | reviewed | 3 | 7 | 16 | 0 | 6 | 0 | 7 | 3 | 0 | 0 | 9 (56 %) | 9 (56 %) | 6 | 6 | 3 | 1 | TC 10, RS 3, PA 3 |
 | b08 | reviewed | 3 | 6 | 16 | 2 | 8 | 0 | 0 | 5 | 0 | 1 | 7 (44 %) | 16 (100 %) | 6 | 6 | 3 | 0 (task `b08-g1`) | RS 10, DE 5, PP 1 |
 | b09 | reviewed (S2.14 pilot + S3.3.b) | 4 | 8 | 22 | 0 | 8 | 0 | 0 | 8 | 4 | 1 | 13 (59 %) | 22 (100 %) | 8 | 8 | 5 | 0 (task `b09-g1`) | OD 22 |
+| b10 | verified (S3.3.c) | 4 | 5 | 24 | 0 | 3 | 0 | 0 | 15 | 2 | 4 | 10 (42 %) | 18 (75 %) | 8 | 8 | 4 | 0 (tasks `b10-g1`–`b10-g4`) | RS 13, DE 6, PP 5 |
 
 ### Per lesson
 
@@ -58,6 +59,10 @@ PA/OD/DE units, every strand of 02 §9.2 present.
 | b09l2 | 2 | 5 | choice 2, decision 3 | G2 G2 G1 G1 G0 | 2 | 5 | — |
 | b09l3 | 2 | 7 | choice 2, decision 3, line 1, play 1 | G2 G2 G1 G1 G0 G0 + `b09-g1` | 6 | 7 | — (pilot S2.14, unchanged) |
 | b09l4 | 1 | 5 | choice 2, line 3 | G2 G2 G1 G1 G0 | 2 | 5 | — |
+| b10l1 | 2 | 6 | decision 4, line 1, play 1 | G2 G2 G1 G1 G0 + `b10-g1` | 0 | 6 | — (new) |
+| b10l2 | 1 | 6 | decision 4, line 1, play 1 | G2 G2 G1 G1 G0 + `b10-g2` | 6 | 6 | — |
+| b10l3 | 1 | 6 | decision 5, play 1 | G2 G2 G1 G1 G0 + `b10-g3` | 2 | 0 | — |
+| b10l4 | 1 | 6 | decision 2, choice 3, review 1 | G2 G2 G1 G1 G0 + `b10-g4` | 2 | 6 | — |
 
 BLK tags (05 §4) of `u1l2#1`, `#3`, `#5` and `u1l3#1`, `#3` are resolved by authored Black items with the same skill
 (b02l1-07/-08 for the General, b02l2-05/-08 for facing, b02l3-08/-09 for the Advisor and Elephant) instead of
@@ -133,6 +138,24 @@ of b01, b04, i08 and b09 itself, so against lessons and other pools the rule is 
 corpus; earlier b09 candidates that repeated b01-check, b04l3-02 or i08l3-07 positions were replaced).
 b09 is `reviewed` (S3.3.b, record `reviews/b09.json`) and back in the course preview.
 
+b10 (S3.3.c, `verified`) follows 02 b10 with three deviations for the content reviewer. (1) The guided games (b10l1-04
+Red, b10l2-03 Black) are G2 `line`s, not `play` tasks: `play` shows no coach prompts, while a `line` shows each authored
+reply's text; the coach's two safety questions ride on the first two replies, then accepted moves without `next` hand over
+to safe-sparring(2, 1.0) for 8 learner moves with no prompts (`handOver`), which is the fading. The validator needs one
+accepted move per learner node to continue on the tree, so at the third coached node one accepted move ends on a leaf
+("the coach's part ends here") while every other accepted move hands over; the guided games do not reach a result (8
+moves after the tree). The Red guided game starts after `h2-e2 g6-g5` (from the start position every developing move is
+−½ at depth 4, a horizon artefact of the Cannon-for-Horse capture, so the b09 table rule accepts nothing there).
+(2) 02's check item "one `review` item on an authored game" is replaced by `choice` items at a game's turning point ("which
+of these moves keeps all your pieces safe?": one safe move, the game's losing move and two other losing moves), because a
+check pool cannot hold `play` / `review` tasks. (3) The tables follow the b09 rule: safety decisions (self-play middlegames
+where the opponent threatens a gain, ≤ 40 % of the moves accepted; five Black ones colour-swapped from Red self-play
+positions and one Red one from a Black position) and the turning-point decisions (any safe move is better than the game's, so 30+ moves are accepted there; G2
+and G0 lesson items only) accept guard + `no-hanging` + ≥ 0 at depth 4; conversion decisions accept exactly the moves that
+keep the forced mate against every defence. The review games are safe-sparring(1) self-play games with one inserted
+allowed loss; their other learner moves carry no Basic signal (the validator's top-turning-point rule).
+§5.7 (`npx tsx scripts/verify-practical.ts b10 --runs 20`): see "Practical tasks" below.
+
 b01l4, b02l3, b03l3, b04l3, b05l1, b06l3, b07l3 and b08l3 have 6 practice items (the low end of 02 §5.2 is 5): the unit's TR item sits there, after the ladder
 minimums G2 2 · G1 2 · G0 1.
 
@@ -177,6 +200,9 @@ minimums G2 2 · G1 2 · G0 1.
 | b09.m2 | Move one piece repeatedly / count moves, not pieces | b09l1-02 | b09l1-04, b09l1-05, b09l2-03, b09-c03, b09-c04 |
 | b09.m3 | The General should step out early | b09l2-02 | b09l1-04, b09l2-03, b09l2-04, b09l4-02, b09l4-03, b09-c03, b09-c12, b09-c16; General / Advisor rows of every new table (and b09l3) |
 | b09.m4 | Grabbing a Soldier is always good | b09l1-03 | b09-g1 (S2.14; no new wrong answer: a free Soldier grab is never refused by these tables) |
+| b10.m1 | Once ahead, the game wins itself | b10l3-01 | tempting rows of b10l3-02–06, b10-c07–c09 and the `b10-g3` tree (a move that does not keep the forced mate) |
+| b10.m2 | Attacking means ignoring threats | b10l1-02 | tempting rows of b10l1-03/05/06/07, b10l2-02/04/05/06, b10-c01–c06; wrong options of b10l4-03, b10l4-04, b10l4-05, b10-c10–c12 |
+| b10.m3 | A lost piece means the game is lost | b10l4-01 | b10l4-03 b |
 
 ### Check pools
 
@@ -191,6 +217,7 @@ minimums G2 2 · G1 2 · G0 1.
 | b07-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b07l1 5 · b07l2 5 · b07l3 6 | 0 | 6 | 5 | 5 | 0 | 8 | 11 | 0 |
 | b08-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b08l1 5 · b08l2 5 · b08l3 6 | 2 | 7 | 0 | 7 | 0 | 8 | 16 | 5 |
 | b09-check | reviewed | 16 | 6 own + 2 interleaved (3 attempts) | b09l1 4 · b09l2 4 · b09l3 4 · b09l4 4 | 0 | 4 | 0 | 12 | 0 | 9 | 16 | 4 |
+| b10-check | verified | 12 | short: 4 own + 2 interleaved (3 attempts) | b10l1 3 · b10l2 3 · b10l3 3 · b10l4 3 | 0 | 3 | 0 | 9 | 0 | 6 | 9 | 6 |
 
 b02-check to b08-check are also checked against near duplicates (`src/content/near-duplicate.ts`, test-only: file mirror, colour swap, a shift of
 the whole pattern and one non-General piece added, removed or moved, against every loaded lesson item and the other pool
@@ -214,3 +241,19 @@ setting for the safety routine and §5.7 passes). §5.7 at 20 seeds (`npx tsx sc
 2026-11-19): reference run 20/20 (scores 82.5–100), N1 fails 20/20, N2 fails 20/20, voided 0, 3 narrow positions in the
 reference run: all checks passed. Caps 6, 8, 9, 10 and 12 were measured too (reference 13, 16, 18, 18 and 19 of 20; N2 ≥ 95 % failing at
 every cap); 11 is the only measured cap in 02's 6–12 range where every check passes.
+
+`b10-g1` (Red, from the start position) and `b10-g2` (Black, after `h2-e2 h9-g7 h0-g2`) (S3.3.c): `play`, task `game`
+(full-game rules, 80 learner moves), R1 60 + R2 20 + R0 20 (= the `xb` per-game score under fallback F2; the result is
+played out but not scored), `development { n: 8, target: 4 }`, F2 (safe-sparring(2, 1.0), no tree). §5.7 at 20 seeds
+(`npx tsx scripts/verify-practical.ts b10 --runs 20`, 2026-11-26): N1 fails 20/20 and 19/19, N2 fails 18/19 and 17/19
+(voids 1–2), but item 1 FAILS: the reference run passes 13/20 (`b10-g1`) and 16/20 (`b10-g2`). The failing reference runs
+score 90–100 but carry a critical failure: the reference player (forcing-attack, then pressing(2)) loses by perpetual check
+(it keeps checking until the training adjudication) or is mated by the partner late in the game; one run scores 67.5.
+F2b was not added: it changes only the opening (scripted tree + line share), and the reference player of the remaining
+70+ moves stays the same, so it cannot repair item 1. Until a decision, both games stay practice only (03 §5.7).
+`b10-g3` (Red, convert, 7 pieces, `measured`): cap 6, R4 90 + R1 10 (the objective is necessary: without the mate the
+best score is 73), a counterplay tree with the forced mate in 3 (claims proven by the validator; every node accepts
+≤ 1/3 of its guard-passing moves), Black threatens a gain at the start (the validator's threat check); two reference lines (the second mates
+with the General's move instead of the Chariot's). §5.7: reference 20/20, N1 20/20, N2 20/20, item 3 n/a by ruling F,
+second plan 20/20: all checks pass. `b10-g4` (`review`, Red): a safe-sparring(1) self-play game with one inserted allowed
+loss (Red's sixth move, the Cannon b4-b7, taken by Black's Cannon); the turning-point table accepts every safe move.

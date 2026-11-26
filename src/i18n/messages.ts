@@ -5069,6 +5069,225 @@ export const messages = {
   'b09-c16.c.t': { en: 'Step the General up', vi: 'Đưa Tướng lên' },
   'b09-c16.c': { en: 'No: the General move brings no piece into play.', vi: 'Không: nước đi Tướng không đưa quân nào vào cuộc.' },
 
+  // ---------- New course: b10 "First complete games" (S3.3.c; lessons b10l1–b10l4, tasks b10-g1–g4 + check pool b10-check) ----------
+  'b10.title': { en: 'First complete games', vi: 'Những ván cờ trọn vẹn đầu tiên' },
+  'b10.desc': {
+    en: 'Play whole games as Red and as Black with the safety routine, finish a won game with mate, and look back at a game to find where material was lost.',
+    vi: 'Chơi trọn ván với bên Đỏ và bên Đen theo thói quen an toàn, kết thúc ván thắng bằng nước chiếu bí, và xem lại một ván để tìm chỗ bị mất quân.',
+  },
+  'b10l1.title': { en: 'A guided game as Red', vi: 'Một ván có hướng dẫn với bên Đỏ' },
+  'b10l2.title': { en: 'A guided game as Black', vi: 'Một ván có hướng dẫn với bên Đen' },
+  'b10l3.title': { en: 'Finishing a won game', vi: 'Kết thúc một ván đã thắng thế' },
+  'b10l4.title': { en: 'Looking back', vi: 'Nhìn lại ván cờ' },
+  'b10.p.safe': {
+    en: 'A position from a game. Find a move that keeps all your pieces safe.',
+    vi: 'Một thế cờ trong ván. Hãy tìm một nước giữ cho mọi quân của bạn được an toàn.',
+  },
+  'b10.p.mate1': {
+    en: 'You are far ahead. Finish the game: mate in one move.',
+    vi: 'Bạn đang hơn rất nhiều quân. Hãy kết thúc ván cờ: chiếu bí trong một nước.',
+  },
+  'b10.p.mate2': {
+    en: 'You are far ahead. Find the first move of a mate in two that works against every defence.',
+    vi: 'Bạn đang hơn rất nhiều quân. Hãy tìm nước đầu của đòn chiếu bí hai nước, đúng trước mọi cách chống đỡ.',
+  },
+  'b10.p.turn': {
+    en: 'In the game, the next move lost material. Play a better move here.',
+    vi: 'Trong ván cờ, nước tiếp theo đã làm mất quân. Hãy đi một nước tốt hơn ở đây.',
+  },
+  'b10.p.guided': {
+    en: 'Play a game with a coach. For the first moves the coach asks the safety questions; then you play on alone. Each move: bring a Horse or a Chariot into play and leave nothing hanging.',
+    vi: 'Hãy chơi một ván có người hướng dẫn. Ở những nước đầu, người hướng dẫn đặt các câu hỏi an toàn; sau đó bạn tự chơi tiếp. Mỗi nước: đưa một quân Mã hoặc Xe vào cuộc và không để quân nào bị bỏ ngỏ.',
+  },
+  'b10.p.spot': {
+    en: 'A position from a finished game. Which of these moves keeps all your pieces safe?',
+    vi: 'Một thế cờ trong một ván đã chơi. Nước nào dưới đây giữ cho mọi quân của bạn được an toàn?',
+  },
+  'b10.o.safe': { en: 'Right: after this move none of your pieces can be taken for free.', vi: 'Đúng: sau nước này không quân nào của bạn bị ăn không.' },
+  'b10.o.game': {
+    en: 'This is the move played in the game: it left a piece where the opponent took it.',
+    vi: 'Đây là nước đã đi trong ván: nó để một quân ở chỗ đối phương đã ăn.',
+  },
+  'b10.o.drops': { en: 'This move leaves a piece where your opponent takes it.', vi: 'Nước này để một quân ở chỗ đối phương ăn được.' },
+  'b10.h.safe': {
+    en: 'First ask: what does your opponent attack now? Then look for a move that protects it or moves it away.',
+    vi: 'Trước hết hãy hỏi: đối phương đang tấn công quân nào? Rồi tìm nước bảo vệ quân đó hoặc đưa nó đi chỗ khác.',
+  },
+  'b10.h.mate1': {
+    en: 'Look at every check you have. Which one leaves the General no escape?',
+    vi: 'Hãy xem mọi nước chiếu bạn có. Nước nào khiến Tướng không còn đường thoát?',
+  },
+  'b10.h.turn': {
+    en: 'In the game, a piece was left where the opponent could take it. Keep every piece protected.',
+    vi: 'Trong ván cờ, một quân đã bị để ở chỗ đối phương ăn được. Hãy giữ cho mọi quân được bảo vệ.',
+  },
+  'b10.h.guided': {
+    en: 'Bring out a Horse toward the centre, or a Chariot, and check that nothing is left hanging.',
+    vi: 'Hãy đưa Mã ra phía giữa, hoặc đưa Xe ra, và kiểm tra rằng không quân nào bị bỏ ngỏ.',
+  },
+  'b10.r.safe': { en: 'Good: after this move none of your pieces can be taken for free.', vi: 'Tốt: sau nước này không quân nào của bạn bị ăn không.' },
+  'b10.r.better': {
+    en: 'Better than the game: after this move none of your pieces can be taken for free.',
+    vi: 'Tốt hơn trong ván: sau nước này không quân nào của bạn bị ăn không.',
+  },
+  'b10.r.loses': { en: 'That loses material at once.', vi: 'Nước đó mất quân ngay.' },
+  'b10.r.later': {
+    en: 'Nothing is lost at once, but after the best replies you are down material.',
+    vi: 'Chưa mất gì ngay, nhưng sau các nước đáp hay nhất, bạn bị thiệt quân.',
+  },
+  'b10.r.trade': {
+    en: 'Nothing is lost at once, but after the best replies a trade leaves you slightly behind.',
+    vi: 'Chưa mất gì ngay, nhưng sau các nước đáp hay nhất, một cuộc đổi quân khiến bạn thiệt một chút.',
+  },
+  'b10.r.risky': {
+    en: 'Nothing is left hanging at once, but a few moves later you lose material.',
+    vi: 'Chưa có quân nào bị bỏ ngỏ ngay, nhưng vài nước sau bạn bị mất quân.',
+  },
+  'b10.r.hangs': { en: 'After this move a piece of yours is left unprotected.', vi: 'Sau nước này một quân của bạn bị bỏ ngỏ.' },
+  'b10.r.edge': {
+    en: 'It develops, but a Horse on the edge reaches fewer points: toward the centre is better.',
+    vi: 'Nước đó có ra quân, nhưng Mã ở biên kiểm soát ít điểm hơn: nhảy vào phía giữa thì tốt hơn.',
+  },
+  'b10.r.general': { en: 'Moving the General or an Advisor now brings no piece into play.', vi: 'Đi Tướng hoặc Sĩ lúc này không đưa thêm quân nào vào cuộc.' },
+  'b10.r.nodev': { en: 'Safe, but it brings no Horse or Chariot into play.', vi: 'An toàn, nhưng không đưa thêm Mã hay Xe nào vào cuộc.' },
+  'b10.r.develops': {
+    en: 'Good: a Horse or a Chariot comes into play, and nothing is left hanging.',
+    vi: 'Tốt: một quân Mã hoặc Xe vào cuộc, và không quân nào bị bỏ ngỏ.',
+  },
+  'b10.r.alone': {
+    en: 'Good. From here you play on alone: before every move, ask what your opponent attacks and whether anything is left hanging.',
+    vi: 'Tốt. Từ đây bạn tự chơi tiếp: trước mỗi nước, hãy hỏi đối phương đang tấn công gì và có quân nào bị bỏ ngỏ không.',
+  },
+  'b10.r.mate1': { en: 'Mate: the General is in check and has no move left.', vi: 'Chiếu bí: Tướng bị chiếu và không còn nước đi.' },
+  'b10.r.mate2': { en: 'Right: whatever your opponent replies, you mate next move.', vi: 'Đúng: đối phương đáp thế nào thì nước sau bạn cũng chiếu bí.' },
+  'b10.r.nomate': { en: 'This does not finish the game: your opponent can still defend.', vi: 'Nước này không kết thúc ván cờ: đối phương vẫn chống đỡ được.' },
+  'b10.t.m1': {
+    en: 'Being far ahead does not win by itself: this move does not finish the game, and your opponent gets time to fight back.',
+    vi: 'Hơn nhiều quân không tự nhiên thắng: nước này không kết thúc ván cờ, và đối phương có thời gian phản công.',
+  },
+  'b10.t.m2': {
+    en: 'Attacking does not mean you can ignore threats: after this move your opponent takes material first.',
+    vi: 'Tấn công không có nghĩa là được bỏ qua các mối đe dọa: sau nước này đối phương ăn quân trước.',
+  },
+  'b10.t.game': {
+    en: 'This is the move played in the game: it leaves a piece where your opponent takes it.',
+    vi: 'Đây là nước đã đi trong ván: nó để một quân ở chỗ đối phương ăn được.',
+  },
+  'b10.t.general': {
+    en: 'Moving the General now brings no piece into play, while your opponent keeps developing.',
+    vi: 'Đi Tướng lúc này không đưa thêm quân nào vào cuộc, trong khi đối phương tiếp tục ra quân.',
+  },
+  'b10.fb.safe.purpose': {
+    en: 'Your move answers the threat: none of your pieces can be taken for free.',
+    vi: 'Nước đi của bạn đáp lại mối đe dọa: không quân nào của bạn bị ăn không.',
+  },
+  'b10.fb.safe.key': {
+    en: 'Your opponent’s capture is no longer free: the piece is protected or has moved away.',
+    vi: 'Nước ăn quân của đối phương không còn là ăn không: quân đó đã được bảo vệ hoặc đã tránh đi.',
+  },
+  'b10.fb.safe.error': {
+    en: 'Before you move, ask what your opponent attacks, then check that the move leaves nothing undefended.',
+    vi: 'Trước khi đi, hãy hỏi đối phương đang tấn công gì, rồi kiểm tra rằng nước đó không để quân nào không được bảo vệ.',
+  },
+  'b10.fb.mate.purpose': { en: 'You finish the game instead of only collecting more material.', vi: 'Bạn kết thúc ván cờ thay vì chỉ ăn thêm quân.' },
+  'b10.fb.mate.key': { en: 'Every defence of your opponent still ends in mate.', vi: 'Mọi cách chống đỡ của đối phương vẫn dẫn đến bị chiếu bí.' },
+  'b10.fb.mate.error': {
+    en: 'Count the General’s escape points: a check that leaves one open does not mate.',
+    vi: 'Hãy đếm các điểm thoát của Tướng: nước chiếu còn để hở một điểm thì không bí được.',
+  },
+  'b10.fb.turn.purpose': {
+    en: 'Your move keeps every piece protected, which the game move did not.',
+    vi: 'Nước đi của bạn giữ cho mọi quân được bảo vệ, điều mà nước trong ván đã không làm được.',
+  },
+  'b10.fb.turn.key': { en: 'Your opponent finds nothing to take for free.', vi: 'Đối phương không tìm được quân nào để ăn không.' },
+  'b10.fb.turn.error': {
+    en: 'Ask which of your pieces the opponent can take after your move, and keep it protected.',
+    vi: 'Hãy hỏi đối phương ăn được quân nào của bạn sau nước đi, và giữ cho quân đó được bảo vệ.',
+  },
+  'b10.fb.game.purpose': { en: 'You brought your pieces into play and left nothing hanging.', vi: 'Bạn đã đưa quân vào cuộc và không để quân nào bị bỏ ngỏ.' },
+  'b10.fb.game.key': { en: 'Your opponent’s replies took nothing for free.', vi: 'Các nước đáp của đối phương không ăn không được quân nào.' },
+  'b10.fb.game.error': {
+    en: 'Each move, bring out a Horse or a Chariot that has not moved yet, and leave nothing undefended.',
+    vi: 'Mỗi nước, hãy đưa ra một quân Mã hoặc Xe chưa đi, và không để quân nào không được bảo vệ.',
+  },
+  'b10.coach.1': {
+    en: 'Coach: your opponent has moved. First question: what does that move attack?',
+    vi: 'Người hướng dẫn: đối phương vừa đi. Câu hỏi thứ nhất: nước đó tấn công gì?',
+  },
+  'b10.coach.2': {
+    en: 'Coach: second question: after your next move, is any of your pieces left unprotected? Next move you ask yourself.',
+    vi: 'Người hướng dẫn: câu hỏi thứ hai: sau nước tiếp theo của bạn, có quân nào bị bỏ ngỏ không? Từ nước sau, bạn tự hỏi.',
+  },
+  'b10.l.coachEnd': {
+    en: 'The coach’s part of the game ends here. In the full games of this unit you ask the safety questions yourself.',
+    vi: 'Phần hướng dẫn của ván cờ kết thúc ở đây. Trong những ván trọn vẹn của bài này, bạn tự đặt các câu hỏi an toàn.',
+  },
+  'b10l1-01.text': {
+    en: 'In this unit you play whole games against a training partner. A game ends with mate, stalemate, or a training result: after 80 of your moves, after 30 moves with no capture, or by the repetition rules, the game is adjudicated. That is a result for training, not an official one. Before every move, ask two questions: what does my opponent attack, and does my move leave anything hanging?',
+    vi: 'Trong bài này bạn chơi trọn ván với một đối thủ luyện tập. Ván cờ kết thúc khi chiếu bí, hết nước đi, hoặc bằng một kết quả luyện tập: sau 80 nước của bạn, sau 30 nước không ăn quân, hoặc theo luật lặp lại, ván cờ được phân xử. Đó là kết quả để luyện tập, không phải kết quả chính thức. Trước mỗi nước, hãy hỏi hai câu: đối phương đang tấn công gì, và nước của tôi có để quân nào bị bỏ ngỏ không?',
+  },
+  'b10l1-02.text': {
+    en: 'Wanting to attack is good, but attacking does not mean you can ignore threats. In a position like this one, first look at what your opponent attacks. An attack of your own is worth playing only when nothing of yours can be taken for free.',
+    vi: 'Muốn tấn công là tốt, nhưng tấn công không có nghĩa là được bỏ qua các mối đe dọa. Trong một thế cờ như thế này, trước hết hãy xem đối phương đang tấn công gì. Một đòn tấn công của bạn chỉ đáng đi khi không quân nào của bạn bị ăn không.',
+  },
+  'b10l2-01.text': {
+    en: 'Now you play Black. The questions are the same: what does Red attack, and does my move leave anything hanging? Red moves first, so look at Red’s last move before you answer.',
+    vi: 'Bây giờ bạn cầm quân Đen. Các câu hỏi vẫn như cũ: Đỏ đang tấn công gì, và nước của tôi có để quân nào bị bỏ ngỏ không? Đỏ đi trước, nên hãy xem nước vừa đi của Đỏ trước khi trả lời.',
+  },
+  'b10l3-01.text': {
+    en: 'Being far ahead does not win the game by itself. Your opponent still has pieces and can fight back if you play carelessly. When you are far ahead, look for the mate: checks first, and count the General’s escape points.',
+    vi: 'Hơn nhiều quân không tự nhiên thắng ván cờ. Đối phương vẫn còn quân và có thể phản công nếu bạn chơi cẩu thả. Khi hơn nhiều quân, hãy tìm nước chiếu bí: xem các nước chiếu trước, và đếm các điểm thoát của Tướng.',
+  },
+  'b10l4-01.text': {
+    en: 'Looking back at a finished game shows where it turned. In this game Red put a Cannon where Black could take it, and Black did. A lost piece does not mean the game is lost: keep your pieces protected, bring the others into play, and wait for your opponent’s mistakes.',
+    vi: 'Xem lại một ván đã chơi cho thấy ván cờ đã xoay chuyển ở đâu. Trong ván này Đỏ đặt Pháo vào chỗ Đen ăn được, và Đen đã ăn. Mất một quân không có nghĩa là thua ván: hãy giữ các quân được bảo vệ, đưa các quân khác vào cuộc, và chờ đối phương mắc sai lầm.',
+  },
+  'b10l4-03.prompt': {
+    en: 'In this game you have just lost a Cannon. What is the best plan now?',
+    vi: 'Trong ván này bạn vừa mất một quân Pháo. Kế hoạch tốt nhất bây giờ là gì?',
+  },
+  'b10l4-03.a.t': {
+    en: 'Keep every piece protected, bring the others into play and look for your opponent’s mistakes.',
+    vi: 'Giữ cho mọi quân được bảo vệ, đưa các quân khác vào cuộc và tìm sai lầm của đối phương.',
+  },
+  'b10l4-03.a': {
+    en: 'Right: a lost piece does not lose the game by itself. Careful play keeps your chances, and a training partner makes mistakes too.',
+    vi: 'Đúng: mất một quân không tự nhiên thua ván. Chơi cẩn thận giữ được cơ hội, và đối thủ luyện tập cũng mắc sai lầm.',
+  },
+  'b10l4-03.b.t': { en: 'The game is lost now, so the next moves do not matter.', vi: 'Ván cờ đã thua rồi, nên những nước tiếp theo không quan trọng.' },
+  'b10l4-03.b': {
+    en: 'Not so: one piece down is not a lost game. Your opponent still has to win it, and careless play would give the rest away.',
+    vi: 'Không đúng: kém một quân chưa phải là thua. Đối phương vẫn phải đánh thắng, còn chơi cẩu thả thì sẽ mất nốt phần còn lại.',
+  },
+  'b10l4-03.c.t': {
+    en: 'Attack at once with every piece to win the material back, whatever it leaves hanging.',
+    vi: 'Tấn công ngay bằng mọi quân để gỡ lại quân, dù để quân nào bị bỏ ngỏ.',
+  },
+  'b10l4-03.c': {
+    en: 'Attacking does not mean ignoring threats: leaving pieces hanging to win one back usually loses more.',
+    vi: 'Tấn công không có nghĩa là bỏ qua các mối đe dọa: để quân bị bỏ ngỏ để gỡ lại một quân thường làm mất thêm.',
+  },
+  'b10-g1.p': {
+    en: 'Play a whole game as Red against the training partner. Before every move ask what your opponent attacks and whether your move leaves anything hanging. The score counts your safety and your development, not the result.',
+    vi: 'Hãy chơi trọn một ván với bên Đỏ trước đối thủ luyện tập. Trước mỗi nước, hãy hỏi đối phương đang tấn công gì và nước của bạn có để quân nào bị bỏ ngỏ không. Điểm số tính sự an toàn và việc ra quân của bạn, không tính kết quả.',
+  },
+  'b10-g2.p': {
+    en: 'Play a whole game as Black against the training partner. Before every move ask what your opponent attacks and whether your move leaves anything hanging. The score counts your safety and your development, not the result.',
+    vi: 'Hãy chơi trọn một ván với bên Đen trước đối thủ luyện tập. Trước mỗi nước, hãy hỏi đối phương đang tấn công gì và nước của bạn có để quân nào bị bỏ ngỏ không. Điểm số tính sự an toàn và việc ra quân của bạn, không tính kết quả.',
+  },
+  'b10-g3.p': {
+    en: 'You are far ahead, but your opponent threatens something too. Finish the game with mate within six moves, and keep your pieces safe on the way.',
+    vi: 'Bạn đang hơn rất nhiều quân, nhưng đối phương cũng đang đe dọa. Hãy kết thúc ván cờ bằng nước chiếu bí trong vòng sáu nước, và giữ an toàn cho các quân trên đường đi.',
+  },
+  'b10-g4.p': {
+    en: 'Look back at this game. Find the move where you lost material, play a better move there, and say what went wrong.',
+    vi: 'Hãy xem lại ván cờ này. Tìm nước bạn đã mất quân, đi một nước tốt hơn ở đó, và cho biết điều gì đã sai.',
+  },
+  'b10-g4.tp': {
+    en: 'Here a piece was put where the opponent could take it for free: an allowed loss.',
+    vi: 'Ở đây một quân bị đặt vào chỗ đối phương ăn không được: để mất quân.',
+  },
+
   // ---------- New course: i08 "Central Cannon plans as Red" (pilot lesson i08l3 + task i08-g1, S2.15) ----------
   'i08.title': {
     en: 'Central Cannon plans as Red',

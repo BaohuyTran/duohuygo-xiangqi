@@ -1,0 +1,1999 @@
+{
+  "id": "b10-check",
+  "kind": "check",
+  "unit": "b10",
+  "primaryStrand": "PP",
+  "version": 1,
+  "items": [
+    {
+      "type": "decision",
+      "id": "b10-c01",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b10.m2"
+      ],
+      "assist": "G0",
+      "fen": "r1bak1cnr/4a4/n3b4/p5C1p/2p1p1p2/P1P6/4P1P1P/2N1B2c1/4A4/RCBAK2NR w - - 24 13",
+      "prompt": "b10.p.safe",
+      "objective": "b10l1",
+      "unit": "b10",
+      "feedback": {
+        "purpose": "b10.fb.safe.purpose",
+        "keyReply": "b10.fb.safe.key",
+        "commonError": "b10.fb.safe.error",
+        "temptingAlternative": {
+          "move": "c4-c5",
+          "text": "b10.t.m2"
+        }
+      },
+      "table": [
+        {
+          "move": "a0-a1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a0-a2",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.r.later"
+        },
+        {
+          "move": "a0-a3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-b1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-b2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-b3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-b4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-b5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-b6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-b7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-b8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-b9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c0-a2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e0-f0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "h0-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "h0-g2",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.r.later"
+        },
+        {
+          "move": "h0-f1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i0-i1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i0-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e1-f2",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.r.later"
+        },
+        {
+          "move": "e1-f0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e1-d2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c2-d4",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "c2-b4",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "c2-a3",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "c2-a1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "e2-g4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e2-g0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e3-e4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g3-g4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i3-i4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a4-a5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c4-c5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.t.m2",
+          "misconception": "b10.m2"
+        },
+        {
+          "move": "g6-h6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-f6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-e6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-d6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-c6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-b6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-g7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-g8",
+          "class": "error",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b10-c02",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b10.m2"
+      ],
+      "assist": "G0",
+      "fen": "r1ba1a1nr/4k3c/n8/p1C1p1p1p/1c4b2/8C/P1P1P1P1P/B7N/9/RN1AKAB1R w - - 15 11",
+      "prompt": "b10.p.safe",
+      "objective": "b10l1",
+      "unit": "b10",
+      "feedback": {
+        "purpose": "b10.fb.safe.purpose",
+        "keyReply": "b10.fb.safe.key",
+        "commonError": "b10.fb.safe.error",
+        "temptingAlternative": {
+          "move": "b0-c2",
+          "text": "b10.t.m2"
+        }
+      },
+      "table": [
+        {
+          "move": "a0-a1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b0-c2",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.t.m2",
+          "misconception": "b10.m2"
+        },
+        {
+          "move": "b0-d1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d0-e1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e0-e1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "f0-e1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g0-e2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i0-h0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i0-i1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a2-c4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a2-c0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i2-h0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i2-g1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a3-a4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c3-c4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e3-e4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g3-g4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i4-h4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i4-g4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i4-f4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i4-e4",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b10.r.hangs"
+        },
+        {
+          "move": "i4-d4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i4-c4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i4-b4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i4-a4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i4-i5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i4-i8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b10.r.hangs"
+        },
+        {
+          "move": "c6-d6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "c6-g6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "c6-b6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "c6-c7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "c6-c8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c6-c5",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "c6-c4",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b10-c03",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b10.m2"
+      ],
+      "assist": "G0",
+      "fen": "1cbckab1r/r5n2/n4a3/p3pCp1p/2p6/6B1P/P1P1P1P1C/9/3NA4/R2A1KBNR w - - 30 16",
+      "prompt": "b10.p.safe",
+      "objective": "b10l1",
+      "unit": "b10",
+      "feedback": {
+        "purpose": "b10.fb.safe.purpose",
+        "keyReply": "b10.fb.safe.key",
+        "commonError": "b10.fb.safe.error",
+        "temptingAlternative": {
+          "move": "f6-f9",
+          "text": "b10.t.m2"
+        }
+      },
+      "table": [
+        {
+          "move": "a0-b0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a0-c0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a0-a1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a0-a2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "f0-e0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "f0-f1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g0-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g0-e2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "h0-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "h0-g2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i0-i1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i0-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d1-b2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d1-b0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e1-f2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e1-d2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a3-a4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c3-c4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e3-e4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i3-h3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i3-i6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "i3-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i3-i1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g4-i2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g4-e2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i4-i5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "f6-i6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "f6-a6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "f6-f9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.t.m2",
+          "misconception": "b10.m2"
+        },
+        {
+          "move": "f6-f5",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "f6-f4",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "f6-f3",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "f6-f2",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "f6-f1",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b10-c04",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b10.m2"
+      ],
+      "assist": "G0",
+      "fen": "3ak1bn1/r3a2C1/ncc1b1r2/4p1p1p/pCp6/9/2P1P1P1P/B1N6/4A4/R2A1KBNR b - - 0 1",
+      "prompt": "b10.p.safe",
+      "objective": "b10l2",
+      "unit": "b10",
+      "feedback": {
+        "purpose": "b10.fb.safe.purpose",
+        "keyReply": "b10.fb.safe.key",
+        "commonError": "b10.fb.safe.error",
+        "temptingAlternative": {
+          "move": "c7-c3",
+          "text": "b10.t.m2"
+        }
+      },
+      "table": [
+        {
+          "move": "a5-a4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c5-c4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e6-e5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-g5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i6-i5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a7-b5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.r.loses"
+        },
+        {
+          "move": "b7-b8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "b7-b9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c7-d7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c7-c8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "c7-c9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c7-c6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c7-c3",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.t.m2",
+          "misconception": "b10.m2"
+        },
+        {
+          "move": "e7-g5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e7-c9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g7-h7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g7-i7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g7-f7",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b10.r.hangs"
+        },
+        {
+          "move": "g7-g8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "a8-b8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a8-c8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a8-d8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a8-a9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "e8-f9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "e8-f7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "e8-d7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b10-c05",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b10.m2"
+      ],
+      "assist": "G0",
+      "fen": "1n2k1b1r/r3a4/1c1ab3n/p3p3C/2p1P1p2/4c2C1/P1P3P1P/2N1B4/R3N4/2BAKA2R b - - 0 1",
+      "prompt": "b10.p.safe",
+      "objective": "b10l2",
+      "unit": "b10",
+      "feedback": {
+        "purpose": "b10.fb.safe.purpose",
+        "keyReply": "b10.fb.safe.key",
+        "commonError": "b10.fb.safe.error",
+        "temptingAlternative": {
+          "move": "e4-e1",
+          "text": "b10.t.m2"
+        }
+      },
+      "table": [
+        {
+          "move": "e4-f4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e4-g4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e4-d4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e4-c4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e4-b4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e4-a4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e4-e3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e4-e1",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.t.m2",
+          "misconception": "b10.m2"
+        },
+        {
+          "move": "c5-c4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g5-g4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a6-a5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e6-e5",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.r.loses"
+        },
+        {
+          "move": "b7-c7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b6",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b7-b0",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e7-c9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i7-h9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "i7-g8",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "i7-g6",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b10.r.trade"
+        },
+        {
+          "move": "a8-b8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a8-c8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a8-d8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a8-a9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a8-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e8-f9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e8-f7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e8-d9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b9-c7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b9-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b9-d8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e9-f9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e9-d9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i9-h9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "i9-i8",
+          "class": "error",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b10-c06",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": true,
+      "misconceptions": [
+        "b10.m2"
+      ],
+      "assist": "G0",
+      "fen": "rnbakab1r/9/8n/pcp1p1p1p/4cP3/P6C1/2P1P3P/C3B4/9/RNBAKA1NR b - - 0 1",
+      "prompt": "b10.p.safe",
+      "objective": "b10l2",
+      "unit": "b10",
+      "feedback": {
+        "purpose": "b10.fb.safe.purpose",
+        "keyReply": "b10.fb.safe.key",
+        "commonError": "b10.fb.safe.error",
+        "temptingAlternative": {
+          "move": "e5-e2",
+          "text": "b10.t.m2"
+        }
+      },
+      "table": [
+        {
+          "move": "e5-d5",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "e5-c5",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "e5-b5",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.safe"
+        },
+        {
+          "move": "e5-a5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e5-e4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e5-e2",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.t.m2",
+          "misconception": "b10.m2"
+        },
+        {
+          "move": "a6-a5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b4",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b3",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b2",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c6-c5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g6-g5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i6-i5",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i7-h9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i7-g8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "a9-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b9-c7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "b9-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c9-e7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "c9-a7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d9-e8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "e9-e8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "f9-e8",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g9-e7",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "i9-h9",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.r.later"
+        },
+        {
+          "move": "i9-i8",
+          "class": "error",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b10-c07",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "DE",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [
+        "b10.m1"
+      ],
+      "assist": "G0",
+      "fen": "9/5k3/3R5/1R7/9/9/9/9/9/4K4 w - - 0 1",
+      "prompt": "b10.p.mate1",
+      "objective": "b10l3",
+      "unit": "b10",
+      "feedback": {
+        "purpose": "b10.fb.mate.purpose",
+        "keyReply": "b10.fb.mate.key",
+        "commonError": "b10.fb.mate.error",
+        "temptingAlternative": {
+          "move": "b6-b8",
+          "text": "b10.t.m1"
+        }
+      },
+      "table": [
+        {
+          "move": "e0-d0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e0-e1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-c6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-d6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-e6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-f6",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.mate1"
+        },
+        {
+          "move": "b6-g6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-h6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-i6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-a6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b10.t.m1",
+          "misconception": "b10.m1"
+        },
+        {
+          "move": "b6-b9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.mate1"
+        },
+        {
+          "move": "b6-b5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "b6-b0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-e7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-f7",
+          "class": "error",
+          "source": "authored",
+          "reason": "b10.r.loses"
+        },
+        {
+          "move": "d7-g7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-h7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-i7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-b7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-a7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-d8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b10.r.nomate"
+        },
+        {
+          "move": "d7-d9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-d6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-d5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-d4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-d3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-d2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-d1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d7-d0",
+          "class": "dubious",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b10-c08",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "DE",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [
+        "b10.m1"
+      ],
+      "assist": "G0",
+      "fen": "5k3/9/8r/9/9/9/9/9/6c2/4K4 b - - 0 1",
+      "prompt": "b10.p.mate2",
+      "alternatives": false,
+      "objective": "b10l3",
+      "unit": "b10",
+      "feedback": {
+        "purpose": "b10.fb.mate.purpose",
+        "keyReply": "b10.fb.mate.key",
+        "commonError": "b10.fb.mate.error",
+        "temptingAlternative": {
+          "move": "i7-i0",
+          "text": "b10.t.m1"
+        }
+      },
+      "table": [
+        {
+          "move": "g1-h1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-i1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-f1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-e1",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "g1-d1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-c1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-b1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-a1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-g2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-g3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-g4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-g5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-g6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-g7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-g8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-g9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "g1-g0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-h7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-g7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-f7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-e7",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.mate2"
+        },
+        {
+          "move": "i7-d7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-c7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-b7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-a7",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-i8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-i9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-i6",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-i5",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-i4",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-i3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-i2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-i1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "i7-i0",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b10.t.m1",
+          "misconception": "b10.m1"
+        },
+        {
+          "move": "f9-f8",
+          "class": "dubious",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "id": "b10-c09",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "DE",
+      "nature": "tactic",
+      "critical": false,
+      "misconceptions": [
+        "b10.m1"
+      ],
+      "assist": "G0",
+      "fen": "3C5/3P1k3/9/9/9/9/9/9/4N4/3K5 w - - 0 1",
+      "prompt": "b10.p.mate2",
+      "alternatives": false,
+      "objective": "b10l3",
+      "unit": "b10",
+      "feedback": {
+        "purpose": "b10.fb.mate.purpose",
+        "keyReply": "b10.fb.mate.key",
+        "commonError": "b10.fb.mate.error",
+        "temptingAlternative": {
+          "move": "d8-e8",
+          "text": "b10.t.m1"
+        }
+      },
+      "table": [
+        {
+          "move": "d0-e0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d0-d1",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e1-f3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e1-d3",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e1-g2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e1-g0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e1-c2",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "e1-c0",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d8-c8",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d8-e8",
+          "class": "dubious",
+          "source": "authored",
+          "reason": "b10.t.m1",
+          "misconception": "b10.m1"
+        },
+        {
+          "move": "d9-e9",
+          "class": "target",
+          "source": "authored",
+          "reason": "b10.r.mate2"
+        },
+        {
+          "move": "d9-f9",
+          "class": "error",
+          "source": "computed"
+        },
+        {
+          "move": "d9-g9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d9-h9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d9-i9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d9-c9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d9-b9",
+          "class": "dubious",
+          "source": "computed"
+        },
+        {
+          "move": "d9-a9",
+          "class": "dubious",
+          "source": "computed"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "id": "b10-c10",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "red",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b10.m2"
+      ],
+      "assist": "G0",
+      "fen": "rnbaka1nr/9/4c3b/p3p3p/2p3p2/7C1/P1P1P1P1P/1C2B4/1R2A4/4KABNR w - - 5 6",
+      "prompt": "b10.p.spot",
+      "options": [
+        {
+          "id": "a",
+          "move": "b2-b3",
+          "correct": true,
+          "feedback": "b10.o.safe"
+        },
+        {
+          "id": "b",
+          "move": "h4-c4",
+          "correct": false,
+          "feedback": "b10.o.game",
+          "misconception": "b10.m2"
+        },
+        {
+          "id": "c",
+          "move": "h4-g4",
+          "correct": false,
+          "feedback": "b10.o.drops",
+          "misconception": "b10.m2"
+        },
+        {
+          "id": "d",
+          "move": "e2-c4",
+          "correct": false,
+          "feedback": "b10.o.drops",
+          "misconception": "b10.m2"
+        }
+      ],
+      "objective": "b10l4",
+      "unit": "b10"
+    },
+    {
+      "type": "choice",
+      "id": "b10-c11",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b10.m2"
+      ],
+      "assist": "G0",
+      "fen": "rn1aka1nr/9/bc2b4/p1C1p3p/9/2P2p1c1/P3P1P1P/9/1C3K2R/RNBA1ABN1 b - - 2 7",
+      "prompt": "b10.p.spot",
+      "options": [
+        {
+          "id": "a",
+          "move": "b7-b2",
+          "correct": true,
+          "feedback": "b10.o.safe"
+        },
+        {
+          "id": "b",
+          "move": "h4-h1",
+          "correct": false,
+          "feedback": "b10.o.game",
+          "misconception": "b10.m2"
+        },
+        {
+          "id": "c",
+          "move": "h4-g4",
+          "correct": false,
+          "feedback": "b10.o.drops",
+          "misconception": "b10.m2"
+        },
+        {
+          "id": "d",
+          "move": "h4-i4",
+          "correct": false,
+          "feedback": "b10.o.drops",
+          "misconception": "b10.m2"
+        }
+      ],
+      "objective": "b10l4",
+      "unit": "b10"
+    },
+    {
+      "type": "choice",
+      "id": "b10-c12",
+      "version": 1,
+      "status": "verified",
+      "source": {
+        "kind": "authored"
+      },
+      "side": "black",
+      "strand": "RS",
+      "nature": "quiet",
+      "critical": false,
+      "misconceptions": [
+        "b10.m2"
+      ],
+      "assist": "G0",
+      "fen": "r1bakab1r/9/n5nC1/pcp1p1p1p/9/3c5/P1P1P1P1P/1C2B4/3NK1N1R/R2A1AB2 b - - 15 8",
+      "prompt": "b10.p.spot",
+      "options": [
+        {
+          "id": "a",
+          "move": "b6-b3",
+          "correct": true,
+          "feedback": "b10.o.safe"
+        },
+        {
+          "id": "b",
+          "move": "d4-c4",
+          "correct": false,
+          "feedback": "b10.o.game",
+          "misconception": "b10.m2"
+        },
+        {
+          "id": "c",
+          "move": "d4-d0",
+          "correct": false,
+          "feedback": "b10.o.drops",
+          "misconception": "b10.m2"
+        },
+        {
+          "id": "d",
+          "move": "d4-a4",
+          "correct": false,
+          "feedback": "b10.o.drops",
+          "misconception": "b10.m2"
+        }
+      ],
+      "objective": "b10l4",
+      "unit": "b10"
+    }
+  ]
+}

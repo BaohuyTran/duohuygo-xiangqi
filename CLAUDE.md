@@ -467,6 +467,13 @@ Tests live next to the code as `*.test.ts(x)`. Component tests start with
   around the reviewed pilot and the pool `assessment/b09-check.json` (16 items, four critical central-Cannon items, three
   attempts); pilot-b09.test.ts pins the move sequences of every position, accepted moves = guard + predicate + ≥ 0 at depth
   4, authored errors lose ≥ 1 at depth 6 (Cannon-for-Horse trades are `dubious`). b09 is back in the preview.
+- Unit `b10` (S3.3.c; `verified` until review, not in the preview) is `src/content/lessons/b10-first-complete-games.json` +
+  `assessment/b10-check.json` (12 items, 3 per objective, 6-item short form: 4 own + 2 interleaved, three attempts). Guided
+  games b10l1-04 / b10l2-03 are G2 `line`s (coach questions as reply texts, then `handOver` to safe-sparring(2, 1.0) for 8
+  moves); tasks `b10-g1` / `b10-g2` (full games, F2), `b10-g3` (convert, mate-in-3 tree, `measured`), `b10-g4` (`review`).
+  `src/content/pilot-b10.test.ts` (table rule of b09; mate tables accept exactly the moves that keep the forced mate).
+  §5.7: `b10-g3` passes (item 3 n/a by ruling F); `b10-g1` / `b10-g2` fail item 1 (the reference player loses by perpetual
+  check or is mated), so they stay practice only until decided (coverage.md).
 - Pilot `i08` (S2.15: `i08l3` + `i08-g1`, Red) is `src/content/lessons/i08-central-cannon.json` (`verified` until review);
   `src/content/pilot-i08.test.ts` pins its ladder, deviations, contrasts and the material safety of accepted moves / replies.
 - Pilot `a03` (S2.16: `a03l1`–`a03l3` + `a03-g1`, both colours) is `src/content/lessons/a03-improving-pieces.json`, with the
