@@ -711,11 +711,57 @@ export const safeShuffler: SimLearner = async ({ ex, state, position, deps, seed
 };
 
 /**
- * The reference player (§5.7 item 1): the authored line's moves while they are legal, then forcing-attack (k = 3 in
- * positions of ≤ 12 pieces, else 2), then pressing(2) for the learner's side.
+ * Does `m` hand the opponent a win by the repetition rule? Either `m` itself is the learner's third occurrence of a
+ * perpetual-check cycle, or some reply of the opponent then makes the third occurrence of a cycle in which only the
+ * learner checked (the partner's repetition filter lets it take that win; the learner's refusal rule cannot stop a
+ * third occurrence the opponent creates).
  */
-export function referenceLearner(line: readonly string[] = []): SimLearner {
-  return async ({ state, position, learnerIndex, deps }) => {
+export function handsOverRepetitionWin(record: play.GameRecord, m: Move, position: Position = play.currentPosition(record)): boolean {
+  if (play.losesByRepetition(record, m, position)) return true;
+  const after = play.appendMove(record, m, { position });
+  const next = makeMove(position, m);
+  return legalMoves(next).some((r) => play.winsByRepetition(after, r, next));
+}
+
+/** Mate guard of the reference player: no move after which the opponent forces mate within this many moves. */
+export const REFERENCE_MATE_GUARD = 2;
+
+/**
+ * The moves a competent learner considers (the reference player's candidates), each filter applied only when some
+ * move survives it: no move that hands the opponent a repetition win, then the task's level guard (the safety routine),
+ * then no move that allows a forced mate within `mateK` (0 = off). A move that could not be checked is kept.
+ */
+export async function referenceCandidates(ex: PlayExercise, record: play.GameRecord, position: Position, deps: TurnDeps, mateK: number): Promise<Move[]> {
+  const narrow = (from: Move[], keep: (m: Move) => boolean) => {
+    const kept = from.filter(keep);
+    return kept.length > 0 ? kept : from;
+  };
+  let cands = narrow(legalMoves(position), (m) => !handsOverRepetitionWin(record, m, position));
+  const guard = guardOf(ex);
+  const verdicts = await Promise.all(cands.map((move) => ask(deps, { kind: 'safety-guard', position, move, guard })));
+  const failing = new Set(cands.filter((_, i) => isChecked(verdicts[i]) && !verdicts[i].value.safe));
+  cands = narrow(cands, (m) => !failing.has(m));
+  if (mateK > 0 && cands.length > 1) {
+    const md = await ask(deps, { kind: 'mate-distances', position, k: mateK, moves: cands });
+    if (isChecked(md)) {
+      const mated = new Set(md.value.filter((d) => d.mateIn !== null).map((d) => moveKey(d.move)));
+      cands = narrow(cands, (m) => !mated.has(moveKey(m)));
+    }
+  }
+  return cands;
+}
+
+/**
+ * The reference player (§5.7 item 1): the authored line's moves while they are legal, then forcing-attack (k = 3 in
+ * positions of ≤ 12 pieces, else 2), then pressing(2) for the learner's side. Like the partners (policies.ts
+ * "Repetition"), it never plays a move that loses by the repetition rule unless every move does: moves that hand the
+ * opponent a perpetual-check win (`handsOverRepetitionWin`) are left out of the policy's candidates. A competent learner
+ * also applies the safety routine: moves failing the task's level guard, then moves allowing a forced mate within
+ * REFERENCE_MATE_GUARD, are left out too (`referenceCandidates`). With nothing filtered, seed and choice are unchanged.
+ */
+export function referenceLearner(line: readonly string[] = [], options: { mateGuard?: number } = {}): SimLearner {
+  const mateK = options.mateGuard ?? REFERENCE_MATE_GUARD;
+  return async ({ ex, state, position, learnerIndex, deps }) => {
     const key = line[learnerIndex];
     if (key !== undefined) {
       const m = keyToMove(key);
@@ -723,7 +769,15 @@ export function referenceLearner(line: readonly string[] = []): SimLearner {
     }
     const k = position.board.filter(Boolean).length <= 12 ? 3 : 2;
     const policy = play.chain(play.forcingAttack(k), play.pressing(2));
-    const choice = await play.choosePartnerMove(policy, state.record, deps.analyzer);
+    const legal = legalMoves(position);
+    const safe = await referenceCandidates(ex, state.record, position, deps, mateK);
+    const choice = await policy.choose({
+      record: state.record,
+      position,
+      analyzer: deps.analyzer,
+      seed: play.deriveSeed(state.record.seed, state.record.moves.length),
+      ...(safe.length > 0 && safe.length < legal.length ? { candidates: safe } : {}),
+    });
     return choice.kind === 'move' ? choice.move : null;
   };
 }

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { AnalysisOutcome, AnalysisRequest } from '../analysis/requests';
 import type { PlayExercise } from '../content/types';
-import { legalMoves, parseFen, positionFromPieces, START_FEN } from '../engine';
+import { hasForcedWin, legalMoves, makeMove, parseFen, positionFromPieces, START_FEN } from '../engine';
 import { parseMoveKey } from '../lessons/decision';
 import { DISCLOSURE_KEYS, appendMove, createRecord, currentPosition, directAnalyzer, type Analyzer } from '../play';
 import { OPENING_OBJECTIVE, convertFixture, drillFixture, gameFixture, holdFixture, openingFixture } from './play-fixtures';
@@ -14,6 +14,8 @@ import {
   developmentFacts,
   disclosureKeys,
   fallbackOf,
+  handsOverRepetitionWin,
+  referenceCandidates,
   offTreeSelective,
   learnerTurn,
   levelReachable,
@@ -26,6 +28,7 @@ import {
   startTask,
   type Level,
   type PoolTask,
+  type TaskState,
 } from './practical';
 
 const deps = { analyzer: directAnalyzer() };
@@ -351,5 +354,60 @@ describe('naive learners face the learner refusal rule', () => {
     }
     const claim = parseMoveKey('e8-e9')!;
     expect(picks.has(`${claim.from}-${claim.to}`)).toBe(true);
+  });
+});
+
+describe('reference player and the repetition rule (§5.7 item 1)', () => {
+  // Red's Chariot checks the Black General up and down the f-file corner: h8-h9+ f9-f8 h9-h8+ f8-f9 … After three
+  // checks the next h9-h8+ lets Black's f8-f9 make the third occurrence of a cycle in which only Red checked: Red loses
+  // by perpetual check (the opponent creates the third occurrence, so the learner's refusal rule never sees it).
+  const start = positionFromPieces({ e0: 'K', h8: 'R', f9: 'k' }, 'red');
+  const cycle = ['h8-h9', 'f9-f8', 'h9-h8', 'f8-f9', 'h8-h9', 'f9-f8'];
+  const record = cycle.reduce((r, key) => appendMove(r, parseMoveKey(key)!), createRecord(start, { learner: 'red', seed: 1 }));
+  const position = currentPosition(record);
+  const move = (key: string) => legalMoves(position).find((m) => m.from === parseMoveKey(key)!.from && m.to === parseMoveKey(key)!.to)!;
+
+  it('flags a move that hands the opponent a perpetual-check win, and nothing else', () => {
+    expect(handsOverRepetitionWin(record, move('h9-h8'), position)).toBe(true);
+    expect(handsOverRepetitionWin(record, move('h9-i9'), position)).toBe(false);
+    expect(handsOverRepetitionWin(record, move('e0-d0'), position)).toBe(false);
+  });
+
+  it('the reference player does not play it (partners and the learner path are unchanged)', async () => {
+    const learner = referenceLearner();
+    const state = { record } as TaskState;
+    const m = await learner({ ex: gameFixture(), state, position, learnerIndex: 0, deps, seed: 1 });
+    expect(m).not.toBeNull();
+    expect(handsOverRepetitionWin(record, m!, position)).toBe(false);
+  });
+});
+
+describe('reference player: the safety routine of a competent learner (§5.7 item 1)', () => {
+  // From a b10-g1 reference run (seed 1, before the fix): Red's c3-c4 passes the Basic guard but lets Black's two
+  // Chariots mate in 2 (c1-c0+ … ); seven moves avoid that.
+  const position = parseFen('4kaR2/4a4/9/p5p2/9/9/P1P1P3P/6r1B/5K3/2r2A2R w - - 2 28');
+  const record = createRecord(position, { learner: 'red', seed: 1 });
+  const key = (m: { from: number; to: number }) => `${m.from}-${m.to}`;
+  const c4 = parseMoveKey('c3-c4')!;
+  const guard = resolveGuard({ itemId: 'b10-g1' });
+
+  it('keeps only moves that pass the level guard; the mate guard then drops moves allowing a forced mate in 2', async () => {
+    const ex = { ...gameFixture(), id: 'b10-g1' };
+    const noMate = await referenceCandidates(ex, record, position, deps, 0);
+    for (const m of noMate) {
+      const v = await deps.analyzer.run({ kind: 'safety-guard', position, move: m, guard });
+      expect(v.status === 'checked' && v.value.safe, key(m)).toBe(true);
+    }
+    expect(noMate.map(key)).toContain(key(c4));
+    const withMate = await referenceCandidates(ex, record, position, deps, 2);
+    expect(withMate.map(key)).not.toContain(key(c4));
+    expect(withMate.length).toBeGreaterThan(0);
+    for (const m of withMate) expect(hasForcedWin(makeMove(position, m), 2), key(m)).toBe(false);
+  });
+
+  it('filters nothing when every move is safe (the policy then sees all legal moves, same seed and choice)', async () => {
+    const quiet = positionFromPieces({ e0: 'K', a0: 'R', f9: 'k' }, 'red');
+    const cands = await referenceCandidates({ ...gameFixture(), id: 'b10-g1' }, createRecord(quiet, { learner: 'red', seed: 1 }), quiet, deps, 2);
+    expect(cands.map(key).sort()).toEqual(legalMoves(quiet).map(key).sort());
   });
 });

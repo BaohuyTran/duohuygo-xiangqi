@@ -246,11 +246,15 @@ every cap); 11 is the only measured cap in 02's 6–12 range where every check p
 (full-game rules, 80 learner moves), R1 60 + R2 20 + R0 20 (= the `xb` per-game score under fallback F2; the result is
 played out but not scored), `development { n: 8, target: 4 }`, F2 (safe-sparring(2, 1.0), no tree). §5.7 at 20 seeds
 (`npx tsx scripts/verify-practical.ts b10 --runs 20`, 2026-11-26): N1 fails 20/20 and 19/19, N2 fails 18/19 and 17/19
-(voids 1–2), but item 1 FAILS: the reference run passes 13/20 (`b10-g1`) and 16/20 (`b10-g2`). The failing reference runs
-score 90–100 but carry a critical failure: the reference player (forcing-attack, then pressing(2)) loses by perpetual check
-(it keeps checking until the training adjudication) or is mated by the partner late in the game; one run scores 67.5.
-F2b was not added: it changes only the opening (scripted tree + line share), and the reference player of the remaining
-70+ moves stays the same, so it cannot repair item 1. Until a decision, both games stay practice only (03 §5.7).
+(voids 1–2). Item 1 failed at first: the reference run passed 13/20 (`b10-g1`) and 16/20 (`b10-g2`). The reference player
+lost by perpetual check (it kept checking and the partner's reply made the third occurrence, which the learner's refusal
+rule does not see), was mated once, and failed the Basic guard three times (R1 50). The sim tooling was fixed (S3.3.c
+follow-up; the app's partners and learner path are unchanged): `referenceLearner` now plays like a competent learner who
+applies the safety routine (`referenceCandidates`, practical.ts). It leaves out moves that hand the opponent a repetition
+win (`handsOverRepetitionWin`), then moves that fail the task's level guard, then moves that allow a forced mate within
+`REFERENCE_MATE_GUARD` = 2 (the level guard alone missed the seed-1 Chariot mate). Each filter applies only when some move
+survives it, and with nothing filtered the seed and choice are as before. Re-run (2026-11-27): reference 20/20 for both
+games, N1 20/20 and 19/19, N2 18/19 and 17/19: all checks pass. F2b was not needed.
 `b10-g3` (Red, convert, 7 pieces, `measured`): cap 6, R4 90 + R1 10 (the objective is necessary: without the mate the
 best score is 73), a counterplay tree with the forced mate in 3 (claims proven by the validator; every node accepts
 ≤ 1/3 of its guard-passing moves), Black threatens a gain at the start (the validator's threat check); two reference lines (the second mates
